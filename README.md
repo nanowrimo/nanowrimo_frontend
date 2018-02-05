@@ -14,8 +14,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd nanowrimo`
+* `git clone git@github.com:nanowrimo/nanowrimo_frontend.git` this repository
+* `cd nanowrimo_frontend`
 * `yarn install`
 
 ## Running / Development
