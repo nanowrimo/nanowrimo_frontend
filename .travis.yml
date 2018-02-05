@@ -28,8 +28,7 @@ script:
   - yarn lint:js
   - yarn test
 
-deploy:
-  provider: script
+after_success:
   script: ember deploy production --verbose
   on:
     branch: master
