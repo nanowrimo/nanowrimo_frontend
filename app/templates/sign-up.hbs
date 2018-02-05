@@ -1,7 +1,7 @@
 <h2>Sign Up</h2>
 
 <form {{action "createUser" on="submit"}}>
-  {{input value=user.username}}
+  {{input name="username" value=user.username}}
 
   <input type="submit" value="Sign Up" />
 </form>
