@@ -27,3 +27,9 @@ install:
 script:
   - yarn lint:js
   - yarn test
+
+deploy:
+  provider: script
+  script: ember deploy production --verbose
+  on:
+    branch: master
