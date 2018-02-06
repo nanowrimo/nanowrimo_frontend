@@ -10,11 +10,13 @@ export default Controller.extend({
   actions: {
     createUser() {
       let user = this.get('user');
-      user.save().then(() => {
-        this.get('router').transitionTo('index');
-      }).catch((error) => {
-        alert(error);
-      });
+      user.save()
+        .then(() => {
+          this.get('router').transitionTo('index');
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
   }
 });

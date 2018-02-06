@@ -13,12 +13,12 @@ export default Controller.extend({
       let username = this.get('user.username');
       let password = 'password';
       this.get('session').authenticate('authenticator:devise', username, password)
-      .then(() => {
-        this.get('router').transitionTo('index');
-      })
-      .catch((reason) => {
-        alert(reason.error || reason);
-      });
+        .then(() => {
+          this.get('router').transitionTo('index');
+        })
+        .catch((reason) => {
+          alert(reason.error || reason);
+        });
     }
   }
 });
