@@ -1,9 +1,10 @@
 <h2>Sign In</h2>
 
 <form {{action "authenticateUser" on="submit"}}>
-  {{input name="username" value=user.username}}
+  <p>{{input name="login" placeholder="Email or Username" value=user.login}}</p>
+  <p>{{input type="password" name="password" placeholder="Password" value=user.password}}</p>
 
-  <input type="submit" value="Sign In" />
+  <p><input type="submit" value="Sign In" /></p>
 </form>
 
 <p>{{link-to 'Sign Up' 'sign-up'}}</p>

@@ -27,8 +27,10 @@ export default function() {
   this.post('users');
   this.post('users/sign_in', () => {
     return {
-      email: 'kevin@201-created.com',
-      token: 'token'
+      user: {
+        email: 'user@example.com',
+        token: 'token'
+      }
     };
   });
 }
