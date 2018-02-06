@@ -1,9 +1,11 @@
 <h2>Sign Up</h2>
 
 <form {{action "createUser" on="submit"}}>
-  {{input name="username" value=user.username}}
+  <p>{{input value=user.username name="username" placeholder="Username" required=true}}</p>
+  <p>{{input value=user.email name="email" type="email" required=true placeholder="Email"}}</p>
+  <p>{{input value=user.password name="password" type="password" required=true placeholder="Password"}}</p>
 
-  <input type="submit" value="Sign Up" />
+  <p><input type="submit" value="Sign Up" /></p>
 </form>
 
 <p>{{link-to 'Sign In' 'sign-in'}}</p>

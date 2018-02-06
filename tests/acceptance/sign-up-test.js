@@ -9,6 +9,8 @@ module('Acceptance | sign up', function(hooks) {
     await visit('/sign-up');
 
     await fillIn('input[name=username]', 'username');
+    await fillIn('input[name=email]', 'user@example.com');
+    await fillIn('input[name=password]', 'password');
     await click('input[type=submit]');
 
     assert.equal(currentURL(), '/', 'redirects after sign up');
