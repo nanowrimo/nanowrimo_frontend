@@ -8,9 +8,9 @@ module('Acceptance | sign up', function(hooks) {
   test('visiting /sign-up', async function(assert) {
     await visit('/sign-up');
 
-    await fillIn('input[name=username]', "Name");
+    await fillIn('input[name=username]', 'Name');
     await click('input[type=submit]');
 
-    assert.equal(currentURL(), '/sign-up');
+    assert.equal(currentURL(), '/', 'redirects after sign up');
   });
 });
