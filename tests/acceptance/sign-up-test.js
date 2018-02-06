@@ -6,11 +6,11 @@ module('Acceptance | sign up', function(hooks) {
   setupApplicationTest(hooks);
 
   test('visiting /sign-up', async function(assert) {
-    await visit('/sign_up');
+    await visit('/sign-up');
 
     await fillIn('input[name=username]', "Name");
     await click('input[type=submit]');
 
-    assert.equal(currentURL(), '/sign_up');
+    assert.equal(currentURL(), '/sign-up');
   });
 });
