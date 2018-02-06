@@ -1,7 +1,7 @@
 <h2>Sign In</h2>
 
 <form {{action "authenticateUser" on="submit"}}>
-  <p>{{input value=user.login name="login" required=true placeholder="Email or Username"}}</p>
+  <p>{{input value=user.email name="email" type="email" required=true placeholder="Email"}}</p>
   <p>{{input value=user.password name="password" type="password" required=true placeholder="Password"}}</p>
 
   <p><input type="submit" value="Sign In" /></p>
