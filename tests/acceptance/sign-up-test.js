@@ -5,10 +5,10 @@ import { setupApplicationTest } from 'ember-qunit';
 module('Acceptance | sign up', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('visiting /sign-up', async function(assert) {
+  test('User Registration', async function(assert) {
     await visit('/sign-up');
 
-    await fillIn('input[name=username]', 'Name');
+    await fillIn('input[name=username]', 'username');
     await click('input[type=submit]');
 
     assert.equal(currentURL(), '/', 'redirects after sign up');
