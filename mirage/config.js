@@ -25,4 +25,14 @@ export default function() {
   */
 
   this.post('users');
+  this.post('users/sign_in', function() {
+    return {
+      // data: {
+      //   user: {
+          email: 'kevin@201-created.com',
+          token: 'token'
+      //   }
+      // }
+    };
+  });
 }

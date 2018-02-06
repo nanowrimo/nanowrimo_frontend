@@ -1,3 +1,9 @@
 <h1>NaNoWriMo</h1>
 
+{{#if session.isAuthenticated}}
+  <p><a href="#" {{action 'invalidateSession'}}>Log out</a></p>
+{{else}}
+  <p>{{link-to 'Sign In' 'sign-in'}}</p>
+{{/if}}
+
 {{outlet}}
