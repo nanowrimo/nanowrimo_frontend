@@ -5,7 +5,7 @@ import { setupApplicationTest } from 'ember-qunit';
 module('Acceptance | sign up', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('User Registration', async function(assert) {
+  test('Basic Registration', async function(assert) {
     await visit('/sign-up');
 
     await fillIn('input[name=username]', 'username');
