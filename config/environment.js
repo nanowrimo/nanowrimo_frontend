@@ -34,10 +34,10 @@ module.exports = function(environment) {
           appId: '766170596906489',
           scope: 'email'
         },
-        'google-oauth2': {
-          apiKey: 'DOyJ_CXNVl1gvMWb_TEn83QG',
-          clientId: '566453198538-kksub7cjr100rg8a75lmgab1metvnqvc.apps.googleusercontent.com',
-          redirectUri: 'http://localhost:4200/oauth2callback'
+        'google-oauth2-bearer-v2': {
+          apiKey: '566453198538-kksub7cjr100rg8a75lmgab1metvnqvc.apps.googleusercontent.com',
+          redirectUri: 'http://localhost:4200/oauth2callback',
+          scope: 'email profile'
         }
       }
     }
@@ -65,9 +65,8 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
-    ENV.torii.providers['google-oauth2'].apiKey = 'BgZ5aSWVEoSUkF8iUMYHeUYE';
-    ENV.torii.providers['google-oauth2'].clientId = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
-    ENV.torii.providers['google-oauth2'].redirectUri = 'http://ember.nanowrimo.org/oauth2callback';
+    ENV.torii.providers['google-oauth2-bearer-v2'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
+    ENV.torii.providers['google-oauth2-bearer-v2'].redirectUri = 'http://ember.nanowrimo.org/oauth2callback';
   }
 
   return ENV;

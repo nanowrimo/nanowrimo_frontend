@@ -31,7 +31,7 @@ export default Controller.extend({
     },
 
     authenticateGoogle() {
-      this.get('session').authenticate('authenticator:torii', 'google-oauth2', {})
+      this.get('session').authenticate('authenticator:torii', 'google-oauth2-bearer-v2', {})
         .then(() => {
           alert('Google Authed!');
         })

@@ -33,4 +33,7 @@ export default function() {
       }
     };
   });
+
+  this.urlPrefix = 'https://www.googleapis.com';
+  this.passthrough();
 }
