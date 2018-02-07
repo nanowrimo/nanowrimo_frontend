@@ -5,9 +5,15 @@ import moment from 'moment';
 export default Component.extend({
   tagName: '',
 
-  selectedZone: moment.tz.guess(),
+  value: moment.tz.guess(),
 
-  _timeZoneOptions: computed(() => {
+  selectedOption: computed('value', 'timeZoneOptions', function() {
+    let options = this.get('timeZoneOptions');
+    let value = this.get('value');
+    return options.findBy('value', value);
+  }),
+
+  timeZoneOptions: computed(() => {
     return [
       { name: 'International Date Line West', value: 'Pacific/Midway' },
       { name: 'Midway Island', value: 'Pacific/Midway' },
