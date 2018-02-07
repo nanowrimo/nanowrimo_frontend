@@ -30,7 +30,7 @@ module.exports = function(environment) {
     torii: {
       providers: {
         'facebook-connect': {
-          appId: '2019466444992364',
+          appId: '766170596906489',
           scope: 'email'
         }
       }
@@ -58,7 +58,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
   }
 
   return ENV;

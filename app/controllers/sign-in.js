@@ -21,7 +21,7 @@ export default Controller.extend({
     },
 
     authenticateFacebook() {
-      this.get('session').authenticate('authenticator:torii', 'facebook-oauth2', {})
+      this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
         .then((response) => {
           alert(`FB Authed! ${response}`);
         })
