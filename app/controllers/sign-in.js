@@ -21,18 +21,18 @@ export default Controller.extend({
     },
 
     authenticateFacebook() {
-      console.log("Facebook?");
       this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
-        .then(() => {
-          alert("FB Authed!");
+        .then((response) => {
+          alert(`FB Authed! ${response}`);
+          // console.log(response);
         })
-        .catch((reason) => {
-          alert(reason.error || reason);
+        .catch((error) => {
+          alert(`Error: ${error}`);
         });
     },
 
     authenticateGoogle() {
-      console.log("Google?")
+      // console.log("Google?")
     }
   }
 });
