@@ -22,9 +22,6 @@ export default Controller.extend({
 
     authenticateFacebook() {
       this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
-        .then(() => {
-          alert('FB Authed!');
-        })
         .catch((error) => {
           alert(error);
         });
@@ -32,9 +29,6 @@ export default Controller.extend({
 
     authenticateGoogle() {
       this.get('session').authenticate('authenticator:torii', 'custom-google', {})
-        .then(() => {
-          alert('Google Authed!');
-        })
         .catch((error) => {
           alert(error);
         });
