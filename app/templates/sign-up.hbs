@@ -1,13 +1,16 @@
 <h2>Sign Up</h2>
 
 <form {{action "createUser" on="submit"}}>
-  <p>{{input value=user.username name="username" placeholder="Username" required=true}}</p>
-  <p>{{input value=user.email name="email" type="email" required=true placeholder="Email"}}</p>
-  <p>{{input value=user.password name="password" type="password" required=true placeholder="Password"}}</p>
 
-  {{select-timezone}}
+  {{#if isStepOne}}
+    <p>{{input value=user.email name="email" type="email" required=true placeholder="Email"}}</p>
+    <p>{{input value=user.password name="password" type="password" required=true placeholder="Password"}}</p>
+  {{else}}
+    <p>{{input value=user.username name="username" placeholder="Username" required=true}}</p>
+    {{select-timezone}}
+  {{/if}}
 
-  <p><input type="submit" value="Sign Up" /></p>
+  <p><input type="submit" value={{buttonLabel}} /></p>
 </form>
 
 <p>{{link-to 'Sign In' 'sign-in'}}</p>
