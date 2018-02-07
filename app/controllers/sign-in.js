@@ -22,16 +22,22 @@ export default Controller.extend({
 
     authenticateFacebook() {
       this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
-        .then((response) => {
-          alert(`FB Authed! ${response}`);
+        .then(() => {
+          alert('FB Authed!');
         })
         .catch((error) => {
-          alert(`Error: ${error}`);
+          alert(error);
         });
     },
 
     authenticateGoogle() {
-      // console.log("Google?")
+      this.get('session').authenticate('authenticator:torii', 'google-oauth2', {})
+        .then(() => {
+          alert('Google Authed!');
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
   }
 });
