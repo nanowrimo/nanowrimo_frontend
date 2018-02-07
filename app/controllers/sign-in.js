@@ -22,6 +22,13 @@ export default Controller.extend({
 
     authenticateFacebook() {
       console.log("Facebook?");
+      this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
+        .then(() => {
+          alert("FB Authed!");
+        })
+        .catch((reason) => {
+          alert(reason.error || reason);
+        });
     },
 
     authenticateGoogle() {
