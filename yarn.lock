@@ -6938,6 +6938,12 @@ to-regex@^3.0.1:
     extend-shallow "^2.0.1"
     regex-not "^1.0.0"
 
+torii@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/torii/-/torii-0.10.1.tgz#caad0a81e82189fc0483b65e68ee28041ad3590f"
+  dependencies:
+    ember-cli-babel "^6.11.0"
+
 tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"

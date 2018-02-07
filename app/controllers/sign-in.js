@@ -18,6 +18,14 @@ export default Controller.extend({
         .catch((reason) => {
           alert(reason.error || reason);
         });
+    },
+
+    authenticateFacebook() {
+      console.log("Facebook?");
+    },
+
+    authenticateGoogle() {
+      console.log("Google?")
     }
   }
 });

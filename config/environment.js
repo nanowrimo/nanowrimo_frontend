@@ -25,6 +25,15 @@ module.exports = function(environment) {
 
     moment: {
       includeTimezone: 'all'
+    },
+
+    torii: {
+      providers: {
+        'facebook-connect': {
+          appId: '2019466444992364',
+          scope: 'email'
+        }
+      }
     }
   };
 
