@@ -1,3 +1,4 @@
+// Options for select taken from Rails: http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
 export default [
   { name: 'International Date Line West', value: 'Pacific/Midway' },
   { name: 'Midway Island', value: 'Pacific/Midway' },
