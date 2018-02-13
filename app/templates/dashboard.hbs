@@ -1,0 +1,11 @@
+{{#each model.panels as |panel|}}
+  <div class="nano-panel">
+    {{#each panel.cards as |card|}}
+      <div class="col-4">
+        <div class="card">
+          {{card.title}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/each}}
