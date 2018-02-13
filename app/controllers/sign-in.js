@@ -10,7 +10,7 @@ export default Controller.extend({
 
   actions: {
     authenticateSignIn() {
-      let { email, password } = this.get('user');
+      let { email, password } = this.get('signInAttempt');
       this.get('session').authenticate('authenticator:devise', email, password)
         .then(() => {
           this.get('router').transitionTo('index');
