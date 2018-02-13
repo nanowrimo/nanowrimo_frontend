@@ -2101,9 +2101,9 @@ ember-ajax@^3.0.0:
   dependencies:
     ember-cli-babel "^6.0.0"
 
-ember-basic-dropdown@^1.0.0-beta.1:
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-1.0.0-beta.2.tgz#fda265c4f6ea11c262b748da502ac12fd7d42ef6"
+ember-basic-dropdown@^1.0.0-beta.3:
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-1.0.0-beta.3.tgz#c6fb53d4cc8e4ddc1ec9f09e23207f15be7b1f04"
   dependencies:
     ember-cli-babel "^6.11.0"
     ember-cli-htmlbars "^2.0.3"
@@ -2707,11 +2707,11 @@ ember-native-dom-helpers@^0.5.10:
     broccoli-funnel "^1.1.0"
     ember-cli-babel "^6.6.0"
 
-ember-power-select@^2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-2.0.0-beta.1.tgz#64a9583a33a6303cd5ce0238e9f70c00545507b7"
+ember-power-select@^2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-2.0.0-beta.2.tgz#18064a309fa43d43b3c92c0d2647652ee7ac5884"
   dependencies:
-    ember-basic-dropdown "^1.0.0-beta.1"
+    ember-basic-dropdown "^1.0.0-beta.3"
     ember-cli-babel "^6.11.0"
     ember-cli-htmlbars "^2.0.1"
     ember-concurrency "^0.8.12"
