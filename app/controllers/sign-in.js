@@ -6,10 +6,10 @@ export default Controller.extend({
   router: service(),
   session: service(),
 
-  user: alias('model'),
+  signInAttempt: alias('model'),
 
   actions: {
-    authenticateUser() {
+    authenticateSignIn() {
       let { email, password } = this.get('user');
       this.get('session').authenticate('authenticator:devise', email, password)
         .then(() => {

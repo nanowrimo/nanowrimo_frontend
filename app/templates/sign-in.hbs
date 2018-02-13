@@ -5,7 +5,7 @@
     <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
     <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
 
-    <form {{action "authenticateUser" on="submit"}}>
+    <form {{action "authenticateSignIn" on="submit"}}>
       <div class="form-group">
         <label for="email">Email</label>
         {{input
@@ -15,7 +15,7 @@
           placeholder="user@domain.com"
           required=true
           type="email"
-          value=user.email
+          value=signInAttempt.email
         }}
       </div>
       <div class="form-group">
@@ -27,7 +27,7 @@
           placeholder="Password"
           required=true
           type="password"
-          value=user.password
+          value=signInAttempt.password
         }}
       </div>
 
