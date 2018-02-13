@@ -2,7 +2,7 @@
   <div class="col">
     <h2>Sign Up</h2>
 
-    <form {{action "createUser" on="submit"}}>
+    <form {{action "signUp" on="submit"}}>
 
       {{#if isStepOne}}
 
@@ -15,7 +15,7 @@
             placeholder="name@domain.com"
             required=true
             type="email"
-            value=signupAttempt.email
+            value=signUpAttempt.email
           }}
         </div>
         <div class="form-group">
@@ -27,7 +27,7 @@
             placeholder="New Password"
             required=true
             type="password"
-            value=signupAttempt.password
+            value=signUpAttempt.password
           }}
         </div>
 
@@ -41,12 +41,12 @@
             name="username"
             placeholder="Username"
             required=true
-            value=signupAttempt.username
+            value=signUpAttempt.username
           }}
         </div>
         <div class="form-group">
           <label for="timezone">Time Zone</label>
-          {{select-timezone value=signupAttempt.timeZone}}
+          {{select-timezone value=signUpAttempt.timeZone}}
         </div>
 
       {{/if}}

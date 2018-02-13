@@ -8,7 +8,7 @@ export default Controller.extend({
 
   isStepOne: true,
 
-  signupAttempt: alias('model'),
+  signUpAttempt: alias('model'),
 
   buttonLabel: computed('isStepOne', function() {
     let isStepOne = this.get('isStepOne');
@@ -16,7 +16,7 @@ export default Controller.extend({
   }),
 
   actions: {
-    createUser() {
+    signUp() {
       let isStepOne = this.get('isStepOne');
 
       if (isStepOne) {
