@@ -1,11 +1,21 @@
-<h1>NaNoWriMo</h1>
+<nav class="navbar bg-light">
+  <a class="navbar-brand">NaNoWriMo</a>
 
-{{#if session.isAuthenticated}}
-  <p><a href="#" {{action 'invalidateSession'}}>Log out</a></p>
-{{else}}
-  <p>{{link-to 'Sign In' 'sign-in'}}</p>
-{{/if}}
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      {{#if session.isAuthenticated}}
+        <a href="#" class="nav-link" {{action 'invalidateSession'}}>Log out</a>
+      {{else}}
+        {{link-to 'Sign In' 'sign-in' class="nav-link"}}
+      {{/if}}
+    </li>
+  </ul>
+</nav>
 
-<hr />
-
-{{outlet}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {{outlet}}
+    </div>
+  </div>
+</div>
