@@ -1,16 +1,61 @@
-<h2>Sign Up</h2>
+<div class="nano-panel">
+  <div class="col">
+    <h2>Sign Up</h2>
 
-<form {{action "createUser" on="submit"}}>
+    <form {{action "createUser" on="submit"}}>
 
-  {{#if isStepOne}}
-    <p>{{input value=user.email name="email" type="email" required=true placeholder="Email"}}</p>
-    <p>{{input value=user.password name="password" type="password" required=true placeholder="Password"}}</p>
-  {{else}}
-    <p>{{input value=user.username name="username" placeholder="Username" required=true}}</p>
-    {{select-timezone}}
-  {{/if}}
+      {{#if isStepOne}}
 
-  <p><input type="submit" value={{buttonLabel}} /></p>
-</form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          {{input
+            autocomplete="email"
+            class="form-control"
+            name="email"
+            placeholder="name@domain.com"
+            required=true
+            type="email"
+            value=user.email
+          }}
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          {{input
+            autocomplete="new-password"
+            class="form-control"
+            name="password"
+            placeholder="New Password"
+            required=true
+            type="password"
+            value=user.password
+          }}
+        </div>
 
-<p>{{link-to 'Sign In' 'sign-in'}}</p>
+      {{else}}
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          {{input
+            autocomplete="username"
+            class="form-control"
+            name="username"
+            placeholder="Username"
+            required=true
+            value=user.username
+          }}
+        </div>
+        <div class="form-group">
+          <label for="timezone">Time Zone</label>
+          {{select-timezone}}
+        </div>
+
+      {{/if}}
+
+      <input type="submit" class="btn btn-primary" value={{buttonLabel}} />
+    </form>
+
+    <hr />
+
+    <p>{{link-to 'Sign In' 'sign-in'}}</p>
+  </div>
+</div>

@@ -1,8 +1,13 @@
-@import "ember-power-select";
-
 // Config
+@import "nano-colors";
+@import "nano-bootstrap-config";
 
+//Bootstrap
 @import "ember-bootstrap/bootstrap";
+
+// Addons
+@import 'ember-power-select/themes/bootstrap';
+@import "ember-power-select";
 
 // Project
 @import "theme/panels";

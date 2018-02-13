@@ -1,4 +1,9 @@
-.panel {
+.nano-panel {
   background: white;
   border-radius: $border-radius;
+  margin-top: $spacer;
+  margin-bottom: $spacer;
+  padding: $spacer;
+
+  @include make-row();
 }

@@ -1,16 +1,40 @@
-<div class="panel">
-  <div class="nano-card">
+<div class="nano-panel">
+  <div class="col">
     <h2>Sign In</h2>
 
     <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
     <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
 
     <form {{action "authenticateUser" on="submit"}}>
-      <p>{{input value=user.email name="email" type="email" autocomplete="username" required=true placeholder="Email"}}</p>
-      <p>{{input value=user.password name="password" type="password" autocomplete="current-password" required=true placeholder="Password"}}</p>
+      <div class="form-group">
+        <label for="email">Email</label>
+        {{input
+          autocomplete="email"
+          class="form-control"
+          name="email"
+          placeholder="user@domain.com"
+          required=true
+          type="email"
+          value=user.email
+        }}
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        {{input
+          autocomplete="current-password"
+          class="form-control"
+          name="password"
+          placeholder="Password"
+          required=true
+          type="password"
+          value=user.password
+        }}
+      </div>
 
-      <p><input type="submit" value="Sign In" /></p>
+      <input type="submit" class="btn btn-primary" value="Sign In" />
     </form>
+
+    <hr />
 
     <p>{{link-to 'Sign Up' 'sign-up'}}</p>
   </div>
