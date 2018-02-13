@@ -1,12 +1,14 @@
 import Route from '@ember/routing/route';
+import moment from 'moment';
 
 export default Route.extend({
   model() {
-    return this.store.createRecord('user');
+    return {
+      timeZone: moment.tz.guess()
+    };
   },
 
-  // eslint-disable-next-line no-unused-vars
-  resetController(controller, isExiting, transition) {
+  resetController(controller, isExiting, transition) { // eslint-disable-line no-unused-vars
     if (isExiting) {
       controller.set('isStepOne', true);
     }

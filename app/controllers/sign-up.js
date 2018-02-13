@@ -8,7 +8,7 @@ export default Controller.extend({
 
   isStepOne: true,
 
-  user: alias('model'),
+  signupAttempt: alias('model'),
 
   buttonLabel: computed('isStepOne', function() {
     let isStepOne = this.get('isStepOne');
@@ -22,14 +22,8 @@ export default Controller.extend({
       if (isStepOne) {
         this.set('isStepOne', false);
       } else {
-        let user = this.get('user');
-        user.save()
-          .then(() => {
-            this.get('router').transitionTo('index');
-          })
-          .catch((error) => {
-            alert(error);
-          });
+        // TODO: Submit signup attempt to API and authenticate user
+        this.get('router').transitionTo('index');
       }
     }
   }

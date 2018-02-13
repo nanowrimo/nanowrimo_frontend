@@ -15,7 +15,7 @@
             placeholder="name@domain.com"
             required=true
             type="email"
-            value=user.email
+            value=signupAttempt.email
           }}
         </div>
         <div class="form-group">
@@ -27,7 +27,7 @@
             placeholder="New Password"
             required=true
             type="password"
-            value=user.password
+            value=signupAttempt.password
           }}
         </div>
 
@@ -41,12 +41,12 @@
             name="username"
             placeholder="Username"
             required=true
-            value=user.username
+            value=signupAttempt.username
           }}
         </div>
         <div class="form-group">
           <label for="timezone">Time Zone</label>
-          {{select-timezone}}
+          {{select-timezone value=signupAttempt.timeZone}}
         </div>
 
       {{/if}}
