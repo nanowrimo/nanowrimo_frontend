@@ -3033,6 +3033,14 @@ ember-source@~3.0.0:
     jquery "^3.2.1"
     resolve "^1.3.3"
 
+ember-test-selectors@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/ember-test-selectors/-/ember-test-selectors-0.3.8.tgz#1e8ae3e78c64bacc4bbfe87f9973c85805699db2"
+  dependencies:
+    broccoli-stew "^1.4.0"
+    ember-cli-babel "^6.8.2"
+    ember-cli-version-checker "^2.0.0"
+
 ember-text-measurer@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/ember-text-measurer/-/ember-text-measurer-0.4.0.tgz#a676195378d4eb4c1617678c2d198a2344b4d12b"

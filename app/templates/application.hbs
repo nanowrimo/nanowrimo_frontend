@@ -4,7 +4,7 @@
   <ul class="navbar-nav">
     <li class="nav-item">
       {{#if session.isAuthenticated}}
-        <a href="#" class="nav-link" {{action 'invalidateSession'}}>Log out</a>
+        <a href="#" class="nav-link" {{action 'invalidateSession'}} data-test-log-out>Log out</a>
       {{else}}
         {{link-to 'Sign In' 'sign-in' class="nav-link"}}
       {{/if}}

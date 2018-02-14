@@ -1,7 +1,8 @@
 import Route from '@ember/routing/route';
+import UnauthenticatedRouteMixin from 'nanowrimo/mixins/unauthenticated-route';
 import moment from 'moment';
 
-export default Route.extend({
+export default Route.extend(UnauthenticatedRouteMixin, {
   model() {
     return {
       timeZone: moment.tz.guess()
