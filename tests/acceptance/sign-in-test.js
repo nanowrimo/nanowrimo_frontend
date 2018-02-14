@@ -12,6 +12,6 @@ module('Acceptance | sign in', function(hooks) {
     await fillIn('input[name=password]', 'password');
     await click('input[type=submit]');
 
-    assert.equal(currentURL(), '/', 'redirected');
+    assert.equal(currentURL(), '/dashboard', 'redirected');
   });
 });

@@ -12,9 +12,6 @@ export default Controller.extend({
     authenticateSignIn() {
       let { email, password } = this.get('signInAttempt');
       this.get('session').authenticate('authenticator:devise', email, password)
-        .then(() => {
-          this.get('router').transitionTo('index');
-        })
         .catch((reason) => {
           alert(reason.error || reason);
         });
