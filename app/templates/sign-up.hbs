@@ -9,6 +9,7 @@
         <div class="form-group">
           <label for="email">Email</label>
           {{input
+            data-test-sign-up-email=true
             autocomplete="email"
             class="form-control"
             name="email"
@@ -21,6 +22,7 @@
         <div class="form-group">
           <label for="password">Password</label>
           {{input
+            data-test-sign-up-password=true
             autocomplete="new-password"
             class="form-control"
             name="password"
@@ -36,6 +38,7 @@
         <div class="form-group">
           <label for="username">Username</label>
           {{input
+            data-test-sign-up-username=true
             autocomplete="username"
             class="form-control"
             name="username"
@@ -51,7 +54,7 @@
 
       {{/if}}
 
-      <input type="submit" class="btn btn-primary" value={{buttonLabel}} />
+      <input data-test-sign-up-submit type="submit" class="btn btn-primary" value={{buttonLabel}} />
     </form>
 
     <hr />

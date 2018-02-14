@@ -8,9 +8,9 @@ module('Acceptance | sign in', function(hooks) {
   test('Basic Authentication', async function(assert) {
     await visit('/sign-in');
 
-    await fillIn('input[name=email]', 'user@example.com');
-    await fillIn('input[name=password]', 'password');
-    await click('input[type=submit]');
+    await fillIn('input[data-test-sign-in-email]', 'user@example.com');
+    await fillIn('input[data-test-sign-in-password]', 'password');
+    await click('[data-test-sign-in-submit]');
 
     assert.equal(currentURL(), '/dashboard', 'redirected to dashboard');
   });
