@@ -12,6 +12,6 @@ module('Acceptance | sign in', function(hooks) {
     await fillIn('input[data-test-sign-in-password]', 'password');
     await click('[data-test-sign-in-submit]');
 
-    assert.equal(currentURL(), '/dashboard', 'redirected to dashboard');
+    assert.equal(currentURL(), '/', 'redirected to dashboard');
   });
 });

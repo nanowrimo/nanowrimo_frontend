@@ -11,7 +11,6 @@ Router.map(function() {
   this.route('sign-up');
   this.route('sign-in');
   this.route('authenticated', { path: '' }, function() {
-    this.route('dashboard');
   });
 });
 
