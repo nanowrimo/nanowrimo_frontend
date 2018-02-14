@@ -1184,12 +1184,6 @@ broccoli-babel-transpiler@^6.0.0, broccoli-babel-transpiler@^6.1.2:
     rsvp "^3.5.0"
     workerpool "^2.2.1"
 
-broccoli-brocfile-loader@^0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/broccoli-brocfile-loader/-/broccoli-brocfile-loader-0.18.0.tgz#2e86021c805c34ffc8d29a2fb721cf273e819e4b"
-  dependencies:
-    findup-sync "^0.4.2"
-
 broccoli-builder@^0.18.8:
   version "0.18.11"
   resolved "https://registry.yarnpkg.com/broccoli-builder/-/broccoli-builder-0.18.11.tgz#a42393c7b10bb0380df255a616307945f5e26efb"
@@ -2656,16 +2650,15 @@ ember-cli-version-checker@^2.0.0, ember-cli-version-checker@^2.1.0:
     resolve "^1.3.3"
     semver "^5.3.0"
 
-ember-cli@~3.0.0-beta.2:
-  version "3.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-3.0.0-beta.2.tgz#676deeeb54ca31ce15ea7202e34610a66f6106dc"
+ember-cli@~3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-3.0.0.tgz#3d44be3ea88345d4d03c95453eb3527b15dbaeb2"
   dependencies:
     amd-name-resolver "1.0.0"
     babel-plugin-transform-es2015-modules-amd "^6.24.0"
     bower-config "^1.3.0"
     bower-endpoint-parser "0.2.2"
     broccoli-babel-transpiler "^6.0.0"
-    broccoli-brocfile-loader "^0.18.0"
     broccoli-builder "^0.18.8"
     broccoli-concat "^3.2.2"
     broccoli-config-loader "^1.0.0"
@@ -2735,7 +2728,7 @@ ember-cli@~3.0.0-beta.2:
     sort-package-json "^1.4.0"
     symlink-or-copy "^1.1.8"
     temp "0.8.3"
-    testem "^1.18.0"
+    testem "^2.0.0"
     tiny-lr "^1.0.3"
     tree-sync "^1.2.1"
     uuid "^3.0.0"
@@ -3361,6 +3354,18 @@ execa@^0.8.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
+execa@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-0.9.0.tgz#adb7ce62cf985071f60580deb4a88b9e34712d01"
+  dependencies:
+    cross-spawn "^5.0.1"
+    get-stream "^3.0.0"
+    is-stream "^1.1.0"
+    npm-run-path "^2.0.0"
+    p-finally "^1.0.0"
+    signal-exit "^3.0.0"
+    strip-eof "^1.0.0"
+
 exists-stat@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/exists-stat/-/exists-stat-1.0.0.tgz#0660e3525a2e89d9e446129440c272edfa24b529"
@@ -3651,15 +3656,6 @@ findup-sync@2.0.0:
     is-glob "^3.1.0"
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
-
-findup-sync@^0.4.2:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/findup-sync/-/findup-sync-0.4.3.tgz#40043929e7bc60adf0b7f4827c4c6e75a0deca12"
-  dependencies:
-    detect-file "^0.1.0"
-    is-glob "^2.0.1"
-    micromatch "^2.3.7"
-    resolve-dir "^0.1.0"
 
 findup-sync@^1.0.0:
   version "1.0.0"
@@ -5008,6 +5004,10 @@ lodash.bind@~2.3.0:
     lodash._createwrapper "~2.3.0"
     lodash._renative "~2.3.0"
     lodash._slice "~2.3.0"
+
+lodash.castarray@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.castarray/-/lodash.castarray-4.4.0.tgz#c02513515e309daddd4c24c60cfddcf5976d9115"
 
 lodash.clonedeep@^4.3.2, lodash.clonedeep@^4.4.1, lodash.clonedeep@^4.5.0:
   version "4.5.0"
@@ -7109,22 +7109,23 @@ temp@0.8.3:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
 
-testem@^1.18.0:
-  version "1.18.4"
-  resolved "https://registry.yarnpkg.com/testem/-/testem-1.18.4.tgz#e45fed922bec2f54a616c43f11922598ac97eb41"
+testem@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/testem/-/testem-2.0.0.tgz#b05c96200c7ac98bae998d71c94c0c5345907d13"
   dependencies:
     backbone "^1.1.2"
     bluebird "^3.4.6"
     charm "^1.0.0"
     commander "^2.6.0"
     consolidate "^0.14.0"
-    cross-spawn "^5.1.0"
+    execa "^0.9.0"
     express "^4.10.7"
     fireworm "^0.7.0"
     glob "^7.0.4"
     http-proxy "^1.13.1"
     js-yaml "^3.2.5"
     lodash.assignin "^4.1.0"
+    lodash.castarray "^4.4.0"
     lodash.clonedeep "^4.4.1"
     lodash.find "^4.5.1"
     lodash.uniqby "^4.7.0"
