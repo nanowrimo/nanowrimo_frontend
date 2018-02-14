@@ -24,6 +24,9 @@ You will need the following things properly installed on your computer.
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
+**Note:** This project includes [ember-chrome-devtools](https://github.com/dwickern/ember-chrome-devtools)
+which improves the console output of the Ember Inspector. To use, check "Enable custom formatters" in the Chrome DevTools Settings (under the "Console" heading).
+
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
