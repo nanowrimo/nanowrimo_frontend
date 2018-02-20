@@ -22,11 +22,11 @@ export default Component.extend({
   }),
 
   inputClasses: computed('showErrorMessage', function() {
-    let classes = "form-control";
+    let classes = ['form-control'];
     if (this.get('showErrorMessage')) {
-      classes += " is-invalid";
+      classes.push('is-invalid');
     }
-    return classes;
+    return classes.join(' ');
   }),
 
   showErrorMessage: computed('errorMessage', 'hasAttemptedSubmit', 'hasBlurred', function() {
