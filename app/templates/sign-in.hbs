@@ -5,7 +5,10 @@
     <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
     <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
 
-    {{sign-in-form signInAttempt=signInAttempt submit=(action "authenticateSignIn")}}
+    {{sign-in-form
+      changeset=(changeset signInAttempt SignInAttemptValidations)
+      submit=(action "authenticateSignIn")
+    }}
 
     <hr />
 

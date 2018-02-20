@@ -1,8 +1,11 @@
 import Controller from '@ember/controller';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import SignInAttemptValidations from 'nanowrimo/validations/signinattempt';
 
 export default Controller.extend({
+  SignInAttemptValidations,
+
   router: service(),
   session: service(),
 
