@@ -2241,9 +2241,9 @@ ember-basic-dropdown@^1.0.0-beta.3:
     ember-maybe-in-element "^0.1.0"
     ember-native-dom-helpers "^0.5.10"
 
-ember-bootstrap@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ember-bootstrap/-/ember-bootstrap-1.2.0.tgz#58995da338615ba0fd732d4b833e656ff0e8079b"
+ember-bootstrap@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ember-bootstrap/-/ember-bootstrap-1.2.1.tgz#9b88d7568f162b211fa78b4030abade283ad4b52"
   dependencies:
     broccoli-debug "^0.6.3"
     broccoli-funnel "^2.0.0"
@@ -2258,7 +2258,7 @@ ember-bootstrap@^1.2.0:
     ember-concurrency "^0.8.7"
     ember-in-element-polyfill "^0.1.2"
     ember-maybe-in-element "^0.1.3"
-    ember-popper "^0.8.2"
+    ember-popper "^0.8.3"
     ember-runtime-enumerable-includes-polyfill "^2.0.0"
     findup-sync "^1.0.0"
     fs-extra "^4.0.1"
@@ -2918,7 +2918,7 @@ ember-native-dom-helpers@^0.5.10:
     broccoli-funnel "^1.1.0"
     ember-cli-babel "^6.6.0"
 
-ember-popper@^0.8.2:
+ember-popper@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.8.3.tgz#547ec0e8d810805bd65bce7556f0a3377cb9730c"
   dependencies:
