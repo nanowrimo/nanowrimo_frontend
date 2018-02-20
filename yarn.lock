@@ -2283,13 +2283,6 @@ ember-changeset@1.4.2-beta.1:
     ember-cli-babel "^6.8.2"
     ember-deep-set "^0.1.3"
 
-ember-changeset@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/ember-changeset/-/ember-changeset-1.4.1.tgz#e9a8f9c2bb3bfc1bc973c21a9e86a8cf8143df38"
-  dependencies:
-    ember-cli-babel "^6.8.2"
-    ember-deep-set "^0.1.2"
-
 ember-chrome-devtools@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ember-chrome-devtools/-/ember-chrome-devtools-0.2.0.tgz#f3287ddf60d0ea9127c93292de86fff2f1c36df8"
@@ -2828,7 +2821,7 @@ ember-decorators@^1.3.2:
     ember-compatibility-helpers "^0.1.0"
     ember-macro-helpers "^0.17.0"
 
-ember-deep-set@^0.1.2, ember-deep-set@^0.1.3:
+ember-deep-set@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/ember-deep-set/-/ember-deep-set-0.1.3.tgz#852dbcf189419d33e57af724ff2d6d8f404d7b73"
   dependencies:
