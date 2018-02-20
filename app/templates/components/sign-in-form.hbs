@@ -1,3 +1,18 @@
+{{#if changeset.errors.length}}
+  <h2>ERRORS</h2>
+  <ul>
+    {{#each changeset.errors as |error|}}
+      <li>{{error.key}}
+        <ul>
+          {{#each error.validation as |validation|}}
+            <li>{{validation}}</li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
+
 <form {{action submit on="submit"}}>
   <div class="form-group">
     <label for="email">Email</label>
