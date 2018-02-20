@@ -1,12 +1,13 @@
-<form {{action submit on="submit"}}>
+<form {{action "validateAndSubmit" on="submit"}}>
   <div class="form-group">
     {{validated-input
       autocomplete="email"
+      autofocus=true
       errors=changeset.errors
+      hasAttemptedSubmit=hasAttemptedSubmit
       label="Email"
       name="email"
       placeholder="user@domain.com"
-      required=true
       type="email"
       value=changeset.email
     }}
@@ -15,10 +16,9 @@
     {{validated-input
       autocomplete="current-password"
       errors=changeset.errors
+      hasAttemptedSubmit=hasAttemptedSubmit
       label="Password"
       name="password"
-      placeholder="Password"
-      required=true
       type="password"
       value=changeset.password
     }}

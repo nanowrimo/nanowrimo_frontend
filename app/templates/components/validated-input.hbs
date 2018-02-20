@@ -2,13 +2,14 @@
 {{input
   data-test-validated-input=name
   autocomplete=autocomplete
+  autofocus=autofocus
   class=inputClasses
   name=name
+  focusOut=(action "markBlurred")
   placeholder=placeholder
-  required=required
   type=type
   value=value
 }}
-{{#if hasErrorMessage}}
+{{#if showErrorMessage}}
   <div class="invalid-feedback">{{errorMessage}}</div>
 {{/if}}
