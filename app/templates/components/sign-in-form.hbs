@@ -1,25 +1,9 @@
-{{#if changeset.errors.length}}
-  <h2>ERRORS</h2>
-  <ul>
-    {{#each changeset.errors as |error|}}
-      <li>{{error.key}}
-        <ul>
-          {{#each error.validation as |validation|}}
-            <li>{{validation}}</li>
-          {{/each}}
-        </ul>
-      </li>
-    {{/each}}
-  </ul>
-{{/if}}
-
 <form {{action submit on="submit"}}>
   <div class="form-group">
-    <label for="email">Email</label>
-    {{input
-      data-test-sign-in-email=true
+    {{validated-input
       autocomplete="email"
-      class="form-control"
+      errors=changeset.errors
+      label="Email"
       name="email"
       placeholder="user@domain.com"
       required=true
@@ -28,11 +12,10 @@
     }}
   </div>
   <div class="form-group">
-    <label for="password">Password</label>
-    {{input
-      data-test-sign-in-password=true
+    {{validated-input
       autocomplete="current-password"
-      class="form-control"
+      errors=changeset.errors
+      label="Password"
       name="password"
       placeholder="Password"
       required=true

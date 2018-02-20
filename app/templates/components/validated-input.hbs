@@ -1,0 +1,16 @@
+<label for={{name}}>{{label}}</label>
+{{input
+  data-test-validated-input=name
+  autocomplete=autocomplete
+  class="form-control"
+  name=name
+  placeholder=placeholder
+  required=required
+  type=type
+  value=value
+}}
+{{#if errorMessages.length}}
+  {{#each errorMessages as |message|}}
+    <p><small>{{message}}</small></p>
+  {{/each}}
+{{/if}}
