@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
+  hasAttemptedSubmit: false,
   isStepOne: true,
 
   buttonLabel: computed('isStepOne', function() {
@@ -11,13 +12,19 @@ export default Component.extend({
 
   actions: {
     stepOrSubmit() {
-      let isStepOne = this.get('isStepOne');
-
-      if (isStepOne) {
-        this.set('isStepOne', false);
-      } else {
-        this.get('submit')();
-      }
+      this.get('changeset').validate()
+        .then(() => {
+          if (this.get('changeset.isValid')) {
+            if (this.get('isStepOne')) {
+              this.get('switchStep')();
+              this.set('hasAttemptedSubmit', false);
+            } else {
+              this.get('submit')();
+            }
+          } else {
+            this.set('hasAttemptedSubmit', true);
+          }
+        });
     }
   }
 });

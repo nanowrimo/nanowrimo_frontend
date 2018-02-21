@@ -3,7 +3,9 @@
     <h2>Sign Up</h2>
 
     {{sign-up-form
-      signUpAttempt=signUpAttempt
+      changeset=(changeset signUpAttempt validationsForCurrentStep)
+      isStepOne=isStepOne
+      switchStep=(action "switchStep")
       submit=(action "signUp")
     }}
 

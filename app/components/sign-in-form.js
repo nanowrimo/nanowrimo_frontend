@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
   hasAttemptedSubmit: false,
@@ -8,7 +7,7 @@ export default Component.extend({
     validateAndSubmit() {
       this.get('changeset').validate()
         .then(() => {
-          if (isEmpty(this.get('changeset.errors'))) {
+          if (this.get('changeset.isValid')) {
             this.get('submit')();
           } else {
             this.set('hasAttemptedSubmit', true);

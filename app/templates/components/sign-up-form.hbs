@@ -3,49 +3,45 @@
   {{#if isStepOne}}
 
     <div class="form-group">
-      <label for="email">Email</label>
-      {{input
-        data-test-sign-up-email=true
+      {{validated-input
         autocomplete="email"
-        class="form-control"
+        autofocus=true
+        errors=changeset.errors
+        hasAttemptedSubmit=hasAttemptedSubmit
+        label="Email"
         name="email"
-        placeholder="name@domain.com"
-        required=true
+        placeholder="user@domain.com"
         type="email"
-        value=signUpAttempt.email
+        value=changeset.email
       }}
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
-      {{input
-        data-test-sign-up-password=true
+      {{validated-input
         autocomplete="new-password"
-        class="form-control"
+        errors=changeset.errors
+        hasAttemptedSubmit=hasAttemptedSubmit
+        label="Password"
         name="password"
-        placeholder="New Password"
-        required=true
         type="password"
-        value=signUpAttempt.password
+        value=changeset.password
       }}
     </div>
 
   {{else}}
 
     <div class="form-group">
-      <label for="username">Username</label>
-      {{input
-        data-test-sign-up-username=true
+      {{validated-input
         autocomplete="username"
-        class="form-control"
+        errors=changeset.errors
+        hasAttemptedSubmit=hasAttemptedSubmit
+        label="Username"
         name="username"
-        placeholder="Username"
-        required=true
-        value=signUpAttempt.username
+        value=changeset.username
       }}
     </div>
     <div class="form-group">
       <label for="timezone">Time Zone</label>
-      {{select-timezone value=signUpAttempt.timeZone}}
+      {{select-timezone value=changeset.timeZone}}
     </div>
 
   {{/if}}
