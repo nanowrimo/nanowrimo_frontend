@@ -6,13 +6,10 @@ import {
 import validateUniqueness from 'nanowrimo/validators/uniqueness';
 
 export default {
-  email: [
-    validatePresence(true),
-    validateFormat({ type: 'email' }),
-    validateUniqueness('email')
-  ],
+  email: validateUniqueness('email', [
+    validateFormat({ type: 'email' })
+  ]),
   password: [
-    validatePresence(true),
     validateLength({ min: 6 }), // Devise default
     validateLength({ max: 128 }) // Devise default
   ]
