@@ -8,11 +8,11 @@ module('Acceptance | sign up', function(hooks) {
   test('Basic Registration', async function(assert) {
     await visit('/sign-up');
 
-    await fillIn('input[data-test-sign-up-email]', 'user@example.com');
-    await fillIn('input[data-test-sign-up-password]', 'password');
+    await fillIn('input[data-test-validated-input=email]', 'user@example.com');
+    await fillIn('input[data-test-validated-input=password]', 'password');
     await click('input[data-test-sign-up-submit]');
 
-    await fillIn('input[data-test-sign-up-username]', 'username');
+    await fillIn('input[data-test-validated-input=username]', 'username');
     await click('input[data-test-sign-up-submit]');
 
     assert.equal(currentURL(), '/', 'redirects after sign up');

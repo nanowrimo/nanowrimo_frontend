@@ -1,0 +1,18 @@
+<form {{action "validateAndSubmit" on="submit"}}>
+  <div class="form-group">
+    {{validated-input
+      autocomplete="username"
+      errors=changeset.errors
+      hasAttemptedSubmit=hasAttemptedSubmit
+      label="Username"
+      name="username"
+      value=changeset.username
+    }}
+  </div>
+  <div class="form-group">
+    <label for="timezone">Time Zone</label>
+    {{select-timezone value=changeset.timeZone}}
+  </div>
+
+  <input data-test-sign-up-submit type="submit" class="btn btn-primary" value="Sign Up" />
+</form>

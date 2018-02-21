@@ -1,30 +1,21 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import SignUpAttemptPartOneValidations from 'nanowrimo/validations/signupattempt-stepone';
+import SignUpAttemptPartTwoValidations from 'nanowrimo/validations/signupattempt-steptwo';
 
 export default Component.extend({
-  hasAttemptedSubmit: false,
-  isStepOne: true,
+  SignUpAttemptPartOneValidations,
+  SignUpAttemptPartTwoValidations,
 
-  buttonLabel: computed('isStepOne', function() {
-    let isStepOne = this.get('isStepOne');
-    return isStepOne ? "Continue" : "Sign Up";
-  }),
+  isStepOne: true,
+  signUpAttempt: null,
 
   actions: {
-    stepOrSubmit() {
-      this.get('changeset').validate()
-        .then(() => {
-          if (this.get('changeset.isValid')) {
-            if (this.get('isStepOne')) {
-              this.get('switchStep')();
-              this.set('hasAttemptedSubmit', false);
-            } else {
-              this.get('submit')();
-            }
-          } else {
-            this.set('hasAttemptedSubmit', true);
-          }
-        });
+    step() {
+      this.set('isStepOne', false);
+    },
+
+    submit() {
+      this.get('submit')();
     }
   }
 });
