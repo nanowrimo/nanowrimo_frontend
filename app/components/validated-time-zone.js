@@ -23,7 +23,7 @@ export default Component.extend({
     return classes.join(' ');
   }),
 
-  showErrorMessage: computed('errorMessage', 'hasAttemptedSubmit', 'hasBlurred', function() {
-    return (this.get('hasAttemptedSubmit') || this.get('hasBlurred')) && isPresent(this.get('errorMessage'));
+  showErrorMessage: computed('errorMessage', 'hasAttemptedSubmit', function() {
+    return this.get('hasAttemptedSubmit') && isPresent(this.get('errorMessage'));
   })
 });
