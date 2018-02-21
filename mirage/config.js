@@ -1,3 +1,5 @@
+import { Response } from 'ember-cli-mirage';
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -32,6 +34,18 @@ export default function() {
         token: 'token'
       }
     };
+  });
+  this.get('uniqueness', (schema, request) => {
+    let queryParams = request.queryParams;
+
+    if (queryParams.email) {
+      return queryParams.email === "taken@example.com" ? new Response(200) : new Response(404);
+    }
+    if (queryParams.username) {
+      return queryParams.username === "taken" ? new Response(200) : new Response(404);
+    }
+
+    return new Response(400);
   });
 
   this.urlPrefix = 'https://www.googleapis.com';

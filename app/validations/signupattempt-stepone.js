@@ -3,11 +3,13 @@ import {
   validateLength,
   validatePresence
 } from 'ember-changeset-validations/validators';
+import validateUniqueness from 'nanowrimo/validators/uniqueness';
 
 export default {
   email: [
     validatePresence(true),
-    validateFormat({ type: 'email' })
+    validateFormat({ type: 'email' }),
+    validateUniqueness('email')
   ],
   password: [
     validatePresence(true),
