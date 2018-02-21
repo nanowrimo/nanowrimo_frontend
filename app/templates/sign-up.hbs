@@ -2,60 +2,10 @@
   <div class="col">
     <h2>Sign Up</h2>
 
-    <form {{action "signUp" on="submit"}}>
-
-      {{#if isStepOne}}
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          {{input
-            data-test-sign-up-email=true
-            autocomplete="email"
-            class="form-control"
-            name="email"
-            placeholder="name@domain.com"
-            required=true
-            type="email"
-            value=signUpAttempt.email
-          }}
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          {{input
-            data-test-sign-up-password=true
-            autocomplete="new-password"
-            class="form-control"
-            name="password"
-            placeholder="New Password"
-            required=true
-            type="password"
-            value=signUpAttempt.password
-          }}
-        </div>
-
-      {{else}}
-
-        <div class="form-group">
-          <label for="username">Username</label>
-          {{input
-            data-test-sign-up-username=true
-            autocomplete="username"
-            class="form-control"
-            name="username"
-            placeholder="Username"
-            required=true
-            value=signUpAttempt.username
-          }}
-        </div>
-        <div class="form-group">
-          <label for="timezone">Time Zone</label>
-          {{select-timezone value=signUpAttempt.timeZone}}
-        </div>
-
-      {{/if}}
-
-      <input data-test-sign-up-submit type="submit" class="btn btn-primary" value={{buttonLabel}} />
-    </form>
+    {{sign-up-form
+      signUpAttempt=signUpAttempt
+      submit=(action "signUp")
+    }}
 
     <hr />
 
