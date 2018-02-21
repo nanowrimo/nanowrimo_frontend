@@ -10,8 +10,11 @@
     }}
   </div>
   <div class="form-group">
-    <label for="timezone">Time Zone</label>
-    {{select-timezone value=changeset.timeZone}}
+    {{validated-time-zone
+      errors=changeset.errors
+      hasAttemptedSubmit=hasAttemptedSubmit
+      value=changeset.timeZone
+    }}
   </div>
 
   <input data-test-sign-up-submit type="submit" class="btn btn-primary" value="Sign Up" />
