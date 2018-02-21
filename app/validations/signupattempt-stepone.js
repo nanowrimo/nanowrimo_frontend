@@ -1,7 +1,6 @@
 import {
   validateFormat,
-  validateLength,
-  validatePresence
+  validateLength
 } from 'ember-changeset-validations/validators';
 import validateUniqueness from 'nanowrimo/validators/uniqueness';
 
