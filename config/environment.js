@@ -51,6 +51,15 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
+  if (environment === 'development-local') {
+    ENV['ember-cli-mirage'] = { enabled: false };
+    ENV.APP.API_HOST = 'http://localhost:3000';
+  }
+
+  if (environment === 'development-api') {
+    ENV['ember-cli-mirage'] = { enabled: false };
+  }
+
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
