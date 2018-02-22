@@ -27,6 +27,13 @@ You will need the following things properly installed on your computer.
 **Note:** This project includes [ember-chrome-devtools](https://github.com/dwickern/ember-chrome-devtools)
 which improves the console output of the Ember Inspector. To use, check "Enable custom formatters" in the Chrome DevTools Settings (under the "Console" heading).
 
+### API Development
+
+By default, `ember serve` will build and run against a mock API server using [ember-cli-mirage](http://www.ember-cli-mirage.com/). To run the app against a live API, use the following environment arguments:
+
+* Local API (`localhost:3000`): `ember serve -e development-local`
+* Production API (`api.nanowrimo.org`): `ember serve -e development-api`
+
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
