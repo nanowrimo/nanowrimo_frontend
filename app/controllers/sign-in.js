@@ -9,14 +9,16 @@ export default Controller.extend({
   router: service(),
   session: service(),
 
+  error: null,
+
   signInAttempt: alias('model'),
 
   actions: {
     authenticateSignIn() {
       let { email, password } = this.get('signInAttempt');
       this.get('session').authenticate('authenticator:devise', email, password)
-        .catch((reason) => {
-          alert(reason.error || reason);
+        .catch((response) => {
+          this.set('error', response.errors);
         });
     },
 
