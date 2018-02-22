@@ -11,7 +11,7 @@ export default Component.extend({
   actions: {
     validateAndSubmit() {
       let changeset = this.get('changeset');
-      changeset.validate()
+      return changeset.validate()
         .then(() => {
           if (changeset.get('isValid')) {
             return changeset.save()
