@@ -5,10 +5,13 @@ export default Component.extend({
 
   actions: {
     validateAndSubmit() {
-      this.get('changeset').validate()
+      let changeset = this.get('changeset');
+      changeset.validate()
         .then(() => {
-          if (this.get('changeset.isValid')) {
-            this.get('submit')();
+          if (changeset.get('isValid')) {
+            changeset.save().then(() => {
+              this.get('submit')();
+            });
           } else {
             this.set('hasAttemptedSubmit', true);
           }
