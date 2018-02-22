@@ -24,8 +24,7 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.post('users');
-  this.post('users/sign_in', () => {
+  this.post('auth/sign_in', () => {
     return {
       user: {
         email: 'user@example.com',
@@ -33,6 +32,7 @@ export default function() {
       }
     };
   });
+  this.post('users');
 
   this.urlPrefix = 'https://www.googleapis.com';
   this.passthrough();
