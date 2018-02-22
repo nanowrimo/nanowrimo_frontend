@@ -1,7 +1,12 @@
-<label for="timezone">Time Zone</label>
-<div class={{selectClasses}}>
-  {{select-timezone value=value}}
-</div>
+<label for={{name}}>Time Zone</label>
+<select id={{name}} name={{name}} class={{selectClasses}}
+  onchange={{action (mut value) value="target.value"}}>
+  {{#each timeZoneOptions as |option|}}
+    <option value={{option.value}} selected={{is-equal option.value value}}>
+      {{option.name}}
+    </option>
+  {{/each}}
+</select>
 {{#if showErrorMessage}}
   <div data-test-error-message class="invalid-feedback">{{errorMessage}}</div>
 {{/if}}

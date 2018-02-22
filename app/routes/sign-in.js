@@ -3,6 +3,9 @@ import UnauthenticatedRouteMixin from 'nanowrimo/mixins/unauthenticated-route';
 
 export default Route.extend(UnauthenticatedRouteMixin, {
   model() {
-    return {};
+    return {
+      email: '',
+      password: ''
+    };
   }
 });

@@ -3,7 +3,7 @@ import { capitalize } from '@ember/string';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 
-const DEBOUNCE_MS = 250;
+const DEBOUNCE_MS = ENV.APP.DEBOUNCE_MS;
 let db_timeout;
 
 export default function validateUniqueness(remoteKey) {

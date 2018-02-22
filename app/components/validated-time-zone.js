@@ -1,12 +1,15 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
+import TimeZones from 'nanowrimo/lib/time-zones';
+import moment from 'moment';
 
 export default Component.extend({
   errors: null,
   hasAttemptedSubmit: false,
+  hasBlurred: false,
   name: 'timeZone',
-  value: null,
+  value: moment.tz.guess(),
 
   errorMessage: computed('errors.@each.validation', 'name', function() {
     let errors = this.get('errors');
@@ -25,5 +28,16 @@ export default Component.extend({
 
   showErrorMessage: computed('errorMessage', 'hasAttemptedSubmit', function() {
     return this.get('hasAttemptedSubmit') && isPresent(this.get('errorMessage'));
-  })
+  }),
+
+  timeZoneOptions: computed(() => {
+    return TimeZones;
+  }),
+
+  actions: {
+    markBlurred() {
+      alert('blur');
+      this.set('hasBlurred', true);
+    }
+  }
 });

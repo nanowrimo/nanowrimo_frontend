@@ -1,21 +1,54 @@
 import Component from '@ember/component';
-import SignUpAttemptPartOneValidations from 'nanowrimo/validations/signupattempt-stepone';
-import SignUpAttemptPartTwoValidations from 'nanowrimo/validations/signupattempt-steptwo';
+import { computed } from '@ember/object';
 
 export default Component.extend({
-  SignUpAttemptPartOneValidations,
-  SignUpAttemptPartTwoValidations,
 
+  hasAttemptedSubmit: false,
   isStepOne: true,
-  signUpAttempt: null,
+
+  buttonValue: computed('isStepOne', function() {
+    return this.get('isStepOne') ? 'Continue' : 'Sign Up';
+  }),
+
+  _stepOneIsValid: computed('changeset.error', function() {
+    return ['email', 'password'].every((property) => {
+      return this.get(`changeset.error.${property}`) === undefined;
+    });
+  }),
+
+  _callAfterSubmit() {
+    let callback = this.get('afterSubmit');
+    if (callback) { callback(); }
+  },
+
+  init() {
+    this._super(...arguments);
+    this.get('changeset').validate();
+  },
 
   actions: {
-    step() {
-      this.set('isStepOne', false);
-    },
-
-    submit() {
-      this.get('submit')();
+    stepOrSubmit() {
+      if (this.get('isStepOne')) {
+        if (this.get('_stepOneIsValid')) {
+          this.set('hasAttemptedSubmit', false);
+          this.set('isStepOne', false);
+        } else {
+          this.set('hasAttemptedSubmit', true);
+        }
+      } else {
+        let changeset = this.get('changeset');
+        changeset.validate()
+        .then(() => {
+          if (changeset.get('isValid')) {
+            return changeset.save()
+              .then(() => {
+                this._callAfterSubmit();
+              });
+          } else {
+            this.set('hasAttemptedSubmit', true);
+          }
+        });
+      }
     }
   }
 });
