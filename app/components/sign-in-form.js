@@ -16,17 +16,14 @@ export default Component.extend({
   actions: {
     validateAndSubmit() {
       let changeset = this.get('changeset');
-      changeset.validate()
-      .then(() => {
-        if (changeset.get('isValid')) {
-          return changeset.save()
-            .then(() => {
-              this._callAfterSubmit();
-            });
-        } else {
-          this.set('hasAttemptedSubmit', true);
-        }
-      });
+      if (changeset.get('isValid')) {
+        return changeset.save()
+        .then(() => {
+          this._callAfterSubmit();
+        });
+      } else {
+        return this.set('hasAttemptedSubmit', true);
+      }
     }
   }
 });
