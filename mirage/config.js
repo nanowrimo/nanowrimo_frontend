@@ -27,12 +27,9 @@ export default function() {
   */
 
   this.post('users');
-  this.post('users/sign_in', () => {
+  this.post('auth/login', () => {
     return {
-      user: {
-        email: 'user@example.com',
-        token: 'token'
-      }
+      access_token: 'token'
     };
   });
   this.get('uniqueness', (schema, request) => {
