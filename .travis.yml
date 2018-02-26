@@ -30,6 +30,6 @@ script:
 
 deploy:
   provider: script
-  script: ./node_modules/ember-cli/bin/ember deploy production --verbose
+  script: bash scripts/deploy.sh
   on:
     branch: master
