@@ -11,7 +11,7 @@
 
     {{sign-in-form
       changeset=(changeset signInAttempt SignInAttemptValidations)
-      submit=(action "authenticateSignIn")
+      afterSubmit=(action "afterSubmit")
     }}
 
     <hr />

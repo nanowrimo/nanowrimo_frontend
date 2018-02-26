@@ -28,7 +28,8 @@ script:
   - yarn lint:js
   - yarn test
 
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      ember deploy production --verbose;
-    fi
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  on:
+    branch: master

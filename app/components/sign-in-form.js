@@ -1,19 +1,29 @@
 import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
   hasAttemptedSubmit: false,
 
+  init() {
+    this._super(...arguments);
+    this.get('changeset').validate();
+  },
+
+  _callAfterSubmit() {
+    let callback = this.get('afterSubmit');
+    if (callback) { callback(); }
+  },
+
   actions: {
     validateAndSubmit() {
-      this.get('changeset').validate()
+      let changeset = this.get('changeset');
+      if (changeset.get('isValid')) {
+        return changeset.save()
         .then(() => {
-          if (isEmpty(this.get('changeset.errors'))) {
-            this.get('submit')();
-          } else {
-            this.set('hasAttemptedSubmit', true);
-          }
+          this._callAfterSubmit();
         });
+      } else {
+        return this.set('hasAttemptedSubmit', true);
+      }
     }
   }
 });

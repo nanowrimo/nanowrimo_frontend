@@ -14,7 +14,7 @@ export default Controller.extend({
   signInAttempt: alias('model'),
 
   actions: {
-    authenticateSignIn() {
+    afterSubmit() {
       let { email, password } = this.get('signInAttempt');
       this.get('session').authenticate('authenticator:devise', email, password)
         .catch((response) => {

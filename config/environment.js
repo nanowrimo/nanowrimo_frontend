@@ -20,7 +20,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API_HOST: 'https://api.nanowrimo.org'
+      API_HOST: 'https://api.nanowrimo.org',
+      DEBOUNCE_MS: 250
     },
 
     moment: {
@@ -70,6 +71,8 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
+    ENV.APP.DEBOUNCE_MS = 0;
   }
 
   if (environment === 'production') {
