@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { get } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import SignInAttemptValidations from 'nanowrimo/validations/signinattempt';
@@ -16,9 +17,9 @@ export default Controller.extend({
   actions: {
     afterSubmit() {
       let { email, password } = this.get('signInAttempt');
-      this.get('session').authenticate('authenticator:devise', email, password)
-        .catch((response) => {
-          this.set('error', response.errors);
+      this.get('session').authenticate('authenticator:nanowrimo', email, password)
+        .catch((json) => {
+          this.set('error', get(json, 'error.user_authentication.firstObject'));
         });
     },
 

@@ -26,13 +26,12 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.post('users');
-  this.post('users/sign_in', () => {
+  this.post('auth/register', () => {
+    return new Response(201);
+  });
+  this.post('auth/login', () => {
     return {
-      user: {
-        email: 'user@example.com',
-        token: 'token'
-      }
+      access_token: 'token'
     };
   });
   this.get('uniqueness', (schema, request) => {
