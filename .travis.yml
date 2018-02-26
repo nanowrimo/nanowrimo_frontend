@@ -30,6 +30,6 @@ script:
 
 deploy:
   provider: script
-  script: bash scripts/deploy.sh
+  script: ember deploy production --verbose
   on:
     branch: master
