@@ -26,7 +26,9 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.post('users');
+  this.post('auth/register', () => {
+    return new Response(201);
+  });
   this.post('auth/login', () => {
     return {
       access_token: 'token'
