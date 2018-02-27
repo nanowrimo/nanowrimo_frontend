@@ -1,4 +1,6 @@
-# NaNoWriMo Frontend [![TravisCI](https://api.travis-ci.org/nanowrimo/nanowrimo_frontend.svg?branch=master)](https://travis-ci.org/nanowrimo/nanowrimo_frontend)
+# NaNoWriMo Frontend
+
+[![TravisCI](https://api.travis-ci.org/nanowrimo/nanowrimo_frontend.svg?branch=master)](https://travis-ci.org/nanowrimo/nanowrimo_frontend) [![Greenkeeper badge](https://badges.greenkeeper.io/nanowrimo/nanowrimo_frontend.svg)](https://greenkeeper.io/)
 
 This is an Ember.js frontend for the new NaNoWriMo web app.
 
