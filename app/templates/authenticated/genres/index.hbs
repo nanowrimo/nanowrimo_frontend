@@ -1,0 +1,16 @@
+<h2>Index</h2>
+
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    {{#each genres as |genre|}}
+      <tr>
+        <td>{{genre.id}}</td>
+        <td>{{genre.name}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
