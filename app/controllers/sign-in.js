@@ -14,10 +14,6 @@ export default Controller.extend({
   signInAttempt: alias('model'),
 
   actions: {
-    afterError(error) {
-      this.set('error', error);
-    },
-
     authenticateFacebook() {
       this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
         .catch((error) => {
