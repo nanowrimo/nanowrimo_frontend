@@ -38,10 +38,10 @@ export default function() {
     let queryParams = request.queryParams;
 
     if (queryParams.email) {
-      return queryParams.email === "taken@example.com" ? new Response(200) : new Response(404);
+      return { available: queryParams.email !== "taken@example.com" };
     }
     if (queryParams.username) {
-      return queryParams.username === "taken" ? new Response(200) : new Response(404);
+      return { available: queryParams.username !== "taken" };
     }
 
     return new Response(400);
