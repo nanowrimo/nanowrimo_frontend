@@ -2,9 +2,29 @@
   <div class="col">
     <h2>Sign Up</h2>
 
+    {{#if errorString}}
+      <div class="alert alert-danger">{{errorString}}</div>
+    {{/if}}
+    {{#if errorObject}}
+      <div class="alert alert-danger">
+        <ul>
+          {{#each-in error as |key messages|}}
+            <li>
+              {{key}}
+              <ul>
+                {{#each messages as |message|}}
+                  <li>{{message}}</li>
+                {{/each}}
+              </ul>
+            </li>
+          {{/each-in}}
+        </ul>
+      </div>
+    {{/if}}
+
     {{sign-up-form
       changeset=(changeset signUpAttempt SignUpAttemptValidations)
-      afterSubmit=(action "afterSubmit")
+      afterError=(action (mut error))
     }}
 
     <hr />

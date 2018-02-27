@@ -16,14 +16,14 @@ export default Component.extend({
     });
   }),
 
-  _callAfterSubmit() {
-    let callback = this.get('afterSubmit');
-    if (callback) { callback(); }
-  },
-
   init() {
     this._super(...arguments);
     this.get('changeset').validate();
+  },
+
+  _callAfterError(error) {
+    let callback = this.get('afterError');
+    if (callback) { callback(error); }
   },
 
   actions: {
@@ -39,9 +39,9 @@ export default Component.extend({
         let changeset = this.get('changeset');
         if (changeset.get('isValid')) {
           return changeset.save()
-            .then(() => {
-              this._callAfterSubmit();
-            });
+          .catch((error) => {
+            this._callAfterError(error);
+          });
         } else {
           return this.set('hasAttemptedSubmit', true);
         }

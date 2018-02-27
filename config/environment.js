@@ -24,6 +24,10 @@ module.exports = function(environment) {
       DEBOUNCE_MS: 250
     },
 
+    'ember-cli-uuid': {
+      defaultUUID: false
+    },
+
     moment: {
       includeTimezone: 'all'
     },
