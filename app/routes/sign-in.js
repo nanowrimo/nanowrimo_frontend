@@ -3,6 +3,6 @@ import UnauthenticatedRouteMixin from 'nanowrimo/mixins/unauthenticated-route';
 
 export default Route.extend(UnauthenticatedRouteMixin, {
   model() {
-    return this.store.createRecord('signInAttempt');
+    return this.store.createRecord('sign-in-attempt');
   }
 });
