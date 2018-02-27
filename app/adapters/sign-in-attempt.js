@@ -11,12 +11,12 @@ export default ApplicationAdapter.extend(AdaptersUuidMixin, {
     let { email, password } = get(snapshot, '_attributes');
     return new Promise ((resolve, reject) => {
       return this.get('session').authenticate('authenticator:nanowrimo', email, password)
-        .then(() => {
-          resolve();
-        })
-        .catch((json) => {
-          reject(get(json, 'error.user_authentication.firstObject'));
-        });
+      .then(() => {
+        resolve();
+      })
+      .catch((json) => {
+        reject(get(json, 'error.user_authentication.firstObject'));
+      });
     });
   }
 });
