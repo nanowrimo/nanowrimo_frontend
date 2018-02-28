@@ -1,6 +1,8 @@
 import Controller from '@ember/controller';
-import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
-  genres: alias('model')
+  genres: computed('model.[]', function() {
+    return this.get('model').sortBy('id');
+  })
 });
