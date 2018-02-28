@@ -8,7 +8,9 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
-    this.route('genres', function() {});
+    this.route('genres', function() {
+      this.route('new');
+    });
   });
 
   this.route('sign-up');
