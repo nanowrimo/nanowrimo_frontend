@@ -33,7 +33,12 @@ export default function() {
 
   // CRUD
 
-  this.resource('genre');
+  this.resource('genre', {except: ['delete'] });
+  this.del('genres/:id', ({ genres }, request) => {
+    let id = request.params.id;
+    genres.find(id).destroy();
+    return { meta: {} };
+  });
 
   // Google
 
