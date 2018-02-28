@@ -1,7 +1,12 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   hasAttemptedSubmit: false,
+
+  buttonLabel: computed('changeset.id', function() {
+    return this.get('changeset.id') ? "Update Genre" : "Create Genre";
+  }),
 
   _callAfterSubmit() {
     let callback = this.get('afterSubmit');

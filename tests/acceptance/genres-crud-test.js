@@ -57,4 +57,21 @@ module('Acceptance | genres CRUD', function(hooks) {
     assert.equal(currentURL(), `/genres/${genre.id}`, 'links to genre show');
     assert.equal(find('[data-test-genre-name]').textContent, genre.name, 'show displays genre name');
   });
+
+  test('edit genre details', async function(assert) {
+    let genre = this.server.create('genre');
+
+    await authenticateSession();
+    await visit(`/genres/${genre.id}`);
+    await click('[data-test-edit-genre]');
+
+    assert.equal(currentURL(), `/genres/${genre.id}/edit`, 'links to genre edit form');
+
+    let newName = 'NewGenreName';
+    await fillIn('input[data-test-validated-input=name]', newName);
+    await click('[data-test-genre-submit]');
+
+    assert.equal(currentURL(), `/genres/${genre.id}`, 'redirects to genre details');
+    assert.equal(find('[data-test-genre-name]').textContent, newName, 'displays new genre name');
+  });
 });

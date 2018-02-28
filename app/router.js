@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('genres', function() {
       this.route('new');
       this.route('show', { path: '/:genre_id' });
+      this.route('edit', { path: '/:genre_id/edit' });
     });
   });
 
