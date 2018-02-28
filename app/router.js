@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
     this.route('genres', function() {
       this.route('new');
+      this.route('show', { path: '/:genre_id' });
     });
   });
 

@@ -9,7 +9,11 @@
     {{#each genres as |genre|}}
       <tr>
         <td>{{genre.id}}</td>
-        <td data-test-genre-item={{genre.id}}>{{genre.name}}</td>
+        <td data-test-genre-item={{genre.id}}>
+          {{#link-to 'authenticated.genres.show' genre.id data-test-show-genre=genre.id}}
+            {{genre.name}}
+          {{/link-to}}
+        </td>
       </tr>
     {{/each}}
   </tbody>
