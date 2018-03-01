@@ -2,6 +2,6 @@ import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
   name() {
-    return faker.company.productName();
+    return faker.commerce.productName();
   }
 });
