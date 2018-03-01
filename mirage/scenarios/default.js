@@ -1,10 +1,12 @@
 import { sampleSize } from 'lodash';
 
 export default function(server) {
-  let project = server.create('project');
-
+  let projects = server.createList('project', 2);
   let genres = server.createList('genre', 5);
-  sampleSize(genres, 2).forEach(function(genre) {
-    server.create('project-genre', { project, genre })
+
+  projects.forEach(function(project) {
+    sampleSize(genres, 2).forEach(function(genre) {
+      server.create('project-genre', { project, genre })
+    });
   });
 }
