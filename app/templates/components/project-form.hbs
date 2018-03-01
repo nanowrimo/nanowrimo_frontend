@@ -9,6 +9,12 @@
       value=changeset.name
     }}
   </div>
+  <div class="form-group">
+    {{validated-genre-select
+      errors=changeset.errors
+      hasAttemptedSubmit=hasAttemptedSubmit
+    }}
+  </div>
 
   <input data-test-project-submit type="submit" class="btn btn-primary" value={{buttonLabel}} />
 </form>
