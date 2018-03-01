@@ -4,6 +4,7 @@
   <thead>
     <th>ID</th>
     <th>Name</th>
+    <th>Genres</th>
   </thead>
   <tbody>
     {{#each projects as |project|}}
@@ -11,6 +12,13 @@
         <td>{{project.id}}</td>
         <td data-test-project-name={{project.id}}>
           {{project.name}}
+        </td>
+        <td data-test-project-genres={{project.id}}>
+          <ul>
+            {{#each project.genres as |genre|}}
+              <li data-test-genre-name={{genre.id}}>{{genre.name}}</li>
+            {{/each}}
+          </ul>
         </td>
       </tr>
     {{/each}}

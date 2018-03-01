@@ -8,6 +8,22 @@ module('Acceptance | project genre tagging', function(hooks) {
   setupApplicationTest(hooks);
   setupMirageTest(hooks);
 
+  test('list projects with genre tags', async function(assert) {
+    let project = this.server.create('project');
+    let genres = this.server.createList('genre', 2);
+    genres.forEach((genre) => {
+      this.server.create('project-genre', { project, genre });
+    });
+
+    await authenticateSession();
+    await visit('/projects');
+
+    assert.equal(find(`[data-test-project-name='${project.id}']`).textContent.trim(), project.name, 'list includes project name');
+    genres.forEach(function(genre) {
+      assert.equal(find(`[data-test-project-genres='${project.id}'] [data-test-genre-name='${genre.id}']`).textContent.trim(), genre.name, 'list includes associated genres');
+    })
+  });
+
   test('creating a new project with genre tags', async function(assert) {
     await authenticateSession();
     await visit('/projects');

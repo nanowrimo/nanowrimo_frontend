@@ -5,6 +5,6 @@ export default function(server) {
 
   let genres = server.createList('genre', 5);
   sampleSize(genres, 2).forEach(function(genre) {
-    server.create('project-genre', { project: project, genre: genre })
+    server.create('project-genre', { project, genre })
   });
 }

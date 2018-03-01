@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { assert } from '@ember/debug';
 import { computed } from '@ember/object';
 
 export default Component.extend({
@@ -15,6 +16,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
+    assert('Must pass a changeset into {{project-form}}', this.get('changeset'));
     this.get('changeset').validate();
   },
 
