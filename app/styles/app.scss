@@ -5,5 +5,9 @@
 //Bootstrap
 @import "ember-bootstrap/bootstrap";
 
+// Addons
+@import "ember-power-select/themes/bootstrap";
+@import "ember-power-select";
+
 // Project
 @import "theme/panels";
