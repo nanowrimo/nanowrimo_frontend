@@ -2,11 +2,11 @@ import { module, test } from 'qunit';
 import { click, currentURL, fillIn, find, findAll, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateSession } from 'ember-simple-auth/test-support';
-import setupMirageTest from 'nanowrimo/tests/helpers/ember-cli-mirage';
+import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 module('Acceptance | genres CRUD', function(hooks) {
   setupApplicationTest(hooks);
-  setupMirageTest(hooks);
+  setupMirage(hooks);
 
   test('list genres', async function(assert) {
     let genreCount = 3;

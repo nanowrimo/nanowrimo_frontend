@@ -1,11 +1,11 @@
 import { module, test } from 'qunit';
 import { visit, fillIn, click, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import setupMirageTest from 'nanowrimo/tests/helpers/ember-cli-mirage';
+import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 module('Acceptance | sign in', function(hooks) {
   setupApplicationTest(hooks);
-  setupMirageTest(hooks);
+  setupMirage(hooks);
 
   test('Basic Authentication', async function(assert) {
     await visit('/sign-in');

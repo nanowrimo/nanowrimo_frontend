@@ -77,7 +77,6 @@ module.exports = function(environment) {
     ENV.APP.autoboot = false;
 
     ENV.APP.DEBOUNCE_MS = 0;
-    ENV['ember-cli-mirage'] = { enabled: false };
   }
 
   if (environment === 'production') {
