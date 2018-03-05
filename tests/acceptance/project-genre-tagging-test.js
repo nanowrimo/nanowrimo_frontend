@@ -1,12 +1,14 @@
 import { module, test } from 'qunit';
 import { click, currentURL, fillIn, find, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
+
+import { selectChoose } from 'ember-power-select/test-support/helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
-import setupMirageTest from 'nanowrimo/tests/helpers/ember-cli-mirage';
+import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 module('Acceptance | project genre tagging', function(hooks) {
   setupApplicationTest(hooks);
-  setupMirageTest(hooks);
+  setupMirage(hooks);
 
   test('list projects with genre tags', async function(assert) {
     let project = this.server.create('project');
@@ -25,6 +27,8 @@ module('Acceptance | project genre tagging', function(hooks) {
   });
 
   test('creating a new project with genre tags', async function(assert) {
+    let genre = this.server.create('genre');
+
     await authenticateSession();
     await visit('/projects');
     await click('[data-test-new-project]');
@@ -33,10 +37,11 @@ module('Acceptance | project genre tagging', function(hooks) {
 
     let projectName = 'Project Name';
     await fillIn('input[data-test-validated-input=name]', projectName);
-    // Select tags
+    // selectChoose('.genre-select', genre.name);
     await click('[data-test-project-submit]');
 
     assert.equal(currentURL(), '/projects', 'redirected to projects list');
     assert.equal(find('[data-test-project-name]').textContent.trim(), projectName, 'project list includes new project');
+    // assert.equal(find(`[data-test-genre-name='${genre.id}']`).textContent.trim(), genre.name, 'list includes associated genre');
   });
 });

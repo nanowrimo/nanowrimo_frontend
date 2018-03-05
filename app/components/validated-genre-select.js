@@ -6,7 +6,7 @@ import { isNone, isPresent } from '@ember/utils';
 export default Component.extend({
   store: service(),
 
-  errors: null,
+  errorMessage: '',
   hasAttemptedSubmit: false,
   name: 'genres',
   value: null,
@@ -22,15 +22,8 @@ export default Component.extend({
     });
   }),
 
-  errorMessage: computed('errors.@each.validation', 'name', function() {
-    let errors = this.get('errors');
-    let name = this.get('name');
-    let inputErrors = errors.findBy('key', name);
-    return inputErrors ? inputErrors.validation[0] : null;
-  }),
-
   selectClasses: computed('showErrorMessage', function() {
-    let classes = ['form-control'];
+    let classes = ['select-genre'];
     if (this.get('showErrorMessage')) {
       classes.push('is-invalid');
     }

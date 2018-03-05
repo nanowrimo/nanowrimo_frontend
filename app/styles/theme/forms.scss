@@ -1,0 +1,7 @@
+.is-invalid .ember-power-select-trigger {
+  border: solid 1px #dc3545;
+}
+
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
