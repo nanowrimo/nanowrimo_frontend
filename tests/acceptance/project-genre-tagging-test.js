@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { click, currentURL, fillIn, find, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 
-import { selectChoose } from 'ember-power-select/test-support/helpers';
+// import { selectChoose } from 'ember-power-select/test-support/helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
@@ -27,7 +27,7 @@ module('Acceptance | project genre tagging', function(hooks) {
   });
 
   test('creating a new project with genre tags', async function(assert) {
-    let genre = this.server.create('genre');
+    // let genre = this.server.create('genre');
 
     await authenticateSession();
     await visit('/projects');

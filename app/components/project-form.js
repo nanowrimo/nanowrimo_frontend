@@ -1,7 +1,8 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { computed, observer } from '@ember/object';
+import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
+import { Promise } from 'rsvp';
 
 export default Component.extend({
   hasAttemptedSubmit: false,
@@ -32,10 +33,16 @@ export default Component.extend({
       let changeset = this.get('changeset');
 
       if (isEmpty(this.get('genreError')) && changeset.get('isValid')) {
-        // Save new genres
-        return changeset.save()
+        return Promise.all(
+          this.get('project.genres').filterBy('isNew').map(function(genre) {
+            return genre.save();
+          })
+        )
         .then(() => {
-          this._callAfterSubmit();
+          return changeset.save()
+          .then(() => {
+            this._callAfterSubmit();
+          });
         });
       } else {
         return this.set('hasAttemptedSubmit', true);
