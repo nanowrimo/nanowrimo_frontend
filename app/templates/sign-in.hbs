@@ -9,10 +9,37 @@
     <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
     <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
 
-    {{sign-in-form
-      changeset=(changeset signInAttempt SignInAttemptValidations)
+    {{#form-for
       afterError=(action (mut error))
-    }}
+      model=signInAttempt
+    as |f|}}
+      <div class="form-group">
+        {{validated-input
+          autocomplete="email"
+          autofocus=true
+          errors=f.changeset.errors
+          hasAttemptedSubmit=f.hasAttemptedSubmit
+          label="Email"
+          name="email"
+          placeholder="user@domain.com"
+          type="email"
+          value=f.changeset.email
+        }}
+      </div>
+      <div class="form-group">
+        {{validated-input
+          autocomplete="current-password"
+          errors=f.changeset.errors
+          hasAttemptedSubmit=f.hasAttemptedSubmit
+          label="Password"
+          name="password"
+          type="password"
+          value=f.changeset.password
+        }}
+      </div>
+
+      <input data-test-sign-in-submit type="submit" class="btn btn-primary" value="Sign In" />
+    {{/form-for}}
 
     <hr />
 

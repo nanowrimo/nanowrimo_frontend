@@ -1,0 +1,6 @@
+<form {{action "validateAndSubmit" on="submit"}}>
+  {{yield (hash
+    changeset=changeset
+    hasAttemptedSubmit=hasAttemptedSubmit
+  )}}
+</form>
