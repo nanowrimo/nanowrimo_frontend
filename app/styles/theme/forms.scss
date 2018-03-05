@@ -1,5 +1,6 @@
 .is-invalid .ember-power-select-trigger {
-  border: solid 1px #dc3545;
+  border-color: $form-feedback-invalid-color;
+  box-shadow: 0 0 0 0.2rem rgba($form-feedback-invalid-color, 0.25);
 }
 
 .is-invalid ~ .invalid-feedback {
