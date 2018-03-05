@@ -23,7 +23,7 @@ export default Component.extend({
   }),
 
   selectClasses: computed('showErrorMessage', function() {
-    let classes = ['select-genre'];
+    let classes = [];
     if (this.get('showErrorMessage')) {
       classes.push('is-invalid');
     }

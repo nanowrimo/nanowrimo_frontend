@@ -10,6 +10,7 @@
   </div>
   <div class="form-group">
     {{validated-genre-select
+      data-test-select-genre=true
       value=project.genres
       errorMessage=genreError
       hasAttemptedSubmit=hasAttemptedSubmit
