@@ -1,0 +1,9 @@
+<h2>New Project</h2>
+
+{{project-form
+  project=project
+  changeset=(changeset project ProjectValidations)
+  afterSubmit=(action "afterSubmit")
+}}
+
+{{outlet}}
