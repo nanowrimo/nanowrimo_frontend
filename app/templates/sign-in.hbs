@@ -13,12 +13,11 @@
       afterError=(action (mut error))
       model=signInAttempt
     as |f|}}
+
       <div class="form-group">
-        {{validated-input
+        {{f.input
           autocomplete="email"
           autofocus=true
-          errors=f.changeset.errors
-          hasAttemptedSubmit=f.hasAttemptedSubmit
           label="Email"
           name="email"
           placeholder="user@domain.com"
@@ -27,10 +26,8 @@
         }}
       </div>
       <div class="form-group">
-        {{validated-input
+        {{f.input
           autocomplete="current-password"
-          errors=f.changeset.errors
-          hasAttemptedSubmit=f.hasAttemptedSubmit
           label="Password"
           name="password"
           type="password"
@@ -39,6 +36,7 @@
       </div>
 
       <input data-test-sign-in-submit type="submit" class="btn btn-primary" value="Sign In" />
+
     {{/form-for}}
 
     <hr />

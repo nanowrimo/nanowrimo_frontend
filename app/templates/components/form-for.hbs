@@ -1,6 +1,6 @@
 <form {{action "validateAndSubmit" on="submit"}}>
   {{yield (hash
     changeset=changeset
-    hasAttemptedSubmit=hasAttemptedSubmit
+    input=(component 'form-for--input' errors=changeset.errors hasAttemptedSubmit=hasAttemptedSubmit)
   )}}
 </form>
