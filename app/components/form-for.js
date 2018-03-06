@@ -17,10 +17,10 @@ export default Component.extend({
     let changeset;
     if (validator) {
       changeset = new Changeset(model, lookupValidator(validator), validator);
+      changeset.validate();
     } else {
       changeset = new Changeset(model);
     }
-    changeset.validate();
     this.set('changeset', changeset);
   },
 
