@@ -1,7 +1,26 @@
 <h2>New Project</h2>
 
-{{project-form
-  project=project
-  changeset=(changeset project ProjectValidations)
+{{#form-for
   afterSubmit=(action "afterSubmit")
+  model=project
+  modelErrors=modelErrors
+  as |f|
 }}
+
+  <div class="form-group">
+    {{f.input
+      label="Name"
+      property="name"
+    }}
+  </div>
+  <div class="form-group">
+    {{f.multiselect
+      data-test-select-genre=true
+      property="genres"
+      errorMessage=genreError
+    }}
+  </div>
+
+  <input data-test-project-submit type="submit" class="btn btn-primary" value="Create Project" />
+
+{{/form-for}}

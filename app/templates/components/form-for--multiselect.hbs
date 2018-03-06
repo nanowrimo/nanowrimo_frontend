@@ -1,0 +1,21 @@
+{{#validation-error
+  modelErrors=modelErrors
+  hasAttemptedSubmit=hasAttemptedSubmit
+  property=property
+  as |hasError|
+}}
+  <label for={{name}}>Genre(s)</label>
+  {{#power-select-multiple-with-create
+    class=(if hasError 'is-invalid')
+    options=unselectedGenres
+    selected=(get model property)
+    searchField="name"
+    showCreatePosition="bottom"
+    showCreateWhen=(action "showCreateWhen")
+    onchange=(action (mut (get model property)))
+    oncreate=(action "createGenre")
+    as |genre|
+  }}
+    {{genre.name}}
+  {{/power-select-multiple-with-create}}
+{{/validation-error}}

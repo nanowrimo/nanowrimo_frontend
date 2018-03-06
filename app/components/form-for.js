@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { getOwner } from '@ember/application';
 import { assert } from '@ember/debug';
 import { computed } from '@ember/object';
-import { isEmpty } from '@ember/utils';
+import { isEmpty, isNone } from '@ember/utils';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
@@ -10,6 +10,7 @@ export default Component.extend({
   currentStepIndex: 0,
   hasAttemptedSubmit: false,
   model: null,
+  modelErrors: null,
   steps: null, // {(property<string>[])[]}
 
   isLastStep: computed('currentStepIndex', 'steps.[]', function() {
@@ -72,7 +73,7 @@ export default Component.extend({
     submitForm() {
       if (this.get('isLastStep')) {
         let changeset = this.get('changeset');
-        if (changeset.get('isValid')) {
+        if (isNone(this.get('modelErrors')) && changeset.get('isValid')) {
           let modelIsNew = this.get('model.isNew');
           return changeset.save()
           .then(() => {

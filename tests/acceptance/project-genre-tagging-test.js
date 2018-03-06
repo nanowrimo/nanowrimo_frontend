@@ -36,7 +36,7 @@ module('Acceptance | project genre tagging', function(hooks) {
     assert.equal(currentURL(), '/projects/new', 'linked to new project form');
 
     let projectName = 'Project Name';
-    await fillIn('input[data-test-validated-input=name]', projectName);
+    await fillIn('input[data-test-form-for--input=name]', projectName);
     await selectChoose('[data-test-select-genre]', genre.name);
     await click('[data-test-project-submit]');
 
