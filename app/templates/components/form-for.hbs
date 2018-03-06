@@ -1,5 +1,7 @@
 <form {{action "submitForm" on="submit"}}>
   {{yield (hash
+    currentStepIndex=currentStepIndex
+    isLastStep=isLastStep
     input=(component 'form-for--input' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
   )}}
 </form>

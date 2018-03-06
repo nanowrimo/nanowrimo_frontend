@@ -1,12 +1,22 @@
 import Component from '@ember/component';
 import { getOwner } from '@ember/application';
 import { assert } from '@ember/debug';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
 export default Component.extend({
+  currentStepIndex: 0,
   hasAttemptedSubmit: false,
   model: null,
+  steps: null, // {(property<string>[])[]}
+
+  isLastStep: computed('currentStepIndex', 'steps.[]', function() {
+    let steps = this.get('steps');
+    if (isEmpty(steps)) { return true; }
+    return this.get('currentStepIndex') === (steps.length - 1)
+  }),
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -34,6 +44,16 @@ export default Component.extend({
     if (callback) { callback(modelWasNew); }
   },
 
+  _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
+    let propertiesForStep = this.get('steps').objectAt(this.get('currentStepIndex'));
+    if (propertiesForStep) {
+      return propertiesForStep.every((property) => {
+        return this.get(`changeset.error.${property}`) === undefined;
+      });
+    }
+    return true;
+  }),
+
   _factoryForValidator(model) {
     let { modelName } = model.constructor;
 
@@ -50,18 +70,27 @@ export default Component.extend({
 
   actions: {
     submitForm() {
-      let changeset = this.get('changeset');
-      if (changeset.get('isValid')) {
-        let modelIsNew = this.get('model.isNew');
-        return changeset.save()
-        .then(() => {
-          this._callAfterSubmit(modelIsNew);
-        })
-        .catch((error) => {
-          this._callAfterError(error);
-        });
+      if (this.get('isLastStep')) {
+        let changeset = this.get('changeset');
+        if (changeset.get('isValid')) {
+          let modelIsNew = this.get('model.isNew');
+          return changeset.save()
+          .then(() => {
+            this._callAfterSubmit(modelIsNew);
+          })
+          .catch((error) => {
+            this._callAfterError(error);
+          });
+        } else {
+          this.set('hasAttemptedSubmit', true);
+        }
       } else {
-        return this.set('hasAttemptedSubmit', true);
+        if (this.get('_currentStepIsValid')) {
+          this.set('hasAttemptedSubmit', false);
+          this.incrementProperty('currentStepIndex');
+        } else {
+          this.set('hasAttemptedSubmit', true);
+        }
       }
     }
   }
