@@ -1,9 +1,16 @@
+{{#validation-error
+  changeset=changeset
+  hasAttemptedSubmit=hasAttemptedSubmit
+  hasBlurred=hasBlurred
+  property=property
+  as |hasError|
+}}
 <label for={{name}}>{{label}}</label>
 {{input
   data-test-form-for--input=name
   autocomplete=autocomplete
   autofocus=autofocus
-  class=inputClasses
+  class=(concat 'form-control' (if hasError ' is-invalid'))
   focusOut=(action (mut hasBlurred) true)
   id=name
   name=name
@@ -11,6 +18,4 @@
   type=type
   value=(get changeset property)
 }}
-{{#if showErrorMessage}}
-  <div data-test-error-message class="invalid-feedback">{{errorMessage}}</div>
-{{/if}}
+{{/validation-error}}
