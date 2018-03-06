@@ -29,6 +29,11 @@ export default Component.extend({
     if (callback) { callback(error); }
   },
 
+  _callAfterSubmit(modelWasNew) {
+    let callback = this.get('afterSubmit');
+    if (callback) { callback(modelWasNew); }
+  },
+
   _factoryForValidator(model) {
     let { modelName } = model.constructor;
 
@@ -44,10 +49,14 @@ export default Component.extend({
   },
 
   actions: {
-    validateAndSubmit() {
+    submitForm() {
       let changeset = this.get('changeset');
       if (changeset.get('isValid')) {
+        let modelIsNew = this.get('model.isNew');
         return changeset.save()
+        .then(() => {
+          this._callAfterSubmit(modelIsNew);
+        })
         .catch((error) => {
           this._callAfterError(error);
         });

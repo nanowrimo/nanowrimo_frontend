@@ -1,6 +1,17 @@
-<h2>Edit Genre</h2>
+<h2>{{if genre.isNew "New" "Edit"}} Genre</h2>
 
-{{genre-form
-  changeset=(changeset genre GenreValidations)
+{{#form-for
   afterSubmit=(action "afterSubmit")
+  model=genre
+  as |f|
 }}
+  <div class="form-group">
+    {{f.input
+      label="Name"
+      property="name"
+    }}
+  </div>
+
+  <input data-test-genre-submit type="submit" class="btn btn-primary"
+    value={{concat (if genre.isNew "Create" "Update") " Genre"}} />
+{{/form-for}}
