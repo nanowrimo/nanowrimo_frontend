@@ -5,17 +5,17 @@
   property=property
   as |hasError|
 }}
-<label for={{name}}>{{label}}</label>
-{{input
-  data-test-form-for--input=name
-  autocomplete=autocomplete
-  autofocus=autofocus
-  class=(concat 'form-control' (if hasError ' is-invalid'))
-  focusOut=(action (mut hasBlurred) true)
-  id=name
-  name=name
-  placeholder=placeholder
-  type=type
-  value=(get changeset property)
-}}
+  <label for={{name}}>{{label}}</label>
+  {{input
+    data-test-form-for--input=name
+    autocomplete=autocomplete
+    autofocus=autofocus
+    class=(concat 'form-control' (if hasError ' is-invalid'))
+    focusOut=(action (mut hasBlurred) true)
+    id=name
+    name=name
+    placeholder=placeholder
+    type=type
+    value=(get changeset property)
+  }}
 {{/validation-error}}

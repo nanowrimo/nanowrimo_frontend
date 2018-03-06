@@ -1,0 +1,17 @@
+{{#validation-error
+  changeset=changeset
+  hasAttemptedSubmit=hasAttemptedSubmit
+  property=property
+  as |hasError|
+}}
+  <label for={{name}}>{{label}}</label>
+  <select id={{name}} name={{name}}
+    class={{concat 'form-control' (if hasError ' is-invalid')}}
+    onchange={{action (mut (get changeset property)) value="target.value"}}>
+    {{#each normalizedOptions as |option|}}
+      <option value={{option.value}} selected={{eq option.value (get changeset property)}}>
+        {{option.name}}
+      </option>
+    {{/each}}
+  </select>
+{{/validation-error}}

@@ -60,10 +60,10 @@
           }}
         </div>
         <div class="form-group">
-          {{validated-time-zone
-            errors=changeset.errors
-            hasAttemptedSubmit=hasAttemptedSubmit
-            value=changeset.timeZone
+          {{f.select
+            label="Time Zone"
+            options=timeZoneOptions
+            property="timeZone"
           }}
         </div>
 

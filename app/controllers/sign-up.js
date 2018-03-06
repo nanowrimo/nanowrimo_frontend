@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import TimeZones from 'nanowrimo/lib/time-zones';
 
 export default Controller.extend({
 
@@ -23,5 +24,9 @@ export default Controller.extend({
       [ 'email', 'password' ],
       [ 'username', 'timeZone' ]
     ];
+  }),
+
+  timeZoneOptions: computed(function() {
+    return TimeZones;
   })
 });
