@@ -1,23 +1,23 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import { isPresent } from '@ember/utils';
 
 export default Component.extend({
   autocomplete: null,
   autofocus: false,
-  errors: null,
+  changeset: null,
   hasAttemptedSubmit: false,
   hasBlurred: false,
-  name: '',
   label: '',
   placeholder: null,
+  property: '',
   type: 'text',
-  value: '',
 
-  errorMessage: computed('errors.@each.validation', 'name', function() {
-    let errors = this.get('errors');
-    let name = this.get('name');
-    let inputErrors = errors.findBy('key', name);
+  name: reads('property'),
+
+  errorMessage: computed('changeset.error', 'property', function() {
+    let inputErrors = this.get(`changeset.error.${this.get('property')}`);
     return inputErrors ? inputErrors.validation[0] : null;
   }),
 
@@ -31,11 +31,5 @@ export default Component.extend({
 
   showErrorMessage: computed('errorMessage', 'hasAttemptedSubmit', 'hasBlurred', function() {
     return (this.get('hasAttemptedSubmit') || this.get('hasBlurred')) && isPresent(this.get('errorMessage'));
-  }),
-
-  actions: {
-    markBlurred() {
-      this.set('hasBlurred', true);
-    }
-  }
+  })
 });

@@ -1,14 +1,15 @@
 <label for={{name}}>{{label}}</label>
 {{input
-  data-test-validated-input=name
+  data-test-form-for--input=name
   autocomplete=autocomplete
   autofocus=autofocus
   class=inputClasses
+  focusOut=(action (mut hasBlurred) true)
+  id=name
   name=name
-  focusOut=(action "markBlurred")
   placeholder=placeholder
   type=type
-  value=value
+  value=(get changeset property)
 }}
 {{#if showErrorMessage}}
   <div data-test-error-message class="invalid-feedback">{{errorMessage}}</div>

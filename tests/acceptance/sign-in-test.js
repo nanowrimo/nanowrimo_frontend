@@ -14,8 +14,8 @@ module('Acceptance | sign in', function(hooks) {
 
     assert.equal(currentURL(), '/sign-in', 'does not submit blank form');
 
-    await fillIn('input[data-test-validated-input=email]', 'user@example.com');
-    await fillIn('input[data-test-validated-input=password]', 'password');
+    await fillIn('input[data-test-form-for--input=email]', 'user@example.com');
+    await fillIn('input[data-test-form-for--input=password]', 'password');
     await click('[data-test-sign-in-submit]');
 
     assert.equal(currentURL(), '/', 'redirected to dashboard');
