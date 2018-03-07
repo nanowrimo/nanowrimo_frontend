@@ -4,18 +4,18 @@
   property=property
   as |hasError|
 }}
-  <label for={{name}}>Genre(s)</label>
+  <label for={{name}}>{{label}}</label>
   {{#power-select-multiple-with-create
     class=(if hasError 'is-invalid')
-    options=unselectedGenres
+    options=unselectedOptions
     selected=(get model property)
-    searchField="name"
+    searchField=searchField
     showCreatePosition="bottom"
     showCreateWhen=(action "showCreateWhen")
     onchange=(action (mut (get model property)))
-    oncreate=(action "createGenre")
-    as |genre|
+    oncreate=(action "createOption")
+    as |option|
   }}
-    {{genre.name}}
+    {{get option searchField}}
   {{/power-select-multiple-with-create}}
 {{/validation-error}}

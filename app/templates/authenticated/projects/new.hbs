@@ -15,8 +15,11 @@
   <div class="form-group">
     {{f.multiselect
       data-test-select-genre=true
+      createOptionModel="genre"
+      label="Genre(s)"
+      options=genreOptions
       property="genres"
-      errorMessage=genreError
+      searchField="name"
     }}
   </div>
 
