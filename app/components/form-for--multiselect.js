@@ -41,7 +41,7 @@ export default Component.extend({
     },
 
     showCreateWhen(value) {
-      return isNone(this.get('options').findBy(this.get('searchField'), value));
+      return isPresent(this.get('createOptionModel')) && isNone(this.get('options').findBy(this.get('searchField'), value));
     }
   }
 });
