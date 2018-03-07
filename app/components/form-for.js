@@ -13,6 +13,16 @@ export default Component.extend({
   modelErrors: null,
   steps: null, // {(property<string>[])[]}
 
+  _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
+    let propertiesForStep = this.get('steps').objectAt(this.get('currentStepIndex'));
+    if (propertiesForStep) {
+      return propertiesForStep.every((property) => {
+        return this.get(`changeset.error.${property}`) === undefined;
+      });
+    }
+    return true;
+  }),
+
   isLastStep: computed('currentStepIndex', 'steps.[]', function() {
     let steps = this.get('steps');
     if (isEmpty(steps)) { return true; }
@@ -35,25 +45,10 @@ export default Component.extend({
     this.set('changeset', changeset);
   },
 
-  _callAfterError(error) {
-    let callback = this.get('afterError');
-    if (callback) { callback(error); }
+  _callAction(action, args) {
+    let callback = this.get(action);
+    if (callback) { callback(args); }
   },
-
-  _callAfterSubmit(modelWasNew) {
-    let callback = this.get('afterSubmit');
-    if (callback) { callback(modelWasNew); }
-  },
-
-  _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
-    let propertiesForStep = this.get('steps').objectAt(this.get('currentStepIndex'));
-    if (propertiesForStep) {
-      return propertiesForStep.every((property) => {
-        return this.get(`changeset.error.${property}`) === undefined;
-      });
-    }
-    return true;
-  }),
 
   _factoryForValidator(model) {
     let { modelName } = model.constructor;
@@ -77,10 +72,10 @@ export default Component.extend({
           let modelIsNew = this.get('model.isNew');
           return changeset.save()
           .then(() => {
-            this._callAfterSubmit(modelIsNew);
+            this._callAction('afterSubmit', modelIsNew);
           })
           .catch((error) => {
-            this._callAfterError(error);
+            this._callAction('afterError', error);
           });
         } else {
           this.set('hasAttemptedSubmit', true);
