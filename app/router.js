@@ -21,7 +21,7 @@ Router.map(function() {
   this.route('index', { path: '/' });
   this.route('sign-up');
   this.route('sign-in');
-  this.route('404');
+  this.route('404', { path: '/*path' });
 });
 
 export default Router;
