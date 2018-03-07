@@ -1,0 +1,21 @@
+{{#validation-error
+  relationshipErrors=model.relationshipErrors
+  hasAttemptedSubmit=hasAttemptedSubmit
+  property=property
+  as |hasError|
+}}
+  <label for={{name}}>{{label}}</label>
+  {{#power-select-multiple-with-create
+    class=(if hasError 'is-invalid')
+    options=unselectedOptions
+    selected=(get model property)
+    searchField=searchField
+    showCreatePosition="bottom"
+    showCreateWhen=(action "showCreateWhen")
+    onchange=(action (mut (get model property)))
+    oncreate=(action "createOption")
+    as |option|
+  }}
+    {{get option searchField}}
+  {{/power-select-multiple-with-create}}
+{{/validation-error}}

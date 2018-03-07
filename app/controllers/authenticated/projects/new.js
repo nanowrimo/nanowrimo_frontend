@@ -1,14 +1,17 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-import ProjectValidations from 'nanowrimo/validations/project';
 
 export default Controller.extend({
   router: service(),
-
-  ProjectValidations,
+  store: service(),
 
   project: alias('model'),
+
+  genreOptions: computed(function() {
+    return this.get('store').findAll('genre');
+  }),
 
   actions: {
     afterSubmit() {

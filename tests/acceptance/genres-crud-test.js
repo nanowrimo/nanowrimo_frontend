@@ -29,7 +29,7 @@ module('Acceptance | genres CRUD', function(hooks) {
     assert.equal(currentURL(), '/genres/new', 'links to new genre form');
 
     let newName = 'NewGenre';
-    await fillIn('input[data-test-validated-input=name]', newName);
+    await fillIn('input[data-test-form-for--input=name]', newName);
     await click('[data-test-genre-submit]');
 
     assert.equal(currentURL(), '/genres', 'redirects to genres index');
@@ -68,7 +68,7 @@ module('Acceptance | genres CRUD', function(hooks) {
     assert.equal(currentURL(), `/genres/${genre.id}/edit`, 'links to genre edit form');
 
     let newName = 'NewGenreName';
-    await fillIn('input[data-test-validated-input=name]', newName);
+    await fillIn('input[data-test-form-for--input=name]', newName);
     await click('[data-test-genre-submit]');
 
     assert.equal(currentURL(), `/genres/${genre.id}`, 'redirects to genre details');
