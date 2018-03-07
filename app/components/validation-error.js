@@ -6,14 +6,14 @@ export default Component.extend({
   changeset: null,
   hasAttemptedSubmit: false,
   hasBlurred: false,
-  modelErrors: null,
+  relationshipErrors: null,
   property: '',
 
-  errorMessage: computed('changeset.error', 'modelErrors', 'property', function() {
-    let modelErrors = this.get('modelErrors');
+  errorMessage: computed('changeset.error', 'property', 'relationshipErrors', function() {
+    let relationshipErrors = this.get('relationshipErrors');
     let property = this.get('property');
-    if (modelErrors) {
-      return get(modelErrors, property);
+    if (relationshipErrors) {
+      return get(relationshipErrors, property);
     } else {
       let changesetErrors = this.get(`changeset.error.${property}`);
       return changesetErrors ? changesetErrors.validation[0] : null;

@@ -9,7 +9,6 @@ export default Component.extend({
   errorMessage: '',
   hasAttemptedSubmit: false,
   model: null,
-  modelErrors: null,
   property: '',
 
   genres: computed(function() {

@@ -10,7 +10,6 @@ export default Component.extend({
   currentStepIndex: 0,
   hasAttemptedSubmit: false,
   model: null,
-  modelErrors: null,
   steps: null, // {(property<string>[])[]}
 
   _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
@@ -68,7 +67,7 @@ export default Component.extend({
     submitForm() {
       if (this.get('isLastStep')) {
         let changeset = this.get('changeset');
-        if (isNone(this.get('modelErrors')) && changeset.get('isValid')) {
+        if (isNone(this.get('model.relationshipErrors')) && changeset.get('isValid')) {
           let modelIsNew = this.get('model.isNew');
           return changeset.save()
           .then(() => {
