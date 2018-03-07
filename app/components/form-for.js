@@ -19,7 +19,7 @@ export default Component.extend({
     return this.get('currentStepIndex') === (steps.length - 1)
   }),
 
-  didReceiveAttrs() {
+  init() {
     this._super(...arguments);
     let model = this.get('model');
     assert('Must pass a model into {{form-for}}', this.get('model'));

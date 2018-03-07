@@ -17,7 +17,7 @@ export default Component.extend({
   }),
 
   selectedGenres: computed('model', 'property', function() {
-    return this.get('model').get(this.get('property'));
+    return this.get(`model.${this.get('property')}`);
   }),
 
   unselectedGenres: computed('genres.[]', 'selectedGenres.[]', function() {
@@ -33,7 +33,7 @@ export default Component.extend({
       if (isNone(genre)) {
         genre = this.get('store').createRecord('genre', { name: value });
       }
-      this.get('model').get(this.get('property')).pushObject(genre);
+      this.get(`model.${this.get('property')}`).pushObject(genre);
     },
 
     showCreateWhen(value) {
