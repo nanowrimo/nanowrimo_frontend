@@ -9,6 +9,8 @@ export default Route.extend(ApplicationRouteMixin, {
       let firstError = error.errors[0];
       if (firstError.status == 404) {
         this.intermediateTransitionTo('404');
+      } else {
+        this.intermediateTransitionTo('error');
       }
     }
   }
