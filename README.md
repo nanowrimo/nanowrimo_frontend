@@ -57,7 +57,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Deployment occurs automatically when TravisCI builds the `master` branch. TravisCI executes the `ember deploy production` command provided by the [ember-cli-deploy](http://ember-cli-deploy.com/) addon and configured via the [ember-cli-deploy-s3-pack](https://github.com/gaurav0/ember-cli-deploy-s3-pack) to build and upload the `index.html` and compiled assets to AWS S3. All AWS configuration keys are stored on TravisCI, so there is no need to pass them between developers.
 
 ## Further Reading / Useful Links
 
