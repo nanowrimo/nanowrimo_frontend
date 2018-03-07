@@ -18,10 +18,12 @@ Router.map(function() {
     });
   });
 
+  this.route('index', { path: '/' });
   this.route('sign-up');
   this.route('sign-in');
-
-  this.route('index', { path: '/' });
+  this.route('404');
+  this.route('not-found', { path: '/*path' });
+  this.route('error');
 });
 
 export default Router;
