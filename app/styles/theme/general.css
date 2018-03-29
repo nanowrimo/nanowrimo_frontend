@@ -1,0 +1,12 @@
+.container-fluid {
+  max-width: 1044px;
+  @media (min-width: $screen-sm-min) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @media (max-width: $screen-xs) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+}

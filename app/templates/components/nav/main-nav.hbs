@@ -1,0 +1,41 @@
+<nav class="navbar mainnav navbar-expand-lg" aria-label="main">
+  <div class="container-fluid">
+    <a class="navbar-brand text-logo" href="/"><img src="logo/logo-text.svg" alt="" /></a>
+    {{#bs-dropdown as |dd|}}
+      {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
+      {{#dd.menu as |ddm|}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        {{/ddm.item}}
+        {{ddm.divider}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        {{/ddm.item}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}
+    {{#bs-dropdown as |dd|}}
+      {{#dd.toggle}}COMMUNITY <span class="caret"></span>{{/dd.toggle}}
+      {{#dd.menu as |ddm|}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        {{/ddm.item}}
+        {{ddm.divider}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        {{/ddm.item}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}
+    {{#bs-dropdown as |dd|}}
+      {{#dd.toggle}}WRITER'S RESOURCES <span class="caret"></span>{{/dd.toggle}}
+      {{#dd.menu as |ddm|}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        {{/ddm.item}}
+        {{ddm.divider}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        {{/ddm.item}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}
+  </div>
+</nav>

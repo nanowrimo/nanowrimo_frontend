@@ -5,10 +5,14 @@
 //Bootstrap
 @import "ember-bootstrap/bootstrap";
 
+// Fonts
+@import "font-awesome";
 // Addons
 @import "ember-power-select/themes/bootstrap";
 @import "ember-power-select";
 
 // Project
+@import "theme/general";
+@import "theme/nav";
 @import "theme/panels";
 @import "theme/forms";

@@ -1,9 +1,13 @@
 .nano-panel {
   background: white;
-  border-radius: $border-radius;
-  margin-top: $spacer;
+  border: 1px solid #FAFAFA;
+  margin-top: 0;
   margin-bottom: $spacer;
   padding: $spacer;
-
+  box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
+  background: repeating-linear-gradient(0deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
   @include make-row();
+  @media (min-width: $screen-sm) {
+    border-radius: $border-radius;
+  }
 }

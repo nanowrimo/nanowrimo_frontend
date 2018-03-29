@@ -1,0 +1,89 @@
+.navbar {
+  .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+    ul {
+      height: 42px;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      -webkit-margin-before: 0em;
+      -webkit-margin-after: 0em;
+      li {
+        height: 42px;
+        a.nav-link {
+          padding: 0;
+          padding-right: 1rem;
+          padding-left: 1rem;
+        }
+        a.nav-link:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  &.micronav {
+    @media (max-width: $screen-lg-min) {
+      display: none;
+    }
+    height: 42px;
+    font-family: SourceSansPro-Regular;
+    font-size: 14px;
+    line-height: 42px;
+    letter-spacing: 0.25px;
+    background: linear-gradient(to right, #73ab9b 0%,#73ab9b 50%,#2f3061 50%,#2f3061 100%);
+    .container-fluid {
+      background: #73AB9B;
+      .nav-store {
+        .store-blue {
+          padding-left: 10px;
+          background: #2f3061;
+          -webkit-border-radius: 21px 0px 0px 21px;
+          -moz-border-radius: 21px 0px 0px 21px;
+          border-radius: 21px 0px 0px 21px;
+        }
+        a.nav-link {
+          color: #F2F8FA;
+        }
+      }
+    }  
+  }
+  &.mainnav {
+    height: 48px;
+    .dropdown-toggle {
+      font-family: SourceSansPro-Bold;
+      font-size: 14px;
+      color: #54301A;
+      letter-spacing: 0;
+      text-align: center;
+      line-height: 22px;
+      
+    }
+  }
+  .shield-logo-container {
+    flex: 0 0 120px;
+    height: 42px;
+    position: relative;
+    .shield-logo {
+      position: absolute;
+      top: 8px;
+      left: 15px;
+      z-index: 1000;
+    }
+  }
+  .navbar-brand.text-logo {
+    flex: 0 0 220px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 86px;
+    @media (max-width: $screen-lg-min) {
+      margin-left: -10px;
+    }
+  }
+  .navbar-brand:hover {
+    -webkit-filter: drop-shadow( 0px 0px 5px rgba(0,0,0,0.1) ); 
+    filter: drop-shadow( 0px 0px 5px rgba(0,0,0,0.1) );
+  }
+  
+}
