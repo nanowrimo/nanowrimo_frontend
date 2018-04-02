@@ -1,21 +1,24 @@
 <div class="nano-panel">
   <div class="col">
-    <h2>Sign In</h2>
+    <div class="nano-card">
 
-    {{#if error}}
-      <div class="alert alert-danger">{{error}}</div>
-    {{/if}}
+      <h2>Sign In</h2>
 
-    <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
-    <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
+      {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+      {{/if}}
 
-    {{sign-in-form
-      changeset=(changeset signInAttempt SignInAttemptValidations)
-      afterError=(action (mut error))
-    }}
+      <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
+      <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
 
-    <hr />
+      {{sign-in-form
+        changeset=(changeset signInAttempt SignInAttemptValidations)
+        afterError=(action (mut error))
+      }}
 
-    <p>{{link-to 'Sign Up' 'sign-up'}}</p>
+      <hr />
+
+      <p>{{link-to 'Sign Up' 'sign-up'}}</p>
+    </div>
   </div>
 </div>

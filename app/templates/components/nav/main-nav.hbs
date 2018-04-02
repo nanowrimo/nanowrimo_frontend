@@ -1,11 +1,15 @@
 <nav class="navbar mainnav navbar-expand-lg" aria-label="main">
-  <div class="container-fluid">
-    <a class="navbar-brand text-logo" href="/"><img src="logo/logo-text.svg" alt="" /></a>
+  <div class="container-fluid d-flex">
+    {{nav/logo-text}}
     {{#bs-dropdown as |dd|}}
       {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
       {{#dd.menu as |ddm|}}
         {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+          {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+            <div class="dropdown-image"></div>
+            <div class="dropdown-headline">Profile</div>
+            <div class="dropdown-teaser">Tell other Wrimos about you</div>
+          {{/ddm.link-to}}
         {{/ddm.item}}
         {{ddm.divider}}
         {{#ddm.item}}
@@ -37,5 +41,19 @@
         {{/ddm.item}}
       {{/dd.menu}}
     {{/bs-dropdown}}
+    {{nav/logging-buttons}}
+    {{#bs-dropdown as |dd|}}
+      {{#dd.toggle class="user-menu"}}Hi, <u>BunnyBeck</u> <span class="caret"></span>{{/dd.toggle}}
+      {{#dd.menu as |ddm|}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        {{/ddm.item}}
+        {{ddm.divider}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        {{/ddm.item}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}
+    {{nav/notify-buttons}}
   </div>
 </nav>

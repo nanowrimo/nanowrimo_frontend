@@ -5,18 +5,20 @@
 $body-bg: $nano-background;
 $border-radius: 6px;
 
-
-$screen-xs:                  768px !default;
+$screen-xs:                  0px !default;
+$screen-xs-max:              767px !default;
 $screen-xs-min:              $screen-xs !default;
 $screen-phone:               $screen-xs-min !default;
 
 // Small screen / tablet
 $screen-sm:                  768px !default;
+$screen-sm-max:              891px !default;
 $screen-sm-min:              $screen-sm !default;
 $screen-tablet:              $screen-sm-min !default;
 
 // Medium screen / desktop
 $screen-md:                  892px !default;
+$screen-md-max:              1023px !default;
 $screen-md-min:              $screen-md !default;
 $screen-desktop:             $screen-md-min !default;
 
