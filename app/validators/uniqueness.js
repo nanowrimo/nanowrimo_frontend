@@ -12,7 +12,7 @@ export default function validateUniqueness(remoteKey) {
     return new Promise((resolve) => {
       clearTimeout(db_timeout[remoteKey]);
       db_timeout[remoteKey] = setTimeout(() => {
-        let url = `${ENV.APP.API_HOST}/uniqueness?${remoteKey}=${newValue}`;
+        let url = `${ENV.APP.API_HOST}/users/uniqueness?${remoteKey}=${newValue}`;
 
         return fetch(url).then((response) => {
           if (response.status !== 200) {

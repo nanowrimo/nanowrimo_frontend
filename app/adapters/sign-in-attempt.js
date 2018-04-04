@@ -15,7 +15,7 @@ export default ApplicationAdapter.extend(AdaptersUuidMixin, {
         resolve();
       })
       .catch((json) => {
-        reject(get(json, 'error.user_authentication.firstObject'));
+        reject(get(json, 'error'));
       });
     });
   }

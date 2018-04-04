@@ -13,6 +13,10 @@ export default Controller.extend({
   actions: {
     authenticateFacebook() {
       this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
+        .then(()=> {
+          //invalidate the torii session
+          
+          })
         .catch((error) => {
           alert(error);
         });
@@ -20,6 +24,9 @@ export default Controller.extend({
 
     authenticateGoogle() {
       this.get('session').authenticate('authenticator:torii', 'custom-google', {})
+        .then(()=>{
+          //invalidate the session
+        })
         .catch((error) => {
           alert(error);
         });

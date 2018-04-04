@@ -5,10 +5,9 @@ import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
 
 export default BaseAuthenticator.extend({
-  serverTokenEndpoint: `${ENV.APP.API_HOST}/auth/login`,
-
-  tokenAttributeName: 'access_token',
-
+  serverTokenEndpoint: `${ENV.APP.API_HOST}/users/sign_in`,
+  tokenAttributeName: "auth_token",
+  
   authenticate(email, password) {
     return new Promise((resolve, reject) => {
       return fetch(this.get('serverTokenEndpoint'), {
@@ -18,22 +17,28 @@ export default BaseAuthenticator.extend({
       })
       .then((response) => {
         return response.json()
-        .then((json) => {
+        .then((json)=>{
           if (this._validate(json)) {
             resolve(json);
           } else {
             reject(json);
           }
         })
-        .catch((error) => {
-          reject(error);
-        });
+      })
+      .catch((error) => {
+        reject(error);
       });
     });
   },
 
-  restore(data) {
-    return this._validate(data) ? Promise.resolve(data) : Promise.reject();
+  restore(data){
+    return new Promise((resolve, reject) => {
+      if (!isEmpty(data.auth_token) ) {
+        resolve(data);
+      } else {
+        reject();
+      }
+    });
   },
 
   invalidate() {

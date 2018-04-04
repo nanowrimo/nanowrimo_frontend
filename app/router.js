@@ -16,6 +16,12 @@ Router.map(function() {
     this.route('projects', function() {
       this.route('new');
     });
+    
+    //User 
+    this.route('users', function() {
+      this.route('show', { path: '/:user_id'});
+      this.route('edit');
+    });
   });
 
   this.route('index', { path: '/' });

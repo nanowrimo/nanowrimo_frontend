@@ -14,12 +14,12 @@ export default {
     validateUniqueness('email')
   ),
   password: [
-    validateLength({ min: 6 }), // Devise default
+    validateLength({ min: 8 }), // Devise default
     validateLength({ max: 128 }) // Devise default
   ],
   username: and(
     validatePresence(true),
-    validateUniqueness('username')
+    validateUniqueness('name')
   ),
   timeZone: validateInclusion({ list: TimeZones.map(z => z.value) })
 };

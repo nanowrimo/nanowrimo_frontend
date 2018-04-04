@@ -59,6 +59,7 @@ module.exports = function(environment) {
   if (environment === 'development-local') {
     ENV['ember-cli-mirage'] = { enabled: false };
     ENV.APP.API_HOST = 'http://localhost:3000';
+    ENV.APP.UI_HOST = 'http://localhost:4200';
   }
 
   if (environment === 'development-api') {
