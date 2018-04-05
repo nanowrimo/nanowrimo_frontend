@@ -5,8 +5,8 @@ export default BaseAuthorizer.extend({
   tokenAttributeName: 'auth_token',
 
   authorize(data = {}, block = () => {}) {
-    if (!isEmpty(data) && !isEmpty(data.token)) {
-      block('Authorization', `Bearer ${data.auth_token}`);
+    if (!isEmpty(data) && !isEmpty(data.auth_token)) {
+      block('Authorization', `${data.auth_token}`);
     }
   }
 });

@@ -7,8 +7,6 @@ import { inject as service } from '@ember/service';
 
 export default DS.JSONAPIAdapter.extend(AdapterFetchMixin, {
   //authorizer: 'authorizer:nanowrimo',
-  //authorizer: 'authorizer:nanodevise',
-  //authorizer: "authorizer:application",
   session: service(),
   
   // the authorizer is failing to load - Why?
@@ -21,7 +19,7 @@ export default DS.JSONAPIAdapter.extend(AdapterFetchMixin, {
       const authToken = data.auth_token;
      
       return  {
-        'Authorization': authToken,
+        'Authorization': authToken
       };
     }
   }),

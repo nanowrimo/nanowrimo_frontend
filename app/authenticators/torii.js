@@ -1,5 +1,6 @@
 import ToriiAuthenticator from 'ember-simple-auth/authenticators/torii';
 import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
@@ -45,9 +46,15 @@ export default ToriiAuthenticator.extend({
             }) 
             .then((response) => {
               if (response.ok) {
-                resolve(response);
+                return response.json()
+                .then((json)=>{
+                  resolve(json)
+                })
               } else {
-                reject(response);
+                return response.json()
+                .then((json)=>{
+                  reject(json)
+                })
               }
             })
             .catch((error) => {
@@ -59,6 +66,26 @@ export default ToriiAuthenticator.extend({
           reject(error);
         });
     });
+  },
+  
+   restore(data){
+    return new Promise((resolve, reject) => {
+      if (!isEmpty(data.auth_token) ) {
+        resolve(data);
+      } else {
+        reject();
+      }
+    });
+  },
+
+  invalidate() {
+    return Promise.resolve();
+  },
+
+  _validate(data) {
+    return !isEmpty(data['auth_token']);
   }
+  
+  
 });
 
