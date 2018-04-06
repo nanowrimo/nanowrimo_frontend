@@ -1,45 +1,24 @@
 <div class="nano-panel">
   <div class="col">
-    <h2>Sign In</h2>
+    <div class="nano-card">
 
-    {{#if error}}
-      <div class="alert alert-danger">{{error}}</div>
-    {{/if}}
+      <h2>Sign In</h2>
 
-    <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
-    <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
+      {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+      {{/if}}
 
-    {{#form-for
-      afterError=(action (mut error))
-      model=signInAttempt
-      as |f|
-    }}
+      <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
+      <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
 
-      <div class="form-group">
-        {{f.input
-          autocomplete="email"
-          autofocus=true
-          label="Email"
-          placeholder="user@domain.com"
-          property="email"
-          type="email"
-        }}
-      </div>
-      <div class="form-group">
-        {{f.input
-          autocomplete="current-password"
-          label="Password"
-          property="password"
-          type="password"
-        }}
-      </div>
+      {{sign-in-form
+        changeset=(changeset signInAttempt SignInAttemptValidations)
+        afterError=(action (mut error))
+      }}
 
-      <input data-test-sign-in-submit type="submit" class="btn btn-primary" value="Sign In" />
+      <hr />
 
-    {{/form-for}}
-
-    <hr />
-
-    <p>{{link-to 'Sign Up' 'sign-up'}}</p>
+      <p>{{link-to 'Sign Up' 'sign-up'}}</p>
+    </div>
   </div>
 </div>

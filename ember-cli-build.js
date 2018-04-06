@@ -11,6 +11,10 @@ module.exports = function(defaults) {
     },
     vendorFiles: {
       'jquery.js': null
+    },
+    'ember-font-awesome': {
+      useScss: true, // for ember-cli-sass
+      useLess: true  // for ember-cli-less
     }
   });
 

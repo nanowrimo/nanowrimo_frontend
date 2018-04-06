@@ -45,6 +45,16 @@ module.exports = function(environment) {
           scope: 'email profile'
         }
       }
+    },
+    
+    googleFonts: [
+      'Source+Sans+Pro'
+    ],
+ 
+    // Set or update content security policies
+    contentSecurityPolicy: {
+      'font-src': "'self' fonts.gstatic.com",
+      'style-src': "'self' fonts.googleapis.com"
     }
   };
 
