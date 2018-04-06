@@ -8,13 +8,36 @@
         <div class="alert alert-danger">{{error}}</div>
       {{/if}}
 
-      <p><a href="#" {{action "authenticateFacebook"}}>Sign In with Facebook</a></p>
-      <p><a href="#" {{action "authenticateGoogle"}}>Sign In with Google</a></p>
+    {{#form-for
+      afterError=(action (mut error))
+      model=signInAttempt
+      as |f|
+    }}
 
-      {{sign-in-form
-        changeset=(changeset signInAttempt SignInAttemptValidations)
-        afterError=(action (mut error))
-      }}
+      <div class="form-group">
+        {{f.input
+          autocomplete="email"
+          autofocus=true
+          label="Email"
+          placeholder="user@domain.com"
+          property="email"
+          type="email"
+        }}
+      </div>
+      <div class="form-group">
+        {{f.input
+          autocomplete="current-password"
+          label="Password"
+          property="password"
+          type="password"
+        }}
+      </div>
+
+      <input data-test-sign-in-submit type="submit" class="btn btn-primary" value="Sign In" />
+
+    {{/form-for}}
+
+    <hr />
 
       <hr />
 
