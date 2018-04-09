@@ -43,11 +43,13 @@
     {{/bs-dropdown}}
     {{nav/logging-buttons}}
     {{#bs-dropdown as |dd|}}
-      {{#dd.toggle class="user-menu"}}Hi, <u>BunnyBeck</u> <span class="caret"></span>{{/dd.toggle}}
+      {{#dd.toggle class="user-menu"}}Hi, <u>Current User</u> <span class="caret"></span>{{/dd.toggle}}
       {{#dd.menu as |ddm|}}
-        {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
-        {{/ddm.item}}
+        {{#if session.isAuthenticated}}
+          {{#ddm.item}}
+            <a href="#" class="nav-link" {{action 'invalidateSession'}} data-test-log-out>Log out</a>
+          {{/ddm.item}}
+        {{/if}}
         {{ddm.divider}}
         {{#ddm.item}}
           {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
