@@ -1,26 +1,27 @@
 <div class="nano-panel">
   <div class="col">
-    <h2>Sign Up</h2>
+    <div class="nano-card">
+      <h2>Sign Up</h2>
 
-    {{#if errorString}}
-      <div class="alert alert-danger">{{errorString}}</div>
-    {{/if}}
-    {{#if errorObject}}
-      <div class="alert alert-danger">
-        <ul>
-          {{#each-in error as |key messages|}}
-            <li>
-              {{key}}
-              <ul>
-                {{#each messages as |message|}}
-                  <li>{{message}}</li>
-                {{/each}}
-              </ul>
-            </li>
-          {{/each-in}}
-        </ul>
-      </div>
-    {{/if}}
+      {{#if errorString}}
+        <div class="alert alert-danger">{{errorString}}</div>
+      {{/if}}
+      {{#if errorObject}}
+        <div class="alert alert-danger">
+          <ul>
+            {{#each-in error as |key messages|}}
+              <li>
+                {{key}}
+                <ul>
+                  {{#each messages as |message|}}
+                    <li>{{message}}</li>
+                  {{/each}}
+                </ul>
+              </li>
+            {{/each-in}}
+          </ul>
+        </div>
+      {{/if}}
 
     {{#form-for
       afterError=(action (mut error))
@@ -75,6 +76,8 @@
 
     <hr />
 
-    <p>{{link-to 'Sign In' 'sign-in'}}</p>
+
+      <p>{{link-to 'Sign In' 'sign-in'}}</p>
+    </div>
   </div>
 </div>

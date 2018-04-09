@@ -1,3 +1,9 @@
+.ember-text-field {
+  background: #F7F7F7;
+  border: 1px solid #979797;
+  box-shadow: inset 0 1px 4px 0 rgba(151,151,151,0.50);
+  border-radius: 6px;
+}
 .is-invalid .ember-power-select-trigger {
   border-color: $form-feedback-invalid-color;
 

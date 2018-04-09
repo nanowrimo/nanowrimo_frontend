@@ -1,0 +1,166 @@
+.navbar {
+  .navbar-brand:hover, .shield-logo:hover {
+    -webkit-filter: drop-shadow( 0px 0px 5px rgba(0,0,0,0.1) ); 
+    filter: drop-shadow( 0px 0px 5px rgba(0,0,0,0.1) );
+  }
+  .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+    ul {
+      height: 42px;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      -webkit-margin-before: 0em;
+      -webkit-margin-after: 0em;
+      li {
+        height: 42px;
+        a.nav-link, button {
+          padding: 0;
+          padding-right: 1rem;
+          padding-left: 1rem;
+        }
+        a.nav-link:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  &.micronav {
+    @media (max-width: $screen-md-max) {
+      display: none;
+    }
+    height: 42px;
+    font-family: SourceSansPro-Regular;
+    font-size: 14px;
+    line-height: 42px;
+    letter-spacing: 0.25px;
+    background: linear-gradient(to right, #73ab9b 0%,#73ab9b 50%,#2f3061 50%,#2f3061 100%);
+    .container-fluid {
+      background: #73AB9B;
+      .shield-logo-container {
+        flex: 0 0 74px;
+        height: 42px;
+        position: relative;
+        .shield-logo {
+          position: absolute;
+          top: 8px;
+          left: 0px;
+          z-index: 1000;
+        }
+      }
+      .nav-search {
+        flex: 1 1 408px;
+        .search-field {
+          position: relative;
+          margin-bottom: 0;
+          label {
+            display: none;
+          }
+          .ember-text-field {
+            height: 28px;
+            width: 408px;
+            background: #F7F7F7;
+            border: 1px solid #699C8D;
+            box-shadow: inset 0 1px 4px 0 rgba(151,151,151,0.50);
+            border-radius: 3px;
+            font-family: SourceSansPro-Regular;
+            font-size: 14px;
+            color: $nano-placeholder;
+          }
+          .search-button { 
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            font-size: 14px;
+            height: 28px;
+            line-height: 28px;
+            color: #73AB9B;
+            border: 0px;
+            border-radius: 0px;
+            border-left: solid 1px #73AB9B;
+            background: transparent;
+            background-image: none;
+            
+          }
+        }
+      }
+      .nav-store {
+        margin-right: -1rem;
+        .store-blue {
+          padding-left: 10px;
+          background: #2f3061;
+          -webkit-border-radius: 21px 0px 0px 21px;
+          -moz-border-radius: 21px 0px 0px 21px;
+          border-radius: 21px 0px 0px 21px;
+        }
+        a.nav-link {
+          color: #F2F8FA;
+        }
+      }
+    }  
+  }
+  &.mainnav {
+    height: 48px;
+    .container-fluid {
+      .navbar-brand.text-logo {
+        flex: 0 0 220px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 86px;
+        @media (max-width: $screen-md-max) {
+          margin-left: -10px;
+          img {
+            width: 144px;
+            height: 36px;
+          }
+        }
+      }
+      .dropdown {
+        @media (max-width: $screen-sm-max) {
+          display: none;
+        }
+        .dropdown-toggle {
+          font-family: SourceSansPro-Bold;
+          font-size: 14px;
+          color: #54301A;
+          letter-spacing: 0;
+          text-align: center;
+          line-height: 22px;
+          &.user-menu {
+            font-family: SourceSansPro-Regular;
+          }
+        }
+      }
+      .nav-logging-buttons {
+        .button-log {
+          @media (min-width: $screen-lg) {
+            width: 28px;
+            height:28px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+          }
+        }
+        .button-timer {
+          @media (max-width: $screen-md-max) {
+            margin-left: 7px;
+          }
+          @media (min-width: $screen-lg) {
+            width: 27px;
+            height: 28px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            .non-mobile {
+              margin-left: -2px;
+            }
+          }
+        }
+        .non-mobile {
+          font-size: 16px;
+          line-height: 25px;
+        }
+      }
+    }
+  }
+}

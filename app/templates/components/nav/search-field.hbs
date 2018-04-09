@@ -1,0 +1,12 @@
+<div class="form-group search-field">
+  {{validated-input
+    errors=changeset.errors
+    hasAttemptedSubmit=hasAttemptedSubmit
+    label="Search"
+    name="search"
+    placeholder="Search people or posts..."
+    type="text"
+    value=changeset.search
+  }}
+  <button class="search-button" aria-label="search"><span aria-hidden="true">{{fa-icon "search"}}</span></button>
+</div>
