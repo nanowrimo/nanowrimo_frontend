@@ -10,21 +10,21 @@ export default function() {
 
   // Authentication
 
-  this.post('auth/register', () => {
+  this.post('users', () => {
     return new Response(201);
   });
-  this.post('auth/login', () => {
+  this.post('users/sign_in', () => {
     return {
-      access_token: 'token'
+      auth_token: 'token'
     };
   });
-  this.get('uniqueness', (schema, request) => {
+  this.get('/users/uniqueness', (schema, request) => {
     let queryParams = request.queryParams;
 
     if (queryParams.email) {
       return { available: queryParams.email !== "taken@example.com" };
     }
-    if (queryParams.username) {
+    if (queryParams.name) {
       return { available: queryParams.username !== "taken" };
     }
 

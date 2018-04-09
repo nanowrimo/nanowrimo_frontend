@@ -2,7 +2,7 @@ import ApplicationAdapter from './application';
 import AdaptersUuidMixin from 'ember-cli-uuid/mixins/adapters/uuid';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
-import ENV from 'nanowrimo/config/environment';
+//import ENV from 'nanowrimo/config/environment';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 
