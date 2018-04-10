@@ -1,61 +1,119 @@
 <nav class="navbar mainnav navbar-expand-lg" aria-label="main">
   <div class="container-fluid d-flex">
     {{nav/logo-text}}
-    {{#bs-dropdown as |dd|}}
-      {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
-      {{#dd.menu as |ddm|}}
-        {{#ddm.item}}
-          {{#ddm.link-to "index" class="dropdown-item d-flex"}}
-            <div class="dropdown-image"></div>
-            <div class="dropdown-headline">Profile</div>
-            <div class="dropdown-teaser">Tell other Wrimos about you</div>
-          {{/ddm.link-to}}
-        {{/ddm.item}}
-        {{ddm.divider}}
-        {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
-        {{/ddm.item}}
-      {{/dd.menu}}
-    {{/bs-dropdown}}
-    {{#bs-dropdown as |dd|}}
-      {{#dd.toggle}}COMMUNITY <span class="caret"></span>{{/dd.toggle}}
-      {{#dd.menu as |ddm|}}
-        {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
-        {{/ddm.item}}
-        {{ddm.divider}}
-        {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
-        {{/ddm.item}}
-      {{/dd.menu}}
-    {{/bs-dropdown}}
+    {{#if session.isAuthenticated}}
+      {{#bs-dropdown as |dd|}}
+        {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.menu as |ddm|}}
+          <img src="nav/tab.svg" alt="" class="nano-menu-tab" />
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/id_card.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Profile</div>
+              <div class="dropdown-teaser">Tell other Wrimos about you</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/bar_chart.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Stats</div>
+              <div class="dropdown-teaser">Track your writing progress</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/open_book.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Projects</div>
+              <div class="dropdown-teaser">Organize all your projects</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/clapping_hands.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Buddies</div>
+              <div class="dropdown-teaser">Support and be supported</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+        {{/dd.menu}}
+      {{/bs-dropdown}}
+      {{#bs-dropdown as |dd|}}
+        {{#dd.toggle}}COMMUNITY <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.menu as |ddm|}}
+          <img src="nav/tab.svg" alt="" class="nano-menu-tab" />
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/smiley_paper.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Forums</div>
+              <div class="dropdown-teaser">Our lively discussion space</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/map_pin.svg" alt="" /></div></div>
+              <div class="dropdown-headline">New York City</div>
+              <div class="dropdown-teaser">Talk to WriMos near you</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/earth.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Find a Region</div>
+              <div class="dropdown-teaser">Join a region for more support</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+          {{#ddm.item}}
+            {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/pencil_flag.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Word Sprints</div>
+              <div class="dropdown-teaser">Ready... set... write</div>
+            {{/ddm.link-to}}
+          {{/ddm.item}}
+        {{/dd.menu}}
+      {{/bs-dropdown}}
+    {{/if}}
     {{#bs-dropdown as |dd|}}
       {{#dd.toggle}}WRITER'S RESOURCES <span class="caret"></span>{{/dd.toggle}}
       {{#dd.menu as |ddm|}}
+        <img src="nav/tab.svg" alt="" class="nano-menu-tab" />
         {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+          {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+            <div class="dropdown-image"><div class="icon-circle"><img src="nav/thought_bubble.svg" alt="" /></div></div>
+            <div class="dropdown-headline">NaNo Prep</div>
+            <div class="dropdown-teaser">Get ready for the big event</div>
+          {{/ddm.link-to}}
         {{/ddm.item}}
-        {{ddm.divider}}
         {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+          {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+            <div class="dropdown-image"><div class="icon-circle"><img src="nav/pompom.svg" alt="" /></div></div>
+            <div class="dropdown-headline">Pep Talks</div>
+            <div class="dropdown-teaser">Great authors to motivate you</div>
+          {{/ddm.link-to}}
+        {{/ddm.item}}
+        {{#ddm.item}}
+          {{#ddm.link-to "index" class="dropdown-item d-flex"}}
+            <div class="dropdown-image"><div class="icon-circle"><img src="nav/present.svg" alt="" /></div></div>
+            <div class="dropdown-headline">Offers</div>
+            <div class="dropdown-teaser">Discounts on writer tools</div>
+          {{/ddm.link-to}}
         {{/ddm.item}}
       {{/dd.menu}}
     {{/bs-dropdown}}
-    {{nav/logging-buttons}}
-    {{#bs-dropdown as |dd|}}
-      {{#dd.toggle class="user-menu"}}Hi, <u>Current User</u> <span class="caret"></span>{{/dd.toggle}}
-      {{#dd.menu as |ddm|}}
-        {{#if session.isAuthenticated}}
+    {{#if session.isAuthenticated}}
+      {{nav/logging-buttons}}
+      {{#bs-dropdown as |dd|}}
+        {{#dd.toggle class="user-menu"}}Hi, <u>Current User</u> <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.menu as |ddm|}}
+          <img src="nav/tab.svg" alt="" class="nano-menu-tab" />
           {{#ddm.item}}
-            <a href="#" class="nav-link" {{action 'invalidateSession'}} data-test-log-out>Log out</a>
+            <a href="#" class="nav-link dropdown-item d-flex" {{action 'invalidateSession'}} data-test-log-out>
+              <div class="dropdown-image"><div class="icon-circle"><img src="nav/thought_bubble.svg" alt="" /></div></div>
+              <div class="dropdown-headline">Logout</div>
+              <div class="dropdown-teaser">Go! If you must!</div>
+            </a>
           {{/ddm.item}}
-        {{/if}}
-        {{ddm.divider}}
-        {{#ddm.item}}
-          {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
-        {{/ddm.item}}
-      {{/dd.menu}}
-    {{/bs-dropdown}}
-    {{nav/notify-buttons}}
+        {{/dd.menu}}
+      {{/bs-dropdown}}
+      {{nav/notify-buttons}}
+    {{/if}}
   </div>
 </nav>
