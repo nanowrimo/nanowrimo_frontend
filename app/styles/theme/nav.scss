@@ -21,6 +21,23 @@
     padding-bottom: 0px;
     margin-top: 0px;
     width: 218px;
+    
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+
+    &.show {
+      max-height: 300px;
+      opacity: 1;
+    }
+    
     .dropdown-item {
       overflow: hidden;
       padding: 0;
@@ -162,6 +179,11 @@
   }
   &.mainnav {
     height: 48px;
+    div.dropdown {
+      @media (max-width: $screen-md-max) {
+        display: none;
+      }
+    }
     .container-fluid {
       
       .navbar-brand.text-logo {
@@ -191,7 +213,7 @@
       }
       .nav {
         .dropdown {
-          @media (max-width: $screen-sm-max) {
+          @media (max-width: $screen-md-max) {
             display: none;
           }
           ul {
@@ -230,11 +252,14 @@
             padding-bottom: 0px;
             margin-top: 0px;
             width: 350px;
+            
+            
             .nano-menu-tab {
               position: absolute;
               top: -5px;
               left: 14px;
             }
+            
             .dropdown-item {
               overflow: hidden;
               padding: 0;
