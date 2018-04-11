@@ -1,5 +1,5 @@
-{{nav/micro-nav}}  
-{{nav/main-nav}}  
+{{micro-nav}}  
+{{main-nav}}  
 
 <div class="content-gutters">
   <div class="container-fluid">
@@ -10,6 +10,3 @@
     </div>
   </div>
 </div>
-{{#if session.isAuthenticated}}
-  <a href="#" class="nav-link" {{action 'invalidateSession'}} data-test-log-out>Log out</a>
-{{/if}}
