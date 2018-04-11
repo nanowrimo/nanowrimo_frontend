@@ -20,7 +20,6 @@ export default Controller.extend({
   tokenDidChange() {
     let t = this.get('token');
     let verifyUrl = `${ENV.APP.API_HOST}/users/confirm?token=${t}`
-    console.log(verifyUrl);
      return fetch(verifyUrl).then((response) => {
        
       if (response.status !== 200) {
