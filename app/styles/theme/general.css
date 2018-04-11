@@ -1,3 +1,10 @@
+body {
+  background: url("/camp_back.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .content-gutters {
   padding-left: 1rem;
   padding-right: 1rem;
