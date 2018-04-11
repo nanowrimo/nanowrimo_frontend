@@ -28,6 +28,7 @@ body {
   }
 }
 button {
+  cursor: pointer;
   background-image: linear-gradient(-180deg, #73AB9B 0%, #5F8C7F 100%);
   border: 1px solid #5F8C7F;
   border-radius: 6px;

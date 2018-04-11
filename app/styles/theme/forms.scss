@@ -1,8 +1,17 @@
 .ember-text-field {
-  background: #F7F7F7;
-  border: 1px solid #979797;
-  box-shadow: inset 0 1px 4px 0 rgba(151,151,151,0.50);
-  border-radius: 6px;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 4px 0 rgba(151, 151, 151, 0.5);
+  background-color: #f7f7f7;
+  border: solid 1px #699c8d;
+  font-family: SourceSansPro-Italic;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  text-align: left;
+  color: #939393;
 }
 .is-invalid .ember-power-select-trigger {
   border-color: $form-feedback-invalid-color;
