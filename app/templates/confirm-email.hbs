@@ -1,0 +1,10 @@
+<h2> Confirm Email</h2>
+{{#if attemptingVerification}}
+  attempting verification
+{{else}}  
+  {{#if successMessage}}
+    {{successMessage}}
+  {{else}}
+    {{errorMessage}}
+  {{/if}}
+{{/if}}

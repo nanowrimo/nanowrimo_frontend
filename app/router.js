@@ -24,6 +24,9 @@ Router.map(function() {
     });
   });
 
+  //email confirmations
+  this.route('confirm-email');
+
   this.route('index', { path: '/' });
   this.route('sign-up');
   this.route('sign-in');
