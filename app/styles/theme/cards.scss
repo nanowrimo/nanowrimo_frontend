@@ -1,10 +1,23 @@
 .nano-card {
-  background: repeating-linear-gradient(90deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
-  border: 1px solid #DFE4E6;
+  &.login {
+    max-width: 436px;
+  }
   border-radius: 6px;
-  padding: $spacer;
-  margin: 0px;
-  margin-bottom: $spacer;
-  box-shadow: 0 0 14px 0px rgba(47,48,97,0.06);
-  
+  box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
+  background-image: linear-gradient(to bottom, #f7f7f7, #ededed);
+  border: solid 1px #dfe4e6;
+  padding: 21px;
+  .card-title {
+    width: 394px;
+    height: 66px;
+    font-family: SourceSerifPro;
+    font-size: 26px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #343434;
+  }
 }

@@ -1,43 +1,44 @@
-<div class="nano-panel">
-  <div class="col">
-    <div class="nano-card">
+<div class="nano-centered">
+  <div>
+    <div class="login_image"><img src="login_image.svg" alt="" /></div>
+    <div class="nano-card login">
 
-      <h2>Sign In</h2>
+      <h2 class="card-title">Welcome back! Just keep writing, writing, and writing...</h2>
 
       {{#if error}}
         <div class="alert alert-danger">{{error}}</div>
       {{/if}}
 
-    {{#form-for
-      afterError=(action (mut error))
-      model=signInAttempt
-      as |f|
-    }}
+      {{#form-for
+        afterError=(action (mut error))
+        model=signInAttempt
+        as |f|
+      }}
 
-      <div class="form-group">
-        {{f.input
-          autocomplete="email"
-          autofocus=true
-          label="Email"
-          placeholder="user@domain.com"
-          property="email"
-          type="email"
-        }}
-      </div>
-      <div class="form-group">
-        {{f.input
-          autocomplete="current-password"
-          label="Password"
-          property="password"
-          type="password"
-        }}
-      </div>
+        <div class="form-group">
+          {{f.input
+            autocomplete="email"
+            autofocus=true
+            label="Email"
+            placeholder="user@domain.com"
+            property="email"
+            type="email"
+          }}
+        </div>
+        <div class="form-group">
+          {{f.input
+            autocomplete="current-password"
+            label="Password"
+            property="password"
+            type="password"
+          }}
+        </div>
 
-      <input data-test-sign-in-submit type="submit" class="btn btn-primary" value="Sign In" />
+        <input data-test-sign-in-submit type="submit" class="btn btn-primary" value="Sign In" />
 
-    {{/form-for}}
+      {{/form-for}}
 
-    <hr />
+      <hr />
 
       <hr />
 

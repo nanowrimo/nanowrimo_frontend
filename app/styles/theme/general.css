@@ -19,6 +19,14 @@ body {
 .container-fluid {
   max-width: 1044px;
 }
+.nano-centered {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
 .non-mobile {
   @media (max-width: $screen-md-max) {
     display: none;
