@@ -10,7 +10,8 @@
 // Addons
 @import "ember-power-select/themes/bootstrap";
 @import "ember-power-select";
-@import "ember-side-menu";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 
 // Project
 @import "theme/general";
