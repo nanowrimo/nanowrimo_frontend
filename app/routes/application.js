@@ -3,9 +3,7 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 
 export default Route.extend(ApplicationRouteMixin, {
   routeAfterAuthentication: 'authenticated',
-  setupController() {
-    this.controllerFor('application').set('show-navigation', true);
-  },
+
   actions: {
     error(error, transition) { // eslint-disable-line no-unused-vars
       let firstError = error.errors[0];
