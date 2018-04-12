@@ -13,5 +13,9 @@ export default Route.extend(ApplicationRouteMixin, {
         this.intermediateTransitionTo('error');
       }
     }
+  },
+  afterModel() {
+    // Hide the navigation when on the sign-in page
+    this.controllerFor('application').set('show_navigation', true);
   }
 });

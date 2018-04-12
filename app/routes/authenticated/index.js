@@ -19,5 +19,9 @@ export default Route.extend({
         }
       ]
     };
+  },
+  afterModel() {
+    // Hide the navigation when on the sign-in page
+    this.controllerFor('application').set('show_navigation', true);
   }
 });
