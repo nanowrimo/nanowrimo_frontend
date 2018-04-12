@@ -4,7 +4,7 @@
     {{#bs-nav type="pills" as |nav|}}
       {{#if session.isAuthenticated}}
         {{#nav.dropdown as |dd|}}
-          {{#dd.toggle}}MY NANOWRIMO, YO <span class="caret"></span>{{/dd.toggle}}
+          {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
             <img src="nav/tab.svg" alt="" class="nano-menu-tab" />
             <ul>
@@ -40,7 +40,7 @@
           {{/dd.menu}}
         {{/nav.dropdown}}
         {{#nav.dropdown as |dd|}}
-          {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
+          {{#dd.toggle}}COMMUNITY <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
             <img src="nav/tab.svg" alt="" class="nano-menu-tab" />
             <ul>
@@ -77,7 +77,7 @@
         {{/nav.dropdown}}
       {{/if}}
       {{#nav.dropdown as |dd|}}
-        {{#dd.toggle}}MY NANOWRIMO <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.toggle}}WRITER'S RESOURCES <span class="caret"></span>{{/dd.toggle}}
         {{#dd.menu as |ddm|}}
           <img src="nav/tab.svg" alt="" class="nano-menu-tab" aria="hidden" />
           <ul>
