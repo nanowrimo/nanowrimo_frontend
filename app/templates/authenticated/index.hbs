@@ -1,11 +1,11 @@
 {{#each model.panels as |panel|}}
   <div class="nano-panel">
-    {{#each panel.cards as |card|}}
-      <div class="col-4">
-        <div class="nano-card">
+    <div class="grid-wrapper">
+      {{#each panel.cards as |card|}}
+        <div class="nano-card {{card.class}}">
           {{card.title}}
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
   </div>
 {{/each}}
