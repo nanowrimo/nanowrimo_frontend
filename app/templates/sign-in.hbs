@@ -5,10 +5,6 @@
 
       <h2 class="card-title">Welcome back! Just keep writing, writing, and writing...</h2>
 
-      {{#if error}}
-        <div class="alert alert-danger">{{error}}</div>
-      {{/if}}
-
       {{#form-for
         afterError=(action (mut error))
         model=signInAttempt
@@ -32,6 +28,11 @@
             property="password"
           }}
         </div>
+
+        {{#if error}}
+          <div class="alert alert-danger">{{error}}</div>
+        {{/if}}
+
 
         <button data-test-sign-in-submit type="submit" class="btn btn-primary">Sign In</button>
 

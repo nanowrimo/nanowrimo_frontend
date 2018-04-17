@@ -15,13 +15,17 @@ export default Component.extend({
   name: reads('property'),
   
   fieldType: 'password',
+  iconClass: 'eye',
 
   actions: {
     toggleVisible: function() {
-      if (this.get('fieldType') == 'password')
+      if (this.get('fieldType') == 'password') {
         this.set('fieldType', 'text');
-      else
+        this.set('iconClass', 'eye-slash');
+      } else {
         this.set('fieldType', 'password');
+        this.set('iconClass', 'eye');
+      }
       var obj = document.getElementById("password");
       obj.focus();
       if (!(obj.updating)) {
