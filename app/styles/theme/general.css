@@ -1,3 +1,8 @@
+
+// ----------------------------------
+// Body and container styles
+// ----------------------------------
+
 body {
   @media (min-width: $screen-sm) {
     background: url("/camp_back.png") no-repeat center center fixed; 
@@ -14,7 +19,6 @@ body {
     padding-left: 0rem;
     padding-right: 0rem;
   }
-  
 }
 .container-fluid {
   max-width: 1044px;
@@ -25,7 +29,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+}
+
+.left-right-links {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  a {
+    font-family: SourceSansPro-Regular;
+    font-size: 16px;
+    line-height: 1.38;
+    letter-spacing: 0.3px;
+    text-align: left;
+    color: #979797;
+  }
 }
 
 // ----------------------------------
@@ -72,6 +89,27 @@ button.btn {
     background-image: linear-gradient(to bottom, #d5412c, #bd2815);
     border: solid 1px #bd2815;
     font-size: 14px;
+  }
+}
+.password-reveal-container {
+  position: relative;
+    button.password-reveal {
+    cursor: pointer;
+    background-image: none;
+    border: 0;
+    background-color: transparent;
+    width: 40px;
+    height: 36px;
+    font-family: FontAwesome;
+    font-size: 20px;
+    line-height: 1.1;
+    color: #6595a3;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    &.is-invalid {
+      bottom: 24px;
+    }
   }
 }
 nav button {

@@ -5,27 +5,38 @@
 
       <h2 class="card-title">Welcome back! Just keep writing, writing, and writing...</h2>
 
-      <form {{action "validateAndSubmit" on="submit"}}>
+      {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+      {{/if}}
+
+      {{#form-for
+        afterError=(action (mut error))
+        model=signInAttempt
+        as |f|
+      }}
+
         <div class="form-group">
-          {{validated-input
+          {{f.input
             autocomplete="email"
             autofocus=true
-            errors=changeset.errors
-            hasAttemptedSubmit=hasAttemptedSubmit
             label="Email"
-            name="email"
             placeholder="user@domain.com"
+            property="email"
             type="email"
-            value=changeset.email
           }}
         </div>
         <div class="form-group">
-          {{password-field f=f}}
+          {{f.password
+            autocomplete="current-password"
+            label="Password"
+            property="password"
+          }}
         </div>
 
         <button data-test-sign-in-submit type="submit" class="btn btn-primary">Sign In</button>
-      </form>
-      <p>{{link-to 'Sign Up' 'sign-up'}}</p>
+
+      {{/form-for}}
+      <div class="left-right-links">{{link-to "Forgot password" 'sign-up'}}{{link-to "I'm a new user!" 'sign-up'}}</div>
       <div class="nano-hr">OR</div>
       <button data-test-sign-in-submit class="btn nano-blue">Continue with Facebook</button>
       <button data-test-sign-in-submit class="btn nano-red">Continue with Google</button>
