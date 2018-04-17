@@ -27,6 +27,12 @@ body {
   align-items: center;
   
 }
+
+// ----------------------------------
+// Shorthand styles for mobile and
+// non-mobile breakpoints
+// ----------------------------------
+
 .non-mobile {
   @media (max-width: $screen-md-max) {
     display: none;
@@ -37,12 +43,38 @@ body {
     display: none;
   }
 }
-button {
+
+// ----------------------------------
+// Button styling, for inside forms
+// or stand-alone
+// ----------------------------------
+
+button.btn {
+  font-family: SourceSansPro-Bold;
   cursor: pointer;
-  background-image: linear-gradient(-180deg, #73AB9B 0%, #5F8C7F 100%);
-  border: 1px solid #5F8C7F;
+  width: 394px;
+  height: 36px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   border-radius: 6px;
+  background-image: linear-gradient(to bottom, #73ab9b, #5f8c7f);
+  border: solid 1px #5f8c7f;
   color: #E2EFF3;
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 16px;
+  &.nano-blue {
+    background-image: linear-gradient(to bottom, #3d5a96, #27437d);
+    border: solid 1px #27437d;
+    font-size: 14px;
+  }
+  &.nano-red {
+    background-image: linear-gradient(to bottom, #d5412c, #bd2815);
+    border: solid 1px #bd2815;
+    font-size: 14px;
+  }
+}
+nav button {
   font-size: 10px;
   line-height: 23px;
   @media (max-width: $screen-lg) {
@@ -68,6 +100,44 @@ button {
     margin-left: 10px;
   }
 }
+
+// ----------------------------------
+// nano-hr styles the horizontal line
+// with a word ('OR') at the center
+// ----------------------------------
+
+.nano-hr {
+  overflow: hidden;
+  text-align: center;
+  color: #b8b8b8;
+  font-family: SourceSansPro-Bold;
+  font-size: 12px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.nano-hr:before, .nano-hr:after {
+  background-color: #dfe4e6;
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.nano-hr:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.nano-hr:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+// ----------------------------------
+// Styling for the red notifications
+// circle
+// ----------------------------------
+
 .unread-circle {
   width: 17px;
   height: 17px;
