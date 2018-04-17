@@ -17,6 +17,6 @@ module('Acceptance | sign up', function(hooks) {
     await fillIn('input[data-test-form-for--input=username]', 'username');
     await click('input[data-test-sign-up-submit]');
 
-    assert.equal(currentURL(), '/', 'redirects after sign up');
+    assert.equal(currentURL(), '/sign-up', 'redirects after sign up');
   });
 });
