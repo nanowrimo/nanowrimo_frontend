@@ -31,7 +31,6 @@
       as |f|
     }}
 
-      {{#if (eq f.currentStepIndex 0)}}
 
         <div class="form-group">
           {{f.input
@@ -52,7 +51,6 @@
           }}
         </div>
 
-      {{else}}
 
         <div class="form-group">
           {{f.input
@@ -68,8 +66,14 @@
             property="timeZone"
           }}
         </div>
+        
+        <div class="form-group">
+          {{f.checkbox
+            label="I am 13 years of age of older."
+            name="thirteen"
+          }}
+        </div>
 
-      {{/if}}
 
       <input data-test-sign-up-submit type="submit" class="btn btn-primary" value={{if f.isLastStep "Sign Up" "Continue"}} />
 

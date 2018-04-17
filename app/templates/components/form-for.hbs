@@ -1,9 +1,12 @@
 <form {{action "submitForm" on="submit"}}>
-  {{yield (hash
-    currentStepIndex=currentStepIndex
-    isLastStep=isLastStep
-    input=(component 'form-for--input' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
-    select=( component 'form-for--select' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
-    multiselect=( component 'form-for--multiselect' model=model hasAttemptedSubmit=hasAttemptedSubmit)
-  )}}
+  {{yield 
+    (hash
+      currentStepIndex=currentStepIndex
+      isLastStep=isLastStep
+      input=(component 'form-for--input' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
+      select=( component 'form-for--select' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
+      multiselect=( component 'form-for--multiselect' model=model hasAttemptedSubmit=hasAttemptedSubmit)
+      checkbox =( component 'form-for--checkbox' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
+    )
+  }}
 </form>
