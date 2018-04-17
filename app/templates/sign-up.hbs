@@ -59,29 +59,36 @@
             property="username"
           }}
         </div>
+        
         <div class="form-group">
+          {{f.checkbox
+            label="I'm at least 13 years of age."
+            property="thirteen"
+          }}
+        </div>
+        
+        <div class="form-group">
+          {{f.checkbox
+            label="I have read and accept the Terms of Conditions. Plus, I understand that NaNoWriMo is a donation-powered, 501(c)(3) nonprofit."
+            property="terms"
+          }}
+        </div>
+
+         <div class="form-group">
           {{f.select
             label="Time Zone"
             options=timeZoneOptions
             property="timeZone"
           }}
         </div>
-        
-        <div class="form-group">
-          {{f.checkbox
-            label="I am 13 years of age of older."
-            name="thirteen"
-          }}
-        </div>
-
 
       <input data-test-sign-up-submit type="submit" class="btn btn-primary" value="Sign Up" />
 
     {{/form-for}}
 
     <hr />
-
-
+      {{continue-with}}
+      
       <p>{{link-to 'Sign In' 'sign-in'}}</p>
     </div>
   </div>

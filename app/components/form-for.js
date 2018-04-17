@@ -15,7 +15,6 @@ export default Component.extend({
   _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
     let propertiesForStep = this.get('steps').objectAt(this.get('currentStepIndex'));
     if (propertiesForStep) {
-      console.log(propertiesForStep);
       return propertiesForStep.every((property) => {
         return this.get(`changeset.error.${property}`) === undefined;
       });
