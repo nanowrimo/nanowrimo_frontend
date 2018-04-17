@@ -6,6 +6,7 @@ import {
 } from 'ember-changeset-validations/validators';
 import validateUniqueness from 'nanowrimo/validators/uniqueness';
 import validateThirteen from 'nanowrimo/validators/thirteen';
+import validateTerms from 'nanowrimo/validators/terms';
 import TimeZones from 'nanowrimo/lib/time-zones';
 
 export default {
@@ -22,5 +23,6 @@ export default {
     validateUniqueness('name')
   ],
   thirteen: validateThirteen(),
+  terms: validateTerms(),
   timeZone: validateInclusion({ list: TimeZones.map(z => z.value) })
 };

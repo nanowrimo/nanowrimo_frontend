@@ -3,6 +3,6 @@ export default function validateTerms() {
         if (newValue === true) {
       return true;
     }
-    return "You need to accept the terms and conditions";
+    return "You must accept the terms and conditions.";
   }
 }

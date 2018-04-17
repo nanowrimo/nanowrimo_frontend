@@ -8,28 +8,6 @@ export default Controller.extend({
 
   error: null,
 
-  signInAttempt: alias('model'),
+  signInAttempt: alias('model')
 
-  actions: {
-    authenticateFacebook() {
-      this.get('session').authenticate('authenticator:torii', 'facebook-connect', {})
-        .then(()=> {
-          //invalidate the torii session
-          
-          })
-        .catch((error) => {
-          alert(error);
-        });
-    },
-
-    authenticateGoogle() {
-      this.get('session').authenticate('authenticator:torii', 'custom-google', {})
-        .then(()=>{
-          //invalidate the session
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
-  }
 });
