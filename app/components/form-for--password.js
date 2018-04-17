@@ -14,20 +14,25 @@ export default Component.extend({
 
   name: reads('property'),
   
+  // Bound to the input field. Changes to 'text' upon clicking the 'eye' icon
   fieldType: 'password',
+  // Bound to the eye icon. Changes to eye-slash when the password field becomes type 'text'
   iconClass: 'eye',
 
   actions: {
     toggleVisible: function() {
+      // If the field is of type 'password', change it to type 'text'
       if (this.get('fieldType') == 'password') {
         this.set('fieldType', 'text');
         this.set('iconClass', 'eye-slash');
-      } else {
+      } else { // Otherwise, do the opposite
         this.set('fieldType', 'password');
         this.set('iconClass', 'eye');
       }
+      // After toggling visibility, put the focus back in the password field...
       var obj = document.getElementById("password");
       obj.focus();
+      // ...and put the cursor at the end of the entered text
       if (!(obj.updating)) {
         obj.updating = true;
         var oldValue = obj.value;
