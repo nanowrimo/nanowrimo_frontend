@@ -20,10 +20,7 @@ export default Controller.extend({
   }),
 
   steps: computed(function() {
-    return [
-      [ 'email', 'password' ],
-      [ 'username', 'timeZone' ]
-    ];
+    return [['email', 'password', 'username', 'timeZone', 'thirteen' ]];
   }),
 
   timeZoneOptions: computed(function() {

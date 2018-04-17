@@ -1,0 +1,18 @@
+{{#validation-error
+  changeset=changeset
+  hasAttemptedSubmit=hasAttemptedSubmit
+  hasBlurred=hasBlurred
+  property=property
+  as |hasError|
+}}
+  {{input
+    data-test-form-for--checkbox=name
+    class=(concat 'form-control' (if hasError ' is-invalid'))
+    id=name
+    name=name
+    type="checkbox"
+    checked=(get changeset property)
+  }}
+  <label for={{name}}>{{label}}</label>
+{{/validation-error}}
+{{changeset.error}}
