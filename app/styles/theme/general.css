@@ -93,7 +93,7 @@ button.btn {
 }
 .password-reveal-container {
   position: relative;
-    button.password-reveal {
+    a.password-reveal {
     cursor: pointer;
     background-image: none;
     border: 0;

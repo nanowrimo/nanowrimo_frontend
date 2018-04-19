@@ -34,6 +34,7 @@ Router.map(function() {
   this.route('not-found', { path: '/*path' });
   this.route('error');
   this.route('forgot-password');
+  this.route('password-reset');
 });
 
 export default Router;
