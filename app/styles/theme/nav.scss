@@ -142,6 +142,7 @@
             display: none;
           }
           .ember-text-field {
+            font-size: 14px;
             height: 28px;
             width: 408px;
           }
@@ -298,32 +299,76 @@
           }
         }
       }
-      .nav-logging-buttons {
-        .button-log {
-          @media (min-width: $screen-lg) {
-            width: 28px;
-            height:28px;
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;
+      button {
+        font-size: 10px;
+        line-height: 23px;
+        &.button-clear {
+          width: 32px;
+          border: 0;
+          background-image: none;
+          background-color: transparent;
+          color: #5F8C7F;
+          font-size: 16px;
+          position: relative;
+          .fa-bell-o {
+            font-size: 18px;
+            color: #343434;
+          }
+          .fa-bars {
+            font-size: 28px;
           }
         }
-        .button-timer {
-          @media (max-width: $screen-md-max) {
-            margin-left: 7px;
-          }
+        &.button-hamburger {
+          margin-left: 10px;
+        }
+      }
+      .nav-logging-buttons {
+        button {
+          display: flex;
           @media (min-width: $screen-lg) {
-            width: 27px;
-            height: 28px;
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;
-            .non-mobile {
-              margin-left: -2px;
+            padding: 0;
+          }
+          @media (max-width: $screen-md-max) {
+            font-size: 12px;
+          }
+          align-content: center;
+          span {
+            align-self: center;
+            i {
+              width: 28px;
+              height:28px;
             }
           }
-        }
-        .non-mobile {
-          font-size: 16px;
-          line-height: 25px;
+          &.button-log {
+            @media (max-width: $screen-md-max) {
+              width: 50px;
+            }
+            @media (min-width: $screen-lg) {
+              width: 28px;
+              height:28px;
+              border-top-right-radius: 0px;
+              border-bottom-right-radius: 0px;
+            }
+          }
+          &.button-timer {
+            @media (max-width: $screen-md-max) {
+              margin-left: 7px;
+              width: 60px;
+            }
+            @media (min-width: $screen-lg) {
+              width: 27px;
+              height: 28px;
+              border-top-left-radius: 0px;
+              border-bottom-left-radius: 0px;
+              .non-mobile {
+                margin-left: -2px;
+              }
+            }
+          }
+          .non-mobile {
+            font-size: 16px;
+            line-height: 25px;
+          }
         }
       }
     }
