@@ -1,29 +1,16 @@
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
-  hasAttemptedSubmit: false,
+  session: service(),
+  store: service(),
+  error: null,
 
-  init() {
+  signInAttempt: null,
+  
+  init(){
     this._super(...arguments);
-    this.get('changeset').validate();
-  },
-
-  _callAfterError(error) {
-    let callback = this.get('afterError');
-    if (callback) { callback(error); }
-  },
-
-  actions: {
-    validateAndSubmit() {
-      let changeset = this.get('changeset');
-      if (changeset.get('isValid')) {
-        return changeset.save()
-        .catch((error) => {
-          this._callAfterError(error);
-        });
-      } else {
-        return this.set('hasAttemptedSubmit', true);
-      }
-    }
+    let sia = this.get('store').createRecord('sign-in-attempt');
+    this.set('signInAttempt', sia);
   }
 });

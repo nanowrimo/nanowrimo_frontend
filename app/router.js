@@ -33,6 +33,8 @@ Router.map(function() {
   this.route('404');
   this.route('not-found', { path: '/*path' });
   this.route('error');
+  this.route('forgot-password');
+  this.route('password-reset');
 });
 
 export default Router;
