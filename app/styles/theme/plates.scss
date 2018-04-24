@@ -1,0 +1,12 @@
+.nano-user-plate {
+  height: 320px;
+  background-image: url('/images/users/lamb.jpg');
+  background-position:50% 50%;  /* Sets reference point to scale from */
+  background-size:cover;
+  .plate-cover {
+    width: 100%;
+    height: 320px;
+    background-color: rgba(52, 52, 52, 0.6);
+    box-shadow: 0 0 14px 3px rgba(47, 48, 97, 0.12);
+  }
+}
