@@ -13,14 +13,14 @@ Router.map(function() {
       this.route('show', { path: '/:genre_id' });
       this.route('edit', { path: '/:genre_id/edit' });
     });
-    this.route('projects', function() {
-      this.route('new');
-    });
     
     //User 
-    this.route('users', function() {
-      this.route('show', { path: '/:user_id'});
+    this.route('users', { path: 'participants'}, function() {
+      this.route('show', { path: '/username'});
       this.route('edit');
+      this.route('projects', function() {
+        this.route('new');
+      });
     });
   });
 

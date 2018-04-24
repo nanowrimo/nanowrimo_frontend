@@ -1,0 +1,57 @@
+.nano-panel.left-sidebar.nano-profile {
+  font-size: 14px;
+  font-family: SourceSansPro-Regular;
+  .nano-avatar-large {
+    width: 100%;
+    text-align: center;
+    margin-top: -70px;
+    height: 140px;
+    img {
+      width: 140px;
+      height: 140px;
+      border-radius: 70px;
+    }
+  }
+  .nano-user-name {
+    width: 100%;
+    text-align: center;
+    font-family: SourceSansPro-Bold;
+    color: #2F3061;
+    font-size: 26px;
+  }
+  .nano-user-location {
+    width: 100%;
+    text-align: center;
+    color: #000000;
+    font-style: italic;
+  }
+  .nano-member-since {
+    width: 100%;
+    text-align: center;
+    color: #979797;
+    font-style: italic;
+  }
+  .nano-user-social {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .social-button {
+      width: 26px;
+      height: 26px;
+      margin: 7px;
+      background-color: #e2eff3;
+      border-radius: 13px;
+      color: #7880b5;
+      font-size: 12px;
+      line-height: 26px;
+    }
+  }
+  .nano-user-link {
+    width: 100%;
+    text-align: center;
+    font-family: SourceSansPro-Bold;
+    a {
+      color: #75ABBC;
+    }
+  }
+}

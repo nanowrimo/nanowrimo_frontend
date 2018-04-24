@@ -5,11 +5,8 @@
 
 body {
   @media (min-width: $screen-sm) {
-    background: url("/camp_back.png") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background: url("/camp_back.png") no-repeat center center; 
+    background-position: bottom;
   }
 }
 .content-gutters {
@@ -44,7 +41,9 @@ body {
     color: #979797;
   }
 }
-
+.full-width {
+  width: 100%;
+}
 // ----------------------------------
 // Shorthand styles for mobile and
 // non-mobile breakpoints
