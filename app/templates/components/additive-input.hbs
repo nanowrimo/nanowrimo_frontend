@@ -1,0 +1,9 @@
+{{#each parentArray as |item index|}}
+  <div>
+    {{input index=index value=item.value}} <a href='#' {{action 'delInput' index}}>delete</a>
+  </div>
+{{/each}}
+
+{{#if inputAvailable}}
+  <a href='#' {{action 'newInput'}}>Add another {{inputIdentifier}}</a>
+{{/if}}

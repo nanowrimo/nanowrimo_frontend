@@ -1,0 +1,74 @@
+<h2>Name and External Links</h2>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td>{{user.name}}</td>
+  </tr>
+
+</table>
+
+{{external-links}}
+
+<table>
+  {{#each user.externalLinks as |link|}}
+    <tr><td>{{link.url}}</td></tr>
+  {{/each}}
+</table>
+
+{{#if showEditOverview}}
+<form {{action 'submitOverviewForm' this on='submit'}}>
+  <div class='form-group'>
+    {{form-for--input label='name' property='name' changeset=userNameChangeset}}
+  </div> 
+
+  <div id='externalLinks'>
+   {{additive-input inputIdentifier='link' parentArray=newExternalLinks baseProperty='url'}}
+   </div>
+  <input type='submit' value='Submit'>
+</form>
+{{/if}}
+
+<a href="#" {{action "clickedOverviewGear"}}>gear</a>
+
+
+<h2>Bio and Books and Authors</h2>
+<table>
+  <tr>
+    <td>bio:</td>
+    <td>{{user.bio}}</td>
+  </tr>
+</table>
+<h3>Favorite Books</h3>
+<table>
+  {{#each user.favoriteBooks as |book|}}
+    <tr><td>{{book.title}}</td></tr>
+  {{/each}}
+</table>
+<h3>Favorite Authors</h3>
+<table>
+  {{#each user.favoriteAuthors as |author|}}
+    <tr><td>{{author.name}}</td></tr>
+  {{/each}}
+</table>
+
+{{#if showEditBio}}
+<form {{action 'submitBioForm' this on='submit'}}>
+  <div class='form-group'>
+    {{form-for--textarea label='Say something about yourself' property='bio' changeset=userBioChangeset}}
+  </div> 
+
+  <div id='books'>
+    <div>Favorite Books</div>
+    {{additive-input inputIdentifier='book' parentArray=newBookTitles baseProperty='title'}}
+  </div>
+  
+  <div id='authors'>
+    <div>Favorite Authors</div>
+    {{additive-input inputIdentifier='author' parentArray=newAuthorNames baseProperty='name'}}
+  </div>
+  <input type='submit' value='Submit'>
+</form>
+{{/if}}
+
+<a href="#" {{action "clickedBioGear"}}>gear</a>
+
