@@ -2,12 +2,12 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
-import userProfileNameValidation from 'nanowrimo/validations/user-profile-name';
+import userProfileOverviewValidation from 'nanowrimo/validations/user-profile-overview';
 import userProfileBioValidation from 'nanowrimo/validations/user-profile-bio';
 
 export default Controller.extend({
   user:null,
-  userNameChangeset:null,
+  userOverviewChangeset:null,
   userBioChangeset:null,
   showEditBio: false,
   showEditOverview: false,
@@ -61,7 +61,7 @@ export default Controller.extend({
         this.set('newAuthorNames', aArray);
       });
       
-      this.set('userNameChangeset', new Changeset(user, lookupValidator(userProfileNameValidation), userProfileNameValidation));
+      this.set('userOverviewChangeset', new Changeset(user, lookupValidator(userProfileOverviewValidation), userProfileOverviewValidation));
       this.set('userBioChangeset', new Changeset(user, lookupValidator(userProfileBioValidation), userProfileBioValidation));
       
     });
@@ -76,9 +76,9 @@ export default Controller.extend({
     },
     submitOverviewForm() {
       //return if the changeset is not valid
-       let changeset = this.get('userNameChangeset');
-      //is the changeset dirty?
-      if (changeset.get('isDirty') ) {
+       let changeset = this.get('userOverviewChangeset');
+      //has the user's name changed?
+      if (changeset.change.name !== undefined ) {
         changeset.validate().then(()=>{
           //if the changeset is valid...
           if (changeset.get('isValid')) {
@@ -92,6 +92,11 @@ export default Controller.extend({
         });
       } else {
         this.handleLinkChanges();
+        //if the changeset is dirty, but the name isn't changed, save the changeset
+        if(changeset.get('isDirty')) {
+          // the name has not changed, but changeset has changes 
+          changeset.save();
+        }
       }
     },
     
