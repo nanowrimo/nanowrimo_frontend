@@ -10,6 +10,8 @@ export default Controller.extend({
   queryParams: ['token'],
   token: null,
   changeset: null,
+  errorMessage: null,
+  successMessage: null,
   init() {
     this._super(...arguments);
     let pra =  this.store.createRecord('password-reset-attempt');

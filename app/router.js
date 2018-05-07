@@ -22,6 +22,9 @@ Router.map(function() {
         this.route('new');
       });
     });
+    this.route('current-user', function() {
+      this.route('show', { path: '/' });
+    });
   });
 
   //email confirmations

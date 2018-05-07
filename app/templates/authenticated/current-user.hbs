@@ -1,0 +1,120 @@
+<h2>Name and External Links</h2>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td>{{user.name}}</td>
+  </tr>
+
+</table>
+
+{{external-links}}
+
+<table>
+  {{#each user.externalLinks as |link|}}
+    <tr><td>{{link.url}}</td></tr>
+  {{/each}}
+</table>
+
+<ul id='display-stats'>
+  
+  {{#if user.statsLifetimeWordCount}}
+    <li>show Lifetime Word Count</li>
+  {{/if}}
+
+  {{#if user.statsNumberOfProjects}}
+    <li>show number of projects</li>
+  {{/if}}
+
+  {{#if user.statsYearsDoneWon}}
+    <li>show years done/won</li>
+  {{/if}}
+
+  {{#if user.statsWordiestNovel}}
+    <li>show wordiest novel</li>
+  {{/if}}
+
+  {{#if user.statsAverageWritingPace}}
+    <li>show averate writing pace </li>
+  {{/if}}
+
+  {{#if user.statsLongestNanoStreak}}
+    <li>show longest nano streak</li>
+  {{/if}}
+</ul>
+
+{{#if showEditOverview}}
+<form {{action 'submitOverviewForm' this on='submit'}}>
+  <div class='form-group'>
+    {{form-for--input label='name' property='name' changeset=userOverviewChangeset}}
+  </div> 
+  <div class='form-group'>
+   {{additive-input inputIdentifier='link' parentArray=newExternalLinks baseProperty='url'}}
+  </div>
+  
+  <div class='form-group'>
+    {{form-for--checkbox changeset=userOverviewChangeset property='statsLifetimeWordCount' label="Lifetime Word Count"}}
+  </div>
+  <div class='form-group'>
+    {{form-for--checkbox changeset=userOverviewChangeset property='statsNumberOfProjects' label="Number of Projects"}}
+  </div>
+  <div class='form-group'>
+    {{form-for--checkbox changeset=userOverviewChangeset property='statsYearsDoneWon' label="Years Done/Won"}}
+  </div>
+  <div class='form-group'>
+    {{form-for--checkbox changeset=userOverviewChangeset property='statsWordiestNovel' label="Wordies Novel"}}
+  </div>
+  <div class='form-group'>
+    {{form-for--checkbox changeset=userOverviewChangeset property='statsAverageWritingPace' label="Average Writing Pace"}}
+  </div>
+  <div class='form-group'>
+    {{form-for--checkbox changeset=userOverviewChangeset property='statsLongestNanoStreak' label="Longest NaNo Streak"}}
+  </div>
+   
+  <input type='submit' value='Submit'>
+</form>
+{{/if}}
+
+<a href="#" {{action "clickedOverviewGear"}}>gear</a>
+
+
+<h2>Bio and Books and Authors</h2>
+<table>
+  <tr>
+    <td>bio:</td>
+    <td>{{user.bio}}</td>
+  </tr>
+</table>
+<h3>Favorite Books</h3>
+<table>
+  {{#each user.favoriteBooks as |book|}}
+    <tr><td>{{book.title}}</td></tr>
+  {{/each}}
+</table>
+<h3>Favorite Authors</h3>
+<table>
+  {{#each user.favoriteAuthors as |author|}}
+    <tr><td>{{author.name}}</td></tr>
+  {{/each}}
+</table>
+
+{{#if showEditBio}}
+<form {{action 'submitBioForm' this on='submit'}}>
+  <div class='form-group'>
+    {{form-for--textarea label='Say something about yourself' property='bio' changeset=userBioChangeset}}
+  </div> 
+
+  <div id='books'>
+    <div>Favorite Books</div>
+    {{additive-input inputIdentifier='book' parentArray=newBookTitles baseProperty='title'}}
+  </div>
+  
+  <div id='authors'>
+    <div>Favorite Authors</div>
+    {{additive-input inputIdentifier='author' parentArray=newAuthorNames baseProperty='name'}}
+  </div>
+  <input type='submit' value='Submit'>
+</form>
+{{/if}}
+
+<a href="#" {{action "clickedBioGear"}}>gear</a>
+
