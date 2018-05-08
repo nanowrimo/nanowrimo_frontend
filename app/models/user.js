@@ -1,19 +1,26 @@
 import DS from 'ember-data';
 
+const {
+  attr,
+  hasMany
+} = DS;
+
 export default DS.Model.extend({
-  name: DS.attr('string'),
-  email: DS.attr('string'),
-  bio: DS.attr('string'),
+  avatar: attr('string'),
+  bio: attr('string'),
+  createdAt: attr('date'),
+  email: attr('string'),
+  name: attr('string'),
+  postalCode: attr('string'),
+  statsLifetimeWordCount: attr('boolean'), 
+  statsNumberOfProjects: attr('boolean'), 
+  statsYearsDoneWon: attr('boolean'), 
+  statsWordiestNovel: attr('boolean'), 
+  statsAverageWritingPace: attr('boolean'), 
+  statsLongestNanoStreak: attr('boolean'),
   
-  statsLifetimeWordCount: DS.attr('boolean'), 
-  statsNumberOfProjects: DS.attr('boolean'), 
-  statsYearsDoneWon: DS.attr('boolean'), 
-  statsWordiestNovel: DS.attr('boolean'), 
-  statsAverageWritingPace: DS.attr('boolean'), 
-  statsLongestNanoStreak: DS.attr('boolean'),
-  
-  externalLinks: DS.hasMany('externalLink'),
-  favoriteAuthors: DS.hasMany('favoriteAuthor'),
-  favoriteBooks: DS.hasMany('favoriteBook')
+  externalLinks: hasMany('externalLink'),
+  favoriteAuthors: hasMany('favoriteAuthor'),
+  favoriteBooks: hasMany('favoriteBook')
 });
 
