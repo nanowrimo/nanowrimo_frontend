@@ -8,13 +8,15 @@ module('Acceptance | sign in', function(hooks) {
   setupMirage(hooks);
 
   test('Basic Authentication', async function(assert) {
+    let user = this.server.create('user');
+
     await visit('/sign-in');
 
     await click('[data-test-sign-in-submit]');
 
     assert.equal(currentURL(), '/sign-in', 'does not submit blank form');
 
-    await fillIn('input[data-test-form-for--input=email]', 'user@example.com');
+    await fillIn('input[data-test-form-for--input=email]', user.email);
     await fillIn('input[data-test-form-for--input=password]', 'password');
     await click('[data-test-sign-in-submit]');
 

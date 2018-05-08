@@ -8,6 +8,10 @@ module('Acceptance | genres CRUD', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
+  hooks.beforeEach(function() {
+    this.server.create('user');
+  });
+
   test('list genres', async function(assert) {
     let genreCount = 3;
     let genres = this.server.createList('genre', genreCount);

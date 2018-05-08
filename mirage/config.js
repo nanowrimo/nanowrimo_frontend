@@ -30,6 +30,9 @@ export default function() {
 
     return new Response(400);
   });
+  this.get('/users/current', ({users}) => {
+    return users.find(1);
+  });
 
   // CRUD
 
