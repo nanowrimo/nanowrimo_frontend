@@ -6,6 +6,7 @@ export default DS.Model.extend({
   password: DS.attr('string', { defaultValue: '' }),
   username: DS.attr('string', { defaultValue: '' }),
   thirteen: DS.attr('boolean',{ defaultValue: false } ),
+  terms: DS.attr('boolean',{ defaultValue: false } ),
   timeZone: DS.attr('string', {
     defaultValue() { return moment.tz.guess(); }
   })
