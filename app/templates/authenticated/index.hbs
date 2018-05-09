@@ -1,19 +1,15 @@
 <div class="content-gutters">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        {{#each model.panels as |panel|}}
-          <div class="nano-panel">
-            <div class="grid-wrapper">
-              {{#each panel.cards as |card|}}
-                <div class="nano-card {{card.class}}">
-                  {{card.title}}
-                </div>
-              {{/each}}
+    {{#each model.panels as |panel|}}
+      <div class="nano-panel">
+        <div class="grid-wrapper">
+          {{#each panel.cards as |card|}}
+            <div class="nano-card {{card.class}}">
+              {{card.title}}
             </div>
-          </div>
-        {{/each}}
+          {{/each}}
+        </div>
       </div>
-    </div>
+    {{/each}}
   </div>
 </div>

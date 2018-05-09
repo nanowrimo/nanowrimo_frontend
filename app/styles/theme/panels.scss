@@ -1,5 +1,8 @@
 .d-flex.align-top {
   align-items: flex-start;
+  @media (max-width: $screen-xs-max) {
+    flex-wrap: wrap;
+  }
 }
 .nano-panel {
   background: white;
@@ -9,7 +12,6 @@
   padding-right: 0;
   box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
   background: repeating-linear-gradient(0deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
-  @include make-row();
   margin-bottom: $spacer;
   margin-top: 0;
   flex: 1 1 100%;
@@ -34,12 +36,23 @@
           bottom: 0;
         }
        }
-      .flip-corner:hover {
-        .flip-corner-link {
-          display: block;
-        }
+     }
+     @media (max-width: $screen-xs-max) {
+       flex: 0 0 100%;
+     }
+    .flip-corner:hover {
+      .flip-corner-link {
+        display: block;
       }
     }
+  }
+  &.right-resize {
+    @media (min-width: $screen-sm) {
+      flex: 1 1 100%;
+    }
+     @media (max-width: $screen-xs-max) {
+       flex: 0 0 100%;
+     }
   }
   .grid-wrapper {
     padding: 28px;
@@ -142,7 +155,7 @@
     }
   }
   &.with-tabs {
-    margin-top: 40px;
+    margin-top: 40px;    flex: 1 1 100%;
     .nano-panel-tabs {
       display: flex;
       list-style-type: none;
