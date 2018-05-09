@@ -1,6 +1,8 @@
 <div class="nav-notify-buttons d-flex">
   <button class="button-clear button-mail non-mobile"><span aria-hidden="false">{{fa-icon "envelope"}}</span></button>
   <button class="button-clear button-bell"><span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span><span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span><div class="unread-circle">1</div></button>
-  <button class="button-clear button-hamburger mobile"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
-  {{side-menu-toggle}}
+  <button class="button-clear button-hamburger mobile navbar-toggler" data-toggle="collapse" data-target="#hamburgerResponsive" aria-controls="hamburgerResponsive" aria-expanded="false" aria-label="Toggle navigation"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
+  <div class="collapse navbar-toggleable-xs" id="hamburgerResponsive">
+    Hello
+  </div>
 </div>
