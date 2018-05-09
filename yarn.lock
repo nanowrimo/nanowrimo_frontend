@@ -3001,12 +3001,6 @@ ember-cli-get-component-path-option@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz#0d7b595559e2f9050abed804f1d8eff1b08bc771"
 
-ember-cli-google-fonts@^2.16.2:
-  version "2.16.2"
-  resolved "https://registry.yarnpkg.com/ember-cli-google-fonts/-/ember-cli-google-fonts-2.16.2.tgz#6cdb5a908e763dac38f066616adf98922c622dc2"
-  dependencies:
-    ember-cli-babel "^6.6.0"
-
 ember-cli-htmlbars-inline-precompile@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars-inline-precompile/-/ember-cli-htmlbars-inline-precompile-1.0.2.tgz#5b544f664d5d9911f08cd979c5f70d8cb0ca2add"
