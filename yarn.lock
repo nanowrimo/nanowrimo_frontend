@@ -2770,15 +2770,6 @@ ember-ast-helpers@0.3.5:
     "@glimmer/compiler" "^0.27.0"
     "@glimmer/syntax" "^0.27.0"
 
-ember-basic-dropdown@^0.34.0:
-  version "0.34.0"
-  resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.34.0.tgz#a0371b7c06756cdd3170e7d4a9ed4f4890bc2d59"
-  dependencies:
-    ember-cli-babel "^6.8.2"
-    ember-cli-htmlbars "^2.0.3"
-    ember-native-dom-helpers "^0.5.4"
-    ember-wormhole "^0.5.2"
-
 ember-basic-dropdown@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-1.0.0.tgz#bbafcaab986ba86dfe8d02b0f8529984229bd738"
@@ -3353,7 +3344,7 @@ ember-compatibility-helpers@^1.0.0-beta.2:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-concurrency@^0.8.12, ember-concurrency@^0.8.18, ember-concurrency@^0.8.7:
+ember-concurrency@^0.8.18, ember-concurrency@^0.8.7:
   version "0.8.19"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.8.19.tgz#71b9c175ba077865310029cb4bdb880e17d5155e"
   dependencies:
@@ -3546,13 +3537,6 @@ ember-modal-dialog@^3.0.0-beta.0:
     ember-ignore-children-helper "^1.0.1"
     ember-wormhole "^0.5.4"
 
-ember-native-dom-helpers@^0.5.4:
-  version "0.5.10"
-  resolved "https://registry.yarnpkg.com/ember-native-dom-helpers/-/ember-native-dom-helpers-0.5.10.tgz#9c7172e4ddfa5dd86830c46a936e2f8eca3e5896"
-  dependencies:
-    broccoli-funnel "^1.1.0"
-    ember-cli-babel "^6.6.0"
-
 ember-native-dom-helpers@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/ember-native-dom-helpers/-/ember-native-dom-helpers-0.6.2.tgz#ad1f82d64ac9abdd612022f4f390bdb6653b3d39"
@@ -3580,26 +3564,15 @@ ember-popper@^0.9.0:
     fastboot-transform "^0.1.0"
     popper.js "^1.14.1"
 
-ember-power-select-with-create@^0.5.0:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/ember-power-select-with-create/-/ember-power-select-with-create-0.5.2.tgz#ea014b8852abe5c77c8027e31b9f81f5bda49804"
+ember-power-select-with-create@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/ember-power-select-with-create/-/ember-power-select-with-create-0.6.0.tgz#40ac701276379b78efbaedc33fb5f82e49f80674"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
-    ember-power-select "^1.10.1"
+    ember-power-select "^2.0.0"
 
-ember-power-select@^1.10.1:
-  version "1.10.4"
-  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-1.10.4.tgz#7f0bb8c55279375391f2d97591ed65f727061579"
-  dependencies:
-    ember-basic-dropdown "^0.34.0"
-    ember-cli-babel "^6.10.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-concurrency "^0.8.12"
-    ember-text-measurer "^0.4.0"
-    ember-truth-helpers "^2.0.0"
-
-ember-power-select@^2.0.0-beta.3:
+ember-power-select@^2.0.0, ember-power-select@^2.0.0-beta.3:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-2.0.0.tgz#f36e113f77006a939a62a2c6e4bcff83aebfe6c3"
   dependencies:
@@ -3758,7 +3731,7 @@ ember-validators@^1.0.0:
     ember-cli-babel "^6.9.2"
     ember-require-module "^0.2.0"
 
-ember-wormhole@^0.5.2, ember-wormhole@^0.5.4:
+ember-wormhole@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/ember-wormhole/-/ember-wormhole-0.5.4.tgz#968e80f093494f4aed266e750afa63919c61383d"
   dependencies:
