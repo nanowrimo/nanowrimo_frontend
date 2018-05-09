@@ -1,12 +1,16 @@
 import ApplicationAdapter from './application';
-import fetch from 'fetch';
 
 export default ApplicationAdapter.extend({
-  queryRecord(store, type, query) {
+  urlForQueryRecord(query) {
     if (query.current) {
-      return fetch(`${this.urlPrefix()}/users/current`).then(response =>  response.json());
+      delete query.current;
+      return `${this._super(...arguments)}/current`;
     }
-
+    if (query.name) {
+      let name = query.name;
+      delete query.name;
+      return `${this._super(...arguments)}/${name}`;
+    }
     return this._super(...arguments);
   }
 });

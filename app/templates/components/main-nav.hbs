@@ -9,7 +9,7 @@
             <img src="/nav/tab.svg" alt="" class="nano-menu-tab" />
             <ul>
               {{#ddm.item tagName="li"}}
-                {{#ddm.link-to "authenticated.users.show" class="dropdown-item d-flex"}}
+                {{#ddm.link-to "authenticated.users.show" currentUserName class="dropdown-item d-flex" data-test-user-profile-link=true}}
                   <div class="dropdown-image"><div class="icon-circle"><img src="/nav/id_card.svg" alt="" /></div></div>
                   <div class="dropdown-headline">Profile</div>
                   <div class="dropdown-teaser">Tell other Wrimos about you</div>
