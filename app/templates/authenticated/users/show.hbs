@@ -28,19 +28,12 @@
             {{user.name}}
           </div>
           <div class="nano-user-location" data-test-user-location>
-            {{user.postalCode}}
+            {{user.location}}
           </div>
           <div class="nano-member-since" data-test-user-since>
             Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
           </div>
-          <div class="nano-user-social">
-            <div class="social-button">{{fa-icon "facebook"}}</div>
-            <div class="social-button">{{fa-icon "pinterest"}}</div>
-            <div class="social-button">{{fa-icon "twitter"}}</div>
-          </div>
-          <div class="nano-user-link">
-            <a href='https://jezra.net'>https://jezra.net</a>
-          </div>
+          {{user-links links=user.externalLinks}}
           <div class="flip-corner-link">
             <img src="/flip_corner.svg" alt="" />
           </div>

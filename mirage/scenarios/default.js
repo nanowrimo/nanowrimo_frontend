@@ -1,8 +1,12 @@
 import { sampleSize } from 'lodash';
 
 export default function(server) {
-  server.create('user', { name: 'username' });
-  
+  let user = server.create('user', { name: 'username' });
+  ['facebook', 'twitter', 'instagram'].forEach(social => {
+    server.create('external-link', { user, url: `https://${social}.com/${user.name}` });
+  });
+  server.createList('external-link', 2, { user });
+
   // Prior demo; replace with realistic Projects and Genres
   let projects = server.createList('project', 2);
   let genres = server.createList('genre', 5);

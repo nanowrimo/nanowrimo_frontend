@@ -1,0 +1,10 @@
+<div class="nano-user-social">
+  {{#each socialLinks as |social|}}
+    <a href={{social.url}} class="social-button">{{fa-icon social.icon}}</a>
+  {{/each}}
+</div>
+{{#each otherLinks as |other|}}
+  <div class="nano-user-link">
+    <a href={{other.url}}>{{other.url}}</a>
+  </div>
+{{/each}}

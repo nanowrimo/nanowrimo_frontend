@@ -41,8 +41,18 @@ module('Acceptance | User profile', function(hooks) {
       assert.dom('img[data-test-user-avatar]').hasAttribute('src', user.avatar);
       assert.dom('img[data-test-user-avatar]').hasAttribute('alt', user.name);
       assert.dom('[data-test-user-name]').hasText(user.name);
-      assert.dom('[data-test-user-location').hasText(user.postalCode);
+      assert.dom('[data-test-user-location').hasText(user.location);
       assert.dom('[data-test-user-since').hasText(`Member since May 8, 2018`);
+    });
+
+    test('User profile displays User links', async function(assert) {
+      let links = this.server.createList('external-link', 3, { user });
+
+      await visit(`/participants/${user.name}`);
+
+      links.forEach(link => {
+        assert.dom(`a[href='${link.url}']`).exists('external link is displayed');        
+      });
     });
   });
 });

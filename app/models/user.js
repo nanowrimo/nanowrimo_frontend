@@ -10,6 +10,7 @@ export default DS.Model.extend({
   bio: attr('string'),
   createdAt: attr('date'),
   email: attr('string'),
+  location: attr('string'),
   name: attr('string'),
   postalCode: attr('string'),
   statsLifetimeWordCount: attr('boolean'), 
@@ -19,7 +20,7 @@ export default DS.Model.extend({
   statsAverageWritingPace: attr('boolean'), 
   statsLongestNanoStreak: attr('boolean'),
   
-  externalLinks: hasMany('externalLink'),
+  externalLinks: hasMany(),
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook')
 });
