@@ -53,7 +53,7 @@
     "ember-modal-dialog": "^3.0.0-beta.0",
     "ember-native-dom-helpers": "^0.6.2",
     "ember-power-select": "^2.0.0-beta.3",
-    "ember-power-select-with-create": "^0.5.0",
+    "ember-power-select-with-create": "^0.6.0",
     "ember-resolver": "^4.0.0",
     "ember-simple-auth": "^1.5.1",
     "ember-source": "~3.1.0",
