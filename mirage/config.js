@@ -33,6 +33,10 @@ export default function() {
   this.get('/users/current', ({users}) => {
     return users.find(1);
   });
+  this.get('/users/:name', ({users}, request) => {
+    let name = request.params.name;
+    return users.findBy({ name });
+  });
 
   // CRUD
 

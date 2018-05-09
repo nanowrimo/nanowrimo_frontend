@@ -13,10 +13,9 @@ Router.map(function() {
       this.route('show', { path: '/:genre_id' });
       this.route('edit', { path: '/:genre_id/edit' });
     });
-    
-    //User 
+
     this.route('users', { path: 'participants'}, function() {
-      this.route('show', { path: '/username'});
+      this.route('show', { path: '/:name'});
       this.route('edit');
       this.route('projects', function() {
         this.route('new');

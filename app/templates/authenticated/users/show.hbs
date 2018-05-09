@@ -22,25 +22,18 @@
       <div class="nano-panel left-sidebar nano-profile">
         <div class="flip-corner">
           <div class="nano-avatar-large">
-            <img src="/images/users/avatars/jezra.png" alt="" />
+            <img src={{user.avatar}} alt={{user.name}} data-test-user-avatar>
           </div>
-          <div class="nano-user-name">
-            Jezra_Lickter
+          <div class="nano-user-name" data-test-user-name>
+            {{user.name}}
           </div>
-          <div class="nano-user-location">
-            Somewhere in the Sierra foothills...
+          <div class="nano-user-location" data-test-user-location>
+            {{user.location}}
           </div>
-          <div class="nano-member-since">
-            Member since, like, forever
+          <div class="nano-member-since" data-test-user-since>
+            Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
           </div>
-          <div class="nano-user-social">
-            <div class="social-button">{{fa-icon "facebook"}}</div>
-            <div class="social-button">{{fa-icon "pinterest"}}</div>
-            <div class="social-button">{{fa-icon "twitter"}}</div>
-          </div>
-          <div class="nano-user-link">
-            <a href='https://jezra.net'>https://jezra.net</a>
-          </div>
+          {{user-links links=user.externalLinks}}
           <div class="flip-corner-link">
             <img src="/flip_corner.svg" alt="" />
           </div>
