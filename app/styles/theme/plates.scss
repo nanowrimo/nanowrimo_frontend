@@ -8,5 +8,31 @@
     height: 320px;
     background-color: rgba(52, 52, 52, 0.6);
     box-shadow: 0 0 14px 3px rgba(47, 48, 97, 0.12);
+    .container-fluid {
+      display: flex;
+      justify-content: center;
+      .plate-area {
+        text-align: center;
+        .plate-stat {
+          font-family: SourceSerifPro-Regular;
+          font-size: 56px;
+          color: #F2F8FA;
+        }
+        .plate-descriptor {
+          font-family: SourceSerifPro-Regular;
+          font-size: 16px;
+          color: #979797;
+        }
+      }
+      .plate-area:hover {
+        cursor: pointer;
+        .plate-stat {
+          color: #A5D9E4;
+        }
+        .plate-descriptor {
+          color: #A5D9E4;
+        }
+      }
+    }
   }
 }

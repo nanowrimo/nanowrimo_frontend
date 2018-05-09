@@ -59,12 +59,15 @@
         line-height: 35px;
       }
     }
-    .dropdown-item:hover {
+    .dropdown-item:hover, .dropdown-item.active {
       background-color: $nano-darkblue;
       .dropdown-icon {
         color: $nano-white;
       }
       .dropdown-headline {
+        color: $nano-white;
+      }
+      .dropdown-teaser {
         color: $nano-white;
       }
     }
