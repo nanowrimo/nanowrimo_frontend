@@ -1,3 +1,31 @@
+// ----------------------------------
+// Fonts
+// ----------------------------------
+
+@font-face {
+  font-family: 'SourceSansPro-Regular';
+  src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SourceSansPro-Bold';
+  src: url('../fonts/SourceSansPro-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SourceSansPro-SemiBold';
+  src: url('../fonts/SourceSansPro-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SourceSansPro-Italic';
+  src: url('../fonts/SourceSansPro-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
 
 // ----------------------------------
 // Body and container styles
@@ -36,7 +64,7 @@ body {
   display: flex;
   justify-content: space-between;
   a {
-    font-family: SourceSansPro-Regular;
+    font-family: 'SourceSansPro-Regular', sans-serif;
     font-size: 16px;
     line-height: 1.38;
     letter-spacing: 0.3px;
@@ -69,7 +97,7 @@ body {
 // ----------------------------------
 
 button.btn {
-  font-family: SourceSansPro-Bold;
+  font-family: 'SourceSansPro-Bold', sans-serif;
   cursor: pointer;
   width: 394px;
   height: 36px;
@@ -132,7 +160,7 @@ button.btn {
   overflow: hidden;
   text-align: center;
   color: #b8b8b8;
-  font-family: SourceSansPro-Bold;
+  font-family: 'SourceSansPro-Bold', sans-serif;
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 15px;
