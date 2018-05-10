@@ -3548,13 +3548,6 @@ ember-moment@^7.7.0:
     ember-getowner-polyfill "^2.0.1"
     ember-macro-helpers "^0.17.0"
 
-ember-native-dom-helpers@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/ember-native-dom-helpers/-/ember-native-dom-helpers-0.6.2.tgz#ad1f82d64ac9abdd612022f4f390bdb6653b3d39"
-  dependencies:
-    broccoli-funnel "^1.1.0"
-    ember-cli-babel "^6.6.0"
-
 ember-popper@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.9.0.tgz#ec211e116bb3c4fb70a770e75134b94ddda079b5"

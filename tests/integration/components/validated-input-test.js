@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { blur, find, findAll, focus, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { find, findAll, triggerEvent } from 'ember-native-dom-helpers';
 
 module('Integration | Component | validated-input', function(hooks) {
   setupRenderingTest(hooks);
@@ -37,7 +36,8 @@ module('Integration | Component | validated-input', function(hooks) {
     assert.equal(find('[data-test-error-message]').textContent, errorMessage, 'shows error message after attempted form submission');
 
     await this.set('hasAttemptedSubmit', false);
-    await triggerEvent(`input[name=${key}]`, 'focusout');
+    await focus(`input[name=${key}]`);
+    await blur(`input[name=${key}]`);
 
     assert.equal(findAll('[data-test-error-message]').length, 1, 'does show error after input blur');
     assert.equal(find('[data-test-error-message]').textContent, errorMessage, 'shows error message after input blur');
