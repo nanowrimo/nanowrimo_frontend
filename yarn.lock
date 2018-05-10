@@ -3185,13 +3185,13 @@ ember-cli-uglify@^2.0.2:
     broccoli-uglify-sourcemap "^2.1.1"
     lodash.defaultsdeep "^4.6.0"
 
-ember-cli-update@^0.21.0:
-  version "0.21.3"
-  resolved "https://registry.yarnpkg.com/ember-cli-update/-/ember-cli-update-0.21.3.tgz#4c5487a8b7bfad03552901379b20a4b6b0f0beeb"
+ember-cli-update@^0.21.4:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/ember-cli-update/-/ember-cli-update-0.21.4.tgz#c09618ef51176dc3c7bb4931ee7c61584b335c6c"
   dependencies:
     debug "^3.0.0"
     execa "^0.10.0"
-    git-diff-apply "^0.8.3"
+    git-diff-apply "^0.8.4"
     merge-package.json "^1.1.1"
     npx "^10.0.1"
     opn "^5.3.0"
@@ -3338,7 +3338,7 @@ ember-compatibility-helpers@^1.0.0-beta.2:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-concurrency@^0.8.18, ember-concurrency@^0.8.7:
+ember-concurrency@^0.8.18, ember-concurrency@^0.8.19, ember-concurrency@^0.8.7:
   version "0.8.19"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.8.19.tgz#71b9c175ba077865310029cb4bdb880e17d5155e"
   dependencies:
@@ -3576,7 +3576,7 @@ ember-power-select-with-create@^0.6.0:
     ember-cli-htmlbars "^2.0.1"
     ember-power-select "^2.0.0"
 
-ember-power-select@^2.0.0, ember-power-select@^2.0.0-beta.3:
+ember-power-select@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-2.0.0.tgz#f36e113f77006a939a62a2c6e4bcff83aebfe6c3"
   dependencies:
@@ -3584,6 +3584,17 @@ ember-power-select@^2.0.0, ember-power-select@^2.0.0-beta.3:
     ember-cli-babel "^6.11.0"
     ember-cli-htmlbars "^2.0.1"
     ember-concurrency "^0.8.18"
+    ember-text-measurer "^0.4.0"
+    ember-truth-helpers "^2.0.0"
+
+ember-power-select@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-2.0.1.tgz#6c74f9ca0131a8e03badd8cc12d1758b7e8a092a"
+  dependencies:
+    ember-basic-dropdown "^1.0.0"
+    ember-cli-babel "^6.11.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-concurrency "^0.8.19"
     ember-text-measurer "^0.4.0"
     ember-truth-helpers "^2.0.0"
 
@@ -3665,9 +3676,9 @@ ember-source-channel-url@^1.0.1:
   dependencies:
     got "^8.0.1"
 
-ember-source@~3.1.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.1.1.tgz#9cf95e8a6d7568d60b8eda2aeda17ac8944e654b"
+ember-source@~3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.1.2.tgz#3c25e63f1e4ff2b83bb3fbfb350625de2a1a521f"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
@@ -4731,9 +4742,9 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-diff-apply@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/git-diff-apply/-/git-diff-apply-0.8.3.tgz#5561ea4f887c9770b8b3a3ce310d0d0febd5644e"
+git-diff-apply@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/git-diff-apply/-/git-diff-apply-0.8.4.tgz#05a5bdf0cc9a11ff086b93038e7033bae4070d5c"
   dependencies:
     debug "^3.0.0"
     denodeify "^1.2.1"
