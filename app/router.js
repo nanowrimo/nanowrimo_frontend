@@ -15,7 +15,8 @@ Router.map(function() {
     });
 
     this.route('users', { path: 'participants'}, function() {
-      this.route('show', { path: '/:name'});
+      this.route('show', { path: '/:name'}, function() {
+      });
       this.route('edit');
       this.route('projects', function() {
         this.route('new');
