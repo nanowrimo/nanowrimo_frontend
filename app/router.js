@@ -16,11 +16,11 @@ Router.map(function() {
 
     this.route('users', { path: 'participants'}, function() {
       this.route('show', { path: '/:name'}, function() {
+        this.route('projects', function() {
+        });
       });
       this.route('edit');
-      this.route('projects', function() {
-        this.route('new');
-      });
+      
     });
     this.route('current-user', function() {
       this.route('show', { path: '/' });
