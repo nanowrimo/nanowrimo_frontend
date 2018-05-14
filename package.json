@@ -33,7 +33,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-mirage": "^0.4.2",
+    "ember-cli-mirage": "^0.4.7",
     "ember-cli-moment-shim": "^3.7.1",
     "ember-cli-qunit": "^4.3.2",
     "ember-cli-sass": "^7.1.7",
@@ -58,7 +58,7 @@
     "ember-source": "~3.1.2",
     "ember-test-selectors": "^1.0.0",
     "ember-truth-helpers": "^2.0.0",
-    "eslint-plugin-ember": "^5.0.0",
+    "eslint-plugin-ember": "^5.1.1",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.6.2",
     "torii": "^0.10.1"
