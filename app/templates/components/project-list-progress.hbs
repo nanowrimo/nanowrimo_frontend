@@ -1,0 +1,14 @@
+<div class='project-progress'>
+  <div class='goal-text'>
+    <span class='goal'>Goal: </span>
+    <span class=''>Write {{formattedGoal}} words</span>
+  </div>
+  
+  <div class='progress-bar-background'>
+    <div class="progress-bar-fill {{if project.completed 'completed' 'in-progress'}}" style="width:{{progressPercent}}%"></div>
+  </div>
+  <div class='progress-text'>
+    <span class="count {{if project.completed 'completed' 'in-progress'}}">{{formattedWordcount}}</span><span class='goal'>/{{formattedGoal}} WORDS</span>
+  </div>
+  
+</div>

@@ -1,10 +1,12 @@
-<div class="projects-card">
+<div class="nano-card project-listing-card">
   <div class='project-actions'>
     pin?
     downarrow
   </div>
   <div class='project-cover'>
-    <img src="{{project.cover}}">
+    <div class='project-cover-clip'>
+      <img src="{{project.cover}}">
+    </div>
   </div>
   <div class='project-name-genres'>
     <div class='project-name'>
@@ -14,6 +16,8 @@
       {{project.concatGenres}}
     </div>
   </div>
+  
+  {{project-list-progress project=project}}
   
   <div class='project-status'>
     {{#if project.completed}}

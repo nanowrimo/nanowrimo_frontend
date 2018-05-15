@@ -4,8 +4,13 @@ export default Factory.extend({
   name() {
     return faker.commerce.productName();
   },
+  wordcount() {
+    return 10000 + Math.floor(Math.random() * 40000);
+  },
   cover() {
-    return faker.image.avatar();
+    let critters = ['dog','cat','bird','horse']
+    let key = critters[Math.floor(Math.random()*critters.length)];
+    return `https://loremflickr.com/240/320/${key}?random=1`;
   },
   status() {
     let stati =['Completed', 'In Progress']

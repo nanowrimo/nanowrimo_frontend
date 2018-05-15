@@ -3,11 +3,15 @@ import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 export default DS.Model.extend({
+  challenges: DS.hasMany('challenge'),
   cover: DS.attr('string'),
   genres: DS.hasMany('genre'),
   name: DS.attr('string'),
   status: DS.attr('string'),
-  
+  wordcount: DS.attr('number'),
+  formattedWordcount: computed("wordcount", function(){
+    return wordcount.toLocaleString();
+  }),
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),

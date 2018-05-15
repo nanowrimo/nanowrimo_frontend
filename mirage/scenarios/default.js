@@ -10,8 +10,10 @@ export default function(server) {
   // Prior demo; replace with realistic Projects and Genres
   let projects = server.createList('project', 2);
   let genres = server.createList('genre', 5);
-
+  
+  let challenge = server.create('challenge');
   projects.forEach(function(project) {
+    server.create('project-challenge', { project, challenge });
     sampleSize(genres, 2).forEach(function(genre) {
       server.create('project-genre', { project, genre })
     });

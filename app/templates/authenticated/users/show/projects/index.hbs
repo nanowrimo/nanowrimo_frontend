@@ -1,20 +1,16 @@
 <div class="nano-panel right-resize with-tabs">
   <ul class="nano-panel-tabs">
-    <li>{{link-to 'Profile' 'authenticated.users.show'}}</li>
-    <li>{{link-to 'Projects (2)' 'authenticated.users.show.projects' class='active'}}</li>
+    <li>{{link-to 'Profile' 'authenticated.users.show.index'}}</li>
+    <li>{{link-to 'Projects (2)' 'authenticated.users.show.projects' }}</li>
     <li>{{link-to 'Buddies (57)' 'index'}}</li>
   </ul>
   
-  <div class="grid-wrapper">
+  <div id='project-listing-actions'>
     <button class='btn btn-primary' {{action "newProject"}}>Announce New Project</button>
+  </div>
 
-    
     {{#each model as |project|}}
-      <div class='g1-row'>
-        {{project-listing project=project}}
-      </div>
-     
+      {{project-listing project=project}}
     {{/each}}  
   
-  </div>
 </div>
