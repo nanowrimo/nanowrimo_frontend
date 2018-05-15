@@ -1,0 +1,26 @@
+.nano-side-menu {
+  position: fixed;
+  right: -285px;
+  -webkit-transition-property: right;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-property: right;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  z-index: 1000;
+  width: 285px;
+  height: 100%;
+  background-color: #73ab9b;
+  box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
+  font-family: "SourceSansPro-Regular", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e2eff3;
+  padding: 28px;
+  .nano-side-menu-submenu {
+  }
+}

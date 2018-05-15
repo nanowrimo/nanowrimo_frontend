@@ -1,0 +1,25 @@
+<div>
+  {{#nano-side-menu-toggle}}
+    <button><span aria-hidden="false">{{fa-icon "times"}}</span></button>
+  {{/nano-side-menu-toggle}}
+  <div class="nano-avatar-large">
+    <img src={{currentUserAvatar}} alt={{currentUserName}} data-test-user-avatar>
+  </div>
+  
+  Hi, {{currentUserName}}!
+  <div class="nano-search d-flex flex-row">
+    {{search-field}}
+  </div>
+  <ul>
+    <li>{{#nano-side-menu-link-to "index"}}Home{{/nano-side-menu-link-to}}</li>
+    {{#each submenus as |submenu|}}
+      {{nano-side-menu-submenu thisSubmenu=submenu}}
+    {{/each}}
+    {{#each storeLinks as |storeLink|}}
+      <li><a href="{{storeLink.url}}">{{storeLink.label}}</a></li>
+    {{/each}}
+    {{#each helpLinks as |helpLink|}}
+      <li>{{#nano-side-menu-link-to helpLink.url}}{{helpLink.label}}{{/nano-side-menu-link-to}}</li>
+    {{/each}}
+  </ul>
+</div>

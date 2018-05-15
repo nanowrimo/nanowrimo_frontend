@@ -1,0 +1,8 @@
+<li>
+  <div class="nano-side-menu-submenu-toggle">{{thisSubmenu.toggleLabel}}</div>
+  <ul class="nano-side-menu-submenu">
+    {{#each thisSubmenu.submenuItems as |submenuItem|}}
+      <li>{{#nano-side-menu-link-to submenuItem.url}}{{submenuItem.label}}{{/nano-side-menu-link-to}}</li>
+    {{/each}}
+  </ul>
+</li>

@@ -1,6 +1,6 @@
 <nav class="navbar mainnav navbar-expand-lg" aria-label="main">
   <div class="container-fluid d-flex">
-    {{logo-text}}
+    <a class="navbar-brand text-logo" href="{{nanoMenuService.homeUrl}}"><img src="/logo/logo-text.svg" alt="" /></a>
     {{#bs-nav type="pills" as |nav|}}
       {{#if session.isAuthenticated}}
         {{#nav.dropdown as |dd|}}
@@ -109,7 +109,7 @@
     {{#if session.isAuthenticated}}
       {{logging-buttons}}
       {{#bs-dropdown as |dd|}}
-        {{#dd.toggle class="user-menu"}}Hi, <u>Current User</u> <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.toggle class="user-menu"}}Hi, <u>{{currentUserName}}!</u> <span class="caret"></span>{{/dd.toggle}}
         {{#dd.menu as |ddm|}}
           <ul>
             {{#ddm.item tagName="li"}}
