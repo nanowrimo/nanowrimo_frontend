@@ -4,7 +4,7 @@ export default Factory.extend({
   name() {
     return faker.commerce.productName();
   },
-  wordcount() {
+  count() {
     return 10000 + Math.floor(Math.random() * 40000);
   },
   cover() {

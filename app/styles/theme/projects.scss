@@ -66,6 +66,7 @@
     left: 511px;
     top: 39px;
     .goal-text{ 
+      margin-bottom: 7.5px;
       font-size: 16px;
       height: 20px;
       font-family: 'SourceSansPro', sans-serif;
@@ -73,38 +74,23 @@
         color: #979797
       }
     }
-    .progress-bar-background {
-      position:relative;
+    .nano-progress-bar{
       width: 352px;
-      height: 14px;
-      border-radius: 6px;
-      box-shadow: inset 0 2px 4px 0 rgba(52, 52, 52, 0.2);
-      background-color: #dfe4e6;
-      border: solid 1px #dfe4e6;
-      .progress-bar-fill {
-        height: 13px;
-        width: 0%;
-        border-radius: 6px;
-        box-shadow: inset 0 2px 4px 0 rgba(255, 255, 255, 0.4);      
-      }
-      .progress-bar-fill.in-progress {
-        background-image: linear-gradient(to right, #75abbc, #6595a3);
-      }
-      .progress-bar-fill.completed {
-        background-image: linear-gradient(to right, #834da9, #633b80);
-      }
     }
+    
     .progress-text {
+      margin-top: 7.5px;
       height: 18px;
       font-family: 'SourceSansPro', sans-serif;
       font-size: 14px;
       font-weight: bold;
-      .count.completed {
-        color: #834da9;
-      }
-      .count.in-progress {
+      .count{
         color: #75abbc;
       }
+      .count.goal-met {
+        color: #834da9;
+      }
+     
     }
    
   }

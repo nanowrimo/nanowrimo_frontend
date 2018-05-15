@@ -8,7 +8,7 @@ export default function(server) {
   server.createList('external-link', 2, { user });
 
   // Prior demo; replace with realistic Projects and Genres
-  let projects = server.createList('project', 2);
+  let projects = server.createList('project', 3);
   let genres = server.createList('genre', 5);
   
   let challenge = server.create('challenge');
@@ -18,4 +18,6 @@ export default function(server) {
       server.create('project-genre', { project, genre })
     });
   });
+  //set the first project to have a count of 50321
+  projects[0].count= 50321; 
 }

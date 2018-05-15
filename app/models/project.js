@@ -8,7 +8,7 @@ export default DS.Model.extend({
   genres: DS.hasMany('genre'),
   name: DS.attr('string'),
   status: DS.attr('string'),
-  wordcount: DS.attr('number'),
+  count: DS.attr('number'),
   formattedWordcount: computed("wordcount", function(){
     return wordcount.toLocaleString();
   }),
