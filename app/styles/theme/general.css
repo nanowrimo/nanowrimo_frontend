@@ -200,3 +200,15 @@ button.btn {
   right: 0;
   bottom: 1px;
 }
+
+// ----------------------------------
+// Resetting list styles
+// ----------------------------------
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}

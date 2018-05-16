@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { click, currentURL, visit } from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { authenticateSession } from 'ember-simple-auth/test-support';
@@ -28,13 +28,6 @@ module('Acceptance | User profile', function(hooks) {
       authenticateSession();
     });
 
-    test('navigate to User profile', async function(assert) {
-      await visit('/');
-      await click('[data-test-user-profile-link]');
-
-      assert.equal(currentURL(), `/participants/${user.name}`, 'links to profile with current User name');
-    });
-  
     test('User profile displays current User info', async function(assert) {
       await visit(`/participants/${user.name}`);
       
