@@ -99,7 +99,8 @@ body {
 button.btn {
   font-family: 'SourceSansPro-Bold', sans-serif;
   cursor: pointer;
-  width: 394px;
+  width: 100%;
+  max-width: 394px;
   height: 36px;
   margin-top: 4px;
   margin-bottom: 4px;
