@@ -162,6 +162,7 @@
         margin-right: 0px;
         margin-left: 76px;
         @media (max-width: $screen-md-max) {
+          flex: 0 0 144px;
           margin-left: -10px;
           img {
             width: 144px;
