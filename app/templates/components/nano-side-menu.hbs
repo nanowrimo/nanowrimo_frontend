@@ -1,25 +1,39 @@
-<div>
-  {{#nano-side-menu-toggle}}
-    <button><span aria-hidden="false">{{fa-icon "times"}}</span></button>
-  {{/nano-side-menu-toggle}}
-  <div class="nano-avatar-large">
-    <img src={{currentUserAvatar}} alt={{currentUserName}} data-test-user-avatar>
-  </div>
-  
-  Hi, {{currentUserName}}!
-  <div class="nano-search d-flex flex-row">
-    {{search-field}}
-  </div>
-  <ul>
-    <li>{{#nano-side-menu-link-to "index"}}Home{{/nano-side-menu-link-to}}</li>
-    {{#each submenus as |submenu|}}
-      {{nano-side-menu-submenu thisSubmenu=submenu}}
-    {{/each}}
-    {{#each storeLinks as |storeLink|}}
-      <li><a href="{{storeLink.url}}">{{storeLink.label}}</a></li>
-    {{/each}}
-    {{#each helpLinks as |helpLink|}}
-      <li>{{#nano-side-menu-link-to helpLink.url}}{{helpLink.label}}{{/nano-side-menu-link-to}}</li>
-    {{/each}}
-  </ul>
-</div>
+{{#nano-side-menu-toggle}}
+  <span aria-hidden="false">{{fa-icon "times"}}</span>
+{{/nano-side-menu-toggle}}
+<ul>
+  {{#if session.isAuthenticated}}
+    {{#if currentUserName}}
+      <li>
+        <a href="/" class="d-flex user-link">
+          <div class="nano-avatar-small">
+            <img src={{currentUserAvatar}} alt={{currentUserName}} data-test-user-avatar>
+          </div>
+          <div class="user-name">
+            Hi, {{currentUserName}}!
+          </div>
+        </a>
+      </li>
+      <li class="menu-break"></li>
+      <li>
+        <div class="nano-search d-flex flex-row">
+          {{search-field}}
+        </div>
+      </li>
+      <li>{{#nano-side-menu-link-to "index"}}Home{{/nano-side-menu-link-to}}</li>
+      {{#each submenus as |submenu|}}
+        {{nano-side-menu-submenu thisSubmenu=submenu}}
+      {{/each}}
+      <li class="menu-break"></li>
+      <li>{{#nano-side-menu-link-to "index"}}Account Settings{{/nano-side-menu-link-to}}</li>
+      <li class="menu-break"></li>
+    {{/if}}
+  {{/if}}
+  {{#each storeLinks as |storeLink|}}
+    <li><a href="{{storeLink.url}}">{{storeLink.label}}</a></li>
+  {{/each}}
+  {{#each helpLinks as |helpLink|}}
+    <li>{{#nano-side-menu-link-to helpLink.url}}{{helpLink.label}}{{/nano-side-menu-link-to}}</li>
+  {{/each}}
+  <li><a href="#" {{action 'invalidateSession'}}>Logout</a></li>
+</ul>

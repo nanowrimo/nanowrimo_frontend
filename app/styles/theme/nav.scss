@@ -1,14 +1,8 @@
 .dropdown {
   ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
     li {
       height: 37px;
       border-bottom: 2px solid #e2eff3;
-
     }
     li:last-child {
       border-bottom: 0px;
@@ -182,8 +176,10 @@
         letter-spacing: 0;
         text-align: center;
         line-height: 22px;
+        text-transform: uppercase;
         &.user-menu {
           font-family: 'SourceSansPro-Regular', sans-serif;
+          text-transform: none;
         }
       }
       .nav {
@@ -373,7 +369,17 @@
       border-left: solid 1px #73AB9B;
       background: transparent;
       background-image: none;
-      
+    }
+  }
+}
+.nano-side-menu {
+  .nano-search {
+    .ember-text-field {
+      height: 35px;
+    }
+    .search-button {
+      height: 35px;
+      width: 35px;
     }
   }
 }

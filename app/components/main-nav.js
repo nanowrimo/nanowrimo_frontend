@@ -8,7 +8,8 @@ export default Component.extend({
   nanoMenuService: service(),
 
   currentUserName: reads('currentUser.user.name'),
-
+  submenus: reads('nanoMenuService.submenus'),
+  
   actions: {
     invalidateSession() {
       this.get('session').invalidate();

@@ -1,6 +1,10 @@
+.nano-side-menu-toggle {
+  cursor: pointer;
+}
 .nano-side-menu {
   position: fixed;
   right: -285px;
+  overflow: scroll;
   -webkit-transition-property: right;
   -webkit-transition-duration: 0.5s;
   -webkit-transition-timing-function: ease-in-out;
@@ -21,6 +25,65 @@
   text-align: left;
   color: #e2eff3;
   padding: 28px;
-  .nano-side-menu-submenu {
+  padding-top: 14px;
+  a {
+    color: #e2eff3;
+  }
+  .nano-side-menu-toggle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0px;
+    right: -10px;
+    font-size: 26px;
+  }
+  li {
+    line-height: 29px;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    .user-link {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      .nano-avatar-small {
+        flex: 0 0 56px;
+        margin-right: 10px;
+      }
+      .user-name {
+        flex: 0 0 100%;
+      }
+    }
+    ul {
+      -webkit-transition-property: max-height;
+      -webkit-transition-duration: 0.5s;
+      -webkit-transition-timing-function: ease-in-out;
+      transition-property: max-height;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-in-out;
+      max-height: 0px;
+      overflow: hidden;
+      padding-left: 12px;
+    }
+    .nano-side-menu-submenu-toggle {
+      cursor: pointer;
+      font-family: "SourceSansPro-SemiBold", sans-serif;
+      .flipped {
+        i {
+          -moz-transform: scaleY(-1);
+          -o-transform: scaleY(-1);
+          -webkit-transform: scaleY(-1);
+          transform: scaleY(-1);
+          filter: FlipV;
+          -ms-filter: "FlipV";
+        }
+      }
+    }
+  }
+  li.menu-break {
+    width: 100%;
+    height: 1px;
+    background-color: #dfe4e6;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
