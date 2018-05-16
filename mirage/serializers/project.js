@@ -60,7 +60,8 @@ export default JSONAPISerializer.extend({
             type: 'challenge',
             attributes: {
               name: challenge.name,
-              'required-goal': challenge.requiredGoal
+              'required-goal': challenge.requiredGoal,
+              'starts-on': challenge.startsOn
             }
           }
           break;

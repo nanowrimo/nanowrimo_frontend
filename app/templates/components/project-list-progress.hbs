@@ -6,8 +6,13 @@
   
     {{nano-progress-bar percent=percentCompleted}}
     
-  <div class='progress-text'>
+  <span class='progress-text'>
     <span class="count {{if goalMet 'goal-met' ''}}">{{formattedWordcount}}</span><span class='goal'>/{{formattedGoal}} WORDS</span>
-  </div>
+  </span>
+  <span class='challenge-start'>
+    <span class="started">Started</span>
+    <span class="date">{{formattedStart}}</span>
+  </span>
+  
   
 </div>
