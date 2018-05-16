@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { reads, alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
-import { get, computed } from '@ember/object';
+import { set, get, computed } from '@ember/object';
 
 export default Component.extend({
   session: service(),

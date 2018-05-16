@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set, get, computed } from '@ember/object';
+import { set, get } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -8,7 +8,7 @@ export default Component.extend({
   menuMaxHeight: "max-height: 0px".htmlSafe(),
   caretClass: "".htmlSafe(),
   actions: {
-    toggleSubmenu(event) {
+    toggleSubmenu() {
       set(this,"submenuIsOpen",!get(this,"submenuIsOpen"));
       if (get(this,"submenuIsOpen")) {
         set(this,"menuMaxHeight","max-height: 500px".htmlSafe());
