@@ -9,8 +9,10 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   status: DS.attr('string'),
   count: DS.attr('number'),
+  createdAt: DS.attr('date'),
+  
   formattedWordcount: computed("wordcount", function(){
-    return wordcount.toLocaleString();
+    return this.get('count').toLocaleString();
   }),
   completed: computed('status', function() {
     return this.get('status') === "Completed";

@@ -15,5 +15,8 @@ export default Factory.extend({
   status() {
     let stati =['Completed', 'In Progress']
     return stati[Math.floor(Math.random()*stati.length)];
+  },
+  createdAt(i) {
+    return faker.list.cycle('2015-11-01','2013-11-01','2016-11-01','2017-11-01')(i);
   }
 });

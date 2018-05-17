@@ -41,7 +41,7 @@ export default JSONAPISerializer.extend({
   includedAssociations(included) {
     return included.map(projectAssociation => {
       switch(projectAssociation.type) {
-        case 'project-genres':
+        case 'project-genres': {
           let genreId = this.registry.schema.projectGenres.find(projectAssociation.id).genreId;
           let genre = this.registry.schema.genres.find(genreId);
           return {
@@ -51,8 +51,8 @@ export default JSONAPISerializer.extend({
               name: genre.name
             }
           }
-          break;
-        case 'project-challenges':
+        }
+        case 'project-challenges': {
           let challengeId = this.registry.schema.projectChallenges.find(projectAssociation.id).challengeId;
           let challenge = this.registry.schema.challenges.find(challengeId);
           return {
@@ -64,7 +64,7 @@ export default JSONAPISerializer.extend({
               'starts-on': challenge.startsOn
             }
           }
-          break;
+        }
       }
       
     });

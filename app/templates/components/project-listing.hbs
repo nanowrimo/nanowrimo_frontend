@@ -1,29 +1,30 @@
 <div class="nano-card project-listing-card">
   <div class='project-actions'>
-    pin?
-    downarrow
+
   </div>
-  <div class='project-cover'>
-    <div class='project-cover-clip'>
-      <img src="{{project.cover}}">
+  <div class='flex-container'>
+    <div class='project-cover'>
+      <div class='project-cover-clip'>
+        <img src="{{project.cover}}">
+      </div>
     </div>
-  </div>
-  <div class='project-name-genres'>
-    <div class='project-name'>
-      {{project.name}}
+    <div class='project-name-genres'>
+      <div class='project-name'>
+        {{project.name}}
+      </div>
+      <div class='project-genres'>
+        {{project.concatGenres}}
+      </div>
     </div>
-    <div class='project-genres'>
-      {{project.concatGenres}}
+    
+    {{project-list-progress project=project}}
+    
+    <div class='project-status'>
+      {{#if project.completed}}
+        <img src="/images/users/projects/flippy-doodle-completed.png">
+      {{else}}
+        <img src="/images/users/projects/flippy-doodle-in-progress.png">
+      {{/if}}
     </div>
-  </div>
-  
-  {{project-list-progress project=project}}
-  
-  <div class='project-status'>
-    {{#if project.completed}}
-      <img src="/images/users/projects/flippy-doodle-completed.png">
-    {{else}}
-      <img src="/images/users/projects/flippy-doodle-in-progress.png">
-    {{/if}}
   </div>
 </div>

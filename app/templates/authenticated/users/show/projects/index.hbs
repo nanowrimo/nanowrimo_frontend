@@ -1,4 +1,4 @@
-<div class="nano-panel right-resize with-tabs">
+<div id='project-listing-panel' class="nano-panel right-resize with-tabs">
   <ul class="nano-panel-tabs">
     <li>{{link-to 'Profile' 'authenticated.users.show.index'}}</li>
     <li>{{link-to 'Projects' 'authenticated.users.show.projects' }}</li>
@@ -7,9 +7,18 @@
   
   <div id='project-listing-actions'>
     <button class='btn btn-primary' {{action "newProject"}}>Announce New Project</button>
+    <div id='project-listing-sort' >
+      <span id='project-listing-sort-by-text'>Sort by</span>
+      <span id=project-listing-sort-by-select'>
+        <select onchange={{action "setSortSelection" value="target.value"}} >
+          <option value='createdAt'>Date Created</option>
+          <option value='name'>Project Title</option>
+        </select>
+      </span>
+    </div>
   </div>
-
-    {{#each model as |project|}}
+  
+    {{#each sortedProjects as |project|}}
       {{project-listing project=project}}
     {{/each}}  
   

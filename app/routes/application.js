@@ -30,9 +30,6 @@ export default Route.extend(ApplicationRouteMixin, {
         } else {
           this.intermediateTransitionTo('error');
         }
-      } else {
-        //this is most likely a dev error
-        console.log(error);
       }
     }
   }
