@@ -56,6 +56,7 @@ export default DS.Model.extend({
     } else if (this.get('changeset.isDirty')) {
       if (isPresent(this.get('changeset.url'))) {
         this.get('changeset').save();
+        this.set('_service', null);
       } else {
         this.deleteRecord();
         next(() => {
