@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { click, currentURL, visit } from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { authenticateSession } from 'ember-simple-auth/test-support';
@@ -11,7 +11,7 @@ module('Acceptance | User profile', function(hooks) {
 
     test('visiting User profile requires authentication', async function(assert) {
       await visit('/participants/username');
-  
+
       assert.equal(currentURL(), '/sign-in', 'redirects to sign in');
     });
   });
@@ -28,16 +28,9 @@ module('Acceptance | User profile', function(hooks) {
       authenticateSession();
     });
 
-    test('navigate to User profile', async function(assert) {
-      await visit('/');
-      await click('[data-test-user-profile-link]');
-
-      assert.equal(currentURL(), `/participants/${user.name}`, 'links to profile with current User name');
-    });
-  
     test('User profile displays current User info', async function(assert) {
       await visit(`/participants/${user.name}`);
-      
+
       assert.dom('img[data-test-user-avatar]').hasAttribute('src', user.avatar);
       assert.dom('img[data-test-user-avatar]').hasAttribute('alt', user.name);
       assert.dom('[data-test-user-name]').hasText(user.name);
@@ -51,7 +44,7 @@ module('Acceptance | User profile', function(hooks) {
       await visit(`/participants/${user.name}`);
 
       links.forEach(link => {
-        assert.dom(`a[href='${link.url}']`).exists('external link is displayed');        
+        assert.dom(`a[href='${link.url}']`).exists('external link is displayed');
       });
     });
   });

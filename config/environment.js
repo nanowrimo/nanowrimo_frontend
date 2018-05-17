@@ -21,7 +21,10 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       API_HOST: 'https://api.nanowrimo.org',
-      DEBOUNCE_MS: 250
+      DEBOUNCE_MS: 250,
+      SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr'],
+      MODAL_BACKGROUND_TRANSITION_MS: 150,
+      MODAL_TRANSITION_MS: 300
     },
 
     'ember-cli-uuid': {
@@ -46,11 +49,11 @@ module.exports = function(environment) {
         }
       }
     },
-    
+
     googleFonts: [
       'Source+Sans+Pro'
     ],
- 
+
     // Set or update content security policies
     contentSecurityPolicy: {
       'font-src': "'self' fonts.gstatic.com",
@@ -88,6 +91,8 @@ module.exports = function(environment) {
     ENV.APP.autoboot = false;
 
     ENV.APP.DEBOUNCE_MS = 0;
+    ENV.APP.MODAL_BACKGROUND_TRANSITION_MS = 0;
+    ENV.APP.MODAL_TRANSITION_MS = 0;
   }
   if (environment === 'production') {
     ENV['ember-cli-mirage'] = {
