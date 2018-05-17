@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { union }  from '@ember/object/computed';
-import { assign } from '@ember/polyfills';
+import { next }  from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
 
@@ -34,10 +34,12 @@ export default Component.extend({
     return editLinks;
   }),
 
-  _newExternalLink(options) {
-    let user = this.get('user');
-    let attrs = assign({ user }, options);
-    return this.get('store').createRecord('external-link', attrs);
+  _newExternalLink(attrs) {
+    let link = this.get('store').createRecord('external-link', attrs);
+    next(() => {
+      link.set('user', this.get('user'));
+    })
+    return link;
   },
 
   init() {
