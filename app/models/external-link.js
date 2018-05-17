@@ -63,6 +63,17 @@ export default DS.Model.extend({
         });
       }
     }
+  },
+
+  rollback() {
+    if (this.get('changeset.isDirty')) {
+      this.get('changeset').rollback();
+    }
+    if (this.get('hasDirtyAttributes')) {
+      next(() => {
+        this.rollbackAttributes();
+      });
+    }
   }
 });
 

@@ -27,11 +27,7 @@ export default DS.Model.extend({
 
   rollbackExternalLinks() {
     this.get('externalLinks').forEach((link) => {
-      if (link && link.get('hasDirtyAttributes')) {
-        next(() => {
-          link.rollbackAttributes();
-        });
-      }
+      if (link) { link.rollback(); }
     });
   },
 
