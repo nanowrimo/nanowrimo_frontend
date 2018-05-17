@@ -15,7 +15,7 @@ Router.map(function() {
     });
 
     this.route('users', { path: 'participants'}, function() {
-      this.route('show', { path: '/:name'}, function() {
+      this.route('show', { path: '/:slug'}, function() {
       });
       this.route('edit');
       this.route('projects', function() {

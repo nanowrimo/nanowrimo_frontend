@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { alias }  from '@ember/object/computed';
 
 const {
   attr,
@@ -24,6 +25,8 @@ export default DS.Model.extend({
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
 
+  slug: alias('name'),
+
   rollbackExternalLinks() {
     this.get('externalLinks').forEach((link) => {
       if (link) { link.rollback(); }
@@ -36,4 +39,3 @@ export default DS.Model.extend({
     });
   }
 });
-

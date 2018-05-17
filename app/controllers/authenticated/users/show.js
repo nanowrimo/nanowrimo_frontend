@@ -19,16 +19,16 @@ export default Controller.extend({
   }),
 
   _needsURLUpdate() {
-    return this.get('user.name') !== this.get('userParam');
+    return this.get('user.slug') !== this.get('userParam');
   },
 
   actions: {
     afterModalClose() {
       this.set('edit', null);
       if (this._needsURLUpdate()) {
-        let userName = this.get('user.name');
-        let newURL = this.get('router.currentURL').replace(this.get('userParam'), userName);
-        this.set('userParam', userName);
+        let userSlug = this.get('user.slug');
+        let newURL = this.get('router.currentURL').replace(this.get('userParam'), userSlug);
+        this.set('userParam', userSlug);
         this.get('router').replaceWith(newURL);
       }
     }
