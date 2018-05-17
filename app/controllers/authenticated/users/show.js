@@ -7,7 +7,9 @@ export default Controller.extend({
   currentUser: service(),
   router: service(),
 
-  isEditingUser: false,
+  queryParams: ['edit'],
+
+  edit: null,
   userParam: null,
 
   user: alias('model'),
@@ -22,7 +24,7 @@ export default Controller.extend({
 
   actions: {
     afterModalClose() {
-      this.set('isEditingUser', false);
+      this.set('edit', null);
       if (this._needsURLUpdate()) {
         let userName = this.get('user.name');
         let newURL = this.get('router.currentURL').replace(this.get('userParam'), userName);

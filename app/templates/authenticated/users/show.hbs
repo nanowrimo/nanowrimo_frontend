@@ -35,12 +35,12 @@
           </div>
           {{user-links links=user.externalLinks}}
           {{#if canEditUser}}
-            <div class="flip-corner-link" {{action (mut isEditingUser) true}} data-test-user-profile-edit>
+            <div class="flip-corner-link" {{action (mut edit) true}} data-test-user-profile-edit>
               <img src="/flip_corner.svg" alt="Edit User Profile" />
             </div>
             {{user-edit-profile-modal
               onHidden=(action "afterModalClose")
-              open=isEditingUser
+              open=edit
               user=user
             }}
           {{/if}}

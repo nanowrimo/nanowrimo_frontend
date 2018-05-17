@@ -16,7 +16,7 @@ export default Component.extend({
       if (callback) {
         callback();
       } else {
-        this.set('open', false);
+        this.set('open', null);
       }
     }
   }
