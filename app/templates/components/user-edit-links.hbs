@@ -20,5 +20,7 @@
       </div>
     </div>
   {{/each}}
-  <button {{action "addLink"}}>Add another link</button>
+  {{#if canAddAnotherLink}}
+    <button {{action "addLink"}}>Add another link</button>
+  {{/if}}
 </div>

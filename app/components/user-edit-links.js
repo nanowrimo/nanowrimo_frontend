@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
-import { union }  from '@ember/object/computed';
+import { filterBy, setDiff, union }  from '@ember/object/computed';
 import { next }  from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
@@ -10,28 +10,26 @@ export default Component.extend({
 
   tagName: '',
 
-  newLinks: null,
+  _newLinks: null,
   user: null,
 
-  inputLinks: union('editLinks', 'newLinks'),
+  _existingLinks: filterBy('user.externalLinks', 'isDeleted', false),
+  _otherLinks: setDiff('_existingLinks', '_socialLinks'),
+  _otherSavedLinks: filterBy('_otherLinks', 'isNew', false),
+  inputLinks: union('_socialLinks', '_otherSavedLinks', '_newLinks'),
 
-  editLinks: computed('user.externalLinks.@each.isDeleted', function() {
-    let links = this.get('user.externalLinks').filterBy('isDeleted', false);
-    let editLinks = [];
+  _socialLinks: computed('_existingLinks.@each.service', function() {
+    let links = this.get('_existingLinks');
 
-    // Show an input for each Social Service first
-    ENV.APP.SOCIAL_SERVICES.forEach((service) => {
-      let matchingLink = links.findBy('service', service);
-      editLinks.pushObject(matchingLink || this._newExternalLink({ service }));
-    });
+    return ENV.APP.SOCIAL_SERVICES.reduce((acc, service) => {
+      let link = links.findBy('service', service);
+      if (!link) { link = this._newExternalLink({ service }); }
+      return acc.concat(link);
+    }, []);
+  }),
 
-    // Show an input for other existing links next
-    let otherLinks = links.reject(link => {
-      return editLinks.includes(link);
-    });
-    editLinks.pushObjects(otherLinks);
-
-    return editLinks;
+  canAddAnotherLink: computed('_otherSavedLinks.[]', '_newLinks.[]', function() {
+    return this.get('_otherSavedLinks').length + this.get('_newLinks').length < 5;
   }),
 
   _newExternalLink(attrs) {
@@ -44,19 +42,25 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.set('newLinks', [ this._newExternalLink() ]);
+    let newLinks = [];
+    if (this.get('_otherSavedLinks').length < 5) {
+      newLinks.pushObject(this._newExternalLink());
+    }
+    this.set('_newLinks', newLinks);
   },
 
   actions: {
     addLink() {
-      this.get('newLinks').pushObject(this._newExternalLink());
+      if (this.get('canAddAnotherLink')) {
+        this.get('_newLinks').pushObject(this._newExternalLink());
+      }
     },
 
     clearLink(link) {
       if (link.get('service')) {
         link.set('changeset.url', null);
       } else {
-        this.get('newLinks').removeObject(link);
+        this.get('_newLinks').removeObject(link);
         link.deleteRecord();
       }
     }

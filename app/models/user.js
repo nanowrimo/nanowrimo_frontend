@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import { next }  from '@ember/runloop';
 
 const {
   attr,
