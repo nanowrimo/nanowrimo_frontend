@@ -34,9 +34,16 @@
             Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
           </div>
           {{user-links links=user.externalLinks}}
-          <div class="flip-corner-link">
-            <img src="/flip_corner.svg" alt="" />
-          </div>
+          {{#if canEditUser}}
+            <div class="flip-corner-link" {{action (mut isEditingUser) true}} data-test-user-profile-edit>
+              <img src="/flip_corner.svg" alt="Edit User Profile" />
+            </div>
+            {{user-edit-profile-modal
+              onHidden=(action "afterModalClose")
+              open=isEditingUser
+              user=user
+            }}
+          {{/if}}
         </div>
       </div>
       {{outlet}}

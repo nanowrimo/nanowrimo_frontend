@@ -21,7 +21,8 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       API_HOST: 'https://api.nanowrimo.org',
-      DEBOUNCE_MS: 250
+      DEBOUNCE_MS: 250,
+      SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr']
     },
 
     'ember-cli-uuid': {
@@ -46,11 +47,11 @@ module.exports = function(environment) {
         }
       }
     },
-    
+
     googleFonts: [
       'Source+Sans+Pro'
     ],
- 
+
     // Set or update content security policies
     contentSecurityPolicy: {
       'font-src': "'self' fonts.gstatic.com",

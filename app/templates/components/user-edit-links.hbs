@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label>Would you like to link to your external pages?</label>
+  {{#each inputLinks as |link|}}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          {{fa-icon (if link.service link.service "link") fixedWidth=true}}
+        </div>
+      </div>
+      {{input
+        data-test-external-link-url=link.id
+        class="form-control"
+        placeholder=(if link.service (concat "https://" link.service ".com/username") "https://example.com")
+        value=link.changeset.url
+      }}
+      <div class="input-group-append" style="cursor:pointer" {{action "clearLink" link}}>
+        <div class="input-group-text">
+          {{fa-icon "minus-circle" fixedWidth=true}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  <button {{action "addLink"}}>Add another link</button>
+</div>

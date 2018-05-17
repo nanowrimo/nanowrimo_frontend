@@ -21,6 +21,7 @@
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^1.2.1",
+    "ember-changeset-hofs": "kpfefferle/ember-changeset-hofs#b27303af3c848975c57e87a3bd041946ae6f5e71",
     "ember-changeset-validations": "^1.2.11",
     "ember-chrome-devtools": "^0.2.0",
     "ember-cli": "~3.1.4",

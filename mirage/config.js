@@ -10,6 +10,7 @@ export default function() {
 
   // Authentication
 
+  this.resource('users', { only: ['update'] });
   this.post('users', () => {
     return new Response(201);
   });
@@ -39,6 +40,13 @@ export default function() {
   });
 
   // CRUD
+
+  this.resource('external-links', { only: ['create', 'update', 'delete'] });
+  this.del('external-links/:id', ({ externalLinks }, request) => {
+    let id = request.params.id;
+    externalLinks.find(id).destroy();
+    return { meta: {} };
+  });
 
   this.resource('genre', { except: ['delete'] });
   this.del('genres/:id', ({ genres }, request) => {
