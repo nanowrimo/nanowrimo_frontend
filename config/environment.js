@@ -22,7 +22,9 @@ module.exports = function(environment) {
       // when it is created
       API_HOST: 'https://api.nanowrimo.org',
       DEBOUNCE_MS: 250,
-      SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr']
+      SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr'],
+      MODAL_BACKGROUND_TRANSITION_MS: 150,
+      MODAL_TRANSITION_MS: 300
     },
 
     'ember-cli-uuid': {
@@ -89,6 +91,8 @@ module.exports = function(environment) {
     ENV.APP.autoboot = false;
 
     ENV.APP.DEBOUNCE_MS = 0;
+    ENV.APP.MODAL_BACKGROUND_TRANSITION_MS = 0;
+    ENV.APP.MODAL_TRANSITION_MS = 0;
   }
   if (environment === 'production') {
     ENV['ember-cli-mirage'] = {
