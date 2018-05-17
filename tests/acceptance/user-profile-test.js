@@ -11,7 +11,7 @@ module('Acceptance | User profile', function(hooks) {
 
     test('visiting User profile requires authentication', async function(assert) {
       await visit('/participants/username');
-  
+
       assert.equal(currentURL(), '/sign-in', 'redirects to sign in');
     });
   });
@@ -30,7 +30,7 @@ module('Acceptance | User profile', function(hooks) {
 
     test('User profile displays current User info', async function(assert) {
       await visit(`/participants/${user.name}`);
-      
+
       assert.dom('img[data-test-user-avatar]').hasAttribute('src', user.avatar);
       assert.dom('img[data-test-user-avatar]').hasAttribute('alt', user.name);
       assert.dom('[data-test-user-name]').hasText(user.name);
@@ -44,7 +44,7 @@ module('Acceptance | User profile', function(hooks) {
       await visit(`/participants/${user.name}`);
 
       links.forEach(link => {
-        assert.dom(`a[href='${link.url}']`).exists('external link is displayed');        
+        assert.dom(`a[href='${link.url}']`).exists('external link is displayed');
       });
     });
   });
