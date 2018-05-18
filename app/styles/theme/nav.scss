@@ -1,14 +1,8 @@
 .dropdown {
   ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
     li {
       height: 37px;
       border-bottom: 2px solid #e2eff3;
-
     }
     li:last-child {
       border-bottom: 0px;
@@ -136,36 +130,6 @@
           z-index: 1000;
         }
       }
-      .nav-search {
-        flex: 1 1 408px;
-        .search-field {
-          position: relative;
-          margin-bottom: 0;
-          label {
-            display: none;
-          }
-          .ember-text-field {
-            font-size: 14px;
-            height: 28px;
-            width: 408px;
-          }
-          .search-button { 
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            font-size: 14px;
-            height: 28px;
-            line-height: 28px;
-            color: #73AB9B;
-            border: 0px;
-            border-radius: 0px;
-            border-left: solid 1px #73AB9B;
-            background: transparent;
-            background-image: none;
-            
-          }
-        }
-      }
       .nav-store {
         margin-right: -1rem;
         .store-blue {
@@ -174,6 +138,7 @@
           -webkit-border-radius: 21px 0px 0px 21px;
           -moz-border-radius: 21px 0px 0px 21px;
           border-radius: 21px 0px 0px 21px;
+          text-transform: uppercase;
         }
         a.nav-link {
           color: #F2F8FA;
@@ -197,6 +162,7 @@
         margin-right: 0px;
         margin-left: 76px;
         @media (max-width: $screen-md-max) {
+          flex: 0 0 144px;
           margin-left: -10px;
           img {
             width: 144px;
@@ -211,8 +177,10 @@
         letter-spacing: 0;
         text-align: center;
         line-height: 22px;
+        text-transform: uppercase;
         &.user-menu {
           font-family: 'SourceSansPro-Regular', sans-serif;
+          text-transform: none;
         }
       }
       .nav {
@@ -375,5 +343,50 @@
         }
       }
     }
+  }
+}
+.nano-search {
+  .search-field {
+    position: relative;
+    margin-bottom: 0;
+    label {
+      display: none;
+    }
+    .ember-text-field {
+      font-size: 14px;
+      height: 28px;
+      width: 220px;
+    }
+    .search-button { 
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      font-size: 14px;
+      height: 28px;
+      line-height: 28px;
+      color: #73AB9B;
+      border: 0px;
+      border-radius: 0px;
+      border-left: solid 1px #73AB9B;
+      background: transparent;
+      background-image: none;
+    }
+  }
+}
+.nano-side-menu {
+  .nano-search {
+    .ember-text-field {
+      height: 35px;
+    }
+    .search-button {
+      height: 35px;
+      width: 35px;
+    }
+  }
+}
+.navbar .nano-search {
+  flex: 1 1 408px;
+  .ember-text-field {
+    width: 408px;
   }
 }

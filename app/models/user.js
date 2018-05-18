@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { alias }  from '@ember/object/computed';
 
 const {
   attr,
@@ -13,15 +14,28 @@ export default DS.Model.extend({
   location: attr('string'),
   name: attr('string'),
   postalCode: attr('string'),
-  statsLifetimeWordCount: attr('boolean'), 
-  statsNumberOfProjects: attr('boolean'), 
-  statsYearsDoneWon: attr('boolean'), 
-  statsWordiestNovel: attr('boolean'), 
-  statsAverageWritingPace: attr('boolean'), 
+  statsLifetimeWordCount: attr('boolean'),
+  statsNumberOfProjects: attr('boolean'),
+  statsYearsDoneWon: attr('boolean'),
+  statsWordiestNovel: attr('boolean'),
+  statsAverageWritingPace: attr('boolean'),
   statsLongestNanoStreak: attr('boolean'),
-  
-  externalLinks: hasMany(),
-  favoriteAuthors: hasMany('favoriteAuthor'),
-  favoriteBooks: hasMany('favoriteBook')
-});
 
+  externalLinks: hasMany('externalLink', { async: false }),
+  favoriteAuthors: hasMany('favoriteAuthor'),
+  favoriteBooks: hasMany('favoriteBook'),
+
+  slug: alias('name'),
+
+  rollbackExternalLinks() {
+    this.get('externalLinks').forEach((link) => {
+      if (link) { link.rollback(); }
+    });
+  },
+
+  save() {
+    return this._super().then(() => {
+      this.get('externalLinks').forEach(link => link.persistChanges());
+    });
+  }
+});
