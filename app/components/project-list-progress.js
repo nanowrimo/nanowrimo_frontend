@@ -22,12 +22,19 @@ export default Component.extend({
     }
   }),
   formattedWordcount: computed("project.count", function(){
-    return this.get('project').count.toLocaleString();
+    let project = this.get('project');
+    if (project) {
+      return project.count.toLocaleString();
+    } else {
+      return 0;
+    }
   }),
   goal: computed('project.challenges.[]', function(){
     let proj = this.get('project');
     if (proj) {
       return proj.challenges.firstObject.requiredGoal;
+    } else {
+      return 0;
     }
   }),
   goalMet: computed("percentCompleted", function(){
@@ -36,12 +43,17 @@ export default Component.extend({
   
   
   percentCompleted: computed("goal","project.count",function(){
-    let wc = this.get('project').count;
-    let g = this.get('goal');
-    let percent = wc*100/g;
-    if (percent > 100) {
-      percent = 100;
+    let proj = this.get('project');
+    if (proj) {
+      let wc = proj.count;
+      let g = this.get('goal');
+      let percent = wc*100/g;
+      if (percent > 100) {
+        percent = 100;
+      }
+      return percent;
+    } else {
+      0;
     }
-    return percent;
   })
 });
