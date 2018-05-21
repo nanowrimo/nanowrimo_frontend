@@ -32,7 +32,24 @@
             {{/nav.dropdown}}
           {{/each}}
         {{/bs-nav}}
-        {{logging-buttons}}
+        <div class="nav-logging-buttons d-flex">
+          <button class="btn button-log">
+            {{#if media.isMobile}}
+              <span class="mobile">LOG</span>
+            {{/if}}
+            {{#if media.isDesktop}}
+              <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
+            {{/if}}
+          </button>
+          <button class="btn button-timer">
+            {{#if media.isMobile}}
+              <span class="mobile">TIMER</span>
+            {{/if}}
+            {{#if media.isDesktop}}
+              <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
+            {{/if}}
+          </button>
+        </div>
         {{#bs-dropdown as |dd|}}
           {{#dd.toggle class="user-menu"}}Hi, <u>{{currentUserName}}!</u> <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
@@ -62,7 +79,15 @@
           {{#if media.isDesktop}}
             <button class="button-clear button-mail"><span aria-hidden="false">{{fa-icon "envelope"}}</span></button>
           {{/if}}
-          <button class="button-clear button-bell"><span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span><span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span><div class="unread-circle">1</div></button>
+          <button class="button-clear button-bell">
+            {{#if media.isDesktop}}
+              <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
+            {{/if}}
+            {{#if media.isMobile}}
+              <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
+            {{/if}}
+            <div class="unread-circle">1</div>
+          </button>
           {{#if media.isMobile}}
             {{#nano-side-menu-toggle}}
               <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>

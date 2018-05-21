@@ -75,21 +75,6 @@ body {
 .full-width {
   width: 100%;
 }
-// ----------------------------------
-// Shorthand styles for mobile and
-// non-mobile breakpoints
-// ----------------------------------
-
-.non-mobile {
-  @media (max-width: $screen-md-max) {
-    display: none;
-  }
-}
-.mobile {
-  @media (min-width: $screen-lg) {
-    display: none;
-  }
-}
 
 // ----------------------------------
 // Button styling, for inside forms
