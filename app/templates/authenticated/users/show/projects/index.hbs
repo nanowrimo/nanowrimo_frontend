@@ -6,11 +6,11 @@
   </ul>
   
   <div id='project-listing-actions'>
-    <button class='btn btn-primary' {{action "newProject"}}>Announce New Project</button>
+    <button id='announce-new-project-button' class='btn btn-primary' {{action "newProject"}}>Announce New Project</button>
     <div id='project-listing-sort' >
-      <span id='project-listing-sort-by-text'>Sort by</span>
+      <label id='project-listing-sort-by-text' for='sort-by'>Sort by</label>
       <span id=project-listing-sort-by-select'>
-        <select onchange={{action "setSortSelection" value="target.value"}} >
+        <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
           <option value='createdAt'>Date Created</option>
           <option value='name'>Project Title</option>
         </select>
@@ -22,4 +22,22 @@
       {{project-listing project=project}}
     {{/each}}  
   
+    <div id='announce-card'>
+      <div class='quote-block'>
+        <div class='quote'>
+          "A journey of a thousand miles
+          <br>
+           begins with a single step."
+        </div>
+        <div class='quotee'>
+          Lao Tzu
+        </div>
+      </div>
+      <div id='announce-new-project'>
+        <a href="#" {{action "newProject"}}>Announce a new project!</a>
+      </div> 
+      <div id='megaphone'>
+        <img src='/images/users/projects/megaphone.svg'>
+      </div>
+    </div>
 </div>
