@@ -4,6 +4,9 @@
     margin-left: 27px;
     height: 107px;
     position: relative;
+    #announce-new-project-button {
+      width: 291px;
+    }
     
     #project-listing-sort {
       position: absolute;
@@ -69,8 +72,12 @@
     .flex-container {
       display: flex;
       flex-wrap: wrap;
+      
       .project-cover {
         flex: 0 0 189px;
+        @media(max-width: $screen-md) {
+          order: 3;
+        }
         .project-cover-clip {
           position: absolute;
           bottom: 0px;
@@ -86,13 +93,8 @@
           }
         }
       }
+
       .project-name-genres {
-        /*
-        position: absolute;
-        top: 39px;
-        left: 189px;
-        width: 298px;
-        */
         margin-top: 18px;
         flex: 0 0 298px;
         .project-name {
@@ -111,14 +113,12 @@
         }
       }
       .project-progress {
-        /*
-        position: absolute;
-        left: 511px;
-        top: 39px;
-        */
         margin-top: 18px;
         width: 352px;
         flex: 0 0 352px;
+        @media(max-width: $screen-md) {
+          margin-bottom: 144px;
+        }
         .goal-text{ 
           margin-bottom: 7.5px;
           font-size: 16px;
