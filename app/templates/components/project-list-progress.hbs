@@ -1,0 +1,18 @@
+<div class='project-progress'>
+  <div class='goal-text'>
+    <span class='goal'>Goal: </span>
+    <span class=''>Write {{formattedGoal}} words</span>
+  </div>
+  
+    {{nano-progress-bar percent=percentCompleted}}
+    
+  <span class='progress-text'>
+    <span class="count {{if goalMet 'goal-met' ''}}">{{formattedWordcount}}</span><span class='goal'>/{{formattedGoal}} WORDS</span>
+  </span>
+  <span class='challenge-start'>
+    <span class="started">Started</span>
+    <span class="date">{{formattedStart}}</span>
+  </span>
+  
+  
+</div>

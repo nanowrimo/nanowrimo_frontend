@@ -23,11 +23,13 @@ export default Route.extend(ApplicationRouteMixin, {
 
   actions: {
     error(error, transition) { // eslint-disable-line no-unused-vars
-      let firstError = error.errors[0];
-      if (firstError.status == 404) {
-        this.intermediateTransitionTo('404');
-      } else {
-        this.intermediateTransitionTo('error');
+      if (error.errors) {
+        let firstError = error.errors[0];
+        if (firstError.status == 404) {
+          this.intermediateTransitionTo('404');
+        } else {
+          this.intermediateTransitionTo('error');
+        }
       }
     }
   }
