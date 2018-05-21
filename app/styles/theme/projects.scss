@@ -68,6 +68,9 @@
       position: absolute;
       top: -5px;
       left: 176px;
+      @media(max-width: $screen-md) {
+        left: 10px;
+      }
     }
     .flex-container {
       display: flex;
@@ -162,12 +165,14 @@
     margin-bottom: 32px;
     margin-left: 28px;
     margin-right: 28px;
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     color: #b8b8b8;
+    justify-content: center;
+     
     .quote-block {
       flex: 0 1 310px;
-      margin-left: 100px;
       align-self: center;
       text-align: center;
       
@@ -183,15 +188,32 @@
     }
     #announce-new-project {
       align-self: center;
+      text-align: center;
       flex: 1 1 291px;
       font-size: 26px;
+      margin-right: 144px;
+       @media(max-width: $screen-md) {
+          margin-bottom: 144px;
+          margin-right: 0px;
+      }
       a {
         color: #b8b8b8;
+        text-decoration: underline;
       }
+      
     }
-    #megaphone {
-      flex: 0 0 112px;
-      margin-top: 45px;
+    #megaphone-wrapper {
+      min-height: 144px;
+      
+      #megaphone {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+         @media(max-width: $screen-md) {
+          right: 144px;
+        }
+        margin-top: 45px;
+      }
     }
   }
 }
