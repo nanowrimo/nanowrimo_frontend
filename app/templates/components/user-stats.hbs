@@ -16,10 +16,13 @@
   <div class="plate-area">
     <div class="plate-stat">{{format-number yearsDoneCount}}</div>
     <div class="plate-descriptor">time NaNo participant</div>
-    {{#bs-tooltip}}
-      {{#each yearsDone as |year|}}
-        <span>{{short-year year}}{{#if (array-includes yearsWon year)}}*{{/if}}</span>
-      {{/each}}
+    {{#bs-tooltip placement="bottom"}}
+      <div>Years Done/Won</div>
+      <div>
+        {{#each yearsDone as |year|}}
+          <span>{{short-year year}}{{#if (array-includes yearsWon year)}}*{{/if}}</span>
+        {{/each}}
+      </div>
     {{/bs-tooltip}}
   </div>
 {{/if}}
