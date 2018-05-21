@@ -1,7 +1,7 @@
 import { sampleSize } from 'lodash';
 
 export default function(server) {
-  let user = server.create('user', { name: 'username' });
+  let user = server.create('user', { name: 'username', statsYearsEnabled: true });
   ['facebook', 'twitter', 'instagram'].forEach(social => {
     server.create('external-link', { user, url: `https://${social}.com/${user.name}` });
   });
