@@ -10,8 +10,9 @@ export default DS.Model.extend({
   status: DS.attr('string'),
   count: DS.attr('number'),
   createdAt: DS.attr('date'),
+  primaryChallenge: DS.belongsTo('challenge', { inverse: 'primaryChallengeProjects' }),
   
-  formattedWordcount: computed("wordcount", function(){
+  formattedWordcount: computed("count", function(){
     return this.get('count').toLocaleString();
   }),
   completed: computed('status', function() {
