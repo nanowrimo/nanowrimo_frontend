@@ -4,6 +4,8 @@ import { computed } from '@ember/object';
 
 export default Controller.extend({
   session: service(),
+  media: service(),
+  
   show_navigation: computed('routeName', function() {
     let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset"];
     let rn = this.get('routeName');
