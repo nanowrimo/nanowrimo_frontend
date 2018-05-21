@@ -156,4 +156,42 @@
       }
     }
   }
+  #announce-card {
+    border: 2px dashed #dfe4e6;
+    border-radius: 6px;
+    margin-bottom: 32px;
+    margin-left: 28px;
+    margin-right: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    color: #b8b8b8;
+    .quote-block {
+      flex: 0 1 310px;
+      margin-left: 100px;
+      align-self: center;
+      text-align: center;
+      
+      .qoute {
+        font-size: 20px;
+        font-family: "SourceSerifPro-Regular", serif;
+        margin-bottom: 7px;
+      }
+      .quotee {
+        font-size: 16px;
+        font-family: "SourceSansPro-Regular", sans-serif ;
+      }
+    }
+    #announce-new-project {
+      align-self: center;
+      flex: 1 1 291px;
+      font-size: 26px;
+      a {
+        color: #b8b8b8;
+      }
+    }
+    #megaphone {
+      flex: 0 0 112px;
+      margin-top: 45px;
+    }
+  }
 }
