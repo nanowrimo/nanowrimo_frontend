@@ -59,6 +59,7 @@ export default JSONAPISerializer.extend({
             id: challenge.id,
             type: 'challenge',
             attributes: {
+              type: challenge.type,
               name: challenge.name,
               'required-goal': challenge.requiredGoal,
               'starts-on': challenge.startsOn
