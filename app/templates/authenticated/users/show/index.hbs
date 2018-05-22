@@ -5,10 +5,29 @@
     <li>{{link-to 'Buddies (57)' 'index'}}</li>
   </ul>
   <div class="grid-wrapper">
+
+    {{!-- FIXME: Move these styles into CSS assets --}}
+    <style>
+      .nano-card {
+        position: relative;
+      }
+      .nano-card .flip-corner-link {
+        display: none;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        cursor: pointer;
+      }
+      .nano-card:hover .flip-corner-link {
+        display: block;
+      }
+    </style>
+    {{!-- /FIXME --}}
+
     <div class="nano-card g1-row">
-      About {{user.name}}
       <div class="row">
         <div class="col-6">
+          <h6>About {{user.name}}</h6>
 
           {{!-- FIXME: Move these styles into CSS assets --}}
           <style>
@@ -31,6 +50,20 @@
           {{/if}}
         </div>
       </div>
+
+      {{#if canEditUser}}
+        <div {{action "showEditBio"}} class="flip-corner-link" data-test-user-edit-bio>
+          <img src="/flip_corner.svg" alt="Edit User Bio" />
+        </div>
+
+        {{user-edit-bio-modal
+          onHidden=(action "afterModalClose")
+          open=editBio
+          user=user
+          tab=editBioTab
+        }}
+      {{/if}}
+
     </div>
     <div class="nano-card g1-row">
       Participation badges

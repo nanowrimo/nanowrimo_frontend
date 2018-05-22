@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 
-const DEFAULT_TAB = 'overview';
+const DEFAULT_TAB = 'biography';
 
 export default Component.extend({
   tagName: '',
@@ -26,7 +26,7 @@ export default Component.extend({
 
   actions: {
     onHidden() {
-      this.get('user').rollbackExternalLinks();
+      // this.get('user').rollbackFavorites();
       let callback = this.get('onHidden');
       if (callback) {
         callback();
