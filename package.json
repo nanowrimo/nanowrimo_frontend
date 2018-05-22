@@ -27,7 +27,7 @@
     "ember-cli": "~3.1.4",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.12.0",
-    "ember-cli-dependency-checker": "^2.0.0",
+    "ember-cli-dependency-checker": "^2.1.1",
     "ember-cli-deploy": "^1.0.2",
     "ember-cli-deploy-s3-pack": "^1.0.0-beta.2",
     "ember-cli-eslint": "^4.2.1",
@@ -52,7 +52,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-modal-dialog": "^3.0.0-beta.0",
     "ember-moment": "^7.7.0",
-    "ember-power-select": "^2.0.1",
+    "ember-power-select": "^2.0.2",
     "ember-power-select-with-create": "^0.6.0",
     "ember-resolver": "^4.0.0",
     "ember-simple-auth": "^1.5.1",
@@ -61,7 +61,7 @@
     "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.6.2",
+    "qunit-dom": "^0.6.3",
     "torii": "^0.10.1"
   },
   "engines": {

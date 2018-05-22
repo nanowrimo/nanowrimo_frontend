@@ -31,6 +31,8 @@ export default Route.extend(ApplicationRouteMixin, {
           this.intermediateTransitionTo('error');
         }
       }
+
+      return true;
     }
   }
 });

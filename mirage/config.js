@@ -36,7 +36,8 @@ export default function() {
   });
   this.get('/users/:name', ({users}, request) => {
     let name = request.params.name;
-    return users.findBy({ name });
+    let user = users.findBy({ name });
+    return user || new Response(404);
   });
 
   // CRUD
