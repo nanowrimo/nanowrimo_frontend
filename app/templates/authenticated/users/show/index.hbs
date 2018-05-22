@@ -6,7 +6,31 @@
   </ul>
   <div class="grid-wrapper">
     <div class="nano-card g1-row">
-      About Jezra_Lickter
+      About {{user.name}}
+      <div class="row">
+        <div class="col-6">
+
+          {{!-- FIXME: Move these styles into CSS assets --}}
+          <style>
+            .nano-user-bio {
+              /* line-height is currently 24px */
+              overflow: hidden;
+              max-height: 144px; /* line-height (24px) * number of lines (6) */
+            }
+            .nano-user-bio.expanded {
+              max-height: none;
+            }
+          </style>
+          {{!-- /FIXME --}}
+
+          <div class="nano-user-bio{{if bioExpanded " expanded"}}" data-test-user-bio>
+            {{user.bio}}
+          </div>
+          {{#if showBioReadMore}}
+            <button {{action (mut bioExpanded) true}}>Read More</button>
+          {{/if}}
+        </div>
+      </div>
     </div>
     <div class="nano-card g1-row">
       Participation badges

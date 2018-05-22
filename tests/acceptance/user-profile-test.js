@@ -36,6 +36,7 @@ module('Acceptance | User profile', function(hooks) {
       assert.dom('[data-test-user-name]').hasText(user.name);
       assert.dom('[data-test-user-location').hasText(user.location);
       assert.dom('[data-test-user-since').hasText(`Member since May 8, 2018`);
+      assert.dom('[data-test-user-bio]').hasText(user.bio);
     });
 
     test('User profile displays User links', async function(assert) {

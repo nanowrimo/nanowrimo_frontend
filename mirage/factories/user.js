@@ -3,6 +3,7 @@ import { uniq } from 'lodash';
 
 export default Factory.extend({
   avatar: faker.image.avatar(),
+  bio: faker.lorem.sentences(20),
   createdAt: faker.date.past(),
   email: faker.internet.email(),
   location() {
