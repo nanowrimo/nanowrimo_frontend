@@ -61,7 +61,7 @@
     "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.6.2",
+    "qunit-dom": "^0.6.3",
     "torii": "^0.10.1"
   },
   "engines": {
