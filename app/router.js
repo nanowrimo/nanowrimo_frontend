@@ -20,7 +20,8 @@ Router.map(function() {
         });
       });
       this.route('edit');
-      
+    });
+    this.route('stats', function() {
     });
     this.route('current-user', function() {
       this.route('show', { path: '/' });
@@ -38,6 +39,7 @@ Router.map(function() {
   this.route('error');
   this.route('forgot-password');
   this.route('password-reset');
+  this.route('components.stats', { path: '/stats' });
 });
 
 export default Router;

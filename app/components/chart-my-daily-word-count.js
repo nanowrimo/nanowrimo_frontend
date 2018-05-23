@@ -6,7 +6,8 @@ export default Component.extend({
   chartOptions: computed(function() {
     let cOptions = {
       chart: {
-        type: 'spline'
+        type: 'spline',
+        reflow: true
       },
       title: null,
       xAxis: {
