@@ -10,7 +10,12 @@ export default DS.Model.extend({
   status: DS.attr('string'),
   count: DS.attr('number'),
   createdAt: DS.attr('date'),
-  primaryChallenge: DS.belongsTo('challenge', { inverse: 'primaryChallengeProjects' }),
+  user: DS.belongsTo('user'),
+  
+  displayChallenge: computed("user", "challenges.[]", function(){
+    let tz = this.get('user').get('timeZone');
+    //console.log(tz);
+  }),
   
   formattedWordcount: computed("count", function(){
     return this.get('count').toLocaleString();

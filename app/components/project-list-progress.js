@@ -32,6 +32,8 @@ export default Component.extend({
   goal: computed('project.challenges.[]', function(){
     let proj = this.get('project');
     if (proj) {
+      let dc = proj.displayChallenge;
+      
       return proj.challenges.firstObject.requiredGoal;
     } else {
       return 0;

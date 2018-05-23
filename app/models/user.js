@@ -34,6 +34,7 @@ export default DS.Model.extend({
   favoriteBooks: hasMany('favoriteBook'),
 
   slug: alias('name'),
+  projects: hasMany('project'),
 
   rollbackExternalLinks() {
     this.get('externalLinks').forEach((link) => {

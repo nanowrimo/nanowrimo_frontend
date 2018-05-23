@@ -8,7 +8,7 @@ export default function(server) {
   server.createList('external-link', 2, { user });
 
   // Prior demo; replace with realistic Projects and Genres
-  let projects = server.createList('project', 3);
+  let projects = server.createList('project', 3, {user: user});
   let genres = server.createList('genre', 5);
   
   let challenge = server.create('challenge');
