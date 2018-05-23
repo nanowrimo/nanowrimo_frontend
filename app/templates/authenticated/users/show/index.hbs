@@ -49,6 +49,28 @@
             <button {{action (mut bioExpanded) true}}>Read More</button>
           {{/if}}
         </div>
+
+        <div class="col-3">
+          <h6>Favorite Books</h6>
+          <ul>
+            {{#each user.favoriteBooks as |book|}}
+              <li data-test-favorite-book={{book.id}}>{{book.title}}</li>
+            {{else}}
+              <li><em>None</em></li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class="col-3">
+          <h6>Favorite Authors</h6>
+          <ul>
+            {{#each user.favoriteAuthors as |author|}}
+              <li data-test-favorite-author={{author.id}}>{{author.name}}</li>
+            {{else}}
+              <li><em>None</em></li>
+            {{/each}}
+          </ul>
+        </div>
       </div>
 
       {{#if canEditUser}}

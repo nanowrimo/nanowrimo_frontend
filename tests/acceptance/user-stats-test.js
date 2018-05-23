@@ -13,7 +13,6 @@ module('Acceptance | User stats', function(hooks) {
     authenticateSession();
 
     let statsUser = this.server.create('user', {
-      name: 'stats_user',
       statsWordCountEnabled: true,
       statsWordCount: 12345,
       statsProjectsEnabled: true,
@@ -33,7 +32,6 @@ module('Acceptance | User stats', function(hooks) {
     assert.dom('[data-test-user-stats-streak]').doesNotExist('streak stat is not shown');
 
     let otherStatsUser = this.server.create('user', {
-      name: 'other_stats_user',
       statsWordCountEnabled: false,
       statsProjectsEnabled: false,
       statsYearsEnabled: false,

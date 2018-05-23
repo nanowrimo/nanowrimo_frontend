@@ -30,8 +30,8 @@ export default DS.Model.extend({
   statsYearsWon: attr('string'),
 
   externalLinks: hasMany('externalLink', { async: false }),
-  favoriteAuthors: hasMany('favoriteAuthor'),
-  favoriteBooks: hasMany('favoriteBook'),
+  favoriteAuthors: hasMany('favoriteAuthor', { async: false }),
+  favoriteBooks: hasMany('favoriteBook', { async: false }),
 
   slug: alias('name'),
 
