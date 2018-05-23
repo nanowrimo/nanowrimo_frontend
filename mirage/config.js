@@ -42,10 +42,22 @@ export default function() {
 
   // CRUD
 
-  this.resource('external-links', { only: ['create', 'update', 'delete'] });
+  this.resource('external-links', { only: ['create', 'update'] });
   this.del('external-links/:id', ({ externalLinks }, request) => {
     let id = request.params.id;
     externalLinks.find(id).destroy();
+    return { meta: {} };
+  });
+  this.resource('favorite-authors', { only: ['create', 'update'] });
+  this.del('favorite-authors/:id', ({ favoriteAuthors }, request) => {
+    let id = request.params.id;
+    favoriteAuthors.find(id).destroy();
+    return { meta: {} };
+  });
+  this.resource('favorite-books', { only: ['create', 'update'] });
+  this.del('favorite-books/:id', ({ favoriteBooks }, request) => {
+    let id = request.params.id;
+    favoriteBooks.find(id).destroy();
     return { meta: {} };
   });
 

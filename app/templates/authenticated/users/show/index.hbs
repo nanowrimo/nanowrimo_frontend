@@ -52,8 +52,8 @@
 
         <div class="col-3">
           <h6>Favorite Books</h6>
-          <ul>
-            {{#each user.favoriteBooks as |book|}}
+          <ul data-test-favorite-books>
+            {{#each favoriteBooks as |book|}}
               <li data-test-favorite-book={{book.id}}>{{book.title}}</li>
             {{else}}
               <li><em>None</em></li>
@@ -63,8 +63,8 @@
 
         <div class="col-3">
           <h6>Favorite Authors</h6>
-          <ul>
-            {{#each user.favoriteAuthors as |author|}}
+          <ul data-test-favorite-authors>
+            {{#each favoriteAuthors as |author|}}
               <li data-test-favorite-author={{author.id}}>{{author.name}}</li>
             {{else}}
               <li><em>None</em></li>

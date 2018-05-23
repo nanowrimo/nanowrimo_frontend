@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { computed }  from '@ember/object';
-import { alias, not }  from '@ember/object/computed';
+import { alias, filterBy, not }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -15,6 +15,8 @@ export default Controller.extend({
 
   bioExpanded: false,
 
+  favoriteAuthors: filterBy('user.favoriteAuthors', 'isNew', false),
+  favoriteBooks: filterBy('user.favoriteBooks', 'isNew', false),
   showBioReadMore: not('bioExpanded'),
 
   canEditUser: computed('currentUser.user.id', 'user.id', function() {
@@ -24,12 +26,12 @@ export default Controller.extend({
   actions: {
     afterModalClose() {
       this.set('editBio', null);
+      this.set('editBioTab', null);
     },
 
-    showEditBio(tab) {
+    showEditBio() {
       if (this.get('canEditUser')) {
         this.set('editBio', true);
-        if (tab) { this.set('editBioTab', tab); }
       }
     }
   }

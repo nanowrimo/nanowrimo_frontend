@@ -33,7 +33,54 @@
 
         {{#tab.pane title="Favorite Books and Authors" id="favorites"}}
           <div class="form-group">
+            <label>What are your (up to) 5 favorite books?</label>
           </div>
+          {{#each favoriteBooks as |book|}}
+            <div class="form-group">
+              <div class="input-group">
+                {{input
+                  data-test-favorite-book-input=(concat "" book.id)
+                  class="form-control"
+                  value=book.changeset.title
+                }}
+                <div {{action "deleteBook" book}} class="input-group-append" style="cursor:pointer" data-test-favorite-book-delete={{concat "" book.id}}>
+                  <div class="input-group-text">
+                    {{fa-icon "minus-circle" fixedWidth=true}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{#if canAddAnotherBook}}
+            <div class="form-group">
+              <button {{action "addBook"}}>Add another book</button>
+            </div>
+          {{/if}}
+
+          <div class="form-group">
+            <label>What are your (up to) 5 favorite authors?</label>
+          </div>
+          {{#each favoriteAuthors as |author|}}
+            <div class="form-group">
+              <div class="input-group">
+                {{input
+                  data-test-favorite-author-input=(concat "" author.id)
+                  class="form-control"
+                  value=author.changeset.name
+                }}
+                <div {{action "deleteAuthor" author}} class="input-group-append" style="cursor:pointer" data-test-favorite-author-delete={{concat "" author.id}}>
+                  <div class="input-group-text">
+                    {{fa-icon "minus-circle" fixedWidth=true}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{#if canAddAnotherAuthor}}
+            <div class="form-group">
+              <button {{action "addAuthor"}}>Add another author</button>
+            </div>
+          {{/if}}
         {{/tab.pane}}
 
       {{/bs-tab}}
