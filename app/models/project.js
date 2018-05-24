@@ -13,7 +13,7 @@ export default DS.Model.extend({
   user: DS.belongsTo('user'),
   
   displayChallenge: computed("user", "challenges.[]", function(){
-    let tz = this.get('user').get('timeZone');
+    //let tz = this.get('user').get('timeZone');
     //console.log(tz);
   }),
   
