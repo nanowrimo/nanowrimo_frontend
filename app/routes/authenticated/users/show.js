@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model(params) {
-    return this.get('store').queryRecord('user', { name: params.slug, include: 'externalLinks' });
+    return this.get('store').queryRecord('user', { name: params.slug, include: 'externalLinks,favoriteBooks,favoriteAuthors' });
   },
 
   setupController(controller, model) {

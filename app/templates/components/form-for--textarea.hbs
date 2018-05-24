@@ -7,7 +7,7 @@
 }}
   <label for={{name}}>{{label}}</label>
   {{textarea
-    data-test-form-for--input=name
+    data-test-form-for--textarea=name
     autocomplete=autocomplete
     autofocus=autofocus
     class=(concat 'form-control' (if hasError ' is-invalid'))
@@ -15,6 +15,7 @@
     id=name
     name=name
     placeholder=placeholder
+    rows=rows
     value=(get changeset property)
   }}
 {{/validation-error}}

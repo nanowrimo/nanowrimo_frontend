@@ -39,7 +39,6 @@ export default Controller.extend({
     openEditModal(tab) {
       if (this.get('canEditUser')) {
         this.set('edit', true);
-
         if (tab) { this.set('editTab', tab); }
       }
     }

@@ -36,6 +36,7 @@ module('Acceptance | User profile', function(hooks) {
       assert.dom('[data-test-user-name]').hasText(user.name);
       assert.dom('[data-test-user-location').hasText(user.location);
       assert.dom('[data-test-user-since').hasText(`Member since May 8, 2018`);
+      assert.dom('[data-test-user-bio]').hasText(user.bio);
     });
 
     test('User profile displays User links', async function(assert) {
@@ -45,6 +46,20 @@ module('Acceptance | User profile', function(hooks) {
 
       links.forEach(link => {
         assert.dom(`a[href='${link.url}']`).exists('external link is displayed');
+      });
+    });
+
+    test('User profile displays User favorites', async function(assert) {
+      let favoriteBooks = this.server.createList('favorite-book', 3, { user });
+      let favoriteAuthors = this.server.createList('favorite-author', 3, { user });
+
+      await visit(`/participants/${user.name}`);
+
+      favoriteBooks.forEach(book => {
+        assert.dom(`[data-test-favorite-book='${book.id}']`).hasText(book.title, 'book title is displayed');
+      });
+      favoriteAuthors.forEach(author => {
+        assert.dom(`[data-test-favorite-author='${author.id}']`).hasText(author.name, 'author name is displayed');
       });
     });
   });
