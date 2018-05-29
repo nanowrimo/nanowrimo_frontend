@@ -1,6 +1,6 @@
-import Component from '@ember/component';
+import NanoSubcard from 'nanowrimo/components/nano-subcard';
 
-export default Component.extend({
+export default NanoSubcard.extend({
   
   _shortTimeString(i) {
     var tHour = i;
@@ -15,14 +15,14 @@ export default Component.extend({
     }
   },
   
-  _timeHourString(i) {
+  _timeHourString(i,connector) {
     var ampm1 = 'AM';
     var ampm2 = 'AM';
     var endHour = i + 1;
     if (endHour>23) endHour = 0;
     if (i>11) ampm1 = 'PM';
     if (endHour>11) ampm2 = 'PM';
-    return (i % 12 || 12) + ':00' + ampm1 + '-' + (endHour % 12 || 12) + ':00' + ampm2;
+    return (i % 12 || 12) + ':00' + ampm1 + connector + (endHour % 12 || 12) + ':00' + ampm2;
   }
   
 });
