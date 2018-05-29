@@ -1,0 +1,45 @@
+<div id='project-listing-panel' class="nano-panel right-resize with-tabs">
+  <ul class="nano-panel-tabs">
+    <li>{{link-to 'Profile' 'authenticated.users.show.index'}}</li>
+    <li>{{link-to 'Projects' 'authenticated.users.show.projects' }}</li>
+    <li>{{link-to 'Buddies (57)' 'index'}}</li>
+  </ul>
+  
+  <div id='project-listing-actions'>
+    <button id='announce-new-project-button' class='btn btn-primary' {{action "newProject"}}>Announce New Project</button>
+    <div id='project-listing-sort' >
+      <label id='project-listing-sort-by-text' for='sort-by'>Sort by</label>
+      <span id=project-listing-sort-by-select'>
+        <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
+          <option value='createdAt'>Date Created</option>
+          <option value='name'>Project Title</option>
+        </select>
+      </span>
+    </div>
+  </div>
+  
+    {{#each sortedProjects as |project|}}
+      {{project-listing project=project}}
+    {{/each}}  
+  
+    <div id='announce-card'>
+        <div class='quote-block'>
+          <div class='quote'>
+            "A journey of a thousand miles
+            <br>
+             begins with a single step."
+          </div>
+          <div class='quotee'>
+            Lao Tzu
+          </div>
+        </div>
+        <div id='announce-new-project'>
+          <a href="#" {{action "newProject"}}>Announce a new project!</a>
+        </div> 
+      <div id='megaphone-wrapper'>
+        <div id='megaphone'>
+          <img src='/images/users/projects/megaphone.svg'>
+        </div>
+      </div>
+    </div>
+</div>
