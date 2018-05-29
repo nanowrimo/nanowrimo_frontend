@@ -1,19 +1,17 @@
 <div class="nano-user-plate full-width d-flex">
-  <div class="plate-cover">
+  <div class="plate-cover" style="position:relative">
+
     <div class="container-fluid">
-      <div class="plate-area">
-        <div class="plate-stat">4,567</div>
-        <div class="plate-descriptor">words written</div>
-      </div>
-      <div class="plate-area">
-        <div class="plate-stat">6</div>
-        <div class="plate-descriptor">time NaNo participant</div>
-      </div>
-      <div class="plate-area">
-        <div class="plate-stat">28</div>
-        <div class="plate-descriptor">badges unlocked</div>
-      </div>
+      {{user-stats user=user}}
     </div>
+
+    {{#if canEditUser}}
+      {{!-- TODO: CSS styling for this edit link to show/hide --}}
+      <div class="flip-corner-link" {{action "openEditModal" "stats"}} style="position:absolute;left:0;bottom:0;cursor:pointer" data-test-user-profile-edit-stats>
+        <img src="/flip_corner.svg" alt="Edit User Stats" />
+      </div>
+    {{/if}}
+
   </div>
 </div>
 <div class="content-gutters">
@@ -21,6 +19,7 @@
     <div class="d-flex align-top">
       <div class="nano-panel left-sidebar nano-profile">
         <div class="flip-corner">
+
           <div class="nano-avatar-large">
             <img src={{user.avatar}} alt={{user.name}} data-test-user-avatar>
           </div>
@@ -33,20 +32,29 @@
           <div class="nano-member-since" data-test-user-since>
             Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
           </div>
+
           {{user-links links=user.externalLinks}}
+
           {{#if canEditUser}}
-            <div class="flip-corner-link" {{action (mut edit) true}} data-test-user-profile-edit>
+
+            <div class="flip-corner-link" {{action "openEditModal"}} data-test-user-profile-edit>
               <img src="/flip_corner.svg" alt="Edit User Profile" />
             </div>
+
             {{user-edit-profile-modal
               onHidden=(action "afterModalClose")
               open=edit
               user=user
+              tab=editTab
             }}
+
           {{/if}}
+
         </div>
       </div>
+
       {{outlet}}
+
     </div>
   </div>
 </div>

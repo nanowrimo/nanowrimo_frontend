@@ -14,28 +14,48 @@ export default DS.Model.extend({
   location: attr('string'),
   name: attr('string'),
   postalCode: attr('string'),
-  statsLifetimeWordCount: attr('boolean'),
-  statsNumberOfProjects: attr('boolean'),
-  statsYearsDoneWon: attr('boolean'),
-  statsWordiestNovel: attr('boolean'),
-  statsAverageWritingPace: attr('boolean'),
-  statsLongestNanoStreak: attr('boolean'),
+
+  statsStreakEnabled: attr('boolean'),
+  statsStreak: attr('number'),
+  statsProjectsEnabled: attr('boolean'),
+  statsProjects: attr('number'),
+  statsWordCountEnabled: attr('boolean'),
+  statsWordCount: attr('number'),
+  statsWritingPaceEnabled: attr('boolean'),
+  statsWritingPace: attr('number'),
+  statsWordiestEnabled: attr('boolean'),
+  statsWordiest: attr('number'),
+  statsYearsEnabled: attr('boolean'),
+  statsYearsDone: attr('string'),
+  statsYearsWon: attr('string'),
 
   externalLinks: hasMany('externalLink', { async: false }),
-  favoriteAuthors: hasMany('favoriteAuthor'),
-  favoriteBooks: hasMany('favoriteBook'),
+  favoriteAuthors: hasMany('favoriteAuthor', { async: false }),
+  favoriteBooks: hasMany('favoriteBook', { async: false }),
 
   slug: alias('name'),
+  projects: hasMany('project'),
 
   rollbackExternalLinks() {
-    this.get('externalLinks').forEach((link) => {
+    this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }
+    });
+  },
+
+  rollbackFavorites() {
+    this.get('favoriteAuthors').forEach(author => {
+      if (author) { author.rollback(); }
+    });
+    this.get('favoriteBooks').forEach(book => {
+      if (book) { book.rollback(); }
     });
   },
 
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
+      this.get('favoriteAuthors').forEach(author => author.persistChanges());
+      this.get('favoriteBooks').forEach(book => book.persistChanges());
     });
   }
 });

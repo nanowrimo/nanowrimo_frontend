@@ -4,9 +4,8 @@ import moment from 'moment';
 
 export default Component.extend({
   project: null,
-  
-  formattedGoal: computed("goal", function(){
-    return this.get('goal').toLocaleString();
+  count: computed('project.count', function(){
+    return this.get('project').count;
   }),
   formattedStart: computed("project.challenges.[]", function(){
     let proj = this.get('project');
@@ -21,17 +20,11 @@ export default Component.extend({
       }
     }
   }),
-  formattedWordcount: computed("project.count", function(){
-    let project = this.get('project');
-    if (project) {
-      return project.count.toLocaleString();
-    } else {
-      return 0;
-    }
-  }),
+
   goal: computed('project.challenges.[]', function(){
     let proj = this.get('project');
     if (proj) {
+      //let dc = proj.displayChallenge;
       return proj.challenges.firstObject.requiredGoal;
     } else {
       return 0;

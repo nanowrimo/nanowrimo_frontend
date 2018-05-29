@@ -6,5 +6,6 @@ export default DS.Model.extend({
   startsOn: DS.attr('date'),
   requiredGoal: DS.attr('number'),
   projects: DS.hasMany('project'),
+  primaryChallengeProjects: DS.hasMany('project', { inverse: 'primaryChallenge' }),
   flexibleGoal: DS.attr('boolean')
 });
