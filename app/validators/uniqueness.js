@@ -9,6 +9,7 @@ let db_timeout = {}; // Store timeouts on per-key basis so different keys don't 
 
 export default function validateUniqueness(remoteKey) {
   return (key, newValue, oldValue, changes, content) => { // eslint-disable-line no-unused-vars
+    if (newValue === oldValue) { return true; }
     return new Promise((resolve) => {
       clearTimeout(db_timeout[remoteKey]);
       db_timeout[remoteKey] = setTimeout(() => {

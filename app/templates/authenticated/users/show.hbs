@@ -1,10 +1,17 @@
 <div class="nano-user-plate full-width d-flex">
-  <div class="plate-cover">
+  <div class="plate-cover" style="position:relative">
+
     <div class="container-fluid">
-
       {{user-stats user=user}}
-
     </div>
+
+    {{#if canEditUser}}
+      {{!-- TODO: CSS styling for this edit link to show/hide --}}
+      <div class="flip-corner-link" {{action "openEditModal" "stats"}} style="position:absolute;left:0;bottom:0;cursor:pointer" data-test-user-profile-edit-stats>
+        <img src="/flip_corner.svg" alt="Edit User Stats" />
+      </div>
+    {{/if}}
+
   </div>
 </div>
 <div class="content-gutters">
@@ -30,7 +37,7 @@
 
           {{#if canEditUser}}
 
-            <div class="flip-corner-link" {{action (mut edit) true}} data-test-user-profile-edit>
+            <div class="flip-corner-link" {{action "openEditModal"}} data-test-user-profile-edit>
               <img src="/flip_corner.svg" alt="Edit User Profile" />
             </div>
 
@@ -38,6 +45,7 @@
               onHidden=(action "afterModalClose")
               open=edit
               user=user
+              tab=editTab
             }}
 
           {{/if}}

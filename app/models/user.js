@@ -30,21 +30,32 @@ export default DS.Model.extend({
   statsYearsWon: attr('string'),
 
   externalLinks: hasMany('externalLink', { async: false }),
-  favoriteAuthors: hasMany('favoriteAuthor'),
-  favoriteBooks: hasMany('favoriteBook'),
+  favoriteAuthors: hasMany('favoriteAuthor', { async: false }),
+  favoriteBooks: hasMany('favoriteBook', { async: false }),
 
   slug: alias('name'),
   projects: hasMany('project'),
 
   rollbackExternalLinks() {
-    this.get('externalLinks').forEach((link) => {
+    this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }
+    });
+  },
+
+  rollbackFavorites() {
+    this.get('favoriteAuthors').forEach(author => {
+      if (author) { author.rollback(); }
+    });
+    this.get('favoriteBooks').forEach(book => {
+      if (book) { book.rollback(); }
     });
   },
 
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
+      this.get('favoriteAuthors').forEach(author => author.persistChanges());
+      this.get('favoriteBooks').forEach(book => book.persistChanges());
     });
   }
 });

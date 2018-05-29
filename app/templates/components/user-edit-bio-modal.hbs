@@ -1,0 +1,96 @@
+{{#bs-modal
+  open=open
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    Edit Your Profile
+  {{/modal.header}}
+  {{#form-for
+    afterSubmit=modal.close
+    model=user
+    data-test-user-edit-bio-form=true
+    as |f|
+  }}
+    {{#modal.body}}
+
+      {{#bs-tab
+        activeId=activeTab
+        onChange=(action (mut activeTab))
+        as |tab|
+      }}
+
+        {{#tab.pane title="Bio" id="biography"}}
+          <div class="form-group">
+            {{f.textarea
+              label="Say something about yourself!"
+              property="bio"
+              placeholder=(concat "Hi there, my name is " user.name "...")
+              rows="15"
+            }}
+          </div>
+        {{/tab.pane}}
+
+        {{#tab.pane title="Favorite Books and Authors" id="favorites"}}
+          <div class="form-group">
+            <label>What are your (up to) 5 favorite books?</label>
+          </div>
+          {{#each favoriteBooks as |book|}}
+            <div class="form-group">
+              <div class="input-group">
+                {{input
+                  data-test-favorite-book-input=(concat "" book.id)
+                  class="form-control"
+                  value=book.changeset.title
+                }}
+                <div {{action "deleteBook" book}} class="input-group-append" style="cursor:pointer" data-test-favorite-book-delete={{concat "" book.id}}>
+                  <div class="input-group-text">
+                    {{fa-icon "minus-circle" fixedWidth=true}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{#if canAddAnotherBook}}
+            <div class="form-group">
+              <button {{action "addBook"}}>Add another book</button>
+            </div>
+          {{/if}}
+
+          <div class="form-group">
+            <label>What are your (up to) 5 favorite authors?</label>
+          </div>
+          {{#each favoriteAuthors as |author|}}
+            <div class="form-group">
+              <div class="input-group">
+                {{input
+                  data-test-favorite-author-input=(concat "" author.id)
+                  class="form-control"
+                  value=author.changeset.name
+                }}
+                <div {{action "deleteAuthor" author}} class="input-group-append" style="cursor:pointer" data-test-favorite-author-delete={{concat "" author.id}}>
+                  <div class="input-group-text">
+                    {{fa-icon "minus-circle" fixedWidth=true}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{#if canAddAnotherAuthor}}
+            <div class="form-group">
+              <button {{action "addAuthor"}}>Add another author</button>
+            </div>
+          {{/if}}
+        {{/tab.pane}}
+
+      {{/bs-tab}}
+
+    {{/modal.body}}
+    {{#modal.footer tagName="div"}}
+
+      <input type="submit" value="Save Details" data-test-user-bio-submit />
+      <input type="button" value="Cancel" {{action modal.close}} data-test-user-bio-cancel />
+
+    {{/modal.footer}}
+  {{/form-for}}
+{{/bs-modal}}

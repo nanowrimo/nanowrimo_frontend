@@ -6,6 +6,8 @@ export default function(server) {
     server.create('external-link', { user, url: `https://${social}.com/${user.name}` });
   });
   server.createList('external-link', 2, { user });
+  server.createList('favorite-book', 3, { user });
+  server.createList('favorite-author', 3, { user });
 
   // Prior demo; replace with realistic Projects and Genres
   let projects = server.createList('project', 3, {user: user});
