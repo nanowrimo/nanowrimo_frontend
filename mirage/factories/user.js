@@ -69,5 +69,6 @@ export default Factory.extend({
     let yearsDone = this.statsYearsDone.split(' ');
     let yearsWon = yearsDone.filter(() => faker.random.boolean());
     return yearsWon.join(' ');
-  }
+  },
+  timeZone: "America/Los_Angeles"
 });

@@ -1,0 +1,219 @@
+#project-listing-panel {
+  #project-listing-actions {
+    margin-top: 28px;
+    margin-left: 27px;
+    height: 107px;
+    position: relative;
+    #announce-new-project-button {
+      width: 291px;
+    }
+    
+    #project-listing-sort {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      margin-right: 30px;
+      margin-bottom: 15px;
+      #project-listing-sort-by-text {
+        font-family: 'SourceSansPro-It', sans-serif;
+        font-size: 14px;
+        font-style: italic;
+        color: #979797; 
+      }
+      select {
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: none;
+        border: 0px;
+        border-bottom: 1px solid black;
+        padding-right: 25px;
+        font-family: 'SourceSansPro-Regular', sans-serif;
+      }
+      &:after {
+        content:"\f0d7";
+        font-family: FontAwesome;
+        color: #000;
+        position: absolute; right: 0; top: 0;
+        z-index: 1;
+        text-align: center;
+        width: 10%;
+        height: 100%;      
+        pointer-events: none;
+        box-sizing: border-box; 
+      }
+    }
+  }
+
+  .project-listing-card {
+    position: relative;
+    
+    min-height: 151px;
+    max-height: none;
+    
+    margin-bottom: 32px;
+    margin-left: 28px;
+    margin-right: 28px;
+    border-radius: 6px;
+    background-image: repeating-linear-gradient(90deg, #f7f7f7, #f7f7f7 2px, #ededed 3px, #ededed 4px);
+    border: solid 1px #dfe4e6;
+    
+    .project-actions {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+    .project-status {
+      position: absolute;
+      top: -5px;
+      left: 176px;
+      @media(max-width: $screen-md) {
+        left: 10px;
+      }
+    }
+    .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      
+      .project-cover {
+        flex: 0 0 189px;
+        @media(max-width: $screen-md) {
+          order: 3;
+        }
+        .project-cover-clip {
+          position: absolute;
+          bottom: 0px;
+          width: 189px;
+          height: 170px;
+          clip-path: inset(0px 0px 0px -50px);
+          img {
+            transform: rotate(-15deg);
+            transform-origin: bottom right;
+            width: 128px;
+            height: 170px;
+            border-radius: 3px;
+          }
+        }
+      }
+
+      .project-name-genres {
+        margin-top: 18px;
+        flex: 0 0 298px;
+        .project-name {
+          font-family: 'SourceSerifPro', serif ;
+          font-size: 20px;
+          color: black;
+          margin-bottom: 7px;
+        }
+        .project-genres {
+          height: 22px;
+          font-family: 'SourceSansPro', sans-serif;
+          font-size: 14px;
+          line-height: 1.57;
+          text-align: left;
+          color: #939393;
+        }
+      }
+      .project-progress {
+        margin-top: 18px;
+        width: 352px;
+        flex: 0 0 352px;
+        @media(max-width: $screen-md) {
+          margin-bottom: 144px;
+        }
+        .goal-text{ 
+          margin-bottom: 7.5px;
+          font-size: 16px;
+          height: 20px;
+          font-family: 'SourceSansPro', sans-serif;
+          .goal {
+            color: #979797
+          }
+        }
+        .nano-progress-bar{
+          width: 100%;
+        }
+        
+        .progress-text {
+          margin-top: 7.5px;
+          height: 18px;
+          font-family: 'SourceSansPro', sans-serif;
+          font-size: 14px;
+          font-weight: bold;
+          .count{
+            color: #75abbc;
+          }
+          .count.goal-met {
+            color: #834da9;
+          }
+        }
+        .challenge-start {
+          font-size: 14px;
+          font-family: 'SourceSansPro-Regular', sans-serif;
+          float: right;
+          .started {
+            color: #b8b8b8;
+          }
+        }
+      }
+    }
+  }
+  #announce-card {
+    border: 2px dashed #dfe4e6;
+    border-radius: 6px;
+    margin-bottom: 32px;
+    margin-left: 28px;
+    margin-right: 28px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    color: #b8b8b8;
+    justify-content: center;
+     
+    .quote-block {
+      flex: 0 1 310px;
+      align-self: center;
+      text-align: center;
+      
+      .qoute {
+        font-size: 20px;
+        font-family: "SourceSerifPro-Regular", serif;
+        margin-bottom: 7px;
+      }
+      .quotee {
+        font-size: 16px;
+        font-family: "SourceSansPro-Regular", sans-serif ;
+      }
+    }
+    #announce-new-project {
+      align-self: center;
+      text-align: center;
+      flex: 1 1 291px;
+      font-size: 26px;
+      margin-right: 144px;
+       @media(max-width: $screen-md) {
+          margin-bottom: 144px;
+          margin-right: 0px;
+      }
+      a {
+        color: #b8b8b8;
+        text-decoration: underline;
+      }
+      
+    }
+    #megaphone-wrapper {
+      min-height: 144px;
+      
+      #megaphone {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+         @media(max-width: $screen-md) {
+          right: 144px;
+        }
+        margin-top: 45px;
+      }
+    }
+  }
+}
