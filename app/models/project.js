@@ -17,9 +17,6 @@ export default DS.Model.extend({
     //console.log(tz);
   }),
   
-  formattedWordcount: computed("count", function(){
-    return this.get('count').toLocaleString();
-  }),
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
