@@ -18,7 +18,8 @@
   },
   "devDependencies": {
     "bootstrap": "^4.0.0",
-    "broccoli-asset-rev": "^2.4.5",
+    "broccoli": "^1.1.4",
+    "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^1.2.1",
     "ember-changeset-hofs": "kpfefferle/ember-changeset-hofs#b27303af3c848975c57e87a3bd041946ae6f5e71",

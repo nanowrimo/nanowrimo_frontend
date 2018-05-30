@@ -61,19 +61,19 @@ export default ChartBaseComponent.extend({
           {
             outerRadius: '114%',
             innerRadius: '98%',
-            backgroundColor: Highcharts.Color('#2f3061').setOpacity(0.2).get(),
+            backgroundColor: '#e8e8e8',
             borderWidth: 0
           },
           {
             outerRadius: '94%',
             innerRadius: '78%',
-            backgroundColor: Highcharts.Color('#edbb82').setOpacity(0.2).get(),
+            backgroundColor: '#e8e8e8',
             borderWidth: 0
           },
           {
             outerRadius: '74%',
             innerRadius: '58%',
-            backgroundColor: Highcharts.Color('#73ab9b').setOpacity(0.2).get(),
+            backgroundColor: '#e8e8e8',
             borderWidth: 0
           }
         ]

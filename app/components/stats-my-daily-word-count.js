@@ -1,12 +1,9 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { get,computed } from '@ember/object';
-import { reads } from '@ember/object/computed';
 
 export default ChartBaseComponent.extend({
 
   countData: computed('myChartType',function() {
-    // Set _this equal to component for later reference
-    let _this = this;
     let cData = [
       {
         name: 'My word count',
@@ -94,10 +91,7 @@ export default ChartBaseComponent.extend({
         }
       },
       legend: {
-        layout: 'horizontal',
-        align: 'center',
-        horizontalAlign: 'middle',
-        borderWidth: 0
+        enabled: false
       }
     };
     return cOptions;
