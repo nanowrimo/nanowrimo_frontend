@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
 
 const {
@@ -13,6 +14,7 @@ export default DS.Model.extend({
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
+  plate: attr('string'),
   postalCode: attr('string'),
 
   statsStreakEnabled: attr('boolean'),
@@ -34,6 +36,28 @@ export default DS.Model.extend({
   favoriteBooks: hasMany('favoriteBook', { async: false }),
 
   slug: alias('name'),
+
+  _avatarUrl: null,
+  avatarUrl: computed('avatar', {
+    get() {
+      let avatar = this.get('avatar');
+      if (avatar.includes(':')) {
+        this.set('_avatarUrl', avatar);
+      }
+      return this.get('_avatarUrl');
+    }
+  }),
+
+  _plateUrl: null,
+  plateUrl: computed('plate', {
+    get() {
+      let avatar = this.get('plate');
+      if (avatar.includes(':')) {
+        this.set('_plateUrl', avatar);
+      }
+      return this.get('_plateUrl');
+    }
+  }),
 
   rollbackExternalLinks() {
     this.get('externalLinks').forEach(link => {
