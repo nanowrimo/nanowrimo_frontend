@@ -8,9 +8,9 @@ export default Component.extend({
   session: service(),
   nanoMenuService: service(),
   currentUser: service(),
-  currentUserName: reads('currentUser.user.name'),  
-  currentUserAvatar: reads('currentUser.user.avatar'),  
-  
+  currentUserName: reads('currentUser.user.name'),
+  currentUserAvatar: reads('currentUser.user.avatarUrl'),
+
   sideMenuIsOpen: alias("nanoMenuService.sideMenuIsOpen"),
   submenus: reads("nanoMenuService.submenus"),
   storeLinks: reads("nanoMenuService.storeLinks"),
@@ -30,5 +30,5 @@ export default Component.extend({
       set(this,'sideMenuIsOpen',false);
     }
   }
-  
+
 });
