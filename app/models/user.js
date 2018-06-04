@@ -41,7 +41,7 @@ export default DS.Model.extend({
   avatarUrl: computed('avatar', {
     get() {
       let avatar = this.get('avatar');
-      if (avatar.includes(':')) {
+      if (avatar && avatar.includes(':')) {
         this.set('_avatarUrl', avatar);
       }
       return this.get('_avatarUrl');
@@ -51,9 +51,9 @@ export default DS.Model.extend({
   _plateUrl: null,
   plateUrl: computed('plate', {
     get() {
-      let avatar = this.get('plate');
-      if (avatar.includes(':')) {
-        this.set('_plateUrl', avatar);
+      let plate = this.get('plate');
+      if (plate && plate.includes(':')) {
+        this.set('_plateUrl', plate);
       }
       return this.get('_plateUrl');
     }

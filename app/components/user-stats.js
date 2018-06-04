@@ -52,7 +52,8 @@ export default Component.extend({
   }),
 
   yearsDone: computed('user.statsYearsDone', function() {
-    return this.get('user.statsYearsDone').split(' ').sort();
+    let yearsDone = this.get('user.statsYearsDone');
+    return yearsDone ? yearsDone.split(' ').sort() : [];
   }),
 
   yearsDoneCount: computed('yearsDone.[]', function() {
@@ -60,6 +61,7 @@ export default Component.extend({
   }),
 
   yearsWon: computed('user.statsYearsWon', function() {
-    return this.get('user.statsYearsWon').split(' ').sort();
+    let yearsWon = this.get('user.statsYearsWon');
+    return yearsWon ? yearsWon.split(' ').sort() : [];
   })
 });
