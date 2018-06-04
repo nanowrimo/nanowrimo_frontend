@@ -4,8 +4,8 @@ import moment from 'moment';
 
 export default Component.extend({
   project: null,
-  count: computed('project.count', function(){
-    return this.get('project').count;
+  unitCount: computed('project.unitCount', function(){
+    return this.get('project').unitCount;
   }),
   formattedStart: computed("project.challenges.[]", function(){
     let proj = this.get('project');
@@ -35,10 +35,10 @@ export default Component.extend({
   }),
   
   
-  percentCompleted: computed("goal","project.count",function(){
+  percentCompleted: computed("goal","project.unitCount",function(){
     let proj = this.get('project');
     if (proj) {
-      let wc = proj.count;
+      let wc = proj.unitCount;
       let g = this.get('goal');
       let percent = wc*100/g;
       if (percent > 100) {

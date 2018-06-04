@@ -6,9 +6,11 @@ export default DS.Model.extend({
   challenges: DS.hasMany('challenge'),
   cover: DS.attr('string'),
   genres: DS.hasMany('genre'),
-  name: DS.attr('string'),
+  title: DS.attr('string'),
+  slug: DS.attr('string'),
   status: DS.attr('string'),
-  count: DS.attr('number'),
+  unitCount: DS.attr('number'),
+  unitType: DS.attr('string'),
   createdAt: DS.attr('date'),
   user: DS.belongsTo('user'),
   

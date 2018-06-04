@@ -9,8 +9,10 @@
       </div>
     </div>
     <div class='project-name-genres'>
-      <div class='project-name'>
-        {{project.name}}
+      <div class='project-title'>
+        {{#link-to 'authenticated.users.show.projects.show' project.slug}}
+          {{project.title}}
+        {{/link-to}}
       </div>
       <div class='project-genres'>
         {{project.concatGenres}}

@@ -1,10 +1,13 @@
 import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  name() {
+  title() {
     return faker.commerce.productName();
   },
-  count() {
+  unitType() {
+    return 'word';
+  },
+  unitCount() {
     return 10000 + Math.floor(Math.random() * 40000);
   },
   cover() {
@@ -18,5 +21,10 @@ export default Factory.extend({
   },
   createdAt(i) {
     return faker.list.cycle('2015-11-01','2013-11-01','2016-11-01','2017-11-01')(i);
+  },
+  
+  slug(i){
+    return "project-slug-"+i; 
   }
+  
 });
