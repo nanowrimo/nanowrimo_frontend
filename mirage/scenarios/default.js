@@ -22,4 +22,7 @@ export default function(server) {
   });
   //set the first project to have a count of 50321
   projects[0].count= 50321; 
+  
+  server.createList('fundometer', 5);
+  
 }

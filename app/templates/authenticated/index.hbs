@@ -1,15 +1,65 @@
 <div class="content-gutters">
   <div class="container-fluid">
-    {{#each model.panels as |panel|}}
-      <div class="nano-panel">
-        <div class="grid-wrapper">
-          {{#each panel.cards as |card|}}
-            <div class="nano-card {{card.class}}">
-              {{card.title}}
+    <div class="nano-page-intro">
+      <div class="welcome-content left-side">
+        <h1>Welcome back, {{currentUserName}}!</h1>
+        <div class="nano-subtext">Hope your writing is still going great!</div>
+      </div>
+      <div class="right-side">
+        {{dashboard-fundometer class="fundometer"}}
+      </div>
+    </div>
+    <div class="nano-panel">
+      <div class="grid-wrapper">
+        <div class="nano-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1">
+          <div id='announce-card'>
+            <div class='quote-block'>
+              <div class='quote'>
+                "A journey of a thousand miles
+                <br>
+                 begins with a single step."
+              </div>
+              <div class='quotee'>
+                Lao Tzu
+              </div>
             </div>
-          {{/each}}
+            <div id='announce-new-project'>
+              <a href="#" {{action "newProject"}}>Announce a new project!</a>
+            </div> 
+            <div id='megaphone-wrapper'>
+              <div id='megaphone'>
+                <img src='/images/users/projects/megaphone.svg'>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    {{/each}}
+    </div>
+    <div class="nano-panel">
+      <div class="grid-wrapper">
+        <div class="nano-card g3-col1 g3-row1 g3-hspan2 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1">
+          {{dashboard-my-badges}}
+        </div>
+        <div class="nano-card g3-col3 g3-row1 g3-hspan1 g3-vspan2 g2-col2 g2-row3 g2-hspan1 g2-vspan2">
+          {{dashboard-my-buddies}}
+        </div>
+        <div class="nano-card g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan2 g2-vspan1">
+          {{dashboard-home-region class="g3-sub1 g2-sub1"}}
+          {{dashboard-nanowrimo-hq class="g3-sub1 g2-sub1"}}
+        </div>
+        <div class="nano-card g3-col1 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row3 g2-hspan1 g2-vspan1">
+          {{dashboard-writers-resources}}
+        </div>
+        <div class="nano-card g3-col2 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row4 g2-hspan1 g2-vspan1">
+          {{dashboard-nano-store}}
+        </div>
+        <div class="nano-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row5 g2-hspan1 g2-vspan1">
+          {{dashboard-my-offers}}
+        </div>
+        <div class="nano-card g3-col1 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row5 g2-hspan1 g2-vspan1">
+          {{dashboard-twitter}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>

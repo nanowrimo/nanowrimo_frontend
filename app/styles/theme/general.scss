@@ -33,7 +33,8 @@
 
 body {
   @media (min-width: $screen-sm) {
-    background: url("/camp_back.png") repeat-x center center; 
+    background-color: #e2eff3;
+    background-image: url("/camp_back.png") repeat-x center center; 
     background-position: bottom;
     padding-bottom: 336px;
   }
@@ -58,7 +59,9 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+.nano-full-width {
+  width: 100%;
+}
 .left-right-links {
   width: 100%;
   display: flex;
@@ -143,6 +146,7 @@ button.btn {
 // ----------------------------------
 
 .nano-hr {
+  width: 100%;
   overflow: hidden;
   text-align: center;
   color: #b8b8b8;
