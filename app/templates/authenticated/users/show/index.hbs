@@ -5,95 +5,91 @@
     <li>{{link-to 'Buddies (57)' 'index'}}</li>
   </ul>
   <div class="grid-wrapper">
+    <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
+      <div class="nano-subcard g3-sub1 g2-sub1">
+        <div class="nano-subcard-face face-front filled-grey">
+          <div class="nano-subcard-content side-by-side">
+            <div class="info-text side-by-side-even">
+              <h6>About {{user.name}}</h6>
+              <div class="nano-user-bio{{if bioExpanded " expanded"}}" data-test-user-bio>
+                {{user.bio}}
+              </div>
+              {{#if showBioReadMore}}
+                <button class="btn-underlined" {{action (mut bioExpanded) true}}>Read More</button>
+              {{/if}}
+            </div>
+            <div class="info-text side-by-side side-by-side-even">
+              <div class="side-by-side-even">
+                <h6>Favorite Books</h6>
+                <ul data-test-favorite-books>
+                  {{#each favoriteBooks as |book|}}
+                    <li data-test-favorite-book={{book.id}}>{{fa-icon "book"}} {{book.title}}</li>
+                  {{else}}
+                    <li><em>None</em></li>
+                  {{/each}}
+                </ul>
+              </div>
 
-    {{!-- FIXME: Move these styles into CSS assets --}}
-    <style>
-      .nano-card {
-        position: relative;
-      }
-      .nano-card .flip-corner-link {
-        display: none;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        cursor: pointer;
-      }
-      .nano-card:hover .flip-corner-link {
-        display: block;
-      }
-    </style>
-    {{!-- /FIXME --}}
-
-    <div class="nano-card g1-row">
-      <div class="row">
-        <div class="col-6">
-          <h6>About {{user.name}}</h6>
-
-          {{!-- FIXME: Move these styles into CSS assets --}}
-          <style>
-            .nano-user-bio {
-              /* line-height is currently 24px */
-              overflow: hidden;
-              max-height: 144px; /* line-height (24px) * number of lines (6) */
-            }
-            .nano-user-bio.expanded {
-              max-height: none;
-            }
-          </style>
-          {{!-- /FIXME --}}
-
-          <div class="nano-user-bio{{if bioExpanded " expanded"}}" data-test-user-bio>
-            {{user.bio}}
+              <div class="side-by-side-even">
+                <h6>Favorite Authors</h6>
+                <ul data-test-favorite-authors>
+                  {{#each favoriteAuthors as |author|}}
+                    <li data-test-favorite-author={{author.id}}>{{fa-icon "user"}} {{author.name}}</li>
+                  {{else}}
+                    <li><em>None</em></li>
+                  {{/each}}
+                </ul>
+              </div>
+            </div>
           </div>
-          {{#if showBioReadMore}}
-            <button {{action (mut bioExpanded) true}}>Read More</button>
-          {{/if}}
         </div>
 
-        <div class="col-3">
-          <h6>Favorite Books</h6>
-          <ul data-test-favorite-books>
-            {{#each favoriteBooks as |book|}}
-              <li data-test-favorite-book={{book.id}}>{{book.title}}</li>
-            {{else}}
-              <li><em>None</em></li>
-            {{/each}}
-          </ul>
-        </div>
+        {{#if canEditUser}}
+          <div {{action "showEditBio"}} class="flip-corner-link" data-test-user-edit-bio>
+            <img src="/flip_corner.svg" alt="Edit User Bio" />
+          </div>
 
-        <div class="col-3">
-          <h6>Favorite Authors</h6>
-          <ul data-test-favorite-authors>
-            {{#each favoriteAuthors as |author|}}
-              <li data-test-favorite-author={{author.id}}>{{author.name}}</li>
-            {{else}}
-              <li><em>None</em></li>
-            {{/each}}
-          </ul>
+          {{user-edit-bio-modal
+            onHidden=(action "afterModalClose")
+            open=editBio
+            user=user
+            tab=editBioTab
+          }}
+        {{/if}}
+      </div>
+    </div>
+    <div class="nano-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row2 g2-hspan2">
+      <div class="nano-subcard">
+        <div class="nano-subcard-face face-front filled-grey">
+          <div class="nano-subcard-content">
+            <div class="info-text">
+              <h6>Participation badges</h6>
+            </div>
+          </div>
         </div>
       </div>
-
-      {{#if canEditUser}}
-        <div {{action "showEditBio"}} class="flip-corner-link" data-test-user-edit-bio>
-          <img src="/flip_corner.svg" alt="Edit User Bio" />
+    </div>
+    <div class="nano-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
+      <div class="nano-subcard">
+        <div class="nano-subcard-face face-front filled-grey">
+          <div class="nano-subcard-content">
+            <div class="info-text">
+              <h6>Writing badges</h6>
+            </div>
+          </div>
         </div>
-
-        {{user-edit-bio-modal
-          onHidden=(action "afterModalClose")
-          open=editBio
-          user=user
-          tab=editBioTab
-        }}
-      {{/if}}
+      </div>
     </div>
-    <div class="nano-card g1-row">
-      Participation badges
-    </div>
-    <div class="nano-card g1-row">
-      Writing badges
-    </div>
-    <div class="nano-card g1-row">
-      Personal achievement badges
+    <div class="nano-card g3-col1 g3-row4 g3-hspan3 g2-col1 g2-row4 g2-hspan2">
+      <div class="nano-subcard">
+        <div class="nano-subcard-face face-front filled-grey">
+          <div class="nano-subcard-content">
+            <div class="info-text">
+              <h6>Personal achievement badges</h6>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

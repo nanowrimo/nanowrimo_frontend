@@ -1,23 +1,5 @@
 <div class="nano-user-plate full-width d-flex" {{action "openImagesModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
 
-  {{!-- FIXME: Move these styles into CSS assets --}}
-  <style>
-    .plate-cover {
-      position: relative;
-    }
-    .plate-cover .flip-corner-link {
-      display: none;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      cursor: pointer;
-    }
-    .plate-cover:hover .flip-corner-link {
-      display: block;
-    }
-  </style>
-  {{!-- /FIXME --}}
-
   <div class="plate-cover">
 
     <div class="container-fluid">
@@ -26,8 +8,8 @@
 
     {{#if canEditUser}}
       {{!-- TODO: CSS styling for this edit link to show/hide --}}
-      <div class="flip-corner-link" {{action "openEditModal" "stats" bubbles=false}} data-test-user-profile-edit-stats>
-        <img src="/flip_corner.svg" alt="Edit User Stats" />
+      <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
+        <img src="/flip_corner.svg" alt="Edit User Images" />
       </div>
     {{/if}}
 

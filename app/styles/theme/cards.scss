@@ -1,4 +1,5 @@
 .nano-card {
+  position: relative;
   display: flex;
   min-height: 380px;
   &.short-card {
@@ -9,6 +10,18 @@
   box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
   border-radius: 6px;
   border: solid 1px #dfe4e6;
+  .flip-corner-link {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+  &:hover {
+    .flip-corner-link {
+      display: block;
+    }
+  }
   &.login {
     max-width: 436px;
   }
@@ -85,11 +98,40 @@
         color: #979797;
         background-repeat: no-repeat;
         background-position: left bottom;
+        .info-text {
+          text-align: left;
+          font-family: SourceSansPro-Regular;
+          font-size: 16px;
+          line-height: 1.38;
+          color: #343434;
+          &.side-by-side {
+            display: flex;
+            .side-by-side-even {
+              margin-left: 20px;
+            }
+          }
+          ul {
+            li {
+              margin-top: 14px;
+              .fa {
+                font-size: 16px;
+                line-height: 1.38;
+                color: #75abbc;
+              }
+            }
+          }
+        }
         &.side-by-side {
+          display: flex;
+          margin: auto;
+          
           align-items: stretch;
           flex-wrap: nowrap;
           padding-top: 21px;
           padding-bottom: 21px;
+          .side-by-side-even {
+            flex: 1 1 100%;
+          }
           .side-by-side-left {
             flex: 0 0 114px;
           }
@@ -111,6 +153,12 @@
               flex: 1 1 100%;
             }
           }
+        }
+        h6 {
+          font-family: SourceSansPro-Bold;
+          font-size: 14px;
+          color: #979797;
+          text-transform: uppercase;
         }
         .nano-card-icon {
           flex: 0 0 100%;
@@ -238,4 +286,13 @@
     color: #343434;
     margin-top: 20px;
   }
+  .nano-user-bio {
+    /* line-height is currently 24px */
+    overflow: hidden;
+    max-height: 144px; /* line-height (24px) * number of lines (6) */
+  }
+  .nano-user-bio.expanded {
+    max-height: none;
+  }
+  
 }
