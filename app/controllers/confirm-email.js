@@ -2,7 +2,10 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import ENV from 'nanowrimo/config/environment';
 import fetch from 'fetch';
+import { inject as service } from '@ember/service';
 export default Controller.extend({
+  session: service(),
+  flashMessages: service(),
   //what queryParams do we care about?
   queryParams: ['token'],
   token: null,
@@ -30,7 +33,16 @@ export default Controller.extend({
         if (json.error) {
           this.set('errorMessage', json.error);
         }else if (json.message) {
-          this.set('successMessage', json.message);
+          //if the user is signed in
+          if (this.get('session.isAuthenticated')) {
+            //set a flash 
+            this.get('flashMessages').success(json.message);
+            //redirect to dashboard
+            this.replaceRoute('/');
+          } else {
+            this.set('successMessage', json.message);
+          }
+
         }
       });
     });
