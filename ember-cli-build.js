@@ -12,6 +12,14 @@ module.exports = function(defaults) {
     'ember-font-awesome': {
       useScss: true, // for ember-cli-sass
       useLess: true  // for ember-cli-less
+    },
+    emberHighCharts: {
+      includeHighCharts: true,
+      includeHighStock: false,
+      includeHighMaps: false,
+      includeHighChartsMore: true,
+      includeHighCharts3D: false,
+      includeModules: ['solid-gauge']
     }
   });
 

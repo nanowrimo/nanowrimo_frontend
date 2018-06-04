@@ -33,7 +33,8 @@
 
 body {
   @media (min-width: $screen-sm) {
-    background: url("/camp_back.png") repeat-x center center; 
+    background-color: #e2eff3;
+    background-image: url("/camp_back.png") repeat-x center center; 
     background-position: bottom;
     padding-bottom: 336px;
   }
@@ -58,7 +59,9 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+.nano-full-width {
+  width: 100%;
+}
 .left-right-links {
   width: 100%;
   display: flex;
@@ -75,21 +78,6 @@ body {
 .full-width {
   width: 100%;
 }
-// ----------------------------------
-// Shorthand styles for mobile and
-// non-mobile breakpoints
-// ----------------------------------
-
-.non-mobile {
-  @media (max-width: $screen-md-max) {
-    display: none;
-  }
-}
-.mobile {
-  @media (min-width: $screen-lg) {
-    display: none;
-  }
-}
 
 // ----------------------------------
 // Button styling, for inside forms
@@ -99,7 +87,8 @@ body {
 button.btn {
   font-family: 'SourceSansPro-Bold', sans-serif;
   cursor: pointer;
-  width: 394px;
+  width: 100%;
+  max-width: 394px;
   height: 36px;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -157,6 +146,7 @@ button.btn {
 // ----------------------------------
 
 .nano-hr {
+  width: 100%;
   overflow: hidden;
   text-align: center;
   color: #b8b8b8;

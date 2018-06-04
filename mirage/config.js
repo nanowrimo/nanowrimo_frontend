@@ -40,6 +40,10 @@ export default function() {
     return user || new Response(404);
   });
 
+  this.get('/fundometer/:id', ({fundometers}) => {
+    return fundometers.find(1);
+  });
+
   // CRUD
 
   this.resource('external-links', { only: ['create', 'update'] });

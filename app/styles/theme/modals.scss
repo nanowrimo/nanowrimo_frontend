@@ -1,0 +1,133 @@
+.modal-backdrop {
+    opacity:0.7 !important;
+}
+.modal-content {
+  background-image: url('/images/global/card-back.png');
+  background-repeat: repeat-x;
+  background-size: 4px 100%;
+  border-radius: 6px;
+  border-color: #f7f7f7;
+  .modal-header {
+    width: 100%;
+    height: 21px;
+    border-radius: 6px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-image: linear-gradient(to bottom, #73ab9b, #5f8c7f);
+    font-family: SourceSansPro-Bold;
+    font-size: 12px;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #3f5e55;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+  }
+  .modal-body {
+    padding: 0px;
+    .nav-tabs {
+      height: 34px;
+      background-color: #ffffff;
+      align-items: flex-start;
+      justify-content: center;
+      border-bottom: 0px;
+      .nav-item {
+        font-family: SourceSansPro-Regular;
+        font-size: 16px;
+        color: #b8b8b8;
+        border-radius: 0px;
+        a {
+          border-top: 0px;
+          border-radius: 6px;
+          color: #b8b8b8;
+          height: 39px;
+          padding-top: 4px;
+          padding-left: 0px;
+          padding-right: 0px;
+          margin-left: 15px;
+          margin-right: 15px;
+          &:hover {
+            color: #6595a3;
+            border-color: transparent;
+          }
+        }
+        &.active {
+          color: #6595a3;
+          a {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-color: transparent;
+            background: linear-gradient(to top, #75ABBC 0px, #75ABBC 4px, transparent 4px, transparent 500px);
+            color: #6595a3;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+    .tab-content {
+      padding: 28px;
+      padding-bottom: 4px;
+      .form-group {
+        input {
+          height: 36px;
+          border-radius: 6px;
+          box-shadow: inset 0 1px 4px 0 rgba(151, 151, 151, 0.5);
+          background-color: #f7f7f7;
+          border: solid 1px #979797;
+          &.ember-checkbox {
+            box-shadow: none;
+            background-color: transparent;
+            padding-top: 0px;
+            height: 20px;
+          }
+        }
+        label.checkbox-label {
+          font-family: SourceSansPro-Regular;
+          font-size: 16px;
+          line-height: 1.31;
+          color: #343434;
+        }
+        .input-group {
+          margin-bottom: 14px;
+          .input-group-prepend {
+            .input-group-text {
+              justify-content: center;
+              width: 36px;
+              border-color: #979797;
+              box-shadow: inset 1px 1px 2px 0 rgba(52, 52, 52, 0.2);
+              background-color: #dfe4e6;
+              .fa {
+                font-size: 20px;
+                color: #b8b8b8;
+              }
+            }
+          }
+          .input-group-append {
+            .input-group-text {
+              border: 0px;
+              background-color: transparent;
+              padding-right: 0px;
+              .fa {
+                font-family: FontAwesome;
+                font-size: 20px;
+                color: #e37f82;
+              }
+            }
+          }
+          input.no-left-radius {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          }
+        }
+      }
+    }
+  }
+  .modal-footer {
+    border-top: 1px solid #dfe4e6;
+    padding: 28px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    justify-content: space-between;
+  }
+}
