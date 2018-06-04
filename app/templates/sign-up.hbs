@@ -2,93 +2,98 @@
   <div>
     <div class="login_image"><img src="login_image.svg" alt="" /></div>
     <div class="nano-card login">
-      
-      <h2 class="card-title">Welcome! Let's start writing!</h2>
+      <div class="nano-subcard">
+        <div class="nano-subcard-face face-front filled-grey">
+          <div class="nano-subcard-content">
+            <h2 class="card-title">Welcome! Let's start writing!</h2>
 
-      {{#if errorString}}
-        <div class="alert alert-danger">{{errorString}}</div>
-      {{/if}}
-      {{#if errorObject}}
-        <div class="alert alert-danger">
-          <ul>
-            {{#each-in error as |key messages|}}
-              <li>
-                {{key}}
+            {{#if errorString}}
+              <div class="alert alert-danger">{{errorString}}</div>
+            {{/if}}
+            {{#if errorObject}}
+              <div class="alert alert-danger">
                 <ul>
-                  {{#each messages as |message|}}
-                    <li>{{message}}</li>
-                  {{/each}}
+                  {{#each-in error as |key messages|}}
+                    <li>
+                      {{key}}
+                      <ul>
+                        {{#each messages as |message|}}
+                          <li>{{message}}</li>
+                        {{/each}}
+                      </ul>
+                    </li>
+                  {{/each-in}}
                 </ul>
-              </li>
-            {{/each-in}}
-          </ul>
-        </div>
-      {{/if}}
+              </div>
+            {{/if}}
 
-      {{#form-for
-        afterError=(action (mut error))
-        model=signUpAttempt
-        steps=steps
-        as |f|
-      }}
-
-
-          <div class="form-group">
-            {{f.input
-              autocomplete="email"
-              autofocus=true
-              label="Email"
-              placeholder="user@domain.com"
-              property="email"
-              type="email"
+            {{#form-for
+              afterError=(action (mut error))
+              model=signUpAttempt
+              steps=steps
+              as |f|
             }}
-          </div>
-          <div class="form-group">
-            {{f.password
-              autocomplete="new-password"
-              label="Password"
-              property="password"
-            }}
-          </div>
 
 
-          <div class="form-group">
-            {{f.input
-              autocomplete="username"
-              label="Username"
-              property="username"
-            }}
-          </div>
+                <div class="form-group">
+                  {{f.input
+                    autocomplete="email"
+                    autofocus=true
+                    label="Email"
+                    placeholder="user@domain.com"
+                    property="email"
+                    type="email"
+                  }}
+                </div>
+                <div class="form-group">
+                  {{f.password
+                    autocomplete="new-password"
+                    label="Password"
+                    property="password"
+                  }}
+                </div>
+
+
+                <div class="form-group">
+                  {{f.input
+                    autocomplete="username"
+                    label="Username"
+                    property="username"
+                  }}
+                </div>
         
-          <div class="form-group">
-            {{f.checkbox
-              label="I'm at least 13 years of age."
-              property="thirteen"
-            }}
-          </div>
+                <div class="form-group">
+                  {{f.checkbox
+                    label="I'm at least 13 years of age."
+                    property="thirteen"
+                  }}
+                </div>
         
-          <div class="form-group">
-            {{f.checkbox
-              label="I have read and accept the Terms of Conditions. Plus, I understand that NaNoWriMo is a donation-powered, 501(c)(3) nonprofit."
-              property="terms"
-            }}
-          </div>
+                <div class="form-group">
+                  {{f.checkbox
+                    label="I have read and accept the Terms of Conditions. Plus, I understand that NaNoWriMo is a donation-powered, 501(c)(3) nonprofit."
+                    property="terms"
+                  }}
+                </div>
 
-           <div class="form-group">
-            {{f.select
-              label="Time Zone"
-              options=timeZoneOptions
-              property="timeZone"
-            }}
-          </div>
+                 <div class="form-group">
+                  {{f.select
+                    label="Time Zone"
+                    options=timeZoneOptions
+                    property="timeZone"
+                  }}
+                </div>
 
-        <button data-test-sign-up-submit type="submit" class="btn btn-primary">Sign Up</button>
+              <button data-test-sign-up-submit type="submit" class="btn btn-primary">Sign Up</button>
 
-      {{/form-for}}
+            {{/form-for}}
       
-      <div class="left-right-links">{{link-to "Forgot password" 'forgot-password'}}{{link-to "I have an account" 'sign-in'}}</div>
-      <div class="nano-hr">OR</div>
-      {{continue-with}}
+            <div class="left-right-links">{{link-to "Forgot password" 'forgot-password'}}{{link-to "I have an account" 'sign-in'}}</div>
+            <div class="nano-hr">OR</div>
+            {{continue-with}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
