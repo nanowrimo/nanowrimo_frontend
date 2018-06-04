@@ -1,0 +1,56 @@
+{{#validation-error
+  changeset=changeset
+  hasAttemptedSubmit=hasAttemptedSubmit
+  property=property
+  as |hasError|
+}}
+
+  {{!-- FIXME: Extract CSS to stylesheets --}}
+  <style>
+    .nano-image-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      border-width: 2px;
+      border-style: dashed;
+    }
+  </style>
+
+  <label>{{label}}</label>
+  {{#file-dropzone
+    class=(concat
+      "nano-image-upload form-control"
+      (if hasError " is-invalid")
+      (if hasUploaded " is-valid")
+    )
+    name=property
+    as |dropzone queue|
+  }}
+    {{#if hasUploaded}}
+      Image uploaded!
+    {{else}}
+      {{#if dropzone.active}}
+        {{#if dropzone.valid}}
+          Drop to upload
+        {{else}}
+          Invalid file
+        {{/if}}
+      {{else if queue.files.length}}
+        Uploading file: {{progress}}%
+      {{else}}
+        {{#if dropzone.supported}}
+          <div>Drag and drop image onto this area to upload or</div>
+        {{/if}}
+        {{#file-upload
+          accept=accept
+          name=property
+          onfileadd=(action "uploadImage")
+        }}
+          <a style="cursor:pointer">Select an image</a>
+        {{/file-upload}}
+      {{/if}}
+    {{/if}}
+  {{/file-dropzone}}
+{{/validation-error}}
