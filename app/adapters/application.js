@@ -11,7 +11,5 @@ export default DS.JSONAPIAdapter.extend({
   headers: computed('session.data.authenticated.auth_token', function() {
     let { auth_token } = this.get('session.data.authenticated');
     return auth_token ? { 'Authorization': auth_token } : {};
-  }),
-
-
+  })
 });

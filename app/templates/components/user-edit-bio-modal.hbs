@@ -53,7 +53,7 @@
           {{/each}}
           {{#if canAddAnotherBook}}
             <div class="form-group">
-              <button {{action "addBook"}}>Add another book</button>
+              <button class="btn-underlined" {{action "addBook"}}>Add another book</button>
             </div>
           {{/if}}
 
@@ -78,7 +78,7 @@
           {{/each}}
           {{#if canAddAnotherAuthor}}
             <div class="form-group">
-              <button {{action "addAuthor"}}>Add another author</button>
+              <button class="btn-underlined" {{action "addAuthor"}}>Add another author</button>
             </div>
           {{/if}}
         {{/tab.pane}}
@@ -88,8 +88,8 @@
     {{/modal.body}}
     {{#modal.footer tagName="div"}}
 
-      <input type="submit" value="Save Details" data-test-user-bio-submit />
-      <input type="button" value="Cancel" {{action modal.close}} data-test-user-bio-cancel />
+      <input type="submit" class="btn-secondary btn-green" value="Save Details" data-test-user-bio-submit />
+      <input type="button" class="btn-underlined" value="Cancel" {{action modal.close}} data-test-user-bio-cancel />
 
     {{/modal.footer}}
   {{/form-for}}

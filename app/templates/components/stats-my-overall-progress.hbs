@@ -1,0 +1,12 @@
+<div class="nano-subcard-face face-front filled-white">
+  <div class="nano-subcard-header">
+    <div class="corner-label">My Overall Progress</div>
+    <div class="nano-subcard-toggle" {{action "toggleSubcard"}}>
+      <div style="{{cardPrimaryStyle}}">{{fa-icon "bar-chart"}}</div>
+      <div style="{{cardSecondaryStyle}}">{{fa-icon "line-chart"}}</div>
+    </div>
+  </div>
+  <div class="nano-subcard-content">
+    {{high-charts content=chartData chartOptions=chartOptions theme=theme}}
+  </div>
+</div>

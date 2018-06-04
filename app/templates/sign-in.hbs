@@ -2,12 +2,17 @@
   <div>
     <div class="login_image"><img src="login_image.svg" alt="" /></div>
     <div class="nano-card login">
-
-      <h2 class="card-title">Welcome back! Just keep writing, writing, and writing...</h2>
-      {{sign-in-form}}
-      <div class="left-right-links">{{link-to "Forgot password" 'forgot-password'}}{{link-to "I'm a new user!" 'sign-up'}}</div>
-      <div class="nano-hr">OR</div>
-      {{continue-with}}
+      <div class="nano-subcard">
+        <div class="nano-subcard-face face-front filled-grey">
+          <div class="nano-subcard-content">
+            <h2 class="card-title">Welcome back! Just keep writing, writing, and writing...</h2>
+            {{sign-in-form class="nano-full-width"}}
+            <div class="left-right-links">{{link-to "Forgot password" 'forgot-password'}}{{link-to "I'm a new user!" 'sign-up'}}</div>
+            <div class="nano-hr">OR</div>
+            {{continue-with}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
