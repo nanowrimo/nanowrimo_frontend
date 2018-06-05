@@ -133,7 +133,7 @@ button, input {
     }
     
   }
-  &.btn-underlined {
+  &.btn-underlined, &.truncate-multiline--button {
     cursor: pointer;
     background: transparent;
     border: 0px;
