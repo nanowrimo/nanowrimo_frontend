@@ -20,6 +20,9 @@ export default Factory.extend({
   name() {
     return faker.internet.userName();
   },
+  plate() {
+    return faker.image.nature();
+  },
   postalCode() {
     return faker.address.zipCode();
   },

@@ -1,5 +1,6 @@
-<div class="nano-user-plate full-width d-flex">
-  <div class="plate-cover" style="position:relative">
+<div class="nano-user-plate full-width d-flex" {{action "openImagesModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
+
+  <div class="plate-cover">
 
     <div class="container-fluid">
       {{user-stats user=user}}
@@ -7,8 +8,8 @@
 
     {{#if canEditUser}}
       {{!-- TODO: CSS styling for this edit link to show/hide --}}
-      <div class="flip-corner-link" {{action "openEditModal" "stats"}} style="position:absolute;left:0;bottom:0;cursor:pointer" data-test-user-profile-edit-stats>
-        <img src="/flip_corner.svg" alt="Edit User Stats" />
+      <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
+        <img src="/flip_corner.svg" alt="Edit User Images" />
       </div>
     {{/if}}
 
@@ -20,8 +21,8 @@
       <div class="nano-panel left-sidebar nano-profile">
         <div class="flip-corner">
 
-          <div class="nano-avatar-large">
-            <img src={{user.avatar}} alt={{user.name}} data-test-user-avatar>
+          <div class="nano-avatar-large" {{action "openImagesModal"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
+            <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
           </div>
           <div class="nano-user-name" data-test-user-name>
             {{user.name}}
@@ -42,10 +43,17 @@
             </div>
 
             {{user-edit-profile-modal
-              onHidden=(action "afterModalClose")
+              onHidden=(action "afterEditModalClose")
               open=edit
               user=user
               tab=editTab
+            }}
+
+            {{user-edit-images-modal
+              onHidden=(action "afterImagesModalClose")
+              open=editImages
+              user=user
+              tab=editImagesTab
             }}
 
           {{/if}}

@@ -1,0 +1,51 @@
+{{#bs-modal
+  open=open
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    Edit Your Profile
+  {{/modal.header}}
+  {{#form-for
+    afterSubmit=modal.close
+    model=user
+    data-test-user-images-form=true
+    as |f|
+  }}
+    {{#modal.body}}
+
+      {{#bs-tab
+        activeId=activeTab
+        onChange=(action (mut activeTab))
+        as |tab|
+      }}
+
+        {{#tab.pane title="Avatar" id="avatarTab"}}
+          <div class="form-group">
+            {{f.imageUpload
+              label="Update your avatar image"
+              property="avatar"
+            }}
+          </div>
+        {{/tab.pane}}
+
+        {{#tab.pane title="Header" id="headerTab"}}
+          <div class="form-group">
+            {{f.imageUpload
+              label="Update your header image"
+              property="plate"
+            }}
+          </div>
+        {{/tab.pane}}
+
+      {{/bs-tab}}
+
+    {{/modal.body}}
+    {{#modal.footer}}
+
+      <input type="submit" class="btn-secondary btn-green" value="Save Images" data-test-user-images-submit />
+      <input type="button" class="btn-underlined" value="Cancel" {{action modal.close}} data-test-user-images-cancel />
+
+    {{/modal.footer}}
+  {{/form-for}}
+{{/bs-modal}}

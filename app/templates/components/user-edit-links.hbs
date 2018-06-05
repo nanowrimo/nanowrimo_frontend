@@ -9,7 +9,7 @@
       </div>
       {{input
         data-test-external-link-url=(concat "" link.id)
-        class="form-control"
+        class="form-control no-left-radius"
         placeholder=(if link.service (concat "https://" link.service ".com/username") "https://example.com")
         value=link.changeset.url
       }}
@@ -21,6 +21,6 @@
     </div>
   {{/each}}
   {{#if canAddAnotherLink}}
-    <button {{action "addLink"}}>Add another link</button>
+    <button class="btn-underlined" {{action "addLink"}}>Add another link</button>
   {{/if}}
 </div>

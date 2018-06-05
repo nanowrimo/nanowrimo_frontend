@@ -2,14 +2,17 @@ import Controller from '@ember/controller';
 import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { htmlSafe }  from '@ember/string';
 
 export default Controller.extend({
   currentUser: service(),
   router: service(),
 
-  queryParams: ['edit', 'editTab'],
+  queryParams: ['edit', 'editImages', 'editImagesTab', 'editTab'],
 
   edit: null,
+  editImages: null,
+  editImagesTab: null,
   editTab: null,
   userParam: null,
 
@@ -19,12 +22,24 @@ export default Controller.extend({
     return this.get('currentUser.user.id') === this.get('user.id');
   }),
 
+  plateStyle: computed('user.plateUrl', 'canEditUser', function() {
+    let styles = [];
+    let plateUrl = this.get('user.plateUrl');
+    if (plateUrl) {
+      styles.push(`background-image:url(${plateUrl})`);
+    }
+    if (this.get('canEditUser')) {
+      styles.push('cursor:pointer');
+    }
+    return htmlSafe(styles.join(';'));
+  }),
+
   _needsURLUpdate() {
     return this.get('user.slug') !== this.get('userParam');
   },
 
   actions: {
-    afterModalClose() {
+    afterEditModalClose() {
       this.set('edit', null);
       this.set('editTab', null);
 
@@ -36,11 +51,23 @@ export default Controller.extend({
       }
     },
 
+    afterImagesModalClose() {
+      this.set('editImages', null);
+      this.set('editImagesTab', null);
+    },
+
     openEditModal(tab) {
       if (this.get('canEditUser')) {
         this.set('edit', true);
         if (tab) { this.set('editTab', tab); }
       }
-    }
+    },
+
+    openImagesModal(tab) {
+      if (this.get('canEditUser')) {
+        this.set('editImages', true);
+        if (tab) { this.set('editImagesTab', tab); }
+      }
+    },
   }
 });

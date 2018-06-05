@@ -24,7 +24,8 @@ Router.map(function() {
         });
       });
       this.route('edit');
-      
+    });
+    this.route('stats', function() {
     });
     this.route('project',function(){
       this.route('show', { path: '/:project_slug'}, function(){});
@@ -47,6 +48,7 @@ Router.map(function() {
   this.route('error');
   this.route('forgot-password');
   this.route('password-reset');
+  this.route('components.stats', { path: '/stats' });
 });
 
 export default Router;

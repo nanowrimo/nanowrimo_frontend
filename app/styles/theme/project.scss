@@ -1,0 +1,109 @@
+#project {
+  position: relative;
+  height: 223px;
+  
+  .project-status {
+    position: absolute;
+    top: -5px;
+    left: 250px;
+    @media(max-width: $screen-md) {
+      left: 10px;
+    }
+  }
+  
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    
+    .project-cover {
+      flex: 0 0 255px;
+      @media(max-width: $screen-md) {
+        order: 3;
+      }
+      .project-cover-clip {
+        position: absolute;
+        bottom: 0px;
+        width: 189px;
+        height: 170px;
+        left: 70px;
+        clip-path: inset(0px 0px 0px -50px);
+        img {
+          transform: rotate(-15deg);
+          transform-origin: bottom right;
+          width: 128px;
+          height: 170px;
+          border-radius: 3px;
+        }
+      }
+    }
+
+    .project-name-genres {
+      margin-top: 36px;
+      flex: 0 0 450px;
+      .project-title {
+        font-family: 'SourceSerifPro-regular', serif ;
+        font-size: 26px;
+        color: #343434;
+        margin-bottom: 7px;
+      }
+      .project-genres {
+        margin-top: 7px;
+        font-family: 'SourceSansPro-regular', sans-serif;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: left;
+        color: #979797;
+      }
+    }
+    .project-count-display {
+      height: 100%;
+      text-align: center;
+      flex: 0 0 340px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      
+      .count{
+        font-size: 56px;
+        font-family: 'SourceSerifPro-Regular', serif;
+        color: #2f3061;
+      }
+      .unit-text {
+        font-weight: bold;
+        font-family: 'SourceSerifPro-Bold', serif;
+        font-size: 16px;
+        color: #979797;
+        
+      }
+    }
+  }
+}
+
+#project-needs-details {
+  position: relative;
+  border: 2px dashed #e5e5e5;
+  border-radius: 6px;
+  margin: 28px;
+  padding: 30px;
+  #texts {
+    text-align: center;
+    font-size: 26px;
+    color: #979797;
+    #line-1 {
+    
+    }
+    #line-2 {
+      a{
+        color: #343434;
+        text-decoration: underline;
+      }
+    }
+  }
+  #graphic {
+    position: absolute;
+    bottom: 0px;
+    right: 30px;
+  }
+}  
