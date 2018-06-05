@@ -9,14 +9,11 @@
       <div class="nano-subcard g3-sub1 g2-sub1">
         <div class="nano-subcard-face face-front filled-grey">
           <div class="nano-subcard-content side-by-side">
-            <div class="info-text side-by-side-even">
+            <div class="info-text side-by-side-even" data-test-user-bio>
               <h6>About {{user.name}}</h6>
-              <div class="nano-user-bio{{if bioExpanded " expanded"}}" data-test-user-bio>
-                {{user.bio}}
-              </div>
-              {{#if showBioReadMore}}
-                <button class="btn-underlined" {{action (mut bioExpanded) true}}>Read More</button>
-              {{/if}}
+              {{truncate-multiline
+                text=user.bio
+              }}
             </div>
             <div class="info-text side-by-side side-by-side-even">
               <div class="side-by-side-even">
