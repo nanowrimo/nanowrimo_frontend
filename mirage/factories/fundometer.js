@@ -1,16 +1,14 @@
-import { Factory } from 'ember-cli-mirage';
+import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
   goalNumber() {
-    return 1400000;
-    //return 100000*faker.random.number({ min: 10, max: 20 });
+    let hundos = faker.random.number({ min: 10, max: 20 });
+    return 100000 * hundos;
   },
   raisedNumber() {
-    return 123345;
-    //return faker.random.number({ min: 0, max: 2000000 });
+    return faker.random.number({ min: 0, max: this.goalNumber });
   },
   donorNumber() {
-    return 1500;
-    //return faker.random.number({ min: 0, max: 5000 });
+    return faker.random.number({ min: 1, max: 5000 });
   }
 });
