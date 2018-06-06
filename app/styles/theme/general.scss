@@ -34,7 +34,8 @@
 body {
   @media (min-width: $screen-sm) {
     background-color: #e2eff3;
-    background-image: url("/camp_back.png") repeat-x center center; 
+    background-image: url("/images/backgrounds/camp_back.png");
+    background-repeat: repeat-x; 
     background-position: bottom;
     padding-bottom: 336px;
   }
