@@ -266,4 +266,14 @@
       }
     }
   }
+  .banner-divot {
+    @media (min-width: $screen-sm) {
+      width: 299px;
+      height: 7px;
+      position: absolute;
+      bottom: -20;
+      background-image: url("/images/global/leftside_bottom.png");
+      background-size: 299px 7px;
+    }
+  }
 }
