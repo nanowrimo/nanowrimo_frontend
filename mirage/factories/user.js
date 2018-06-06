@@ -50,7 +50,5 @@ export default Factory.extend({
     let yearsWon = yearsDone.filter(() => faker.random.boolean());
     return yearsWon.join(' ');
   },
-  timeZone() {
-    return faker.list.random('America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles');
-  }
+  timeZone: faker.list.random('America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles')
 });
