@@ -7,7 +7,7 @@ export default Component.extend({
   session: service(),
   nanoMenuService: service(),
   media: service(),
-
+  
   currentUserName: reads('currentUser.user.name'),
   submenus: reads('nanoMenuService.submenus'),
   

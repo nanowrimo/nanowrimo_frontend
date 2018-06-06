@@ -18,6 +18,8 @@ Router.map(function() {
       this.route('show', { path: '/:slug'}, function() {
         this.route('projects', function() {
         });
+        this.route('buddies', function() {
+        });
       });
       this.route('edit');
     });
