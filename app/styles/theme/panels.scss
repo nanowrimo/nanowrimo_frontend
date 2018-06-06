@@ -6,7 +6,7 @@
 }
 .nano-panel {
   background: white;
-  border: 1px solid #FAFAFA;
+  border: 0px solid #FAFAFA;
   padding: 0;
   padding-left: 0;
   padding-right: 0;
@@ -23,12 +23,12 @@
     @media (min-width: $screen-sm) {
       flex: 0 0 299px;
       width: 299px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+      border-radius: 0;
       margin-right: 28px;
       .flip-corner {
         width: 100%;
         position: relative;
+        padding-bottom: 10px;
         .flip-corner-link {
           display: none;
           position: absolute;
