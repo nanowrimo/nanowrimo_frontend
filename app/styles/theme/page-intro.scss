@@ -1,8 +1,9 @@
 .nano-page-intro {
-  min-height: 150px;
+  min-height: 140px;
+  margin-top: 20px;
   display: flex;
   justify-content: stretch;
-  align-items: flex-end;
+  align-items: center;
   .left-side {
     flex: 1 1 100%;
     justify-content: flex-start;
@@ -13,6 +14,7 @@
     justify-content: flex-end;
   }
   .welcome-content {
+    height: 100%;
     h1 {
       font-family: SourceSerifPro-Bold;
       font-size: 40px;
