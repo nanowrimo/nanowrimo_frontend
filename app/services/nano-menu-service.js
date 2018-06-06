@@ -15,10 +15,10 @@ export default Service.extend({
       {
         toggleLabel: "My NaNoWriMo",
         submenuItems: [
-          {label: "Profile", url: "authenticated.users.show", segment: get(this,"currentUserName"), teaser: "Tell other Wrimos about you", src: "/nav/id_card.svg"},
+          {label: "Profile", url: "authenticated.users.show.index", segment: get(this,"currentUserName"), teaser: "Tell other Wrimos about you", src: "/nav/id_card.svg"},
           {label: "Stats", url: "components.stats", segment: null, teaser: "Track your writing progress", src: "/nav/bar_chart.svg"},
-          {label: "Projects", url: "authenticated.users.show.projects", segment: null, teaser: "Organize all your projects", src: "/nav/open_book.svg"},
-          {label: "Buddies", url: "authenticated.users.show.buddies", segment: null, teaser: "Support and be supported", src: "/nav/clapping_hands.svg"}
+          {label: "Projects", url: "authenticated.users.show.projects", segment: get(this,"currentUserName"), teaser: "Organize all your projects", src: "/nav/open_book.svg"},
+          {label: "Buddies", url: "authenticated.users.show.buddies", segment: get(this,"currentUserName"), teaser: "Support and be supported", src: "/nav/clapping_hands.svg"}
         ]
       },
       {
