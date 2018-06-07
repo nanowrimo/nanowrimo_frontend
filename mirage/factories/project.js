@@ -11,17 +11,13 @@ export default Factory.extend({
   cover(i) {
     return `https://loremflickr.com/240/320/dog,cat,bird,horse?random=${i}`;
   },
-  status() {
-    return faker.list.random('Completed', 'In Progress');
-  },
-
   slug(i){
     return "project-slug-"+i; 
   },
-  createdAt() {
-    let year = faker.list.cycle('2013', '2015', '2016', '2017');
+  status: faker.list.random('Completed', 'In Progress'),
+  createdAt(i) {
+    let year = faker.list.cycle('2013', '2015', '2016', '2017')(i);
     return `${year}-11-01`;
-
   }
   
 });

@@ -4,6 +4,11 @@
   display: flex;
   justify-content: stretch;
   align-items: center;
+  @media (max-width: $screen-xs-max) {
+    margin-right: 20px;
+    margin-left: 20px;
+    flex-wrap: wrap;
+  }
   .left-side {
     flex: 1 1 100%;
     justify-content: flex-start;
@@ -15,6 +20,9 @@
   }
   .welcome-content {
     height: 100%;
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 20px;
+    }
     h1 {
       font-family: SourceSerifPro-Bold;
       font-size: 40px;
@@ -24,60 +32,6 @@
       letter-spacing: -0.1px;
       text-align: left;
       color: #ab6a57;
-    }
-  }
-}
-.fundometer {
-  display: flex;
-  align-items: stretch;
-  .fundometer-image {
-    position: relative;
-    width: 130px;
-    height: 139px;
-    img {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-    .fundometer-label {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      font-family: SourceSansPro-Bold;
-      font-size: 10px;
-      letter-spacing: 0.2px;
-      color: #2f3061;
-      text-transform: uppercase;
-      text-align: center;
-      margin-top: 5px;
-      padding-right: 16px;
-    }
-  }
-  .fundometer-text {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    margin-left: 30px;
-    font-family: SourceSansPro-Regular;
-    font-size: 16px;
-    line-height: 1.38;
-    letter-spacing: normal;
-    text-align: center;
-    color: #343434;
-    div {
-      flex: 0 0 auto;
-      &.fundometer-raised {
-        font-family: SourceSerifPro-Bold;
-        font-size: 20px;
-        line-height: 1.25;
-        color: #2f3061;
-        margin-bottom: 10px;
-      }
-      a {
-        color: #343434;
-        text-decoration: underline;
-      }
     }
   }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="112px" height="112px" viewBox="0 0 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle Copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="-2.22044605e-14%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#4E4F82" offset="0%"></stop>
+            <stop stop-color="#2F3061" offset="100%"></stop>
+        </linearGradient>
+        <path d="M7.6916556,1.30119242e-14 L105.975659,1.59872116e-14 C109.289368,1.53784932e-14 111.975659,2.6862915 111.975659,6 C111.975659,6.48580152 111.916659,6.9698051 111.799955,7.4413804 L100.396092,53.5218434 C100.120612,54.6349926 100.0494,54.9938589 100.00255,55.4041952 C99.9556999,55.8145315 99.9556999,56.1854685 100.00255,56.5958048 C100.0494,57.0061411 100.120612,57.3650074 100.396092,58.4781566 L111.799955,104.55862 C112.596008,107.775289 110.633709,111.028243 107.41704,111.824296 C106.945464,111.941 106.461461,112 105.975659,112 L0,112 L-6.81010358e-16,7.6916556 C-1.00854903e-15,5.01709938 0.278476833,4.04724067 0.801398111,3.06946289 C1.32431939,2.09168511 2.09168511,1.32431939 3.06946289,0.801398111 C4.04724067,0.278476833 5.01709938,1.35032322e-14 7.6916556,1.30119242e-14 Z" id="path-2"></path>
+        <pattern id="pattern-3" width="4" height="10" x="-4" y="-10" patternUnits="userSpaceOnUse">
+            <use xlink:href="#image-4"></use>
+        </pattern>
+        <image id="image-4" width="4" height="10" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAKCAYAAACT+/8OAAAEGWlDQ1BrQ0dDb2xvclNwYWNlR2VuZXJpY1JHQgAAOI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvuuWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd/p+tt0YdFSBxH2Kz5qgLiI8B8KdVy3YBevqRHz/qWh72Yui3MUDEL3q44WPXw3M+fo1pZuQs4tOIBVVTaoiXEI/MxfhGDPsxsNZfoE1q66ro5aJim3XdoLFw72H+n23BaIXzbcOnz5mfPoTvYVz7KzUl5+FRxEuqkp9G/Ajia219thzg25abkRE/BpDc3pqvphHvRFys2weqvp+krbWKIX7nhDbzLOItiM8358pTwdirqpPFnMF2xLc1WvLyOwTAibpbmvHHcvttU57y5+XqNZrLe3lE/Pq8eUj2fXKfOe3pfOjzhJYtB/yll5SDFcSDiH+hRkH25+L+sdxKEAMZahrlSX8ukqMOWy/jXW2m6M9LDBc31B9LFuv6gVKg/0Szi3KAr1kGq1GMjU/aLbnq6/lRxc4XfJ98hTargX++DbMJBSiYMIe9Ck1YAxFkKEAG3xbYaKmDDgYyFK0UGYpfoWYXG+fAPPI6tJnNwb7ClP7IyF+D+bjOtCpkhz6CFrIa/I6sFtNl8auFXGMTP34sNwI/JhkgEtmDz14ySfaRcTIBInmKPE32kxyyE2Tv+thKbEVePDfW/byMM1Kmm0XdObS7oGD/MypMXFPXrCwOtoYjyyn7BV29/MZfsVzpLDdRtuIZnbpXzvlf+ev8MvYr/Gqk4H/kV/G3csdazLuyTMPsbFhzd1UabQbjFvDRmcWJxR3zcfHkVw9GfpbJmeev9F08WW8uDkaslwX6avlWGU6NRKz0g/SHtCy9J30o/ca9zX3Kfc19zn3BXQKRO8ud477hLnAfc1/G9mrzGlrfexZ5GLdn6ZZrrEohI2wVHhZywjbhUWEy8icMCGNCUdiBlq3r+xafL549HQ5jH+an+1y+LlYBifuxAvRN/lVVVOlwlCkdVm9NOL5BE4wkQ2SMlDZU97hX86EilU/lUmkQUztTE6mx1EEPh7OmdqBtAvv8HdWpbrJS6tJj3n0CWdM6busNzRV3S9KTYhqvNiqWmuroiKgYhshMjmhTh9ptWhsF7970j/SbMrsPE1suR5z7DMC+P/Hs+y7ijrQAlhyAgccjbhjPygfeBTjzhNqy28EdkUh8C+DU9+z2v/oyeH791OncxHOs5y2AtTc7nb/f73TWPkD/qwBnjX8BoJ98VQNcC+8AAAAkSURBVAgdY8jLy3uWm5v7lQEKmP7//88FZIMwGDDBGDB6gAQAr9EHkNPd7H8AAAAASUVORK5CYII="></image>
+    </defs>
+    <g id="banner-end" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle-Copy-3" transform="translate(56.000000, 56.000000) rotate(-180.000000) translate(-56.000000, -56.000000) ">
+            <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+            <use fill-opacity="0.03" fill="url(#pattern-3)" fill-rule="evenodd" style="mix-blend-mode: screen;" xlink:href="#path-2"></use>
+            <path stroke="#DFE4E6" stroke-width="1" d="M0.5,111.5 L105.975659,111.5 C106.420977,111.5 106.864647,111.445917 107.296925,111.338938 C110.245539,110.609223 112.044312,107.627349 111.314597,104.678735 L99.9107335,58.5982716 C99.6403058,57.5055334 99.5576724,57.1070441 99.5057775,56.6525239 C99.454624,56.2044973 99.454624,55.7955027 99.5057775,55.3474761 C99.5576724,54.8929559 99.6403058,54.4944666 99.9107335,53.4017284 L111.314597,7.32126536 C111.421576,6.888988 111.475659,6.44531806 111.475659,6 C111.475659,2.96243388 109.013225,0.5 105.975659,0.5 L7.6916556,0.5 C5.32868808,0.5 4.33413652,0.692056765 3.30526232,1.24230471 C2.41461878,1.71862609 1.71862609,2.41461878 1.24230471,3.30526232 C0.692056765,4.33413652 0.5,5.32868808 0.5,7.6916556 L0.5,111.5 Z" stroke-linejoin="square"></path>
+        </g>
+    </g>
+</svg>

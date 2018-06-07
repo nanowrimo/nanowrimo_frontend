@@ -1,14 +1,14 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { equal }  from '@ember/object/computed';
+import { htmlSafe }  from '@ember/string';
 
 export default Component.extend({
   percent: 0,
-  goalMet: computed("percent", function() {
-    let p = this.get('percent');
-    if (p) {
-      return p === 100;
-    } else {
-      return false;
-    }
+
+  goalMet: equal('percent', 100),
+
+  fillStyle: computed('percent', function() {
+    return htmlSafe(`width:${this.get('percent')}%`);
   })
 });
