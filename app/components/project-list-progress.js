@@ -25,7 +25,7 @@ export default Component.extend({
     let proj = this.get('project');
     if (proj) {
       //let dc = proj.displayChallenge;
-      return proj.challenges.firstObject.requiredGoal;
+      return proj.challenges.firstObject.defaultGoal;
     } else {
       return 0;
     }
