@@ -34,7 +34,8 @@
 body {
   @media (min-width: $screen-sm) {
     background-color: #e2eff3;
-    background-image: url("/camp_back.png") repeat-x center center; 
+    background-image: url("/images/backgrounds/camp_back.png");
+    background-repeat: repeat-x; 
     background-position: bottom;
     padding-bottom: 336px;
   }
@@ -201,4 +202,21 @@ ul {
   padding: 0;
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
+}
+
+// ----------------------------------
+// Truncation styles
+// ----------------------------------
+.truncate-multiline--last-line {
+  display: none;
+}
+.truncate-multiline--last-line-wrapper {
+  &::before {
+    content: "";
+    display: block;
+  }
+}
+.truncate-multiline--button {
+  text-transform: capitalize;
+  padding-left: 0px;
 }

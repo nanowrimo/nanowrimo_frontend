@@ -6,7 +6,7 @@
 }
 .nano-panel {
   background: white;
-  border: 1px solid #FAFAFA;
+  border: 0px solid #FAFAFA;
   padding: 0;
   padding-left: 0;
   padding-right: 0;
@@ -23,12 +23,12 @@
     @media (min-width: $screen-sm) {
       flex: 0 0 299px;
       width: 299px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+      border-radius: 0;
       margin-right: 28px;
       .flip-corner {
         width: 100%;
         position: relative;
+        padding-bottom: 10px;
         .flip-corner-link {
           display: none;
           position: absolute;
@@ -97,7 +97,17 @@
       }
     }
   }
+  .nano-card {
+    margin-bottom: 32px;
+    margin-left: 28px;
+    margin-right: 28px;
+  }
   .grid-wrapper {
+    .nano-card {
+      margin-bottom: 0px;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
     padding: 28px;
     width: 100%;
     display: grid;
@@ -242,7 +252,7 @@
         margin-left: 10px;
         margin-right: 10px;
         a {
-          font-size: 13px;
+          font-size: 16px;
           color: #b8b8b8;
           border-radius: 4px;
           padding-bottom: 8px;

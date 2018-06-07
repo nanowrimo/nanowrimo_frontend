@@ -22,6 +22,8 @@ Router.map(function() {
             this.route('badges');
           });
         });
+        this.route('buddies', function() {
+        });
       });
       this.route('edit');
     });
@@ -30,11 +32,6 @@ Router.map(function() {
     this.route('project',function(){
       this.route('show', { path: '/:project_slug'}, function(){});
     });
-    
-    this.route('current-user', function() {
-      this.route('show', { path: '/' });
-    });
-    this.route('project');
   });
 
   //email confirmations

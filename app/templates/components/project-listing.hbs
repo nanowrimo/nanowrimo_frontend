@@ -1,32 +1,36 @@
 <div class="nano-card project-listing-card">
-  <div class='project-actions'>
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front filled-grey">
+      <div class='project-actions'>
 
-  </div>
-  <div class='flex-container'>
-    <div class='project-cover'>
-      <div class='project-cover-clip'>
-        <img src="{{project.cover}}">
       </div>
-    </div>
-    <div class='project-name-genres'>
-      <div class='project-title'>
-        {{#link-to 'authenticated.project.show.index' project.slug}}
-          {{project.title}}
-        {{/link-to}}
-      </div>
-      <div class='project-genres'>
-        {{project.concatGenres}}
-      </div>
-    </div>
+      <div class='flex-container'>
+        <div class='project-cover'>
+          <div class='project-cover-clip'>
+            <img src="{{project.cover}}">
+          </div>
+        </div>
+        <div class='project-name-genres'>
+          <div class='project-title'>
+          {{#link-to 'authenticated.project.show.index' project.slug}}
+            {{project.title}}
+          {{/link-to}}
+          </div>
+          <div class='project-genres'>
+            {{project.concatGenres}}
+          </div>
+        </div>
     
-    {{project-list-progress project=project}}
+        {{project-list-progress project=project}}
     
-    <div class='project-status'>
-      {{#if project.completed}}
-        <img src="/images/users/projects/flippy-doodle-completed.png">
-      {{else}}
-        <img src="/images/users/projects/flippy-doodle-in-progress.png">
-      {{/if}}
+        <div class='project-status'>
+          {{#if project.completed}}
+            <img src="/images/users/projects/flippy-doodle-completed.png">
+          {{else}}
+            <img src="/images/users/projects/flippy-doodle-in-progress.png">
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
