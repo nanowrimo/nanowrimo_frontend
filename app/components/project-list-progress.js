@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export default Component.extend({
   project: null,
-  unitCount: computed('project.unitCount', function(){
+  count: computed('project.unitCount', function(){
     return this.get('project').unitCount;
   }),
   formattedStart: computed("project.challenges.[]", function(){

@@ -13,6 +13,7 @@ export default DS.Model.extend({
   unitType: DS.attr('string'),
   createdAt: DS.attr('date'),
   user: DS.belongsTo('user'),
+  writingType: DS.attr('string'),
   
   displayChallenge: computed("user", "challenges.[]", function(){
     //let tz = this.get('user').get('timeZone');
