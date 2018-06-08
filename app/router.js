@@ -17,6 +17,10 @@ Router.map(function() {
     this.route('users', { path: 'participants'}, function() {
       this.route('show', { path: '/:slug'}, function() {
         this.route('projects', function() {
+          this.route('show', { path: '/:project_slug'}, function(){
+            this.route('goals');
+            this.route('badges');
+          });
         });
         this.route('buddies', function() {
         });
@@ -24,6 +28,9 @@ Router.map(function() {
       this.route('edit');
     });
     this.route('stats', function() {
+    });
+    this.route('project',function(){
+      this.route('show', { path: '/:project_slug'}, function(){});
     });
   });
 

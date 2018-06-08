@@ -72,6 +72,11 @@ export default function() {
     return { meta: {} };
   });
   this.resource('project', { only: ['index'] });
+  this.get('projects/:slug',({projects}, request) => {
+    let slug = request.params.slug;
+    let project = projects.findBy({ slug });
+    return project || new Response(404);
+  });
   this.post('projects', function({ projects, projectGenres }) {
     let attrs = this.normalizedRequestAttrs();
     let genreIds = attrs.genreIds;

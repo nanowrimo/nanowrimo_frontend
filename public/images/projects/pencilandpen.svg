@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="166px" height="135px" viewBox="0 0 166 135" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Illustration">
+            <circle id="Oval-3" fill="#F2F8FA" cx="107.5" cy="91.5" r="58.5"></circle>
+            <circle id="Oval-3" fill="#A5D9E4" cx="30" cy="30" r="30"></circle>
+            <circle id="Oval-3-Copy" fill="#A5D9E4" cx="91" cy="116" r="37"></circle>
+            <g id="pencil" transform="translate(46.036978, 101.503281) rotate(-13.000000) translate(-46.036978, -101.503281) translate(31.036978, 28.503281)">
+                <polygon id="Triangle" stroke="#2F3061" stroke-width="2" fill="#F2C48F" stroke-linecap="round" stroke-linejoin="round" points="15 0 30 45 0 45"></polygon>
+                <path d="M30,45 L30,146 L0,146 L0,45 L5.625,39 L10.3125,44 L15,39 L19.6875,44 L24.375,39 L30,45 Z" id="Combined-Shape" stroke="#2F3061" stroke-width="2" fill="#F2C230" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M10.75,45 L15,40.4699707 L19.25,45 L19.6300049,45 L19.25,145 L10,145 L10.3800049,45 L10.75,45 Z" id="Combined-Shape" fill="#F28729"></path>
+                <path d="M15.1900024,2 L21.4000244,20.5 C19.3639497,21.1666667 17.3074777,21.5 15.2306083,21.5 C13.1537388,21.5 11.0768694,21.1666667 9,20.5 L15.1900024,2 Z" id="Triangle" fill="#2F3061"></path>
+            </g>
+            <g id="Group" transform="translate(79.147440, 109.320798) rotate(-345.000000) translate(-79.147440, -109.320798) translate(64.147440, 48.820798)">
+                <g id="stencil">
+                    <path d="M15,0 L15,0 C21.627417,-1.21743675e-15 27,5.372583 27,12 L27,108 L3,108 L3,12 C3,5.372583 8.372583,1.21743675e-15 15,0 Z" id="Rectangle-5" stroke="#2F3061" stroke-width="2" fill="#A5D9E4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <rect id="Rectangle-5" stroke="#2F3061" stroke-width="2" fill="#1E575F" stroke-linecap="round" stroke-linejoin="round" x="0" y="13" width="30" height="108" rx="3"></rect>
+                    <rect id="Rectangle-9" fill="#DFE4E6" x="1" y="27" width="28" height="4" rx="2"></rect>
+                </g>
+                <path d="M15,25 L15,25 C17.209139,25 19,26.790861 19,29 L19,88.1857818 C19,88.2889073 18.9681128,88.3895103 18.9087074,88.4738066 L15.0142818,94 L11.0922645,88.4742542 C11.0322431,88.3896898 11,88.2885553 11,88.1848552 L11,29 C11,26.790861 12.790861,25 15,25 Z" id="Rectangle-9" fill-opacity="0.5" fill="#343434"></path>
+                <path d="M11,20 L11,20 C13.209139,20 15,21.790861 15,24 L15,83.1857818 C15,83.2889073 14.9681128,83.3895103 14.9087074,83.4738066 L11.0142818,89 L7.09226454,83.4742542 C7.03224313,83.3896898 7,83.2885553 7,83.1848552 L7,24 C7,21.790861 8.790861,20 11,20 Z" id="Rectangle-9" fill="#DFE4E6"></path>
+            </g>
+        </g>
+    </g>
+</svg>
