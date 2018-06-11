@@ -11,8 +11,10 @@
           </div>
         </div>
         <div class='project-name-genres'>
-          <div class='project-name'>
-            {{project.name}}
+          <div class='project-title'>
+          {{#link-to 'authenticated.project.show.index' project.slug}}
+            {{project.title}}
+          {{/link-to}}
           </div>
           <div class='project-genres'>
             {{project.concatGenres}}

@@ -1,0 +1,27 @@
+<div class="nano-panel right-resize with-tabs">
+  <ul class="nano-panel-tabs">
+    <li>{{link-to 'goal' 'authenticated.project.show'}}</li>
+    <li>{{link-to 'details' 'authenticated.project.show.index'}}</li>
+  </ul>
+  {{#if hasDetails}}  
+    <div>Details</div>
+  {{else}}
+    <div id='project-needs-details'>
+        <div id="texts">
+          <div id='line-1'>You haven't told us much about your new project.</div>
+          <div id='line-2'>
+            <a href="#" {{action "editProject"}}>
+              Fill out your project details here.
+            </a>
+          </div>
+        </div>
+        <div id='graphic'>
+          <img src='/images/projects/pencilandpen.svg'>
+        </div>
+    </div>
+  {{/if}}
+
+</div>
+
+
+
