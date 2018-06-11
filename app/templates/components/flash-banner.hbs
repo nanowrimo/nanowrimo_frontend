@@ -1,0 +1,26 @@
+<div class="flash-banner">
+  <div class="banner-left">
+  </div>
+  <div class="banner-content">
+    {{#if banner.image_url}}
+      <div class="flash-image {{banner.image_style}}">
+        <img src="{{flash_banner.image_url}}" />
+      </div>
+    {{/if}}
+    <div class="flash-content">
+      <div class="flash-text">
+        {{banner.content}}
+      </div>
+      {{#if banner.button-text}}
+        <div class="flash-button">
+          <button type="submit" class="btn btn-secondary btn-green">{{banner.button-text}}</button>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="banner-right">
+    {{#if banner.dismissable}}
+      {{fa-icon "times-circle"}}
+    {{/if}}
+  </div>
+</div>

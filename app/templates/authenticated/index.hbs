@@ -1,78 +1,23 @@
 <div class="content-gutters">
   <div class="container-fluid">
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image">
-          <img src="/images/banners/wavinghand.svg" />
+    {{#if currentUserIsNotConfirmed}}
+      <div class="flash-banner">
+        <div class="banner-left">
         </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Welcome to NaNoWriMo! We just sent an email to you with a confirmation link, just so we know you're the right you. Click it and you'll be up and running in just a few moments!
+        <div class="banner-content">
+          <div class="flash-image image-unframed">
+            <img src="/images/banners/wavinghand.svg" />
+          </div>
+          <div class="flash-content">
+            <div class="flash-text">
+              Welcome to NaNoWriMo! We just sent an email to {{currentUserEmail}} with a confirmation link, just so we know you're the right you. Click it and you'll be up and running in just a few moments!
+            </div>
           </div>
         </div>
-      </div>
-      <div class="banner-right">
-      </div>
-    </div>
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image">
-          <img src="/images/banners/pompom.svg" />
-        </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Welcome to NaNoWriMo! We just sent an email to you with a confirmation link, just so we know you're the right you. Click it and you'll be up and running in just a few moments!
-          </div>
-          <div class="flash-button">
-            <button type="submit" class="btn btn-secondary btn-green">Take Me there</button>
-          </div>
+        <div class="banner-right">
         </div>
       </div>
-      <div class="banner-right">
-        {{fa-icon "times-circle"}}
-      </div>
-    </div>
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image image-uploaded">
-          <img src="/images/test_images/camp_scene.png" />
-        </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Welcome to NaNoWriMo! We just sent an email to you with a confirmation link, just so we know you're the right you. Click it and you'll be up and running in just a few moments!
-          </div>
-        </div>
-      </div>
-      <div class="banner-right">
-        {{fa-icon "times-circle"}}
-      </div>
-    </div>
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image image-uploaded">
-          <img src="/images/test_images/camp_scene.png" />
-        </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Welcome to NaNoWriMo! We just sent an email to you with a confirmation link, just so we know you're the right you. Click it and you'll be up and running in just a few moments!
-          </div>
-          <div class="flash-button">
-            <button type="submit" class="btn btn-secondary btn-green">Take Me there</button>
-          </div>
-        </div>
-      </div>
-      <div class="banner-right">
-        {{fa-icon "times-circle"}}
-      </div>
-    </div>
+    {{/if}}
     <div class="nano-page-intro">
       <div class="welcome-content left-side">
         <h1>Welcome back, {{currentUserName}}!</h1>

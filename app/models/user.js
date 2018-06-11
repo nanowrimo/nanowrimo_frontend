@@ -11,6 +11,7 @@ export default DS.Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
   createdAt: attr('date'),
+  confirmedAt: attr('date'),
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
@@ -57,6 +58,12 @@ export default DS.Model.extend({
         this.set('_plateUrl', plate);
       }
       return this.get('_plateUrl');
+    }
+  }),
+
+  isNotConfirmed: computed('confirmedAt', {
+    get() {
+      return this.get('confirmedAt')==null;
     }
   }),
 
