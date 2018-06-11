@@ -1,15 +1,11 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { next }  from '@ember/runloop';
 import { isPresent }  from '@ember/utils';
 import Changeset from 'ember-changeset';
 import ENV from 'nanowrimo/config/environment';
-
-const {
-  Model,
-  attr,
-  belongsTo
-} = DS;
 
 export default Model.extend({
   url: attr('string'),
