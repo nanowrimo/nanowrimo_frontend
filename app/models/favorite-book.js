@@ -5,11 +5,12 @@ import { isPresent }  from '@ember/utils';
 import Changeset from 'ember-changeset';
 
 const {
+  Model,
   attr,
   belongsTo
 } = DS;
 
-export default DS.Model.extend({
+export default Model.extend({
   title: attr('string'),
 
   user: belongsTo(),

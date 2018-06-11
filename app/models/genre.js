@@ -1,7 +1,13 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  name: DS.attr('string', { defaultValue: '' }),
+const {
+  Model,
+  attr,
+  hasMany
+} = DS;
 
-  projects: DS.hasMany('project')
+export default Model.extend({
+  name: attr('string', { defaultValue: '' }),
+
+  projects: hasMany('project')
 });

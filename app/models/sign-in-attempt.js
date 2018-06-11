@@ -1,6 +1,11 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  email: DS.attr('string', { defaultValue: '' }),
-  password: DS.attr('string', { defaultValue: '' })
+const {
+  Model,
+  attr
+} = DS;
+
+export default Model.extend({
+  email: attr('string', { defaultValue: '' }),
+  password: attr('string', { defaultValue: '' })
 });

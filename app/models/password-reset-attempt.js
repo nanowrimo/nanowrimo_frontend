@@ -1,6 +1,11 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  token: DS.attr('string', { defaultValue: '' }),
-  password: DS.attr('string', { defaultValue: '' })
+const {
+  Model,
+  attr
+} = DS;
+
+export default Model.extend({
+  password: attr('string', { defaultValue: '' }),
+  token: attr('string', { defaultValue: '' })
 });

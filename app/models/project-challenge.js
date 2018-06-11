@@ -1,7 +1,11 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
+const {
+  Model,
+  belongsTo
+} = DS;
 
-  project: DS.belongsTo('project'),
-  challenge: DS.belongsTo('challenge')
+export default Model.extend({
+  challenge: belongsTo('challenge'),
+  project: belongsTo('project')
 });

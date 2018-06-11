@@ -6,11 +6,12 @@ import Changeset from 'ember-changeset';
 import ENV from 'nanowrimo/config/environment';
 
 const {
+  Model,
   attr,
   belongsTo
 } = DS;
 
-export default DS.Model.extend({
+export default Model.extend({
   url: attr('string'),
 
   user: belongsTo(),
@@ -77,4 +78,3 @@ export default DS.Model.extend({
     }
   }
 });
-

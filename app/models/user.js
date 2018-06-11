@@ -3,11 +3,12 @@ import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
 
 const {
+  Model,
   attr,
   hasMany
 } = DS;
 
-export default DS.Model.extend({
+export default Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
   createdAt: attr('date'),
