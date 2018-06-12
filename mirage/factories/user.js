@@ -12,6 +12,7 @@ export default Factory.extend({
     return `${faker.address.city()}, ${faker.address.stateAbbr()}`;
   },
   name: faker.internet.userName,
+  confirmedAt: null,
   plate(i) {
     return `https://loremflickr.com/1200/320/nature?random=${i}`;
   },

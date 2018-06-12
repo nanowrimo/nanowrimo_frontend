@@ -24,5 +24,6 @@ export default function(server) {
   projects[0].count= 50321; 
   
   server.createList('fundometer', 5);
+  server.create('flash-banner');
   
 }

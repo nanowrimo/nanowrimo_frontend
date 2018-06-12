@@ -1,7 +1,8 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
 
-export default DS.Model.extend({
-  goalNumber: DS.attr('number'),
-  raisedNumber: DS.attr('number'),
-  donorNumber: DS.attr('number')
+export default Model.extend({
+  donorNumber: attr('number'),
+  goalNumber: attr('number'),
+  raisedNumber: attr('number')
 });

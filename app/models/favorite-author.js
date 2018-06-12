@@ -1,15 +1,12 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { next }  from '@ember/runloop';
 import { isPresent }  from '@ember/utils';
 import Changeset from 'ember-changeset';
 
-const {
-  attr,
-  belongsTo
-} = DS;
-
-export default DS.Model.extend({
+export default Model.extend({
   name: attr('string'),
 
   user: belongsTo(),

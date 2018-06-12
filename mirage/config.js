@@ -40,7 +40,7 @@ export default function() {
     return user || new Response(404);
   });
 
-  this.get('/fundometer/:id', ({fundometers}) => {
+  this.get('/fundometer', ({fundometers}) => {
     return fundometers.find(1);
   });
 
