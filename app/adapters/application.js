@@ -1,9 +1,9 @@
-import DS from 'ember-data';
+import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import ENV from 'nanowrimo/config/environment';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-export default DS.JSONAPIAdapter.extend({
+export default JSONAPIAdapter.extend({
   session: service(),
 
   host: ENV.APP.API_HOST,
