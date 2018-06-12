@@ -1,12 +1,8 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
-
-const {
-  Model,
-  attr,
-  hasMany
-} = DS;
 
 export default Model.extend({
   avatar: attr('string'),
