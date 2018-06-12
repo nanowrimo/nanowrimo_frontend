@@ -1,10 +1,48 @@
-<div class="nano-panel right-resize with-tabs">
+<div class="nano-panel with-tabs">
   <ul class="nano-panel-tabs">
     <li>{{link-to 'goal' 'authenticated.project.show'}}</li>
     <li>{{link-to 'details' 'authenticated.project.show.index'}}</li>
   </ul>
   {{#if hasDetails}}  
-    <div>Details</div>
+    <div class ='nano-card'>
+      <div id='split-project-display'>
+        <div id='large-project-cover' class='split'>
+
+          <img src={{project.cover}}>
+        </div>
+        <div id='project-information' class='split'>
+          <div id='project-summary-label'>Summary</div>
+          <div id='project-summary'>
+            {{project.summary}}
+          </div>
+          <div id='genres-and-links'>
+            <div id='genres-label'>Genres</div>
+            <div id='genre-list'>
+              {{#each project.genres as |genre|}}
+                <span class='genre'>{{genre.name}}</span>
+              {{/each}}
+            </div>
+            <hr>
+            <div id='external-links'>
+              {{#if project.playlist_url}}
+                <i class="fa fa-music" aria-hidden="true"></i>
+                <a href='{{project.playlist_url}}' target='_blank'>Listen to the soundtrack</a>
+              {{/if}}
+              {{#if project.pinterest_url}}
+                <i class="fa fa-pinterest" aria-hidden="true"></i>
+                <a href='{{project.pinterest_url}}' target='_blank'>View the inspiration</a>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='nano-card'>
+        <div id='project-excerpt-display'>
+          <div id='project-excerpt-label'>Excerpt</div>
+          <div id='project-excerpt'>{{project.excerpt}}</div>
+        </div>
+    </div>
   {{else}}
     <div id='project-needs-details'>
         <div id="texts">
@@ -22,6 +60,6 @@
   {{/if}}
 
 </div>
-
+ 
 
 

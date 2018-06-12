@@ -81,6 +81,88 @@
   }
 }
 
+#split-project-display {
+  height: 630px;
+  margin: 0px auto;
+  
+  .split{ 
+    border-radius: 6px;
+    border: 1px solid #2f3061;
+    float: left;
+    height: 630px;
+    width: 460px;
+  }
+  
+  
+  #large-project-cover {
+    position: relative;
+    background: #cfcfcf;
+    /* box-shadow: 7px 7px -3px -3px #2f3061; */
+  }
+  
+  #project-information {
+    /* box-shadow: 7px 7px 0px 0px #2f3061; */
+    padding: 28px;
+    background: #e2eff3;
+    
+    #project-summary-label {
+      font-family: "SourceSansPro-Regular", sans-serif;
+      font-size: 14px;
+    }
+    #project-summary {
+      font-family: "SourceSerifPro-Regular", serif;
+      font-size: 16px;
+    }
+    #genres-and-links {
+      position: absolute;
+      bottom: 27px;
+      
+      #genres-label {
+        font-family:'SourceSansPro-Regular', sans-serif;
+        font-size: 14px;
+        color: #979797;
+        padding-bottom: 7px;
+      }
+      #genres-list {
+        
+        .genre {
+          font-family: 'SourceSerifPro-Regular', serif;
+          font-color: #343434;
+          font-size: 18px;
+          margin-right: 21px;
+        }
+      }
+      #external-links {
+        a {
+          font-family: SourceSerifPro, serif;
+          font-size: 16px;
+          color: #343434;
+        }
+      }
+    }
+  }
+}
+
+#project-excerpt-display {
+  padding: 28px;
+  
+  #project-excerpt-label {
+    font-family: "SourceSansPro", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #979797;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+  #project-excerpt {
+    font-family: "SourceSansPro", sans-serif;
+    font-size: 16px;
+    line-height: 1.38;
+    color: #343434;
+  }
+}
+
+
 #project-needs-details {
   position: relative;
   border: 2px dashed #e5e5e5;

@@ -14,6 +14,10 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   user: DS.belongsTo('user'),
   writingType: DS.attr('string'),
+  summary: DS.attr('string'),
+  excerpt: DS.attr('string'),
+  playlist_url: DS.attr('string'),
+  pinterest_url: DS.attr('string'),
   
   displayChallenge: computed("user", "challenges.[]", function(){
     //let tz = this.get('user').get('timeZone');
