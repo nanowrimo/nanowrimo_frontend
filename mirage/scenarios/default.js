@@ -8,22 +8,15 @@ export default function(server) {
   server.createList('external-link', 2, { user });
   server.createList('favorite-book', 3, { user });
   server.createList('favorite-author', 3, { user });
-
-  // Prior demo; replace with realistic Projects and Genres
-  let projects = server.createList('project', 3, {user: user});
-  let genres = server.createList('genre', 5);
-  
+  let projects = server.createList('project', 3, { user });
   let challenge = server.create('challenge');
+  let genres = server.createList('genre', 5);
   projects.forEach(function(project) {
     server.create('project-challenge', { project, challenge });
     sampleSize(genres, 2).forEach(function(genre) {
       server.create('project-genre', { project, genre })
     });
   });
-  //set the first project to have a count of 50321
-  projects[0].count= 50321; 
-  
   server.createList('fundometer', 5);
   server.create('flash-banner');
-  
 }

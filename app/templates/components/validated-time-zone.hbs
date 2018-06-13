@@ -2,7 +2,7 @@
 <select id={{name}} name={{name}} class={{selectClasses}}
   onchange={{action (mut value) value="target.value"}}>
   {{#each timeZoneOptions as |option|}}
-    <option value={{option.value}} selected={{is-equal option.value value}}>
+    <option value={{option.value}} selected={{eq option.value value}}>
       {{option.name}}
     </option>
   {{/each}}

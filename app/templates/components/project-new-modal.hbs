@@ -1,0 +1,148 @@
+{{#bs-modal
+  open=open
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    This is a Great Start!
+  {{/modal.header}}
+  {{#form-for
+    data-test-project-form=true
+    afterSubmit=modal.close
+    model=project
+    steps=steps
+    as |f|
+  }}
+    {{#modal.body}}
+
+      <div class="row">
+        <div class="col-4 text-center">
+          {{#if (eq f.currentStepIndex 0)}}
+            <strong>Overview</strong>
+          {{else}}
+            <strike>Overview</strike>
+          {{/if}}
+        </div>
+        <div class="col-4 text-center">
+          {{#if (eq f.currentStepIndex 1)}}
+            <strong>Goal</strong>
+          {{else if (gt f.currentStepIndex 1)}}
+            <strike>Goal</strike>
+          {{else}}
+            Goal
+          {{/if}}
+        </div>
+        <div class="col-4 text-center">
+          {{#if f.isLastStep}}
+            <strong>Details</strong>
+          {{else}}
+            Details
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="tab-content">
+
+        {{#if (eq f.currentStepIndex 0)}}
+
+          <div class="form-group">
+            {{f.input
+              label="What is the name of your project?"
+              property="title"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="What is the project status?"
+              options=optionsForStatus
+              property="status"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="How much privacy do you want?"
+              options=optionsForPrivacy
+              property="privacy"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="What type of project is this?"
+              options=optionsForWritingType
+              property="writingType"
+            }}
+          </div>
+
+        {{else if (eq f.currentStepIndex 1)}}
+
+          {{challenge-editor challenge=challenge}}
+
+        {{else}}
+
+          <div class="form-group">
+            {{f.imageUpload
+              label="Add your cover art"
+              property="cover"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.input
+              label="What is the current word count?"
+              property="wordCount"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.multiselect
+              createOptionModel="genre"
+              label="What is/are the genre(s)?"
+              options=optionsForGenres
+              property="genres"
+              searchField="name"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.textarea
+              label="Add a project summary"
+              property="summary"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.textarea
+              label="Add an excerpt"
+              property="excerpt"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.input
+              label="What is the project's Pinterest?"
+              placeholder="https://"
+              property="pinterestUrl"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.input
+              label="What is the project's playlist?"
+              placeholder="https://"
+              property="playlistUrl"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.checkbox
+              label="Make this my primary project"
+              property="primary"
+            }}
+          </div>
+
+        {{/if}}
+
+      </div>
+
+    {{/modal.body}}
+    {{#modal.footer}}
+
+      <input type="submit" class="btn-secondary btn-green" value={{if f.isLastStep "Save Project" (if (eq f.currentStepIndex 0) "On To Your Goal" "On To Details")}} data-test-project-submit />
+      <input type="button" class="btn-underlined" value="Cancel" {{action modal.close}} data-test-project-cancel />
+
+    {{/modal.footer}}
+  {{/form-for}}
+{{/bs-modal}}
