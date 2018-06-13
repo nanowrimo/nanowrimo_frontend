@@ -51,7 +51,7 @@
 
 body {
   @media (min-width: $screen-sm) {
-    background-color: #e2eff3;
+    background-color: $nano-lightblue;
     background-image: url("/images/backgrounds/camp_back.png");
     background-repeat: repeat-x; 
     background-position: bottom;
@@ -91,7 +91,7 @@ body {
     line-height: 1.38;
     letter-spacing: 0.3px;
     text-align: left;
-    color: #979797;
+    color: $nano-mediumgrey;
   }
 }
 .full-width {
@@ -112,9 +112,9 @@ button.btn {
   margin-top: 4px;
   margin-bottom: 4px;
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, #73ab9b, #5f8c7f);
-  border: solid 1px #5f8c7f;
-  color: #E2EFF3;
+  background-image: linear-gradient(to bottom, $nano-mediumgreen, $nano-darkgreen);
+  border: solid 1px $nano-darkgreen;
+  color: $nano-lightblue;
   font-size: 16px;
   text-transform: uppercase;
   line-height: 16px;
@@ -142,13 +142,13 @@ button.btn {
     font-family: FontAwesome;
     font-size: 20px;
     line-height: 1.1;
-    color: #6595a3;
+    color: $nano-mediumblue;
     position: absolute;
     bottom: 0;
     right: 0;
     align-content: center;
     &:hover {
-      color: #6595a3;
+      color: $nano-mediumblue;
     }
     &.is-invalid {
       bottom: 24px;
@@ -168,7 +168,7 @@ button.btn {
   width: 100%;
   overflow: hidden;
   text-align: center;
-  color: #b8b8b8;
+  color: $nano-lightgrey;
   font-family: 'SourceSansPro-Bold', sans-serif;
   font-size: 12px;
   margin-top: 15px;

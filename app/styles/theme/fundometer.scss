@@ -17,7 +17,7 @@
       font-family: SourceSansPro-Bold;
       font-size: 10px;
       letter-spacing: 0.2px;
-      color: #2f3061;
+      color: $nano-darkblue;
       text-transform: uppercase;
       text-align: center;
       margin-top: 5px;
@@ -35,18 +35,18 @@
     line-height: 1.38;
     letter-spacing: normal;
     text-align: center;
-    color: #343434;
+    color: $nano-darkgrey;
     div {
       flex: 0 0 auto;
       &.fundometer-raised {
         font-family: SourceSerifPro-Bold;
         font-size: 20px;
         line-height: 1.25;
-        color: #2f3061;
+        color: $nano-darkblue;
         margin-bottom: 10px;
       }
       a {
-        color: #343434;
+        color: $nano-darkgrey;
         text-decoration: underline;
       }
     }

@@ -1,0 +1,75 @@
+.badges {
+  margin: auto;
+  /*background-color: #ff0000;*/
+  @media (max-width: $screen-xs) {
+    width: 220px;
+    :nth-child(5n-2) {
+      margin-right: 0px;
+    }
+    :nth-child(5n-1) {
+      margin-left: 40px;
+    }
+  }
+  @media (min-width: $screen-xs) and (max-width: $screen-xs-max) {
+    width: 454px;
+    :nth-child(11n-5) {
+      margin-right: 0px;
+    }
+    :nth-child(11n-4) {
+      margin-left: 40px;
+    }
+  }
+  @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    width: 532px;
+    :nth-child(13n-6) {
+      margin-right: 0px;
+    }
+    :nth-child(13n-5) {
+      margin-left: 40px;
+    }
+  }
+  @media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    width: 376px;
+    :nth-child(9n-4) {
+      margin-right: 0px;
+    }
+    :nth-child(9n-3) {
+      margin-left: 40px;
+    }
+  }
+  @media (min-width: $screen-lg) {
+    width: 338px;
+    :nth-child(8n) {
+      margin-right: 0px;
+    }
+    :nth-child(8n-3) {
+      margin-left: 40px;
+    }
+  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  li{
+    flex: 0 0 64px;
+    height: 68px;
+    margin-right: 14px;
+    /*background-color: #0000FF;*/
+    border-radius: 12px;
+    overflow: visible;
+    list-style-type: none;
+    img {
+      width: 64px;
+      height: auto;
+      margin-top: -2px;
+    }
+  }
+}
+.nano-card-icon {
+  &.badge-large {
+    height: 120px;
+    img {
+      width: 130px;
+      height: 147px;
+    }
+  }
+}

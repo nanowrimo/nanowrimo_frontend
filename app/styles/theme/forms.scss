@@ -4,7 +4,7 @@
     font-family: 'SourceSansPro-Regular', sans-serif;
     font-size: 14px;
     text-align: left;
-    color: #979797;
+    color: $nano-mediumgrey;
     margin-bottom: 3px;
   }
   .ember-checkbox {
@@ -25,7 +25,7 @@
     font-family: 'SourceSansPro-Regular', sans-serif;
     font-size: 20px;
     line-height: 22px;
-    color: #343434;
+    color: $nano-darkgrey;
     text-align: left;
     &.is-invalid {
       border-color: #e37f82;
@@ -82,9 +82,9 @@ select.form-control {
   padding: 4px;
   padding-left: 0px;
   font-size: 16px;
-  color: #343434;
+  color: $nano-darkgrey;
   border: none;
-  border-bottom: 2px solid #979797;
+  border-bottom: 2px solid $nano-mediumgrey;
   border-radius: 0;
   -webkit-appearance: none;
 }
@@ -92,7 +92,7 @@ select.form-control:focus {
   background-color: transparent;
   outline: none;
   border: none;
-  border-bottom: 1px solid #979797;
+  border-bottom: 1px solid $nano-mediumgrey;
 }
 
 .alert-danger {
@@ -102,45 +102,4 @@ select.form-control:focus {
   color: #e37f82;
   border: 0;
   padding: 0;
-}
-button, input {
-  &.btn-secondary {
-    height: 28px;
-    width: auto;
-    border-radius: 6px;
-    background-image: linear-gradient(to bottom, #75abbc, #6595a3);
-    border: solid 1px #6595a3;
-    font-family: SourceSansPro-Regular;
-    font-size: 14px;
-    font-style: normal;
-    font-stretch: normal;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    line-height: 14px;
-    letter-spacing: 0.3px;
-    text-align: center;
-    color: #e2eff3;
-    &.btn-green {
-      background-image: linear-gradient(to bottom, #73ab9b, #5f8c7f);
-      border: solid 1px #5f8c7f;
-    }
-    &.btn-reversed {
-      background-image: none;
-      background-color: #f2f8fa;
-      border: solid 2px #6595a3;
-      color: #6595a3;
-      padding-top: 0.3rem;
-    }
-    
-  }
-  &.btn-underlined, &.truncate-multiline--button {
-    cursor: pointer;
-    background: transparent;
-    border: 0px;
-    text-decoration: underline;
-    font-family: SourceSansPro-Regular;
-    font-size: 16px;
-    letter-spacing: 0.3px;
-    color: #979797;
-  }
 }

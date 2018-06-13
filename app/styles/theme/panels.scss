@@ -236,6 +236,12 @@
         flex: 1 1 50%;
       }
     }
+    @media (max-width: $screen-xs-max) {
+      grid-template-columns: 1fr;
+      .nano-card {
+        flex-wrap: wrap;
+      }
+    }
   }
   &.with-tabs {
     margin-top: 40px;    flex: 1 1 100%;
@@ -246,21 +252,21 @@
       font-family: 'SourceSansPro-SemiBold', sans-serif;
       font-size: 16px;
       text-align: left;
-      color: #b8b8b8;
+      color: $nano-lightgrey;
       margin-top: -28px;
       li {
         margin-left: 10px;
         margin-right: 10px;
         a {
           font-size: 16px;
-          color: #b8b8b8;
+          color: $nano-lightgrey;
           border-radius: 4px;
           padding-bottom: 8px;
         }
         a.active, a:hover {
           text-decoration: none;
-          color: #75ABBC;
-          background: linear-gradient(to top, #75ABBC 0px,#75ABBC 3px,transparent 3px,transparent 500px);
+          color: $nano-mediumlightblue;
+          background: linear-gradient(to top, $nano-mediumlightblue 0px,$nano-mediumlightblue 3px,transparent 3px,transparent 500px);
 
         }
       }

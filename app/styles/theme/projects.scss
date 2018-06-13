@@ -18,7 +18,7 @@
         font-family: 'SourceSansPro-It', sans-serif;
         font-size: 14px;
         font-style: italic;
-        color: #979797; 
+        color: $nano-mediumgrey; 
       }
       select {
         position: relative;
@@ -125,7 +125,7 @@
           height: 20px;
           font-family: 'SourceSansPro', sans-serif;
           .goal {
-            color: #979797
+            color: $nano-mediumgrey
           }
         }
         .nano-progress-bar{
@@ -139,7 +139,7 @@
           font-size: 14px;
           font-weight: bold;
           .count{
-            color: #75abbc;
+            color: $nano-mediumlightblue;
           }
           .count.goal-met {
             color: #834da9;
@@ -150,7 +150,7 @@
           font-family: 'SourceSansPro-Regular', sans-serif;
           float: right;
           .started {
-            color: #b8b8b8;
+            color: $nano-lightgrey;
           }
         }
       }

@@ -2,10 +2,16 @@
 
 // Body
 
-$body-bg: $nano-background;
+$body-bg: $nano-lightblue;
 $border-radius: 6px;
 
-$screen-xs:                  0px !default;
+// Tiny screen
+$screen-tiny:                  0px !default;
+$screen-tiny-max:              479px !default;
+$screen-tiny-min:              $screen-tiny !default;
+
+// Xtra-Small screen
+$screen-xs:                  480px !default;
 $screen-xs-max:              767px !default;
 $screen-xs-min:              $screen-xs !default;
 $screen-phone:               $screen-xs-min !default;

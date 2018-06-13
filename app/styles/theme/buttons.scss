@@ -1,0 +1,93 @@
+button, input.nano-button {
+  
+  /* Cursor */
+  cursor: pointer;
+  
+  /* Dimensions  and spacing */
+  height: 28px;
+  width: auto;  
+  margin-top: 4px;
+  margin-bottom: 4px;
+  
+  /* Button text */
+  font-family: 'SourceSansPro-Bold', sans-serif;
+  color: $nano-lightblue;
+  font-size: 14px;
+  font-style: normal;
+  font-stretch: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 14px;
+  letter-spacing: 0.3px;
+  text-align: center;
+  
+  /* Background and border */
+  border-radius: 6px;
+  background-image: linear-gradient(to bottom, $nano-mediumgreen, $nano-darkgreen);
+  border: solid 1px $nano-darkgreen;
+  
+  /* Reversed green button */
+  &.button-reversed {
+    background-image: linear-gradient(to bottom, $nano-white-1, $nano-white-2);
+    border: solid 2px $nano-darkgreen;
+    color: $nano-darkgreen;
+    padding-top: 0.3rem;
+  }
+  
+  /* Blue buttons */
+  &.nano-button-blue {
+    background-image: linear-gradient(to bottom, $nano-mediumlightblue, $nano-mediumblue);
+    border: solid 1px $nano-mediumblue;
+    
+    /* Blue buttons reversed */
+    &.button-reversed {
+      border: solid 2px $nano-mediumblue;
+      color: $nano-mediumblue;
+    }
+  }
+  
+  /* Dark blue button */
+  &.nano-button-dark-blue {
+    background-image: linear-gradient(to bottom, #3d5a96, #27437d);
+    border: solid 1px #27437d;
+  }
+  
+  /* Red button */
+  &.nano-button-red {
+    background-image: linear-gradient(to bottom, #d5412c, #bd2815);
+    border: solid 1px #bd2815;
+  }
+  
+  
+  &.nano-button-large {
+    height: 36px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+  
+  &.nano-button-small {
+    height: 22px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  
+  &.btn-underlined, &.truncate-multiline--button {
+    background: transparent;
+    border: 0px;
+    text-decoration: underline;
+    font-family: SourceSansPro-Regular;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    color: $nano-mediumgrey;
+    text-transform: none;
+    
+  }
+}
+
+
+
+
+button.btn {
+  width: 100%;
+  max-width: 394px;
+}
