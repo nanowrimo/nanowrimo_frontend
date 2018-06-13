@@ -3,11 +3,15 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-
+  
 export default Model.extend({
   cover: attr('string'),
   createdAt: attr('date'),
+  excerpt: attr('string'),
+  pinterest_url: attr('string'),
+  playlist_url: attr('string'),
   slug: attr('string'),
+  summary: attr('string'),
   status: attr('string'),
   title: attr('string'),
   unitCount: attr('number'),

@@ -5,9 +5,10 @@ export default Controller.extend({
 
   project: alias('model'),
   
-  hasDetails: computed("model", function(){
+  hasDetails: computed("project", function(){
     //what constitutes 'details'? 
-    return false;
+    let p = this.get('project');
+    return (p.summary!=null || p.excerpt!=null);
   }),
   
   actions: {
