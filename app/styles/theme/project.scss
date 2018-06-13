@@ -76,6 +76,18 @@
       font-size: 16px;
       color: #979797;
       
+      .count{
+        font-size: 56px;
+        font-family: 'SourceSerifPro-Regular', serif;
+        color: $nano-darkblue;
+      }
+      .unit-text {
+        font-weight: bold;
+        font-family: 'SourceSerifPro-Bold', serif;
+        font-size: 16px;
+        color: $nano-mediumgrey;
+        
+      }
     }
   }
 
@@ -176,13 +188,13 @@
   #texts {
     text-align: center;
     font-size: 26px;
-    color: #979797;
+    color: $nano-mediumgrey;
     #line-1 {
     
     }
     #line-2 {
       a{
-        color: #343434;
+        color: $nano-darkgrey;
         text-decoration: underline;
       }
     }

@@ -13,7 +13,7 @@
     border-radius: 6px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    background-image: linear-gradient(to bottom, #73ab9b, #5f8c7f);
+    background-image: linear-gradient(to bottom, $nano-mediumgreen, $nano-darkgreen);
     font-family: SourceSansPro-Bold;
     font-size: 12px;
     letter-spacing: 0.1px;
@@ -35,12 +35,12 @@
       .nav-item {
         font-family: SourceSansPro-Regular;
         font-size: 16px;
-        color: #b8b8b8;
+        color: $nano-lightgrey;
         border-radius: 0px;
         a {
           border-top: 0px;
           border-radius: 6px;
-          color: #b8b8b8;
+          color: $nano-lightgrey;
           height: 39px;
           padding-top: 4px;
           padding-left: 0px;
@@ -48,18 +48,18 @@
           margin-left: 15px;
           margin-right: 15px;
           &:hover {
-            color: #6595a3;
+            color: $nano-mediumblue;
             border-color: transparent;
           }
         }
         &.active {
-          color: #6595a3;
+          color: $nano-mediumblue;
           a {
             border-top-left-radius: 0px;
             border-top-right-radius: 0px;
             border-color: transparent;
-            background: linear-gradient(to top, #75ABBC 0px, #75ABBC 4px, transparent 4px, transparent 500px);
-            color: #6595a3;
+            background: linear-gradient(to top, $nano-mediumlightblue 0px, $nano-mediumlightblue 4px, transparent 4px, transparent 500px);
+            color: $nano-mediumblue;
             background-color: transparent;
           }
         }
@@ -74,7 +74,7 @@
           border-radius: 6px;
           box-shadow: inset 0 1px 4px 0 rgba(151, 151, 151, 0.5);
           background-color: #f7f7f7;
-          border: solid 1px #979797;
+          border: solid 1px $nano-mediumgrey;
           &.ember-checkbox {
             box-shadow: none;
             background-color: transparent;
@@ -86,7 +86,7 @@
           font-family: SourceSansPro-Regular;
           font-size: 16px;
           line-height: 1.31;
-          color: #343434;
+          color: $nano-darkgrey;
         }
         .input-group {
           margin-bottom: 14px;
@@ -94,12 +94,12 @@
             .input-group-text {
               justify-content: center;
               width: 36px;
-              border-color: #979797;
+              border-color: $nano-mediumgrey;
               box-shadow: inset 1px 1px 2px 0 rgba(52, 52, 52, 0.2);
               background-color: #dfe4e6;
               .fa {
                 font-size: 20px;
-                color: #b8b8b8;
+                color: $nano-lightgrey;
               }
             }
           }

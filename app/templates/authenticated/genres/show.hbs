@@ -7,10 +7,10 @@
 
 <p>
   {{link-to 'Edit Genre' 'authenticated.genres.edit' genre.id
-    class="btn btn-outline-primary"
+    class="btn-outline-primary"
     data-test-edit-genre=true
   }}
-  <button {{action "deleteGenre"}} class="btn btn-outline-danger" data-test-delete-genre>
+  <button {{action "deleteGenre"}} class="btn-outline-danger" data-test-delete-genre>
     Delete Genre
   </button>
 </p>

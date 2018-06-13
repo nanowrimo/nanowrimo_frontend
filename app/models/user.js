@@ -36,7 +36,7 @@ export default Model.extend({
   slug: alias('name'),
   projects: hasMany('project'),
 
-  _avatarUrl: null,
+  _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
       let avatar = this.get('avatar');
