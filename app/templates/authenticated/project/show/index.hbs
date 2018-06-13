@@ -1,23 +1,23 @@
-<div class="nano-panel with-tabs">
+<div class="nano-panel with-tabs" id='nano-panel-project'>
   <ul class="nano-panel-tabs">
     <li>{{link-to 'goal' 'authenticated.project.show'}}</li>
     <li>{{link-to 'details' 'authenticated.project.show.index'}}</li>
   </ul>
   {{#if hasDetails}}  
-    <div class ='nano-card'>
-      <div id='split-project-display'>
-        <div id='large-project-cover' class='split'>
-
+    <div class ='nano-card' id='project-details-card'>
+      <div id='project-details'>
+        <div id='project-cover-large'>
           <img src={{project.cover}}>
         </div>
-        <div id='project-information' class='split'>
+        <div id='project-information' >
+          <div id='project-title'>{{project.title}}</div>
           <div id='project-summary-label'>Summary</div>
           <div id='project-summary'>
             {{project.summary}}
           </div>
           <div id='genres-and-links'>
             <div id='genres-label'>Genres</div>
-            <div id='genre-list'>
+            <div id='genres-list'>
               {{#each project.genres as |genre|}}
                 <span class='genre'>{{genre.name}}</span>
               {{/each}}
@@ -25,19 +25,27 @@
             <hr>
             <div id='external-links'>
               {{#if project.playlist_url}}
-                <i class="fa fa-music" aria-hidden="true"></i>
-                <a href='{{project.playlist_url}}' target='_blank'>Listen to the soundtrack</a>
+                <span class='external-link'>
+                  <a href='{{project.playlist_url}}' target='_blank'>
+                    <i class="fa fa-music" aria-hidden="true"></i>
+                    Listen to the soundtrack
+                  </a>
+                </span>
               {{/if}}
               {{#if project.pinterest_url}}
-                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                <a href='{{project.pinterest_url}}' target='_blank'>View the inspiration</a>
+                <span class='external-link'>
+                  <a href='{{project.pinterest_url}}' target='_blank'>
+                    <i class="fa fa-pinterest" aria-hidden="true"></i>
+                    View the inspiration
+                  </a>
+                </span>
               {{/if}}
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class='nano-card'>
+    <div class='nano-card' id='project-excerpt-card'>
         <div id='project-excerpt-display'>
           <div id='project-excerpt-label'>Excerpt</div>
           <div id='project-excerpt'>{{project.excerpt}}</div>
