@@ -2,21 +2,24 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
-import { isEmpty } from '@ember/utils';
-  
-export default Model.extend({
+// import { isEmpty } from '@ember/utils';
+
+const Project = Model.extend({
   cover: attr('string'),
   createdAt: attr('date'),
   excerpt: attr('string'),
-  pinterest_url: attr('string'),
-  playlist_url: attr('string'),
+  pinterestUrl: attr('string'),
+  playlistUrl: attr('string'),
+  primary: attr('boolean'),
+  privacy: attr('string', { defaultValue: 'Only I Can See' }),
   slug: attr('string'),
   summary: attr('string'),
-  status: attr('string'),
+  status: attr('string', { defaultValue: 'In Progress' }),
   title: attr('string'),
   unitCount: attr('number'),
   unitType: attr('string'),
-  writingType: attr('string'),
+  wordCount: attr('number'),
+  writingType: attr('string', { defaultValue: 'Novel' }),
 
   challenges: hasMany('challenge'),
   genres: hasMany('genre'),
@@ -25,6 +28,7 @@ export default Model.extend({
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
+
   concatGenres: computed('genres.[]', function() {
     let genreNames = this.get('genres').mapBy('name');
     return genreNames.join(", ");
@@ -34,9 +38,24 @@ export default Model.extend({
     //console.log(tz);
   }),
   relationshipErrors: computed('genres.[]', function() {
-    if (isEmpty(this.get('genres'))) {
-      return { genres: 'Must select at least one genre' };
-    }
+    // if (isEmpty(this.get('genres'))) {
+    //   return { genres: 'Must select at least one genre' };
+    // }
     return null;
   })
 });
+
+Project.reopenClass({
+  optionsForStatus: [
+    'In Progress',
+    'Completed'
+  ],
+  optionsForPrivacy: [
+    'Only I Can See'
+  ],
+  optionsForWritingType: [
+    'Novel'
+  ]
+});
+
+export default Project;

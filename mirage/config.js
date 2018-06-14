@@ -46,6 +46,7 @@ export default function() {
 
   // CRUD
 
+  this.resource('challenges', { only: ['index'] });
   this.resource('external-links', { only: ['create', 'update'] });
   this.del('external-links/:id', ({ externalLinks }, request) => {
     let id = request.params.id;
@@ -64,7 +65,6 @@ export default function() {
     favoriteBooks.find(id).destroy();
     return { meta: {} };
   });
-
   this.resource('genre', { except: ['delete'] });
   this.del('genres/:id', ({ genres }, request) => {
     let id = request.params.id;
@@ -82,11 +82,13 @@ export default function() {
     let genreIds = attrs.genreIds;
     delete attrs.genreIds;
     let project = projects.create(attrs);
-    for (let i=0; i<genreIds.length; i++) {
-      projectGenres.create({
-        projectId: project.attrs.id,
-        genreId: genreIds[i]
-      });
+    if (genreIds) {
+      for (let i=0; i<genreIds.length; i++) {
+        projectGenres.create({
+          projectId: project.attrs.id,
+          genreId: genreIds[i]
+        });
+      }
     }
     return project;
   });
