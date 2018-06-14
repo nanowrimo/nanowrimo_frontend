@@ -75,6 +75,7 @@
       
       .project-cover {
         flex: 0 0 189px;
+        height: 200px;
         @media(max-width: $screen-md) {
           order: 3;
         }
@@ -82,13 +83,13 @@
           position: absolute;
           bottom: 0px;
           width: 189px;
-          height: 170px;
+          height: 172px;
           clip-path: inset(0px 0px 0px -50px);
           img {
             transform: rotate(-15deg);
             transform-origin: bottom right;
-            width: 128px;
-            height: 170px;
+            width: 122px;
+            height: 172px;
             border-radius: 3px;
           }
         }
@@ -116,9 +117,7 @@
         margin-top: 18px;
         width: 352px;
         flex: 0 0 352px;
-        @media(max-width: $screen-md) {
-          margin-bottom: 144px;
-        }
+ 
         .goal-text{ 
           margin-bottom: 7.5px;
           font-size: 16px;

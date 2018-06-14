@@ -25,6 +25,18 @@ const Project = Model.extend({
   genres: hasMany('genre'),
   user: belongsTo('user'),
 
+
+  _coverUrl: "/images/projects/unknown-cover.png",
+  coverUrl: computed('cover', {
+    get() {
+      let cover = this.get('cover');
+      if (cover && cover.includes(':')) {
+        this.set('_coverUrl', cover);
+      }
+      return this.get('_coverUrl');
+    }
+  }),
+  
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
