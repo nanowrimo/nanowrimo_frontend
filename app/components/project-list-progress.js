@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import moment from 'moment';
 
 export default Component.extend({
@@ -10,7 +10,7 @@ export default Component.extend({
   formattedStart: computed("project.challenges.[]", function(){
     let proj = this.get('project');
     if (proj) {
-      let start = proj.challenges.firstObject.startsOn;
+      let start = get(proj, 'challenges.firstObject.startsOn');
       let time = moment(start);
       if (time.month()===4) {
         //may does not need to be formatted with a period
@@ -25,7 +25,7 @@ export default Component.extend({
     let proj = this.get('project');
     if (proj) {
       //let dc = proj.displayChallenge;
-      return proj.challenges.firstObject.defaultGoal;
+      return get(proj, 'challenges.firstObject.defaultGoal');
     } else {
       return 0;
     }
@@ -33,8 +33,8 @@ export default Component.extend({
   goalMet: computed("percentCompleted", function(){
     return this.get('percentCompleted') === 100;
   }),
-  
-  
+
+
   percentCompleted: computed("goal","project.unitCount",function(){
     let proj = this.get('project');
     if (proj) {
