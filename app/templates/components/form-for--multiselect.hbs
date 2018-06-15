@@ -10,10 +10,12 @@
     options=unselectedOptions
     selected=(get model property)
     searchField=searchField
+    searchEnabled=searchEnabled
     showCreatePosition="bottom"
     showCreateWhen=(action "showCreateWhen")
     onchange=(action (mut (get model property)))
     oncreate=(action "createOption")
+    dropdownClass="in-modal-dropdown"
     as |option|
   }}
     {{get option searchField}}
