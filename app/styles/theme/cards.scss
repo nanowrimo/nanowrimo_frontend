@@ -140,6 +140,7 @@
           padding-bottom: 21px;
           .side-by-side-even {
             display: flex;
+            flex-direction: column;
             align-items: center;
             flex: 1 1 100%;
             font-family: SourceSerifPro-Regular;

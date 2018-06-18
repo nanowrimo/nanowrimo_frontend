@@ -15,30 +15,60 @@
   }}
     {{#modal.body}}
 
-      <div class="row">
-        <div class="col-4 text-center">
-          {{#if (eq f.currentStepIndex 0)}}
-            <strong>Overview</strong>
-          {{else}}
-            <strike>Overview</strike>
-          {{/if}}
-        </div>
-        <div class="col-4 text-center">
-          {{#if (eq f.currentStepIndex 1)}}
-            <strong>Goal</strong>
-          {{else if (gt f.currentStepIndex 1)}}
-            <strike>Goal</strike>
-          {{else}}
-            Goal
-          {{/if}}
-        </div>
-        <div class="col-4 text-center">
-          {{#if f.isLastStep}}
-            <strong>Details</strong>
-          {{else}}
-            Details
-          {{/if}}
-        </div>
+      <div class="steps">
+        {{#if (eq f.currentStepIndex 0)}}
+          <div class="step step-current">
+            <div>Overview</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          <div class="step step-completed">
+            <div>Overview</div>
+            <div>{{fa-icon "check-circle"}}</div>
+          </div>
+        {{/if}}
+        {{#if (eq f.currentStepIndex 1)}}
+          <div class="step-connector connector-blue">
+            <hr />
+          </div>
+          <div class="step step-current">
+            <div>Goal</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else if (gt f.currentStepIndex 1)}}
+          <div class="step-connector connector-blue">
+            <hr />
+          </div>
+          <div class="step step-completed">
+            <div>Goal</div>
+            <div>{{fa-icon "check-circle"}}</div>
+          </div>
+        {{else}}
+          <div class="step-connector">
+            <hr />
+          </div>
+          <div class="step">
+            <div>Goal</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{/if}}
+        {{#if f.isLastStep}}
+          <div class="step-connector connector-blue">
+            <hr />
+          </div>
+          <div class="step step-current">
+            <div>Details</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          <div class="step-connector">
+            <hr />
+          </div>
+          <div class="step">
+            <div>Details</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{/if}}
       </div>
 
       <div class="tab-content">
@@ -140,8 +170,8 @@
     {{/modal.body}}
     {{#modal.footer}}
 
-      <input type="submit" class="btn-secondary btn-green" value={{if f.isLastStep "Save Project" (if (eq f.currentStepIndex 0) "On To Your Goal" "On To Details")}} data-test-project-submit />
-      <input type="button" class="btn-underlined" value="Cancel" {{action modal.close}} data-test-project-cancel />
+      <input type="submit" class="nano-button" value={{if f.isLastStep "Save Project" (if (eq f.currentStepIndex 0) "On To Your Goal" "On To Details")}} data-test-project-submit />
+      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} data-test-project-cancel />
 
     {{/modal.footer}}
   {{/form-for}}
