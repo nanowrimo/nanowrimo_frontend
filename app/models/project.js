@@ -11,7 +11,7 @@ const Project = Model.extend({
   pinterestUrl: attr('string'),
   playlistUrl: attr('string'),
   primary: attr('boolean'),
-  privacy: attr('string', { defaultValue: 'Only I Can See' }),
+  privacy: attr('number', { defaultValue: '0' }),
   slug: attr('string'),
   summary: attr('string'),
   status: attr('string', { defaultValue: 'In Progress' }),
@@ -19,12 +19,24 @@ const Project = Model.extend({
   unitCount: attr('number'),
   unitType: attr('string'),
   wordCount: attr('number'),
-  writingType: attr('string', { defaultValue: 'Novel' }),
+  writingType: attr('number', { defaultValue: '0' }),
 
   challenges: hasMany('challenge'),
   genres: hasMany('genre'),
   user: belongsTo('user'),
 
+
+  _coverUrl: "/images/projects/unknown-cover.png",
+  coverUrl: computed('cover', {
+    get() {
+      let cover = this.get('cover');
+      if (cover && cover.includes(':')) {
+        this.set('_coverUrl', cover);
+      }
+      return this.get('_coverUrl');
+    }
+  }),
+  
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
@@ -46,15 +58,48 @@ const Project = Model.extend({
 });
 
 Project.reopenClass({
+  /* Some options are enumerated in the Rails API
+   *  before editing these options, check that they match the API
+   *  */ 
   optionsForStatus: [
     'In Progress',
     'Completed'
   ],
-  optionsForPrivacy: [
-    'Only I Can See'
-  ],
+  /* from the API: 
+    ## PRIVACY ## 
+  # Privacy is an integer value representing which group of users
+  # an author has allowed to view a project.
+  # 0 = self
+  # 1 = buddies and MLs
+  # 2 = buddies of buddies, and MLs
+  # 3 = any signed in user
+  */
+  optionsForPrivacy: 
+  [
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+    
+  ], 
+  
+  // writing_type is an integer value representing the type of project 
+  // the author is working on
+  //  0 = Novel
+  //  1 = Short Stories
+  //  2 = Memoir
+  //  3 = Script
+  //  4 = Nonfiction
+  //  5 = Poetry
+  //  6 = Other
   optionsForWritingType: [
-    'Novel'
+    {value:'0', name:'Novel'},
+    {value:'1', name:'Short Stories'},
+    {value:'2', name:'Memoir'},
+    {value:'3', name:'Script'},
+    {value:'4', name:'Nonfiction'},
+    {value:'5', name:'Poetry'},
+    {value:'6', name:'Other'}
   ]
 });
 

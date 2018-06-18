@@ -11,7 +11,6 @@ const Challenge = Model.extend({
   startsOn: attr('date'),
   unitType: attr('string'),
 
-  primaryChallengeProjects: hasMany('project', { inverse: 'primaryChallenge' }),
   projects: hasMany('project')
 });
 
