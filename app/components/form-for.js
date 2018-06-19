@@ -53,23 +53,23 @@ export default Component.extend({
   _checkRelationships() {
     let relationships = this.get('checkRelationships');
     let rel_array = [];
-    relationships.forEach((r) => {
-      //get the model's relationship models
-      let models = this.get(`model.${r}`);
-      //let models = this.get('model').get(r);
-      console.log(models);
-      //loop through the models
-      models.forEach((m)=>{
-        // does the model have an id? 
-        if(!m.id) {
-          // no id, the item needs to be saved
-          //save the model and push onto the relationship array
-         rel_array.push( m.save() );
-        }
+    if (relationships) {
+      relationships.forEach((r) => {
+        //get the model's relationship models
+        let models = this.get(`model.${r}`);
+        //let models = this.get('model').get(r);
+        //loop through the models
+        models.forEach((m)=>{
+          // does the model have an id? 
+          if(!m.id) {
+            // no id, the item needs to be saved
+            //save the model and push onto the relationship array
+           rel_array.push( m.save() );
+          }
+        });
       });
-    });
+    }
     return rel_array;
-    
   },
   
   _factoryForValidator(model) {
