@@ -7,11 +7,12 @@ import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
 export default Component.extend({
+  checkRelationships: null, //an array of relationships that may need saving 
   currentStepIndex: 0,
   hasAttemptedSubmit: false,
   model: null,
   steps: null, // {(property<string>[])[]}
-
+  
   _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
     let propertiesForStep = this.get('steps').objectAt(this.get('currentStepIndex'));
     if (propertiesForStep) {
@@ -49,6 +50,28 @@ export default Component.extend({
     if (callback) { callback(args); }
   },
 
+  _checkRelationships() {
+    let relationships = this.get('checkRelationships');
+    let rel_array = [];
+    relationships.forEach((r) => {
+      //get the model's relationship models
+      let models = this.get(`model.${r}`);
+      //let models = this.get('model').get(r);
+      console.log(models);
+      //loop through the models
+      models.forEach((m)=>{
+        // does the model have an id? 
+        if(!m.id) {
+          // no id, the item needs to be saved
+          //save the model and push onto the relationship array
+         rel_array.push( m.save() );
+        }
+      });
+    });
+    return rel_array;
+    
+  },
+  
   _factoryForValidator(model) {
     let { modelName } = model.constructor;
 
@@ -69,13 +92,17 @@ export default Component.extend({
         let changeset = this.get('changeset');
         if (isNone(this.get('model.relationshipErrors')) && changeset.get('isValid')) {
           let modelIsNew = this.get('model.isNew');
-          return changeset.save()
-          .then(() => {
-            this._callAction('afterSubmit', modelIsNew);
-          })
-          .catch((error) => {
-            this._callAction('afterError', error);
+          Promise.all(this._checkRelationships())
+          .then(()=>{          
+            return changeset.save()
+            .then(() => {
+              this._callAction('afterSubmit', modelIsNew);
+            })
+            .catch((error) => {
+              this._callAction('afterError', error);
+            });
           });
+          
         } else {
           this.set('hasAttemptedSubmit', true);
         }
