@@ -64,6 +64,10 @@ export default Component.extend({
   },
 
   actions: {
+    goToStep() {
+      alert('yse');
+    },
+    
     submitForm() {
       if (this.get('isLastStep')) {
         let changeset = this.get('changeset');

@@ -238,3 +238,20 @@ ul {
   text-transform: capitalize;
   padding-left: 0px;
 }
+
+// ----------------------------------
+// Side by side content
+// ----------------------------------
+
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  @media (max-width: $screen-md) {
+    flex-wrap: wrap;
+  }
+  .side-by-side-even {
+    width: 47%;
+  }
+}

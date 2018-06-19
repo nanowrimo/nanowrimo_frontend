@@ -18,6 +18,13 @@ export default Component.extend({
     return Challenge.optionsForUnitType;
   }),
 
+  steps: computed(function() {
+    return [
+      ['eventType', 'defaultGoal', 'unitType', 'startsOn', 'endsOn'],
+    ]
+  }),
+
+  
   init() {
     this._super(...arguments);
     let challenge = this.get('challenge');

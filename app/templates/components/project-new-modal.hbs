@@ -9,6 +9,7 @@
   {{#form-for
     data-test-project-form=true
     afterSubmit=modal.close
+    currentStepIndex=formStepOverride
     model=project
     steps=steps
     as |f|
@@ -22,7 +23,7 @@
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}
-          <div class="step step-completed">
+          <div class="step step-completed" {{action "setStep" 0}}>
             <div>Overview</div>
             <div>{{fa-icon "check-circle"}}</div>
           </div>
@@ -39,7 +40,7 @@
           <div class="step-connector connector-blue">
             <hr />
           </div>
-          <div class="step step-completed">
+          <div class="step step-completed" {{action "setStep" 1}}>
             <div>Goal</div>
             <div>{{fa-icon "check-circle"}}</div>
           </div>
