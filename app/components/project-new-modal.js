@@ -15,7 +15,9 @@ export default Component.extend({
   open: null,
   project: null,
   user: null,
-  
+  formStepOverride: 0,
+
+
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
@@ -32,7 +34,7 @@ export default Component.extend({
   steps: computed(function() {
     return [
       ['title', 'status', 'privacy', 'writingType'],
-      [],
+      ['eventType', 'defaultGoal', 'unitType', 'startsOn', 'endsOn'],
       ['wordCount', 'summary', 'excerpt', 'pinterest', 'playlist']
     ]
   }),
@@ -47,6 +49,10 @@ export default Component.extend({
   },
 
   actions: {
+    setStep(stepNum) {
+      this.set("formStepOverride", stepNum);
+    },
+    
     onHidden() {
       let callback = this.get('onHidden');
       if (callback) {

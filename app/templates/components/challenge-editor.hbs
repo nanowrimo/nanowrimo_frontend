@@ -1,40 +1,51 @@
-<div class="form-group">
-  {{form-for--select
-    changeset=changeset
-    label="What type of goal is this?"
-    options=optionsForEventType
-    property="eventType"
-  }}
-</div>
-<div class="form-group">
-  {{form-for--input
-    changeset=changeset
-    label="What is your goal?"
-    property="defaultGoal"
-    type='number'
-  }}
-</div>
-<div class="form-group">
-  {{form-for--select
-    changeset=changeset
-    label=""
-    options=optionsForUnitType
-    property="unitType"
-  }}
-</div>
-<div class="form-group">
-  {{form-for--input
-    changeset=changeset
-    label="When do you start?"
-    property="startsOn"
-    type='date'
-  }}
-</div>
-<div class="form-group">
-  {{form-for--input
-    changeset=changeset
-    label="When do you end?"
-    property="endsOn"
-    type='date'
-  }}
-</div>
+{{#form-for
+  data-test-project-form=true
+  afterSubmit=modal.close
+  model=challenge
+  as |c|
+}}
+  <div class="form-group">
+    {{c.select
+      changeset=changeset
+      label="What type of goal is this?"
+      options=optionsForEventType
+      property="eventType"
+    }}
+  </div>
+  <div class="side-by-side">
+    <div class="form-group side-by-side-even">
+      {{c.input
+        changeset=changeset
+        label="What is your goal?"
+        property="defaultGoal"
+        type='number'
+      }}
+    </div>
+    <div class="form-group side-by-side-even">
+      {{c.select
+        changeset=changeset
+        label=""
+        options=optionsForUnitType
+        property="unitType"
+      }}
+    </div>
+  </div>
+  <div class="side-by-side">
+    <div class="form-group side-by-side-even">
+      {{c.input
+        changeset=changeset
+        label="When do you start?"
+        property="startsOn"
+        type='date'
+      }}
+    </div>
+    <div class="form-group side-by-side-even">
+      {{c.input
+        changeset=changeset
+        label="When do you end?"
+        property="endsOn"
+        type='date'
+      }}
+    </div>
+  </div>
+{{/form-for}}

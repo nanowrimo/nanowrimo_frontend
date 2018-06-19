@@ -26,6 +26,62 @@
   }
   .modal-body {
     padding: 0px;
+    .steps {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 63px;
+      background-color: #ffffff;
+      .step {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 70px;
+        font-family: 'SourceSansPro-Regular', sans-serif;
+        font-size: 14px;
+        text-align: center;
+        color: $nano-mediumgrey;
+        &.step-current {
+          color: $nano-mediumblue;
+        }
+        &.step-completed {
+          color: $nano-mediumblue;
+          cursor: pointer;
+        }
+        div {
+          width: 100%;
+          
+        }
+      }
+      .step-connector {
+        display: flex;
+        align-items: flex-end;
+        height: 70px;
+        padding-bottom: 8px;
+        width: 48px;
+        margin-left: -19px;
+        margin-right: -19px;
+        overflow: visible;
+        hr {
+          padding: 0;
+          height: 0;
+          width: 48px;
+          max-height: 0;
+          font-size: 1px;
+          line-height: 0;
+          clear: both;
+          border: none;
+          border-top: 1px solid $nano-mediumgrey;
+          border-bottom: 1px solid $nano-mediumgrey;
+        }
+        &.connector-blue {
+          hr {
+            border-top: 1px solid $nano-mediumblue;
+            border-bottom: 1px solid $nano-mediumblue;
+          }
+        }
+      }
+    }
     .nav-tabs {
       height: 34px;
       background-color: #ffffff;
