@@ -10,11 +10,13 @@ export default Component.extend({
   tagName: '',
 
   challenge: null,
+  checkRelationships: null,
   tab: null,
   open: null,
   project: null,
   user: null,
   formStepOverride: 0,
+
 
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
@@ -43,6 +45,7 @@ export default Component.extend({
     assert('Must pass a user into {{project-new-modal}}', user);
     let newProject = this.get('store').createRecord('project', { user });
     this.set('project', newProject);
+    this.set('checkRelationships', ['genres'] );
   },
 
   actions: {
