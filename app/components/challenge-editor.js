@@ -3,6 +3,7 @@ import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
 import Challenge from 'nanowrimo/models/challenge';
+import ProjectChallenge from 'nanowrimo/models/project-challenge';
 
 export default Component.extend({
   store: service(),
@@ -10,13 +11,29 @@ export default Component.extend({
   tagName: '',
 
   challenge: null,
-
-  optionsForEventType: computed(function() {
-    return Challenge.optionsForEventType;
+  projectChallenge: null,
+  
+  optionsForWritingType: computed(function() {
+    return Challenge.optionsForWritingType;
   }),
   optionsForUnitType: computed(function() {
     return Challenge.optionsForUnitType;
   }),
+  
+  disableWritingType: computed(function() {
+    return this.get('challenge.eventType') === 0;
+  }),
+  disableDefaultGoal: computed(function() {
+    return this.get('challenge.eventType') === 0;
+  }),
+  disableUnitType: computed(function() {
+    return this.get('challenge.eventType') === 0;
+  }),
+  disableStartEnd: computed(function() {
+    let et = this.get('challenge.eventType')
+    return  (et === 0 || et === 1);
+  }),
+  
 
   steps: computed(function() {
     return [

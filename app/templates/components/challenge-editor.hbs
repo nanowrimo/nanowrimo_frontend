@@ -8,8 +8,9 @@
     {{c.select
       changeset=changeset
       label="What type of goal is this?"
-      options=optionsForEventType
-      property="eventType"
+      options=optionsForWritingType
+      property="WritingType"
+      isDisabled=disableWritingType
     }}
   </div>
   <div class="side-by-side">
@@ -19,6 +20,7 @@
         label="What is your goal?"
         property="defaultGoal"
         type='number'
+        isDisabled=disableDefaultGoal
       }}
     </div>
     <div class="form-group side-by-side-even">
@@ -27,6 +29,7 @@
         label=""
         options=optionsForUnitType
         property="unitType"
+        isDisabled=disableUnitType
       }}
     </div>
   </div>
@@ -35,16 +38,18 @@
       {{c.input
         changeset=changeset
         label="When do you start?"
-        property="startsOn"
-        type='date'
+        property="startsAt"
+        type='datetime'
+        isDisabled=disableStartEnd
       }}
     </div>
     <div class="form-group side-by-side-even">
       {{c.input
         changeset=changeset
         label="When do you end?"
-        property="endsOn"
-        type='date'
+        property="endsAt"
+        type='datetime'
+        isDisabled=disableStartEnd
       }}
     </div>
   </div>

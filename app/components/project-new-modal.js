@@ -9,7 +9,10 @@ export default Component.extend({
 
   tagName: '',
 
+  associateWithChallenge: false,
+  associatedChallenge: null,
   challenge: null,
+  projectChallenge: null,
   checkRelationships: null,
   tab: null,
   open: null,
@@ -17,7 +20,9 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
 
-
+  optionsForChallenges: computed(function() {
+    return this.get('store').findAll('challenge');
+  }),
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
@@ -49,6 +54,25 @@ export default Component.extend({
   },
 
   actions: {
+    associateChallengeSelect(challengeID) {
+      this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
+      if (this.get("associateWithChallenge") ) {
+        this.set('challenge', this.get("associatedChallenge"));
+      }
+    },
+    clickedAssociateCheckbox(v) {
+      this.toggleProperty("associateWithChallenge");
+      if (this.get('associateWithChallenge')) {
+        //get the challenge
+        if (this.get("associatedChallenge") === null) {
+          //set the challenge id to the id of the first object in options for Challenges
+          this.set('associatedChallenge', this.get('optionsForChallenges.firstObject'));
+        }
+        this.set('challenge', this.get("associatedChallenge"));
+      } else {
+        this.set('challenge', null);
+      }
+    },
     setStep(stepNum) {
       this.set("formStepOverride", stepNum);
     },
