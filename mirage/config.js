@@ -92,7 +92,13 @@ export default function() {
     }
     return project;
   });
-
+  this.post('/project-challenges', function({projectChallenges}){
+    let attrs = this.normalizedRequestAttrs();
+    let projectChallenge = projectChallenges.create(attrs);
+    
+    
+    return projectChallenge;
+  });
   // Google
 
   this.urlPrefix = 'https://www.googleapis.com';

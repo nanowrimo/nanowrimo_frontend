@@ -13,6 +13,7 @@
     model=project
     steps=steps
     checkRelationships=checkRelationships
+    saveAfterSave=projectChallengeChangeset
     as |f|
   }}
     {{#modal.body}}
@@ -104,10 +105,38 @@
               property="writingType"
             }}
           </div>
-
+          
+          {{#if optionsForChallenges}}
+            <div class="form-group">
+              {{input class= 'form-control' 
+                id='associateCheckbox'
+                name='associateCheckbox'
+                type="checkbox"
+                checked=associateWithChallenge
+                change=(action "clickedAssociateCheckbox")
+              }}
+              <label for='associateCheckbox'>Associate with a event (optional)</label>
+            </div>
+            <div class="form-group">
+              <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+                {{#each optionsForChallenges as |c|}}
+                  <option value="{{c.id}}">{{c.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          
+          {{/if}}          
         {{else if (eq f.currentStepIndex 1)}}
+          {{#if (eq challenge.eventType 0)}}
+            <div id='you-chose-nanowrimo'>
+            Because you have chosen NaNoWriMo, this information can’t be edited. 
+            <a href=# {{action "setStep" 0}}>Go back to change event</a>
+            </div>
+          {{/if}}
 
-          {{challenge-editor challenge=challenge}}
+          {{project-challenge-editor project=project 
+            challenge=challenge projectChallenge=projectChallenge 
+            changeset=projectChallengeChangeset}}
 
         {{else}}
 

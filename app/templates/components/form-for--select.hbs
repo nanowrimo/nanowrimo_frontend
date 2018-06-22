@@ -6,7 +6,7 @@
 }}
   <label for={{name}}>{{label}}</label>
   <div class="select-container">
-    <select id={{name}} name={{name}}
+    <select id={{name}} name={{name}} disabled={{if isDisabled 'disabled' ''}}
       class={{concat 'form-control' (if hasError ' is-invalid')}}
       onchange={{action (mut (get changeset property)) value="target.value"}}>
       {{#each normalizedOptions as |option|}}

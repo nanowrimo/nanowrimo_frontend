@@ -3,21 +3,28 @@ import { assert } from '@ember/debug';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
+import Changeset from 'ember-changeset';
 
 export default Component.extend({
   store: service(),
 
   tagName: '',
 
+  associateWithChallenge: false,
+  associatedChallenge: null,
   challenge: null,
+  projectChallenge: null,
   checkRelationships: null,
   tab: null,
   open: null,
   project: null,
   user: null,
   formStepOverride: 0,
+  projectChallengeChangeset: null,
 
-
+  optionsForChallenges: computed(function() {
+    return this.get('store').findAll('challenge');
+  }),
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
@@ -34,7 +41,7 @@ export default Component.extend({
   steps: computed(function() {
     return [
       ['title', 'status', 'privacy', 'writingType'],
-      ['eventType', 'defaultGoal', 'unitType', 'startsOn', 'endsOn'],
+      ['writingType', 'defaultGoal', 'unitType', 'startsAt', 'endsAt'],
       ['wordCount', 'summary', 'excerpt', 'pinterest', 'playlist']
     ]
   }),
@@ -45,10 +52,36 @@ export default Component.extend({
     assert('Must pass a user into {{project-new-modal}}', user);
     let newProject = this.get('store').createRecord('project', { user });
     this.set('project', newProject);
+    //create the newProjectChallenge for the newProject
+    let newProjectChallenge = this.get('store').createRecord('projectChallenge');
+    //push the projectChallenge onto the project
+    newProject.projectChallenges.pushObject(newProjectChallenge);
+    
+    this.set('projectChallenge', newProject);
     this.set('checkRelationships', ['genres'] );
+    this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
   },
 
   actions: {
+    associateChallengeSelect(challengeID) {
+      this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
+      if (this.get("associateWithChallenge") ) {
+        this.set('challenge', this.get("associatedChallenge"));
+      }
+    },
+    clickedAssociateCheckbox() {
+      this.toggleProperty("associateWithChallenge");
+      if (this.get('associateWithChallenge')) {
+        //get the challenge
+        if (this.get("associatedChallenge") === null) {
+          //set the challenge id to the id of the first object in options for Challenges
+          this.set('associatedChallenge', this.get('optionsForChallenges.firstObject'));
+        }
+        this.set('challenge', this.get("associatedChallenge"));
+      } else {
+        this.set('challenge', null);
+      }
+    },
     setStep(stepNum) {
       this.set("formStepOverride", stepNum);
     },
