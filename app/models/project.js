@@ -22,6 +22,7 @@ const Project = Model.extend({
   writingType: attr('number', { defaultValue: '0' }),
 
   challenges: hasMany('challenge'),
+  projectChallenges: hasMany('projectChallenge'),
   genres: hasMany('genre'),
   user: belongsTo('user'),
 
