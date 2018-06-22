@@ -69,7 +69,7 @@ export default Component.extend({
         this.set('challenge', this.get("associatedChallenge"));
       }
     },
-    clickedAssociateCheckbox(v) {
+    clickedAssociateCheckbox() {
       this.toggleProperty("associateWithChallenge");
       if (this.get('associateWithChallenge')) {
         //get the challenge
