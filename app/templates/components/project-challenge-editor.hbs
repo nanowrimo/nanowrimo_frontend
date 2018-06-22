@@ -1,7 +1,7 @@
 {{#form-for
   data-test-project-form=true
   afterSubmit=modal.close
-  model=challenge
+  model=projectChallenge
   as |c|
 }}
   <div class="form-group">
@@ -18,7 +18,7 @@
       {{c.input
         changeset=changeset
         label="What is your goal?"
-        property="defaultGoal"
+        property="goal"
         type='number'
         isDisabled=disableDefaultGoal
       }}
@@ -39,7 +39,7 @@
         changeset=changeset
         label="When do you start?"
         property="startsAt"
-        type='datetime'
+        type='date'
         isDisabled=disableStartEnd
       }}
     </div>
@@ -48,7 +48,7 @@
         changeset=changeset
         label="When do you end?"
         property="endsAt"
-        type='datetime'
+        type='date'
         isDisabled=disableStartEnd
       }}
     </div>

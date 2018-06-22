@@ -2,18 +2,29 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
+import moment from 'moment';
 
 const Challenge = Model.extend({
   defaultGoal: attr('number'),
   endsAt: attr('date'),
   eventType: attr('number'),
+  
+  //writingType is defined in the api as:
+  // 0 = novel
+  // 1 = revision
+  writingType: attr('number'),
+  
   //eventType is defined in the api as:
   // 0 = NaNoWriMo
   // 1 = Camp
   // 2 = User Created
   flexibleGoal: attr('boolean'),
   startsAt: attr('date'),
-  unitType: attr('string'),
+  
+  //unitType is defined in the api as:
+  // 0 = words
+  // 1 = hours
+  unitType: attr('number'),
 
   projects: hasMany('project'),
   
@@ -32,18 +43,26 @@ const Challenge = Model.extend({
         break;
     }
     return name;
-  })
+  }),
+  
+  duration: computed("startsAt", "endsAt", function(){
+    // return the difference between start and end in number of days
+    let s = moment(this.get('startsAt'));
+    let e = moment(this.get('endsAt'));
+    let duration = moment.duration(e.diff(s));
+    return duration.asDays();
+  }),
   
 });
 
 Challenge.reopenClass({
   optionsForWritingType: [
-    'Writing',
-    'Editing'
+    {value:'0', name: 'Writing'},
+    {value:'1', name: 'Editing'}
   ],
   optionsForUnitType: [
-    'words',
-    'hours'
+   {value:'0', name: 'words'},
+    {value:'1', name: 'hours'}
   ]
 });
 

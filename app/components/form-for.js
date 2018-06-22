@@ -12,6 +12,7 @@ export default Component.extend({
   hasAttemptedSubmit: false,
   model: null,
   steps: null, // {(property<string>[])[]}
+  saveAfterSave: null,
   
   _currentStepIsValid: computed('changeset.error', 'currentStepIndex', 'steps.[]', function() {
     let propertiesForStep = this.get('steps').objectAt(this.get('currentStepIndex'));
@@ -85,6 +86,13 @@ export default Component.extend({
 
     return null;
   },
+  
+  _saveAfterSave() {
+    let sas = this.get('saveAfterSave');
+    if (sas) {
+      sas.save();
+    }
+  },
 
   actions: {
     goToStep() {
@@ -100,6 +108,7 @@ export default Component.extend({
           .then(()=>{          
             return changeset.save()
             .then(() => {
+              this._saveAfterSave();
               this._callAction('afterSubmit', modelIsNew);
             })
             .catch((error) => {

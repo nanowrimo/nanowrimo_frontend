@@ -1,17 +1,18 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-import Changeset from 'ember-changeset';
+
 import Challenge from 'nanowrimo/models/challenge';
-import ProjectChallenge from 'nanowrimo/models/project-challenge';
 
 export default Component.extend({
   store: service(),
 
   tagName: '',
-
   challenge: null,
   projectChallenge: null,
+  changeset: null,
+  project: null,
+  saveAfterSave: null,
   
   optionsForWritingType: computed(function() {
     return Challenge.optionsForWritingType;
@@ -37,18 +38,32 @@ export default Component.extend({
 
   steps: computed(function() {
     return [
-      ['eventType', 'defaultGoal', 'unitType', 'startsOn', 'endsOn'],
+      ['writingType', 'defaultGoal', 'unitType', 'startsat', 'endsat'],
     ]
   }),
 
   
   init() {
     this._super(...arguments);
-    let challenge = this.get('challenge');
-    if (!challenge) {
-      challenge = this.get('store').createRecord('challenge');
-      this.set('challenge', challenge);
+    let projectChallenge = this.get('projectChallenge');
+    let project = this.get('project');
+    if (!projectChallenge) {
+      projectChallenge = this.get('store').createRecord('projectChallenge');
+      this.set('projectChallenge', projectChallenge);
+      projectChallenge.set('project', project);
     }
-    this.set('changeset', new Changeset(challenge));
+    
+    //check for the challenge
+    let challenge = this.get('challenge');
+    if (challenge) {
+      let cs = this.get('changeset')
+      //clone the challenge data into the project challenge changeset
+      cs.set('goal', challenge.defaultGoal);
+      cs.set('startsAt', challenge.startsAt);
+      cs.set('endsAt', challenge.endsAt);
+      cs.set('writingType', challenge.writingType);
+      cs.set('unitType', challenge.unitType);
+      cs.set('challenge', challenge);
+    }
   }
 });
