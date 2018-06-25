@@ -1,15 +1,16 @@
 {{#form-for
   data-test-project-form=true
   afterSubmit=modal.close
-  model=challenge
+  model=projectChallenge
   as |c|
 }}
   <div class="form-group">
     {{c.select
       changeset=changeset
       label="What type of goal is this?"
-      options=optionsForEventType
-      property="eventType"
+      options=optionsForWritingType
+      property="WritingType"
+      isDisabled=disableWritingType
     }}
   </div>
   <div class="side-by-side">
@@ -17,8 +18,9 @@
       {{c.input
         changeset=changeset
         label="What is your goal?"
-        property="defaultGoal"
+        property="goal"
         type='number'
+        isDisabled=disableDefaultGoal
       }}
     </div>
     <div class="form-group side-by-side-even">
@@ -27,6 +29,7 @@
         label=""
         options=optionsForUnitType
         property="unitType"
+        isDisabled=disableUnitType
       }}
     </div>
   </div>
@@ -35,16 +38,18 @@
       {{c.input
         changeset=changeset
         label="When do you start?"
-        property="startsOn"
+        property="startsAt"
         type='date'
+        isDisabled=disableStartEnd
       }}
     </div>
     <div class="form-group side-by-side-even">
       {{c.input
         changeset=changeset
         label="When do you end?"
-        property="endsOn"
+        property="endsAt"
         type='date'
+        isDisabled=disableStartEnd
       }}
     </div>
   </div>

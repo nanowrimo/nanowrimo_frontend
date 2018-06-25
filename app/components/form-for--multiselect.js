@@ -12,6 +12,7 @@ export default Component.extend({
   model: null,
   options: null,
   property: '',
+  saveOnCreate: false,
   searchField: '',
 
   _selectedOptions: computed('model', 'property', function() {
@@ -35,6 +36,9 @@ export default Component.extend({
           let props = {};
           props[searchField] = value;
           option = this.get('store').createRecord(createOptionModel, props);
+          if (this.get('saveOnCreate') ) {
+            option.save();
+          }
         }
         this.get(`model.${this.get('property')}`).pushObject(option);
       }

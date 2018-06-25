@@ -1,10 +1,9 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  type:'nano',
-  name: 'NaNoWriMo',
-  requiredGoal: 50000,
+  eventType:0,
+  defaultGoal: 50000,
   flexibleGoal: false,
-  startsOn: "2016-11-01T00:00:00.000",
-  endsOn: "2016-12-01T00:00:00.000"
+  startsAt: "2016-11-01T00:00:00.000",
+  endsAt: "2016-12-01T00:00:00.000"
 });
