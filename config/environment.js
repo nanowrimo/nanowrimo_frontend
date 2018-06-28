@@ -74,8 +74,10 @@ module.exports = function(environment) {
     //pull in the os lib so we can get the hostname
     var os = require("os");
     //define hosts based on hostname
-    ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
-    ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';
+    //ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
+    //ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';
+    ENV.APP.API_HOST = 'http://localhost:3000';
+    ENV.APP.UI_HOST = 'http://localhost:4200';
   }
 
   if (environment === 'development-api') {
