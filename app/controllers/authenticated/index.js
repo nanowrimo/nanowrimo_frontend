@@ -6,5 +6,6 @@ export default Controller.extend({
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
   currentUserEmail: reads('currentUser.user.email'),
-  currentUserIsNotConfirmed: reads('currentUser.user.isNotConfirmed')
+  currentUserIsNotConfirmed: reads('currentUser.user.isNotConfirmed'),
+  
 });

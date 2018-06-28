@@ -10,7 +10,7 @@ export default Controller.extend({
       let email = form.get('email');
       if (this.validEmail(email) ){
         //perform the query
-        let url = `${ENV.APP.API_HOST}/users/forgot_password`;
+        let url = `${ENV.APP.API_HOST}/users/resend_confirmation`;
         // send the data as a POST so that the email doesn't end up in the server logs
         return fetch(url, {
           body: JSON.stringify({email: email}),

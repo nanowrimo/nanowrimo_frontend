@@ -96,7 +96,6 @@ export default Component.extend({
 
   actions: {
     goToStep() {
-      alert('yse');
     },
     
     submitForm() {

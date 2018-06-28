@@ -89,6 +89,9 @@
         padding-left: 20px;
         padding-right: 20px;
         align-self: center;
+        a.ember-view {
+          display: inline;
+        }
         @media (max-width: $screen-md-max) {
           font-size: 20px;
           line-height: 1.3;

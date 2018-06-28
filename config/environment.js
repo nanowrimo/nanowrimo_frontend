@@ -72,7 +72,7 @@ module.exports = function(environment) {
   if (environment === 'development-local') {
     ENV['ember-cli-mirage'] = { enabled: false };
     //pull in the os lib so we can get the hostname
-    var os = require("os");
+    //var os = require("os");
     //define hosts based on hostname
     //ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
     //ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';

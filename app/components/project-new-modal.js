@@ -88,6 +88,7 @@ export default Component.extend({
     
     onHidden() {
       let callback = this.get('onHidden');
+      this.set('formStepOverride',0);
       if (callback) {
         callback();
       } else {

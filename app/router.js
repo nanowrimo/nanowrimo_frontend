@@ -48,6 +48,7 @@ Router.map(function() {
   this.route('not-found', { path: '/*path' });
   this.route('error');
   this.route('forgot-password');
+  this.route('resend-confirmation-email');
   this.route('password-reset');
   this.route('components.stats', { path: '/stats' });
 });

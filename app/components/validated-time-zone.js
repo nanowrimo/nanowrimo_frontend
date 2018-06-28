@@ -36,7 +36,6 @@ export default Component.extend({
 
   actions: {
     markBlurred() {
-      alert('blur');
       this.set('hasBlurred', true);
     }
   }

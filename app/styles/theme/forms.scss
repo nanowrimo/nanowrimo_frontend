@@ -1,3 +1,6 @@
+form {
+  width: 100%;
+}
 .form-group {
   margin-bottom: 10px;
   label {
@@ -54,6 +57,9 @@
     line-height: 1.43;
     color: #e37f82;
   }
+}
+select {
+  border-radius: 0px;
 }
 .select-container {
   overflow: hidden; 

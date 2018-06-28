@@ -34,7 +34,7 @@ export default Component.extend({
   }),
 
   actions: {
-    markBlurred() {
+    markBlurred(event) {
       this.set('hasBlurred', true);
     }
   }

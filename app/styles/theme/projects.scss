@@ -72,10 +72,10 @@
     .flex-container {
       display: flex;
       flex-wrap: wrap;
-      
+      align-items: center;
       .project-cover {
         flex: 0 0 189px;
-        height: 200px;
+        height: 150px;
         @media(max-width: $screen-md) {
           order: 3;
         }
@@ -96,17 +96,27 @@
       }
 
       .project-name-genres {
-        margin-top: 18px;
+        margin-top: 28px;
         flex: 0 0 298px;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: center;
         .project-title {
-          font-family: 'SourceSerifPro', serif ;
+          flex: 0 0 100%;
+          font-family: 'SourceSerifPro-Regular', serif ;
           font-size: 20px;
           color: black;
           margin-bottom: 7px;
+          text-align: left;
+          a {
+            color: #343434;
+          }
         }
         .project-genres {
+          flex: 0 0 100%;
           height: 22px;
-          font-family: 'SourceSansPro', sans-serif;
+          font-family: 'SourceSansPro-Regular', sans-serif;
           font-size: 14px;
           line-height: 1.57;
           text-align: left;
@@ -122,7 +132,8 @@
           margin-bottom: 7.5px;
           font-size: 16px;
           height: 20px;
-          font-family: 'SourceSansPro', sans-serif;
+          text-align: left;
+          font-family: 'SourceSansPro-Regular', sans-serif;
           .goal {
             color: $nano-mediumgrey
           }
@@ -134,7 +145,7 @@
         .progress-text {
           margin-top: 7.5px;
           height: 18px;
-          font-family: 'SourceSansPro', sans-serif;
+          font-family: 'SourceSansPro-Regular', sans-serif;
           font-size: 14px;
           font-weight: bold;
           .count{
@@ -145,6 +156,7 @@
           }
         }
         .challenge-start {
+          margin-top: 7.5px;
           font-size: 14px;
           font-family: 'SourceSansPro-Regular', sans-serif;
           float: right;
