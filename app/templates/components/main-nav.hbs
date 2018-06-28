@@ -32,24 +32,38 @@
             {{/nav.dropdown}}
           {{/each}}
         {{/bs-nav}}
-        <div class="nav-logging-buttons d-flex">
-          <button class="button-log">
-            {{#if media.isMobile}}
-              <span class="mobile">LOG</span>
-            {{/if}}
-            {{#if media.isDesktop}}
-              <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
-            {{/if}}
-          </button>
-          <button class="button-timer">
-            {{#if media.isMobile}}
-              <span class="mobile">TIMER</span>
-            {{/if}}
-            {{#if media.isDesktop}}
-              <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
-            {{/if}}
-          </button>
-        </div>
+        {{#bs-nav class="nav-logging-buttons" type="pills" as |nav|}}
+          {{#nav.dropdown as |dd|}}
+            {{#dd.toggle}}
+              <button class="button-log">
+                {{#if media.isMobile}}
+                  <span class="mobile">LOG</span>
+                {{/if}}
+                {{#if media.isDesktop}}
+                  <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
+                {{/if}}
+              </button>
+            {{/dd.toggle}}
+            {{#dd.menu align="right" as |ddm|}}
+              {{progress-update-form}}
+            {{/dd.menu}}
+          {{/nav.dropdown}}
+          {{#nav.dropdown as |dd|}}
+            {{#dd.toggle}}
+              <button class="button-timer">
+                {{#if media.isMobile}}
+                  <span class="mobile">TIMER</span>
+                {{/if}}
+                {{#if media.isDesktop}}
+                  <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
+                {{/if}}
+              </button>
+            {{/dd.toggle}}
+            {{#dd.menu align="right" as |ddm|}}
+              {{log-session-form}}
+            {{/dd.menu}}
+          {{/nav.dropdown}}
+        {{/bs-nav}}
         {{#bs-dropdown as |dd|}}
           {{#dd.toggle class="user-menu"}}Hi, <u>{{currentUserName}}!</u> <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
