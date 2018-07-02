@@ -32,7 +32,6 @@ const Project = Model.extend({
     get() {
       let cover = this.get('cover');
       if (cover && cover.includes(':')) {
-        alert(cover);
         this.set('_coverUrl', cover);
       }
       return this.get('_coverUrl');
