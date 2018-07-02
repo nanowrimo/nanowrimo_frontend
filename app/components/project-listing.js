@@ -12,7 +12,7 @@ export default Component.extend({
       this.set('editCoverTab', null);
     },
 
-    openCoverModal(tab) {
+    openCoverModal() {
       this.set('editCover', true);
       this.set('editCoverTab', null);
     },
