@@ -8,7 +8,7 @@ export default Service.extend({
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
   sideMenuIsOpen: true,
-  homeUrl: "index",
+  homeUrl: "authenticated",
   
   submenus: computed(function() {
     let links = [

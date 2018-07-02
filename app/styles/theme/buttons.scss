@@ -24,6 +24,9 @@ button, input.nano-button {
   /* Background and border */
   border-radius: 6px;
   background-image: linear-gradient(to bottom, $nano-mediumgreen, $nano-darkgreen);
+  &:hover, &:active {
+    background-image: linear-gradient(to bottom, $nano-lightgreen, $nano-mediumgreen);
+  }
   border: solid 1px $nano-darkgreen;
   
   /* Reversed green button */
@@ -38,6 +41,9 @@ button, input.nano-button {
   &.nano-button-blue {
     background-image: linear-gradient(to bottom, $nano-mediumlightblue, $nano-mediumblue);
     border: solid 1px $nano-mediumblue;
+    &:hover, &:active {
+      background-image: linear-gradient(to bottom, $nano-lightblue, $nano-mediumlightblue);
+    }
     
     /* Blue buttons reversed */
     &.button-reversed {
@@ -84,7 +90,9 @@ button, input.nano-button {
   }
 }
 
-
+button:focus, input.nano-button:focus {
+  outline: 0;
+}
 
 
 button.btn {
