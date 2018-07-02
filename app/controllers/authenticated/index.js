@@ -8,4 +8,16 @@ export default Controller.extend({
   currentUserEmail: reads('currentUser.user.email'),
   currentUserIsNotConfirmed: reads('currentUser.user.isNotConfirmed'),
   
+  queryParams: ['addProject'],
+  
+  addProject: false,
+  
+  actions: {
+    afterProjectModalClose() {
+      this.set('addProject', null);
+    },
+    openNewProjectModal() {
+      this.set('addProject', true);
+    },
+  }
 });

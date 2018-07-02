@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   store: service(),
   fundometer: computed('store',function() {
-    let fundometer = this.get('store').peekRecord('fundometer', 123);
+    let fundometer = this.get('store').peekRecord('fundometer', 1);
     return fundometer;
   }),
   stack_height: 139,

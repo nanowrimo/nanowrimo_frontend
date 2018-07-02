@@ -5,7 +5,7 @@
 
       </div>
       <div class='flex-container'>
-        <div class='project-cover'>
+        <div class='project-cover' {{action "openCoverModal"}}>
           <div class='project-cover-clip'>
             <img src="{{project.coverUrl}}">
           </div>
@@ -22,6 +22,14 @@
         </div>
 
         {{project-list-progress project=project}}
+        
+        {{project-edit-cover-modal
+          onHidden=(action "afterCoverModalClose")
+          open=editCover
+          project=project
+          tab=editCoverTab
+        }}
+        
 
         <div class='project-status'>
           {{#if project.completed}}

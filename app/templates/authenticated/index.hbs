@@ -13,7 +13,7 @@
               Welcome to NaNoWriMo! We just sent an email to {{currentUserEmail}} with a confirmation link, just so we know you're the right you. Click it and you'll be up and running in just a few moments!
             </div>
             <div class="flash-button">
-              {{link-to 'Resend Email' 'resend-confirmation-email' tagName='button'}}>
+              {{link-to 'Resend Email' 'resend-confirmation-email' tagName='button'}}
             </div>
           </div>
         </div>
@@ -37,10 +37,16 @@
             <div class="nano-subcard-face">
               <div class="nano-subcard-content side-by-side">
                 <div class="side-by-side-even">
-                  <div>Looks like you haven't started a<br />new novel yet.</div>
+                  <div class="quote-text">Looks like you haven't started a<br />new novel yet.</div>
                 </div>
                 <div class="side-by-side-even">
-                  <a href="#" {{action "newProject"}}>Announce a new project!</a>
+                  <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
+                  {{project-new-modal
+                    onHidden=(action "afterProjectModalClose")
+                    open=addProject
+                    user=currentUser.user
+                  }}
+                  
                   <img src='/images/users/projects/megaphone.svg' class="prompt-image">
                 </div>
               </div>
