@@ -7,25 +7,24 @@ import moment from 'moment';
 const Challenge = Model.extend({
   defaultGoal: attr('number'),
   endsAt: attr('date'),
+  startsAt: attr('date'),
   eventType: attr('number'),
-  
-  //writingType is defined in the api as:
-  // 0 = novel
-  // 1 = revision
-  writingType: attr('number'),
-  
   //eventType is defined in the api as:
   // 0 = NaNoWriMo
   // 1 = Camp
   // 2 = User Created
-  flexibleGoal: attr('boolean'),
-  startsAt: attr('date'),
   
+  writingType: attr('number'),
+   //writingType is defined in the api as:
+  // 0 = novel
+  // 1 = revision
+  
+  flexibleGoal: attr('boolean'),
+  unitType: attr('number'),
   //unitType is defined in the api as:
   // 0 = words
   // 1 = hours
-  unitType: attr('number'),
-
+  
   projects: hasMany('project'),
   
   name: computed('eventType', function(){
@@ -43,6 +42,11 @@ const Challenge = Model.extend({
         break;
     }
     return name;
+  }),
+  
+  isNaNoEvent: computed('eventType', function(){
+    let type = this.get('eventType');
+    return (type === 0 || type === 1 );
   }),
   
   duration: computed("startsAt", "endsAt", function(){

@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 //import { assert } from '@ember/debug';
+import { filterBy } from '@ember/object/computed';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
@@ -22,7 +23,9 @@ export default Component.extend({
   formStepOverride: 0,
   projectChallengeChangeset: null,
 
-  optionsForChallenges: computed(function() {
+  optionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
+  
+  baseChallenges:  computed(function() {
     return this.get('store').findAll('challenge');
   }),
   optionsForGenres: computed(function() {
