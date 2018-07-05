@@ -11,6 +11,8 @@ export default Component.extend({
   placeholder: null,
   property: '',
   type: 'text',
+  min: null,
+  max: null,
 
   name: reads('property')
 });

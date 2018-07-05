@@ -21,6 +21,8 @@
         property="goal"
         type='number'
         isDisabled=disableDefaultGoal
+        min=1
+        
       }}
     </div>
     <div class="form-group side-by-side-even">
@@ -35,21 +37,30 @@
   </div>
   <div class="side-by-side">
     <div class="form-group side-by-side-even">
-      {{c.input
+
+      <label for='start-date' class='form-group'>When do you start?</label>
+      <input name='start-date' type='date' class='form-control'
+        oninput={{action "startsAtChanged" value="target.value"}} 
+        value={{displayStartsAt}}
+        disabled={{disableStartEnd}}>
+        
+      {{c.hidden-input
         changeset=changeset
-        label="When do you start?"
         property="startsAt"
-        type='date'
-        isDisabled=disableStartEnd
       }}
+      
     </div>
     <div class="form-group side-by-side-even">
-      {{c.input
+      <label for='challenge-duration'>Duration in days</label>
+      <input type='number' min='1' max='31' value={{newDuration}}
+        class='form-control' 
+        oninput={{action "durationChanged" value="target.value"}}
+        disabled={{disableStartEnd}}
+        >
+      
+      {{c.hidden-input
         changeset=changeset
-        label="When do you end?"
         property="endsAt"
-        type='date'
-        isDisabled=disableStartEnd
       }}
     </div>
   </div>
