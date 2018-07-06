@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-//import { assert } from '@ember/debug';
+import { assert } from '@ember/debug';
 import { filterBy } from '@ember/object/computed';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -52,7 +52,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     let user = this.get('user');
-    //assert('Must pass a user into {{project-new-modal}}', user);
+    assert('Must pass a user into {{project-new-modal}}', user);
     let newProject = this.get('store').createRecord('project', { user });
     this.set('project', newProject);
     //create the newProjectChallenge for the newProject

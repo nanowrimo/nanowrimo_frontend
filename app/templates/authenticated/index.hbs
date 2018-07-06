@@ -39,16 +39,18 @@
                 <div class="side-by-side-even">
                   <div class="quote-text">Looks like you haven't started a<br />new novel yet.</div>
                 </div>
-                <div class="side-by-side-even">
-                  <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
-                  {{project-new-modal
-                    onHidden=(action "afterProjectModalClose")
-                    open=addProject
-                    user=currentUser.user
-                  }}
-                  
-                  <img src='/images/users/projects/megaphone.svg' class="prompt-image">
-                </div>
+                {{#if currentUser.user}}
+                  <div class="side-by-side-even">
+                    <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
+                    {{project-new-modal
+                      onHidden=(action "afterProjectModalClose")
+                      open=addProject
+                      user=currentUser.user
+                    }}
+                    
+                    <img src='/images/users/projects/megaphone.svg' class="prompt-image">
+                  </div>
+                {{/if}} 
               </div>
             </div>
           </div>
