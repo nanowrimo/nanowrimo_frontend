@@ -39,7 +39,7 @@
                 <div class="side-by-side-even">
                   <div class="quote-text">Looks like you haven't started a<br />new novel yet.</div>
                 </div>
-                {{#if currentUserResolved}}
+                {{#if currentUser.user}}
                   <div class="side-by-side-even">
                     <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
                     {{project-new-modal
