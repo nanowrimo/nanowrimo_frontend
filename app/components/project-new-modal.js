@@ -55,6 +55,8 @@ export default Component.extend({
     assert('Must pass a user into {{project-new-modal}}', user);
     let newProject = this.get('store').createRecord('project', { user });
     this.set('project', newProject);
+    //by default, we want this new project to be 'primary'
+    newProject.set('primary', true);
     //create the newProjectChallenge for the newProject
     let newProjectChallenge = this.get('store').createRecord('projectChallenge');
     //push the projectChallenge onto the project

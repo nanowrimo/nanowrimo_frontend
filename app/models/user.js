@@ -3,7 +3,6 @@ import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
-
 export default Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
@@ -34,7 +33,7 @@ export default Model.extend({
   favoriteBooks: hasMany('favoriteBook', { async: false }),
 
   slug: alias('name'),
-  projects: hasMany('project'),
+  projects: hasMany('project', { async: false }),
 
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
@@ -63,7 +62,18 @@ export default Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
-
+  primaryProject: computed('projects.@each.primary',{
+    get() {
+      let pp = null;
+      this.get('projects').forEach((p) =>{
+        if (p.id && p.primary) {
+          pp = p;
+        }
+      });
+      return pp;
+    }
+  }),
+  
   rollbackExternalLinks() {
     this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }

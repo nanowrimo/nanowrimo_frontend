@@ -10,7 +10,8 @@ export default Service.extend({
 
   load() {
     if (this.get('session.isAuthenticated')) {
-      return this.get('store').queryRecord('user', { current: true }).then((user) => {
+      return this.get('store').queryRecord('user', 
+      { current: true, include: 'projects' }).then((user) => {
         this.set('user', user);
       });
     } else {
