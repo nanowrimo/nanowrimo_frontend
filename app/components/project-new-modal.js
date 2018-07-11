@@ -15,7 +15,6 @@ export default Component.extend({
   associatedChallenge: null,
   challenge: null,
   projectChallenge: null,
-  checkRelationships: null,
   tab: null,
   open: null,
   project: null,
@@ -63,7 +62,6 @@ export default Component.extend({
     newProject.projectChallenges.pushObject(newProjectChallenge);
     
     this.set('projectChallenge', newProject);
-    this.set('checkRelationships', ['genres'] );
     this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
   },
 
