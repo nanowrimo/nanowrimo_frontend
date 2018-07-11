@@ -55,7 +55,25 @@ const Project = Model.extend({
     //   return { genres: 'Must select at least one genre' };
     // }
     return null;
-  })
+  }),
+  
+  save() {
+    let promiseArray = [];
+    //persist the genres 
+    this.get('genres').forEach((genre) => {
+      // if the genre doesn't have an id, it needs to be saved
+      if (!genre.id) {
+        promiseArray.push( genre.save() );
+      }
+    });
+    let _super = this._super;
+    //resolve all of the genre save promises before saving this project
+    return Promise.all(promiseArray).then(() => {
+      return _super.call(this);
+    });
+    
+    
+  }
 });
 
 Project.reopenClass({
