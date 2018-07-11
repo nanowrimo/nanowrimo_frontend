@@ -46,6 +46,9 @@ export default function() {
 
   // CRUD
 
+  this.resource('groups', { only: ['index'] });
+  this.resource('locations', { only: ['index'] });
+  
   this.resource('challenges', { only: ['index'] });
   this.resource('external-links', { only: ['create', 'update'] });
   this.del('external-links/:id', ({ externalLinks }, request) => {

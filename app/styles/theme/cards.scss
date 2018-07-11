@@ -97,6 +97,23 @@
         color: $nano-mediumgrey;
         background-repeat: no-repeat;
         background-position: left bottom;
+        &.no-padding {
+          padding-top: 0px;
+          padding-bottom: 0px;
+          padding-left: 0px;
+          padding-right: 0px;
+          border-radius: 6px;
+        }
+        .g-map{
+          width: 100%;
+          height: 100%;
+          border-radius: 6px;
+        }
+        .g-map-canvas {
+          width: 100%;
+          height: 100%;
+          border-radius: 6px;
+        }
         .quotee {
           font-family: SourceSansPro-Regular;
           font-size: 16px;
@@ -363,4 +380,8 @@
   letter-spacing: normal;
   text-align: center;
   color: #b8b8b8;
+}
+.ember-google-map {
+  width: 100%;
+  height: 100%;
 }

@@ -3045,7 +3045,7 @@ ember-cli-babel@6.12.0:
     ember-cli-version-checker "^2.1.0"
     semver "^5.4.1"
 
-ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
+ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7, ember-cli-babel@^5.2.4:
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-5.2.8.tgz#0356b03cc3fdff5d0f2ecaa46a0e1cfaebffd876"
   dependencies:
@@ -3721,6 +3721,13 @@ ember-font-awesome@^4.0.0-rc.4:
     fs-readdir-recursive "^1.1.0"
     postcss "^6.0.14"
     sync-disk-cache "^1.3.2"
+
+ember-g-map@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/ember-g-map/-/ember-g-map-0.0.25.tgz#32139e1c94c2a0d07b063422bf707e42f329af59"
+  dependencies:
+    ember-cli-babel "^5.2.4"
+    ember-cli-htmlbars "^1.1.1"
 
 ember-get-config@^0.2.2, ember-get-config@^0.2.3, ember-get-config@^0.2.4:
   version "0.2.4"

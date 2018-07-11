@@ -17,6 +17,13 @@ export default function(server) {
       server.create('project-genre', { project, genre })
     });
   });
-  server.createList('fundometer', 5);
-  server.create('flash-banner');
+  let locations = server.createList('location', 5);
+  let groups = server.createList('group', 5);
+  groups.forEach(function(group) {
+    sampleSize(locations, 1).forEach(function(location) {
+      server.create('location-group', { location, group })
+    });
+    
+  });
+  
 }

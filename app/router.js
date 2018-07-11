@@ -33,6 +33,12 @@ Router.map(function() {
     });
     this.route('stats', function() {
     });
+    this.route('locations', { path: 'locations'}, function() {
+    });
+    this.route('groups', { path: 'regions'}, function() {
+      this.route('find');
+      this.route('leaderboard');
+    });
     this.route('project',function(){
       this.route('show', { path: '/:project_slug'}, function(){});
     });

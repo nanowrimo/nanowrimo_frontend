@@ -26,7 +26,7 @@ export default Service.extend({
         submenuItems: [
           {label: "Forums", url: "index", segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
           {label: "New York City", url: "index", segment: null, teaser: "Talk to WriMos near you", src: "/images/nav/map_pin.svg"},
-          {label: "Find a Region", url: "index", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"},
+          {label: "Find a Region", url: "authenticated.groups.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"},
           {label: "Word Sprints", url: "index", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
         ]
       },

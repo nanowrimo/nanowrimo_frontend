@@ -1,0 +1,28 @@
+<h2>Regions</h2>
+
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Longitude</th>
+  </thead>
+  <tbody>
+    {{#each groups as |group|}}
+      <tr>
+        <td>
+          {{group.id}}
+        </td>
+        <td>
+          {{group.name}}
+        </td>
+        <td>
+          <ul>
+            {{#each group.locations as |location|}}
+              <li>{{location.longitude}}{{location.latitude}}</li>
+            {{/each}}
+          </ul>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
