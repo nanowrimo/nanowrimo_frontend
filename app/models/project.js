@@ -16,7 +16,7 @@ const Project = Model.extend({
   summary: attr('string'),
   status: attr('string', { defaultValue: 'In Progress' }),
   title: attr('string'),
-  unitCount: attr('number'),
+  //unitCount: attr('number'),
   unitType: attr('string'),
   wordCount: attr('number'),
   writingType: attr('number', { defaultValue: '0' }),
@@ -25,7 +25,7 @@ const Project = Model.extend({
   projectChallenges: hasMany('projectChallenge'),
   genres: hasMany('genre'),
   user: belongsTo('user'),
-
+  projectSessions: hasMany('projectSession', {async: false}),
 
   _coverUrl: "/images/projects/unknown-cover.png",
   coverUrl: computed('cover', {
@@ -36,6 +36,17 @@ const Project = Model.extend({
       }
       return this.get('_coverUrl');
     }
+  }),
+  
+  unitCount: computed('project-sessions.[]', function() {
+    // sum of the project.sessions counts where unit-type === 0 (words)
+    let count=0;
+    this.get('projectSessions').forEach((ps)=>{
+      if (ps.unitType === 0 ) {
+        count+=ps.count;
+      }
+    });
+    return count;
   }),
   
   completed: computed('status', function() {
