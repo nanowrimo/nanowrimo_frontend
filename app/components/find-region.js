@@ -1,6 +1,7 @@
 import Component from '@ember/component';
-import { set, get, computed } from '@ember/object';
-import { alias, sort, filterBy } from '@ember/object/computed';
+import EmberObject from '@ember/object';
+import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -12,13 +13,13 @@ export default Component.extend({
   searchTab: computed('sortOption', function() {
     if (this.get('sortOption')=='search') {
       return 'tabSelected';
-    };
+    }
     return '';
   }),
   proximityTab: computed('sortOption', function() {
     if (this.get('sortOption')=='proximity') {
       return 'tabSelected';
-    };
+    }
     return '';
   }),
   searchHide: computed('sortOption', function() {
@@ -63,17 +64,17 @@ export default Component.extend({
     if (s == 'search') {
       r.forEach(function(obj) {
         if ((m == '')||(obj.name.toLowerCase().indexOf(m) != -1)) {
-          let o = Ember.Object.create();
+          let o = EmberObject.create();
           o.setProperties({regionObject: obj, name: obj.name, proximity: ''});
           newArray.push(o);
         }
       });
-      return newArray.sortBy('search');
+      return newArray.sortBy('name');
     } else if (s == 'proximity') {
       let ulong = this.get('user_longitude');
       let ulat = this.get('user_latitude');
       r.forEach(function(obj) {
-        let o = Ember.Object.create();
+        let o = EmberObject.create();
         var p = 0.017453292519943295;
         var c = Math.cos;
         var a = 0.5 - c((ulat - obj.latitude) * p)/2 + c(obj.latitude * p) * c(ulat * p) * (1 - c((ulong - obj.longitude) * p))/2;

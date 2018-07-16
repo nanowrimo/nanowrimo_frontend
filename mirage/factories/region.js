@@ -18,8 +18,8 @@ export default Factory.extend({
   latitude() {
     return faker.address.latitude();
   },
-  memberCount() {
-    return faker.random.number({ min: 1, max: 25000 });
+  numberOfUsers() {
+    return faker.random.number({ min: 1, max: 30000 });
   },
   
 });
