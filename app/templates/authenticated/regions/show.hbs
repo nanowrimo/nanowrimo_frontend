@@ -1,17 +1,7 @@
-<div class="nano-user-plate full-width d-flex" {{action "openImagesModal" "headerTab"}} style={{plateStyle}}>
+<div class="nano-user-plate full-width d-flex">
 
   <div class="plate-cover">
 
-    <div class="container-fluid">
-      {{user-stats user=user}}
-    </div>
-
-    {{#if canEditUser}}
-      {{!-- TODO: CSS styling for this edit link to show/hide --}}
-      <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
-        <img src="/images/global/flip_corner.svg" alt="Edit User Images" />
-      </div>
-    {{/if}}
 
   </div>
 </div>
@@ -21,48 +11,19 @@
       <div class="nano-panel left-sidebar nano-profile">
         <div class="flip-corner">
 
-          <div class="nano-avatar-large" {{action "openImagesModal"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
-            <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
-          </div>
-          <div class="nano-user-name" data-test-user-name>
+          <div class="nano-user-name">
             {{region.name}}
           </div>
-          <div class="nano-user-location" data-test-user-location>
-            {{user.location}}
+          <div>DESCRIPTION</div>
+          <hr />
+          <div class="nano-region-description">
+            {{region.description}}
           </div>
-          <div class="nano-member-since" data-test-user-since>
-            Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
-          </div>
-
-          {{user-links links=user.externalLinks}}
-
-          {{#if canEditUser}}
-
-            <div class="flip-corner-link" {{action "openEditModal"}} data-test-user-profile-edit>
-              <img src="/images/global/flip_corner.svg" alt="Edit User Profile" />
-            </div>
-
-            {{user-edit-profile-modal
-              onHidden=(action "afterEditModalClose")
-              open=edit
-              user=user
-              tab=editTab
-            }}
-
-            {{user-edit-images-modal
-              onHidden=(action "afterImagesModalClose")
-              open=editImages
-              user=user
-              tab=editImagesTab
-            }}
-
-          {{/if}}
 
         </div>
         <div class="banner-divot"></div>
       </div>
 
-      {{outlet}}
 
     </div>
   </div>

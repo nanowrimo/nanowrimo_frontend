@@ -2,7 +2,6 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model() {
-    return this.get('store').queryRecord('region', { slug: params.slug });
+    return this.modelFor('authenticated.regions.show');
   }
-  
 });
