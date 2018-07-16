@@ -3,17 +3,17 @@ import { JSONAPISerializer } from 'ember-cli-mirage';
 export default JSONAPISerializer.extend({
   serialize(){
     let json = JSONAPISerializer.prototype.serialize.apply(this, arguments);
-    if (Array.isArray(json.data)) {
-      json.data.forEach((data, i) => {
-        if (json.data[i].relationships) {
+    //if (Array.isArray(json.data)) {
+      //json.data.forEach((data, i) => {
+        //if (json.data[i].relationships) {
           //json.data[i].relationships.locations.data = this.locationSerialize(data);
-        }
-      });
-    } else {
-      if (json.data.relationships) {
+        //}
+      //});
+    //} else {
+      //if (json.data.relationships) {
         //json.data.relationships.locations.data = this.locationSerialize(json.data);
-      }
-    }
+      //}
+    //}
 
     /*if (Array.isArray(json.included)) {
       json.included = this.includedAssociations(json.included);

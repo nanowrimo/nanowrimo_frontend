@@ -38,7 +38,7 @@ Router.map(function() {
     this.route('regions', function() {
       this.route('find');
       this.route('leaderboard');
-      this.route('show', { path: '/:slug'}, function() {
+      this.route('show', { path: '/:region_slug'}, function() {
       });
     });
     this.route('project',function(){

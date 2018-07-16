@@ -17,7 +17,7 @@ export default Component.extend({
 
   actions: {
     formSubmit(v) {
-      console.log(v);
+      //console.log(v);
     }
   }
 });
