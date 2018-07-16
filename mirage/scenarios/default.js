@@ -17,7 +17,7 @@ export default function(server) {
       server.create('project-genre', { project, genre })
     });
     //create some project-session data
-    server.createList('project-session', random(1,10, false), {project});
+    server.createList('project-session', random(1,10, false), { project });
   });
   server.createList('fundometer', 5);
   server.create('flash-banner');
