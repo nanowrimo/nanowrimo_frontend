@@ -35,9 +35,11 @@ Router.map(function() {
     });
     this.route('locations', { path: 'locations'}, function() {
     });
-    this.route('groups', { path: 'regions'}, function() {
+    this.route('regions', function() {
       this.route('find');
       this.route('leaderboard');
+      this.route('show', { path: '/:region_slug'}, function() {
+      });
     });
     this.route('project',function(){
       this.route('show', { path: '/:project_slug'}, function(){});

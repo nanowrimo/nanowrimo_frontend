@@ -1,0 +1,20 @@
+<h2>Regions</h2>
+
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    {{#each regions as |region|}}
+      <tr>
+        <td>
+          {{region.id}}
+        </td>
+        <td>
+          {{region.name}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

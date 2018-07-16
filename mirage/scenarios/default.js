@@ -17,13 +17,5 @@ export default function(server) {
       server.create('project-genre', { project, genre })
     });
   });
-  let locations = server.createList('location', 5);
-  let groups = server.createList('group', 5);
-  groups.forEach(function(group) {
-    sampleSize(locations, 1).forEach(function(location) {
-      server.create('location-group', { location, group })
-    });
-    
-  });
-  
+  server.createList('region', 50);
 }

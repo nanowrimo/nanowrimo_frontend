@@ -5,5 +5,8 @@
 
     Setting `disableAnalytics` to true will prevent any data from being sent.
   */
-  "disableAnalytics": false
+  "disableAnalytics": false,
+  "ssl": true,
+  "ssl-key": "/Users/davebeck/projects/server.key",
+  "ssl-cert": "/Users/davebeck/projects/server.crt"
 }
