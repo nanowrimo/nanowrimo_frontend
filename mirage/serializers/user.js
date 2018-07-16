@@ -14,7 +14,7 @@ export default ApplicationSerializer.extend({
   _relationships(included) {
     let relationships = {};
 
-    ['external-links', 'favorite-authors', 'favorite-books'].forEach(type => {
+    ['projects', 'external-links', 'favorite-authors', 'favorite-books'].forEach(type => {
       relationships[type] = this._buildRelationship(type, included);
     });
 

@@ -13,6 +13,16 @@ export default Service.extend({
       return this.get('store').queryRecord('user', 
       { current: true, include: 'projects' }).then((user) => {
         this.set('user', user);
+        
+        //get the current user's projects 
+        return this.get('store').query('project',
+        { 
+          filter: { user_id: user.id },
+          include: 'genres,challenges,project-challenges,project-sessions'
+          
+        });
+        
+        
       });
     } else {
       return resolve();

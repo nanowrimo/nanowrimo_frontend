@@ -1,4 +1,4 @@
-import { sampleSize } from 'lodash';
+import { sampleSize, random } from 'lodash';
 
 export default function(server) {
   let user = server.create('user', { name: 'username', statsYearsEnabled: true });
@@ -16,6 +16,8 @@ export default function(server) {
     sampleSize(genres, 2).forEach(function(genre) {
       server.create('project-genre', { project, genre })
     });
+    //create some project-session data
+    server.createList('project-session', random(1,10, false), {project});
   });
   server.createList('fundometer', 5);
   server.create('flash-banner');

@@ -7,6 +7,7 @@ export default JSONAPISerializer.extend({
       json.data.forEach((data, i) => {
         if (json.data[i].relationships) {
           json.data[i].relationships.genres.data = this.genreSerialize(data);
+          json.data[i].relationships['project-sessions'].data = this.projectSessionSerialize(data);
           json.data[i].relationships.challenges.data = this.challengeSerialize(data);
           //if there is no user relationship, create one
           if (!json.data[i].relationships.user) {
@@ -34,6 +35,12 @@ export default JSONAPISerializer.extend({
     return json;
   },
 
+  projectSessionSerialize(data) {
+    return data.relationships['project-sessions'].data.map(projectSession => ({
+      id: projectSession.id,
+      type: 'project-session',
+    }));
+  },
   genreSerialize(data) {
     return data.relationships.genres.data.map(projectGenre => ({
       id: this.registry.schema.projectGenres.find(projectGenre.id).genreId,
@@ -79,6 +86,22 @@ export default JSONAPISerializer.extend({
               'required-goal': challenge.requiredGoal,
               'starts-on': challenge.startsOn,
               'ends-on': challenge.endsOn
+            }
+          }
+        }
+        case 'project-sessions': {
+          let session = this.registry.schema.projectSessions.find(projectAssociation.id);
+           return {
+            id: session.id,
+            type: 'project-session',
+            attributes: {
+              count: session.count,
+              start: session.start,
+              end: session.end,
+              where: session.where,
+              feeling: session.feeling,
+              'created-at': session.createdAt,
+              'unit-ype': session.unitType,
             }
           }
         }

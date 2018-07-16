@@ -5,7 +5,7 @@ export default Route.extend({
     let user = this.modelFor('authenticated.users.show');
     return this.get('store').query('project', {
       filter: { user_id: user.id },
-      include: 'genres,challenges,project-challenges'
+      include: 'genres,challenges,project-challenges,project-sessions'
     });
   },
 

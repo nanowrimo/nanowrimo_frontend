@@ -31,7 +31,7 @@ export default Model.extend({
   externalLinks: hasMany('externalLink', { async: false }),
   favoriteAuthors: hasMany('favoriteAuthor', { async: false }),
   favoriteBooks: hasMany('favoriteBook', { async: false }),
-
+  projectSessions: hasMany('projectSession'),
   slug: alias('name'),
   projects: hasMany('project', { async: false }),
 
@@ -66,6 +66,7 @@ export default Model.extend({
     get() {
       let pp = null;
       this.get('projects').forEach((p) =>{
+        
         if (p.id && p.primary) {
           pp = p;
         }
