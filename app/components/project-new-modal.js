@@ -1,5 +1,6 @@
 import Component from '@ember/component';
-//import { assert } from '@ember/debug';
+import { assert } from '@ember/debug';
+import { filterBy } from '@ember/object/computed';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
@@ -14,7 +15,6 @@ export default Component.extend({
   associatedChallenge: null,
   challenge: null,
   projectChallenge: null,
-  checkRelationships: null,
   tab: null,
   open: null,
   project: null,
@@ -22,7 +22,9 @@ export default Component.extend({
   formStepOverride: 0,
   projectChallengeChangeset: null,
 
-  optionsForChallenges: computed(function() {
+  optionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
+  
+  baseChallenges:  computed(function() {
     return this.get('store').findAll('challenge');
   }),
   optionsForGenres: computed(function() {
@@ -49,16 +51,17 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     let user = this.get('user');
-    //assert('Must pass a user into {{project-new-modal}}', user);
+    assert('Must pass a user into {{project-new-modal}}', user);
     let newProject = this.get('store').createRecord('project', { user });
     this.set('project', newProject);
+    //by default, we want this new project to be 'primary'
+    newProject.set('primary', true);
     //create the newProjectChallenge for the newProject
     let newProjectChallenge = this.get('store').createRecord('projectChallenge');
     //push the projectChallenge onto the project
     newProject.projectChallenges.pushObject(newProjectChallenge);
     
     this.set('projectChallenge', newProject);
-    this.set('checkRelationships', ['genres'] );
     this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
   },
 
