@@ -43,7 +43,7 @@
         </div>
         <ul class="nano-list {{processingHide}}" style="height: 700px; ">
           {{#each sortedRegions as |region|}}
-            {{#link-to "authenticated.regions.show.index" region.regionObject.slug tagName="li" class="nano-list-item"}}
+            {{#link-to "authenticated.regions.show" region.regionObject.slug tagName="li" class="nano-list-item"}}
               <div class="nano-list-icon">
                 {{fa-icon "map-marker"}}
               </div>
