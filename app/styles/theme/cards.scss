@@ -103,8 +103,11 @@
           font-size: 12px;
           color: $nano-lightgrey;
           &.tabSelected, &:hover {
-            background-color: rgb(190, 242, 253);
-            color: $nano-mediumdarkgrey;
+            background-color: #75abbc;
+            color: rgba(255, 255, 255, 0.8);
+          }
+          &.tabSelected {
+            cursor: auto;
           }
         }
       }
