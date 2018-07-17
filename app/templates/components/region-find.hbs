@@ -5,20 +5,13 @@
         <div class="corner-label">My Regions</div>
       </div>
       <div class="nano-subcard-content no-padding" style="max-height: 300px;">
+        <div class="nano-list-message">
+          You haven't joined a region! Please select one of the regions from the list below.
+          <br />
+          
+        </div>
+        
         <ul class="nano-list">
-          <li {{action "remapCenter" 45 45}} class="nano-list-item">
-            <div class="nano-list-icon">
-              {{fa-icon "map-marker"}}
-            </div>
-            <div class="nano-list-item-content">
-              <div class="nano-list-item-title">
-                USA :: California :: Berkeley
-              </div>
-              <div class="nano-list-item-info">
-                9,456 members
-              </div>
-            </div>
-          </li>
         </ul>
       </div>
     </div>
@@ -39,25 +32,36 @@
           Thanks for your patience while we determine your location...
         </div>
         <div class="nano-list-search {{proximityHide}}">
-          {{input class="nano-list-search-field" placeholder="Search region names..." value=searchString}}
+          {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up="searchStringChange"}}
         </div>
         <ul class="nano-list {{processingHide}}" style="height: 700px; ">
-          {{#each sortedRegions as |region|}}
+          {{#each sortedRegions as |region index|}}
             {{#link-to "authenticated.regions.show" region.regionObject.slug tagName="li" class="nano-list-item"}}
-              <div class="nano-list-icon">
-                {{fa-icon "map-marker"}}
-              </div>
+              {{#if (lt index limitList)}}
+                <div class="nano-list-icon icon-highlighted">
+                  {{fa-icon "map-marker"}}
+                </div>
+              {{else}}
+                <div class="nano-list-icon">
+                  {{fa-icon "map-marker"}}
+                </div>
+              {{/if}}
               <div class="nano-list-item-content">
                 <div class="nano-list-item-title">
                   {{region.regionObject.name}}
                 </div>
-                <div class="nano-list-item-info">
-                  {{#if sortBySearch}}
-                    {{format-number region.regionObject.numberOfUsers}} members
-                  {{/if}}
-                  {{#unless sortBySearch}}
-                    {{format-number region.proximity}} miles
-                  {{/unless}}
+                <div class="nano-list-item-subcontent">
+                  <div class="nano-list-item-info">
+                    {{#if sortBySearch}}
+                      {{format-number region.regionObject.numberOfUsers}} members
+                    {{/if}}
+                    {{#unless sortBySearch}}
+                      {{format-number region.proximity}} miles
+                    {{/unless}}
+                  </div>
+                  <div class="nano-list-item-buttons">
+                    <button class="button-reversed nano-button-small">Join</button>
+                  </div>
                 </div>
               </div>
             {{/link-to}}
@@ -71,8 +75,12 @@
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front">
       <div class="nano-subcard-content no-padding">
-        {{#g-map lat=user_latitude lng=user_longitude zoom=6 as |context|}}
-          {{g-map-marker context lat=latitude lng=longitude}}
+        {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
+          {{#each sortedRegions as |region index|}}
+             {{#if (lt index limitList)}}
+               {{g-map-marker context lat=region.regionObject.latitude lng=region.regionObject.longitude}}
+             {{/if}}
+          {{/each}}
         {{/g-map}}
       </div>
     </div>

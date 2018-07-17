@@ -402,6 +402,14 @@
   }
   
 }
+.nano-card {
+  &.nano-card-clear {
+    box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0);
+    border: solid 0px #dfe4e6;
+    .nano-subcard {
+    }
+  }
+}
 .quote-text {
   font-size: 20px;
   font-weight: normal;

@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-//import { hasMany } from 'ember-data/relationships';
+import { hasMany } from 'ember-data/relationships';
 //import { computed } from '@ember/object';
 // import { isEmpty } from '@ember/utils';
 
@@ -13,7 +13,12 @@ const Region = Model.extend({
   longitude: attr('number'),
   latitude: attr('number'),
   numberOfUsers: attr('number'),
-  description: attr('string')
+  description: attr('string'),
+  
+  // Members
+  users: hasMany('user'),
+  regionUsers: hasMany('regionUser')
+  
 });
 
 

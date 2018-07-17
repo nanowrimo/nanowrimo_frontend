@@ -33,8 +33,14 @@ export default Model.extend({
   favoriteBooks: hasMany('favoriteBook', { async: false }),
   projectSessions: hasMany('projectSession'),
   slug: alias('name'),
+  
+  // Projects
   projects: hasMany('project', { async: false }),
-
+  
+  // Regional membership
+  regions: hasMany('region'),
+  regionUsers: hasMany('regionUser'),
+  
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
