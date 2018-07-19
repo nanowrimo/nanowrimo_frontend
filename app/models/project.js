@@ -11,7 +11,7 @@ const Project = Model.extend({
   excerpt: attr('string'),
   pinterestUrl: attr('string'),
   playlistUrl: attr('string'),
-  primary: attr('boolean'),
+  primary: attr('number'),
   privacy: attr('number', { defaultValue: '0' }),
   slug: attr('string'),
   summary: attr('string'),

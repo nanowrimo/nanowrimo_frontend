@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { alias }  from '@ember/object/computed';
+import { alias, sort }  from '@ember/object/computed';
 export default Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
@@ -63,15 +63,11 @@ export default Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
-  primaryProject: computed('projects.@each.primary',function(){
-    let pp;
-    this.get('projects').forEach((p) =>{
-      if (p.id && p.primary) {
-        pp = p;
-        console.log(pp);
-      }
-    });
-    return pp;
+  primarySortedProjects: sort('projects', function(a,b){return b.primary - a.primary;}),
+  primaryProject: computed('primarySortedProjects', function(){
+    let psp = this.get('primarySortedProjects');
+    console.log(psp);
+    return psp.firstObject;
   }),
   
   rollbackExternalLinks() {

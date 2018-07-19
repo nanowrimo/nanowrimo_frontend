@@ -9,6 +9,8 @@ export default Component.extend({
   countType: 0,
   showForm: false,
   user: null,
+  newPrimaryValue:0,
+  primaryProject:null,
   
   challengeUnitType: computed("currentUser.user.primaryProject.activeProjectChallenge", function(){
     let apc = this.get('currentUser.user.primaryProject.activeProjectChallenge');
@@ -25,21 +27,12 @@ export default Component.extend({
     }
   }),
   
-  primaryProject: computed('currentUser.user.projects.@each.primary',function(){
-    let pp;
-    this.get('currentUser.user.projects').forEach((p) =>{
-      if ( p.primary) {
-        pp = p;
-        console.log(pp);
-      }
-    });
-    return pp;
-  }),
-  
   primaryProject: computed("user.primaryProject", function(){
     let project = this.get('user.primaryProject');
     this.set('countValue', project.unitCount);
     this.set('initialValue', project.unitCount);
+    this.set('newPrimaryValue',project.primary+1);
+    console.log(this.get('newPrimaryValue'));
     return project;
   }),
   
