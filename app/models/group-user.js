@@ -3,7 +3,7 @@ import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
 
-const GroupUser = Model.extend({
+export default  Model.extend({
   is_admin: attr('boolean'),
   
   
@@ -11,5 +11,3 @@ const GroupUser = Model.extend({
   user: belongsTo('user', {async: false}),
   
 });
-
-export default GroupUser;
