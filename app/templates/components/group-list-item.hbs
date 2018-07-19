@@ -1,0 +1,29 @@
+{{#link-to "authenticated.regions.show" groupContainer.groupObject.slug tagName="li" class="nano-list-item"}}
+  {{#if (lt index limitList)}}
+    <div class="nano-list-icon icon-highlighted">
+      {{fa-icon "map-marker"}}
+    </div>
+  {{else}}
+    <div class="nano-list-icon">
+      {{fa-icon "map-marker"}}
+    </div>
+  {{/if}}
+  <div class="nano-list-item-content">
+    <div class="nano-list-item-title">
+      {{groupContainer.groupObject.name}}
+    </div>
+    <div class="nano-list-item-subcontent">
+      <div class="nano-list-item-info">
+        {{#if sortBySearch}}
+          {{format-number groupContainer.groupObject.numberOfUsers}} members
+        {{/if}}
+        {{#unless sortBySearch}}
+          {{format-number groupContainer.proximity}} miles
+        {{/unless}}
+      </div>
+      <div class="nano-list-item-buttons">
+        <button class="button-reversed nano-button-small" {{action 'joinGroup' bubbles=false}}>Join{{groupContainer.groupObject.groupUsers.length}}</button>
+      </div>
+    </div>
+  </div>
+{{/link-to}}

@@ -46,12 +46,18 @@ export default function() {
 
   // CRUD
 
-  this.resource('regions', { only: ['index'] });
-  this.get('regions/:slug',({regions}, request) => {
+  this.resource('groups', { only: ['index'] });
+  this.get('groups/:slug',({groups}, request) => {
     let slug = request.params.slug;
-    let region = regions.findBy({ slug });
-    return region || new Response(404);
+    let group = groups.findBy({ slug });
+    return group || new Response(404);
   });
+  this.post('/group-users', function({groupUsers}){
+    let attrs = this.normalizedRequestAttrs();
+    let groupUser = groupUsers.create(attrs);
+    return groupUser;
+  });
+  
   //this.resource('locations', { only: ['index'] });
   
   this.resource('challenges', { only: ['index'] });

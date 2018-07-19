@@ -37,9 +37,9 @@ export default Model.extend({
   // Projects
   projects: hasMany('project', { async: false }),
   
-  // Regional membership
-  regions: hasMany('region'),
-  regionUsers: hasMany('regionUser'),
+  // Group membership
+  groups: hasMany('group', {async: false}),
+  groupUsers: hasMany('groupUser', {async: false}),
   
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
@@ -102,5 +102,5 @@ export default Model.extend({
       this.get('favoriteAuthors').forEach(author => author.persistChanges());
       this.get('favoriteBooks').forEach(book => book.persistChanges());
     });
-  }
+  },
 });

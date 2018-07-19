@@ -3,13 +3,13 @@ import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 
 
-const RegionUser = Model.extend({
+const GroupUser = Model.extend({
   is_admin: attr('boolean'),
   
   
-  region: belongsTo('region'),
-  user: belongsTo('user'),
+  group: belongsTo('group', {async: false}),
+  user: belongsTo('user', {async: false}),
   
 });
 
-export default RegionUser;
+export default GroupUser;

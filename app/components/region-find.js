@@ -1,11 +1,35 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
-import { computed } from '@ember/object';
+import { get, computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { debounce } from '@ember/runloop';
 
 export default Component.extend({
+  currentUser: service(),
+  recomputeUserRegions: false,
+  userRegions: computed('recomputeUserRegions', function() {
+    //alert('gh');
+    //this.set('recomputeUserRegions',false);
+    let cu = this.get('currentUser.user');
+    let groupname = get(cu, 'groups.firstObject.is_admin');
+    //let r = get(cu, 'name');
+    //let r = cu.groupUsers;
+    alert(groupname);
+    let newArray = [];
+    if (r) {
+      r.forEach(function(obj) {
+        if (r.group_type=='region') {
+          let o = EmberObject.create();
+          o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
+          newArray.push(o);
+        }
+      });
+    }
+    let sortedArray = newArray.sortBy('name');
+    return sortedArray;
+  }),
+  
   init() {
     this._super(...arguments);
   },
@@ -75,6 +99,7 @@ export default Component.extend({
   sortBySearch: computed('sortOption',function() {
     return this.get('sortOption')=='search'
   }),
+  
   sortedRegions: computed('regions','searchString','sortOption','user_longitude','user_latitude', function() {
     let r = this.get('regions');
     let s = this.get('sortOption');
@@ -84,7 +109,7 @@ export default Component.extend({
       r.forEach(function(obj) {
         if ((m == '')||(obj.name.toLowerCase().indexOf(m) != -1)) {
           let o = EmberObject.create();
-          o.setProperties({regionObject: obj, name: obj.name, proximity: ''});
+          o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
           newArray.push(o);
         }
       });
@@ -98,7 +123,7 @@ export default Component.extend({
         var c = Math.cos;
         var a = 0.5 - c((ulat - obj.latitude) * p)/2 + c(obj.latitude * p) * c(ulat * p) * (1 - c((ulong - obj.longitude) * p))/2;
         var d = Math.round(7917.5 * Math.asin(Math.sqrt(a)));
-        o.setProperties({regionObject: obj, name: obj.name, proximity: d});
+        o.setProperties({groupObject: obj, name: obj.name, proximity: d});
         newArray.push(o);
       });
       var sortedArray = newArray.sortBy('proximity');
@@ -172,6 +197,9 @@ export default Component.extend({
     },
     searchStringChange: function() {
       debounce(this, this.updateSearch, 1000, false);
+    },
+    setRecomputeUserRegions: function() {
+      this.set('recomputeUserRegions', true);
     }
   }
   
