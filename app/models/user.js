@@ -11,6 +11,8 @@ export default Model.extend({
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
+  slug: attr('string'),
+  timeZone: attr('string'),
   plate: attr('string'),
   postalCode: attr('string'),
 
@@ -28,12 +30,11 @@ export default Model.extend({
   statsYearsDone: attr('string'),
   statsYearsWon: attr('string'),
 
-  externalLinks: hasMany('externalLink', { async: false }),
-  favoriteAuthors: hasMany('favoriteAuthor', { async: false }),
-  favoriteBooks: hasMany('favoriteBook', { async: false }),
+  externalLinks: hasMany('externalLink'),
+  favoriteAuthors: hasMany('favoriteAuthor'),
+  favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
-  slug: alias('name'),
-  projects: hasMany('project', { async: false }),
+  projects: hasMany('project'),
 
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
@@ -62,17 +63,15 @@ export default Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
-  primaryProject: computed('projects.@each.primary',{
-    get() {
-      let pp = null;
-      this.get('projects').forEach((p) =>{
-        
-        if (p.id && p.primary) {
-          pp = p;
-        }
-      });
-      return pp;
-    }
+  primaryProject: computed('projects.@each.primary',function(){
+    let pp;
+    this.get('projects').forEach((p) =>{
+      if (p.id && p.primary) {
+        pp = p;
+        console.log(pp);
+      }
+    });
+    return pp;
   }),
   
   rollbackExternalLinks() {

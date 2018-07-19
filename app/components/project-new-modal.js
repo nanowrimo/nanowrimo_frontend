@@ -52,7 +52,8 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('user');
     assert('Must pass a user into {{project-new-modal}}', user);
-    let newProject = this.get('store').createRecord('project', { user });
+    let newProject = this.get('store').createRecord('project');
+    newProject.set('user',user);
     this.set('project', newProject);
     //by default, we want this new project to be 'primary'
     newProject.set('primary', true);
