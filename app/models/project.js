@@ -2,6 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
+import moment from 'moment';
 // import { isEmpty } from '@ember/utils';
 
 const Project = Model.extend({
@@ -10,7 +11,7 @@ const Project = Model.extend({
   excerpt: attr('string'),
   pinterestUrl: attr('string'),
   playlistUrl: attr('string'),
-  primary: attr('boolean'),
+  primary: attr('number'),
   privacy: attr('number', { defaultValue: '0' }),
   slug: attr('string'),
   summary: attr('string'),
@@ -23,9 +24,11 @@ const Project = Model.extend({
 
   challenges: hasMany('challenge'),
   projectChallenges: hasMany('projectChallenge'),
+  projectSessions: hasMany('projectSession'),
   genres: hasMany('genre'),
+  
   user: belongsTo('user'),
-  projectSessions: hasMany('projectSession', {async: false}),
+
 
   _coverUrl: "/images/projects/unknown-cover.png",
   coverUrl: computed('cover', {
@@ -57,10 +60,25 @@ const Project = Model.extend({
     let genreNames = this.get('genres').mapBy('name');
     return genreNames.join(", ");
   }),
-  displayChallenge: computed('user', 'challenges.[]', function(){
-    //let tz = this.get('user').get('timeZone');
-    //console.log(tz);
+  activeProjectChallenge: computed('user.timeZone', 'projectChallenges.[]', function(){
+    let pcs = this.get('projectChallenges');
+    let user = this.get('user');
+    let now = moment();
+    //loop through the pcs
+    let active;
+    pcs.forEach((pc)=>{
+      let now = moment();
+      let start = moment(pc.startsAt);
+      let end = moment(pc.endsAt);
+      //is now between pc start and pc end?
+      if (now.isSameOrAfter(start) && now.isSameOrBefore(end) ) {
+        //this is the active project challenge
+        active = pc;
+      }
+    });
+    return active;
   }),
+  
   relationshipErrors: computed('genres.[]', function() {
     // if (isEmpty(this.get('genres'))) {
     //   return { genres: 'Must select at least one genre' };
@@ -80,7 +98,8 @@ const Project = Model.extend({
     let _super = this._super;
     //resolve all of the genre save promises before saving this project
     return Promise.all(promiseArray).then(() => {
-      return _super.call(this);
+      return _super.call(this).then(()=>{
+      });
     });
     
     

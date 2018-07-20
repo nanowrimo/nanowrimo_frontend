@@ -1,0 +1,47 @@
+<div class='progress-update-dropdown'>
+  <button class="button-log" {{action 'showForm'}}>
+    <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
+  </button>
+  {{#if showForm}}
+  <div id='progress-update-overlay' {{action 'hideForm'}}></div>
+
+  <div id='progress-update-display'>
+    <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
+    <div class="modal-content">
+      <div class="modal-header">
+        How's your writing going?
+      </div>
+      <div class="modal-body">
+        <div id='menu-progress-update-project-display'>
+          <div class='primary-project-display'>
+            <div class='project-cover' >
+              <div class='project-cover-clip'>
+                <img src="{{primaryProject.coverUrl}}">
+              </div>
+            </div>
+               <div class='project-title'>
+              {{primaryProject.title}}
+            </div>
+          </div>
+        <div id='progress-update-form'>
+          <form onSubmit={{action "formSubmit" }}>
+            <div id="progress-update-form-inputs" class='form-group'> 
+              {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
+              
+              <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
+                <option value='0'>total {{unit_type_plural}}</option>
+                <option value='1'>{{unit_type_plural}} this session</option>
+              </select>
+            </div>
+            <div id="progress-update-form-buttons" class='form-group'> 
+              <input class='form-control nano-button' type='submit' value='Update progress'>
+              <a href="#" {{action 'hideForm'}}>Cancel</a>
+            </div>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</div>

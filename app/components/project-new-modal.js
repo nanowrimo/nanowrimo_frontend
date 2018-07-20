@@ -21,6 +21,7 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
   projectChallengeChangeset: null,
+  newPrimaryValue:0,
 
   optionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
   
@@ -51,8 +52,10 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     let user = this.get('user');
+    this.set('newPrimaryValue',user.primaryProject.primary+1);
     assert('Must pass a user into {{project-new-modal}}', user);
-    let newProject = this.get('store').createRecord('project', { user });
+    let newProject = this.get('store').createRecord('project');
+    newProject.set('user',user);
     this.set('project', newProject);
     //by default, we want this new project to be 'primary'
     newProject.set('primary', true);

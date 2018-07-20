@@ -101,7 +101,8 @@ export default JSONAPISerializer.extend({
               where: session.where,
               feeling: session.feeling,
               'created-at': session.createdAt,
-              'unit-ype': session.unitType,
+              'unit-type': session.unitType,
+              'project-id': session.projectId
             }
           }
         }

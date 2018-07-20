@@ -17,7 +17,7 @@ export default function(server) {
       server.create('project-genre', { project, genre })
     });
     //create some project-session data
-    server.createList('project-session', random(1,10, false), {project});
+    server.createList('project-session', random(1,10, false), { project });
   });
   server.createList('group', 10, { groupType: 'region' });
   //server.create('group-user', { groupId: 1, userId: 1 });

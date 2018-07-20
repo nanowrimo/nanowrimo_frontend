@@ -16,7 +16,7 @@ export default Factory.extend({
     return `https://spotify.com/${faker.internet.userName()}`;
   },
   primary(i) {
-    return i === 1;
+    return i;
   },
   privacy() {
     let options = Project.optionsForPrivacy;

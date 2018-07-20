@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { alias }  from '@ember/object/computed';
+import { alias, sort }  from '@ember/object/computed';
 export default Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
@@ -11,6 +11,8 @@ export default Model.extend({
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
+  slug: attr('string'),
+  timeZone: attr('string'),
   plate: attr('string'),
   postalCode: attr('string'),
 
@@ -28,18 +30,16 @@ export default Model.extend({
   statsYearsDone: attr('string'),
   statsYearsWon: attr('string'),
 
-  externalLinks: hasMany('externalLink', { async: false }),
-  favoriteAuthors: hasMany('favoriteAuthor', { async: false }),
-  favoriteBooks: hasMany('favoriteBook', { async: false }),
+  externalLinks: hasMany('externalLink'),
+  favoriteAuthors: hasMany('favoriteAuthor'),
+  favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
-  slug: alias('name'),
-  
-  // Projects
-  projects: hasMany('project', { async: false }),
   
   // Group membership
   groups: hasMany('group', { async: false }),
   groupUsers: hasMany('groupUser', { async: false }),
+
+  projects: hasMany('project'),
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
@@ -67,17 +67,10 @@ export default Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
-  primaryProject: computed('projects.@each.primary',{
-    get() {
-      let pp = null;
-      this.get('projects').forEach((p) =>{
-        
-        if (p.id && p.primary) {
-          pp = p;
-        }
-      });
-      return pp;
-    }
+  primarySortedProjects: sort('projects', function(a,b){return b.primary - a.primary;}),
+  primaryProject: computed('primarySortedProjects', function(){
+    let psp = this.get('primarySortedProjects');
+    return psp.firstObject;
   }),
   
   rollbackExternalLinks() {

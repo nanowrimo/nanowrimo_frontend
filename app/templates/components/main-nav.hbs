@@ -32,22 +32,8 @@
             {{/nav.dropdown}}
           {{/each}}
         {{/bs-nav}}
+        {{progress-update-dropdown}}
         {{#bs-nav class="nav-logging-buttons" type="pills" as |nav|}}
-          {{#nav.dropdown as |dd|}}
-            {{#dd.toggle}}
-              <button class="button-log">
-                {{#if media.isMobile}}
-                  <span class="mobile">LOG</span>
-                {{/if}}
-                {{#if media.isDesktop}}
-                  <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
-                {{/if}}
-              </button>
-            {{/dd.toggle}}
-            {{#dd.menu align="right" as |ddm|}}
-              {{progress-update-form}}
-            {{/dd.menu}}
-          {{/nav.dropdown}}
           {{#nav.dropdown as |dd|}}
             {{#dd.toggle}}
               <button class="button-timer">
