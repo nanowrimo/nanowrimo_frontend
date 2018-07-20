@@ -62,12 +62,10 @@ const Project = Model.extend({
   }),
   activeProjectChallenge: computed('user.timeZone', 'projectChallenges.[]', function(){
     let pcs = this.get('projectChallenges');
-    let user = this.get('user');
     let now = moment();
     //loop through the pcs
     let active;
     pcs.forEach((pc)=>{
-      let now = moment();
       let start = moment(pc.startsAt);
       let end = moment(pc.endsAt);
       //is now between pc start and pc end?

@@ -4,14 +4,13 @@ import { computed } from "@ember/object";
 export default Component.extend({
   currentUser: service(),
   store: service(),
-  countValue: null,
-  initialValue: null,
+ 
   countType: 0,
   showForm: false,
   user: null,
-  newPrimaryValue:0,
-  primaryProject:null,
-  
+  countValue: null,
+  initialValue: null,
+
   challengeUnitType: computed("currentUser.user.primaryProject.activeProjectChallenge", function(){
     let apc = this.get('currentUser.user.primaryProject.activeProjectChallenge');
     if (apc) {

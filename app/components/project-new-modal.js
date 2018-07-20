@@ -21,7 +21,6 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
   projectChallengeChangeset: null,
-  newPrimaryValue:0,
 
   optionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
   
