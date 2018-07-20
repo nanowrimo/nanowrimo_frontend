@@ -66,7 +66,6 @@ export default Model.extend({
   primarySortedProjects: sort('projects', function(a,b){return b.primary - a.primary;}),
   primaryProject: computed('primarySortedProjects', function(){
     let psp = this.get('primarySortedProjects');
-    console.log(psp);
     return psp.firstObject;
   }),
   
