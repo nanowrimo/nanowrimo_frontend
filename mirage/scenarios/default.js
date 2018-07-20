@@ -19,8 +19,10 @@ export default function(server) {
     //create some project-session data
     server.createList('project-session', random(1,10, false), {project});
   });
-  let groups = server.createList('group', 10, { groupType: 'region' });
-  groups.forEach(function(group) {
-    server.create('group-user', { group, user, is_admin: true });
-  });
+  server.createList('group', 10, { groupType: 'region' });
+  //server.create('group-user', { groupId: 1, userId: 1 });
+  /*groups.forEach(function(group) {
+    let user = this.get('user');
+    server.create('group-user', { groupId: group.id, userId: user.id });
+  });*/
 }

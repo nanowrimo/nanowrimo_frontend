@@ -20,7 +20,7 @@ export default Component.extend({
   actions: {
     joinGroup() {
       let gu = this.get('store').createRecord('groupUser');
-      gu.set('user', this.get('currentUser'));
+      gu.set('user', this.get('currentUser.user'));
       gu.set('group', this.get('thisGroup'));
       gu.save();
       this.get('statusChanged')();

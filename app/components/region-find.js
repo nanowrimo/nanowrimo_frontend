@@ -7,19 +7,30 @@ import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
+  store: service(),
   recomputeUserRegions: false,
   userRegions: computed('recomputeUserRegions', function() {
-    //alert('gh');
+    /*let r = this.get('regions');
+    let s = this.get('sortOption');
+    let m = this.get('searchString').toLowerCase();
+    let newArray = [];
+    r.forEach(function(obj) {
+      if ((m == '')||(obj.name.toLowerCase().indexOf(m) != -1)) {
+        let o = EmberObject.create();
+        o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
+        newArray.push(o);
+      }
+    });
+    return newArray.sortBy('name');*/
     //this.set('recomputeUserRegions',false);
+    let store = this.get('store');
     let cu = this.get('currentUser.user');
-    let groupname = get(cu, 'groups.firstObject.is_admin');
-    //let r = get(cu, 'name');
-    //let r = cu.groupUsers;
-    alert(groupname);
+    let r = get(cu, 'groups');
+    alert(r.length);
     let newArray = [];
     if (r) {
       r.forEach(function(obj) {
-        if (r.group_type=='region') {
+        if (obj.group_type=='region') {
           let o = EmberObject.create();
           o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
           newArray.push(o);

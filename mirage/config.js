@@ -10,7 +10,7 @@ export default function() {
 
   // Authentication
 
-  this.resource('users', { only: ['update'] });
+  this.resource('users', { only: ['index','update'] });
   this.post('users', () => {
     return new Response(201);
   });

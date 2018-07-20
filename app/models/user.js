@@ -38,9 +38,8 @@ export default Model.extend({
   projects: hasMany('project', { async: false }),
   
   // Group membership
-  groups: hasMany('group', {async: false}),
-  groupUsers: hasMany('groupUser', {async: false}),
-  
+  groups: hasMany('group', { async: false }),
+  groupUsers: hasMany('groupUser', { async: false }),
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
