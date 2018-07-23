@@ -16,7 +16,7 @@ export default Factory.extend({
     return `https://spotify.com/${faker.internet.userName()}`;
   },
   primary(i) {
-    return i === 1;
+    return i;
   },
   privacy() {
     let options = Project.optionsForPrivacy;
@@ -31,14 +31,9 @@ export default Factory.extend({
   },
   summary: faker.lorem.sentence,
   title: faker.commerce.productName,
-  unitCount() {
-    return faker.random.number({ min: 10000, max: 50000 });
-  },
+  
   unitType() {
     return 'word';
-  },
-  wordCount() {
-    return faker.random.number({ min: 0, max: 5000 });
   },
   writingType() {
     let options = Project.optionsForWritingType;

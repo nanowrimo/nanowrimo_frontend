@@ -1,0 +1,97 @@
+.progress-update-dropdown {
+  position:relative;
+  
+  .nano-menu-tab {
+    position: absolute;
+    top: -8px;
+    right: 5px;
+  }
+  
+  #progress-update-display{
+     z-index: 1000;
+     position:absolute;
+     right: 0px;
+     top: 40px;
+
+    #menu-progress-update-project-display {
+      .primary-project-display {
+        margin-top: 14px;
+        height: 90px;
+        position: relative;
+        
+        .project-cover {
+          width: 255px;
+          float: left;
+          .project-cover-clip {
+            position: absolute;
+            bottom: 0px;
+            width: 67px;
+            height: 94px;
+            left: 10px;
+            clip-path: inset(0px 0px 0px -50px);
+            img {
+              transform: rotate(-15deg);
+              transform-origin: bottom right;
+              width: 67px;
+              height: 94px;
+              border-radius: 3px;
+            }
+          }
+        }
+        .project-title {
+          position: absolute;
+          top: 0px;
+          left: 80px;
+        }
+      }
+      #progress-update-form-inputs {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        padding: 14px;
+        background-color: #dfe4e6;
+        .progress-update-input::-webkit-inner-spin-button,
+        .progress-update-input::-webkit-outer-spin-button {
+           -webkit-appearance: textfield;
+        }
+        select {
+          font-size: 16px;
+          font-family: 'SourceSansPro-Regular', sans-serif;
+        }
+        .progress-update-input {
+          width: 96px;
+          margin-right: 14px;
+          -moz-appearance: textfield;
+        }
+      }
+      #progress-update-form-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        padding-left: 14px;
+        padding-right: 14px;
+        a {
+          font-size: 16px;
+          font-family: 'SourceSansPro-Regular', sans-serif;
+          text-align: right;
+          color: #979797;
+          vertical-align: text-bottom;
+        }
+      }
+      
+    }
+  }
+
+  #progress-update-overlay {
+    z-index: 500;
+    background-color:transparent;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display:block;
+  }
+}

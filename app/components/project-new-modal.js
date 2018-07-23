@@ -52,7 +52,7 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('user');
     assert('Must pass a user into {{project-new-modal}}', user);
-    let newProject = this.get('store').createRecord('project', { user });
+    let newProject = this.get('store').createRecord('project');
     this.set('project', newProject);
     //by default, we want this new project to be 'primary'
     newProject.set('primary', true);
@@ -88,7 +88,11 @@ export default Component.extend({
     setStep(stepNum) {
       this.set("formStepOverride", stepNum);
     },
-    
+    onShow() {
+      //assign the user to the project
+    this.set('project.user', this.get('user'));
+      
+    },
     onHidden() {
       let callback = this.get('onHidden');
       this.set('formStepOverride',0);

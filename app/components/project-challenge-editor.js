@@ -70,12 +70,16 @@ export default Component.extend({
     } else {
       //set the goals to default to 50K
        this.set('changeset.goal', 50000);
+       //set the unitType to 0 (words type)
+       this.set('changeset.unitType', 0);
     }
     //format the newStartsAt and set the displayStartsAt
     this.set('displayStartsAt', newStartsAt.format("YYYY-MM-DD"));
     this.set('newStartsAt', newStartsAt);
     this.set('changeset.startsAt', newStartsAt.toDate());
     this.set('newDuration', 30);
+    //initial compute of endsat 
+    this.recomputeEndsAt();
   },
   
   actions: {

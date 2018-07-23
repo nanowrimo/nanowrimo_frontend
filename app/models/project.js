@@ -1,7 +1,9 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
+import DS from 'ember-data';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
+import moment from 'moment';
 // import { isEmpty } from '@ember/utils';
 
 const Project = Model.extend({
@@ -10,22 +12,26 @@ const Project = Model.extend({
   excerpt: attr('string'),
   pinterestUrl: attr('string'),
   playlistUrl: attr('string'),
-  primary: attr('boolean'),
+  primary: attr('number'),
   privacy: attr('number', { defaultValue: '0' }),
   slug: attr('string'),
   summary: attr('string'),
   status: attr('string', { defaultValue: 'In Progress' }),
   title: attr('string'),
-  unitCount: attr('number'),
+  //unitCount: attr('number'),
   unitType: attr('string'),
   wordCount: attr('number'),
   writingType: attr('number', { defaultValue: '0' }),
 
   challenges: hasMany('challenge'),
   projectChallenges: hasMany('projectChallenge'),
+  projectSessions: hasMany('projectSession'),
   genres: hasMany('genre'),
+  
   user: belongsTo('user'),
 
+
+  activeChallengeUnitTypePlural: null,
 
   _coverUrl: "/images/projects/unknown-cover.png",
   coverUrl: computed('cover', {
@@ -38,6 +44,19 @@ const Project = Model.extend({
     }
   }),
   
+  unitCount: computed('projectSessions.[]',{ 
+    get() {
+      // sum of the project.sessions counts where unit-type === 0 (words)
+      let count=0;
+      this.get('projectSessions').forEach((ps)=>{
+        if (ps.unitType === 0 ) {
+          count+=ps.count;
+        }
+      });
+      return count;
+    }
+  }),
+  
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
@@ -46,10 +65,26 @@ const Project = Model.extend({
     let genreNames = this.get('genres').mapBy('name');
     return genreNames.join(", ");
   }),
-  displayChallenge: computed('user', 'challenges.[]', function(){
-    //let tz = this.get('user').get('timeZone');
-    //console.log(tz);
+  
+  activeProjectChallenge: computed('projectChallenges.[]', function(){
+    const promise = this.get('projectChallenges').then((pcs)=>{
+      let now = moment();
+      //loop through the pcs
+      let active = null;
+      pcs.forEach((pc)=>{
+        let start = moment(pc.startsAt);
+        let end = moment(pc.endsAt);
+        //is now between pc start and pc end?
+        if (now.isSameOrAfter(start) && now.isSameOrBefore(end) ) {
+          //this is the active project challenge
+          active = pc;
+        }
+      });
+      return active;
+    });
+    return  DS.PromiseObject.create({promise});
   }),
+  
   relationshipErrors: computed('genres.[]', function() {
     // if (isEmpty(this.get('genres'))) {
     //   return { genres: 'Must select at least one genre' };
@@ -69,7 +104,8 @@ const Project = Model.extend({
     let _super = this._super;
     //resolve all of the genre save promises before saving this project
     return Promise.all(promiseArray).then(() => {
-      return _super.call(this);
+      return _super.call(this).then(()=>{
+      });
     });
     
     
