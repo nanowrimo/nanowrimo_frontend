@@ -1,5 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
+import DS from 'ember-data';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
 import moment from 'moment';
@@ -30,6 +31,8 @@ const Project = Model.extend({
   user: belongsTo('user'),
 
 
+  activeChallengeUnitTypePlural: null,
+
   _coverUrl: "/images/projects/unknown-cover.png",
   coverUrl: computed('cover', {
     get() {
@@ -41,15 +44,17 @@ const Project = Model.extend({
     }
   }),
   
-  unitCount: computed('project-sessions.[]', function() {
-    // sum of the project.sessions counts where unit-type === 0 (words)
-    let count=0;
-    this.get('projectSessions').forEach((ps)=>{
-      if (ps.unitType === 0 ) {
-        count+=ps.count;
-      }
-    });
-    return count;
+  unitCount: computed('projectSessions.[]',{ 
+    get() {
+      // sum of the project.sessions counts where unit-type === 0 (words)
+      let count=0;
+      this.get('projectSessions').forEach((ps)=>{
+        if (ps.unitType === 0 ) {
+          count+=ps.count;
+        }
+      });
+      return count;
+    }
   }),
   
   completed: computed('status', function() {
@@ -60,21 +65,24 @@ const Project = Model.extend({
     let genreNames = this.get('genres').mapBy('name');
     return genreNames.join(", ");
   }),
-  activeProjectChallenge: computed('user.timeZone', 'projectChallenges.[]', function(){
-    let pcs = this.get('projectChallenges');
-    let now = moment();
-    //loop through the pcs
-    let active;
-    pcs.forEach((pc)=>{
-      let start = moment(pc.startsAt);
-      let end = moment(pc.endsAt);
-      //is now between pc start and pc end?
-      if (now.isSameOrAfter(start) && now.isSameOrBefore(end) ) {
-        //this is the active project challenge
-        active = pc;
-      }
+  
+  activeProjectChallenge: computed('projectChallenges.[]', function(){
+    const promise = this.get('projectChallenges').then((pcs)=>{
+      let now = moment();
+      //loop through the pcs
+      let active = null;
+      pcs.forEach((pc)=>{
+        let start = moment(pc.startsAt);
+        let end = moment(pc.endsAt);
+        //is now between pc start and pc end?
+        if (now.isSameOrAfter(start) && now.isSameOrBefore(end) ) {
+          //this is the active project challenge
+          active = pc;
+        }
+      });
+      return active;
     });
-    return active;
+    return  DS.PromiseObject.create({promise});
   }),
   
   relationshipErrors: computed('genres.[]', function() {
