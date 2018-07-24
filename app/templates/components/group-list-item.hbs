@@ -5,7 +5,11 @@
     </div>
   {{else}}
     <div class="nano-list-icon">
-      {{fa-icon "map-marker"}}
+      {{#if groupContainer.isHome}}
+        {{fa-icon "home"}}
+      {{else}}
+        {{fa-icon "map-marker"}}
+      {{/if}}
     </div>
   {{/if}}
   <div class="nano-list-item-content">
@@ -26,6 +30,9 @@
           <button class="button-reversed nano-button-small" {{action 'joinGroup' bubbles=false}}>Join</button>
         {{/if}}
         {{#if leavable}}
+          {{#unless groupContainer.isHome}}
+            <button class="button-reversed nano-button-small" {{action 'makeHome' bubbles=false}}>Make Home</button>
+          {{/unless}}
           <button class="button-reversed nano-button-small" {{action 'leaveGroup' bubbles=false}}>Leave</button>
         {{/if}}
       </div>

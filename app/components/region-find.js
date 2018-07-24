@@ -76,30 +76,26 @@ export default Component.extend({
   }),
   sortOption: 'name',
   sortBySearch: computed('sortOption',function() {
-    return this.get('sortOption')=='name'
+    return this.get('sortOption')=='name';
   }),
   
-  userRegions: computed('currentUser.user.regions', function() {
-    //var date = new Date();
-    //var timestamp = date.getTime();
-    
+  userRegions: computed('currentUser.user.{homeRegion,regions}', function() {
     let r = this.get('currentUser.user.regions');
+    let homeRegion = this.get('currentUser.user.homeRegion');
     let newArray = [];
     if (r) {
       r.forEach(function(obj) {
         let o = EmberObject.create();
-        o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: ''});
+        let isHome = false;
+        if (homeRegion == obj) {
+          isHome = true;
+        }
+        o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: '', isHome: isHome});
         newArray.push(o);
       });
     }
     var sorted = this.mergeSort(newArray);
-    //var date2 = new Date();
-    //var timestamp2 = date2.getTime();
-    //console.log("userRegions: " + (timestamp2-timestamp));
     return sorted;
-    
-    //let sortedArray = newArray.sortBy('name');
-    //return sortedArray;
   }),
   
   joinedRegionIds: computed('userRegions', function() {
@@ -155,7 +151,7 @@ export default Component.extend({
     return result;
   },
 
-  sortedRegions: computed('joinedRegionIds','regions','searchString','sortOption','user_longitude','user_latitude', function() {
+  sortedRegions: computed('currentUser.user.homeRegion','joinedRegionIds','regions','searchString','sortOption','user_longitude','user_latitude', function() {
     //var date = new Date();
     //var timestamp = date.getTime();
     let r = this.get('regions');
@@ -167,7 +163,7 @@ export default Component.extend({
       r.forEach(function(obj) {
         if (((m == '')||(obj.name.toLowerCase().indexOf(m) != -1))) {
           let o = EmberObject.create();
-          o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: ''});
+          o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: '', isHome: false});
           newArray.push(o);
         }
       });
@@ -180,7 +176,7 @@ export default Component.extend({
         var c = Math.cos;
         var a = 0.5 - c((ulat - obj.latitude) * p)/2 + c(obj.latitude * p) * c(ulat * p) * (1 - c((ulong - obj.longitude) * p))/2;
         var d = Math.round(7917.5 * Math.asin(Math.sqrt(a)));
-        o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: d});
+        o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: d, isHome: false});
         newArray.push(o);
       });
     }

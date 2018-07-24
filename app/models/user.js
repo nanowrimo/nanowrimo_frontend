@@ -40,7 +40,26 @@ export default Model.extend({
   groups: hasMany('group'),
   groupUsers: hasMany('groupUser'),
   regions: filterBy('groups', 'groupType', 'region'),
-  
+  recalculateHome: 0,
+  homeRegion: computed('regions.[]','recalculateHome', {
+    //homeRegion: computed('regions.[]', 'groupUsers.[]',{
+    get() {
+      let r = this.get('regions');
+      let gu = this.get('groupUsers');
+      //console.log(gu.length);
+      let maxPrimary = -1;
+      let maxRegion = null;
+      r.forEach(function(tgroup) {
+        gu.forEach(function(tgu) {
+          if (tgu.group_id==tgroup.id && tgu.primary>maxPrimary) {
+            maxPrimary = tgu.primary;
+            maxRegion = tgroup;
+          }
+        });
+      });
+      return maxRegion;
+    }
+  }),
   projects: hasMany('project'),
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {

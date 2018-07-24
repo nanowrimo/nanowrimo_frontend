@@ -8,7 +8,7 @@ export default  Model.extend({
   invitation_accepted: attr('number', { defaultValue: '1' }),
   group_id: attr('number'),
   user_id: attr('number'),
-  
+  primary: attr('number'),
   group: belongsTo('group'),
   user: belongsTo('user'),
   

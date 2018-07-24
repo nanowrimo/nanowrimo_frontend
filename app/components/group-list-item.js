@@ -26,13 +26,34 @@ export default Component.extend({
         group: this.get('thisGroup'),
         is_admin: 0
       });
-      gu.save();
+      gu.save().then(() => {
+        let cu = this.get('currentUser.user');
+        let g = this.get('thisGroup');
+        cu.get('groupUsers').pushObject(gu);
+        g.get('groupUsers').pushObject(gu);
+        cu.get('groups').pushObject(g);
+        g.get('users').pushObject(cu);
+      });
+    },
+    makeHome() {
       let cu = this.get('currentUser.user');
       let g = this.get('thisGroup');
-      cu.get('groupUsers').pushObject(gu);
-      g.get('groupUsers').pushObject(gu);
-      cu.get('groups').pushObject(g);
-      g.get('users').pushObject(cu);
+      let gu = null;
+      let maxPrimary = -1;
+      cu.groupUsers.forEach(function(obj) {
+        if (obj.primary>maxPrimary) {
+          maxPrimary = obj.primary;
+        }
+        if (obj.group_id==g.id) {
+          gu = obj;
+        }
+      });
+      let newMax = maxPrimary + 1;
+      gu.set('primary', newMax);
+      gu.save().then(() => {
+        let newInt = cu.set('recalculateHome') + 1;
+        cu.set('recalculateHome', newInt);
+      });
     },
     leaveGroup() {
       let cu = this.get('currentUser.user');
@@ -44,21 +65,14 @@ export default Component.extend({
         }
       });
       if (gu) {
-        cu.get('groupUsers').removeObject(gu);
-        g.get('groupUsers').removeObject(gu);
-        cu.get('groups').removeObject(g);
-        g.get('users').removeObject(cu);
         gu.deleteRecord();
-        gu.save();
+        gu.save().then(() => {
+          cu.get('groupUsers').removeObject(gu);
+          g.get('groupUsers').removeObject(gu);
+          cu.get('groups').removeObject(g);
+          g.get('users').removeObject(cu);
+        });
       }
-      //let cu = this.get('currentUser.user');
-      //let g = this.get('thisGroup');
-      //cu.get('groupUsers').removeObject(gu);
-      //g.get('groupUsers').removeObject(gu);
-      //cu.get('groups').removeObject(g);
-      //g.get('users').removeObject(cu);
-      //gu.deleteRecord();
-      //gu.save();
     }
     
   }
