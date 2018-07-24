@@ -8,47 +8,16 @@ import { debounce } from '@ember/runloop';
 export default Component.extend({
   currentUser: service(),
   store: service(),
-  recomputeUserRegions: false,
-  userRegions: computed('recomputeUserRegions', function() {
-    /*let r = this.get('regions');
-    let s = this.get('sortOption');
-    let m = this.get('searchString').toLowerCase();
-    let newArray = [];
-    r.forEach(function(obj) {
-      if ((m == '')||(obj.name.toLowerCase().indexOf(m) != -1)) {
-        let o = EmberObject.create();
-        o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
-        newArray.push(o);
-      }
-    });
-    return newArray.sortBy('name');*/
-    //this.set('recomputeUserRegions',false);
-    let store = this.get('store');
-    let cu = this.get('currentUser.user');
-    let r = get(cu, 'groups');
-    alert(r.length);
-    let newArray = [];
-    if (r) {
-      r.forEach(function(obj) {
-        if (obj.group_type=='region') {
-          let o = EmberObject.create();
-          o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
-          newArray.push(o);
-        }
-      });
-    }
-    let sortedArray = newArray.sortBy('name');
-    return sortedArray;
-  }),
+  regions: alias('model'),
   
   init() {
     this._super(...arguments);
   },
   
-  _mapZoom: 5,
+  _mapZoom: 3,
   mapZoom: computed('sortOption', function() {
-    if (this.get('sortOption')=='search') {
-      return 2;
+    if (this.get('sortOption')=='name') {
+      return 4;
     } else {
       return 6;
     }
@@ -56,15 +25,15 @@ export default Component.extend({
   
   _limitList: 0,
   limitList: computed('sortOption', function() {
-    if (this.get('sortOption')=='search') {
+    if (this.get('sortOption')=='name') {
       return 1000;
     } else {
-      return 20;
+      return 10;
     }
   }),
   geolocation: service(),
   searchTab: computed('sortOption', function() {
-    if (this.get('sortOption')=='search') {
+    if (this.get('sortOption')=='name') {
       return 'tabSelected';
     }
     return '';
@@ -76,7 +45,7 @@ export default Component.extend({
     return '';
   }),
   searchHide: computed('sortOption', function() {
-    if (this.get('sortOption')!='search') {
+    if (this.get('sortOption')!='name') {
       return 'nano-show';
     } else {
       return 'nano-hide';
@@ -101,30 +70,107 @@ export default Component.extend({
   userLocation: null,
   searchString: '',
   tempSearchString: '',
-  regions: alias('model'),
   _processing: false,
   processing: computed('_processing', function() {
     return this.get('_processing');
   }),
-  sortOption: 'search',
+  sortOption: 'name',
   sortBySearch: computed('sortOption',function() {
-    return this.get('sortOption')=='search'
+    return this.get('sortOption')=='name'
   }),
   
-  sortedRegions: computed('regions','searchString','sortOption','user_longitude','user_latitude', function() {
+  userRegions: computed('currentUser.user.regions', function() {
+    var date = new Date();
+    var timestamp = date.getTime();
+    
+    let r = this.get('currentUser.user.regions');
+    let newArray = [];
+    if (r) {
+      r.forEach(function(obj) {
+        let o = EmberObject.create();
+        o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: ''});
+        newArray.push(o);
+      });
+    }
+    var sorted = this.mergeSort(newArray);
+    var date2 = new Date();
+    var timestamp2 = date2.getTime();
+    console.log("userRegions: " + (timestamp2-timestamp));
+    return sorted;
+    
+    //let sortedArray = newArray.sortBy('name');
+    //return sortedArray;
+  }),
+  
+  joinedRegionIds: computed('userRegions', function() {
+    let r = this.get('userRegions');
+    let newArray = [];
+    if (r) {
+      r.forEach(function(obj) {
+        newArray.push(obj.id);
+      });
+    }
+    return newArray;
+  }),
+  
+  userHasNoRegions: computed('joinedRegionIds', function() {
+    if (this.get('joinedRegionIds').length==0) {
+      return '';
+    } else {
+      return 'nano-hide';
+    }
+  }),
+  
+  
+  mergeSort(a, sortOption) {
+    var len = a.length;
+    if(len < 2) { 
+      return a;
+    }
+    var pivot = Math.ceil(len/2);
+    return this.merge(this.mergeSort(a.slice(0,pivot), sortOption), this.mergeSort(a.slice(pivot), sortOption), sortOption);
+  },
+
+  merge(left, right, sortOption) {
+    var result = [];
+    if (sortOption=='name') {
+      while((left.length > 0) && (right.length > 0)) {
+        if((left[0]).name < (right[0]).name) {
+          result.push(left.shift());
+        } else {
+          result.push(right.shift());
+        }
+      }
+    }
+    if (sortOption=='proximity') {
+      while((left.length > 0) && (right.length > 0)) {
+        if((left[0]).proximity < (right[0]).proximity) {
+          result.push(left.shift());
+        } else {
+          result.push(right.shift());
+        }
+      }
+    }
+    result = result.concat(left, right);
+    return result;
+  },
+
+  sortedRegions: computed('joinedRegionIds','regions','searchString','sortOption','user_longitude','user_latitude', function() {
+    var date = new Date();
+    var timestamp = date.getTime();
     let r = this.get('regions');
+    let joinedRegionIds = this.get('joinedRegionIds');
     let s = this.get('sortOption');
     let m = this.get('searchString').toLowerCase();
     let newArray = [];
-    if (s == 'search') {
+    if (s == 'name') {
       r.forEach(function(obj) {
-        if ((m == '')||(obj.name.toLowerCase().indexOf(m) != -1)) {
+        if (((m == '')||(obj.name.toLowerCase().indexOf(m) != -1))) {
           let o = EmberObject.create();
-          o.setProperties({groupObject: obj, name: obj.name, proximity: ''});
+          o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: ''});
           newArray.push(o);
         }
       });
-      return newArray.sortBy('name');
     } else if (s == 'proximity') {
       let ulong = this.get('user_longitude');
       let ulat = this.get('user_latitude');
@@ -134,14 +180,24 @@ export default Component.extend({
         var c = Math.cos;
         var a = 0.5 - c((ulat - obj.latitude) * p)/2 + c(obj.latitude * p) * c(ulat * p) * (1 - c((ulong - obj.longitude) * p))/2;
         var d = Math.round(7917.5 * Math.asin(Math.sqrt(a)));
-        o.setProperties({groupObject: obj, name: obj.name, proximity: d});
+        o.setProperties({groupObject: obj, id: obj.id, name: obj.name, proximity: d});
         newArray.push(o);
       });
-      var sortedArray = newArray.sortBy('proximity');
-      
-      return sortedArray;
     }
+    console.log("Array length: " + newArray.length);
+    for (var i=newArray.length-1; i>=0; i--) {
+      if (joinedRegionIds.indexOf(newArray[i].id)>=0) {
+        newArray.splice(i, 1);
+      }
+    }
+    var sorted = this.mergeSort(newArray, s);
+    //var sorted = newArray.sortBy(s);
+    var date2 = new Date();
+    var timestamp2 = date2.getTime();
+    console.log("sortedRegions: " + (timestamp2-timestamp));
+    return sorted;
   }),
+  
   _user_longitude: null,
   user_longitude: computed('_user_longitude', '_longitude',function() {
     if (this.get('_user_longitude') == null) {
@@ -204,13 +260,10 @@ export default Component.extend({
       this.getLoc();
     },
     findByString: function() {
-      this.set('sortOption', 'search');
+      this.set('sortOption', 'name');
     },
     searchStringChange: function() {
       debounce(this, this.updateSearch, 1000, false);
-    },
-    setRecomputeUserRegions: function() {
-      this.set('recomputeUserRegions', true);
     }
   }
   

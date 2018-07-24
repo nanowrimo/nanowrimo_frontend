@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { alias, sort }  from '@ember/object/computed';
+import { alias, sort, filterBy }  from '@ember/object/computed';
 export default Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
@@ -36,9 +36,10 @@ export default Model.extend({
   projectSessions: hasMany('projectSession'),
   
   // Group membership
-  groups: hasMany('group', { async: false }),
-  groupUsers: hasMany('groupUser', { async: false }),
-
+  groups: hasMany('group'),
+  groupUsers: hasMany('groupUser'),
+  regions: filterBy("groups", "groupType", "region"),
+  
   projects: hasMany('project'),
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {

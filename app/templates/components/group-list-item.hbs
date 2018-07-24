@@ -22,7 +22,12 @@
         {{/unless}}
       </div>
       <div class="nano-list-item-buttons">
-        <button class="button-reversed nano-button-small" {{action 'joinGroup' bubbles=false}}>Join{{groupContainer.groupObject.groupUsers.length}}</button>
+        {{#if joinable}}
+          <button class="button-reversed nano-button-small" {{action 'joinGroup' bubbles=false}}>Join</button>
+        {{/if}}
+        {{#if leavable}}
+          <button class="button-reversed nano-button-small" {{action 'leaveGroup' bubbles=false}}>Leave</button>
+        {{/if}}
       </div>
     </div>
   </div>

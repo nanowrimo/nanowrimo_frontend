@@ -14,6 +14,6 @@ export default Model.extend({
   description: attr('string'),
   
   // Members
-  users: hasMany('user', { async: false }),
-  groupUsers: hasMany('group-user', { async: false })
+  users: hasMany('user'),
+  groupUsers: hasMany('group-user')
 });
