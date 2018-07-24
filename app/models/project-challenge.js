@@ -15,10 +15,8 @@ const ProjectChallenge = Model.extend({
   writingType: attr('number'),
   unitType: attr('number'),
   
-  
   challenge: belongsTo('challenge'),
   project: belongsTo('project'),
-  
   
   duration: computed("startsAt", "endsAt", function(){
     // return the difference between start and end in number of days
@@ -26,6 +24,15 @@ const ProjectChallenge = Model.extend({
     let e = moment(this.get('endsAt'));
     let duration = moment.duration(e.diff(s));
     return duration.asDays();
+  }),
+  
+  unitTypePlural: computed("unitType", function(){
+    let type = this.get('unitType');
+    if (type===0) {
+      return "words";
+    } else if (type===1) {
+      return 'hours';
+    }
   }),
   
 });

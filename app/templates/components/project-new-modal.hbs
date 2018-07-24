@@ -1,5 +1,6 @@
 {{#bs-modal
   open=open
+  onShow=(action "onShow")
   onHidden=(action "onHidden")
   as |modal|
 }}
@@ -186,6 +187,7 @@
             {{f.checkbox
               label="Make this my primary project"
               property="primary"
+              value=newPrimaryValue
             }}
           </div>
 

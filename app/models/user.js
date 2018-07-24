@@ -3,6 +3,7 @@ import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { alias, sort, filterBy }  from '@ember/object/computed';
+
 export default Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
@@ -38,7 +39,7 @@ export default Model.extend({
   // Group membership
   groups: hasMany('group'),
   groupUsers: hasMany('groupUser'),
-  regions: filterBy("groups", "groupType", "region"),
+  regions: filterBy('groups', 'groupType', 'region'),
   
   projects: hasMany('project'),
   _avatarUrl: "/images/users/unknown-avatar.png",
@@ -68,6 +69,7 @@ export default Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
+  
   primarySortedProjects: sort('projects', function(a,b){return b.primary - a.primary;}),
   primaryProject: computed('primarySortedProjects', function(){
     let psp = this.get('primarySortedProjects');

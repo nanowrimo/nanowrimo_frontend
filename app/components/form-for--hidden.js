@@ -6,11 +6,11 @@ export default Component.extend({
   changeset: null,
   property: '',
   name: reads('property'),
-  initial_value: null,
+  initialValue: null,
   //override init
   init() {
     this._super(...arguments);
-    let iv = this.get('initial_value');
+    let iv = this.get('initialValue');
     let n = this.get('name');
     assert('Must pass an initial_value into {{form-for--hidden}}', iv);
     //add the initial value to the changeset 
