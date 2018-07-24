@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { alias, sort, filterBy }  from '@ember/object/computed';
+import { sort, filterBy }  from '@ember/object/computed';
 
 export default Model.extend({
   avatar: attr('string'),

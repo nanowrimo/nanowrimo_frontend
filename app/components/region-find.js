@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
-import { get, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { debounce } from '@ember/runloop';
@@ -80,8 +80,8 @@ export default Component.extend({
   }),
   
   userRegions: computed('currentUser.user.regions', function() {
-    var date = new Date();
-    var timestamp = date.getTime();
+    //var date = new Date();
+    //var timestamp = date.getTime();
     
     let r = this.get('currentUser.user.regions');
     let newArray = [];
@@ -93,9 +93,9 @@ export default Component.extend({
       });
     }
     var sorted = this.mergeSort(newArray);
-    var date2 = new Date();
-    var timestamp2 = date2.getTime();
-    console.log("userRegions: " + (timestamp2-timestamp));
+    //var date2 = new Date();
+    //var timestamp2 = date2.getTime();
+    //console.log("userRegions: " + (timestamp2-timestamp));
     return sorted;
     
     //let sortedArray = newArray.sortBy('name');
@@ -156,8 +156,8 @@ export default Component.extend({
   },
 
   sortedRegions: computed('joinedRegionIds','regions','searchString','sortOption','user_longitude','user_latitude', function() {
-    var date = new Date();
-    var timestamp = date.getTime();
+    //var date = new Date();
+    //var timestamp = date.getTime();
     let r = this.get('regions');
     let joinedRegionIds = this.get('joinedRegionIds');
     let s = this.get('sortOption');
@@ -184,7 +184,7 @@ export default Component.extend({
         newArray.push(o);
       });
     }
-    console.log("Array length: " + newArray.length);
+    //console.log("Array length: " + newArray.length);
     for (var i=newArray.length-1; i>=0; i--) {
       if (joinedRegionIds.indexOf(newArray[i].id)>=0) {
         newArray.splice(i, 1);
@@ -192,9 +192,9 @@ export default Component.extend({
     }
     var sorted = this.mergeSort(newArray, s);
     //var sorted = newArray.sortBy(s);
-    var date2 = new Date();
-    var timestamp2 = date2.getTime();
-    console.log("sortedRegions: " + (timestamp2-timestamp));
+    //var date2 = new Date();
+    //var timestamp2 = date2.getTime();
+    //console.log("sortedRegions: " + (timestamp2-timestamp));
     return sorted;
   }),
   
