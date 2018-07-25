@@ -46,6 +46,9 @@ Router.map(function() {
     this.route('project',function(){
       this.route('show', { path: '/:project_slug'}, function(){});
     });
+    
+    // callback for discourse SSO
+    this.route('sso');
   });
 
   //email confirmations
