@@ -4,12 +4,13 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   currentUser: service(),
   queryParams: ['sig', 'sso'],
-
-  init(){
+  init() {
     this._super(...arguments);
-    let cu = this.get('currentUser');
-    let user = cu.get('user');
-    console.log(cu);  
-    console.log(user);
+    //add an observer to the model
+    this.addObserver('model', this, 'modelDidChange');
+  },
+  //the route model hook has completed and we can now access all service data
+  modelDidChange(){
+    console.log(this.get('currentUser.user.name'));
   }
 });
