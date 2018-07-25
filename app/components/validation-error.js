@@ -21,6 +21,7 @@ export default Component.extend({
   }),
 
   showErrorMessage: computed('errorMessage', 'hasAttemptedSubmit', 'hasBlurred', function() {
-    return (this.get('hasAttemptedSubmit') || this.get('hasBlurred')) && isPresent(this.get('errorMessage'));
+    //return (this.get('hasAttemptedSubmit') || this.get('hasBlurred')) && isPresent(this.get('errorMessage'));
+    return (this.get('hasAttemptedSubmit')) && isPresent(this.get('errorMessage'));
   })
 });
