@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.22 0 39.78 0 39.78 39.9999 0.22 39.9999"></polygon>
+        <polygon id="path-3" points="0 0.0102 2.9997 0.0102 2.9997 5.9902 0 5.9902"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <g id="3">
+                <g id="Group-3">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M39.78,22.9899 C38.33,32.6199 30.03,39.9999 20,39.9999 C9.98,39.9999 1.67,32.6199 0.22,22.9899 C1.78,22.8799 3,21.5899 3,19.9999 C3,18.4099 1.78,17.1199 0.22,17.0099 C1.67,7.3799 9.98,-0.0001 20,-0.0001 C30.03,-0.0001 38.33,7.3799 39.78,17.0099 C38.23,17.1199 37,18.4199 37,19.9999 C37,21.5799 38.23,22.8799 39.78,22.9899" id="Fill-1" fill="#FFD478" mask="url(#mask-2)"></path>
+                </g>
+                <path d="M39.9997,20.0002 C39.9997,21.0202 39.9197,22.0202 39.7797,22.9902 C38.2297,22.8802 36.9997,21.5802 36.9997,20.0002 C36.9997,18.4202 38.2297,17.1202 39.7797,17.0102 C39.9197,17.9802 39.9997,18.9802 39.9997,20.0002" id="Fill-4" fill="#DBAD4A"></path>
+                <g id="Group-8" transform="translate(0.000000, 17.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-7"></g>
+                    <path d="M2.9997,3.0002 C2.9997,4.5902 1.7797,5.8802 0.2207,5.9902 C0.0797,5.0202 -0.0003,4.0202 -0.0003,3.0002 C-0.0003,1.9802 0.0797,0.9802 0.2207,0.0102 C1.7797,0.1202 2.9997,1.4102 2.9997,3.0002" id="Fill-6" fill="#DBAD4A" mask="url(#mask-4)"></path>
+                </g>
+                <path d="M10.3952,28.2917 L29.5812,28.2917" id="Stroke-9" stroke="#2F3061" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M14.6413,14.592 C14.6413,16.184 13.3503,17.475 11.7573,17.475 C10.1643,17.475 8.8733,16.184 8.8733,14.592 C8.8733,12.999 10.1643,11.708 11.7573,11.708 C13.3503,11.708 14.6413,12.999 14.6413,14.592" id="Fill-11" fill="#2F3061"></path>
+                <path d="M31.1266,14.592 C31.1266,16.184 29.8356,17.475 28.2426,17.475 C26.6496,17.475 25.3586,16.184 25.3586,14.592 C25.3586,12.999 26.6496,11.708 28.2426,11.708 C29.8356,11.708 31.1266,12.999 31.1266,14.592" id="Fill-13" fill="#2F3061"></path>
+            </g>
+        </g>
+        <circle id="Oval" fill="#FFFFFF" fill-rule="nonzero" style="mix-blend-mode: color;" cx="20" cy="20" r="20"></circle>
+    </g>
+</svg>

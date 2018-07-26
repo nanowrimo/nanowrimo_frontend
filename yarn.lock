@@ -3027,6 +3027,15 @@ ember-cli-app-version@^3.0.0:
     ember-cli-babel "^6.12.0"
     git-repo-version "^1.0.2"
 
+ember-cli-autocomplete-input@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-autocomplete-input/-/ember-cli-autocomplete-input-1.1.0.tgz#39119924e78b1a6aaa4d7b615f5e110c39b9eb3c"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-keyboard-nav "~1.0.0"
+
 ember-cli-babel@6.12.0:
   version "6.12.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.12.0.tgz#3adcdbe1278da1fcd0b9038f1360cb4ac5d4414c"
@@ -3299,6 +3308,12 @@ ember-cli-inject-live-reload@^1.4.1:
 ember-cli-is-package-missing@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-is-package-missing/-/ember-cli-is-package-missing-1.0.0.tgz#6e6184cafb92635dd93ca6c946b104292d4e3390"
+
+ember-cli-keyboard-nav@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-keyboard-nav/-/ember-cli-keyboard-nav-1.0.0.tgz#7da241c93b92ea8cf45ce1e39606f33d48a9445a"
+  dependencies:
+    ember-cli-babel "^6.6.0"
 
 ember-cli-lodash-subset@^1.0.7:
   version "1.0.12"
@@ -3773,6 +3788,19 @@ ember-in-element-polyfill@^0.1.2:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^2.1.0"
     ember-wormhole "^0.5.4"
+
+ember-in-viewport@~3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/ember-in-viewport/-/ember-in-viewport-3.0.3.tgz#49c60b52525795246761742ed4495ad6cd9bf70d"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+
+ember-infinity@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ember-infinity/-/ember-infinity-1.1.0.tgz#2c7f52e892f73ae75b2a9184bdbe8e09b39d9840"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-in-viewport "~3.0.3"
 
 ember-inflector@^2.0.0:
   version "2.3.0"
