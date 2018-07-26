@@ -10,8 +10,8 @@ export default Component.extend({
   user: null,
   countValue: null,
   initialValue: null,
-  selectedWhere: null,
-  _projectAdditionalInfoShow: true,
+  selectedWhere: 'work',
+  _projectAdditionalInfoShow: false,
   projectAdditionalInfoShow: computed('_projectAdditionalInfoShow', function() {
     let p = this.get('_projectAdditionalInfoShow');
     if (p) {
@@ -38,10 +38,17 @@ export default Component.extend({
   actions: {
     foo() { },
     foo2() { },
-    createWhere() { },
+    createWhere() { 
+      alert('where');
+    },
+    createHow() { },
     toggleAdditionalInfo() {
       this.set('_projectAdditionalInfoShow',!this.get('_projectAdditionalInfoShow'));
     },
+    showCreateWhen(value) {
+      return true;
+    },
+    
     showForm(){
       //reset values
       this.set('countType',0);

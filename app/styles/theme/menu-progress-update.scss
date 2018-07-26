@@ -8,10 +8,12 @@
   }
   
   #progress-update-display{
-     z-index: 1000;
-     position:absolute;
-     right: 0px;
-     top: 40px;
+    box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
+    
+    z-index: 1000;
+    position:absolute;
+    right: 0px;
+    top: 40px;
 
     #menu-progress-update-project-display {
       .primary-project-display {

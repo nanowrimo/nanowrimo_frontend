@@ -301,6 +301,29 @@
     min-height: auto;
   }
 }
+.more-info-toggle {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  color: #979797;
+  font-size: 14px;
+  cursor: pointer;
+  &.info-hidden {
+    .fa-chevron-up {
+      display: none;
+    }
+  }
+  &.info-visible {
+    .fa-chevron-down {
+      display: none;
+    }
+  }
+  
+}
+#progress-update-form-buttons {
+  padding-top: 10px;
+  border-top: 1px $nano-lightgrey solid;
+}
 .project-additional-info {
   padding: 15px;
   padding-top: 0px;
