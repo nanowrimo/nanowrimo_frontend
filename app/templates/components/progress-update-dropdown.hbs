@@ -39,7 +39,8 @@
                   </select>
                   {{activeProjectChallenge.content}}
                 </div>
-                <div class="project-additional-info">
+                <div {{action 'toggleAdditionalInfo'}}>More metrics for the intrepid...</div>
+                <div class="project-additional-info {{projectAdditionalInfoShow}}">
                   <label>How did it go?</label>
                   <div class="project-emoji-list">
                     <div class="project-emoji emoji-5"></div>
@@ -50,14 +51,17 @@
                   </div>
                   <div>
                     <label>Where were you writing?</label>
-                    {{names}}
-                    {{#power-select options=name dropdownClass="in-modal-dropdown" onchange=(action "foo") as |name|}}
+                    {{#power-select-with-create
+                      options=whereList
+                      selected=selectedWhere
+                      searchField="name"
+                      renderInPlace=true
+                      dropdownClass="in-modal-dropdown"
+                      onchange=(action (mut selectedWhere))
+                      oncreate=(action "createWhere") as |name term|
+                    }}
                       {{name}}
-                    {{/power-select}}
-                  </div>
-                  <div>
-                    <label>How were you writing?</label>
-                    {{input type='text' name='how' class='form-control progress-update-input'}}
+                    {{/power-select-with-create}}
                   </div>
                   <div class="side-by-side" style="justify-content: space-between">
                     <div style="flex: 0 0 130px; width: 130px;">

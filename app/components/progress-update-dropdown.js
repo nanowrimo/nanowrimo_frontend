@@ -10,8 +10,16 @@ export default Component.extend({
   user: null,
   countValue: null,
   initialValue: null,
-  resultSet: ['home','library','work'],
-  
+  selectedWhere: null,
+  _projectAdditionalInfoShow: true,
+  projectAdditionalInfoShow: computed('_projectAdditionalInfoShow', function() {
+    let p = this.get('_projectAdditionalInfoShow');
+    if (p) {
+      return "info-visible";
+    } else {
+      return "info-hidden";
+    }
+  }),
   primaryProject: computed("user.primaryProject", function(){
     return this.get('user.primaryProject');
   }),
@@ -21,10 +29,19 @@ export default Component.extend({
     let user = this.get('currentUser.user');
     this.set('user',  user);
   },
-  names: ['Stefan', 'Miguel', 'Tomster', 'Pluto'],
+  whereList: computed(function() {
+    return ['home', 'work', 'cafe', 'library'];
+  }),
+  howList: computed(function() {
+    return ['laptop', 'phone', 'longhand', 'dictation'];
+  }),
   actions: {
     foo() { },
-    
+    foo2() { },
+    createWhere() { },
+    toggleAdditionalInfo() {
+      this.set('_projectAdditionalInfoShow',!this.get('_projectAdditionalInfoShow'));
+    },
     showForm(){
       //reset values
       this.set('countType',0);
