@@ -46,6 +46,14 @@ export default function() {
 
   // CRUD
 
+  this.resource('regions', { only: ['index'] });
+  this.get('regions/:slug',({regions}, request) => {
+    let slug = request.params.slug;
+    let region = regions.findBy({ slug });
+    return region || new Response(404);
+  });
+  //this.resource('locations', { only: ['index'] });
+  
   this.resource('challenges', { only: ['index'] });
   this.resource('external-links', { only: ['create', 'update'] });
   this.del('external-links/:id', ({ externalLinks }, request) => {

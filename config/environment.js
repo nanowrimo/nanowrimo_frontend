@@ -109,6 +109,9 @@ module.exports = function(environment) {
     ENV.torii.providers['custom-google'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
     ENV.torii.providers['custom-google'].redirectUri = 'http://ember.nanowrimo.org/oauth2callback';
   }
-
+  ENV['g-map'] = {
+    key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss'
+  }
+  
   return ENV;
 };

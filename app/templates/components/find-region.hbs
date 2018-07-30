@@ -1,0 +1,80 @@
+<div class="nano-card g3-col1 g3-row1 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2 wrap-content">
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front filled-grey">
+      <div class="nano-subcard-header">
+        <div class="corner-label">My Regions</div>
+      </div>
+      <div class="nano-subcard-content no-padding" style="max-height: 300px;">
+        <ul class="nano-list">
+          <li {{action "remapCenter" 45 45}} class="nano-list-item">
+            <div class="nano-list-icon">
+              {{fa-icon "map-marker"}}
+            </div>
+            <div class="nano-list-item-content">
+              <div class="nano-list-item-title">
+                USA :: California :: Berkeley
+              </div>
+              <div class="nano-list-item-info">
+                9,456 members
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front filled-grey">
+      <div class="nano-subcard-header">
+        <div class="corner-label">Find a Region</div>
+        <div class="nano-subcard-tab {{searchTab}}" {{action 'findByString'}}>
+          Search
+        </div>
+        <div class="nano-subcard-tab {{proximityTab}}" {{action 'getUserLocation'}}>
+          Nearest to me
+        </div>
+      </div>
+      <div class="nano-subcard-content no-padding">
+        <div class="nano-list-message {{processingShow}}">
+          Thanks for your patience while we determine your location...
+        </div>
+        <div class="nano-list-search {{proximityHide}}">
+          {{input class="nano-list-search-field" placeholder="Search region names..." value=searchString}}
+        </div>
+        <ul class="nano-list {{processingHide}}" style="height: 700px; ">
+          {{#each sortedRegions as |region|}}
+            {{#link-to "authenticated.regions.find" tagName="li" class="nano-list-item"}}
+              <div class="nano-list-icon">
+                {{fa-icon "map-marker"}}
+              </div>
+              <div class="nano-list-item-content">
+                <div class="nano-list-item-title">
+                  {{region.regionObject.name}}
+                </div>
+                <div class="nano-list-item-info">
+                  {{#if sortBySearch}}
+                    {{format-number region.regionObject.numberOfUsers}} members
+                  {{/if}}
+                  {{#unless sortBySearch}}
+                    {{format-number region.proximity}} miles
+                  {{/unless}}
+                </div>
+              </div>
+            {{/link-to}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="nano-card g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2">
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front">
+      <div class="nano-subcard-content no-padding">
+        {{#g-map lat=user_latitude lng=user_longitude zoom=6 as |context|}}
+          {{g-map-marker context lat=latitude lng=longitude}}
+        {{/g-map}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,9 @@
   &.login {
     max-width: 436px;
   }
+  &.wrap-content {
+    flex-wrap: wrap;
+  }
   .nano-subcard {
     flex: 1 1 100%;
     border-radius: 6px;
@@ -78,6 +81,34 @@
           border-bottom-right-radius: 6px;
           border-bottom-left-radius: 6px;
           background-color: $nano-lightblue;
+          &:hover {
+            background-color: rgb(190, 242, 253);
+          }
+        }
+        .nano-subcard-tab {
+          cursor: pointer;
+          text-align: center;
+          color: $nano-mediumgrey;
+          margin-left: 7px;
+          padding: 4px;
+          line-height: 20px;
+          border-bottom-right-radius: 6px;
+          border-bottom-left-radius: 6px;
+          background-color: $nano-lightblue;
+          font-size: 12px;
+          padding: 4px;
+          padding-right: 14px;
+          padding-left: 14px;
+          line-height: 20px;
+          font-size: 12px;
+          color: $nano-lightgrey;
+          &.tabSelected, &:hover {
+            background-color: #75abbc;
+            color: rgba(255, 255, 255, 0.8);
+          }
+          &.tabSelected {
+            cursor: auto;
+          }
         }
       }
       .nano-subcard-content {
@@ -97,6 +128,23 @@
         color: $nano-mediumgrey;
         background-repeat: no-repeat;
         background-position: left bottom;
+        &.no-padding {
+          padding-top: 0px;
+          padding-bottom: 0px;
+          padding-left: 0px;
+          padding-right: 0px;
+          border-radius: 6px;
+        }
+        .g-map{
+          width: 100%;
+          height: 100%;
+          border-radius: 6px;
+        }
+        .g-map-canvas {
+          width: 100%;
+          height: 100%;
+          border-radius: 6px;
+        }
         .quotee {
           font-family: SourceSansPro-Regular;
           font-size: 16px;
@@ -363,4 +411,8 @@
   letter-spacing: normal;
   text-align: center;
   color: #b8b8b8;
+}
+.ember-google-map {
+  width: 100%;
+  height: 100%;
 }

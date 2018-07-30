@@ -142,6 +142,9 @@
         &.g3-vspan2 {
           grid-row: 1 / 3;
         }
+        &.g3-vspan3 {
+          grid-row: 1 / 4;
+        }
       }
       .g3-row2 {
         grid-row: 2;
@@ -268,6 +271,12 @@
           color: $nano-mediumlightblue;
           background: linear-gradient(to top, $nano-mediumlightblue 0px,$nano-mediumlightblue 3px,transparent 3px,transparent 500px);
 
+        }
+        &.nano-panel-tabs-spacer {
+          width: 60px;
+          @media (max-width: $screen-md-max) {
+            display: none;
+          }
         }
       }
     }
