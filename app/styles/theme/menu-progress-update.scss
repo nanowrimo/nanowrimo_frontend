@@ -14,8 +14,11 @@
     position:absolute;
     right: 0px;
     top: 40px;
-
+    .modal-content {
+      border: solid 1px #dfe4e6;
+    }
     #menu-progress-update-project-display {
+      
       .primary-project-display {
         margin-top: 14px;
         height: 90px;
@@ -46,6 +49,72 @@
           left: 80px;
         }
       }
+      #progress-update-form {
+        .more-info-toggle {
+          font-size: 14px;
+          padding-left: 15px;
+          padding-right: 15px;
+          padding-bottom: 10px;
+          cursor: pointer;
+          &.info-hidden {
+            .fa-chevron-up {
+              display: none;
+            }
+          }
+          &.info-visible {
+            .fa-chevron-down {
+              display: none;
+            }
+          }
+        }
+        .project-additional-info {
+          padding: 15px;
+          padding-top: 0px;
+          &.info-hidden {
+            display: none;
+          }
+          .project-emoji-list {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            .project-emoji {
+              width: 40px;
+              height: 40px;
+              cursor: pointer;
+              &.emoji-1 {
+                background-image: url('/images/projects/emoji/unselected/1.svg');
+                &:hover, &.selected {
+                  background-image: url('/images/projects/emoji/selected/1.svg');
+                }
+              }
+              &.emoji-2 {
+                background-image: url('/images/projects/emoji/unselected/2.svg');
+                &:hover, &.selected {
+                  background-image: url('/images/projects/emoji/selected/2.svg');
+                }
+              }
+              &.emoji-3 {
+                background-image: url('/images/projects/emoji/unselected/3.svg');
+                &:hover, &.selected {
+                  background-image: url('/images/projects/emoji/selected/3.svg');
+                }
+              }
+              &.emoji-4 {
+                background-image: url('/images/projects/emoji/unselected/4.svg');
+                &:hover, &.selected {
+                  background-image: url('/images/projects/emoji/selected/4.svg');
+                }
+              }
+              &.emoji-5 {
+                background-image: url('/images/projects/emoji/unselected/5.svg');
+                &:hover, &.selected {
+                  background-image: url('/images/projects/emoji/selected/5.svg');
+                }
+              }
+            }
+          }
+        }
+      }
       #progress-update-form-inputs {
         display: flex;
         justify-content: space-between;
@@ -58,12 +127,12 @@
            -webkit-appearance: textfield;
         }
         select {
+          flex: 0 0 47%;
           font-size: 16px;
           font-family: 'SourceSansPro-Regular', sans-serif;
         }
         .progress-update-input {
-          width: 96px;
-          margin-right: 14px;
+          flex: 0 0 47%;
           -moz-appearance: textfield;
         }
       }
@@ -74,6 +143,9 @@
         flex-wrap: nowrap;
         padding-left: 14px;
         padding-right: 14px;
+        padding-top: 10px;
+        border-top: 1px $nano-lightgrey solid;
+        
         a {
           font-size: 16px;
           font-family: 'SourceSansPro-Regular', sans-serif;
