@@ -3,12 +3,30 @@ import EmberObject from '@ember/object';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   init() {
     this._super(...arguments);
   },
   
+  _mapZoom: 5,
+  mapZoom: computed('sortOption', function() {
+    if (this.get('sortOption')=='search') {
+      return 2;
+    } else {
+      return 6;
+    }
+  }),
+  
+  _limitList: 0,
+  limitList: computed('sortOption', function() {
+    if (this.get('sortOption')=='search') {
+      return 1000;
+    } else {
+      return 20;
+    }
+  }),
   geolocation: service(),
   searchTab: computed('sortOption', function() {
     if (this.get('sortOption')=='search') {
@@ -47,6 +65,7 @@ export default Component.extend({
   geoObject: null,
   userLocation: null,
   searchString: '',
+  tempSearchString: '',
   regions: alias('model'),
   _processing: false,
   processing: computed('_processing', function() {
@@ -103,14 +122,29 @@ export default Component.extend({
       return this.get('_user_latitude');
     }
   }),
-  _longitude: 45.00,
+  _longitude: -122.42,
   longitude: computed('_longitude',function() {
     return this.get('_longitude');
   }),
-  _latitude: 45.00,
+  _latitude: 37.77,
   latitude: computed('_latitude',function() {
     return this.get('_latitude');
   }),
+  center_longitude: computed('sortOption','_user_longitude', '_longitude',function() {
+    if (this.get('_user_longitude') == null) {
+      return this.get('_longitude');
+    } else {
+      return this.get('_user_longitude');
+    }
+  }),
+  center_latitude: computed('sortOption','_user_latitude', '_latitude',function() {
+    if (this.get('_user_latitude') == null) {
+      return this.get('_latitude');
+    } else {
+      return this.get('_user_latitude');
+    }
+  }),
+  
   getLoc() {
     this.set('sortOption', 'proximity');
     this.get('geolocation').getLocation().then((geoObject)=>{
@@ -120,6 +154,10 @@ export default Component.extend({
       
     });
   },
+  updateSearch() {
+    this.set('searchString',this.get('tempSearchString'));
+  },
+  
   actions: {
     remapCenter: function(longitude, latitude) {
       this.set('_longitude', longitude);
@@ -131,6 +169,9 @@ export default Component.extend({
     },
     findByString: function() {
       this.set('sortOption', 'search');
+    },
+    searchStringChange: function() {
+      debounce(this, this.updateSearch, 1000, false);
     }
   }
   

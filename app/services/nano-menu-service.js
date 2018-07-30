@@ -9,8 +9,32 @@ export default Service.extend({
   currentUserName: reads('currentUser.user.name'),
   sideMenuIsOpen: true,
   homeUrl: "authenticated",
+  homeRegionName: computed('currentUser.user.homeRegion', function() {
+    let region = this.get('currentUser.user.homeRegion');
+    if (region) {
+      return region.name;
+    } else {
+      return 'Join a region!';
+    }
+  }),
+  homeRegionUrl: computed('currentUser.user.homeRegion', function() {
+    let region = this.get('currentUser.user.homeRegion');
+    if (region) {
+      return "authenticated.regions.show.index";
+    } else {
+      return "authenticated.regions.find";
+    }
+  }),
+  homeRegionSegment: computed('currentUser.user.homeRegion', function() {
+    let region = this.get('currentUser.user.homeRegion');
+    if (region) {
+      return region.slug;
+    } else {
+      return null;
+    }
+  }),
   
-  submenus: computed(function() {
+  submenus: computed('homeRegionName',function() {
     let links = [
       {
         toggleLabel: "My NaNoWriMo",
@@ -25,7 +49,7 @@ export default Service.extend({
         toggleLabel: "Community",
         submenuItems: [
           {label: "Forums", url: "index", segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
-          {label: "New York City", url: "index", segment: null, teaser: "Talk to WriMos near you", src: "/images/nav/map_pin.svg"},
+          {label: this.get('homeRegionName'), url: this.get('homeRegionUrl'), segment: this.get('homeRegionSegment'), teaser: "", src: "/images/nav/map_pin.svg"},
           {label: "Find a Region", url: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"},
           {label: "Word Sprints", url: "index", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
         ]

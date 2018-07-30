@@ -119,6 +119,9 @@
         &.center-vertically {
           align-items: center;
         }
+        .center-horizontally {
+          text-align: center;
+        }
         width: 100%;
         padding: 21px;
         padding-top: 0px;
@@ -401,6 +404,14 @@
     max-height: none;
   }
   
+}
+.nano-card {
+  &.nano-card-clear {
+    box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0);
+    border: solid 0px #dfe4e6;
+    .nano-subcard {
+    }
+  }
 }
 .quote-text {
   font-size: 20px;

@@ -2,7 +2,11 @@
   <div class="nano-subcard-header">
     <div class="corner-label">{{fa-icon "home"}} Home Region</div>
   </div>
-  <div class="nano-subcard-content center-vertically" style="background-image: url('/images/cards/homeregion.svg')">
-    <div>There are lots of fun things going on around you, but we don't know your home region yet.<br /><button type="submit" class="">Find Home Region</button></div>
+  <div class="nano-subcard-content center-vertically center-horizontally" style="background-image: url('/images/cards/homeregion.svg')">
+    <div class="center-horizontally">There are lots of fun things going on around you, but we don't know your home region yet.<br />
+      {{#link-to "authenticated.regions.find" tagName="button"}}
+        Find Home Region
+      {{/link-to}}
+    </div>
   </div>
 </div>

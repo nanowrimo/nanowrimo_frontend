@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import {  sort }  from '@ember/object/computed';
+import { sort, filterBy }  from '@ember/object/computed';
 
 export default Model.extend({
   avatar: attr('string'),
@@ -35,8 +35,32 @@ export default Model.extend({
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
+  
+  // Group membership
+  groups: hasMany('group'),
+  groupUsers: hasMany('groupUser'),
+  regions: filterBy('groups', 'groupType', 'region'),
+  recalculateHome: 0,
+  homeRegion: computed('regions.[]','recalculateHome', {
+    //homeRegion: computed('regions.[]', 'groupUsers.[]',{
+    get() {
+      let r = this.get('regions');
+      let gu = this.get('groupUsers');
+      //console.log(gu.length);
+      let maxPrimary = -1;
+      let maxRegion = null;
+      r.forEach(function(tgroup) {
+        gu.forEach(function(tgu) {
+          if (tgu.group_id==tgroup.id && tgu.primary>maxPrimary) {
+            maxPrimary = tgu.primary;
+            maxRegion = tgroup;
+          }
+        });
+      });
+      return maxRegion;
+    }
+  }),
   projects: hasMany('project'),
-
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
@@ -92,5 +116,5 @@ export default Model.extend({
       this.get('favoriteAuthors').forEach(author => author.persistChanges());
       this.get('favoriteBooks').forEach(book => book.persistChanges());
     });
-  }
+  },
 });

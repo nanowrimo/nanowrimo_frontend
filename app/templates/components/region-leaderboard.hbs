@@ -1,0 +1,44 @@
+<div class="nano-card nano-card-clear g3-col1 g3-row1 g3-hspan3 g3-vspan3 g2-col1 g2-row1 g2-hspan2 g2-vspan2">
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front">
+      <div class="nano-subcard-content no-padding">
+        <div class="nano-list-search">
+          {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up="searchStringChange"}}
+        </div>
+        <ul class="nano-list" style="height: 700px; ">
+          {{#each sortedRegions as |region index|}}
+            {{#link-to "authenticated.regions.show" region.regionObject.slug tagName="li" class="nano-list-item"}}
+              {{#if (lt index limitList)}}
+                <div class="nano-list-icon icon-highlighted">
+                  {{fa-icon "map-marker"}}
+                </div>
+              {{else}}
+                <div class="nano-list-icon">
+                  {{fa-icon "map-marker"}}
+                </div>
+              {{/if}}
+              <div class="nano-list-item-content">
+                <div class="nano-list-item-title">
+                  {{region.regionObject.name}}
+                </div>
+                <div class="nano-list-item-subcontent">
+                  <div class="nano-list-item-info">
+                    {{#if sortBySearch}}
+                      {{format-number region.regionObject.numberOfUsers}} members
+                    {{/if}}
+                    {{#unless sortBySearch}}
+                      {{format-number region.proximity}} miles
+                    {{/unless}}
+                  </div>
+                  <div class="nano-list-item-buttons">
+                    <button class="button-reversed nano-button-small">Join</button>
+                  </div>
+                </div>
+              </div>
+            {{/link-to}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

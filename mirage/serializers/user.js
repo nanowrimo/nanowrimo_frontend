@@ -3,14 +3,15 @@ import ApplicationSerializer from './application';
 export default ApplicationSerializer.extend({
   serialize() {
     let json = ApplicationSerializer.prototype.serialize.apply(this, arguments);
-
+    
     if (json.included) {
       json.data.relationships = this._relationships(json.included);
     }
 
     return json;
   },
-
+  
+  
   _relationships(included) {
     let relationships = {};
 

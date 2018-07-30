@@ -10,7 +10,16 @@
         <div class="nano-subcard-face face-front filled-grey">
           <div class="nano-subcard-content side-by-side">
             <div class="info-text side-by-side-even">
-              <h6>About {{group.name}}</h6>
+              <button id="announce-new-event-button" class="nano-button-large" {{action "openNewEventModal"}}>
+                Submit an event
+              </button>
+
+              {{event-new-modal
+                onHidden=(action "afterEventModalClose")
+                open=addEvent
+                user=user
+              }}
+              <h6>{{group.name}} Events</h6>
             </div>
           </div>
         </div>

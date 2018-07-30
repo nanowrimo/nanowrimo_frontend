@@ -39,6 +39,8 @@ Router.map(function() {
       this.route('find');
       this.route('leaderboard');
       this.route('show', { path: '/:slug'}, function() {
+        this.route('events');
+        this.route('members');
       });
     });
     this.route('project',function(){

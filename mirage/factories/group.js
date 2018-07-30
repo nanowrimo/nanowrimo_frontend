@@ -17,5 +17,17 @@ export default Factory.extend({
   },
   latitude() {
     return faker.address.latitude();
+  },
+  numberOfUsers() {
+    return faker.random.number({ min: 1, max: 30000 });
+  },
+  totalDonation() {
+    return faker.random.number({ min: 1, max: 50000 });
+  },
+  totalWordCount() {
+    return faker.random.number({ min: 1, max: 4000000 });
+  },
+  averageWordCount() {
+    return faker.random.number({ min: 1, max: 20000 });
   }
 });

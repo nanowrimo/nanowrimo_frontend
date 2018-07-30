@@ -1,6 +1,6 @@
 import { Model, belongsTo } from 'ember-cli-mirage';
 
 export default Model.extend({
-  user: belongsTo(),
-  group: belongsTo()
+  user: belongsTo('user'),
+  group: belongsTo('group')
 });

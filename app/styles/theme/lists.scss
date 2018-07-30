@@ -5,6 +5,7 @@
   padding-bottom: 7px;
   font-size: 14px;
   width: 100%;
+  min-height: 70px;
 }
 .nano-list-search {
   padding-left: 14px;
@@ -45,6 +46,12 @@
       font-size: 16px;
       text-align: center;
       color: #b8b8b8;
+      &.icon-highlighted {
+        color: $nano-mediumgreen;
+      }
+      .fa-home {
+        color: $nano-mediumgreen;
+      }
     }
     .nano-list-item-content {
       flex: 1 1 100%;
@@ -53,10 +60,21 @@
         font-size: 16px;
         color: #979797;
       }
-      .nano-list-item-info {
-        font-family: 'SourceSansPro-Regular', sans-serif;
-        font-size: 14px;
-        color: #b8b8b8;
+      .nano-list-item-subcontent {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .nano-list-item-info {
+          flex: 1 1 50%;
+          font-family: 'SourceSansPro-Regular', sans-serif;
+          font-size: 14px;
+          color: #b8b8b8;
+        }
+        .nano-list-item-buttons {
+          flex: 1 1 50%;
+          text-align: right;
+          visibility: hidden;
+        }
       }
     }
   }
@@ -68,7 +86,12 @@
       .nano-list-item-title {
         color: #343434;
       }
-      .nano-list-item-info {
+      .nano-list-item-subcontent {
+        .nano-list-item-info {
+        }
+        .nano-list-item-buttons {
+          visibility: visible;
+        }
       }
     }
   }
