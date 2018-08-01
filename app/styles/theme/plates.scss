@@ -3,6 +3,9 @@
   background-image: url('/images/users/lamb.jpg');
   background-position:50% 50%;  /* Sets reference point to scale from */
   background-size:cover;
+  &.info-hidden {
+    display: none;
+  }
   .plate-cover {
     position: relative;
     width: 100%;

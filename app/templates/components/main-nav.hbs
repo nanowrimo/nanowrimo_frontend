@@ -11,21 +11,23 @@
                 <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
                 <ul>
                   {{#each submenu.submenuItems as |submenuItem|}}
-                    {{#ddm.item tagName="li"}}
-                      {{#if submenuItem.segment}}
-                        {{#ddm.link-to submenuItem.url submenuItem.segment class="dropdown-item d-flex"}}
-                          <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                          <div class="dropdown-headline">{{submenuItem.label}}</div>
-                          <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                        {{/ddm.link-to}}
-                      {{else}}
-                        {{#ddm.link-to submenuItem.url class="dropdown-item d-flex"}}
-                          <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                          <div class="dropdown-headline">{{submenuItem.label}}</div>
-                          <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                        {{/ddm.link-to}}
-                      {{/if}}
-                    {{/ddm.item}}
+                    {{#if submenuItem}}
+                      {{#ddm.item tagName="li"}}
+                        {{#if submenuItem.segment}}
+                          {{#ddm.link-to submenuItem.url submenuItem.segment class="dropdown-item d-flex"}}
+                            <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                            <div class="dropdown-headline">{{submenuItem.label}}</div>
+                            <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                          {{/ddm.link-to}}
+                        {{else}}
+                          {{#ddm.link-to submenuItem.url class="dropdown-item d-flex"}}
+                            <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                            <div class="dropdown-headline">{{submenuItem.label}}</div>
+                            <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                          {{/ddm.link-to}}
+                        {{/if}}
+                      {{/ddm.item}}
+                    {{/if}}
                   {{/each}}
                 </ul>
               {{/dd.menu}}

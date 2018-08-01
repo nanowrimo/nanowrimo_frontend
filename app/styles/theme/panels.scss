@@ -1,5 +1,9 @@
 .d-flex.align-top {
   align-items: flex-start;
+  
+  &.with-wrap {
+    flex-wrap: wrap;
+  }
   @media (max-width: $screen-xs-max) {
     flex-wrap: wrap;
   }
@@ -13,6 +17,9 @@
   box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
   background: repeating-linear-gradient(0deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
   margin-bottom: 35px;
+  &.no-margin {
+    margin-bottom: 0px;
+  }
   margin-top: 0;
   flex: 1 1 100%;
   @media (min-width: $screen-sm) {

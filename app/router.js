@@ -43,9 +43,6 @@ Router.map(function() {
         this.route('members');
       });
     });
-    this.route('project',function(){
-      this.route('show', { path: '/:project_slug'}, function(){});
-    });
   });
 
   //email confirmations

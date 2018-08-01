@@ -33,6 +33,15 @@ export default Service.extend({
       return null;
     }
   }),
+  homeRegionItem: computed('homeRegionName', function() {
+    let region = this.get('currentUser.user.homeRegion');
+    if (region) {
+      let v = {label: "Home Region", url: "authenticated.regions.show.index", segment: region.slug, teaser: region.name, src: "/images/nav/map_pin.svg"};
+      return v;
+    } else {
+      return null;
+    }
+  }),
   
   submenus: computed('homeRegionName',function() {
     let links = [
@@ -49,7 +58,7 @@ export default Service.extend({
         toggleLabel: "Community",
         submenuItems: [
           {label: "Forums", url: "index", segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
-          {label: this.get('homeRegionName'), url: this.get('homeRegionUrl'), segment: this.get('homeRegionSegment'), teaser: "", src: "/images/nav/map_pin.svg"},
+          this.get('homeRegionItem'),
           {label: "Find a Region", url: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"},
           {label: "Word Sprints", url: "index", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
         ]

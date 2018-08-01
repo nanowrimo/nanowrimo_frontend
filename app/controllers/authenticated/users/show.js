@@ -7,7 +7,6 @@ import { htmlSafe }  from '@ember/string';
 export default Controller.extend({
   currentUser: service(),
   router: service(),
-
   queryParams: ['edit', 'editImages', 'editImagesTab', 'editTab'],
 
   edit: null,
@@ -17,7 +16,14 @@ export default Controller.extend({
   userParam: null,
 
   user: alias('model'),
-
+  showUserContent: computed('router.currentURL',function() {
+    let r = this.get('router.currentURL');
+    if (r.indexOf('/projects/')>0) {
+      return false;
+    } else {
+      return true;
+    }
+  }),
   canEditUser: computed('currentUser.user.id', 'user.id', function() {
     return this.get('currentUser.user.id') === this.get('user.id');
   }),
