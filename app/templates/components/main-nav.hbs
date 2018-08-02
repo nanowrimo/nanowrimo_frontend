@@ -11,21 +11,23 @@
                 <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
                 <ul>
                   {{#each submenu.submenuItems as |submenuItem|}}
-                    {{#ddm.item tagName="li"}}
-                      {{#if submenuItem.segment}}
-                        {{#ddm.link-to submenuItem.url submenuItem.segment class="dropdown-item d-flex"}}
-                          <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                          <div class="dropdown-headline">{{submenuItem.label}}</div>
-                          <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                        {{/ddm.link-to}}
-                      {{else}}
-                        {{#ddm.link-to submenuItem.url class="dropdown-item d-flex"}}
-                          <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                          <div class="dropdown-headline">{{submenuItem.label}}</div>
-                          <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                        {{/ddm.link-to}}
-                      {{/if}}
-                    {{/ddm.item}}
+                    {{#if submenuItem}}
+                      {{#ddm.item tagName="li"}}
+                        {{#if submenuItem.segment}}
+                          {{#ddm.link-to submenuItem.url submenuItem.segment class="dropdown-item d-flex"}}
+                            <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                            <div class="dropdown-headline">{{submenuItem.label}}</div>
+                            <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                          {{/ddm.link-to}}
+                        {{else}}
+                          {{#ddm.link-to submenuItem.url class="dropdown-item d-flex"}}
+                            <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                            <div class="dropdown-headline">{{submenuItem.label}}</div>
+                            <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                          {{/ddm.link-to}}
+                        {{/if}}
+                      {{/ddm.item}}
+                    {{/if}}
                   {{/each}}
                 </ul>
               {{/dd.menu}}
@@ -33,23 +35,6 @@
           {{/each}}
         {{/bs-nav}}
         {{progress-update-dropdown}}
-        {{#bs-nav class="nav-logging-buttons" type="pills" as |nav|}}
-          {{#nav.dropdown as |dd|}}
-            {{#dd.toggle}}
-              <button class="button-timer">
-                {{#if media.isMobile}}
-                  <span class="mobile">TIMER</span>
-                {{/if}}
-                {{#if media.isDesktop}}
-                  <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
-                {{/if}}
-              </button>
-            {{/dd.toggle}}
-            {{#dd.menu align="right" as |ddm|}}
-              {{log-session-form}}
-            {{/dd.menu}}
-          {{/nav.dropdown}}
-        {{/bs-nav}}
         {{#bs-dropdown as |dd|}}
           {{#dd.toggle class="user-menu"}}Hi, <u>{{currentUserName}}!</u> <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
@@ -75,17 +60,6 @@
             </ul>
           {{/dd.menu}}
         {{/bs-dropdown}}
-        {{notifications-menu class="nav-notify-buttons d-flex"}}
-        <div class="nav-notify-buttons d-flex">
-          {{#if media.isDesktop}}
-            <button class="button-clear button-mail"><span aria-hidden="false">{{fa-icon "envelope"}}</span></button>
-          {{/if}}
-          {{#if media.isMobile}}
-            {{#nano-side-menu-toggle}}
-              <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
-            {{/nano-side-menu-toggle}}
-          {{/if}}
-        </div>
       {{/if}}
     {{/if}}
   </div>

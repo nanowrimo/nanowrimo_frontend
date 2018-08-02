@@ -1,3 +1,16 @@
+<div class="nano-card g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2">
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front">
+      <div class="nano-subcard-content no-padding">
+        {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
+          {{#each sortedRegions as |region index|}}
+            {{g-map-marker context lat=region.groupObject.latitude lng=region.groupObject.longitude}}
+          {{/each}}
+        {{/g-map}}
+      </div>
+    </div>
+  </div>
+</div>
 <div class="nano-card g3-col1 g3-row1 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2 wrap-content">
   <div class="nano-subcard" style="border-bottom: 1px solid #dfe4e6; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
     <div class="nano-subcard-face face-front filled-grey" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
@@ -17,7 +30,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div>  
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front filled-grey">
       <div class="nano-subcard-header">
@@ -38,24 +51,9 @@
         </div>
         <ul class="nano-list {{processingHide}}" style="height: 700px; ">
           {{#each sortedRegions as |regionContainer index|}}
-            {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch=sortBySearch joinable=true}}
+            {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
           {{/each}}
         </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="nano-card g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2">
-  <div class="nano-subcard">
-    <div class="nano-subcard-face face-front">
-      <div class="nano-subcard-content no-padding">
-        {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
-          {{#each sortedRegions as |region index|}}
-             {{#if (lt index limitList)}}
-               {{g-map-marker context lat=region.groupObject.latitude lng=region.groupObject.longitude}}
-             {{/if}}
-          {{/each}}
-        {{/g-map}}
       </div>
     </div>
   </div>

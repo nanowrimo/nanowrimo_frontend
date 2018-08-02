@@ -8,6 +8,7 @@ import { debounce } from '@ember/runloop';
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  pageLoaded: false,
   regions: alias('model'),
   
   init() {
@@ -151,15 +152,17 @@ export default Component.extend({
     return result;
   },
 
-  sortedRegions: computed('currentUser.user.homeRegion','joinedRegionIds','regions','searchString','sortOption','user_longitude','user_latitude', function() {
+  sortedRegions: computed('currentUser.user.homeRegion','regions','joinedRegionIds','searchString','sortOption', function() {
     //var date = new Date();
     //var timestamp = date.getTime();
     let r = this.get('regions');
     let joinedRegionIds = this.get('joinedRegionIds');
     let s = this.get('sortOption');
+    let listLength = 10;
     let m = this.get('searchString').toLowerCase();
     let newArray = [];
     if (s == 'name') {
+      listLength = 700;
       r.forEach(function(obj) {
         if (((m == '')||(obj.name.toLowerCase().indexOf(m) != -1))) {
           let o = EmberObject.create();
@@ -180,18 +183,18 @@ export default Component.extend({
         newArray.push(o);
       });
     }
-    //console.log("Array length: " + newArray.length);
     for (var i=newArray.length-1; i>=0; i--) {
       if (joinedRegionIds.indexOf(newArray[i].id)>=0) {
         newArray.splice(i, 1);
       }
     }
     var sorted = this.mergeSort(newArray, s);
+    var sliced = sorted.slice(0,listLength);
     //var sorted = newArray.sortBy(s);
     //var date2 = new Date();
     //var timestamp2 = date2.getTime();
     //console.log("sortedRegions: " + (timestamp2-timestamp));
-    return sorted;
+    return sliced;
   }),
   
   _user_longitude: null,

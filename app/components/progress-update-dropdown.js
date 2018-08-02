@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from "@ember/object";
+
 export default Component.extend({
   currentUser: service(),
   store: service(),
@@ -10,7 +11,16 @@ export default Component.extend({
   user: null,
   countValue: null,
   initialValue: null,
-  
+  selectedWhere: 'work',
+  _projectAdditionalInfoShow: false,
+  projectAdditionalInfoShow: computed('_projectAdditionalInfoShow', function() {
+    let p = this.get('_projectAdditionalInfoShow');
+    if (p) {
+      return "info-visible";
+    } else {
+      return "info-hidden";
+    }
+  }),
   primaryProject: computed("user.primaryProject", function(){
     return this.get('user.primaryProject');
   }),
@@ -20,8 +30,25 @@ export default Component.extend({
     let user = this.get('currentUser.user');
     this.set('user',  user);
   },
-
+  whereList: computed(function() {
+    return ['home', 'work', 'cafe', 'library'];
+  }),
+  howList: computed(function() {
+    return ['laptop', 'phone', 'longhand', 'dictation'];
+  }),
   actions: {
+    foo() { },
+    foo2() { },
+    createWhere() { 
+    },
+    createHow() { },
+    toggleAdditionalInfo() {
+      this.set('_projectAdditionalInfoShow',!this.get('_projectAdditionalInfoShow'));
+    },
+    showCreateWhen() {
+      return true;
+    },
+    
     showForm(){
       //reset values
       this.set('countType',0);

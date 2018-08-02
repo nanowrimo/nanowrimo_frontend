@@ -2,6 +2,6 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model() {
-    return this.modelFor('authenticated.project.show');
+    return this.modelFor('authenticated.users.show.projects.show');
   }
 });

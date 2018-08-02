@@ -29,18 +29,59 @@
         <div id='progress-update-form'>
           {{#if primaryProject.activeProjectChallenge.isFulfilled}}
             <form onSubmit={{action "formSubmit" }}>
-              <div id="progress-update-form-inputs" class='form-group'> 
-                {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
+              <div class="form-group">
+                <div id="progress-update-form-inputs" class='form-group'> 
+                  {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
                 
-                <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
-                  <option value='0'>total {{primaryProject.activeProjectChallenge.content.unitTypePlural}}</option>
-                  <option value='1'>{{primaryProject.activeProjectChallenge.content.unitTypePlural}} this session</option>
-                </select>
-                {{activeProjectChallenge.content}}
-              </div>
-              <div id="progress-update-form-buttons" class='form-group'> 
-                <input class='form-control nano-button' type='submit' value='Update progress'>
-                <a href="#" {{action 'hideForm'}}>Cancel</a>
+                  <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
+                    <option value='0'>total {{primaryProject.activeProjectChallenge.content.unitTypePlural}}</option>
+                    <option value='1'>{{primaryProject.activeProjectChallenge.content.unitTypePlural}} this session</option>
+                  </select>
+                  {{activeProjectChallenge.content}}
+                </div>
+                <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>More metrics for the intrepid wrimo {{fa-icon "chevron-down"}}{{fa-icon "chevron-up"}}</div>
+                <div class="project-additional-info {{projectAdditionalInfoShow}}">
+                  <label>How did it go?</label>
+                  <div class="project-emoji-list">
+                    <div class="project-emoji emoji-5"></div>
+                    <div class="project-emoji emoji-4"></div>
+                    <div class="project-emoji emoji-3"></div>
+                    <div class="project-emoji emoji-2"></div>
+                    <div class="project-emoji emoji-1"></div>
+                  </div>
+                  <div>
+                    <label>Where were you writing?</label>
+                    {{#power-select-with-create
+                      options=whereList
+                      selected=selectedWhere
+                      searchField=searchField
+                      searchEnabled='true'
+                      showCreatePosition="bottom"
+                      showCreateWhen=(action "showCreateWhen")
+                      dropdownClass="in-modal-dropdown"
+                      renderInPlace=true
+                      onchange=(action (mut selectedWhere))
+                      oncreate=(action "createWhere")
+                      as |option|
+                    }}
+                      {{option}}
+                    {{/power-select-with-create}}
+                  </div>
+                  <div class="side-by-side" style="justify-content: space-between">
+                    <div style="flex: 0 0 130px; width: 130px;">
+                      <label>When did you start?</label>
+                      {{input type='time' name='when_start' class='form-control progress-update-input'}}
+                    </div>
+                    <div style="flex: 0 0 130px; width: 130px;">
+                      <label>When did you end?</label>
+                      {{input type='time' name='when_end' class='form-control progress-update-input'}}
+                    </div>
+                  </div>
+                </div>
+                <div id="progress-update-form-buttons" class='form-group'> 
+                  <input class='form-control nano-button' type='submit' value='Update progress'>
+                  <a href="#" {{action 'hideForm'}}>Cancel</a>
+                </div>
               </div>
             </form>
           {{/if}}

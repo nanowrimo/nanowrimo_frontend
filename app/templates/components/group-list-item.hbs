@@ -1,17 +1,11 @@
 {{#link-to "authenticated.regions.show" groupContainer.groupObject.slug tagName="li" class="nano-list-item"}}
-  {{#if (lt index limitList)}}
-    <div class="nano-list-icon icon-highlighted">
+  <div class="nano-list-icon">
+    {{#if groupContainer.isHome}}
+      {{fa-icon "home"}}
+    {{else}}
       {{fa-icon "map-marker"}}
-    </div>
-  {{else}}
-    <div class="nano-list-icon">
-      {{#if groupContainer.isHome}}
-        {{fa-icon "home"}}
-      {{else}}
-        {{fa-icon "map-marker"}}
-      {{/if}}
-    </div>
-  {{/if}}
+    {{/if}}
+  </div>
   <div class="nano-list-item-content">
     <div class="nano-list-item-title">
       {{groupContainer.groupObject.name}}

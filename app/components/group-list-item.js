@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
 
 export default Component.extend({
   currentUser: service(),
@@ -11,24 +10,17 @@ export default Component.extend({
   listOrder: null,
   limitList: null,
   sortBySearch: null,
-  thisGroup: computed('groupContainer', function() {
-    let groupContainer = this.get('groupContainer');
-    return groupContainer.groupObject;
-  }),
-  init() {
-    this._super(...arguments);
-  },
   
   actions: {
     joinGroup() {
       let gu = this.get('store').createRecord('groupUser', {
         user: this.get('currentUser.user'),
-        group: this.get('thisGroup'),
+        group: this.get('groupContainer.groupObject'),
         is_admin: 0
       });
       gu.save().then(() => {
         let cu = this.get('currentUser.user');
-        let g = this.get('thisGroup');
+        let g = this.get('groupContainer.groupObject');
         cu.get('groupUsers').pushObject(gu);
         g.get('groupUsers').pushObject(gu);
         cu.get('groups').pushObject(g);
@@ -37,7 +29,7 @@ export default Component.extend({
     },
     makeHome() {
       let cu = this.get('currentUser.user');
-      let g = this.get('thisGroup');
+      let g = this.get('groupContainer.groupObject');
       let gu = null;
       let maxPrimary = -1;
       cu.groupUsers.forEach(function(obj) {
@@ -57,7 +49,7 @@ export default Component.extend({
     },
     leaveGroup() {
       let cu = this.get('currentUser.user');
-      let g = this.get('thisGroup');
+      let g = this.get('groupContainer.groupObject');
       let gu = null;
       cu.groupUsers.forEach(function(obj) {
         if (obj.group_id==g.id) {
