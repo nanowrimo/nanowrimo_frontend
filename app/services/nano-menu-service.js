@@ -7,33 +7,10 @@ export default Service.extend({
   session: service(),
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
+  currentUserObj: reads('currentUser.user'),
   sideMenuIsOpen: true,
   homeUrl: "authenticated",
-  homeRegionName: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
-    if (region) {
-      return region.name;
-    } else {
-      return 'Join a region!';
-    }
-  }),
-  homeRegionUrl: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
-    if (region) {
-      return "authenticated.regions.show.index";
-    } else {
-      return "authenticated.regions.find";
-    }
-  }),
-  homeRegionSegment: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
-    if (region) {
-      return region.slug;
-    } else {
-      return null;
-    }
-  }),
-  homeRegionItem: computed('homeRegionName', function() {
+  homeRegionItem: computed('currentUser.user.homeRegion', function() {
     let region = this.get('currentUser.user.homeRegion');
     if (region) {
       let v = {label: "Home Region", url: "authenticated.regions.show.index", segment: region.slug, teaser: region.name, src: "/images/nav/map_pin.svg"};
@@ -43,15 +20,15 @@ export default Service.extend({
     }
   }),
   
-  submenus: computed('homeRegionName',function() {
+  submenus: computed('currentUser.user.homeRegion',function() {
     let links = [
       {
         toggleLabel: "My NaNoWriMo",
         submenuItems: [
-          {label: "Profile", url: "authenticated.users.show.index", segment: get(this,"currentUserName"), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
+          {label: "Profile", url: "authenticated.users.show.index", segment: get(this,"currentUserObj"), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
           {label: "Stats", url: "components.stats", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
-          {label: "Projects", url: "authenticated.users.show.projects", segment: get(this,"currentUserName"), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
-          {label: "Buddies", url: "authenticated.users.show.buddies", segment: get(this,"currentUserName"), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
+          {label: "Projects", url: "authenticated.users.show.projects", segment: get(this,"currentUserObj"), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
+          {label: "Buddies", url: "authenticated.users.show.buddies", segment: get(this,"currentUserObj"), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
         ]
       },
       {

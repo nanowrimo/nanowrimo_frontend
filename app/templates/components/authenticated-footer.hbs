@@ -1,0 +1,98 @@
+<div class="content-gutters">
+  <div class="container-fluid">
+    <div class="nano-panel nano-footer">
+      <div class="grid-wrapper">
+        <div class="nano-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan2 extend-right">
+          <div class="nano-subcard">
+            <div class="nano-subcard-face">
+              <div class="nano-subcard-content">
+                <div class="footer-logos">
+                  <a href="/"><img src="/images/logo/logo.svg" style="margin-right: 10px;" /><img src="/images/logo/logo_long_text.svg" style="padding-top: 10px;" /></a>
+                </div>
+                <div class="footer-description">
+                  National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing. <a href="/">Learn More</a>
+                </div>
+                <div class="footer-about-links">
+                  <a href="/">What is NaNoWriMo</a>
+                  <a href="/">From NaNo HQ</a>
+                  <a href="/">About Us</a>
+                  <a href="/">Donate</a>
+                  <a href="/">Shop</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nano-card g3-col2 g3-row1 g3-hspan1 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1 shorten-left extend-right">
+          <div class="nano-subcard">
+            <div class="nano-subcard-face">
+              <div class="nano-subcard-content">
+                {{#each footerSubmenus as |footerSubmenu|}}
+                  <div class="footer-submenu">
+                    <div class="footer-header">
+                      {{footerSubmenu.toggleLabel}}
+                    </div>
+                    <ul>
+                      {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
+                        {{#if footerSubmenuItem}}
+                          <li>
+                            {{#if footerSubmenuItem.segment}}
+                              {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
+                                {{footerSubmenuItem.label}}
+                              {{/link-to}}
+                            {{else}}
+                              {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
+                            {{/if}}
+                          </li>
+                        {{/if}}
+                      {{/each}}
+                    </ul>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nano-card g3-col3 g3-row1 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1 shorten-left">
+          <div class="nano-subcard">
+            <div class="nano-subcard-face">
+              <div class="nano-subcard-content wrap-content">
+                <div>
+                  <div class="footer-header">
+                    Connect with NaNo
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="nano-footer-social">
+                        <a href="https://www.facebook.com/nanowrimo" class="social-button">{{fa-icon 'facebook-square'}}</a>
+                        <a href="https://twitter.com/nanowrimo" class="social-button">{{fa-icon 'twitter-square'}}</a>
+                        <a href="https://blog.nanowrimo.org/" class="social-button">{{fa-icon 'tumblr-square'}}</a>
+                        <a href="https://www.youtube.com/c/nanowrimo" class="social-button">{{fa-icon 'youtube-square'}}</a>
+                        <a href="https://www.instagram.com/nanowrimo" class="social-button">{{fa-icon 'instagram'}}</a>
+                        <a href="https://www.pinterest.com/nanowrimo" class="social-button">{{fa-icon 'pinterest-square'}}</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="ywp-logo">
+                  <a href="https://ywp.nanowrimo.org" alt="Young Writer's Program">
+                    <img src="/images/logo/ywp_logo.svg" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nano-card g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row3 g2-hspan2 g2-vspan1" style="min-height: 30px;">
+          <div class="nano-subcard">
+            <div class="nano-subcard-face">
+              <div class="nano-subcard-content nano-copyright">
+                Terms and Conditions &bull; Privacy Policy &bull; Copyright © 1999 - {{currentYear}} National Novel Writing Month &bull; All posted novel excerpts remain copyright to their authors.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

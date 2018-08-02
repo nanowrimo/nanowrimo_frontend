@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from "@ember/object";
+
 export default Component.extend({
   currentUser: service(),
   store: service(),
@@ -39,13 +40,12 @@ export default Component.extend({
     foo() { },
     foo2() { },
     createWhere() { 
-      alert('where');
     },
     createHow() { },
     toggleAdditionalInfo() {
       this.set('_projectAdditionalInfoShow',!this.get('_projectAdditionalInfoShow'));
     },
-    showCreateWhen(value) {
+    showCreateWhen() {
       return true;
     },
     
