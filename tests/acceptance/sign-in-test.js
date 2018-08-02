@@ -1,6 +1,6 @@
-import { module } from 'qunit';
-//import { module, test } from 'qunit';
-//import { visit, fillIn, click, currentURL } from '@ember/test-helpers';
+//import { module } from 'qunit';
+import { module, test } from 'qunit';
+import { visit, fillIn, click, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
@@ -8,7 +8,7 @@ module('Acceptance | sign in', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
-  /*test('Basic Authentication', async function(assert) {
+  test('Basic Authentication', async function(assert) {
     let user = this.server.create('user');
 
     await visit('/sign-in');
@@ -22,5 +22,5 @@ module('Acceptance | sign in', function(hooks) {
     await click('[data-test-sign-in-submit]');
 
     assert.equal(currentURL(), '/', 'redirected to dashboard');
-  });*/
+  });
 });

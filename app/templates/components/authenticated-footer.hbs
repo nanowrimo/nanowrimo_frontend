@@ -27,28 +27,30 @@
           <div class="nano-subcard">
             <div class="nano-subcard-face">
               <div class="nano-subcard-content">
-                {{#each footerSubmenus as |footerSubmenu|}}
-                  <div class="footer-submenu">
-                    <div class="footer-header">
-                      {{footerSubmenu.toggleLabel}}
+                {{#if currentUserName}}
+                  {{#each footerSubmenus as |footerSubmenu|}}
+                    <div class="footer-submenu">
+                      <div class="footer-header">
+                        {{footerSubmenu.toggleLabel}}
+                      </div>
+                      <ul>
+                        {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
+                          {{#if footerSubmenuItem}}
+                            <li>
+                              {{#if footerSubmenuItem.segment}}
+                                {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
+                                  {{footerSubmenuItem.label}}
+                                {{/link-to}}
+                              {{else}}
+                                {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
+                              {{/if}}
+                            </li>
+                          {{/if}}
+                        {{/each}}
+                      </ul>
                     </div>
-                    <ul>
-                      {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
-                        {{#if footerSubmenuItem}}
-                          <li>
-                            {{#if footerSubmenuItem.segment}}
-                              {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
-                                {{footerSubmenuItem.label}}
-                              {{/link-to}}
-                            {{else}}
-                              {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
-                            {{/if}}
-                          </li>
-                        {{/if}}
-                      {{/each}}
-                    </ul>
-                  </div>
-                {{/each}}
+                  {{/each}}
+                {{/if}}
               </div>
             </div>
           </div>
