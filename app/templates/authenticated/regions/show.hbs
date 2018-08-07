@@ -1,25 +1,60 @@
-<div class="nano-user-plate full-width d-flex">
-
+<div class="nano-user-plate full-width d-flex" {{action "openImagesModal" "headerTab"}} style={{plateStyle}}>
   <div class="plate-cover">
 
+    <div class="container-fluid">
+      {{group-stats group=group}}
+    </div>
+
+    {{#if canEditGroup}}
+      <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}}>
+        <img src="/images/global/flip_corner.svg" alt="Edit Group Images" />
+      </div>
+    {{/if}}
 
   </div>
 </div>
 <div class="content-gutters">
   <div class="container-fluid">
     <div class="d-flex align-top">
-      <div class="nano-panel left-sidebar nano-profile">
+      <div class="nano-panel left-sidebar region-summary">
         <div class="flip-corner">
-
-          <div class="nano-user-name">
-            {{group.name}}
+          <div class="padding-14px">
+            <div class="nano-region-name-prelim">
+              {{namePrelim}}
+            </div>
+            <div class="nano-region-name">
+              {{nameFinal}}
+            </div>
+            <div class="nano-region-description-label">
+              DESCRIPTION
+            </div>
+            <div class="nano-region-description">
+              {{group.description}}
+            </div>
           </div>
-          <div>DESCRIPTION</div>
-          <hr />
-          <div class="nano-region-description">
-            {{group.description}}
-          </div>
+          {{group-links links=group.groupExternalLinks}}
+          
+          {{#if canEditGroup}}
 
+            <div class="flip-corner-link" {{action "openEditModal"}}>
+              <img src="/images/global/flip_corner.svg" alt="Edit Region Info" />
+            </div>
+
+            {{group-edit-info-modal
+              onHidden=(action "afterEditModalClose")
+              open=edit
+              group=group
+              tab=editTab
+            }}
+
+            {{group-edit-images-modal
+              onHidden=(action "afterImagesModalClose")
+              open=editImages
+              group=group
+              tab=editImagesTab
+            }}
+
+          {{/if}}
         </div>
         <div class="banner-divot"></div>
       </div>

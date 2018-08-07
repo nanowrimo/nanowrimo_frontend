@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label>Would you like to link to external pages?</label>
+  {{#each inputLinks as |link|}}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          {{fa-icon (if link.service link.service "link") fixedWidth=true}}
+        </div>
+      </div>
+      {{input
+        class="form-control no-left-radius"
+        placeholder=(if link.service (concat "https://" link.service ".com/username") "https://example.com")
+        value=link.changeset.url
+      }}
+      <div {{action "clearLink" link}} class="input-group-append" style="cursor:pointer">
+        <div class="input-group-text">
+          {{fa-icon "minus-circle" fixedWidth=true}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  {{#if canAddAnotherLink}}
+    <button class="nano-button btn-underlined" {{action "addLink"}}>Add another link</button>
+  {{/if}}
+</div>

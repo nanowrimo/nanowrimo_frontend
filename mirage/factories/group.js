@@ -29,5 +29,7 @@ export default Factory.extend({
   },
   averageWordCount() {
     return faker.random.number({ min: 1, max: 20000 });
-  }
+  },
+  timeZone: faker.list.random('America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles')
+  
 });
