@@ -115,21 +115,23 @@
                 checked=associateWithChallenge
                 change=(action "clickedAssociateCheckbox")
               }}
-              <label for='associateCheckbox'>Associate with a event (optional)</label>
+              <label for='associateCheckbox'>Associate with an event (optional)</label>
             </div>
-            <div class="form-group">
-              <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
-                {{#each optionsForChallenges as |c|}}
-                  <option value="{{c.id}}">{{c.name}}</option>
-                {{/each}}
-              </select>
+            <div class="form-group {{hideClass}}">
+              <div class="select-container">
+                <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+                  {{#each optionsForChallenges as |c|}}
+                    <option value="{{c.id}}">{{c.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
             </div>
           
           {{/if}}          
         {{else if (eq f.currentStepIndex 1)}}
           {{#if (eq challenge.eventType 0)}}
             <div id='you-chose-nanowrimo'>
-            Because you have chosen NaNoWriMo, this information can’t be edited. 
+            Because you have chosen {{challenge.name}}, this information can’t be edited. 
             <a href=# {{action "setStep" 0}}>Go back to change event</a>
             </div>
           {{/if}}

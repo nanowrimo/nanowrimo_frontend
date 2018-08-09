@@ -26,7 +26,7 @@ export default Service.extend({
         toggleLabel: "My NaNoWriMo",
         submenuItems: [
           {label: "Profile", url: "authenticated.users.show.index", segment: get(this,"currentUserObj"), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
-          {label: "Stats", url: "components.stats", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
+          {label: "Stats", url: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
           {label: "Projects", url: "authenticated.users.show.projects", segment: get(this,"currentUserObj"), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
           {label: "Buddies", url: "authenticated.users.show.buddies", segment: get(this,"currentUserObj"), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
         ]

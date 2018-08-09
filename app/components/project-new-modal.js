@@ -11,7 +11,6 @@ export default Component.extend({
 
   tagName: '',
 
-  associateWithChallenge: false,
   associatedChallenge: null,
   challenge: null,
   projectChallenge: null,
@@ -21,8 +20,28 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
   projectChallengeChangeset: null,
-
+  
   optionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
+  
+  associateWithChallenge: computed(function() {
+    let challenges = this.get('optionsForChallenges');
+    if (challenges.length > 0) {
+      let latest = challenges[0];
+      let d = new Date();
+      if (latest.endsAt > d) {
+        return true;
+      }
+    }
+    return false;
+  }),
+  
+  hideClass: computed('associateWithChallenge',function() {
+    let s = this.get('associateWithChallenge');
+    if (s) {
+      return '';
+    }
+    return 'nano-hide';
+  }),
   
   baseChallenges:  computed(function() {
     return this.get('store').findAll('challenge');

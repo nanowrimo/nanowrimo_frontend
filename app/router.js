@@ -63,7 +63,6 @@ Router.map(function() {
   this.route('forgot-password');
   this.route('resend-confirmation-email');
   this.route('password-reset');
-  this.route('components.stats', { path: '/stats' });
 });
 
 export default Router;

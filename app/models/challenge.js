@@ -27,22 +27,7 @@ const Challenge = Model.extend({
   
   projects: hasMany('project'),
   
-  name: computed('eventType', function(){
-    let type = this.get('eventType');
-    let name = ''
-    switch(type) {
-      case 0:
-        name="NaNoWriMo";
-        break;
-      case 1:
-        name="Camp NaNoWriMo";
-        break;
-      case 2:
-        name="User Defined";
-        break;
-    }
-    return name;
-  }),
+  name: attr('string'),
   
   isNaNoEvent: computed('eventType', function(){
     let type = this.get('eventType');
