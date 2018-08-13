@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "bootstrap": "^4.0.0",
-    "broccoli-asset-rev": "^2.7.0",
+    "broccoli-asset-rev": "^3.0.0",
     "ember-active-storage": "^1.0.0",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^1.2.1",
