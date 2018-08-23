@@ -115,13 +115,13 @@
                 checked=associateWithChallenge
                 change=(action "clickedAssociateCheckbox")
               }}
-              <label for='associateCheckbox'>Associate with an event (optional)</label>
+              <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
             </div>
             <div class="form-group {{hideClass}}">
               <div class="select-container">
                 <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
                   {{#each optionsForChallenges as |c|}}
-                    <option value="{{c.id}}">{{c.name}}</option>
+                    <option value="{{c.id}}" selected={{if (eq c.id associatedChallengeId) 'true'}}>{{c.name}}</option>
                   {{/each}}
                 </select>
               </div>
@@ -129,13 +129,12 @@
           
           {{/if}}          
         {{else if (eq f.currentStepIndex 1)}}
-          {{#if (eq challenge.eventType 0)}}
+          {{#if (lte challenge.eventType 1)}}
             <div id='you-chose-nanowrimo'>
-            Because you have chosen {{challenge.name}}, this information can’t be edited. 
-            <a href=# {{action "setStep" 0}}>Go back to change event</a>
+            Because you have chosen {{challenge.name}}, some information cannot be edited. 
+            (Go <a href=# {{action "setStep" 0}}>back</a> if needed)
             </div>
           {{/if}}
-
           {{project-challenge-editor project=project 
             challenge=challenge projectChallenge=projectChallenge 
             changeset=projectChallengeChangeset}}
@@ -144,7 +143,7 @@
 
           <div class="form-group">
             {{f.input
-              label="What is the current word count?"
+              label="What is the current total word count?"
               property="wordCount"
             }}
           </div>

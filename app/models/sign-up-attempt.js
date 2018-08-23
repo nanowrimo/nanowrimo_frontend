@@ -5,8 +5,6 @@ import moment from 'moment';
 export default Model.extend({
   email: attr('string', { defaultValue: '' }),
   password: attr('string', { defaultValue: '' }),
-  terms: attr('boolean',{ defaultValue: false } ),
-  thirteen: attr('boolean',{ defaultValue: false } ),
   timeZone: attr('string', {
     defaultValue() { return moment.tz.guess(); }
   }),

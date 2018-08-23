@@ -1,0 +1,18 @@
+<div class='nano-panel'>
+  <div class='nano-card'>
+    <h2> Confirm Email</h2>
+    {{#if attemptingVerification}}
+      attempting email confirmation...
+    {{else}}  
+      {{#if successMessage}}
+        {{successMessage}}
+      {{else}}
+        <div class='alert alert-error'>
+          {{errorMessage}}
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>
+
+

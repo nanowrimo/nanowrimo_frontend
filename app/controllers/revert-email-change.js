@@ -25,11 +25,11 @@ export default Controller.extend({
   },
   tokenDidChange() {
     let t = this.get('token');
-    let verifyUrl = `${ENV.APP.API_HOST}/users/confirm?token=${t}`
+    let verifyUrl = `${ENV.APP.API_HOST}/revert-email-change?token=${t}`
      return fetch(verifyUrl).then((response) => {
        
       if (response.status !== 200) {
-        this.set("errorMessage", "Cannot verify confirmation token");
+        this.set("errorMessage", "Cannot verify reversion token");
       }
 
       return response.json().then((json) => {

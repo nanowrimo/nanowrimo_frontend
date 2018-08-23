@@ -8,12 +8,12 @@ import moment from 'moment';
 const ProjectChallenge = Model.extend({
   startCount: attr('number'),
   currentCount: attr('number'),
-  targetCount: attr('number'),
   goal: attr('number'),
   startsAt: attr('date'),
   endsAt: attr('date'),
   writingType: attr('number'),
   unitType: attr('number'),
+  name: attr('string'),
   
   challenge: belongsTo('challenge'),
   project: belongsTo('project'),

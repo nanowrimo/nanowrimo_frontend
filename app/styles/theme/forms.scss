@@ -82,7 +82,9 @@ select {
   }  
 }
 select.form-control {
-  font-family: inherit;
+  font-family: 'SourceSansPro-Regular';
+  font-size: 20px;
+  line-height: 1.1;
   background-color: transparent;
   width: 100%;
   padding: 4px;
@@ -124,4 +126,7 @@ select.form-control:focus {
       }
     }
   }
+}
+input:disabled, select:disabled {
+  opacity: 0.3 !important;
 }

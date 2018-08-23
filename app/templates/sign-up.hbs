@@ -29,6 +29,7 @@
 
             {{#form-for
               afterError=(action (mut error))
+              class="full-width"
               model=signUpAttempt
               steps=steps
               as |f|
@@ -62,20 +63,6 @@
                   }}
                 </div>
         
-                <div class="form-group">
-                  {{f.checkbox
-                    label="I'm at least 13 years of age."
-                    property="thirteen"
-                  }}
-                </div>
-        
-                <div class="form-group">
-                  {{f.checkbox
-                    label="I have read and accept the Terms of Conditions. Plus, I understand that NaNoWriMo is a donation-powered, 501(c)(3) nonprofit."
-                    property="terms"
-                  }}
-                </div>
-
                  <div class="form-group">
                   {{f.select
                     label="Time Zone"
@@ -92,6 +79,8 @@
             <div class="left-right-links">{{link-to "Forgot password" 'forgot-password' bubble=false}}{{link-to "I have an account" 'sign-in' bubble=false}}</div>
             <div class="nano-hr">OR</div>
             {{continue-with}}
+            <div class="nano-hr">TERMS</div>
+            <div class="left-right-links"><div>By signing up for NaNoWriMo, you agree to our Terms of Use and Privacy Policy.</div></div>
           </div>
         </div>
       </div>

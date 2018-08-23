@@ -31,6 +31,18 @@ Router.map(function() {
       });
       this.route('edit');
     });
+    this.route('settings', function() {
+      this.route('account');
+      this.route('privacy', function() {
+      });
+      this.route('preferences', function() {
+      });
+      this.route('blocked', function() {
+      });
+      this.route('regions', function() {
+      });
+    });
+    
     this.route('stats', function() {
     });
     this.route('locations', { path: 'locations'}, function() {
@@ -63,6 +75,8 @@ Router.map(function() {
   this.route('forgot-password');
   this.route('resend-confirmation-email');
   this.route('password-reset');
+  this.route('confirm-email-change');
+  this.route('revert-email-change');
 });
 
 export default Router;

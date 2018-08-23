@@ -1,0 +1,76 @@
+{{#form-for
+  afterError=(action (mut error))
+  
+  model=currentUser.user
+  as |f|
+}}
+  <div class="nano-card">
+    <div class="nano-subcard">
+      <div class="nano-subcard-face face-front filled-grey">
+        <div class="nano-subcard-content">
+          <div class="form-group full-width">
+            {{f.input
+              autocomplete="username"
+              label="Username"
+              property="name"
+            }}
+          </div>
+          <div class="form-group full-width">
+            {{f.input
+              autocomplete="email"
+              label="Email Address"
+              property="email"
+              type="email"
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nano-card">
+    <div class="nano-subcard">
+      <div class="nano-subcard-face face-front filled-grey">
+        <div class="nano-subcard-content">
+          <div class="form-group full-width">
+            {{f.password
+              autocomplete="current-password"
+              label="Current Password"
+              property="current-password"
+            }}
+          </div>
+          <div class="form-group full-width">
+            {{f.password
+              autocomplete="new-password"
+              label="New Password"
+              property="new-password"
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nano-card">
+    <div class="nano-subcard">
+      <div class="nano-subcard-face face-front filled-grey">
+        <div class="nano-subcard-content">
+          <div class="form-group full-width">
+            {{f.select
+              label="Time Zone"
+              options=timeZoneOptions
+              property="timeZone"
+          }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nano-card card-submit">
+    <div class="nano-subcard">
+      <div class="nano-subcard-face face-front">
+        <div class="nano-subcard-content">
+          <button type="submit" class="nano-button-large">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/form-for}}

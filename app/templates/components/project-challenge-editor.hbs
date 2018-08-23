@@ -5,9 +5,17 @@
   as |c|
 }}
   <div class="form-group">
+    {{c.input
+      label="Goal name"
+      property="name"
+      isDisabled=disableName
+      changeset=changeset
+    }}
+  </div>
+  <div class="form-group">
     {{c.select
       changeset=changeset
-      label="What type of goal is this?"
+      label=goalTypeLabel
       options=optionsForWritingType
       property="WritingType"
       isDisabled=disableWritingType
@@ -17,12 +25,11 @@
     <div class="form-group side-by-side-even">
       {{c.input
         changeset=changeset
-        label="What is your goal?"
+        label=goalCountLabel
         property="goal"
         type='number'
         isDisabled=disableDefaultGoal
         min=1
-        
       }}
     </div>
     <div class="form-group side-by-side-even">
@@ -38,12 +45,12 @@
   <div class="side-by-side">
     <div class="form-group side-by-side-even">
 
-      <label for='start-date' class='form-group'>When do you start?</label>
+      <label for='start-date' class='form-group'>{{startLabel}}</label>
       <input name='start-date' type='date' class='form-control'
         oninput={{action "startsAtChanged" value="target.value"}} 
         value={{displayStartsAt}}
-        disabled={{disableStartEnd}}>
-        
+        disabled={{disableStartEnd}}
+        min='1999-07-01'>
       {{c.hidden-input
         changeset=changeset
         property="startsAt"
@@ -64,4 +71,44 @@
       }}
     </div>
   </div>
+  <div class="side-by-side">
+    <div class="form-group side-by-side-even">
+      {{c.input
+        changeset=changeset
+        label="Count at start"
+        property="startCount"
+        type='number'
+        min=0
+      }}
+    </div>
+    {{#if pastTense}}
+      <div class="form-group side-by-side-even">
+        {{c.input
+          changeset=changeset
+          label="Count at end"
+          property="currentCount"
+          type='number'
+          min=0
+        }}
+      </div>
+    {{/if}}
+  </div>
+  {{#if (and pastTense metGoal)}}
+    <div class="side-by-side {{winDateClass}}">
+      <div class="form-group side-by-side-even">
+
+        <label for='win-date' class='form-group'>When did you win?</label>
+        <input name='win-date' type='date' class='form-control'
+          value={{displayWinAt}}>
+        
+        {{c.hidden-input
+          changeset=changeset
+          property="winAt"
+        }}
+      
+      </div>
+      <div class="form-group side-by-side-even">
+      </div>
+    </div>
+  {{/if}}
 {{/form-for}}

@@ -1,14 +1,11 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import TimeZones from 'nanowrimo/lib/time-zones';
 
 export default Controller.extend({
-
   error: null, // String OR object
-
-  signUpAttempt: alias('model'),
-
+  currentUser: service(),
   errorString: computed('error', function() {
     let error = this.get('error');
     return (typeof error === 'string') ? error : null;
@@ -19,11 +16,9 @@ export default Controller.extend({
     return (typeof error === 'object') ? error : null;
   }),
 
-  steps: computed(function() {
-    return [['email', 'password', 'username', 'timeZone']];
-  }),
-
+  
   timeZoneOptions: computed(function() {
     return TimeZones;
   })
+  
 });

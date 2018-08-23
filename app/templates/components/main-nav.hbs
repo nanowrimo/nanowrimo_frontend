@@ -46,10 +46,10 @@
                 </a>
               {{/ddm.item}}
               {{#ddm.item tagName="li"}}
-                <a href="/" class="dropdown-item d-flex">
+                {{#ddm.link-to 'authenticated.settings.account' class="dropdown-item d-flex"}}
                   <div class="dropdown-icon">{{fa-icon "cog"}}</div>
                   <div class="dropdown-headline">Settings</div>
-                </a>
+                {{/ddm.link-to}}
               {{/ddm.item}}
               {{#ddm.item tagName="li"}}
                 <a href="#" class="dropdown-item d-flex" {{action 'invalidateSession'}} data-test-log-out>

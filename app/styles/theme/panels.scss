@@ -254,7 +254,8 @@
     }
   }
   &.with-tabs {
-    margin-top: 40px;    flex: 1 1 100%;
+    margin-top: 40px;
+    flex: 1 1 100%;
     .nano-panel-tabs {
       display: flex;
       list-style-type: none;
@@ -264,6 +265,10 @@
       text-align: left;
       color: $nano-lightgrey;
       margin-top: -28px;
+      &.narrow {
+        justify-content: center;
+      }
+      
       li {
         margin-left: 10px;
         margin-right: 10px;
@@ -287,6 +292,7 @@
         }
       }
     }
+    
   }
   .banner-divot {
     @media (min-width: $screen-sm) {
@@ -296,6 +302,46 @@
       bottom: -20;
       background-image: url("/images/global/leftside_bottom.png");
       background-size: 299px 7px;
+    }
+  }
+}
+.container-fluid.narrow {
+  .nano-panel.with-tabs {
+    .card-container {
+      margin-top: 34px;
+      padding-bottom: 14px;
+      .nano-card {
+        min-height: 100px;
+        margin-top: 14px;
+        margin-bottom: 14px;
+        box-shadow: none;
+        .nano-subcard {
+          .nano-subcard-face {
+            .nano-subcard-content {
+              padding-top: 21px;
+              padding-bottom: 21px;
+              label {
+                font-family: 'SourceSansPro-Bold', sans-serif;
+                font-size: 14px;
+                color: #979797;
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+        &.card-submit {
+          border: 0px;
+          min-height: 40px;
+          .nano-subcard {
+            .nano-subcard-face {
+              .nano-subcard-content {
+                padding: 0px;
+                
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

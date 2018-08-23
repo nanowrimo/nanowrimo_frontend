@@ -4,6 +4,7 @@ import { isEmpty } from '@ember/utils';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
+import moment from 'moment';
 
 export default ToriiAuthenticator.extend({
   torii: service(),
@@ -16,14 +17,18 @@ export default ToriiAuthenticator.extend({
           // pull data from the response
           let { provider } = data;
           let body = {};
-          
+          let time_zone = moment.tz.guess();
+          if (!time_zone) {
+            time_zone = "America/Los_Angeles2";
+          }
           if (provider === 'custom-google') {
             let { user_id, access_token } = data;
 
             body = {
               method: 'google',
               user_id: user_id,
-              token: access_token
+              token: access_token,
+              time_zone: time_zone
             }
 
           } else if (provider === 'facebook-connect') {
@@ -32,7 +37,8 @@ export default ToriiAuthenticator.extend({
             body = {
               method: 'facebook',
               user_id: userId,
-              token: accessToken
+              token: accessToken,
+              time_zone: time_zone
             }
 
           }

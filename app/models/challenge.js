@@ -8,6 +8,7 @@ const Challenge = Model.extend({
   defaultGoal: attr('number'),
   endsAt: attr('date'),
   startsAt: attr('date'),
+  winAllowedAt: attr('date'),
   eventType: attr('number'),
   //eventType is defined in the api as:
   // 0 = NaNoWriMo
@@ -27,6 +28,7 @@ const Challenge = Model.extend({
   
   projects: hasMany('project'),
   
+  // Used here but not on API side
   name: attr('string'),
   
   isNaNoEvent: computed('eventType', function(){

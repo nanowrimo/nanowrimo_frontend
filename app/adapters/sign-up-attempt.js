@@ -10,7 +10,7 @@ export default ApplicationAdapter.extend(AdaptersUuidMixin, {
   session: service(),
 
   createRecord(store, type, snapshot) {
-    let { email, password, username, timeZone, terms, thirteen } = get(snapshot, '_attributes');
+    let { email, password, username, timeZone } = get(snapshot, '_attributes');
     return new Promise ((resolve, reject) => {
       return fetch(`${this.get('host')}/users`, {
         method: 'POST',
@@ -19,9 +19,7 @@ export default ApplicationAdapter.extend(AdaptersUuidMixin, {
           email, 
           password, 
           name: username, 
-          time_zone: timeZone,
-          terms: terms,
-          thirteen: thirteen
+          time_zone: timeZone
           })
       })
       .then(() => {

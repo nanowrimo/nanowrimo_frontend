@@ -1,4 +1,5 @@
 import {
+  validateFormat,
   validatePresence
 } from 'ember-changeset-validations/validators';
 import and from 'ember-changeset-hofs/utils/and'
@@ -8,5 +9,10 @@ export default {
   name: and(
     validatePresence(true),
     validateUniqueness('name')
-  )
+  ),
+  email: and(
+    validateFormat({ type: 'email' }),
+    validateUniqueness('email')
+  ),
+  
 };

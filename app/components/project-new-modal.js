@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { filterBy } from '@ember/object/computed';
+import { filterBy, sort } from '@ember/object/computed';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
@@ -12,6 +12,7 @@ export default Component.extend({
   tagName: '',
 
   associatedChallenge: null,
+  associatedChallengeId: 0,
   challenge: null,
   projectChallenge: null,
   tab: null,
@@ -20,9 +21,32 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
   projectChallengeChangeset: null,
+  recalculateEvents: 0,
   
-  optionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  
+  challengeSortingDesc: Object.freeze(['startsAt:desc']),
+  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
+  unassignedOptionsForChallenges: computed('user.projects.[]','recalculateEvents',function() {
+    let newArray = [];
+    let acs = this.get('filteredOptionsForChallenges');
+    //console.log(acs.length);
+    let ucs = this.get('user.projects');
+    acs.forEach(function(ac) {
+      let found = false;
+      ucs.forEach(function(uc) {
+        let pcs = uc.challenges;
+        pcs.forEach(function(pc) {
+          if (ac.id == pc.id) {
+            found = true;
+          }
+        });
+      });
+      if (!found) {
+        newArray.push(ac);
+      }
+    });
+    return newArray;
+  }),
+  optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
   associateWithChallenge: computed(function() {
     let challenges = this.get('optionsForChallenges');
     if (challenges.length > 0) {
@@ -62,11 +86,10 @@ export default Component.extend({
   steps: computed(function() {
     return [
       ['title', 'status', 'privacy', 'writingType'],
-      ['writingType', 'defaultGoal', 'unitType', 'startsAt', 'endsAt'],
+      ['name','writingType', 'defaultGoal', 'unitType', 'startsAt', 'endsAt'],
       ['wordCount', 'summary', 'excerpt', 'pinterest', 'playlist']
     ]
   }),
-
   init() {
     this._super(...arguments);
     let user = this.get('user');
@@ -86,6 +109,8 @@ export default Component.extend({
 
   actions: {
     associateChallengeSelect(challengeID) {
+      this.set('associatedChallengeId', challengeID);
+      console.log(this.get('associatedChallengeId'));
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
       if (this.get("associateWithChallenge") ) {
         this.set('challenge', this.get("associatedChallenge"));
@@ -109,12 +134,15 @@ export default Component.extend({
     },
     onShow() {
       //assign the user to the project
-    this.set('project.user', this.get('user'));
+      this.set('project.user', this.get('user'));
       
     },
     onHidden() {
       let callback = this.get('onHidden');
       this.set('formStepOverride',0);
+      let r = this.get('recalculateEvents')
+      this.set('recalculateEvents', r+1);
+      
       if (callback) {
         callback();
       } else {
