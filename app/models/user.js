@@ -16,6 +16,9 @@ export default Model.extend({
   timeZone: attr('string'),
   plate: attr('string'),
   postalCode: attr('string'),
+  registrationPath: attr('string'),
+  currentPassword: attr('string'),
+  newPassword: attr('string'),
 
   statsStreakEnabled: attr('boolean'),
   statsStreak: attr('number'),

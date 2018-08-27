@@ -18,9 +18,6 @@ export default ToriiAuthenticator.extend({
           let { provider } = data;
           let body = {};
           let time_zone = moment.tz.guess();
-          if (!time_zone) {
-            time_zone = "America/Los_Angeles2";
-          }
           if (provider === 'custom-google') {
             let { user_id, access_token } = data;
 

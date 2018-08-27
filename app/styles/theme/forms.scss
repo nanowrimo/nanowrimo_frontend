@@ -130,3 +130,8 @@ select.form-control:focus {
 input:disabled, select:disabled {
   opacity: 0.3 !important;
 }
+.form-instruction {
+  font-family: 'SourceSansPro-Regular', sans-serif;
+  font-size: 14px;
+  color: $nano-mediumgrey;
+}
