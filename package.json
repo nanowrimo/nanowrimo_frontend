@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "bootstrap": "^4.0.0",
-    "broccoli-asset-rev": "^2.7.0",
+    "broccoli-asset-rev": "^3.0.0",
     "ember-active-storage": "^1.0.0",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^2.0",
@@ -47,7 +47,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.2",
     "ember-cli-update": "^0.22.0",
-    "ember-cli-uuid": "^0.6.0",
+    "ember-cli-uuid": "^0.7.1",
     "ember-data": "~3.4.0",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^5.0.0",
@@ -73,7 +73,7 @@
     "eslint-plugin-ember": "^5.2.0",
     "highcharts": "^6.1.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.6.3",
+    "qunit-dom": "^0.7.1",
     "torii": "^0.10.1"
   },
   "engines": {
