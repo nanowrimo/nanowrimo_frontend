@@ -22,9 +22,9 @@ export default Component.extend({
   //currentCount: 0,
   //goal: 0,
   
-  metGoal: computed('changeset.startCount','changeset.currentCount','changeset.goal', function() {
+  metGoal: computed('changeset.{startCount,currentCount,goal}', function() {
     let diff = this.get('changeset.currentCount') - this.get('changeset.startCount');
-    console.log(diff);
+    //console.log(diff);
     if (this.get('changeset.goal') <= diff) {
       return true;
     }

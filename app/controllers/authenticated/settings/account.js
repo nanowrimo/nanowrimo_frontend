@@ -47,9 +47,9 @@ export default Controller.extend({
   }),
   
   actions: {
-    willTransition: function(transition) {
-      this.set('_formResponseMessage',null);
-    },
+    //willTransition: function(transition) {
+      //this.set('_formResponseMessage',null);
+    //},
     afterSubmit() {
       let u = this.get('currentUser.user');
       let ne = this.get('newEmail');

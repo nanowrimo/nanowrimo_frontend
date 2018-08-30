@@ -110,7 +110,7 @@ export default Component.extend({
   actions: {
     associateChallengeSelect(challengeID) {
       this.set('associatedChallengeId', challengeID);
-      console.log(this.get('associatedChallengeId'));
+      //console.log(this.get('associatedChallengeId'));
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
       if (this.get("associateWithChallenge") ) {
         this.set('challenge', this.get("associatedChallenge"));
