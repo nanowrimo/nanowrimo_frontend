@@ -47,7 +47,7 @@
           Determining location...
         </div>
         <div class="nano-list-search {{proximityHide}}">
-          {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up="searchStringChange"}}
+          {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
         </div>
         <ul class="nano-list {{processingHide}}" style="height: 700px; ">
           {{#each sortedRegions as |regionContainer index|}}

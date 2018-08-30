@@ -20,7 +20,7 @@
                       name="email"
                       type="email"
                       value=email
-                      key-press="emailChange"
+                      key-press=(action "emailChange")
                     }}
                   {{#if emailError}}
                     <div class="invalid-feedback">Please enter a valid email.</div>
