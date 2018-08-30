@@ -9,9 +9,9 @@
     <select id={{name}} name={{name}} disabled={{if isDisabled 'disabled' ''}}
       class={{concat 'form-control' (if hasError ' is-invalid')}}
       onchange={{action (mut (get changeset property)) value="target.value"}}>
-      {{#each normalizedOptions as |option|}}
-        <option value={{option.value}} selected={{eq option.value (get changeset property)}}>
-          {{option.name}}
+      {{#each normalizedOptions as |opt|}}
+        <option value={{opt.value}} selected={{eq opt.value (get changeset property)}}>
+          {{opt.name}}
         </option>
       {{/each}}
     </select>
