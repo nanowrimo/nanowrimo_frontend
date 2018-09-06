@@ -21,7 +21,7 @@ export default Component.extend({
   iconClass: 'eye',
 
   actions: {
-    valueChanged: function(v){
+    valueChanged: function(){
       let vcc = this.get('valueChangedCallback');
       if (vcc) {
         //get the value 
