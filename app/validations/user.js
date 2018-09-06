@@ -1,6 +1,7 @@
 import {
   validateFormat,
-  validatePresence
+  validatePresence,
+  validateLength
 } from 'ember-changeset-validations/validators';
 import and from 'ember-changeset-hofs/utils/and'
 import validateUniqueness from 'nanowrimo/validators/uniqueness';
@@ -14,5 +15,9 @@ export default {
     validateFormat({ type: 'email' }),
     validateUniqueness('email')
   ),
+  newPassword: [
+    validateLength({ min: 8 }),
+    validateLength({ max: 128 })
+  ],
   
 };
