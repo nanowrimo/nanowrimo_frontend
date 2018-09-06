@@ -11,6 +11,7 @@ export default Component.extend({
   placeholder: null,
   property: '',
   type: 'password',
+  valueChangedCallback: null,
 
   name: reads('property'),
   
@@ -20,6 +21,15 @@ export default Component.extend({
   iconClass: 'eye',
 
   actions: {
+    valueChanged: function(){
+      let vcc = this.get('valueChangedCallback');
+      if (vcc) {
+        //get the value 
+        let val = this.get('changeset').get( this.get('property') );
+        //perform the value changed action
+        vcc(val);
+      }
+    },
     toggleVisible: function() {
       // If the field is of type 'password', change it to type 'text'
       if (this.get('fieldType') == 'password') {
