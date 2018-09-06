@@ -2,6 +2,7 @@
   {{yield (hash
     currentStepIndex=currentStepIndex
     isLastStep=isLastStep
+    yesno=(component 'form-for--yesno' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
     checkbox=(component 'form-for--checkbox' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
     hidden=(component 'form-for--hidden' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)
     imageUpload=(component 'form-for--image-upload' changeset=changeset hasAttemptedSubmit=hasAttemptedSubmit)

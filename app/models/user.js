@@ -4,7 +4,7 @@ import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { sort, filterBy }  from '@ember/object/computed';
 
-export default Model.extend({
+const User = Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
   createdAt: attr('date'),
@@ -34,6 +34,16 @@ export default Model.extend({
   statsYearsDone: attr('string'),
   statsYearsWon: attr('string'),
 
+  privacyViewBuddies: attr('number'),
+  privacyViewProjects: attr('number'),
+  privacyViewProfile: attr('number'),
+  privacySendNanomessages: attr('number'),
+  privacyViewSearch: attr('number'),
+  
+  privacyVisibilityRegions: attr('boolean'),
+  privacyVisibilityBuddyLists: attr('boolean'),
+  privacyVisibilityActivityLogs: attr('boolean'),
+  
   externalLinks: hasMany('externalLink'),
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
@@ -121,3 +131,25 @@ export default Model.extend({
     });
   },
 });
+
+User.reopenClass({
+  /* from the API: 
+    ## PRIVACY ## 
+  # Privacy is an integer value representing which group of users
+  # an author has allowed to view a project.
+  # 0 = self
+  # 1 = buddies and MLs
+  # 2 = buddies of buddies, and MLs
+  # 3 = any signed in user
+  */
+  optionsForPrivacy: 
+  [
+    {value: 0, name:'Only me'},
+    {value: 1, name:'Only My Buddies And MLs'},
+    {value: 2, name:'Only MLs and Buddies Of My Buddies'},
+    {value: 3, name:'Anyone who is logged in'},
+    
+  ]
+});
+
+export default User;
