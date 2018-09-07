@@ -4,7 +4,7 @@ import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { sort, filterBy }  from '@ember/object/computed';
 
-export default Model.extend({
+const User = Model.extend({
   avatar: attr('string'),
   bio: attr('string'),
   createdAt: attr('date'),
@@ -38,6 +38,19 @@ export default Model.extend({
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
+  
+  //privacy
+  privacyViewProfile: attr('number'),
+  privacyViewProjects: attr('number'),
+  privacyViewBuddies: attr('number'),
+  privacyViewSearch: attr('number'),
+  privacySendNanomessages: attr('number'),
+  
+
+  privacyVisibilityRegions: attr('boolean'),
+  privacyVisibilityBuddyLists: attr('boolean'), 
+  privacyVisibilityActivityLogs: attr('boolean'),
+  
   
   // Group membership
   groups: hasMany('group'),
@@ -121,3 +134,50 @@ export default Model.extend({
     });
   },
 });
+
+User.reopenClass({
+  /* Some options are enumerated in the Rails API
+   *  before editing these options, check that they match the API
+   *  */ 
+ 
+  optionsForPrivacyViewProfile: 
+  [
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+    
+  ], 
+  optionsForPrivacyViewProjects: 
+  [
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+  optionsForPrivacyViewBuddies: 
+  [
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+  optionsForPrivacyViewSearch: 
+  [
+    {value:'0', name:'No One'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+  optionsForPrivacySendNanomessages: 
+  [
+    {value:'0', name:'No One'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+ 
+ 
+});
+
+export default User;
