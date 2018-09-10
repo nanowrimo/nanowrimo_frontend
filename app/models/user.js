@@ -40,11 +40,11 @@ const User = Model.extend({
   projectSessions: hasMany('projectSession'),
   
   //privacy
-  privacyViewProfile: attr('number'),
-  privacyViewProjects: attr('number'),
-  privacyViewBuddies: attr('number'),
-  privacyViewSearch: attr('number'),
-  privacySendNanomessages: attr('number'),
+  privacyViewProfile: attr('string'),
+  privacyViewProjects: attr('string'),
+  privacyViewBuddies: attr('string'),
+  privacyViewSearch: attr('string'),
+  privacySendNanomessages: attr('string'),
   
 
   privacyVisibilityRegions: attr('boolean'),
