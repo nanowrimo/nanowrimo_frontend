@@ -51,6 +51,26 @@ const User = Model.extend({
   privacyVisibilityBuddyLists: attr('boolean'), 
   privacyVisibilityActivityLogs: attr('boolean'),
   
+  //notification and emails
+  notificationBuddyRequests: attr('boolean'),
+  notificationNanomessagesMls: attr('boolean'),
+  notificationWritingReminders: attr('boolean'),
+  notificationBuddyActivities: attr('boolean'),
+  notificationNanomessagesHq: attr('boolean'),
+  notificationGoalMilestones: attr('boolean'),
+  notificationEventsInHomeRegion: attr('boolean'),
+  notificationSprintInvitation: attr('boolean'),
+  notificationNewBadges: attr('boolean'),
+  notificationNanomessagesBuddies: attr('boolean'),
+  notificationSprintStart: attr('boolean'),
+  emailNewsletter: attr('boolean'),
+  emailEventsInHomeRegion: attr('boolean'),
+  emailNanomessagesMls: attr('boolean'),
+  emailBlogPosts: attr('boolean'),
+  emailBuddyRequests: attr('boolean'),
+  emailNanomessagesBuddies: attr('boolean'),
+  emailNanomessagesHq: attr('boolean'),
+  emailWritingReminders: attr('boolean'),  
   
   // Group membership
   groups: hasMany('group'),

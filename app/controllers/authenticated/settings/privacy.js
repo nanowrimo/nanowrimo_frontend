@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import TimeZones from 'nanowrimo/lib/time-zones';
 
 import User from 'nanowrimo/models/user';
 export default Controller.extend({
