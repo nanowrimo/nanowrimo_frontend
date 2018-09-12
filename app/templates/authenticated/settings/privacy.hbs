@@ -1,9 +1,90 @@
-<div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
-  <div class="nano-subcard g3-sub1 g2-sub1">
-    <div class="nano-subcard-face face-front filled-grey">
-      <div class="nano-subcard-content">
-        privacy
+{{#form-for model=user as |f| }}
+  <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
+    <div class="nano-subcard g3-sub1 g2-sub1">
+      <div class="nano-subcard-face face-front filled-grey">
+        <div class='nano-subcard-header'>
+          <div class='card-title'>Profile</div>
+        </div>
+        <div class="nano-subcard-content">
+          <div class="form-group">
+            {{f.select
+              label="Who can view your profile?"
+              options=optionsForPrivacyViewProfile
+              property="privacyViewProfile"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="Who can view your projects?"
+              options=optionsForPrivacyViewProjects
+              property="privacyViewProjects"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="Who can view your buddies?"
+              options=optionsForPrivacyViewBuddies
+              property="privacyViewBuddies"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="Who can see you in search results?"
+              options=optionsForPrivacyViewSearch
+              property="privacyViewSearch"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="Who can send you NaNoMessages?"
+              options=optionsForPrivacySendNanomessages
+              property="privacySendNanomessages"
+            }}
+          </div>
+          
+         
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+  <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
+  
+
+    
+    <div class="nano-subcard g3-sub1 g2-sub1">
+      <div class="nano-subcard-face face-front filled-grey">
+        <div class='nano-subcard-header'>
+          <div class='card-title'>Visibility</div>
+        </div>
+        <div class="nano-subcard-content">
+          <div>
+            <div class="form-group inline-checkbox">
+              {{f.checkbox
+                label="Visible to my regions"
+                property="privacyVisibilityRegions"
+              }}
+            </div>
+            <div class="form-group inline-checkbox">
+              {{f.checkbox
+                label="Visible on buddy lists"
+                property="privacyVisibilityBuddyLists"
+              }}
+            </div>
+            <div class="form-group inline-checkbox">
+              {{f.checkbox
+                label="Visible on activity logs"
+                options=optionsForPrivacyViewBuddies
+                property="privacyVisibilityActivityLogs"
+              }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <div class='nano-panel-footer'>
+    {{f.save-cancel}}
+  </div>
+ 
+{{/form-for}}
