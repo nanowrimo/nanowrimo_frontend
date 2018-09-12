@@ -12,7 +12,25 @@ export default Component.extend({
   countValue: null,
   initialValue: null,
   selectedWhere: 'work',
+  selectedFeeling: null,
   _projectAdditionalInfoShow: false,
+  
+  feeling1Selected: computed('selectedFeeling', function() {
+    return this.get('selectedFeeling') == 1;
+  }),
+  feeling2Selected: computed('selectedFeeling', function() {
+    return this.get('selectedFeeling') == 2;
+  }),
+  feeling3Selected: computed('selectedFeeling', function() {
+    return this.get('selectedFeeling') == 3;
+  }),
+  feeling4Selected: computed('selectedFeeling', function() {
+    return this.get('selectedFeeling') == 4;
+  }),
+  feeling5Selected: computed('selectedFeeling', function() {
+    return this.get('selectedFeeling') == 5;
+  }),
+  
   projectAdditionalInfoShow: computed('_projectAdditionalInfoShow', function() {
     let p = this.get('_projectAdditionalInfoShow');
     if (p) {
@@ -37,8 +55,9 @@ export default Component.extend({
     return ['laptop', 'phone', 'longhand', 'dictation'];
   }),
   actions: {
-    foo() { },
-    foo2() { },
+    changeFeeling(val){
+      this.set("selectedFeeling", val);
+    },
     createWhere() { 
     },
     createHow() { },
