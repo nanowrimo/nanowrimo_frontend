@@ -6,9 +6,9 @@ import { belongsTo } from 'ember-data/relationships';
 export default  Model.extend({
   is_admin: attr('boolean', { defaultValue: '0' }),
   invitation_accepted: attr('number', { defaultValue: '1' }),
+  primary: attr('number'),
   group_id: attr('number'),
   user_id: attr('number'),
-  primary: attr('number'),
   group: belongsTo('group'),
   user: belongsTo('user'),
   

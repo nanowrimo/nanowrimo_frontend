@@ -74,6 +74,27 @@ const User = Model.extend({
     }
   }),
   projects: hasMany('project'),
+  
+  buddyGroups: filterBy('groups', 'groupType', 'buddies'),
+  buddiesActive: computed('buddyGroups', {
+    get() {
+      let bg = this.get('buddyGroups');
+      let ra = [];
+      let store = this.get('store');
+      let email = this.get('email');
+      bg.forEach(function(tgroup) {
+        let gu = tgroup.groupUsers;
+        gu.forEach(function(tgu) {
+          let u = store.peekRecord('user', tgu.user_id);
+          if ((u) && (u.email!=email)) {
+            ra.push(u);
+          }
+        });
+      });
+      return ra;
+    }
+  }),
+  
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {

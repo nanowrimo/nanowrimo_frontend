@@ -5,6 +5,13 @@
     <li>{{link-to 'Buddies' 'authenticated.users.show.buddies' }}</li>
   </ul>
   
-  <div id='project-listing-actions'>
+  <div id='buddies-listing'>
+    <div>
+      {{#each user.buddiesActive as |buddy|}}
+        {{buddy-listing user=buddy}}
+      {{/each}}
+      
+    </div>
+    
   </div>
 </div>

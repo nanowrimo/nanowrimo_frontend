@@ -1,0 +1,67 @@
+{{#if notCurrentUser}}
+  {{#if notBuddy}}
+    <div class="buddy-buttons">
+      <div class="buddy-status">
+        You aren't buddies with {{user.name}}.
+      </div>
+      <button {{action "sendInvitation"}}>
+        {{fa-icon "user-plus"}}
+        Send invitation
+      </button>
+    </div>
+  {{/if}}
+  {{#if buddyInvited}}
+    <div class="buddy-buttons">
+      <div class="buddy-status">
+        You've invited {{user.name}} to be buddies.
+      </div>
+      {{#link-to "authenticated.regions.find" tagName="button" class="button-reversed"}}
+        {{fa-icon "minus-circle"}}
+        Cancel invitation
+      {{/link-to}}
+    </div>
+  {{/if}}
+  {{#if selfInvited}}
+    <div class="buddy-buttons">
+      <div class="buddy-status">
+        {{user.name}} has invited you to be buddies.
+      </div>
+      {{#link-to "authenticated.regions.find" tagName="button"}}
+        {{fa-icon "user-plus"}}
+        Accept
+      {{/link-to}}
+      &nbsp;
+      {{#link-to "authenticated.regions.find" tagName="button" class="button-reversed"}}
+        {{fa-icon "minus-circle"}}
+        Reject
+      {{/link-to}}
+      &nbsp;
+      {{#link-to "authenticated.regions.find" tagName="button" class="button-reversed button-danger"}}
+        {{fa-icon "ban"}}
+        Block
+      {{/link-to}}
+    </div>
+  {{/if}}
+  {{#if buddyActive}}
+    <div class="buddy-buttons">
+      <div class="buddy-status">
+        You are buddies with {{user.name}}.
+      </div>
+      {{#link-to "authenticated.regions.find" class="remove-element"}}
+        {{fa-icon "minus-circle"}}
+        Remove as buddy
+      {{/link-to}}
+    </div>
+  {{/if}}
+  {{#if userBlocked}}
+    <div class="buddy-buttons button-danger">
+      <div class="buddy-status">
+        You've blocked {{user.name}}.
+      </div>
+      {{#link-to "authenticated.regions.find" tagName="button"class="button-reversed"}}
+        {{fa-icon "minus-circle"}}
+        Unblock
+      {{/link-to}}
+    </div>
+  {{/if}}
+{{/if}}

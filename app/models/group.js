@@ -5,6 +5,7 @@ import { computed }  from '@ember/object';
 
 export default Model.extend({
   name: attr('string'),
+  userId: attr('number'),
   createdAt: attr('date'),
   updatedAt: attr('date'),
   groupType: attr('string'),

@@ -1,0 +1,20 @@
+<div class="nano-card project-listing-card">
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front filled-grey">
+      <div class='flex-container'>
+        <div class='project-cover'>
+          <div class='project-cover-clip'>
+            <img src="{{user.avatarUrl}}">
+          </div>
+        </div>
+        <div class='project-name-genres'>
+          <div class='project-title'>
+          {{#link-to 'authenticated.users.show' user.slug}}
+            {{user.name}}
+          {{/link-to}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
