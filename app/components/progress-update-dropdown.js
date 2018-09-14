@@ -16,7 +16,7 @@ export default Component.extend({
   selectedFeeling: null,
   whenStart: null,
   whenEnd: null,
-  writingLocations: [],
+  writingLocations: null,
   _projectAdditionalInfoShow: false,
   
   feeling1Selected: computed('selectedFeeling', function() {
