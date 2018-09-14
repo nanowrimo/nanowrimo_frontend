@@ -6,7 +6,7 @@ export default Model.extend({
   count: attr('number'),
   start: attr('date'),
   end: attr('date'),
-  where: attr('number'),
+  where: attr('string'),
   feeling: attr('number'),
   createdAt: attr('date'),
   unitType: attr('number'),
