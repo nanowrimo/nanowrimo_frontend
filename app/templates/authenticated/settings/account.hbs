@@ -39,9 +39,10 @@
                 label="New Password"
                 property="newPassword"
                 change=(action (mut newPassword) value="target.value")
+                valueChangedCallback=(action "newPasswordChanged")
               }}
             </div>
-            {{#if passwordChanged}}
+            {{#if showPasswordConfirm}}
               <div class="form-group full-width">
                 {{f.password
                   label="Enter Your Current Password to Confirm"

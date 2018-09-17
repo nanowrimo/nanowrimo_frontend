@@ -2,36 +2,27 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import User from 'nanowrimo/models/user';
-
 export default Controller.extend({
   error: null, // String OR object
   currentUser: service(),
-  optionsForPrivacy: computed(function() {
-    return User.optionsForPrivacy;
-  }),
-  // For displaying response messages
-  _formResponseMessage: null,
-  formResponseMessage: computed('_formResponseMessage',function() {
-    return this.get('_formResponseMessage');
-  }),
-  
-  errorString: computed('error', function() {
-    let error = this.get('error');
-    return (typeof error === 'string') ? error : null;
-  }),
 
-  errorObject: computed('error', function() {
-    let error = this.get('error');
-    return (typeof error === 'object') ? error : null;
+  user: computed('currentUser.user',function() {
+    return this.get('currentUser.user');
   }),
-
   
-  actions: {
-    //willTransition: function(transition) {
-      //this.set('_formResponseMessage',null);
-    //},
-    afterSubmit() {
-    }
-  }
-  
+  optionsForPrivacyViewProfile: computed(function() {
+    return User.optionsForPrivacyViewProfile;
+  }),
+  optionsForPrivacyViewProjects: computed(function() {
+    return User.optionsForPrivacyViewProjects;
+  }),
+  optionsForPrivacyViewBuddies: computed(function() {
+    return User.optionsForPrivacyViewBuddies;
+  }),
+  optionsForPrivacyViewSearch: computed(function() {
+    return User.optionsForPrivacyViewSearch;
+  }),
+  optionsForPrivacySendNanomessages: computed(function() {
+    return User.optionsForPrivacySendNanomessages;
+  }),
 });

@@ -8,6 +8,7 @@ export default Controller.extend({
   currentUser: service(),
   newEmail: null,
   newPassword: null,
+  showPasswordConfirm: false,
   // For displaying response messages
   _formResponseMessage: null,
   formResponseMessage: computed('_formResponseMessage',function() {
@@ -22,14 +23,6 @@ export default Controller.extend({
   hasPassword: computed('registrationPath',function() {
     let rp = this.get('registrationPath');
     return (rp === 'email')
-  }),
-  // Shows the password confirm field when user is editing password
-  passwordChanged: computed('newPassword',function() {
-    let np = this.get('newPassword');
-    if (np == null || np == '') {
-      return false;
-    }
-    return true;
   }),
   errorString: computed('error', function() {
     let error = this.get('error');
@@ -50,6 +43,10 @@ export default Controller.extend({
     //willTransition: function(transition) {
       //this.set('_formResponseMessage',null);
     //},
+    newPasswordChanged(val) {
+      this.set("showPasswordConfirm", val.length > 0);
+    },
+    
     afterSubmit() {
       let u = this.get('currentUser.user');
       let ne = this.get('newEmail');

@@ -49,6 +49,39 @@ const User = Model.extend({
   favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
   
+  //privacy
+  privacyViewProfile: attr('string'),
+  privacyViewProjects: attr('string'),
+  privacyViewBuddies: attr('string'),
+  privacyViewSearch: attr('string'),
+  privacySendNanomessages: attr('string'),
+  
+
+  privacyVisibilityRegions: attr('boolean'),
+  privacyVisibilityBuddyLists: attr('boolean'), 
+  privacyVisibilityActivityLogs: attr('boolean'),
+  
+  //notification and emails
+  notificationBuddyRequests: attr('boolean'),
+  notificationNanomessagesMls: attr('boolean'),
+  notificationWritingReminders: attr('boolean'),
+  notificationBuddyActivities: attr('boolean'),
+  notificationNanomessagesHq: attr('boolean'),
+  notificationGoalMilestones: attr('boolean'),
+  notificationEventsInHomeRegion: attr('boolean'),
+  notificationSprintInvitation: attr('boolean'),
+  notificationNewBadges: attr('boolean'),
+  notificationNanomessagesBuddies: attr('boolean'),
+  notificationSprintStart: attr('boolean'),
+  emailNewsletter: attr('boolean'),
+  emailEventsInHomeRegion: attr('boolean'),
+  emailNanomessagesMls: attr('boolean'),
+  emailBlogPosts: attr('boolean'),
+  emailBuddyRequests: attr('boolean'),
+  emailNanomessagesBuddies: attr('boolean'),
+  emailNanomessagesHq: attr('boolean'),
+  emailWritingReminders: attr('boolean'),  
+  
   // Group membership
   groups: hasMany('group'),
   groupUsers: hasMany('groupUser'),
@@ -154,23 +187,48 @@ const User = Model.extend({
 });
 
 User.reopenClass({
-  /* from the API: 
-    ## PRIVACY ## 
-  # Privacy is an integer value representing which group of users
-  # an author has allowed to view a project.
-  # 0 = self
-  # 1 = buddies and MLs
-  # 2 = buddies of buddies, and MLs
-  # 3 = any signed in user
-  */
-  optionsForPrivacy: 
+  /* Some options are enumerated in the Rails API
+   *  before editing these options, check that they match the API
+   *  */ 
+ 
+  optionsForPrivacyViewProfile: 
   [
-    {value: 0, name:'Only me'},
-    {value: 1, name:'Only My Buddies And MLs'},
-    {value: 2, name:'Only MLs and Buddies Of My Buddies'},
-    {value: 3, name:'Anyone who is logged in'},
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
     
-  ]
+  ], 
+  optionsForPrivacyViewProjects: 
+  [
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+  optionsForPrivacyViewBuddies: 
+  [
+    {value:'0', name:'Only I Can See'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+  optionsForPrivacyViewSearch: 
+  [
+    {value:'0', name:'No One'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+  optionsForPrivacySendNanomessages: 
+  [
+    {value:'0', name:'No One'},
+    {value:'1', name:'Only My Buddies And MLs Can See'},
+    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
+    {value:'3', name:'Anyone Can See'},
+  ], 
+ 
+ 
 });
 
 export default User;
