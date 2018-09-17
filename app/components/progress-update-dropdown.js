@@ -85,11 +85,11 @@ export default Component.extend({
         // set the whenEnd and whenStart 
         let t = moment();
         //get the time in HH:MM format and set that as the whenend
-        this.set("whenEnd", t.format("HH:MM"));
+        this.set("whenEnd", t.format("HH:mm"));
         //subtract 1 hour from the moment 
         t.subtract(1, 'h');
         //get the time in HH:MM format and set that as the whenStart
-         this.set("whenStart", t.format("HH:MM"));
+         this.set("whenStart", t.format("HH:mm"));
       } else {
         //nullify the whenEnd and whenStart
          this.set("whenEnd", null);
