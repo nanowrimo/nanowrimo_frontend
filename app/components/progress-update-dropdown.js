@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from "@ember/object";
 import moment from "moment"
-
+import {isNull} from "lodash"
 export default Component.extend({
   currentUser: service(),
   store: service(),
@@ -12,11 +12,13 @@ export default Component.extend({
   user: null,
   countValue: null,
   initialValue: null,
-  selectedWhere: 'home',
   selectedFeeling: null,
+  selectedHow: null,
+  selectedWhere: null,
   whenStart: null,
   whenEnd: null,
   writingLocations: null,
+  writingMethods: null,
   _projectAdditionalInfoShow: false,
   
   feeling1Selected: computed('selectedFeeling', function() {
@@ -53,23 +55,30 @@ export default Component.extend({
     this.set('user',  user);
   },
 
-  howList: computed(function() {
-    return ['laptop', 'phone', 'longhand', 'dictation'];
-  }),
   actions: {
     changeFeeling(val){
       this.set("selectedFeeling", val);
     },
-    createWhere(value) { 
-      //append the passed value to the whereList
-      this.get('writingLocations').pushObject(value);
-      //select the new value
-      this.set('selectedWhere', value);
+    createWhere(value) {       
       //add this location to the DB
       let wl = this.get('store').createRecord('writingLocation', {name: value} );
-      wl.save();
+      this.set('selectedWhere', wl);
+      wl.save().then((result)=>{ 
+        let obj = {"name": result.name, "value": result.id}
+        this.get('writingLocations').pushObject(obj);
+        this.set('selectedWhere', obj);
+      });
     },
-    createHow() { 
+    createHow(value) { 
+      //add this location to the DB
+      let record = this.get('store').createRecord('writingMethod', {name: value} );
+       //select the new value
+      this.set('selectedHow', record);
+      record.save().then((result)=>{ 
+        let obj = {"name": result.name, "value": result.id}
+        this.get('writingMethods').pushObject(obj);
+        this.set('selectedHow', obj);
+      });
     },
     toggleAdditionalInfo() {
       let show = !this.get('_projectAdditionalInfoShow');
@@ -78,9 +87,37 @@ export default Component.extend({
         //get the writing locations
         this.get('store').findAll('writingLocation')
         .then((locations)=>{
-          let names = locations.map((l)=>{return l.name});
+          let names = locations.map((l)=>{return {"value": l.id, "name":l.name}});
           //set the whereList
           this.set('writingLocations', names);
+          // if the selectedWhere is null, set it to 'laptop'
+          if ( isNull(this.get('selectedWhere')) ) {
+            for (var i = 0; i < names.length; i++ ){
+              let w = names[i];
+              if (w.name === "home" ) {
+                this.set('selectedWhere', w);
+                break;
+              }
+            }
+          }
+          
+        });
+        //get the writing methods
+        this.get('store').findAll('writingMethod')
+        .then((locations)=>{
+          let names = locations.map((l)=>{return {"value": l.id, "name":l.name}});
+          //set the whereList
+          this.set('writingMethods', names);
+          // if the selectedHow is null, set it to 'laptop'
+          if ( isNull(this.get('selectedHow')) ) {
+            for (var i = 0; i < names.length; i++ ){
+              let w = names[i];
+              if (w.name === "laptop" ) {
+                this.set('selectedHow', w);
+                break;
+              }
+            }
+          }
         });
         // set the whenEnd and whenStart 
         let t = moment();
@@ -135,35 +172,32 @@ export default Component.extend({
         let iv = this.get("initialValue");
         count -= iv;
       }
-      if (count != 0) {
-        //check for other metrics
-        session.set('feeling', this.get('selectedFeeling'));
-        session.set('where', this.get('selectedWhere'));
-        
-        //fiddle with the dates
-        let end = this.get('whenEnd');
-        let start = this.get('whenStart');
-        // have start and end been set?
-        if (start && end) {
-          //get "today"
-          let today = moment();
-          let ymd = today.format('YYYY-MM-DD');
-          let endDate = moment(ymd+" "+end).toDate();
-          if( start > end ) {
-            //start was yesterday 
-            let yesterday = today.subtract(1, 'd');
-            ymd = yesterday.format('YYYY-MM-DD');
-          } 
-          let startDate = moment(ymd+" "+start).toDate();
-          session.set('end', endDate);
-          session.set('start', startDate);
-        }
-       
-        session.set('count', count);
-        session.save();
-      } else {
-        // we should notify the user that they didn't change the count
+
+      //check for other metrics
+      session.set('feeling', this.get('selectedFeeling'));
+      session.set('where', this.get('selectedWhere').value);
+      session.set('how', this.get('selectedHow').value);
+      //fiddle with the dates
+      let end = this.get('whenEnd');
+      let start = this.get('whenStart');
+      // have start and end been set?
+      if (start && end) {
+        //get "today"
+        let today = moment();
+        let ymd = today.format('YYYY-MM-DD');
+        let endDate = moment(ymd+" "+end).toDate();
+        if( start > end ) {
+          //start was yesterday 
+          let yesterday = today.subtract(1, 'd');
+          ymd = yesterday.format('YYYY-MM-DD');
+        } 
+        let startDate = moment(ymd+" "+start).toDate();
+        session.set('end', endDate);
+        session.set('start', startDate);
       }
+     
+      session.set('count', count);
+      session.save();
       this.set('showForm', false);
       return true;
     }
