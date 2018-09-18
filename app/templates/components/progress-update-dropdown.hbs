@@ -72,7 +72,7 @@
                     {{#power-select-with-create
                       options=writingLocations
                       selected=selectedWhere
-                      searchField=searchField
+                      searchField='name'
                       searchEnabled='true'
                       showCreatePosition="bottom"
                       showCreateWhen=(action "showCreateWhen")
@@ -82,7 +82,25 @@
                       oncreate=(action "createWhere")
                       as |opt|
                     }}
-                      {{opt}}
+                      {{opt.name}}
+                    {{/power-select-with-create}}
+                  </div>
+                  <div>
+                    <label>How were you writing?</label>
+                    {{#power-select-with-create
+                      options=writingMethods
+                      selected=selectedHow
+                      searchField='name'
+                      searchEnabled='true'
+                      showCreatePosition="bottom"
+                      showCreateWhen=(action "showCreateWhen")
+                      dropdownClass="in-modal-dropdown"
+                      renderInPlace=true
+                      onchange=(action (mut selectedHow))
+                      oncreate=(action "createHow")
+                      as |opt|
+                    }}
+                      {{opt.name}}
                     {{/power-select-with-create}}
                   </div>
                   
