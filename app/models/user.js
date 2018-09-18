@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { sort, filterBy }  from '@ember/object/computed';
+import { filterBy }  from '@ember/object/computed';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -82,7 +82,6 @@ const User = Model.extend({
     get() {
       let r = this.get('regions');
       let gu = this.get('groupUsers');
-      //console.log(gu.length);
       let maxPrimary = -1;
       let maxRegion = null;
       r.forEach(function(tgroup) {
@@ -96,7 +95,9 @@ const User = Model.extend({
       return maxRegion;
     }
   }),
+  
   projects: hasMany('project'),
+  
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
@@ -125,12 +126,6 @@ const User = Model.extend({
     }
   }),
   
-  primarySortedProjects: sort('projects', function(a,b){return b.primary - a.primary;}),
-  primaryProject: computed('primarySortedProjects', function(){
-    let psp = this.get('primarySortedProjects');
-    return psp.firstObject;
-  }),
-  
   rollbackExternalLinks() {
     this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }
@@ -145,6 +140,22 @@ const User = Model.extend({
       if (book) { book.rollback(); }
     });
   },
+
+  primaryProject: computed('projects.@each.primary', function(){
+    let ps = this.get('projects');
+    let prime = ps.firstObject;
+    
+    //loop though the projects
+    for(var i = 1; i < ps.length; i++ ) {
+      var t_project = ps.objectAt(i);
+      if (t_project.primary > prime.primary) {
+        prime = t_project;
+      }
+    }
+    return prime;
+  }),
+
+
 
   save() {
     return this._super().then(() => {
