@@ -37,19 +37,6 @@ export default Component.extend({
     return this.get('selectedFeeling') == 5;
   }),
   
-  selectedWhere: computed('writingLocations.[]',function() {
-    let wl = this.get('writingLocations');
-    if (wl) {
-      for (var i = 0; i < wl.length; i++ ){
-        let w = wl[i];
-        if (w.name === "home" ) {
-          return w;
-          break;
-        }
-      }
-    }
-  }),
-  
   projectAdditionalInfoShow: computed('_projectAdditionalInfoShow', function() {
     let p = this.get('_projectAdditionalInfoShow');
     if (p) {
