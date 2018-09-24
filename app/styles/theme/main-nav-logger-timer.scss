@@ -1,54 +1,64 @@
-.progress-update-dropdown {
-  position:relative;
+#logger-and-timer {
+  position: relative;
   
   .nano-menu-tab {
     position: absolute;
     top: -8px;
-    right: 5px;
+    right: 12px;
   }
-  
-  #progress-update-display{
-    box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
-    
+  .logger-timer-modal {
+    all: initial;
     z-index: 1000;
     position:absolute;
-    right: 0px;
-    top: 40px;
+    box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
+    top: 60px;
+    
     .modal-content {
       border: solid 1px #dfe4e6;
     }
-    #menu-progress-update-project-display {
+    
+    .primary-project-display {
+      margin-top: 14px;
+      height: 90px;
+      position: relative;
       
-      .primary-project-display {
-        margin-top: 14px;
-        height: 90px;
-        position: relative;
-        
-        .project-cover {
-          width: 300px;
-          float: left;
-          .project-cover-clip {
-            position: absolute;
-            bottom: 0px;
+      .project-cover {
+        width: 300px;
+        float: left;
+        .project-cover-clip {
+          position: absolute;
+          bottom: 0px;
+          width: 67px;
+          height: 94px;
+          left: 10px;
+          clip-path: inset(0px 0px 0px -50px);
+          img {
+            transform: rotate(-15deg);
+            transform-origin: bottom right;
             width: 67px;
             height: 94px;
-            left: 10px;
-            clip-path: inset(0px 0px 0px -50px);
-            img {
-              transform: rotate(-15deg);
-              transform-origin: bottom right;
-              width: 67px;
-              height: 94px;
-              border-radius: 3px;
-            }
+            border-radius: 3px;
           }
         }
-        .project-title {
-          position: absolute;
-          top: 0px;
-          left: 80px;
-        }
       }
+      .project-title {
+        position: absolute;
+        top: 0px;
+        left: 80px;
+      }
+    }  
+  }
+
+  #main-nav-timer-form-display {
+    right: 0px;
+  }
+  
+  #session-logger-display{ 
+    right: 32px;
+
+    #menu-progress-update-project-display {
+      
+
       #progress-update-form {
         .more-info-toggle {
           font-size: 14px;
@@ -159,7 +169,7 @@
     }
   }
 
-  #progress-update-overlay {
+  #logger-and-timer-overlay {
     z-index: 500;
     background-color:transparent;
     position:fixed;
@@ -169,4 +179,5 @@
     bottom:0;
     display:block;
   }
+
 }

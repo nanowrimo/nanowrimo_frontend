@@ -3,6 +3,7 @@ import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { filterBy }  from '@ember/object/computed';
+import moment from 'moment';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -71,6 +72,9 @@ const User = Model.extend({
   emailNanomessagesBuddies: attr('boolean'),
   emailNanomessagesHq: attr('boolean'),
   emailWritingReminders: attr('boolean'),  
+  
+  //a user has many timers 
+  timers: hasMany('timer'),
   
   // Group membership
   groups: hasMany('group'),
@@ -155,7 +159,24 @@ const User = Model.extend({
     return prime;
   }),
 
-
+  //a user can only hae 1 timer active at a given time
+  activeTimer: computed('timers.@each.duration','timers.@each.start', function() {
+    //sort timers by start desc
+    var sorted = this.get('timers').sortBy('start');
+    if (sorted.length > 0) {
+      let obj = sorted.lastObject;
+      let end = moment(obj.start).add(obj.duration, 'minutes');
+      let now = moment();
+      //return the obj if the end is greater than now
+      if (now.isBefore(end)) {
+        return obj;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }),
 
   save() {
     return this._super().then(() => {

@@ -1,0 +1,26 @@
+{{#if currentUser.user.primaryProject }}
+  <div id='logger-and-timer'>
+    <div class="btn-group" role="group">
+      <button class="button-log btn btn-primary" {{action 'showSessionForm'}}>
+        <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
+      </button>
+      <button class="button-log btn btn-primary" {{action 'showTimerForm'}}>
+        {{#if displayCountdownOnButton}}
+          {{countdownRemaining}}
+        {{else}}
+          <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
+        {{/if}}
+      </button>
+    </div>
+    {{#if displaySessionForm}}
+      {{main-nav-session-logger closeFormAction=(action "hideForms") }}
+      <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
+    {{/if}}
+    
+    {{#if displayTimerForm}}
+      {{main-nav-timer-form closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
+      <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
+    {{/if}}
+  </div>
+{{/if}}
+

@@ -6,7 +6,8 @@ import {isNull} from "lodash"
 export default Component.extend({
   currentUser: service(),
   store: service(),
- 
+  
+  closeFormAction: null,
   countType: 0,
   showForm: false,
   user: null,
@@ -53,6 +54,10 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('currentUser.user');
     this.set('user',  user);
+    
+    this.set('countType',0);
+    this.set('countValue', this.get("primaryProject.unitCount"));
+    this.set('initialValue', this.get("primaryProject.unitCount"));
   },
 
   actions: {
@@ -138,15 +143,10 @@ export default Component.extend({
       return true;
     },
     
-    showForm(){
-      //reset values
-      this.set('countType',0);
-      this.set('countValue', this.get("primaryProject.unitCount"));
-      this.set('initialValue', this.get("primaryProject.unitCount"));
-      this.set('showForm', true);
-    },
-    hideForm(){
-      this.set('showForm', false);
+    cancel(){
+      if ( this.get('closeFormAction') ) {
+        this.attrs.closeFormAction();
+      }
     },
     selectChanged(v) {
       //convert the string to integer 
@@ -175,8 +175,12 @@ export default Component.extend({
 
       //check for other metrics
       session.set('feeling', this.get('selectedFeeling'));
-      session.set('where', this.get('selectedWhere').value);
-      session.set('how', this.get('selectedHow').value);
+      if (this.get('selectedWhere') ) {
+        session.set('where', this.get('selectedWhere').value);
+      }
+      if (this.get('selectedHow') ) {
+        session.set('how', this.get('selectedHow').value);
+      }
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
@@ -198,7 +202,9 @@ export default Component.extend({
      
       session.set('count', count);
       session.save();
-      this.set('showForm', false);
+      if ( this.get('closeFormAction') ) {
+        this.attrs.closeFormAction();
+      }
       return true;
     }
   }

@@ -1,0 +1,69 @@
+<div id="main-nav-timer-form-display" class='logger-timer-modal'>
+    <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
+  <div class="modal-content">
+    <div class="modal-header">
+      Ready...? Set...?
+    </div>
+    <div class="modal-body">
+     
+      <div class='primary-project-display'>
+        <div class='project-cover' >
+          <div class='project-cover-clip'>
+            <img src="{{primaryProject.coverUrl}}">
+          </div>
+        </div>
+           <div class='project-title'>
+          {{primaryProject.title}}
+        </div>
+      </div>
+    </div>
+    <div id='timer-form-modes'>
+      {{#if showStopwatch}}
+        <div class='timer-sub-menu'>
+          <div class='selected timer-sub-menu-item'>Stopwatch</div>
+          <div class='timer-sub-menu-item'>
+            <a href="#" {{action 'selectTimer'}}>Timer</a>
+          </div>
+        </div>
+        
+        <div class='foot-actions'>
+          <button {{action "startStopwatch"}}>Start Stopwatch</button>
+          <a href="#" {{action "cancel"}} >Cancel</a>
+        </div>
+        
+        
+      {{else}}
+        <div class='timer-sub-menu'>
+          <div class='timer-sub-menu-item'>
+            <a href="#" {{action 'selectStopwatch'}}>Stopwatch</a>
+          </div>
+          <div class='selected timer-sub-menu-item'>Timer</div>
+        </div>
+        <div class='timer-content'>
+          {{#if countdownRemaining}}
+            {{countdownRemaining}}
+          {{else}}
+            <div id='timer-instruction'>Enter the Timer duration in hours and minutes</div>
+            <div id='timer-duration'>
+              hours: <input type='number' min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}>
+              minutes: <input type='number' min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}>
+             </div>
+          {{/if}}
+
+        </div>
+        <div class='footer-actions'>
+          {{#if countdownRemaining}}
+            <button {{action "cancelTimer"}}>Cancel Timer</button>
+          {{else}} 
+            <button {{action "startTimer"}}>Start Timer</button>
+            <a href="#" {{action "cancel"}} >Cancel</a>
+          {{/if}}
+        </div>
+        
+      {{/if}}
+    </div>
+
+  </div>
+
+</div>
+
