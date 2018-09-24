@@ -26,7 +26,9 @@ export default Component.extend({
       //stop what needs stopping 
       
       //hide the forms
-      this.attrs.closeFormAction();
+      let cfa = this.get('closeFormAction');
+      cfa();
+      //this.attrs.closeFormAction();
     },
     selectTimer: function() {
       this.set('showStopwatch', false);
@@ -52,7 +54,8 @@ export default Component.extend({
       t.save();
       /* post save stuff? */
       //close the form
-      this.attrs.closeFormAction();
+      let cfa = this.get('closeFormAction');
+      cfa();
       
       
     },

@@ -160,7 +160,7 @@ const User = Model.extend({
   }),
 
   //a user can only hae 1 timer active at a given time
-  activeTimer: computed('timers.@each.duration','timers.@each.start', function() {
+  activeTimer: computed('timers.@each.{duration,start}', function() {
     //sort timers by start desc
     var sorted = this.get('timers').sortBy('start');
     if (sorted.length > 0) {

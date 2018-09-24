@@ -144,9 +144,8 @@ export default Component.extend({
     },
     
     cancel(){
-      if ( this.get('closeFormAction') ) {
-        this.attrs.closeFormAction();
-      }
+      let cfa = this.get('closeFormAction');
+      cfa();      
     },
     selectChanged(v) {
       //convert the string to integer 
@@ -202,9 +201,9 @@ export default Component.extend({
      
       session.set('count', count);
       session.save();
-      if ( this.get('closeFormAction') ) {
-        this.attrs.closeFormAction();
-      }
+      let cfa = this.get('closeFormAction');
+      cfa();
+      
       return true;
     }
   }
