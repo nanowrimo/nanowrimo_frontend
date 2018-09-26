@@ -1,4 +1,12 @@
 {{#if currentUser.user.primaryProject }}
+  <audio id='timer-audio'>
+    <source src='/audio/timer/times_up.m4a' type='audio/mpeg' />
+    <source src='/audio/timer/times_up.ogg' type='audio/ogg' />
+    <source src='/audio/timer/times_up.mp3' type='audio/mpeg' />
+  </audio>
+
+
+
   <div id='logger-and-timer'>
     <div class="btn-group" role="group">
       <button class="button-log btn btn-primary" {{action 'showSessionForm'}}>
@@ -16,7 +24,7 @@
       {{main-nav-session-logger closeFormAction=(action "hideForms") }}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
-    
+
     {{#if displayTimerForm}}
       {{main-nav-timer-form afterNewTimer=(action "checkTimer") closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
