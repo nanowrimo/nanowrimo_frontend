@@ -18,6 +18,12 @@ export default DS.Model.extend({
     return m.toDate();
   }),
   
+  ended: function() {
+    let now = moment();
+    let end = moment(this.get('end'));
+    return end.isBefore(now);
+  },
+  
   HmsRemaining: function() {
     let end = moment(this.get('end'));
     let now = moment();

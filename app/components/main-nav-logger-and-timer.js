@@ -8,20 +8,19 @@ export default Component.extend({
   
   displaySessionForm: false,
   displayTimerForm: false,
-  activeTimer: null,
   timerIsRunning: false,
   countdownRemaining: null,
   
-  
-  displayCountdownOnButton: computed('countdownRemaining', 'displayTimerForm', function(){
+  displayCountdownOnButton: computed('countdownRemaining', function(){
     return ( this.get('countdownRemaining') );
   }),
+  
   
   init(){
     this._super(...arguments);
     // does the current user have an active timer?
-    this.set('activeTimer', this.get('currentUser.user.activeTimer') );
-    this.checkTimer();
+    this.set('latestTimer', this.get('currentUser.user.latestTimer') );
+    this._checkTimer();
   },
   
   actions: {
@@ -36,23 +35,25 @@ export default Component.extend({
     hideForms: function() {
       this.set('displaySessionForm', false);
       this.set('displayTimerForm', false);
+    },
+    checkTimer: function(){
+      this._checkTimer();
     }
   },
   
   //function to check the timer and dispay if necessary 
-  checkTimer: function() {
+  _checkTimer: function() {
     var self = this;
-    let t = this.get('activeTimer');
-    if(t) {
+    let t = this.get('currentUser.user.latestTimer');
+    //has the timer not ended?
+    if(t && !t.ended()) {
       //there is an active timer
       this.set('timerIsRunning', true)
       //get the formattted H M S remaining
       this.set('countdownRemaining', t.HmsRemaining());
-      
-      
       //check the timer again in about 1 second
       later(self, function(){
-        self.checkTimer();
+        self._checkTimer();
       }, 1000);
     } else {
       //is there a runningtimer?
@@ -62,6 +63,7 @@ export default Component.extend({
         
         // do stuff because the timer has ended!
         this.set('countdownRemaining', null);
+        //console.log('beep!');
       }
     }
   }

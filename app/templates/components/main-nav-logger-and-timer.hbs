@@ -18,7 +18,7 @@
     {{/if}}
     
     {{#if displayTimerForm}}
-      {{main-nav-timer-form closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
+      {{main-nav-timer-form afterNewTimer=(action "checkTimer") closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
   </div>
