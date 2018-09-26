@@ -3,7 +3,6 @@ import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { filterBy }  from '@ember/object/computed';
-import moment from 'moment';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -160,19 +159,12 @@ const User = Model.extend({
   }),
 
   //a user can only hae 1 timer active at a given time
-  activeTimer: computed('timers.@each.{duration,start}', function() {
+  latestTimer: computed('timers.@each.{duration,start}', function() {
     //sort timers by start desc
     var sorted = this.get('timers').sortBy('start');
     if (sorted.length > 0) {
       let obj = sorted.lastObject;
-      let end = moment(obj.start).add(obj.duration, 'minutes');
-      let now = moment();
-      //return the obj if the end is greater than now
-      if (now.isBefore(end)) {
-        return obj;
-      } else {
-        return null;
-      }
+      return obj;
     } else {
       return null;
     }

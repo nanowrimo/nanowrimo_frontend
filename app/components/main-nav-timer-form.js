@@ -56,8 +56,9 @@ export default Component.extend({
       //close the form
       let cfa = this.get('closeFormAction');
       cfa();
-      
-      
+      //do the afterNewTimer stuff
+      let ant = this.get('afterNewTimer');
+      ant();
     },
     startStopwatch: function() {
     },
