@@ -5,24 +5,24 @@ import { later } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
-  
+
   displaySessionForm: false,
   displayTimerForm: false,
   timerIsRunning: false,
   countdownRemaining: null,
-  
+
   displayCountdownOnButton: computed('countdownRemaining', function(){
     return ( this.get('countdownRemaining') );
   }),
-  
-  
+
+
   init(){
     this._super(...arguments);
     // does the current user have an active timer?
     this.set('latestTimer', this.get('currentUser.user.latestTimer') );
     this._checkTimer();
   },
-  
+
   actions: {
     showSessionForm: function() {
       this.set('displaySessionForm', true);
@@ -40,8 +40,8 @@ export default Component.extend({
       this._checkTimer();
     }
   },
-  
-  //function to check the timer and dispay if necessary 
+
+  //function to check the timer and dispay if necessary
   _checkTimer: function() {
     var self = this;
     let t = this.get('currentUser.user.latestTimer');
@@ -60,12 +60,15 @@ export default Component.extend({
       if (this.get('timerIsRunning') ) {
         //timer is no longer running
         this.set('timerIsRunning', false);
-        
+
         // do stuff because the timer has ended!
         this.set('countdownRemaining', null);
         //console.log('beep!');
+        //get the timer audio
+        let at = document.getElementById('timer-audio');
+        at.play();
       }
     }
   }
-  
+
 });
