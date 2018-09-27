@@ -122,6 +122,21 @@
         .center-horizontally {
           text-align: center;
         }
+        .nano-card-header {
+          width: 100%;
+          color: #979797;
+          font-size: 14px;
+          font-family: 'SourceSansPro-Regular', sans-serif;
+          margin-bottom: 20px;
+          .title {
+            font-family: 'SourceSansPro-Bold', sans-serif;
+            text-transform: uppercase;
+          }
+        }
+        .nano-subcard-body {
+          width: 100%;
+        }
+        
         width: 100%;
         padding: 21px;
         padding-top: 0px;
@@ -366,6 +381,32 @@
       .nano-subcard-face {
         border-style: dashed;
         border: dashed 2px #dfe4e6;
+        .nano-subcard-content {
+          color: $nano-lightgrey;
+          align-items: center;
+          a {
+            font-family: SourceSerifPro-Regular;
+            font-size: 26px;
+            text-align: center;
+            color: $nano-mediumgrey;
+            text-decoration: underline;
+          }
+          .prompt-image {
+            margin-bottom: -21px;
+          }
+        }
+      }
+    }
+  }
+  &.header-card {
+    box-shadow: none;
+    border: 0px;
+    min-height: 30px;
+    
+    .nano-subcard {
+      .nano-subcard-face {
+        border-style: none;
+        border: solid 0px #dfe4e6;
         .nano-subcard-content {
           color: $nano-lightgrey;
           align-items: center;
