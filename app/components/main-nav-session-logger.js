@@ -6,7 +6,7 @@ import {isNull} from "lodash"
 export default Component.extend({
   currentUser: service(),
   store: service(),
-  
+
   closeFormAction: null,
   countType: 0,
   showForm: false,
@@ -20,8 +20,9 @@ export default Component.extend({
   whenEnd: null,
   writingLocations: null,
   writingMethods: null,
+  referenceTimer: null,
   _projectAdditionalInfoShow: false,
-  
+
   feeling1Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 1;
   }),
@@ -37,7 +38,7 @@ export default Component.extend({
   feeling5Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 5;
   }),
-  
+
   projectAdditionalInfoShow: computed('_projectAdditionalInfoShow', function() {
     let p = this.get('_projectAdditionalInfoShow');
     if (p) {
@@ -54,32 +55,42 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('currentUser.user');
     this.set('user',  user);
-    
+
     this.set('countType',0);
     this.set('countValue', this.get("primaryProject.unitCount"));
     this.set('initialValue', this.get("primaryProject.unitCount"));
+    let t = this.get('referenceTimer');
+    if(t){
+      //there is a referenceTimer
+      //force the 'extra' stuff to be displayed
+
+      this.set('_projectAdditionalInfoShow',false);
+      this.send('toggleAdditionalInfo');
+    }
   },
+
+
 
   actions: {
     changeFeeling(val){
       this.set("selectedFeeling", val);
     },
-    createWhere(value) {       
+    createWhere(value) {
       //add this location to the DB
       let wl = this.get('store').createRecord('writingLocation', {name: value} );
       this.set('selectedWhere', wl);
-      wl.save().then((result)=>{ 
-        let obj = {"name": result.name, "value": result.id}
+      wl.save().then((result)=>{
+        let obj = {"name": result.name, "value": result.id};
         this.get('writingLocations').pushObject(obj);
         this.set('selectedWhere', obj);
       });
     },
-    createHow(value) { 
+    createHow(value) {
       //add this location to the DB
       let record = this.get('store').createRecord('writingMethod', {name: value} );
        //select the new value
       this.set('selectedHow', record);
-      record.save().then((result)=>{ 
+      record.save().then((result)=>{
         let obj = {"name": result.name, "value": result.id}
         this.get('writingMethods').pushObject(obj);
         this.set('selectedHow', obj);
@@ -105,7 +116,7 @@ export default Component.extend({
               }
             }
           }
-          
+
         });
         //get the writing methods
         this.get('store').findAll('writingMethod')
@@ -124,31 +135,45 @@ export default Component.extend({
             }
           }
         });
-        // set the whenEnd and whenStart 
-        let t = moment();
+        // set the whenEnd and whenStart
+        let rt = this.get('referenceTimer');
+        let hhmmStart;
+        let hhmmEnd;
+        if (rt) {
+          let m = moment(rt.start);
+          hhmmStart = m.format("HH:mm");
+          m.add(rt.duration, 'm');
+          hhmmEnd = m.format("HH:mm");
+        } else {
+          let m = moment();
+          hhmmEnd = m.format("HH:mm");
+          m.subtract(1, 'h');
+          hhmmStart = m.format("HH:mm");
+        }
+
         //get the time in HH:MM format and set that as the whenend
-        this.set("whenEnd", t.format("HH:mm"));
-        //subtract 1 hour from the moment 
-        t.subtract(1, 'h');
+        this.set("whenEnd", hhmmEnd);
+        //subtract 1 hour from the moment
+
         //get the time in HH:MM format and set that as the whenStart
-         this.set("whenStart", t.format("HH:mm"));
+         this.set("whenStart", hhmmStart);
       } else {
         //nullify the whenEnd and whenStart
          this.set("whenEnd", null);
          this.set("whenStart", null);
       }
-      
+
     },
     showCreateWhen() {
       return true;
     },
-    
+
     cancel(){
       let cfa = this.get('closeFormAction');
-      cfa();      
+      cfa();
     },
     selectChanged(v) {
-      //convert the string to integer 
+      //convert the string to integer
       v = parseInt(v);
       this.set('countType',v);
       if (v === 1) {
@@ -160,7 +185,7 @@ export default Component.extend({
     formSubmit() {
       //what project are we actually dealing with?
       let project = this.get('store').peekRecord('project', this.get('primaryProject.id') );
-      //create a session for the primary project 
+      //create a session for the primary project
       let session = this.get('store').createRecord('projectSession');
       session.set('project', project);
       session.set('unitType', 0);
@@ -190,20 +215,22 @@ export default Component.extend({
         let ymd = today.format('YYYY-MM-DD');
         let endDate = moment(ymd+" "+end).toDate();
         if( start > end ) {
-          //start was yesterday 
+          //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
-        } 
+        }
         let startDate = moment(ymd+" "+start).toDate();
         session.set('end', endDate);
         session.set('start', startDate);
       }
-     
+
       session.set('count', count);
       session.save();
+      //reset the referenceTimer
+      this.set('referenceTimer',null);
       let cfa = this.get('closeFormAction');
       cfa();
-      
+
       return true;
     }
   }

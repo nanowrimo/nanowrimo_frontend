@@ -21,7 +21,7 @@
       </button>
     </div>
     {{#if displaySessionForm}}
-      {{main-nav-session-logger closeFormAction=(action "hideForms") }}
+      {{main-nav-session-logger closeFormAction=(action "hideForms") referenceTimer=referenceTimer}}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
 

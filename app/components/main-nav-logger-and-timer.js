@@ -10,6 +10,7 @@ export default Component.extend({
   displayTimerForm: false,
   timerIsRunning: false,
   countdownRemaining: null,
+  referenceTimer: null,
 
   displayCountdownOnButton: computed('countdownRemaining', function(){
     return ( this.get('countdownRemaining') );
@@ -67,6 +68,10 @@ export default Component.extend({
         //get the timer audio
         let at = document.getElementById('timer-audio');
         at.play();
+        //update the reference timer
+        this.set('referenceTimer', t);
+        //open the logger
+        this.send('showSessionForm');
       }
     }
   }
