@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { sort, filterBy }  from '@ember/object/computed';
+import { filterBy }  from '@ember/object/computed';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -82,6 +82,9 @@ const User = Model.extend({
   emailNanomessagesHq: attr('boolean'),
   emailWritingReminders: attr('boolean'),  
   
+  //a user has many timers 
+  timers: hasMany('timer'),
+  
   // Group membership
   groups: hasMany('group'),
   groupUsers: hasMany('group-user'),
@@ -92,7 +95,6 @@ const User = Model.extend({
     get() {
       let r = this.get('regions');
       let gu = this.get('groupUsers');
-      //console.log(gu.length);
       let maxPrimary = -1;
       let maxRegion = null;
       r.forEach(function(tgroup) {
@@ -106,7 +108,9 @@ const User = Model.extend({
       return maxRegion;
     }
   }),
+  
   projects: hasMany('project'),
+
   //activeGroupUsers: filterBy('groupUsers','exit_at',
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   buddyGroupUsers: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
@@ -264,12 +268,6 @@ const User = Model.extend({
     }
   }),
   
-  primarySortedProjects: sort('projects', function(a,b){return b.primary - a.primary;}),
-  primaryProject: computed('primarySortedProjects', function(){
-    let psp = this.get('primarySortedProjects');
-    return psp.firstObject;
-  }),
-  
   rollbackExternalLinks() {
     this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }
@@ -284,6 +282,7 @@ const User = Model.extend({
       if (book) { book.rollback(); }
     });
   },
+<<<<<<< HEAD
   
   loadGroupUsers(group_types) {
     let u = this;
@@ -297,6 +296,35 @@ const User = Model.extend({
     });
   },
   
+=======
+
+  primaryProject: computed('projects.@each.primary', function(){
+    let ps = this.get('projects');
+    let prime = ps.firstObject;
+    
+    //loop though the projects
+    for(var i = 1; i < ps.length; i++ ) {
+      var t_project = ps.objectAt(i);
+      if (t_project.primary > prime.primary) {
+        prime = t_project;
+      }
+    }
+    return prime;
+  }),
+
+  //a user can only hae 1 timer active at a given time
+  latestTimer: computed('timers.@each.{duration,start}', function() {
+    //sort timers by start desc
+    var sorted = this.get('timers').sortBy('start');
+    if (sorted.length > 0) {
+      let obj = sorted.lastObject;
+      return obj;
+    } else {
+      return null;
+    }
+  }),
+
+>>>>>>> master
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
