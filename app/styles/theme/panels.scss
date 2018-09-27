@@ -108,6 +108,12 @@
     margin-bottom: 32px;
     margin-left: 28px;
     margin-right: 28px;
+    &.small-gap {
+      margin-bottom: 15px;
+    }
+    &.no-gap {
+      margin-bottom: 0px;
+    }
   }
   .grid-wrapper {
     .nano-card {
@@ -316,20 +322,35 @@
       padding-bottom: 14px;
       .nano-card {
         min-height: 100px;
+        &.header-card {
+          min-height: 30px;
+        }
         margin-top: 14px;
         margin-bottom: 14px;
         box-shadow: none;
         .nano-subcard {
           .nano-subcard-face {
             .nano-subcard-content {
+              .card-title {
+                font-family: 'SourceSansPro-Bold', sans-serif;
+                font-size: 14px;
+                text-transform: uppercase;
+              }
               padding-top: 21px;
               padding-bottom: 21px;
               label {
-                font-family: 'SourceSansPro-Bold', sans-serif;
+                font-family: 'SourceSansPro-Regular', sans-serif;
                 font-size: 14px;
                 color: #979797;
-                text-transform: uppercase;
               }
+              &.inline-checkbox {
+                label {
+                  font-family: 'SourceSansPro-Regular', sans-serif;
+                  font-size: 16px;
+                  color: #343434;
+                }
+              }
+              
             }
           }
         }

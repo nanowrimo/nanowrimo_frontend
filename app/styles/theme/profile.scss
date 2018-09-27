@@ -55,6 +55,16 @@
     border-radius: 70px;
   }
 }
+.nano-avatar-medium {
+  width: 62px;
+  text-align: center;
+  height: 62px;
+  img {
+    width: 62px;
+    height: 62px;
+    border-radius: 31px;
+  }
+}
 .nano-avatar-small {
   height: 56px;
   img {
@@ -63,5 +73,37 @@
     border-radius: 28px;
     box-shadow: 0 0 14px 0 rgba(47, 48, 97, 0.1);
     
+  }
+}
+.user-listing {
+  padding: 15px;
+  display: flex;
+  .nano-avatar {
+    flex: 0 0 62px;
+    margin-right: 10px;
+  }
+  .user-info {
+    flex: 1 1 100%;
+    .nano-user-name {
+      font-family: 'SourceSansPro-Bold', sans-serif;
+      font-size: 20px;
+      color: #343434;
+      a {
+        color: #343434;
+        
+      }
+    }
+    .nano-user-location {
+      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-size: 14px;
+      font-style: italic;
+      color: #343434;
+    }
+  }
+  .user-buttons {
+    flex: 1 1 100%;
+    .buddy-buttons {
+      padding: 0px;
+    }
   }
 }

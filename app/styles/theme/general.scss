@@ -109,8 +109,9 @@ body {
   flex: 1 1 100%;
 }
 
-a {
+div {
   &.remove-element {
+    cursor: pointer;
     color: $nano-lightred;
     font-family: 'SourceSansPro-Regular';
     &:hover {

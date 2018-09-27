@@ -2,6 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
+import { filterBy }  from '@ember/object/computed';
 
 export default Model.extend({
   name: attr('string'),
@@ -21,9 +22,17 @@ export default Model.extend({
   // Members
   users: hasMany('user'),
   groupUsers: hasMany('group-user'),
+  invitedGroupUsers: filterBy('groupUsers', 'invitationAccepted', '0'),
+  activeGroupUsers: filterBy('groupUsers', 'invitationAccepted', '1'),
   
   groupExternalLinks: hasMany('group-external-link'),
   
+  membersActive: computed('groupUsers', {
+    get() {
+      let store = this.get('store');
+      
+    }
+  }),
   _plateUrl: null,
   plateUrl: computed('plate', {
     get() {

@@ -1,0 +1,9 @@
+<div>
+  <div class='buddy-listings'>
+    <div>
+      {{#each currentUser.user.usersBlocked as |buddy|}}
+        {{buddy-listing user=buddy buttons=true}}
+      {{/each}}
+    </div>
+  </div>
+</div>

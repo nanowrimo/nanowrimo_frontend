@@ -2,10 +2,10 @@
   <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
     <div class="nano-subcard g3-sub1 g2-sub1">
       <div class="nano-subcard-face face-front filled-grey">
-        <div class='nano-subcard-header'>
-          <div class='card-title'>Profile</div>
-        </div>
         <div class="nano-subcard-content">
+          <div class='nano-card-header'>
+            <div class='title'>Profile</div>
+          </div>
           <div class="form-group">
             {{f.select
               label="Who can view your profile?"
@@ -48,11 +48,11 @@
   <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
     <div class="nano-subcard g3-sub1 g2-sub1">
       <div class="nano-subcard-face face-front filled-grey">
-        <div class='nano-subcard-header'>
-          <div class='card-title'>Visibility</div>
-        </div>
         <div class="nano-subcard-content">
-          <div>
+          <div class='nano-card-header'>
+            <div class='title'>Visibility</div>
+          </div>
+          <div class="nano-subcard-body">
             <div class="form-group inline-checkbox">
               {{f.checkbox
                 label="Visible to my regions"
@@ -78,6 +78,6 @@
     </div>
   </div>
   <div class='nano-panel-footer'>
-    {{f.save-cancel}}
+    {{f.save-cancel class="save-cancel"}}
   </div>
 {{/form-for}}
