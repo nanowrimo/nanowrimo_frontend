@@ -59,7 +59,6 @@ export default Component.extend({
     this.set('countType',0);
     this.set('countValue', this.get("primaryProject.unitCount"));
     this.set('initialValue', this.get("primaryProject.unitCount"));
-    console.log('logger init');
     let t = this.get('referenceTimer');
     if(t){
       //there is a referenceTimer
@@ -68,7 +67,6 @@ export default Component.extend({
       this.set('_projectAdditionalInfoShow',false);
       this.send('toggleAdditionalInfo');
     }
-    console.log(t);
   },
 
 
