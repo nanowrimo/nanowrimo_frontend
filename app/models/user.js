@@ -282,7 +282,6 @@ const User = Model.extend({
       if (book) { book.rollback(); }
     });
   },
-<<<<<<< HEAD
   
   loadGroupUsers(group_types) {
     let u = this;
@@ -296,7 +295,6 @@ const User = Model.extend({
     });
   },
   
-=======
 
   primaryProject: computed('projects.@each.primary', function(){
     let ps = this.get('projects');
@@ -324,7 +322,6 @@ const User = Model.extend({
     }
   }),
 
->>>>>>> master
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
