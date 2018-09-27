@@ -25,13 +25,21 @@ export default Component.extend({
   },
 
   actions: {
-    showSessionForm: function() {
-      this.set('displaySessionForm', true);
-      this.set('displayTimerForm', false);
+    toggleSessionForm: function() {
+      if (this.get('displaySessionForm')) {
+        this.set('displaySessionForm', false);
+      } else {
+        this.set('displaySessionForm', true);
+        this.set('displayTimerForm', false);
+      }
     },
-    showTimerForm: function() {
-      this.set('displayTimerForm', true);
-      this.set('displaySessionForm', false);
+    toggleTimerForm: function() {
+      if (this.get('displayTimerForm')) {
+        this.set('displayTimerForm', false);
+      } else {
+        this.set('displayTimerForm', true);
+        this.set('displaySessionForm', false);
+      }
     },
     hideForms: function() {
       this.set('displaySessionForm', false);

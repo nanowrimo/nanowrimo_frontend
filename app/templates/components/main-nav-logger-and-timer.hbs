@@ -5,14 +5,12 @@
     <source src='/audio/timer/times_up.mp3' type='audio/mpeg' />
   </audio>
 
-
-
   <div id='logger-and-timer'>
-    <div class="btn-group" role="group">
-      <button class="button-log btn btn-primary" {{action 'showSessionForm'}}>
+    <div class="btn-group" role="group" id="logger-and-timer-triggers">
+      <button class="button-log btn btn-primary" {{action 'toggleSessionForm'}}>
         <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
       </button>
-      <button class="button-log btn btn-primary" {{action 'showTimerForm'}}>
+      <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
         {{#if displayCountdownOnButton}}
           {{countdownRemaining}}
         {{else}}

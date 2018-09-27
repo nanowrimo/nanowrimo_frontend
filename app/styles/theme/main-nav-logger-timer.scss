@@ -1,6 +1,10 @@
 #logger-and-timer {
   position: relative;
   
+  #logger-and-timer-triggers {
+    z-index:900;
+  }
+  
   .nano-menu-tab {
     position: absolute;
     top: -8px;
