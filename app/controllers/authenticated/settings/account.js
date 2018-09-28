@@ -44,7 +44,9 @@ export default Controller.extend({
       //this.set('_formResponseMessage',null);
     //},
     newPasswordChanged(val) {
-      this.set("showPasswordConfirm", val.length > 0);
+      if (val) {
+        this.set("showPasswordConfirm", val.length > 0);
+      }
     },
     
     afterSubmit() {

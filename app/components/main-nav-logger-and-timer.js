@@ -2,10 +2,12 @@ import Component from '@ember/component';
 import { computed } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
+import moment from 'moment';
 
 export default Component.extend({
   currentUser: service(),
 
+  displaySessionButton:true,
   displaySessionForm: false,
   displayTimerForm: false,
   timerIsRunning: false,
@@ -47,6 +49,12 @@ export default Component.extend({
     },
     checkTimer: function(){
       this._checkTimer();
+    },
+    cancelTimer: function() {
+      //cancel the timer
+      let t = this.get('currentUser.user.latestTimer');
+      t.cancelled = moment().toDate();
+      t.save();
     }
   },
 
@@ -55,7 +63,7 @@ export default Component.extend({
     var self = this;
     let t = this.get('currentUser.user.latestTimer');
     //has the timer not ended?
-    if(t && !t.ended()) {
+    if(t && !t.ended() && !t.cancelled) {
       //there is an active timer
       this.set('timerIsRunning', true)
       //get the formattted H M S remaining
@@ -79,7 +87,7 @@ export default Component.extend({
         //update the reference timer
         this.set('referenceTimer', t);
         //open the logger
-        this.send('showSessionForm');
+        this.send('toggleSessionForm');
       }
     }
   }
