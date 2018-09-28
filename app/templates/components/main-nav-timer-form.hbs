@@ -5,7 +5,7 @@
       Ready...? Set...?
     </div>
     <div class="modal-body">
-     
+
       <div class='primary-project-display'>
         <div class='project-cover' >
           <div class='project-cover-clip'>
@@ -20,33 +20,36 @@
     <div id='timer-form-modes'>
       {{#if showStopwatch}}
         <div class='timer-sub-menu'>
-          <div class='selected timer-sub-menu-item'>Stopwatch</div>
-          <div class='timer-sub-menu-item'>
+          <span class='selected timer-sub-menu-item'>Stopwatch</span>
+          <span class='timer-sub-menu-item'>
             <a href="#" {{action 'selectTimer'}}>Timer</a>
-          </div>
+          </span>
         </div>
-        
-        <div class='foot-actions'>
+
+        <div class='footer-actions'>
           <button {{action "startStopwatch"}}>Start Stopwatch</button>
           <a href="#" {{action "cancel"}} >Cancel</a>
         </div>
-        
-        
+
+
       {{else}}
         <div class='timer-sub-menu'>
-          <div class='timer-sub-menu-item'>
+          <span class='timer-sub-menu-item'>
             <a href="#" {{action 'selectStopwatch'}}>Stopwatch</a>
-          </div>
-          <div class='selected timer-sub-menu-item'>Timer</div>
+          </span>
+          <span class='selected timer-sub-menu-item'>Timer</span>
         </div>
         <div class='timer-content'>
           {{#if countdownRemaining}}
             {{countdownRemaining}}
           {{else}}
-            <div id='timer-instruction'>Enter the Timer duration in hours and minutes</div>
-            <div id='timer-duration'>
+            <div class='timer-instruction'>You can enter time as 1.5 or 1:30, they both mean 1 hour and 30 minutes.</div>
+            <div class='timer-duration'>
+              <input id='duration' class="form-control {{if validDurationInput '' 'is-invalid'}}" onchange={{action "durationChange" value="target.value"}}>
+              <!--
               hours: <input type='number' min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}>
               minutes: <input type='number' min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}>
+              //-->
              </div>
           {{/if}}
 
@@ -54,12 +57,12 @@
         <div class='footer-actions'>
           {{#if countdownRemaining}}
             <button {{action "cancelTimer"}}>Cancel Timer</button>
-          {{else}} 
+          {{else}}
             <button {{action "startTimer"}}>Start Timer</button>
             <a href="#" {{action "cancel"}} >Cancel</a>
           {{/if}}
         </div>
-        
+
       {{/if}}
     </div>
 

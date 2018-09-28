@@ -6,10 +6,13 @@
   </audio>
 
   <div id='logger-and-timer'>
+
     <div class="btn-group" role="group" id="logger-and-timer-triggers">
-      <button class="button-log btn btn-primary" {{action 'toggleSessionForm'}}>
-        <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
-      </button>
+      {{#if displaySessionButton}}
+        <button class="button-log btn btn-primary" {{action 'toggleSessionForm'}}>
+          <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
+        </button>
+      {{/if}}
       <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
         {{#if displayCountdownOnButton}}
           {{countdownRemaining}}
@@ -24,7 +27,7 @@
     {{/if}}
 
     {{#if displayTimerForm}}
-      {{main-nav-timer-form afterNewTimer=(action "checkTimer") closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
+      {{main-nav-timer-form cancelTimerAction=(action "cancelTimer") afterNewTimer=(action "checkTimer") closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
   </div>

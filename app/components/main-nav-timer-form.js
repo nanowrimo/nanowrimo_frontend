@@ -5,26 +5,28 @@ import moment from 'moment';
 export default Component.extend({
   currentUser: service(),
   store: service(),
-  
+
   user: null,
   primaryProject: null,
   showStopwatch: false, //default to showing the stopwatch
   timerHoursValue: 1,
   timerMinutesValue: 0,
   countdownRemaining: null,
-  
+  validDurationInput: true,
+  timerDuration: null,
+
   init(){
     this._super(...arguments);
     let user = this.get('currentUser.user');
     this.set('user',  user);
     this.set('primaryProject', user.primaryProject);
   },
-  
-  
+
+
   actions: {
     cancel: function() {
-      //stop what needs stopping 
-      
+      //stop what needs stopping
+
       //hide the forms
       let cfa = this.get('closeFormAction');
       cfa();
@@ -37,38 +39,68 @@ export default Component.extend({
       this.set('showStopwatch', true);
     },
     startTimer: function() {
-      //determine the duration
-      var hours = parseInt( this.get('timerHoursValue') );
-      var mins = parseInt( this.get('timerMinutesValue') );
-      var duration = (hours*60)+mins;
-      
-      //make a new timer for the user
-      let now = moment();
-      let t = this.store.createRecord('timer', {
-        user: this.get('user'), 
-        start: now.toDate(),
-        duration: duration
-      });
+      if (this.get('validDurationInput')) {
+        //determine the duration
+        //var hours = parseInt( this.get('timerHoursValue') );
+        //var mins = parseInt( this.get('timerMinutesValue') );
+        //var duration = (hours*60)+mins;
 
-      //save the timer
-      t.save();
-      /* post save stuff? */
-      //close the form
-      let cfa = this.get('closeFormAction');
-      cfa();
-      //do the afterNewTimer stuff
-      let ant = this.get('afterNewTimer');
-      ant();
+        //make a new timer for the user
+        let now = moment();
+        let t = this.store.createRecord('timer', {
+          user: this.get('user'),
+          start: now.toDate(),
+          duration: this.get('timerDuration')
+        });
+
+        //save the timer
+        t.save();
+        /* post save stuff? */
+        //close the form
+        let cfa = this.get('closeFormAction');
+        cfa();
+        //do the afterNewTimer stuff
+        let ant = this.get('afterNewTimer');
+        ant();
+      }
+    },
+    durationChange: function(v) {
+      //validate and parse the input value
+      let trimmed = v.replace(/[^0-9.:]/g, '');
+      //if the trimmed value contains a . and a :, the input is invalid
+      if (trimmed.includes(".") && trimmed.includes(":") || trimmed.length < 1 ) {
+        this.set('validDurationInput', false);
+      } else {
+        // does the input have a ":"?
+        if(trimmed.includes(":")){
+          //split at ":"
+          var bits = trimmed.split(":");
+          let hours = parseInt(bits[0] || 0);
+          let minutes = parseInt(bits[1]);
+          this.set('timerDuration', (hours*60)+minutes);
+          this.set('validDurationInput', true);
+        } else {
+          let hours = parseFloat(trimmed);
+          let minutes = parseInt(hours*60);
+          this.set('timerDuration', minutes);
+          this.set('validDurationInput', true);
+        }
+      }
     },
     startStopwatch: function() {
     },
+
     timerSetHoursChanged: function(v) {
       this.set('timerHoursValue', v);
     },
     timerSetMinutesChanged: function(v) {
       this.set('timerMinutesValue', v);
     },
+    cancelTimer: function(){
+     let cta = this.get('cancelTimerAction');
+     cta();
+    }
   }
-  
-  
+
+
 });
