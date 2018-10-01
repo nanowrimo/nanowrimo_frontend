@@ -53,8 +53,10 @@ export default Component.extend({
     cancelTimer: function() {
       //cancel the timer
       let t = this.get('currentUser.user.latestTimer');
-      t.cancelled = moment().toDate();
+      t.set('cancelled', moment().toDate());
       t.save();
+      this.set('timerIsRunning', false);
+      this.set('countdownRemaining', null);
     }
   },
 
