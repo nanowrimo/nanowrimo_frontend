@@ -35,7 +35,7 @@
             </div>
 
             {{user-links links=user.externalLinks}}
-
+            {{buddy-buttons user=user}}
             {{#if canEditUser}}
 
               <div class="flip-corner-link" {{action "openEditModal"}} data-test-user-profile-edit>

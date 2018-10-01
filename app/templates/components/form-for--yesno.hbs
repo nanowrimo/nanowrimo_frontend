@@ -1,0 +1,25 @@
+{{#validation-error
+  changeset=changeset
+  hasAttemptedSubmit=hasAttemptedSubmit
+  hasBlurred=hasBlurred
+  property=property
+  as |hasError|
+}}
+  {{input
+    class=(concat 'form-control' (if hasError ' is-invalid'))
+    name=name
+    type="radio"
+    value=1
+    label="Yes"
+    checked=(get changeset property)
+  }}
+  <label class="radio-label" for={{name}}>Yes</label>
+  {{input
+    class=(concat 'form-control' (if hasError ' is-invalid'))
+    name=name
+    type="radio"
+    value=0
+    checked=(get changeset property)
+  }}
+  <label class="radio-label" for={{name}}>No</label>
+{{/validation-error}}

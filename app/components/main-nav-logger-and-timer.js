@@ -80,7 +80,6 @@ export default Component.extend({
 
         // do stuff because the timer has ended!
         this.set('countdownRemaining', null);
-        //console.log('beep!');
         //get the timer audio
         let at = document.getElementById('timer-audio');
         at.play();

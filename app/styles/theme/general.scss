@@ -109,6 +109,16 @@ body {
   flex: 1 1 100%;
 }
 
+div {
+  &.remove-element {
+    cursor: pointer;
+    color: $nano-lightred;
+    font-family: 'SourceSansPro-Regular';
+    &:hover {
+      color: $nano-darkred;
+    }
+  }
+}
 // ----------------------------------
 // Button styling, for inside forms
 // or stand-alone

@@ -52,7 +52,8 @@ export default function() {
     let group = groups.findBy({ slug });
     return group || new Response(404);
   });
-  this.post('/group-users', function({groupUsers}){
+  this.resource('group-users', { only: ['index'] });
+  this.post('group-users', function({groupUsers}){
     let attrs = this.normalizedRequestAttrs();
     let groupUser = groupUsers.create(attrs);
     return groupUser;
@@ -117,4 +118,5 @@ export default function() {
 
   this.urlPrefix = 'https://www.googleapis.com';
   this.passthrough();
+  
 }
