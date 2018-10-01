@@ -13,7 +13,7 @@ export default Component.extend({
   approveBuddyEndpoint: `${ENV.APP.API_HOST}/groups/approve_buddy/`,
   rejectBuddyEndpoint: `${ENV.APP.API_HOST}/groups/reject_buddy/`,
   removeBuddyEndpoint: `${ENV.APP.API_HOST}/groups/remove_buddy/`,
-  cancelInvitationEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy_cancel/`,
+  cancelInvitationEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy_cancel2/`,
   blockUserEndpoint: `${ENV.APP.API_HOST}/groups/block_user/`,
   unblockUserEndpoint: `${ENV.APP.API_HOST}/groups/unblock_user/`,
   
@@ -65,12 +65,11 @@ export default Component.extend({
   actions: {
     sendInvitation() {
       let user = this.get('user');
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         let newBuddyEndpoint = this.get('newBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
         
         let body = {};
-        console.log(newBuddyEndpoint);
         return fetch((newBuddyEndpoint), { 
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
@@ -80,21 +79,21 @@ export default Component.extend({
           if (response.ok) {
             user.loadGroupUsers('buddies');
           } else {
+            alert('There was a problem sending this invitation. Please reload the page and try again.');
           }
         })
-        .catch((error) => {
-          reject(error);
+        .catch(() => {
+          alert('There was a problem sending this invitation. Please check your internet connection and try again.');
         });
       });
     },
     
     approveInvitation() {
       let user = this.get('user');
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         let approveBuddyEndpoint = this.get('approveBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
         let body = {};
-        console.log(approveBuddyEndpoint);
         return fetch((approveBuddyEndpoint), { 
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
@@ -104,10 +103,11 @@ export default Component.extend({
           if (response.ok) {
             user.loadGroupUsers('buddies');
           } else {
+            alert('There was a problem approving this invitation. Please reload the page and try again.');
           }
         })
-        .catch((error) => {
-          reject(error);
+        .catch(() => {
+          alert('There was a problem approving this invitation. Please check your internet connection and try again.');
         });
       });
     },
@@ -115,7 +115,7 @@ export default Component.extend({
     rejectInvitation() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         let rejectBuddyEndpoint = this.get('rejectBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
         let body = {};
@@ -128,10 +128,11 @@ export default Component.extend({
           if (response.ok) {
             cu.loadGroupUsers('buddies');
           } else {
+            alert('There was a problem rejecting this invitation. Please reload the page and try again.');
           }
         })
-        .catch((error) => {
-          reject(error);
+        .catch(() => {
+          alert('There was a problem rejecting this invitation. Please check your internet connection and try again.');
         });
       });
     },
@@ -139,7 +140,7 @@ export default Component.extend({
     removeBuddy() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         let removeBuddyEndpoint = this.get('removeBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
         let body = {};
@@ -152,17 +153,17 @@ export default Component.extend({
           if (response.ok) {
             cu.loadGroupUsers('buddies');
           } else {
+            alert('There was a problem removing this buddy. Please reload the page and try again.');
           }
         })
-        .catch((error) => {
-          reject(error);
+        .catch(() => {
+          alert('There was a problem removing this buddy. Please check your internet connection and try again.');
         });
       });
     },
     
     cancelInvitation() {
       let user = this.get('user');
-      let cu = this.get('currentUser.user');
       let store = this.get('store');
       let bgus = this.get('currentUser.user.buddyGroupUsersAccepted');
       let group = null;
@@ -197,9 +198,10 @@ export default Component.extend({
             });
             store.unloadRecord(group);
           } else {
+            alert('There was a problem cancelling this invitation. Please reload the page and try again.');
           }
-        }).catch((error) => {
-          //reject(error);
+        }).catch(() => {
+          alert('There was a problem cancelling this invitation. Please check your internet connection and try again.');
         });
       }
     },
@@ -207,7 +209,7 @@ export default Component.extend({
     blockUser() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         let blockUserEndpoint = this.get('blockUserEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
         let body = {};
@@ -220,10 +222,11 @@ export default Component.extend({
           if (response.ok) {
             cu.loadGroupUsers('buddies');
           } else {
+            alert('There was a problem blocking this user. Please reload the page and try again.');
           }
         })
-        .catch((error) => {
-          reject(error);
+        .catch(() => {
+          alert('There was a problem blocking this user. Please check your internet connection and try again.');
         });
       });
     },
@@ -231,7 +234,7 @@ export default Component.extend({
     unblockUser() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         let unblockUserEndpoint = this.get('unblockUserEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
         let body = {};
@@ -244,10 +247,11 @@ export default Component.extend({
           if (response.ok) {
             cu.loadGroupUsers('buddies');
           } else {
+            alert('There was a problem unblocking this user. Please reload the page and try again.');
           }
         })
-        .catch((error) => {
-          reject(error);
+        .catch(() => {
+          alert('There was a problem unblocking this user. Please check your internet connection and try again.');
         });
       });
     },

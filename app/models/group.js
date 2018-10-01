@@ -27,12 +27,6 @@ export default Model.extend({
   
   groupExternalLinks: hasMany('group-external-link'),
   
-  membersActive: computed('groupUsers', {
-    get() {
-      let store = this.get('store');
-      
-    }
-  }),
   _plateUrl: null,
   plateUrl: computed('plate', {
     get() {

@@ -49,17 +49,6 @@ const User = Model.extend({
   favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
   
-  //privacy
-  privacyViewProfile: attr('string'),
-  privacyViewProjects: attr('string'),
-  privacyViewBuddies: attr('string'),
-  privacyViewSearch: attr('string'),
-  privacySendNanomessages: attr('string'),
-  
-
-  privacyVisibilityRegions: attr('boolean'),
-  privacyVisibilityBuddyLists: attr('boolean'), 
-  privacyVisibilityActivityLogs: attr('boolean'),
   
   //notification and emails
   notificationBuddyRequests: attr('boolean'),
@@ -156,14 +145,11 @@ const User = Model.extend({
   buddiesActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersAccepted');
-      let s = this.get('groupUsers');
-      let t = this.get('buddyGroupUsers');
       let buddies = [];
       let store = this.get('store');
       let email = this.get('email');
       bgus.forEach(function(bgu) {
         let gus = bgu.group.get('groupUsers');
-        console.log('active');
         gus.forEach(function(gu) {
           if (gu.user_id) {
             let u = store.peekRecord('user', gu.user_id);
@@ -184,7 +170,6 @@ const User = Model.extend({
       let email = this.get('email');
       bgus.forEach(function(bgu) {
         let gus = bgu.group.get('groupUsers');
-        console.log('invited');
         gus.forEach(function(gu) {
           if (gu.user_id) {
             let u = store.peekRecord('user', gu.user_id);
@@ -205,7 +190,6 @@ const User = Model.extend({
       let email = this.get('email');
       bgus.forEach(function(bgu) {
         let gus = bgu.group.get('groupUsers');
-        console.log('invited by');
         gus.forEach(function(gu) {
           if (gu.user_id) {
             let u = store.peekRecord('user', gu.user_id);
@@ -285,7 +269,6 @@ const User = Model.extend({
   
   loadGroupUsers(group_types) {
     let u = this;
-    let s = this.get('store');
     this.get('store').query('group-user',
     { 
       filter: { user_id: u.id },
