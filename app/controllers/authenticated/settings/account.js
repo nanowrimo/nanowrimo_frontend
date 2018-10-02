@@ -36,6 +36,7 @@ export default Controller.extend({
 
   
   timeZoneOptions: computed(function() {
+    //let c = this.get('currentUser.user.projects');
     return TimeZones;
   }),
   
