@@ -4,6 +4,11 @@
     <source src='/audio/timer/times_up.ogg' type='audio/ogg' />
     <source src='/audio/timer/times_up.mp3' type='audio/mpeg' />
   </audio>
+  <audio id='stopwatch-audio'>
+    <source src='/audio/stopwatch/ding.m4a' type='audio/mpeg' />
+    <source src='/audio/stopwatch/ding.ogg' type='audio/ogg' />
+    <source src='/audio/stopwatch/ding.mp3' type='audio/mpeg' />
+  </audio>
 
   <div id='logger-and-timer'>
 
@@ -14,20 +19,27 @@
         </button>
       {{/if}}
       <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
-        {{#if displayCountdownOnButton}}
-          {{countdownRemaining}}
+        {{#if displayTimeOnButton}}
+          {{#if stopwatchRunning}}
+            {{fa-icon "stop"}}
+          {{/if}}
+          {{timeProgress}}
         {{else}}
           <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
         {{/if}}
       </button>
     </div>
     {{#if displaySessionForm}}
-      {{main-nav-session-logger closeFormAction=(action "hideForms") referenceTimer=referenceTimer}}
+      {{main-nav-session-logger closeFormAction=(action "hideForms") referenceStart=referenceStart referenceEnd=referenceEnd}}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
 
     {{#if displayTimerForm}}
-      {{main-nav-timer-form cancelTimerAction=(action "cancelTimer") afterNewTimer=(action "checkTimer") closeFormAction=(action "hideForms") countdownRemaining=countdownRemaining}}
+      {{main-nav-timer-form cancelTimerAction=(action "cancelTimer")
+        afterNewTimer=(action "checkTimer")
+        afterNewStopwatch=(action "checkStopwatch")
+        closeFormAction=(action "hideForms")
+        countdownRemaining=countdownRemaining}}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
   </div>
