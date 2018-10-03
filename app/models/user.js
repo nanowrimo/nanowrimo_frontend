@@ -39,17 +39,17 @@ const User = Model.extend({
   privacyViewProfile: attr('number'),
   privacySendNanomessages: attr('number'),
   privacyViewSearch: attr('number'),
-  
+
   privacyVisibilityRegions: attr('boolean'),
   privacyVisibilityBuddyLists: attr('boolean'),
   privacyVisibilityActivityLogs: attr('boolean'),
-  
+
   externalLinks: hasMany('externalLink'),
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
   projectSessions: hasMany('projectSession'),
-  
-  
+
+
   //notification and emails
   notificationBuddyRequests: attr('boolean'),
   notificationNanomessagesMls: attr('boolean'),
@@ -69,11 +69,13 @@ const User = Model.extend({
   emailBuddyRequests: attr('boolean'),
   emailNanomessagesBuddies: attr('boolean'),
   emailNanomessagesHq: attr('boolean'),
-  emailWritingReminders: attr('boolean'),  
-  
-  //a user has many timers 
+  emailWritingReminders: attr('boolean'),
+
+  //a user has many timers
   timers: hasMany('timer'),
-  
+  //a user has many stopwatches
+  stopwatches: hasMany('stopwatch'),
+
   // Group membership
   groups: hasMany('group'),
   groupUsers: hasMany('group-user'),
@@ -97,7 +99,7 @@ const User = Model.extend({
       return maxRegion;
     }
   }),
-  
+
   projects: hasMany('project'),
 
   //activeGroupUsers: filterBy('groupUsers','exit_at',
@@ -202,7 +204,7 @@ const User = Model.extend({
       return buddies;
     }
   }),
-  
+
   usersBlocked: computed('buddyGroupUsersBlocked','buddyGroupUsersBlocked.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersBlocked');
@@ -223,7 +225,7 @@ const User = Model.extend({
       return blocked;
     }
   }),
-  
+
   _avatarUrl: "/images/users/unknown-avatar.png",
   avatarUrl: computed('avatar', {
     get() {
@@ -251,7 +253,7 @@ const User = Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
-  
+
   rollbackExternalLinks() {
     this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }
@@ -266,23 +268,23 @@ const User = Model.extend({
       if (book) { book.rollback(); }
     });
   },
-  
+
   loadGroupUsers(group_types) {
     let u = this;
     this.get('store').query('group-user',
-    { 
+    {
       filter: { user_id: u.id },
       group_types: group_types,
       include: 'user,group'
-      
+
     });
   },
-  
+
 
   primaryProject: computed('projects.@each.primary', function(){
     let ps = this.get('projects');
     let prime = ps.firstObject;
-    
+
     //loop though the projects
     for(var i = 1; i < ps.length; i++ ) {
       var t_project = ps.objectAt(i);
@@ -305,6 +307,18 @@ const User = Model.extend({
     }
   }),
 
+  //a user can only hae 1 stopwatch active at a given time
+  latestStopwatch: computed('stopwatches.@each.{start,end}', function() {
+    //sort stopwatchs by start desc
+    var sorted = this.get('stopwatches').sortBy('start');
+    if (sorted.length > 0) {
+      let obj = sorted.lastObject;
+      return obj;
+    } else {
+      return null;
+    }
+  }),
+
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
@@ -317,46 +331,46 @@ const User = Model.extend({
 User.reopenClass({
   /* Some options are enumerated in the Rails API
    *  before editing these options, check that they match the API
-   *  */ 
- 
-  optionsForPrivacyViewProfile: 
+   *  */
+
+  optionsForPrivacyViewProfile:
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
     {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
     {value:'3', name:'Anyone Can See'},
-    
-  ], 
-  optionsForPrivacyViewProjects: 
+
+  ],
+  optionsForPrivacyViewProjects:
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
     {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
     {value:'3', name:'Anyone Can See'},
-  ], 
-  optionsForPrivacyViewBuddies: 
+  ],
+  optionsForPrivacyViewBuddies:
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
     {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
     {value:'3', name:'Anyone Can See'},
-  ], 
-  optionsForPrivacyViewSearch: 
+  ],
+  optionsForPrivacyViewSearch:
   [
     {value:'0', name:'No One'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
     {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
     {value:'3', name:'Anyone Can See'},
-  ], 
-  optionsForPrivacySendNanomessages: 
+  ],
+  optionsForPrivacySendNanomessages:
   [
     {value:'0', name:'No One'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
     {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
     {value:'3', name:'Anyone Can See'},
-  ], 
- 
- 
+  ],
+
+
 });
 
 export default User;
