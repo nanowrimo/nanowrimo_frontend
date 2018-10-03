@@ -88,6 +88,21 @@ export default Component.extend({
       }
     },
     startStopwatch: function() {
+     //make a new stopwatch for the user
+      let now = moment();
+      let s = this.store.createRecord('stopwatch', {
+        user: this.get('user'),
+        start: now.toDate()
+      });
+
+      //save the timer
+      s.save();
+      /* post save stuff? */
+      let ans =this.get('afterNewStopwatch');
+      ans();
+      //close the form
+      let cfa = this.get('closeFormAction');
+      cfa();
     },
 
     timerSetHoursChanged: function(v) {
@@ -101,6 +116,4 @@ export default Component.extend({
      cta();
     }
   }
-
-
 });

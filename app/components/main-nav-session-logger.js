@@ -21,6 +21,7 @@ export default Component.extend({
   writingLocations: null,
   writingMethods: null,
   referenceTimer: null,
+  referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
 
   feeling1Selected: computed('selectedFeeling', function() {
@@ -59,9 +60,10 @@ export default Component.extend({
     this.set('countType',0);
     this.set('countValue', this.get("primaryProject.unitCount"));
     this.set('initialValue', this.get("primaryProject.unitCount"));
-    let t = this.get('referenceTimer');
-    if(t){
-      //there is a referenceTimer
+    let t = this.get('referenceEnd');
+    let s = this.get('referenceStart');
+    if(t && s){
+      //there is a referenceTimer or stopwatch?
       //force the 'extra' stuff to be displayed
 
       this.set('_projectAdditionalInfoShow',false);
@@ -136,14 +138,15 @@ export default Component.extend({
           }
         });
         // set the whenEnd and whenStart
-        let rt = this.get('referenceTimer');
+        let rs = this.get('referenceStart');
+        let re = this.get('referenceEnd');
         let hhmmStart;
         let hhmmEnd;
-        if (rt) {
-          let m = moment(rt.start);
-          hhmmStart = m.format("HH:mm");
-          m.add(rt.duration, 'm');
-          hhmmEnd = m.format("HH:mm");
+        if (rs) {
+          let ms = moment(rs);
+          hhmmStart = ms.format("HH:mm");
+          let me = moment(re);
+          hhmmEnd = me.format("HH:mm");
         } else {
           let m = moment();
           hhmmEnd = m.format("HH:mm");
@@ -226,8 +229,6 @@ export default Component.extend({
 
       session.set('count', count);
       session.save();
-      //reset the referenceTimer
-      this.set('referenceTimer',null);
       let cfa = this.get('closeFormAction');
       cfa();
 
