@@ -33,16 +33,14 @@ export default Component.extend({
   actions: {
 
     onShow() {
-      console.log('onShow');
       this.set('open', true);
     },
     onHidden() {
       let callback = this.get('onHidden');
       if (callback) {
-        console.log('has callback')
         callback();
       } else {
-        //this.set('open', null);
+        this.set('open', null);
       }
     }
   }

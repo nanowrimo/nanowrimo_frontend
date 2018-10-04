@@ -23,22 +23,12 @@ export default Controller.extend({
   actions: {
     editProject() {
       if(this.get('canEdit')){
-        console.log('editproject');
         this.set('displayEditModal', true);
       }
     },
 
     afterEditProjectModalClose(){
-      console.log('after edit project modal close');
       this.set('displayEditModal', false);
     }
   }
-
-  /* TODO: remove canUpdateCount
-  canUpdateCount: computed("currentUser.user.id", "project.user.id", function(){
-    let cuid = this.get("currentUser.user.id");
-    let puid = this.get("project.user.id");
-    return cuid == puid;
-  })
-  */
 });
