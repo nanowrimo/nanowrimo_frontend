@@ -15,7 +15,7 @@
       {{project.concatGenres}}
     </div>
     <div id='project-badges'> </div>
-    
+
   </div>
   <div class='project-count-display'>
     <div>
@@ -25,9 +25,14 @@
       <div class='unit-text'>
         total {{project.unitType}} count
       </div>
-      {{#if canUpdateCount}}
-        <button class="btn btn-primary">update {{project.unitType}} count</button>
-      {{/if}}
+        {{#if canEdit}}
+          <button class="btn btn-primary" {{action "editProject"}}>Edit Project</button>
+        {{/if}}
+         {{project-edit-modal
+            onHidden=(action "afterEditProjectModalClose")
+            open=displayEditModal
+            project=project
+          }}
     </div>
   </div>
   <div class='project-status'>

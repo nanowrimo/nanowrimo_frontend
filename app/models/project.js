@@ -27,7 +27,7 @@ const Project = Model.extend({
   projectChallenges: hasMany('projectChallenge'),
   projectSessions: hasMany('projectSession'),
   genres: hasMany('genre'),
-  
+
   user: belongsTo('user'),
 
 
@@ -43,8 +43,14 @@ const Project = Model.extend({
       return this.get('_coverUrl');
     }
   }),
-  
-  unitCount: computed('projectSessions.[]',{ 
+
+  isPrimary: computed('user.projects.@each.primary', function(){
+    return this === this.get('user.primaryProject');
+  }),
+  isNotPrimary: computed('isPrimary',function(){
+    return !this.get('isPrimary');
+  }),
+  unitCount: computed('projectSessions.[]',{
     get() {
       // sum of the project.sessions counts where unit-type === 0 (words)
       let count=0;
@@ -56,7 +62,7 @@ const Project = Model.extend({
       return count;
     }
   }),
-  
+
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
@@ -65,7 +71,7 @@ const Project = Model.extend({
     let genreNames = this.get('genres').mapBy('name');
     return genreNames.join(", ");
   }),
-  
+
   activeProjectChallenge: computed('projectChallenges.[]', function(){
     const promise = this.get('projectChallenges').then((pcs)=>{
       let now = moment();
@@ -84,17 +90,17 @@ const Project = Model.extend({
     });
     return  DS.PromiseObject.create({promise});
   }),
-  
+
   relationshipErrors: computed('genres.[]', function() {
     // if (isEmpty(this.get('genres'))) {
     //   return { genres: 'Must select at least one genre' };
     // }
     return null;
   }),
-  
+
   save() {
     let promiseArray = [];
-    //persist the genres 
+    //persist the genres
     this.get('genres').forEach((genre) => {
       // if the genre doesn't have an id, it needs to be saved
       if (!genre.id) {
@@ -107,21 +113,21 @@ const Project = Model.extend({
       return _super.call(this).then(()=>{
       });
     });
-    
-    
+
+
   }
 });
 
 Project.reopenClass({
   /* Some options are enumerated in the Rails API
    *  before editing these options, check that they match the API
-   *  */ 
+   *  */
   optionsForStatus: [
     'In Progress',
     'Completed'
   ],
-  /* from the API: 
-    ## PRIVACY ## 
+  /* from the API:
+    ## PRIVACY ##
   # Privacy is an integer value representing which group of users
   # an author has allowed to view a project.
   # 0 = self
@@ -129,16 +135,16 @@ Project.reopenClass({
   # 2 = buddies of buddies, and MLs
   # 3 = any signed in user
   */
-  optionsForPrivacy: 
+  optionsForPrivacy:
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
     {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
     {value:'3', name:'Anyone Can See'},
-    
-  ], 
-  
-  // writing_type is an integer value representing the type of project 
+
+  ],
+
+  // writing_type is an integer value representing the type of project
   // the author is working on
   //  0 = Novel
   //  1 = Short Stories
