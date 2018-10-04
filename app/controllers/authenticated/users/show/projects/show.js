@@ -7,11 +7,28 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   currentUser: service(),
   project: alias('model'),
+  displayEditModal: false,
+  author: null,
+  
+  canEdit: computed('author','currentUser.user', function(){
+    let a = this.get('author');
+    let cu = this.get('currentUser.user');
+    return a==cu;
+  }),
 
-  canUpdateCount: computed("currentUser.user.id", "project.user.id", function(){
-    let cuid = this.get("currentUser.user.id");
-    let puid = this.get("project.user.id");
-    return cuid == puid;
-  })
+  init(){
+    this._super(...arguments);
+  },
 
+  actions: {
+    editProject() {
+      if(this.get('canEdit')){
+        this.set('displayEditModal', true);
+      }
+    },
+
+    afterEditProjectModalClose(){
+      this.set('displayEditModal', false);
+    }
+  }
 });
