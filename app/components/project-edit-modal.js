@@ -8,7 +8,6 @@ export default Component.extend({
   tagName: '',
 
   open: null,
-  project: null,
   user: null,
   project: null,
 
