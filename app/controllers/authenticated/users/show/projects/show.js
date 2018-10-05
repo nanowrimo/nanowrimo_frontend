@@ -6,10 +6,12 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   currentUser: service(),
+  router: service(),
   project: alias('model'),
   displayEditModal: false,
   author: null,
-  
+  projectSlug: null,
+
   canEdit: computed('author','currentUser.user', function(){
     let a = this.get('author');
     let cu = this.get('currentUser.user');
@@ -29,6 +31,16 @@ export default Controller.extend({
 
     afterEditProjectModalClose(){
       this.set('displayEditModal', false);
+      if (this._needsURLUpdate()) {
+        let projectSlug = this.get('project.slug');
+        let newURL = this.get('router.currentURL').replace(this.get('projectSlug'), projectSlug);
+        this.set('projectSlug', projectSlug);
+        this.get('router').replaceWith(newURL);
+      }
     }
-  }
+  },
+
+   _needsURLUpdate() {
+    return this.get('project.slug') !== this.get('projectSlug');
+  },
 });

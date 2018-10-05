@@ -8,5 +8,6 @@ export default Route.extend({
   setupController(controller, model) { // eslint-disable-line no-unused-vars
     this._super(...arguments);
     controller.set('author', this.modelFor('authenticated.users.show') );
+    controller.set('projectSlug', model.get('slug'));
   }
 });

@@ -9,13 +9,5 @@ export default Controller.extend({
     //what constitutes 'details'? 
     let p = this.get('project');
     return (p.summary!=null || p.excerpt!=null);
-  }),
-  
-  actions: {
-    editProject() {
-      //console.log('edit project');
-    }
-  }
-
-  
+  })
 });
