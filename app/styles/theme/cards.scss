@@ -70,6 +70,22 @@
             padding-right: 4px;
           }
         }
+        .corner-label-full {
+          width: 100%;
+          padding: 4px;
+          padding-right: 14px;
+          padding-left: 14px;
+          height: 30px;
+          border-radius: 5px;
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+          background-image: linear-gradient(to bottom, #75abbc, #6595a3);
+          font-family: SourceSansPro-Bold;
+          line-height: 20px;
+          font-size: 14px;
+          text-transform: uppercase;
+          color: #e2eff3;
+        }
         .nano-subcard-toggle {
           cursor: pointer;
           text-align: center;

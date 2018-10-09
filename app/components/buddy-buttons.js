@@ -13,7 +13,7 @@ export default Component.extend({
   approveBuddyEndpoint: `${ENV.APP.API_HOST}/groups/approve_buddy/`,
   rejectBuddyEndpoint: `${ENV.APP.API_HOST}/groups/reject_buddy/`,
   removeBuddyEndpoint: `${ENV.APP.API_HOST}/groups/remove_buddy/`,
-  cancelInvitationEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy_cancel2/`,
+  cancelInvitationEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy_cancel/`,
   blockUserEndpoint: `${ENV.APP.API_HOST}/groups/block_user/`,
   unblockUserEndpoint: `${ENV.APP.API_HOST}/groups/unblock_user/`,
   

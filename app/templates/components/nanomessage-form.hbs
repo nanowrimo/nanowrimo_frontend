@@ -1,0 +1,12 @@
+{{#form-for
+  model=newNanomessage
+  afterSubmit=(action "afterSubmit")
+  as |f|
+}}
+  <div class="form-group">
+    {{f.textarea
+      property="content"
+    }}
+  </div>
+  <input type="submit" value="send" class="nano-button" />
+{{/form-for}}

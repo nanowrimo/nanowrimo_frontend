@@ -142,6 +142,27 @@ const User = Model.extend({
     });
     return blocked;
   }),
+  buddyGroupsActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
+    get() {
+      let bgus = this.get('buddyGroupUsersAccepted');
+      let buddyGroups = [];
+      let store = this.get('store');
+      let email = this.get('email');
+      bgus.forEach(function(bgu) {
+        let gus = bgu.group.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
+              buddyGroups.push(bgu.group);
+            }
+          }
+        });
+      });
+      return buddyGroups;
+    }
+  }),
+  
   buddiesActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersAccepted');

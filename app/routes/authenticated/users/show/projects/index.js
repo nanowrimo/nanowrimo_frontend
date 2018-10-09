@@ -14,9 +14,7 @@ export default Route.extend({
     controller.set('user', this.modelFor('authenticated.users.show'));
   },
 
-  actions: {
-    refreshModel() {
-      this.refresh();
-    }
+  refreshModel() {
+    this.refresh();
   }
 });
