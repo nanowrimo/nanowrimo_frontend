@@ -49,10 +49,5 @@ export default Component.extend({
   }),
   
   actions: {
-    searchStringChange: function() {
-      console.log('changed search');
-      //debounce(this, this.updateSearch, 1000, false);
-    }
-    
   }
 });
