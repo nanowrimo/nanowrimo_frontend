@@ -1,0 +1,30 @@
+<div class="content-gutters">
+  <div class="container-fluid">
+    <div class="nano-panel">
+      <div class="grid-wrapper">
+        <div class="nano-card g3-col1 g3-row1 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2">
+          <div class="nano-subcard">
+            <div class="nano-subcard-face face-front filled-grey">
+              <div class="nano-subcard-header">
+                <div class="corner-label-full">Conversations</div>
+              </div>
+              <div class="nano-subcard-content center-vertically no-padding full-width">
+                {{conversations-list class="full-width"}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nano-card g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2">
+          <div class="nano-subcard">
+            <div class="nano-subcard-face face-front filled-grey">
+              {{#if hasGroup}}
+                {{outlet}}
+              {{else}}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

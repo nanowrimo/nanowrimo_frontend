@@ -66,13 +66,12 @@
   }
 }
 .nano-avatar-small {
-  height: 56px;
+  width: 36px;
+  height: 36px;
   img {
-    width: 56px;
-    height: 56px;
-    border-radius: 28px;
-    box-shadow: 0 0 14px 0 rgba(47, 48, 97, 0.1);
-    
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
   }
 }
 .user-listing {

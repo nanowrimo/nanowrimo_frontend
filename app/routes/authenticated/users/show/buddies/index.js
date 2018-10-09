@@ -10,11 +10,4 @@ export default Route.extend({
     this._super(controller, model);
     controller.set('user', this.modelFor('authenticated.users.show'));
   },
-
-  actions: {
-    refreshModel() {
-      this.refresh();
-    }
-  }
-  
 });

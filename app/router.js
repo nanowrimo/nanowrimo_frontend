@@ -55,6 +55,10 @@ Router.map(function() {
         this.route('members');
       });
     });
+    this.route('nanomessages', function() {
+      this.route('show', { path: '/:slug'}, function() {
+      });
+    });
     this.route('project',function(){
       this.route('show', { path: '/:project_slug'}, function(){});
     });

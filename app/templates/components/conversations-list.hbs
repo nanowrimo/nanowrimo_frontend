@@ -1,0 +1,8 @@
+<div class="nano-list-search">
+  {{input class="nano-list-search-field" placeholder="Search" value=tempSearchString key-up=(action "searchStringChange")}}
+</div>
+<ul class="nano-list" style="height: 600px; ">
+  {{#each conversations as |conversation index|}}
+    {{conversations-list-item group=conversation}}
+  {{/each}}
+</ul>
