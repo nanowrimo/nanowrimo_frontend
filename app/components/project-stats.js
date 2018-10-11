@@ -42,19 +42,19 @@ export default Component.extend({
     return this.get('projectChallenge.duration');
   }),
   goal: computed('projectChallenge', function(){
-	 return this.get('projectChallenge.goal'); 
+   return this.get('projectChallenge.goal'); 
   }),
   goalUnit: computed('projectChallenge', function() {
-	 return this.get('projectChallenge.unitTypePlural'); 
+   return this.get('projectChallenge.unitTypePlural'); 
   }),
   
   count: computed('challengeSessions','project.projectSessions.[]', function() {
-	let sessions = this.get('challengeSessions');
-	let sum = 0;
-	if (sessions) {
-		sessions.forEach((s)=>{ sum+= s.count});
-	}
-	return sum;
+  let sessions = this.get('challengeSessions');
+  let sum = 0;
+  if (sessions) {
+    sessions.forEach((s)=>{ sum+= s.count});
+  }
+  return sum;
   }),
   
   //
@@ -71,28 +71,28 @@ export default Component.extend({
   }),
   
   todaysCount: computed('todaysSessions.[]', function() {
-	let sum = 0;
-	let ts = this.get('todaysSessions');
-	ts.forEach((s)=>{
-	  sum+=s.count;
-	});
-	return sum;
+  let sum = 0;
+  let ts = this.get('todaysSessions');
+  ts.forEach((s)=>{
+    sum+=s.count;
+  });
+  return sum;
   }),
   
   challengeSessions: computed('projectChallenge','project.projectSessions.[]', function() {
-	let cStart = moment( this.get('projectChallenge.startsAt') );
-	let cEnd = moment( this.get('projectChallenge.endsAt') );
-	//get the projectSessions created during the projectChallenge
-	let sessions = this.get('project.projectSessions');
-	let newSessions = [];
-	sessions.forEach((s)=>{
-	  var sCreated = moment(s.createdAt);
+  let cStart = moment( this.get('projectChallenge.startsAt') );
+  let cEnd = moment( this.get('projectChallenge.endsAt') );
+  //get the projectSessions created during the projectChallenge
+  let sessions = this.get('project.projectSessions');
+  let newSessions = [];
+  sessions.forEach((s)=>{
+    var sCreated = moment(s.createdAt);
       if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
-		newSessions.push(s);
-	  }
-	});
-	//loop the sessions 
-	return newSessions;
+    newSessions.push(s);
+    }
+  });
+  //loop the sessions 
+  return newSessions;
   }),
   
   init(){
@@ -135,6 +135,6 @@ export default Component.extend({
       this.set('projectChallenges', pcs);
       this.set('projectChallenge', pcs.firstObject);
     });
-  }	
+  }  
   
 });

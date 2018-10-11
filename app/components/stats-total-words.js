@@ -1,9 +1,9 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
-import { get,computed } from '@ember/object';
+import { computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
-  countData: [],
-  colorsAndRadius: [],
+  countData: null,
+  colorsAndRadius: null,
   
   init(){
     this._super(...arguments);
