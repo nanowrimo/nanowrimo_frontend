@@ -1,10 +1,86 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
-import { get,computed } from '@ember/object';
+import { computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
-  // The data must be an array of 24 numbers, one for each hour of the day, beginning at midnight
-  countData: computed(function() {
-    let cData = [
+  unitsTodayData: null,
+  colorsAndRadius: null,
+  
+  init(){
+    this._super(...arguments);
+    //create an array of colors and radiuses. radii?
+    this.set('colorsAndRadius', [
+      {
+        color: '#2f3061',
+        radius: '114%',
+        innerRadius: '98%'
+      }, 
+      {
+        color: '#edbb82',
+        radius: '94%',
+        innerRadius: '78%'
+      },
+      {
+        color: '#73ab9b',
+        radius: '74%',
+        innerRadius: '58%'
+      }  
+    ]); 
+    this.set('paneBackgrounds', [
+      {
+        outerRadius: '114%',
+        innerRadius: '98%',
+        backgroundColor: '#e8e8e8',
+        borderWidth: 0
+      },
+      {
+        outerRadius: '94%',
+        innerRadius: '78%',
+        backgroundColor: '#e8e8e8',
+        borderWidth: 0
+      },
+      {
+        outerRadius: '74%',
+        innerRadius: '58%',
+        backgroundColor: '#e8e8e8',
+        borderWidth: 0
+      }
+    ]);
+  },
+
+  countNeededToday: computed('unitsTodayData.[]', function(){
+    let utd = this.get('unitsTodayData');
+    if(utd.length>0) {
+      let firstData = utd[0];
+      return firstData.countPerDay - firstData.countToday;
+    } else {
+      return 0;
+    }
+  }),
+  
+  paneBackground: computed('unitsTodayData', function(){
+    let l = this.get('unitsTodayData.length');
+    let pbgs = this.get('paneBackgrounds');
+    var bg = [];
+    for (var i = 0 ; i < l ; i++) {
+      bg.pushObject(pbgs[i]);
+    }
+    return bg;
+  }),
+
+
+  chartData: computed('unitsTodayData', function() {
+    let ud = this.get('unitsTodayData');
+    let car = this.get('colorsAndRadius');
+    let cFormat = [];
+    for (var i =0; i < ud.length ; i++) {
+      // get the count data for user i
+      var c = ud[i];
+      //create the percent complete based on count and goal
+      var percent = parseInt(c.countToday*100/c.countPerDay);
+      //get the colors and radius number i
+      var cr = car[i];
+      //build a formatted thingy 
+      /* format: 
       {
         name: 'Me',
         data: [{
@@ -13,27 +89,21 @@ export default ChartBaseComponent.extend({
           innerRadius: '98%',
           y: 80
         }]
-      },
-      {
-        name: 'Dave<br />Williams',
+      } 
+      */
+      var fThingy = {
+        name: c.name,
         data: [{
-          color: '#edbb82',
-          radius: '94%',
-          innerRadius: '78%',
-          y: 65
+          color: cr.color,
+          radius: cr.radius,
+          innerRadius: cr.innerRadius,
+          y: percent
         }]
-      },
-      {
-        name: 'Ruth Bader<br />Ginsberg',
-        data: [{
-          color: '#73ab9b',
-          radius: '74%',
-          innerRadius: '58%',
-          y: 90
-        }]
-      }
-    ];
-    return cData;
+      };
+      //append the thingy to the cFormat array
+      cFormat.push(fThingy);
+    }
+    return cFormat;
   }),
 
 
@@ -57,26 +127,8 @@ export default ChartBaseComponent.extend({
       pane: {
         startAngle: 0,
         endAngle: 360,
-        background: [
-          {
-            outerRadius: '114%',
-            innerRadius: '98%',
-            backgroundColor: '#e8e8e8',
-            borderWidth: 0
-          },
-          {
-            outerRadius: '94%',
-            innerRadius: '78%',
-            backgroundColor: '#e8e8e8',
-            borderWidth: 0
-          },
-          {
-            outerRadius: '74%',
-            innerRadius: '58%',
-            backgroundColor: '#e8e8e8',
-            borderWidth: 0
-          }
-        ]
+        background: this.get('paneBackground'),
+        
       },
       title: {
         text: null
@@ -114,10 +166,6 @@ export default ChartBaseComponent.extend({
       },
     };
     return cOptions;
-  }),
-  chartData: computed('countData',function() {
-    let cData = get(this,'countData');
-    return cData;
   })
 
 
