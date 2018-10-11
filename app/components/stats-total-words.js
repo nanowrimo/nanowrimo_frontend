@@ -48,13 +48,13 @@ export default ChartBaseComponent.extend({
   },
   
   paneBackground: computed('countData', function(){
-  let l = this.get('countData.length');
-  let pbgs = this.get('paneBackgrounds');
-  var bg = [];
-  for (var i = 0 ; i < l ; i++) {
-    bg.pushObject(pbgs[i]);
-  }
-  return bg;
+    let l = this.get('countData.length');
+    let pbgs = this.get('paneBackgrounds');
+    var bg = [];
+    for (var i = 0 ; i < l ; i++) {
+      bg.pushObject(pbgs[i]);
+    }
+    return bg;
   }),
   
   chartData: computed('countData', function() {

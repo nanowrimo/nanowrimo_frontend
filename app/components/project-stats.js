@@ -9,7 +9,21 @@ export default Component.extend({
   projectChallenge: null,
   projectChallenges: null,
   
-  countData: computed('projectChallenge', function() {
+  unitsTodayData: computed('projectChallenge','project.projectSessions.[]', function() {
+    var dataArray = [];
+    var data = {
+      name: this.get('currentUser.user.name'),
+      countToday: this.get('todaysCount'),
+      countPerDay: this.get('projectChallenge.countPerDay')
+    };
+    
+    dataArray.push(data);
+    //TODO: add comparison data
+    
+    return dataArray;
+  }),
+  
+  countData: computed('projectChallenge','project.projectSessions.[]', function() {
     //start building an array of data
     var dataArray = [];
     //create the data thingy for the current user 
@@ -24,6 +38,9 @@ export default Component.extend({
     return dataArray;
   }),
   
+  goalDuration: computed('projectChallenge', function(){
+    return this.get('projectChallenge.duration');
+  }),
   goal: computed('projectChallenge', function(){
 	 return this.get('projectChallenge.goal'); 
   }),
@@ -31,12 +48,34 @@ export default Component.extend({
 	 return this.get('projectChallenge.unitTypePlural'); 
   }),
   
-  count: computed('challengeSessions', function() {
+  count: computed('challengeSessions','project.projectSessions.[]', function() {
 	let sessions = this.get('challengeSessions');
 	let sum = 0;
 	if (sessions) {
 		sessions.forEach((s)=>{ sum+= s.count});
 	}
+	return sum;
+  }),
+  
+  //
+  todaysSessions: computed('challengeSessions.[]', function() {
+    let css = this.get('challengeSessions');
+    let todays = [];
+    let now = moment();
+    css.forEach((cs)=>{
+      if (moment(cs.createdAt).isSame(now, 'day') ) {
+        todays.push(cs);
+      }
+    });
+    return todays;
+  }),
+  
+  todaysCount: computed('todaysSessions.[]', function() {
+	let sum = 0;
+	let ts = this.get('todaysSessions');
+	ts.forEach((s)=>{
+	  sum+=s.count;
+	});
 	return sum;
   }),
   
@@ -92,10 +131,10 @@ export default Component.extend({
   },
 
   getProjectChallenges: function(){
-	return this.get('project.projectChallenges').then((pcs)=>{
-	  this.set('projectChallenges', pcs);
-	  this.set('projectChallenge', pcs.firstObject);
-	});
+    return this.get('project.projectChallenges').then((pcs)=>{
+      this.set('projectChallenges', pcs);
+      this.set('projectChallenge', pcs.firstObject);
+    });
   }	
   
 });
