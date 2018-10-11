@@ -91,13 +91,6 @@ const Project = Model.extend({
     return  DS.PromiseObject.create({promise});
   }),
 
-  relationshipErrors: computed('genres.[]', function() {
-    // if (isEmpty(this.get('genres'))) {
-    //   return { genres: 'Must select at least one genre' };
-    // }
-    return null;
-  }),
-
   save() {
     let promiseArray = [];
     //persist the genres
