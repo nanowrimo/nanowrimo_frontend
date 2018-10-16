@@ -2,8 +2,9 @@ import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
-  unitsTodayData: null,
+  userUnitsToday: null,
   colorsAndRadius: null,
+  comparisonUnitsTodayData: null,
   
   init(){
     this._super(...arguments);
@@ -47,11 +48,28 @@ export default ChartBaseComponent.extend({
     ]);
   },
 
+  unitsTodayData: computed('userUnitsToday', 'comparisonUnitsTodayData', function(){
+    let data = [];
+    data.pushObject(this.get('userUnitsToday') );
+    //append the comparisonPercentData
+    let cut = this.get('comparisonUnitsTodayData');
+    if (cut) {
+      cut.forEach((d)=>{
+        data.pushObject(d);
+      });
+    }
+    return data;
+  }),
+
   countNeededToday: computed('unitsTodayData.[]', function(){
     let utd = this.get('unitsTodayData');
     if(utd.length>0) {
       let firstData = utd[0];
-      return firstData.countPerDay - firstData.countToday;
+      let cnt = firstData.countPerDay - firstData.countToday;
+      if(cnt<0) {
+          cnt=0;
+      }
+      return cnt;
     } else {
       return 0;
     }
@@ -77,6 +95,7 @@ export default ChartBaseComponent.extend({
       var c = ud[i];
       //create the percent complete based on count and goal
       var percent = parseInt(c.countToday*100/c.countPerDay);
+      
       //get the colors and radius number i
       var cr = car[i];
       //build a formatted thingy 
