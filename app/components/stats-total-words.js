@@ -2,7 +2,8 @@ import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
-  countData: null,
+  userPercentData: null,
+  comparisonPercentData: null, // will be an array
   colorsAndRadius: null,
   
   init(){
@@ -45,7 +46,21 @@ export default ChartBaseComponent.extend({
         borderWidth: 0
       }
     ]);
+    this.set('comparisonPercentData', []);
   },
+  
+  countData: computed('userPercentData','comparisonPercentData', function(){
+    let data = [];
+    data.pushObject(this.get('userPercentData') );
+    //append the comparisonPercentData
+    let cpd = this.get('comparisonPercentData');
+    if (cpd) {
+      cpd.forEach((d)=>{
+        data.pushObject(d);
+      });
+    }
+    return data;
+  }),
   
   paneBackground: computed('countData', function(){
     let l = this.get('countData.length');
@@ -64,8 +79,6 @@ export default ChartBaseComponent.extend({
     for (var i =0; i < cd.length ; i++) {
       // get the count data for user i
       var c = cd[i];
-      //create the percent complete based on count and goal
-      var percent = parseInt(c.count*100/c.goal);
       //get the colors and radius number i
       var cr = car[i];
       //build a formatted thingy 
@@ -86,11 +99,11 @@ export default ChartBaseComponent.extend({
           color: cr.color,
           radius: cr.radius,
           innerRadius: cr.innerRadius,
-          y: percent
+          y: c.percent
         }]
       };
       //append the thingy to the cFormat array
-      cFormat.push(fThingy);
+      cFormat.pushObject(fThingy);
     }
     return cFormat;
   }),

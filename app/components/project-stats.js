@@ -1,41 +1,37 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import fetch from 'fetch';
+import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
 
 export default Component.extend({
   currentUser: service(),
+  session: service(),
+  
   project: null,
   projectChallenge: null,
   projectChallenges: null,
   
-  unitsTodayData: computed('projectChallenge','project.projectSessions.[]', function() {
-    var dataArray = [];
+  userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     var data = {
       name: this.get('currentUser.user.name'),
       countToday: this.get('todaysCount'),
       countPerDay: this.get('projectChallenge.countPerDay')
     };
     
-    dataArray.push(data);
-    //TODO: add comparison data
-    
-    return dataArray;
+    return data;
   }),
   
-  countData: computed('projectChallenge','project.projectSessions.[]', function() {
-    //start building an array of data
-    var dataArray = [];
+  
+  userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
     //create the data thingy for the current user 
+    let percent = parseInt(this.get('count')*100/this.get('goal'));
     var data = {
       name: this.get('currentUser.user.name'),
-      count: this.get('count'),
-      goal: this.get('goal'),
+      percent: percent
     };
-    //add the data to  the dataArray
-    dataArray.push(data);
-    //TODO: add comparison data
-    return dataArray;
+    return data;
   }),
   
   goalDuration: computed('projectChallenge', function(){
@@ -134,7 +130,31 @@ export default Component.extend({
     return this.get('project.projectChallenges').then((pcs)=>{
       this.set('projectChallenges', pcs);
       this.set('projectChallenge', pcs.firstObject);
+      //now is a good time to fetch the aggregates
+      this.fetchAggregates();
     });
-  }  
+  },
+  
+  fetchAggregates: function(){
+    let pc = this.get('projectChallenge');
+    let { auth_token }  = this.get('session.data.authenticated');
+    let endpoint = `${ENV.APP.API_HOST}/daily-aggregates/${pc.id}`;
+    let comparisons = this.get('userComparisons');
+    let comps=''
+    if (comparisons) {
+      for( var i =0; i < comparisons; i++) {
+        let prefix = (i==0) ? "?" : "&";
+        comps+=`${prefix}comparison[]=${comparisons[i]}`;
+      }
+    }
+    return fetch((endpoint+comps), { 
+      method: 'get',
+      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+    }).then(() => {
+    }).catch(() => {
+      alert('Failed to get aggregates');
+    });
+     
+  }
   
 });
