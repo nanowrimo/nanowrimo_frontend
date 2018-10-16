@@ -140,18 +140,18 @@ export default Component.extend({
     let { auth_token }  = this.get('session.data.authenticated');
     let endpoint = `${ENV.APP.API_HOST}/daily-aggregates/${pc.id}`;
     let comparisons = this.get('userComparisons');
+    let comps=''
     if (comparisons) {
-      let comps="?";
       for( var i =0; i < comparisons; i++) {
         let prefix = (i==0) ? "?" : "&";
         comps+=`${prefix}comparison[]=${comparisons[i]}`;
       }
     }
-    return fetch((endpoint), { 
+    return fetch((endpoint+comps), { 
       method: 'get',
       headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
-    }).then((response) => {
-    }).catch((out) => {
+    }).then(() => {
+    }).catch(() => {
       alert('Failed to get aggregates');
     });
      
