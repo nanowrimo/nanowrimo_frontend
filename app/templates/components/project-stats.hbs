@@ -15,16 +15,13 @@
    
   </div>
   <div class="nano-panel-tools">
-    <div class="panel-comparison root-comparison" style="color: #2f3061; border-color: #2f3061;">{{fa-icon "circle"}} Dave Beck {{fa-icon "times"}}</div>
-    <div class="panel-comparison" style="color: #edbb82; border-color: #edbb82;">{{fa-icon "circle"}} Dave Williams {{fa-icon "times"}}</div>
-    <div class="panel-comparison" style="color: #73ab9b; border-color: #73ab9b;">{{fa-icon "circle"}} Ruth Bader Ginsberg {{fa-icon "times"}}</div>
   </div>
   <div class="grid-wrapper">
     <div class="nano-card g3-col1 g3-row1 g2-col1 g2-row1 short-card">
-      {{stats-total-words countData=countData count=count goal=goal goalUnit=goalUnit}}
+      {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit}}
     </div>
     <div class="nano-card g3-col2 g3-row1 g2-col2 g2-row1 short-card">
-      {{stats-words-needed-today unitsTodayData=unitsTodayData goalUnit=goalUnit}}
+      {{stats-words-needed-today userUnitsToday=userUnitsToday comparisonUnitsTodayData=comparisonUnitsTodayData goalUnit=goalUnit}}
     </div>
     <div class="nano-card g3-col3 g3-row1 g2-col1 g2-row2 short-card">
       {{stats-days-straight}}
