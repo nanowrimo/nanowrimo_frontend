@@ -20,7 +20,7 @@
       {{/if}}
       {{#if displayTimeOnButton}}
         <button class="button-log btn btn-primary wide-button" {{action 'toggleTimerForm'}}>
-          {{timeProgress}}
+          {{fa-icon "stop-circle-o"}} {{timeProgress}}
         </button>
       {{else}}
         <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
