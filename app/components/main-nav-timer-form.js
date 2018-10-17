@@ -124,9 +124,13 @@ export default Component.extend({
 
     timerSetHoursChanged: function(v) {
       this.set('timerHoursValue', v);
+      this.set('timerDuration', this.get('timerHoursValue')*60 + this.get('timerMinutesValue'));
+      this.set('validDurationInput', true);
     },
     timerSetMinutesChanged: function(v) {
       this.set('timerMinutesValue', v);
+      this.set('timerDuration', this.get('timerHoursValue')*60 + this.get('timerMinutesValue'));
+      this.set('validDurationInput', true);
     },
     cancelTimer: function(){
      let cta = this.get('cancelTimerAction');
