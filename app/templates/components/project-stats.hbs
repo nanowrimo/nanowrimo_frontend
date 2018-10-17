@@ -1,58 +1,83 @@
-<div class="nano-panel">
-  <div id='stats-project-switcher'>
-   Project:
-    <select class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'}}>
-      {{#each currentUser.user.projects as |p|}}
-        <option value='{{p.id}}' selected ={{eq p project}}>{{p.title}}</option>
-      {{/each}}
-    </select>
-   Challenge:
-    <select class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged' value='target.value'}}>
-      {{#each project.projectChallenges as |pc|}}
-        <option value='{{pc.id}}'>{{pc.name}}</option>
-      {{/each}}
-    </select>
+<div id='nano-stats-page'>
+  <div id='stats-project-display'>
+    <div id='stats-project-cover'>
+      <div class='project-cover'>
+        <div class='project-cover-clip'>
+          <img src="{{project.coverUrl}}">
+        </div>
+      </div>
+    </div>
+
+    <div id='stats-project-switcher' class='switcher'>
+      <div class='switcher-title'>
+       Project:
+      </div>
+      <div class='switcher-select'>
+      <select class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'}}>
+        {{#each currentUser.user.projects as |p|}}
+          <option value='{{p.id}}' selected ={{eq p project}}>{{p.title}}</option>
+        {{/each}}
+      </select>
+      </div>
+    </div>
+    <div id='stats-project-challenge-switcher' class='switcher'>
+      <div class='switcher-title'>
+       Challenge:
+      </div>
+      <div class='switcher-select'>
+      <select class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged' value='target.value'}}>
+        {{#each project.projectChallenges as |pc|}}
+          <option value='{{pc.id}}'>{{pc.name}}</option>
+        {{/each}}
+      </select>
+      </div>
+    </div>
+  </div>
+  <div class="nano-panel">
+     
    
-  </div>
-  <div class="nano-panel-tools">
-  </div>
-  <div class="grid-wrapper">
-    <div class="nano-card g3-col1 g3-row1 g2-col1 g2-row1 short-card">
-      {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit}}
+    <div class="nano-panel-tools">
     </div>
-    <div class="nano-card g3-col2 g3-row1 g2-col2 g2-row1 short-card">
-      {{stats-words-needed-today userUnitsToday=userUnitsToday comparisonUnitsTodayData=comparisonUnitsTodayData goalUnit=goalUnit}}
-    </div>
-    <div class="nano-card g3-col3 g3-row1 g2-col1 g2-row2 short-card">
-      {{stats-days-straight}}
-    </div>
-    <div class="nano-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
-      {{stats-my-milestones class="g3-sub1 g2-sub1"}}
-      {{stats-my-overall-progress class="g3-sub2 g2-sub2"}}
-    </div>
-    <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
-      {{stats-when-i-write}}
-    </div>
-    <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
-      {{stats-my-daily-word-count}}
-    </div>
-    <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
-      {{stats-where-i-write}}
-    </div>
-    <div class="nano-card g3-col2 g3-row4 g2-col1 g2-row5 flippable">
-      {{stats-my-daily-count}}
-    </div>
-    <div class="nano-card g3-col3 g3-row4 g2-col2 g2-row5 flippable">
-      {{stats-when-ill-finish}}
-    </div>
-    <div class="nano-card g3-col1 g3-row5 g2-col1 g2-row6 flippable">
-      {{stats-my-writing-speed}}
-    </div>
-    <div class="nano-card g3-col2 g3-row5 g2-col2 g2-row6">
-      {{stats-my-sprintiness}}
-    </div>
-    <div class="nano-card g3-col3 g3-row5 g2-col1 g2-row7">
-      {{stats-how-i-feel}}
+    <div class="grid-wrapper">
+      <div class="nano-card g3-col1 g3-row1 g2-col1 g2-row1 short-card">
+        {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit}}
+      </div>
+      <div class="nano-card g3-col2 g3-row1 g2-col2 g2-row1 short-card">
+        {{stats-words-needed-today userUnitsToday=userUnitsToday comparisonUnitsTodayData=comparisonUnitsTodayData goalUnit=goalUnit}}
+      </div>
+  {{!--    
+      <div class="nano-card g3-col3 g3-row1 g2-col1 g2-row2 short-card">
+        {{stats-days-straight}}
+      </div>
+      <div class="nano-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
+        {{stats-my-milestones class="g3-sub1 g2-sub1"}}
+        {{stats-my-overall-progress class="g3-sub2 g2-sub2"}}
+      </div>
+      <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
+        {{stats-when-i-write}}
+      </div>
+      <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
+        {{stats-my-daily-word-count}}
+      </div>
+      <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
+        {{stats-where-i-write}}
+      </div>
+      <div class="nano-card g3-col2 g3-row4 g2-col1 g2-row5 flippable">
+        {{stats-my-daily-count}}
+      </div>
+      <div class="nano-card g3-col3 g3-row4 g2-col2 g2-row5 flippable">
+        {{stats-when-ill-finish}}
+      </div>
+      <div class="nano-card g3-col1 g3-row5 g2-col1 g2-row6 flippable">
+        {{stats-my-writing-speed}}
+      </div>
+      <div class="nano-card g3-col2 g3-row5 g2-col2 g2-row6">
+        {{stats-my-sprintiness}}
+      </div>
+      <div class="nano-card g3-col3 g3-row5 g2-col1 g2-row7">
+        {{stats-how-i-feel}}
+      </div>
+  --}}
     </div>
   </div>
 </div>
