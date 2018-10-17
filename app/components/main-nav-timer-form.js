@@ -68,7 +68,7 @@ export default Component.extend({
       //validate and parse the input value
       let trimmed = v.replace(/[^0-9.:]/g, '');
       //if the trimmed value contains a . and a :, the input is invalid
-      if (trimmed.includes(".") && trimmed.includes(":") || trimmed.length < 1 ) {
+      if ((trimmed.includes(".") && trimmed.includes(":")) || trimmed.length < 1 ) {
         this.set('validDurationInput', false);
       } else {
         // does the input have a ":"?
@@ -80,10 +80,27 @@ export default Component.extend({
           this.set('timerDuration', (hours*60)+minutes);
           this.set('validDurationInput', true);
         } else {
-          let hours = parseFloat(trimmed);
-          let minutes = parseInt(hours*60);
-          this.set('timerDuration', minutes);
-          this.set('validDurationInput', true);
+          // If there's a decimal point
+          if(trimmed.includes(".")) {
+            let hours = parseFloat(trimmed);
+            let minutes = parseInt(hours*60);
+            this.set('timerDuration', minutes);
+            this.set('validDurationInput', true);
+          } else {
+            // If the value is just an integer
+            let count = parseInt(trimmed);
+            if (count<15) {
+              let hours = parseInt(trimmed);
+              let minutes = parseInt(hours*60);
+              this.set('timerDuration', minutes);
+              this.set('validDurationInput', true);
+            } else {
+              let minutes = parseInt(trimmed);
+              this.set('timerDuration', minutes);
+              this.set('validDurationInput', true);
+
+            }
+          }
         }
       }
     },

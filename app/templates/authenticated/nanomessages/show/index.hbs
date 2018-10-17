@@ -1,6 +1,12 @@
 <div class="nano-subcard-body conversation">
   <div class="conversation-header">
-    To: <span class='conversation-name'>{{groupName}}</span>
+    <div class="new-message-form">
+      To: <span class='conversation-name'>{{groupName}}</span>
+      
+      {{#if showForm}}
+        {{nanomessage-form group=group refreshMessages=(action 'afterNanomessageSubmit')}}
+      {{/if}}
+    </div>
   </div>
   <div class="conversation-content" id="convo-content">
     <div class="nanomessages-container">
@@ -8,10 +14,5 @@
         {{nanomessage-item nanomessage=n}}
       {{/each}}
     </div>
-  </div>
-  <div class="new-message-form">
-    {{#if showForm}}
-      {{nanomessage-form group=group refreshMessages=(action 'afterNanomessageSubmit')}}
-    {{/if}}
   </div>
 </div>

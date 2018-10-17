@@ -27,7 +27,7 @@
         </div>
 
         <div class='footer-actions'>
-          <button {{action "startStopwatch"}}>Start Stopwatch</button>
+          <input class='form-control nano-button' type='submit' value='Start Stopwatch' {{action "startStopwatch" }}>
           <a href="#" {{action "cancel"}} >Cancel</a>
         </div>
 
@@ -56,10 +56,10 @@
         </div>
         <div class='footer-actions'>
           {{#if countdownRemaining}}
-            <button {{action "cancelTimer"}}>Cancel Timer</button>
+            <input class='form-control nano-button' type='submit' value='Cancel Timer' {{action "cancelTimer" }}>
           {{else}}
-            <button {{action "startTimer"}}>Start Timer</button>
-            <a href="#" {{action "cancel"}} >Cancel</a>
+            <input class='form-control nano-button' type='submit' value='Start Timer' {{action "startTimer" }}>
+            <a href="#" {{action "cancel"}} >Close</a>
           {{/if}}
         </div>
 

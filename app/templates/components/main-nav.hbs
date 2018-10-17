@@ -60,7 +60,18 @@
             </ul>
           {{/dd.menu}}
         {{/bs-dropdown}}
-        {{nanomessages-menu}}
+        
+        <div class="nav-notify-buttons d-flex">
+          {{#if media.isDesktop}}
+            {{nanomessages-menu}}
+          {{/if}}
+          {{#if media.isMobile}}
+            {{#nano-side-menu-toggle}}
+              <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
+            {{/nano-side-menu-toggle}}
+          {{/if}}
+        </div>
+        
       {{/if}}
     {{/if}}
   </div>

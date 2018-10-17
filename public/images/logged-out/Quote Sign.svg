@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="83px" height="90px" viewBox="0 0 83 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Quote Sign</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-2.5%" y="-17.3%" width="105.1%" height="139.2%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.184313725   0 0 0 0 0.188235294   0 0 0 0 0.380392157  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-42.9%" y="-38.2%" width="185.7%" height="176.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.184313725   0 0 0 0 0.188235294   0 0 0 0 0.380392157  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <path d="M30.4465269,20.278111 C28.9212818,21.1496796 27.7864439,22.1029434 27.0419791,23.1379311 C26.2975142,24.1729188 25.9252874,25.5074882 25.9252874,27.1416793 C26.0342335,27.105364 26.1976501,27.0872065 26.4155423,27.0872065 C27.396057,27.0872065 28.2403764,27.3868038 28.9485258,27.9860072 C29.6566753,28.5852106 30.0107447,29.4113726 30.0107447,30.4645179 C30.0107447,31.6266094 29.6748327,32.5435584 29.0029986,33.2153925 C28.3311645,33.8872267 27.4686877,34.2231387 26.4155423,34.2231387 C25.0355587,34.2231387 23.9824291,33.6965739 23.256122,32.6434285 C22.5298148,31.5902831 22.1666667,30.1013758 22.1666667,28.1766618 C22.1666667,23.41935 24.4181851,19.8604983 28.9212895,17.5 L30.4465269,20.278111 Z M40.8333333,20.278111 C39.3080883,21.1496796 38.1732504,22.1029434 37.4287856,23.1379311 C36.6843207,24.1729188 36.3120939,25.5074882 36.3120939,27.1416793 C36.42104,27.105364 36.5844566,27.0872065 36.8023488,27.0872065 C37.7828634,27.0872065 38.6271828,27.3868038 39.3353323,27.9860072 C40.0434818,28.5852106 40.3975512,29.4113726 40.3975512,30.4645179 C40.3975512,31.6266094 40.0616392,32.5435584 39.3898051,33.2153925 C38.717971,33.8872267 37.8554941,34.2231387 36.8023488,34.2231387 C35.4223652,34.2231387 34.3692356,33.6965739 33.6429284,32.6434285 C32.9166213,31.5902831 32.5534731,30.1013758 32.5534731,28.1766618 C32.5534731,23.41935 34.8049916,19.8604983 39.3080959,17.5 L40.8333333,20.278111 Z" id="path-3"></path>
+        <filter x="-24.1%" y="-26.9%" width="148.2%" height="153.8%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="3.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="2" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.4 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="2.-What-is-NaNoWriMo?,-The-Platform,-Young-Writers-Program,-Programming-&amp;-Impact" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2a.-The-Platform---v3" transform="translate(-65.000000, -2071.000000)">
+            <g id="Quote-Jemisin" filter="url(#filter-1)" transform="translate(0.000000, 2087.000000)">
+                <g id="Quote-Sign" filter="url(#filter-2)" transform="translate(80.000000, 0.000000)">
+                    <path d="M7,-6.49425402e-10 L43,-6.95782099e-10 C46.3137085,-6.95782707e-10 49,2.6862915 49,6 L49,53.5174712 C49,54.6220407 48.1045695,55.5174712 47,55.5174712 C46.6112472,55.5174712 46.2309211,55.4041737 45.9055416,55.1914368 L31.4981331,45.771704 L17.094622,55.1908981 C16.1701754,55.7954412 14.9306844,55.5361081 14.3261414,54.6116615 C14.1133362,54.2862471 14,53.9058589 14,53.5170395 L14,7 L7,-6.49425402e-10 Z" id="Rectangle" fill="#7880B5"></path>
+                    <path d="M14,7 C14,3.13400675 10.8659932,0 7,0 C3.13400675,0 0,3.13400675 0,7" id="Oval" fill="#2F3061"></path>
+                    <g id="“" style="mix-blend-mode: multiply;">
+                        <use fill="#DFE4E6" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
