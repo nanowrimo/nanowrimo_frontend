@@ -19,7 +19,6 @@ export default Component.extend({
       countToday: this.get('todaysCount'),
       countPerDay: this.get('projectChallenge.countPerDay')
     };
-    
     return data;
   }),
   

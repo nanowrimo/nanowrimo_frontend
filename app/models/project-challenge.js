@@ -21,7 +21,7 @@ const ProjectChallenge = Model.extend({
   countPerDay: computed('goal', 'duration', function(){
     let g = this.get('goal');
     let d = this.get('duration');
-    return parseInt(g/d);
+    return Math.round(g/d);
   }),
   duration: computed("startsAt", "endsAt", function(){
     // return the difference between start and end in number of days
