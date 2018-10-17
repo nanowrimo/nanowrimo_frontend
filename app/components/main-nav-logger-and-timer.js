@@ -50,6 +50,31 @@ export default Component.extend({
         this.set('referenceEnd', s.get('stop'));
         return;
       }
+      if (this.get('timerIsRunning') ) {
+        let t = this.get('currentUser.user.latestTimer');
+        
+        //timer is no longer running
+        this.set('timerIsRunning', false);
+
+        // do stuff because the timer has ended!
+        this.set('timeProgress', null);
+        //get the timer audio
+        //let at = document.getElementById('timer-audio');
+        //at.play();
+        //update the reference timer
+        t.set('end', moment().toDate());
+        this.set('referenceStart', t.get('start'));
+        this.set('referenceEnd', t.get('end'));
+        //open the logger
+        this.send('toggleSessionForm');
+        t.set('cancelled', moment().toDate());
+        t.save();
+        this.set('timerIsRunning', false);
+        this.set('timeProgress', null);
+        
+        return;
+      }
+      
       if (this.get('displayTimerForm')) {
         this.set('displayTimerForm', false);
       } else {

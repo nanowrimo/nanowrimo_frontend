@@ -41,16 +41,16 @@ export default Component.extend({
     startTimer: function() {
       if (this.get('validDurationInput')) {
         //determine the duration
-        //var hours = parseInt( this.get('timerHoursValue') );
-        //var mins = parseInt( this.get('timerMinutesValue') );
-        //var duration = (hours*60)+mins;
+        var hours = parseInt( this.get('timerHoursValue') );
+        var mins = parseInt( this.get('timerMinutesValue') );
+        var duration = (hours*60)+mins;
 
         //make a new timer for the user
         let now = moment();
         let t = this.store.createRecord('timer', {
           user: this.get('user'),
           start: now.toDate(),
-          duration: this.get('timerDuration')
+          duration: duration  //this.get('timerDuration')
         });
 
         //save the timer
@@ -69,7 +69,7 @@ export default Component.extend({
       let trimmed = v.replace(/[^0-9.:]/g, '');
       //if the trimmed value contains a . and a :, the input is invalid
       if ((trimmed.includes(".") && trimmed.includes(":")) || trimmed.length < 1 ) {
-        this.set('validDurationInput', false);
+        this.set('validDurationInput', true);
       } else {
         // does the input have a ":"?
         if(trimmed.includes(":")){
