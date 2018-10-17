@@ -61,7 +61,7 @@ export default Service.extend({
   helpLinks: computed(function() {
     let links = [
       {label: "Help Center", url: "index"},
-      {label: "Get Involved", url: "https://nanowrimo.org/get-involved"}
+      {label: "Get Involved", url: "index"}
     ];
     return links;
   }),

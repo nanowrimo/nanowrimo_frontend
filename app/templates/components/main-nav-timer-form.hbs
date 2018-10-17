@@ -4,19 +4,6 @@
     <div class="modal-header">
       Ready...? Set...?
     </div>
-    <div class="modal-body">
-
-      <div class='primary-project-display'>
-        <div class='project-cover' >
-          <div class='project-cover-clip'>
-            <img src="{{primaryProject.coverUrl}}">
-          </div>
-        </div>
-           <div class='project-title'>
-          {{primaryProject.title}}
-        </div>
-      </div>
-    </div>
     <div id='timer-form-modes'>
       {{#if showStopwatch}}
         <div class='timer-sub-menu'>
@@ -43,14 +30,20 @@
           {{#if countdownRemaining}}
             {{countdownRemaining}}
           {{else}}
+            <!--
             <div class='timer-instruction'>You can enter time as 1.5 or 1:30, they both mean 1 hour and 30 minutes.</div>
-            <div class='timer-duration'>
-              <input id='duration' class="form-control {{if validDurationInput '' 'is-invalid'}}" onchange={{action "durationChange" value="target.value"}}>
+            //-->
+            <div class='timer-duration form-group'>
               <!--
-              hours: <input type='number' min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}>
-              minutes: <input type='number' min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}>
+              <input id='duration' class="form-control {{if validDurationInput '' 'is-invalid'}}" onchange={{action "durationChange" value="target.value"}}>
               //-->
-             </div>
+              <div style="width: 200px; margin-bottom: 5px; font-family: 'SourceSansPro-Regular'">
+                <input type='number' class="ember-text-field" min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}} style="width: 70px; text-align: right;"> hours
+              </div>
+              <div style="width: 200px; font-family: 'SourceSansPro-Regular'">
+                <input type='number' class="ember-text-field" min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}} style="width: 70px; text-align: right;"> minutes
+              </div>
+            </div>
           {{/if}}
 
         </div>
@@ -65,7 +58,6 @@
 
       {{/if}}
     </div>
-
   </div>
 
 </div>
