@@ -39,7 +39,7 @@ export default DS.Model.extend({
     }
     let fm = dur.minutes();
     if (fh || fm) {
-      if ( fm < 10 ) { fm = "0"+fm}
+      if (( fm < 10 )&&(fh!==0)) { fm = "0"+fm}
       formatted = `${formatted}${fm}:`;
       this.set('minutes', fm);
     }

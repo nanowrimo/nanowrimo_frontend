@@ -11,6 +11,13 @@ export default Controller.extend({
     let rn = this.get('routeName');
     return !no_nav_routes.includes(rn);
   }),
+  is_authenticated: computed('session.isAuthenticated', function() {
+    if (this.get('session.isAuthenticated')) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
   routeName: computed('currentPath', function() {
     return this.get('currentPath');
   }),

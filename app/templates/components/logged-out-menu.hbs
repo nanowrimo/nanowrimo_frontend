@@ -1,0 +1,84 @@
+<header>
+  <div class="top">
+    <div class="container">
+      <ul>
+        <li class="menu-item">
+          <a href="https://store.nanowrimo.org/collections/shop" class="link">Shop</a>
+        </li>
+        <li class="menu-item">
+          <a href="https://store.nanowrimo.org/collections/donate" class="link">Donate</a>
+        </li>
+        <li class="menu-item">
+          {{link-to "Ways to Support" "ways-to-support" class="link"}}
+        </li>
+        <div class="account-links">
+          <li class="menu-item">
+            {{link-to 'Sign Up' 'sign-up'}}
+          </li>
+          <li class="menu-item">
+            {{link-to 'Sign In' 'sign-in'}}
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="main-nav">
+    <div class="container">
+      <div class="logo">
+        {{#link-to "index"}}
+          <img src="/images/logged-out/nanowrimo.svg" alt="NaNoWriMo" class="company-logo">
+          <img src="/images/logged-out/nano-mobile-nav.svg" alt="NaNoWriMo" class="mobile-logo">
+        {{/link-to}}
+      </div>
+      <div class="mobile-nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul>
+        <li class="menu-item">
+          {{link-to 'What is Nanowrimo?' 'what-is-nanowrimo'}}
+          <div class="hover-info">It's a website, a community, a wildly ambitious writing event — and so much more!</div>
+        </li>
+        <li class="menu-item">
+          {{link-to "Writer's Resources" 'writers-resources'}}
+          <div class="hover-info">Discover our resources for tips and tricks on starting and finishing your next great writing project.</div>
+        </li>
+        <li class="menu-item">
+          {{link-to "Connect" 'connect'}}
+          <div class="hover-info">Check out what NaNoWriMo's got going on at the moment, from events to book releases to writer chats.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-navbar">
+  <div class="close-icon">
+    <span></span>
+    <span></span>
+  </div>
+  <div class="group">
+    <a href="" class="link">
+      <h4 class="title">What is NaNoWriMo?</h4>
+      <p class="copy">It's a website, a community, a wildly ambitious writing event — and so much more!</p>
+    </a>
+    <a href="" class="link">
+      <h4 class="title">Writer's Resources</h4>
+      <p class="copy">Discover our resources for tips and tricks on starting and finishing your next great writing project.</p>
+    </a>
+    <a href="" class="link">
+      <h4 class="title">Connect</h4>
+      <p class="copy">Check out what NaNoWriMo's got going on at the moment, from events to book releases to writer chats.</p>
+    </a>
+  </div>
+  <div class="quick-links">
+    <a href="https://store.nanowrimo.org/collections/shop" class="link">Shop</a>
+    <a href="https://store.nanowrimo.org/collections/donate" class="link">Donate</a>
+    {{link-to "Ways to Support" "ways-to-support" class="link"}}
+  </div>
+  <div class="bottom">
+    {{link-to 'Sign In' 'sign-in' class="btn btn-outline-blue"}}
+    {{link-to 'Sign Up' 'sign-up' class="link"}}
+  </div>
+</div>

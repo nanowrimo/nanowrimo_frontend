@@ -36,7 +36,7 @@ export default DS.Model.extend({
         formatted = `${fh}:`
       }
       let fm = dur.minutes();
-      if ( fm < 10 ) { fm = "0"+fm}
+      if ( (fm < 10) && (fh>0) ) { fm = "0"+fm}
       let fs = dur.seconds();
       if ( fs < 10 ) { fs = "0"+fs}
       formatted = `${formatted}${fm}:${fs}`;

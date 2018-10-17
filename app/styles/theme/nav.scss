@@ -148,6 +148,8 @@
   }
   &.mainnav {
     height: 48px;
+    background-color: #e2eff3;
+    box-shadow: 0 0.1875rem 0.875rem rgba(47,48,97,0.1);
     div.dropdown {
       @media (max-width: $screen-md-max) {
         display: none;

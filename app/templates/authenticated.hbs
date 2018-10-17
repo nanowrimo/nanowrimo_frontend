@@ -1,14 +1,6 @@
-{{#if media.isMobile}}
-  {{nano-side-menu}}
-{{/if}}
-{{#if media.isDesktop}}
-  {{micro-nav}} 
-{{/if}} 
-{{main-nav}}
 <div id='flash-messages'>
   {{#each flashMessages.queue as |flash|}}
     {{flash-message flash=flash}}
   {{/each}}
 </div>
 {{outlet}}
-{{authenticated-footer}}

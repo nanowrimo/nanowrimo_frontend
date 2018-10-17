@@ -36,7 +36,7 @@ export default Controller.extend({
   }),
   init() {
     this._super(...arguments);
-    let options = ['createdAt:asc'];
+    let options = ['createdAt:desc'];
     this.set('sortOptions', options);
     this.set('selectedSortOption', [options[0]]);
     debounce(this, this.gotoBottom, 1000, false);
@@ -47,8 +47,8 @@ export default Controller.extend({
     this.set('showForm',true);
   },
   gotoBottom(){
-    var objDiv = document.getElementById("convo-content");
-    objDiv.scrollTop = objDiv.scrollHeight+100;
+    //var objDiv = document.getElementById("convo-content");
+    //objDiv.scrollTop = objDiv.scrollHeight+100;
   },
   checkForMessages() {
     this.send('refreshModel');

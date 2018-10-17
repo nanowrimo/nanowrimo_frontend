@@ -73,6 +73,21 @@ Router.map(function() {
   this.route('index', { path: '/' });
   this.route('sign-up');
   this.route('sign-in');
+  
+  // universal pages
+  this.route('what-is-nanowrimo');
+  this.route('terms-conditions');
+  this.route('ways-to-support');
+  this.route('writers-resources');
+  this.route('connect');
+  this.route('press');
+  this.route('about');
+  this.route('pep-talks');
+  this.route('nano-prep');
+  this.route('offers');
+  this.route('programming-and-impact');
+  
+  
   this.route('404');
   this.route('not-found', { path: '/*path' });
   this.route('error');

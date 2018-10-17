@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="83px" height="90px" viewBox="0 0 83 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Quote Sign</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-2.9%" y="-17.3%" width="105.7%" height="139.2%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.184313725   0 0 0 0 0.188235294   0 0 0 0 0.380392157  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-42.9%" y="-38.2%" width="185.7%" height="176.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.184313725   0 0 0 0 0.188235294   0 0 0 0 0.380392157  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <path d="M41.0008749,20.736125 C40.4906952,21.4823579 39.8739202,22.1181692 39.1505311,22.6435781 C39.1581457,22.7501828 39.161953,22.9100874 39.161953,23.1232968 C39.161953,24.1131976 39.0172774,25.1011799 38.7279218,26.0872734 C38.4385661,27.0733668 37.9988284,28.0194694 37.4086952,28.9256093 C36.818562,29.8317492 36.1161238,30.6331761 35.3013593,31.329914 C34.4865948,32.0266518 33.5043234,32.5825108 32.3545156,32.9975077 C31.2047077,33.4125046 29.9749648,33.6199999 28.66525,33.6199999 C26.6016876,33.6199999 24.7132898,33.0679481 23,31.963828 C23.2665117,31.9942865 23.5634775,32.0095155 23.8909062,32.0095155 C25.604196,32.0095155 27.1309047,31.4841145 28.4710781,30.4332968 C27.6715428,30.4180675 26.9557792,30.1724997 26.3237656,29.6965859 C25.691752,29.220672 25.2577251,28.6134151 25.0216719,27.8747968 C25.2729544,27.9128699 25.5051968,27.9319062 25.7184062,27.9319062 C26.0458349,27.9319062 26.3694515,27.8900264 26.6892656,27.8062656 C25.836428,27.6311293 25.1301825,27.2066205 24.5705078,26.5327265 C24.0108331,25.8588325 23.731,25.0764419 23.731,24.1855312 L23.731,24.1398437 C24.2487942,24.4291993 24.8046533,24.5852967 25.3985937,24.6081406 C24.8960287,24.2730972 24.4962671,23.8352631 24.1992969,23.294625 C23.9023266,22.7539869 23.7538437,22.1676698 23.7538437,21.5356562 C23.7538437,20.8655696 23.9213629,20.2449872 24.2564062,19.6738906 C25.1777754,20.8084692 26.2990116,21.7164992 27.6201484,22.3980078 C28.9412852,23.0795164 30.3556799,23.4583381 31.8633749,23.5344843 C31.802458,23.2451287 31.7719999,22.963392 31.7719999,22.6892656 C31.7719999,21.6689063 32.1317854,20.7989489 32.8513671,20.0793672 C33.5709488,19.3597855 34.4409063,19 35.4612655,19 C36.5273125,19 37.4258244,19.3883399 38.156828,20.1650312 C38.9868217,20.0051242 39.7673087,19.7081584 40.4983124,19.274125 C40.2165714,20.1498065 39.6759414,20.8274976 38.8764061,21.3072187 C39.5845659,21.2310725 40.2927151,21.0407098 41.0008749,20.736125 Z" id="path-3"></path>
+        <filter x="-25.0%" y="-30.8%" width="150.0%" height="161.6%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="3.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="2" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.4 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="2.-What-is-NaNoWriMo?,-The-Platform,-Young-Writers-Program,-Programming-&amp;-Impact" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2b.-YWP---v3" transform="translate(-97.000000, -1905.000000)">
+            <g id="Twitter-Quote" transform="translate(-1.000000, 1438.000000)">
+                <g id="Quote-Jemisin" filter="url(#filter-1)" transform="translate(81.000000, 483.000000)">
+                    <g id="Quote-Sign" filter="url(#filter-2)" transform="translate(32.000000, 0.000000)">
+                        <path d="M7,-6.49425402e-10 L43,-6.95782099e-10 C46.3137085,-6.95782707e-10 49,2.6862915 49,6 L49,53.5174712 C49,54.6220407 48.1045695,55.5174712 47,55.5174712 C46.6112472,55.5174712 46.2309211,55.4041737 45.9055416,55.1914368 L31.4981331,45.771704 L17.094622,55.1908981 C16.1701754,55.7954412 14.9306844,55.5361081 14.3261414,54.6116615 C14.1133362,54.2862471 14,53.9058589 14,53.5170395 L14,7 L7,-6.49425402e-10 Z" id="Rectangle" fill="#1DA1F2"></path>
+                        <path d="M14,7 C14,3.13400675 10.8659932,0 7,0 C3.13400675,0 0,3.13400675 0,7" id="Oval" fill="#024873"></path>
+                        <g id="" style="mix-blend-mode: multiply;">
+                            <use fill="#DFE4E6" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

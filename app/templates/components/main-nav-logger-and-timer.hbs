@@ -18,16 +18,15 @@
           <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
         </button>
       {{/if}}
-      <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
-        {{#if displayTimeOnButton}}
-          {{#if stopwatchRunning}}
-            {{fa-icon "stop"}}
-          {{/if}}
+      {{#if displayTimeOnButton}}
+        <button class="button-log btn btn-primary wide-button" {{action 'toggleTimerForm'}}>
           {{timeProgress}}
-        {{else}}
+        </button>
+      {{else}}
+        <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
           <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
-        {{/if}}
-      </button>
+        </button>
+      {{/if}}
     </div>
     {{#if displaySessionForm}}
       {{main-nav-session-logger closeFormAction=(action "hideForms") referenceStart=referenceStart referenceEnd=referenceEnd}}

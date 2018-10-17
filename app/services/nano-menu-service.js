@@ -36,16 +36,16 @@ export default Service.extend({
         submenuItems: [
           {label: "Forums", url: "index", segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
           this.get('homeRegionItem'),
-          {label: "Find a Region", url: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"},
-          {label: "Word Sprints", url: "index", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
+          {label: "Find a Region", url: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"}
+          //{label: "Word Sprints", url: "index", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
         ]
       },
       {
         toggleLabel: "Writer's Resources",
         submenuItems: [
-          {label: "NaNo Prep", url: "index", segment: null, teaser: "Get ready for the big event", src: "/images/nav/thought_bubble.svg"},
-          {label: "Pep Talks", url: "index", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg"},
-          {label: "Offers", url: "index", segment: null, teaser: "Discounts on writer tools", src: "/images/nav/present.svg"}
+          {label: "NaNo Prep", url: "pep-talks", segment: null, teaser: "Get ready for the big event", src: "/images/nav/thought_bubble.svg"},
+          {label: "Pep Talks", url: "nano-prep", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg"},
+          {label: "Offers", url: "offers", segment: null, teaser: "Discounts on writer tools", src: "/images/nav/present.svg"}
         ]
       }
     ];
@@ -61,7 +61,7 @@ export default Service.extend({
   helpLinks: computed(function() {
     let links = [
       {label: "Help Center", url: "index"},
-      {label: "Get Involved", url: "index"}
+      {label: "Get Involved", url: "https://nanowrimo.org/get-involved"}
     ];
     return links;
   }),

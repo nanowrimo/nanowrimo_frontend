@@ -23,17 +23,18 @@
             <div class="form-group">
               <div id="progress-update-form-inputs" class='form-group'> 
                 {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
-              
-                <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
-                  <option value='0'>total {{primaryProject.activeProjectChallenge.content.unitTypePlural}}</option>
-                  <option value='1'>{{primaryProject.activeProjectChallenge.content.unitTypePlural}} this session</option>
-                </select>
+                <div class='select-container'>
+                  <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
+                    <option value='0'>total {{primaryProject.activeProjectChallenge.content.unitTypePlural}}</option>
+                    <option value='1'>{{primaryProject.activeProjectChallenge.content.unitTypePlural}} this session</option>
+                  </select>
+                </div>
                 {{activeProjectChallenge.content}}
               </div>
               <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>More metrics for the intrepid wrimo {{fa-icon "chevron-down"}}{{fa-icon "chevron-up"}}</div>
               <div class="project-additional-info {{projectAdditionalInfoShow}}">
                 <fieldset>
-                  <legend>How did it go?</legend>
+                  <label>How did it go?</label>
                   <div  class="project-emoji-list">
                     <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}}/>
                     <label for='feeling5' >
@@ -98,17 +99,17 @@
                 <div class="side-by-side" style="justify-content: space-between">
                   <div style="flex: 0 0 130px; width: 130px;">
                     <label>When did you start?</label>
-                    {{input type='time' name='when_start' class='form-control progress-update-input' value=whenStart}}
+                    {{input type='time' name='when_start' class='form-control progress-update-input time-input' value=whenStart}}
                   </div>
                   <div style="flex: 0 0 130px; width: 130px;">
                     <label>When did you end?</label>
-                    {{input type='time' name='when_end' class='form-control progress-update-input' value=whenEnd}}
+                    {{input type='time' name='when_end' class='form-control progress-update-input time-input' value=whenEnd}}
                   </div>
                 </div>
               </div>
               <div id="progress-update-form-buttons" class='form-group'> 
                 <input class='form-control nano-button' type='submit' value='Update progress' {{action "formSubmit" }}>
-                <a href="#" {{action 'cancel'}}>Cancel</a>
+                <a href="#" {{action 'cancel'}}>Close</a>
               </div>
             </div>
           </form>

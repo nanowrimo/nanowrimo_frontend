@@ -1,1 +1,29 @@
-{{outlet}}
+{{#if is_authenticated}}
+  <header>
+    {{#if media.isMobile}}
+      {{nano-side-menu}}
+    {{/if}}
+    {{#if media.isDesktop}}
+      {{micro-nav}} 
+    {{/if}} 
+    {{main-nav}}
+  </header>
+{{else}}
+  {{#if show_navigation}}
+    {{logged-out-menu}}
+  {{/if}}
+{{/if}}
+{{#if is_authenticated}}
+  <main class="logged-in">
+    {{outlet}}
+  </main>
+{{else}}
+  {{outlet}}
+{{/if}}
+{{#if is_authenticated}}
+  {{authenticated-footer}}
+{{else}}
+  {{#if show_navigation}}
+    {{logged-out-footer}}
+  {{/if}}
+{{/if}}
