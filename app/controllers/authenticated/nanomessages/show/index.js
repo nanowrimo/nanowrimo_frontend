@@ -32,11 +32,13 @@ export default Controller.extend({
         }
       });
     }
+    //this.set('showForm',false);
+    //debounce(this, this.doShowForm, 500, false);
     return gn;
   }),
   init() {
     this._super(...arguments);
-    let options = ['createdAt:desc'];
+    let options = ['createdAt:asc'];
     this.set('sortOptions', options);
     this.set('selectedSortOption', [options[0]]);
     debounce(this, this.gotoBottom, 1000, false);
@@ -47,13 +49,13 @@ export default Controller.extend({
     this.set('showForm',true);
   },
   gotoBottom(){
-    //var objDiv = document.getElementById("convo-content");
-    //objDiv.scrollTop = objDiv.scrollHeight+100;
+    var objDiv = document.getElementById("convo-content");
+    objDiv.scrollTop = objDiv.scrollHeight;
   },
   checkForMessages() {
     this.send('refreshModel');
     debounce(this, this.checkForMessages, 5000, false);
-    debounce(this, this.gotoBottom, 500, false);
+    //debounce(this, this.gotoBottom, 500, false);
   },
   actions: {
     afterNanomessageSubmit() {

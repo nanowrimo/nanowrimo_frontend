@@ -11,6 +11,19 @@ export default Controller.extend({
     let rn = this.get('routeName');
     return !no_nav_routes.includes(rn);
   }),
+  show_footer: computed('routeName', function() {
+    let no_footer_routes = ["authenticated.nanomessages.index","authenticated.nanomessages.show.index"];
+    let rn = this.get('routeName');
+    //console.log(rn);
+    let body = document.body;
+    let t = no_footer_routes.includes(rn);
+    if (t) {
+      body.classList.add("full-screen");
+    } else {
+      body.classList.remove("full-screen");
+    }
+    return !t;
+  }),
   is_authenticated: computed('session.isAuthenticated', function() {
     if (this.get('session.isAuthenticated')) {
       return true;
