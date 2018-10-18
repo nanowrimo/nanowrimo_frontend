@@ -30,6 +30,33 @@ const ProjectChallenge = Model.extend({
     let duration = moment.duration(e.diff(s));
     return duration.asDays();
   }),
+  dates: computed("startsAt", "endsAt", function(){
+    let s = moment(this.get('startsAt'));
+    let e = moment(this.get('endsAt'));
+    let range = [];
+    //loop while the s is not the same as e day
+    while(! s.isSame(e, 'day')) {
+      //add the start date to the range
+      range.push( s.format("YYYY-MM-DD"));
+      //add 1 day to the s
+      s.add(1,'d');
+    }
+    return range;
+  }),
+  
+  datesShortMonthDayFormat: computed("startsAt", "endsAt", function(){
+    let s = moment(this.get('startsAt'));
+    let e = moment(this.get('endsAt'));
+    let range = [];
+    //loop while the s is not the same as e day
+    while(! s.isSame(e, 'day')) {
+      //add the start date to the range
+      range.push( s.format("MMM D"));
+      //add 1 day to the s
+      s.add(1,'d');
+    }
+    return range;
+  }),
   
   unitTypePlural: computed("unitType", function(){
     let type = this.get('unitType');

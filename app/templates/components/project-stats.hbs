@@ -55,7 +55,9 @@
 {{!--
         {{stats-my-milestones class="g3-sub1 g2-sub1"}}
 --}}   
-        {{stats-my-overall-progress class="g3-sub2 g2-sub2"}}
+        {{#if projectChallenge}}
+          {{stats-my-overall-progress userDailyTotals=userDailyTotals projectChallenge=projectChallenge class="g3-sub2 g2-sub2"}}
+        {{/if}}
       </div>
 {{!--
       <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
