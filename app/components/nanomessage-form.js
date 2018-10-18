@@ -5,8 +5,8 @@ export default Component.extend({
   store: service(),
   currentUser: service(),
   newNanomessage: null,
-  group: null,
   refreshMessages: null,
+  group: null,
   _callAfterSubmit() {
     let callback = this.get('afterSubmit');
     if (callback) { callback(); }
