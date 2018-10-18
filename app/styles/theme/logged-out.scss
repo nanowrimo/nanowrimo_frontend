@@ -173,7 +173,7 @@ main { margin-top: 4.875rem; }
 .btn-white:hover {border: 0.0625rem solid #6595A3;color:#E2EFF3;}
 
 /* Header */
-header { position: fixed; width: 100%; z-index: 1000000; top: 0; }
+header { position: fixed; width: 100%; z-index: 900; top: 0; }
 header .top {display:flex;align-items: center;justify-content: flex-end;background: #73AB9B;height: 2.25rem;box-shadow: 0 0.1875rem 0.875rem rgba(47,48,97,0.1)}
 header .top:after { content: ""; position: absolute; background: #FFFFFF; width: calc((100vw - 80rem) / 2); height: 100%; }
 header .top .container { width:100%; display:flex;align-items: center;justify-content: flex-end; padding-right: 0; }
