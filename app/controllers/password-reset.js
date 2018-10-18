@@ -8,7 +8,7 @@ import passwordResetValidation from 'nanowrimo/validations/password-reset-attemp
 export default Controller.extend({
   //what queryParams do we care about?
   queryParams: ['token'],
-  token: null,
+  token: '',
   changeset: null,
   errorMessage: null,
   successMessage: null,
