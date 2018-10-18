@@ -13,10 +13,10 @@ const Project = Model.extend({
   pinterestUrl: attr('string'),
   playlistUrl: attr('string'),
   primary: attr('number'),
-  privacy: attr('number', { defaultValue: '0' }),
+  privacy: attr('number', { defaultValue: '2' }),
   slug: attr('string'),
   summary: attr('string'),
-  status: attr('string', { defaultValue: 'In Progress' }),
+  status: attr('string', { defaultValue: 'Ready for Progress' }),
   title: attr('string'),
   //unitCount: attr('number'),
   unitType: attr('string'),
@@ -116,8 +116,7 @@ Project.reopenClass({
    *  before editing these options, check that they match the API
    *  */
   optionsForStatus: [
-    'In Progress',
-    'Completed'
+    'Ready for Progress', 'In Progress', 'Drafted', 'Completed','Published'
   ],
   /* from the API:
     ## PRIVACY ##
@@ -130,11 +129,9 @@ Project.reopenClass({
   */
   optionsForPrivacy:
   [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
-
+    {value:'0', name:'Only Me'},
+    {value:'1', name:'Buddies'},
+    {value:'2', name:'Public'}
   ],
 
   // writing_type is an integer value representing the type of project
