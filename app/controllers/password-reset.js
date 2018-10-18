@@ -15,7 +15,7 @@ export default Controller.extend({
   init() {
     this._super(...arguments);
     let pra =  this.store.createRecord('password-reset-attempt');
-    this.set("changeset", new Changeset(pra, lookupValidator(passwordResetValidation), passwordResetValidation))
+    this.set("changeset", new Changeset(pra, lookupValidator(passwordResetValidation), passwordResetValidation));
   },
   
   actions: {
