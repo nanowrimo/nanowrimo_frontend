@@ -19,10 +19,51 @@ export default Component.extend({
       countToday: this.get('todaysCount'),
       countPerDay: this.get('projectChallenge.countPerDay')
     };
-    
     return data;
   }),
   
+  userDailyAggregates: computed('challengeSessions.[]', function() {
+    let css = this.get('challengeSessions');
+    let dates = this.get('projectChallenge.dates');
+    if(dates) {
+      //create an aggregates array
+      let aggs = {};
+      for (var i = 0; i < dates.length; i++) {
+        let key = dates[i];
+        aggs[key] = 0;
+      }
+      
+      //loop the sessions
+      css.forEach((cs)=>{
+        var k = moment(cs.createdAt).format("YYYY-MM-DD");
+        aggs[k]+=cs.count;
+      });
+      return aggs;
+    }
+  }),
+
+  userDailyTotals: computed('userDailyAggregates.[]', function() {
+    let udas = this.get('userDailyAggregates');
+    let dates = this.get('projectChallenge.dates');
+    if(udas) {
+      let totals = [];
+      //loop through the dates 
+      for(var i=0; i < dates.length; i++) {
+        var date = dates[i];
+        //if the date is in the future...
+        if(moment(date).isAfter()) {
+          break;
+        }
+        var val = udas[date];
+        var tval = val;
+        if(i > 0) {
+          tval +=totals[i-1];
+        }
+        totals[i] = tval; 
+      }
+      return totals;
+    }
+  }),
   
   userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
     //create the data thingy for the current user 

@@ -3,14 +3,17 @@ import { get,computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
 
-  countData: computed('myChartType',function() {
+  countData: computed('myChartType','userDailyTotals',function() {
     let cData = [
       {
         name: 'My word count',
         type: get(this,'myChartType'),
         color: '#2f3061',
-        data: [0, 1299, 1300, 1300, 1500, 2397, 3465, 3300, 5500]
-      },
+        data: this.get('userDailyTotals')
+      }
+    ];
+    //TODO: if comparison data, create object, push object onto cData
+    /*
       {
         name: "Dave Williams' word count",
         type: 'spline',
@@ -24,8 +27,8 @@ export default ChartBaseComponent.extend({
         connectNulls: true,
         data: [0, null, null, 3000, null, null, null, 7000, null, null, null, 10000,null, null, null, 20000, null, null, null, 27000, null, null, null, 30000,null, null, null, 43000, null, null, 50000]
       }
-      
-    ];
+     * 
+     */ 
     return cData;
   }),
 
@@ -36,7 +39,7 @@ export default ChartBaseComponent.extend({
       return 'column';
     }
   }),
-  chartOptions: computed(function() {
+  chartOptions: computed('projectChallenge', function() {
     // Set _this equal to component for later reference
     // let _this = this;
     let cOptions = {
@@ -47,7 +50,7 @@ export default ChartBaseComponent.extend({
       },
       title: null,
       xAxis: {
-        categories: ['Nov 1', 'Nov 2', 'Nov 3', 'Nov 4', 'Nov 5', 'Nov 6', 'Nov 7', 'Nov 8', 'Today', 'Nov 10', 'Nov 11', 'Nov 12', 'Nov 13', 'Nov 14', 'Nov 15', 'Nov 16','Nov 17', 'Nov 18', 'Nov 19', 'Nov 20', 'Nov 21', 'Nov 22', 'Nov 23', 'Nov 24', 'Nov 25', 'Nov 26', 'Nov 27', 'Nov 28', 'Nov 29', 'Nov 30'],
+        categories: this.get('projectChallenge.datesShortMonthDayFormat'),
         tickPositions: [0,8,29],
         tickLength: 0,
         title: null,
