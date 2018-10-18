@@ -53,7 +53,7 @@ Challenge.reopenClass({
   ],
   optionsForUnitType: [
    {value:'0', name: 'words'},
-    {value:'1', name: 'hours'}
+   // {value:'1', name: 'hours'}
   ]
 });
 
