@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { filterBy }  from '@ember/object/computed';
+import { filter, filterBy }  from '@ember/object/computed';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -340,6 +340,9 @@ const User = Model.extend({
     }
   }),
 
+  persistedProjects: filter('projects.@each.id', function(project) {
+    return project.id > 0;
+  }),
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
