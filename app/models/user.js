@@ -340,7 +340,7 @@ const User = Model.extend({
     }
   }),
 
-  persistedProjects: filter('projects.@each.id', function(project, index, array) {
+  persistedProjects: filter('projects.@each.id', function(project) {
     return project.id > 0;
   }),
   save() {
