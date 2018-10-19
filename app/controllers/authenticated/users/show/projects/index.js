@@ -9,7 +9,7 @@ export default Controller.extend({
   queryParams: ['addProject'],
 
   addProject: false,
-  projects: alias('user.projects'),
+  projects: alias('user.persistedProjects'),
   sortOptions: null,
   selectedSortOption: null,
   user: null,
