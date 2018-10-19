@@ -179,9 +179,6 @@ export default Component.extend({
       //set the project-challenge starts at
       this.set('changeset.startsAt', m.toDate());
       this.recomputeEndsAt();
-    },
-    goalChanged(val) {
-      console.log(val);
     }
   }
   
