@@ -2,7 +2,9 @@
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front filled-grey">
       <div class='project-actions'>
-
+        {{#if project.isPrimary}}
+          <i class='fa fa-thumb-tack primary-thumb-tack'></i>
+        {{/if}}
       </div>
       <div class='flex-container'>
         <div class='project-cover' {{action "openCoverModal"}}>

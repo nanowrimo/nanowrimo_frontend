@@ -8,6 +8,6 @@ export default Controller.extend({
   hasDetails: computed("project", function(){
     //what constitutes 'details'? 
     let p = this.get('project');
-    return (p.summary!=null || p.excerpt!=null);
+    return (p.summary!=null || p.excerpt!=null || p.pinterestUrl!=null || p.playlistUrl!=null);
   })
 });
