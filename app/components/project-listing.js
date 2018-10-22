@@ -64,6 +64,10 @@ export default Component.extend({
     
     deleteConfirmationNo() {
        this.set('showConfirmDelete', false);
+    },
+    
+    viewGoals() {
+      
     }
   }
   
