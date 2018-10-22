@@ -148,6 +148,12 @@ export default Component.extend({
       } else {
         this.set('open', null);
       }
+    },
+    afterSubmit() {
+      //hide the modal
+      this.set('open', null);
+      let as = this.get('afterSubmit');
+      if (as) { as() }
     }
   }
 });
