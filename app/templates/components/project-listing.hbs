@@ -11,11 +11,7 @@
             {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu align='right' as |menu|}}
               {{#menu.item}}
-                <a href="#" {{action "editOverview"}}>Edit Project Overview</a>
-              {{/menu.item}}
-               {{menu.divider}}
-              {{#menu.item}}
-                <a href="#" {{action "editDetails"}}>Edit Project Details</a>
+                <a href="#" {{action "editProjecct"}}>Edit Project</a>
               {{/menu.item}}
                {{menu.divider}}
               {{#menu.item}}
@@ -27,7 +23,7 @@
               {{/menu.item}}
                {{menu.divider}}
               {{#menu.item}}
-                <a href="#" {{action "delete"}}>Delete</a>
+                <a href="#" {{action "confirmDelete"}}>Delete</a>
               {{/menu.item}}
             {{/dd.menu}}
           {{/bs-dropdown}}
@@ -72,4 +68,13 @@
     </div>
   </div>
   {{project-edit-modal project=project open=editProject}}
+  {{confirmation-modal
+    yes=deleteConfirmationYesText 
+    no=deleteConfirmationNoText 
+    title=deleteConfirmationTitleText
+    body=deleteConfirmationBodyText 
+    open=showConfirmDelete
+    yesAction=(action "deleteConfirmationYes")
+    noAction=(action "deleteConfirmationNo")
+    }}
 </div>
