@@ -1,0 +1,27 @@
+<div class="d-flex align-top">
+  <div class="nano-panel with-tabs full-width" id='nano-panel-project' id='goals-panel'>
+    <ul class="nano-panel-tabs">
+      <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
+      <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
+      <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
+    </ul>
+    <div class='panel-body'>
+      <div class='panel-actions'>
+        <button id='create-new-goal-button'>create new goal</button>
+        <div class='right-actions'>
+          <select>
+            <option value='0'>show all goals</option>
+            <option value='1'>show active goals</option>
+            <option value='2'>show past goals</option>
+          </select>
+        </div>
+      </div>
+      
+      {{#each projectChallenges as |pc|}}
+        {{project-challenge-listing projectChallenge=pc}}
+      {{/each}}
+
+ 
+    </div>
+  </div>
+</div>
