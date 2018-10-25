@@ -30,6 +30,9 @@ const Project = Model.extend({
 
   user: belongsTo('user'),
 
+  // Awarded badges
+  userBadges: hasMany('user-badge'),
+
 
   activeChallengeUnitTypePlural: null,
 

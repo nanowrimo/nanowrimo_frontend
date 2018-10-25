@@ -1,0 +1,21 @@
+<div class="nano-subcard-face face-front filled-grey">
+  <div class="nano-subcard-header">
+    <div class="corner-label">{{cardTitle}}</div>
+  </div>
+  <div class="nano-subcard-content side-by-side badge-subcard">
+    <div class="side-by-side-even">
+      <div class="full-width">
+        {{badge-rendered badge=firstBadge projectChallenge=projectChallenge renderSize='large'}}
+      </div>
+    </div>
+    <div class="side-by-side-even">
+      <ul class="badges">
+        {{#each badges as |badge|}}
+          <li>
+            {{badge-rendered badge=badge projectChallenge=projectChallenge renderSize='small'}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

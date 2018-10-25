@@ -1,47 +1,62 @@
-<div id='project' class='nano-panel full-width no-margin'>
-  <div class='project-cover'>
-    <div class='project-cover-clip'>
-      <img src="{{project.coverUrl}}">
-    </div>
-  </div>
-  <div class='project-name-genres'>
-    <div class='project-title'>
-        {{project.title}}
-    </div>
-    <div class='by'>
-      by {{link-to project.user.name 'authenticated.users.show' project.user.slug}}
-    </div>
-    <div class='project-genres'>
-      {{project.concatGenres}}
-    </div>
-    <div id='project-badges'> </div>
+<div class="content-gutters">
+  <div class="container-fluid">
+    <div id='project' class='nano-panel full-width no-margin'>
+      <div class='project-cover'>
+        <div class='project-cover-clip'>
+          <img src="{{project.coverUrl}}">
+        </div>
+      </div>
+      <div class='project-name-genres'>
+        <div class='project-title'>
+            {{project.title}}
+        </div>
+        <div class='by'>
+          by {{link-to project.user.name 'authenticated.users.show' project.user.slug}}
+        </div>
+        <div class='project-genres'>
+          {{project.concatGenres}}
+        </div>
+        <div id='project-badges'> </div>
 
-  </div>
-  <div class='project-count-display'>
-    <div>
-      <div class='count'>
-        {{format-number project.unitCount}}
       </div>
-      <div class='unit-text'>
-        total {{project.unitType}} count
+      <div class='project-count-display'>
+        <div>
+          <div class='count'>
+            {{format-number project.unitCount}}
+          </div>
+          <div class='unit-text'>
+            total {{project.unitType}} count
+          </div>
+            {{#if canEdit}}
+              <button class="btn btn-primary" {{action "editProject"}}>Edit Project</button>
+            {{/if}}
+             {{project-edit-modal
+                onHidden=(action "afterEditProjectModalClose")
+                open=displayEditModal
+                project=project
+              }}
+        </div>
       </div>
-        {{#if canEdit}}
-          <button class="btn btn-primary" {{action "editProject"}}>Edit Project</button>
+      <div class='project-status'>
+        {{#if project.completed}}
+          <img src="/images/users/projects/flippy-doodle-completed.png">
+        {{else}}
+          <img src="/images/users/projects/flippy-doodle-in-progress.png">
         {{/if}}
-         {{project-edit-modal
-            onHidden=(action "afterEditProjectModalClose")
-            open=displayEditModal
-            project=project
-          }}
+      </div>
     </div>
-  </div>
-  <div class='project-status'>
-    {{#if project.completed}}
-      <img src="/images/users/projects/flippy-doodle-completed.png">
-    {{else}}
-      <img src="/images/users/projects/flippy-doodle-in-progress.png">
-    {{/if}}
+    <div class="d-flex align-top">
+      <div class="nano-panel with-tabs full-width" id='nano-panel-project'>
+        <ul class="nano-panel-tabs">
+          <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
+          <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
+          <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
+        </ul>
+        <div style="padding-top: 28px;">
+          {{outlet}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-{{outlet}}

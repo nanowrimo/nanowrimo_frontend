@@ -71,6 +71,9 @@ const User = Model.extend({
   emailNanomessagesHq: attr('boolean'),
   emailWritingReminders: attr('boolean'),
 
+  // Awarded badges
+  userBadges: hasMany('user-badge'),
+  
   //a user has many timers
   timers: hasMany('timer'),
   //a user has many stopwatches
