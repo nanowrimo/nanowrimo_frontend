@@ -1,0 +1,81 @@
+#goals-panel {
+  .panel-body {
+    margin: 28px;
+    
+    .panel-actions{
+      position: relative;
+      
+      .right-actions {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
+    }
+    .project-challenge-listing-card {
+      min-height: 100px;
+      .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        
+        .title {
+          width: 24%;
+          font-family: SourceSerifPro;
+          font-size: 26px;
+          font-weight: 600;
+          color: #41426f;
+        }
+        .project-challenge-progress {
+          width: 40%;
+          .challenge-progress {
+            width: 100%;
+          }
+          
+          .nano-progress-bar{
+            width: 100%;
+          }
+          .challenge-info {
+            position: relative;
+            
+            .progress-text {
+              margin-top: 7.5px;
+              height: 18px;
+              font-family: 'SourceSansPro-Regular', sans-serif;
+              font-size: 14px;
+              font-weight: bold;
+              .count{
+                color: $nano-mediumlightblue;
+              }
+              .count.goal-met {
+                color: #834da9;
+              }
+            }
+            .challenge-start {
+              position: absolute;
+              right: 0px;
+              top: 0px;
+              font-size: 14px;
+              font-family: 'SourceSansPro-Regular', sans-serif;
+              float: right;
+              .started {
+                color: $nano-lightgrey;
+              }
+            }
+          
+          }
+          
+        }
+        .filler-image {
+          position: relative;
+          height: 115px;
+          width: 15%;
+          text-align: center;
+          img {
+            position: absolute;
+            bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}

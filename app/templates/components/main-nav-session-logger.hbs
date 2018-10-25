@@ -18,7 +18,7 @@
         </div>
      
       <div id='progress-update-form'>
-        {{#if primaryProject.activeProjectChallenge.isFulfilled}}
+        {{#if activeProjectChallenge}}
           <form>
             <div class="form-group">
               <div id="progress-update-form-inputs" class='form-group'> 
@@ -29,7 +29,6 @@
                     <option value='1'>{{primaryProject.activeProjectChallenge.content.unitTypePlural}} this session</option>
                   </select>
                 </div>
-                {{activeProjectChallenge.content}}
               </div>
               <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>More metrics for the intrepid wrimo {{fa-icon "chevron-down"}}{{fa-icon "chevron-up"}}</div>
               <div class="project-additional-info {{projectAdditionalInfoShow}}">
