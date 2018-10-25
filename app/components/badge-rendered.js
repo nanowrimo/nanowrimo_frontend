@@ -15,7 +15,6 @@ export default Component.extend({
     let b = this.get('badge');
     let awarded = false;
     let pc = this.get('projectChallenge');
-    console.log(pc.id);
     ubs.forEach(function(ub) {
       if ((b.id==ub.badge_id)&&(pc.id==ub.project_challenge_id)) {
         awarded = true;
