@@ -13,12 +13,18 @@
     }
     .project-challenge-listing-card {
       min-height: 100px;
+      .project-challenge-listing-top-right{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
       .flex-container {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         
         .title {
+          margin-left: 28px;
           width: 24%;
           font-family: SourceSerifPro;
           font-size: 26px;
