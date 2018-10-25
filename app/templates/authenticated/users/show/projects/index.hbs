@@ -4,21 +4,20 @@
       Announce New Project
     </button>
 
-      {{project-new-modal
-        onHidden=(action "afterProjectModalClose")
-        open=addProject
-        user=user
-      }}
-    {{/if}}
-    <div id='project-listing-sort' >
-      <label id='project-listing-sort-by-text' for='sort-by'>Sort by</label>
-      <span id='project-listing-sort-by-select'>
-        <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
-          <option value='0'>Date Created</option>
-          <option value='1'>Project Title</option>
-        </select>
-      </span>
-    </div>
+    {{project-new-modal
+      onHidden=(action "afterProjectModalClose")
+      open=addProject
+      user=user
+    }}
+  {{/if}}
+  <div id='project-listing-sort' >
+    <label id='project-listing-sort-by-text' for='sort-by'>Sort by</label>
+    <span id='project-listing-sort-by-select'>
+      <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
+        <option value='0'>Date Created</option>
+        <option value='1'>Project Title</option>
+      </select>
+    </span>
   </div>
 </div>
 

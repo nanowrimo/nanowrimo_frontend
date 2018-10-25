@@ -41,23 +41,23 @@
     </div>
   </div>
   <div class='nano-card' id='project-excerpt-card'>
-      <div id='project-excerpt-display'>
-        <div id='project-excerpt-label'>Excerpt</div>
-        <div id='project-excerpt'>{{project.excerpt}}</div>
-      </div>
+    <div id='project-excerpt-display'>
+      <div id='project-excerpt-label'>Excerpt</div>
+      <div id='project-excerpt'>{{project.excerpt}}</div>
+    </div>
   </div>
 {{else}}
   <div id='project-needs-details'>
-      <div id="texts">
-        <div id='line-1'>You haven't told us much about your new project.</div>
-        <div id='line-2'>
-          <a href="#" {{action "editProject"}}>
-            Fill out your project details here.
-          </a>
-        </div>
+    <div id="texts">
+      <div id='line-1'>You haven't told us much about your new project.</div>
+      <div id='line-2'>
+        <a href="#" {{action "editProject"}}>
+          Fill out your project details here.
+        </a>
       </div>
-      <div id='graphic'>
-        <img src='/images/projects/pencilandpen.svg'>
-      </div>
+    </div>
+    <div id='graphic'>
+      <img src='/images/projects/pencilandpen.svg'>
+    </div>
   </div>
 {{/if}}
