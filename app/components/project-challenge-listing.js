@@ -7,10 +7,6 @@ export default Component.extend({
   editProjectChallenge: false,
   showConfirmDelete: false,
   
-  
-  
-  
-  
   canEdit: computed('project', function(){
     let currentUser = this.get('currentUser.user');
     let author = this.get('author');
