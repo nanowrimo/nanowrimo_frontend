@@ -1,9 +1,9 @@
 <div class="d-flex align-top">
   <div class="nano-panel with-tabs full-width" id='nano-panel-project'>
     <ul class="nano-panel-tabs">
-      <li>{{link-to 'Profile' 'authenticated.users.show.index'}}</li>
-      <li>{{link-to 'Projects' 'authenticated.users.show.projects' }}</li>
-      <li>{{link-to 'Buddies' 'authenticated.users.show.buddies' }}</li>
+      <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
+      <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
+      <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
     </ul>
     {{#if hasDetails}}  
       <div class ='nano-card' id='project-details-card'>
@@ -26,17 +26,17 @@
               </div>
               <hr>
               <div id='external-links'>
-                {{#if project.playlist_url}}
+                {{#if project.playlistUrl}}
                   <span class='external-link'>
-                    <a href='{{project.playlist_url}}' target='_blank'>
+                    <a href='{{project.playlistUrl}}' target='_blank'>
                       <i class="fa fa-music" aria-hidden="true"></i>
                       Listen to the soundtrack
                     </a>
                   </span>
                 {{/if}}
-                {{#if project.pinterest_url}}
+                {{#if project.pinterestUrl}}
                   <span class='external-link'>
-                    <a href='{{project.pinterest_url}}' target='_blank'>
+                    <a href='{{project.pinterestUrl}}' target='_blank'>
                       <i class="fa fa-pinterest" aria-hidden="true"></i>
                       View the inspiration
                     </a>

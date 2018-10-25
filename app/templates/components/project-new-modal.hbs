@@ -9,7 +9,7 @@
   {{/modal.header}}
   {{#form-for
     data-test-project-form=true
-    afterSubmit=modal.close
+    afterSubmit=(action 'afterSubmit')
     currentStepIndex=formStepOverride
     model=project
     steps=steps

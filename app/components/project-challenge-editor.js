@@ -84,7 +84,18 @@ export default Component.extend({
     return "What " + this.get('isConjugated') + " your goal?"
   }),
   startLabel: computed('pastTense', function() {
-    return "When " + this.get('doConjugated') + " you start?"
+    if (this.get('pastTense')) {
+      return "What was your start date?"
+    } else {
+      return "What's your start date?"
+    }
+  }),
+  durationLabel: computed('pastTense', function() {
+    if (this.get('pastTense')) {
+      return "How many days did you write for?"
+    } else {
+      return "How many days do you want to write for?"
+    }
   }),
   startCountLabel: computed('pastTense', function() {
     return "When " + this.get('doConjugated') + " you start?"
@@ -129,7 +140,7 @@ export default Component.extend({
       this.set('changeset.startCount', 0);
       this.set('changeset.currentCount', 0);
     } else {
-      //set the goals to default to 50K
+      //set the name of the challenge
        this.set('changeset.name', 'My new goal');
       
       //set the goals to default to 50K

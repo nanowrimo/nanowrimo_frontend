@@ -1,0 +1,46 @@
+<div class="nano-card project-challenge-listing-card">
+  <div class="nano-subcard">
+    <div class="nano-subcard-face face-front filled-grey">
+      <div class='project-top-right'>
+        {{#if projectChallenge.isPrimary}}
+          <i class='fa fa-thumb-tack primary-thumb-tack'></i>
+        {{/if}}
+        {{#if canEdit}}
+          <span class='action-dropdown'>
+          {{#bs-dropdown as |dd|}}
+            {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu align='right' as |menu|}}
+              {{#menu.item}}
+                <a href="#" {{action "editProjectChallenge"}}>Edit Project</a>
+              {{/menu.item}}
+               {{menu.divider}}
+              {{#menu.item}}
+                <a href="#" {{action "confirmDelete"}}>Delete</a>
+              {{/menu.item}}
+            {{/dd.menu}}
+          {{/bs-dropdown}}
+          </span>
+        {{/if}}
+      </div>
+      
+      <div class='flex-container'>
+        <div class='title'>{{projectChallenge.name}}</div>
+
+        <div class='project-challenge-progress'>{{project-challenge-progress projectChallenge=projectChallenge}}</div>
+        
+        <div class='filler-image'><img src="{{svg}}"></div>
+        
+      </div>
+    </div>
+  </div>
+  {{project-challenge-edit-modal project=project open=editProject}}
+  {{confirmation-modal
+    yes=deleteConfirmationYesText 
+    no=deleteConfirmationNoText 
+    title=deleteConfirmationTitleText
+    body=deleteConfirmationBodyText 
+    open=showConfirmDelete
+    yesAction=(action "deleteConfirmationYes")
+    noAction=(action "deleteConfirmationNo")
+    }}
+</div>

@@ -9,27 +9,29 @@ export default Controller.extend({
   queryParams: ['addProject'],
 
   addProject: false,
-  projects: alias('model'),
-  sortedProjects: sort('projects', 'selectedSortOption'),
+  projects: alias('user.persistedProjects'),
   sortOptions: null,
   selectedSortOption: null,
   user: null,
 
+  sortedProjects: sort('projects', 'selectedSortOption'),
+  
   canAddProject: computed('currentUser.user.id', 'user.id', function() {
     return this.get('currentUser.user.id') === this.get('user.id');
   }),
 
   init() {
     this._super(...arguments);
-    let options = ['createdAt:desc', 'name'];
+    let options = ['createdAt:desc', 'title:asc'];
     this.set('sortOptions', options);
     this.set('selectedSortOption', [options[0]]);
+   
   },
 
   actions: {
     afterProjectModalClose() {
       this.set('addProject', null);
-      this.send('refreshModel');
+      //this.send('refreshModel');
     },
     openNewProjectModal() {
       if (this.get('canAddProject')) {
@@ -37,7 +39,9 @@ export default Controller.extend({
       }
     },
     setSortSelection(val) {
-       this.set('selectedSortOption', [val]);
+      val = parseInt(val);
+      let option = this.get('sortOptions')[val];
+      this.set('selectedSortOption', [option]);
     }
   }
 });

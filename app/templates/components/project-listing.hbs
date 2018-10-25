@@ -1,11 +1,37 @@
 <div class="nano-card project-listing-card">
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front filled-grey">
-      <div class='project-actions'>
-
+      <div class='project-top-right'>
+        {{#if project.isPrimary}}
+          <i class='fa fa-thumb-tack primary-thumb-tack'></i>
+        {{/if}}
+        {{#if canEdit}}
+          <span class='action-dropdown'>
+          {{#bs-dropdown as |dd|}}
+            {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu align='right' as |menu|}}
+              {{#menu.item}}
+                <a href="#" {{action "editProject"}}>Edit Project</a>
+              {{/menu.item}}
+               {{menu.divider}}
+              {{#menu.item}}
+                <a href="#" {{action "updateCover"}}>Update Cover</a>
+              {{/menu.item}}
+               {{menu.divider}}
+              {{#menu.item}}
+                <a href="#" {{action "viewGoals"}}>View Project Goals</a>
+              {{/menu.item}}
+               {{menu.divider}}
+              {{#menu.item}}
+                <a href="#" {{action "confirmDelete"}}>Delete</a>
+              {{/menu.item}}
+            {{/dd.menu}}
+          {{/bs-dropdown}}
+          </span>
+        {{/if}}
       </div>
       <div class='flex-container'>
-        <div class='project-cover' {{action "openCoverModal"}}>
+        <div class='project-cover' {{action (if canEdit "openCoverModal" 'doNothing')}}>
           <div class='project-cover-clip'>
             <img src="{{project.coverUrl}}">
           </div>
@@ -41,4 +67,14 @@
       </div>
     </div>
   </div>
+  {{project-edit-modal project=project open=editProject}}
+  {{confirmation-modal
+    yes=deleteConfirmationYesText 
+    no=deleteConfirmationNoText 
+    title=deleteConfirmationTitleText
+    body=deleteConfirmationBodyText 
+    open=showConfirmDelete
+    yesAction=(action "deleteConfirmationYes")
+    noAction=(action "deleteConfirmationNo")
+    }}
 </div>

@@ -23,6 +23,7 @@ export default Component.extend({
   referenceTimer: null,
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
+  activeProjectChallenge:null,
 
   feeling1Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 1;
@@ -49,7 +50,11 @@ export default Component.extend({
     }
   }),
   primaryProject: computed("user.primaryProject", function(){
-    return this.get('user.primaryProject');
+    let p = this.get('user.primaryProject');
+    p.activeProjectChallenge.then((data)=>{
+      this.set('activeProjectChallenge', data);
+    });
+    return p;
   }),
 
   init() {
@@ -69,6 +74,7 @@ export default Component.extend({
       this.set('_projectAdditionalInfoShow',false);
       this.send('toggleAdditionalInfo');
     }
+    // load up the activeProjectChallenge
   },
 
 
@@ -191,6 +197,7 @@ export default Component.extend({
       //create a session for the primary project
       let session = this.get('store').createRecord('projectSession');
       session.set('project', project);
+      session.set('projectChallenge', this.get('activeProjectChallenge'));
       session.set('unitType', 0);
       let count = this.get('countValue');
       //do we need to determine the session count based on the total count?
