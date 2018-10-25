@@ -1,9 +1,8 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
 import moment from 'moment';
-
 
 const ProjectChallenge = Model.extend({
   startCount: attr('number'),
@@ -17,6 +16,7 @@ const ProjectChallenge = Model.extend({
   
   challenge: belongsTo('challenge'),
   project: belongsTo('project'),
+  projectSessions: hasMany('projectSession'),
   
   countPerDay: computed('goal', 'duration', function(){
     let g = this.get('goal');
@@ -66,7 +66,12 @@ const ProjectChallenge = Model.extend({
       return 'hours';
     }
   }),
-  
+  count: computed('projectSessions.[]', function(){
+    let pss = this.get('projectSessions');
+    let sum = 0;
+    pss.forEach((ps)=> {sum+=ps.count });
+    return sum;
+  })
 });
 
 export default ProjectChallenge;
