@@ -1,0 +1,128 @@
+{{#bs-modal
+  open=open
+  onShow=(action "onShow")
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    New Goal
+  {{/modal.header}}
+  {{#modal.body}}
+
+    <div class="form-group">
+      <label for='name'>Goal name</label>
+        {{input
+          name="name"
+          disabled=disableName
+          value=projectChallenge.name
+          class='form-control'
+        }}
+      </div>
+      <div class="form-group">
+        <label for='writingType'>What type of goal is this?</label>
+        <div class="select-container">
+          <select id='qritingType' name='writingType' disabled={{if disableWritingType 'disabled' ''}}
+            class='form-control' 
+            onchange={{action 'writingTypeChanged' value="target.value"}}>
+            {{#each optionsForWritingType as |opt|}}
+              <option value={{opt.value}}>
+                {{opt.name}}
+              </option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="side-by-side">
+        <div class="form-group side-by-side-even">
+          <label for='goal'>What is your goal?</label>
+          <input id='goal' name='goal' min='1' type='number' value={{projectChallenge.goal}}  disabled={{if disableDefaultGoal 'disabled' ''}}/>
+         
+        </div>
+        <div class="form-group side-by-side-even">
+          <div class="select-container">
+            <label for='unitType'></label>
+            <select id='unitType' name='unitType' disabled={{if disableWritingType 'disabled' ''}}
+              class='form-control' 
+              onchange={{action 'unitTypeChanged' value="target.value"}}>
+              {{#each optionsForUnitType as |opt|}}
+                <option value={{opt.value}}>
+                  {{opt.name}}
+                </option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="side-by-side">
+        <div class="form-group side-by-side-even">
+
+          <label for='start-date' class='form-group'>What's your start date?</label>
+          <input name='start-date' type='date' class='form-control'
+            oninput={{action "startsAtChanged" value="target.value"}} 
+            value={{displayStartsAt}}
+            disabled={{disableStartEnd}}
+            min='1999-07-01'>
+          
+        </div>
+        <div class="form-group side-by-side-even">
+          <label for='challenge-duration'>How many days do you want to write for?</label>
+          <input type='number' min='1' max='31' value={{newDuration}}
+            class='form-control' 
+            oninput={{action "durationChanged" value="target.value"}}
+            disabled={{disableStartEnd}}
+            >
+        </div>
+      </div>
+      
+      {{!--
+      <div class="side-by-side">
+        <div class="form-group side-by-side-even">
+          {{input
+            label="Count at start"
+            property="startCount"
+            type='number'
+            min=0
+          }}
+        </div>
+        {{#if pastTense}}
+          <div class="form-group side-by-side-even">
+            {{input
+              label="Count at end"
+              property="currentCount"
+              type='number'
+              min=0
+            }}
+          </div>
+        {{/if}}
+      </div>
+      --}}
+      
+      {{#if (and pastTense metGoal)}}
+        <div class="side-by-side {{winDateClass}}">
+          <div class="form-group side-by-side-even">
+
+            <label for='win-date' class='form-group'>When did you win?</label>
+            <input name='win-date' type='date' class='form-control'
+              value={{displayWinAt}}>
+            
+          </div>
+          <div class="form-group side-by-side-even">
+          </div>
+        </div>
+      {{/if}}
+
+
+
+
+    
+
+  {{/modal.body}}
+
+  {{#modal.footer}}
+
+    <input type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
+    <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}}/>
+
+  {{/modal.footer}}
+
+{{/bs-modal}}
