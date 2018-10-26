@@ -28,7 +28,7 @@ const ProjectChallenge = Model.extend({
     let s = moment(this.get('startsAt'));
     let e = moment(this.get('endsAt'));
     let duration = moment.duration(e.diff(s));
-    return duration.asDays();
+    return Math.round(duration.asDays());
   }),
   dates: computed("startsAt", "endsAt", function(){
     let s = moment(this.get('startsAt'));

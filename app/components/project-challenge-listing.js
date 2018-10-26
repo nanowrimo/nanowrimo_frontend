@@ -33,6 +33,7 @@ export default Component.extend({
     editProjectChallenge(){
        this.set('editProjectChallenge', true);
     },
+   
     confirmDelete(){
       //show the delete dialog
       this.set('showConfirmDelete', true);
@@ -40,6 +41,8 @@ export default Component.extend({
     
     deleteConfirmationYes(){
       //TODO: delete this projectChallenge
+      //get the projectChallenge 
+      this.get('projectChallenge').destroyRecord();
       //close the modal
       this.set('showConfirmDelete', false);
     },
