@@ -7,7 +7,8 @@
     </ul>
     <div class='panel-body'>
       <div class='panel-actions'>
-        <button id='create-new-goal-button'>create new goal</button>
+        <button id='create-new-goal-button' {{action 'newProjectChallenge'}}>create new goal</button>
+        
         <div class='right-actions'>
           <select>
             <option value='0'>show all goals</option>
@@ -18,10 +19,12 @@
       </div>
       
       {{#each projectChallenges as |pc|}}
-        {{project-challenge-listing projectChallenge=pc}}
+        {{project-challenge-listing projectChallenge=pc author=author}}
       {{/each}}
 
  
     </div>
   </div>
 </div>
+
+{{project-challenge-new-modal project=project open=newProjectChallenge}}

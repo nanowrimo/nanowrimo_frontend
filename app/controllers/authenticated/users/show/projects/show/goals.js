@@ -3,7 +3,13 @@ import Controller from '@ember/controller';
 import { alias } from '@ember/object/computed';
 
 export default Controller.extend({
+  newProjectChallenge: false,
+  
   projectChallenges: alias('model'),
 
- 
+  actions: {
+    newProjectChallenge(){
+      this.set('newProjectChallenge', true);
+    },
+  }
 });
