@@ -32,6 +32,8 @@ export default Component.extend({
      
     },
     saveProjectChallenge() {
+      //TODO: validate no time overlap with other projects
+      this._validate();
       //hide the modal
       this.set('open', false);
       //assign the project to the project challenge
@@ -70,5 +72,19 @@ export default Component.extend({
     projectChallenge.set('startsAt', now.toDate()); 
     projectChallenge.set('endsAt', now.add(30,'d').toDate()); 
     this.set('newDuration', 30);
+  },
+  _validate(){
+    //get the proposed start and end as moments
+    let startTime = moment(this.get('projectChallenge.startsAt'));
+    let endTime = moment(this.get('projectChallenge.endsAt'));
+    //loop through this project's projectChallenges
+    let pcs = this.get('project.projectChallenges');
+    pcs.forEach((pc)=>{
+      let pcStart = moment(pc.startsAt);
+      let pcEnd = moment(pc.endsAt);
+    });
+    //ensure the startAt isn't in the middle of an existing project
+    let vs = _validateStart();
+    //ensour the endAt isn't in the middle of an existing project
   }
 });
