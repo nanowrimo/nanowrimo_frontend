@@ -14,6 +14,9 @@ export default Controller.extend({
     }
   }),
   projectChallenges: null,
+  user: computed('project.user',function() {
+    return this.get('project.user');
+  }),
   
   
   actions: {

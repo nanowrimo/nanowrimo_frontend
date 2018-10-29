@@ -6,7 +6,10 @@ export default NanoSubcard.extend({
   store: service(),
   cardTitle: null,
   badgeType: null,
+  user: null,
   projectChallenge: null,
+  parentRecomputeBadges: 0,
+  
   badges: computed('badgeType', function() {
     let bt = this.get('badgeType');
     let bs = this.get('store').peekAll('badge');
