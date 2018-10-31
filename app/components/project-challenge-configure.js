@@ -104,13 +104,6 @@ export default Component.extend({
     this.set('newDuration', projectChallenge.duration);
   },
   
-  recomputeEndsAt: function() {
-    let start = moment.utc( this.get('newStartsAt') );
-    let duration = this.get('newDuration');
-    let newEndsAt = start.add(duration, 'days');
-    this.set('projectChallenge.endsAt', newEndsAt.toDate());
-  },
-  
   actions: {
    
   }

@@ -10,7 +10,8 @@ export default Component.extend({
   open: null,
   user: null,
   project: null,
-
+  newPrimaryValue: false,
+  
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
@@ -24,16 +25,16 @@ export default Component.extend({
     return Project.optionsForWritingType;
   }),
 
-  init() {
-    this._super(...arguments);
-    //what doing?
-  },
-
   actions: {
 
     onShow() {
       this.set('open', true);
+      //what doing?
+      if (this.get('project.isNotPrimary')){
+        this.set('project.primary', 0);
+      }
     },
+    
     onHidden() {
       let callback = this.get('onHidden');
       if (callback) {

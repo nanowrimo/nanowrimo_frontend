@@ -57,21 +57,29 @@
         <div class="form-group side-by-side-even">
 
           <label for='start-date' class='form-group'>What's your start date?</label>
-          <input name='start-date' type='date' class='form-control'
+          <input name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
             oninput={{action "startsAtChanged" value="target.value"}} 
             value={{displayStartsAt}}
             disabled={{disableStartEnd}}
             min='1999-07-01'>
-          
+          {{#if validationErrors.startOverlap}}
+            <span class='invalid-feedback'>a goal can't start before another goal ends</span>
+          {{/if}}
         </div>
         <div class="form-group side-by-side-even">
           <label for='challenge-duration'>How many days do you want to write for?</label>
           <input type='number' min='1' max='31' value={{newDuration}}
-            class='form-control' 
+            class='form-control {{if validationErrors.badEnd 'is-invalid' ''}}' 
             oninput={{action "durationChanged" value="target.value"}}
             disabled={{disableStartEnd}}
             >
+             {{#if validationErrors.endOverlap}}
+            <span class='invalid-feedback'>a goal can't end after another goal has started</span>
+          {{/if}}
         </div>
+        {{#if validationErrors.fullOverlap}}
+          <span class='invalid-feedback'>a goal can not take place within another goal</span>
+        {{/if}}
       </div>
       
       {{!--
