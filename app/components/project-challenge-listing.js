@@ -33,7 +33,7 @@ export default Component.extend({
     editProjectChallenge(){
        this.set('editProjectChallenge', true);
     },
-   
+
     confirmDelete(){
       //show the delete dialog
       this.set('showConfirmDelete', true);

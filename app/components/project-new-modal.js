@@ -28,7 +28,6 @@ export default Component.extend({
   unassignedOptionsForChallenges: computed('user.projects.[]','recalculateEvents',function() {
     let newArray = [];
     let acs = this.get('filteredOptionsForChallenges');
-    //console.log(acs.length);
     let ucs = this.get('user.projects');
     acs.forEach(function(ac) {
       let found = false;
@@ -47,6 +46,7 @@ export default Component.extend({
     return newArray;
   }),
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
+  
   associateWithChallenge: computed(function() {
     let challenges = this.get('optionsForChallenges');
     if (challenges.length > 0) {

@@ -1,15 +1,103 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
+import { filterBy, sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import Challenge from 'nanowrimo/models/challenge';
 
 export default Component.extend({
   store: service(),
-  projectChallenge:null,
   newDuration:null,
   displayStartsAt: null,
-
+  validationErrors: null,
+  editing: false,
+  newStartsAt: null,
+  newEndsAt:null,
+  
+  //challenge stuff
+  associateWithChallenge:false,
+  associatedChallenge: null,
+  
+  challengeSortingDesc: Object.freeze(['startsAt:desc']),
+  
+  canEditName: computed('projectChallenge', function(){
+    let pcu = this.get('projectChallenge.user');
+    let pccu = this.get('projectChallenge.challenge.user');
+    return pcu === pccu;
+  }),
+  
+  disableName: computed('canEditName','associateWithChallenge', function(){
+    return !this.get('canEditName') || this.get('associateWithChallenge');
+  }),
+  
+  disableWritingType: computed('associateWithChallenge', function(){
+    let retval = false;
+    //only disable if the associating with a NaNo event AKA eventType: 0
+    if (this.get('associateWithChallenge')) {
+      if (this.get('associatedChallenge.eventType')==0) {
+        retval=true;
+      }
+    }
+    return retval;
+  }),
+  
+  disableStartEnd: computed('associateWithChallenge', function(){
+    let retval = false;
+    //only disable if the associating with a NaNo event AKA eventType: 0
+    if (this.get('associateWithChallenge')) {
+      let et = this.get('associatedChallenge.eventType');
+      if (et==0 || et==1) {
+        retval=true;
+      }
+    }
+    return retval;
+  }),
+  
+  disableGoal: computed('associateWithChallenge', function(){
+    let retval = false;
+    //only disable if the associating with a NaNo event AKA eventType: 0
+    if (this.get('associateWithChallenge')) {
+      if (this.get('associatedChallenge.eventType')==0) {
+        retval=true;
+      }
+    }
+    return retval;
+  }),
+  
+  projectChallengeIsValid: computed('validationErrors', function(){
+    let ve = this.get('validationErrors');
+    if(ve) {
+      let hasError = (ve.startOverlap || ve.endOverlap || ve.fullOverlap);
+      return !hasError;
+    } else {
+      return false;
+    }
+  }),
+  
+  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
+  unassignedOptionsForChallenges: computed('filteredOptionsForChallenges', function() {
+    let newArray = [];
+    let fofcs = this.get('filteredOptionsForChallenges');
+    let pcs = this.get('project.projectChallenges');
+    fofcs.forEach(function(fofc) {
+      let found = false;
+      pcs.forEach(function(pc) {
+        let id = pc.get('challenge.id');
+        if (id === fofc.id) {
+         found = true;
+        }
+      });
+      if (!found) {
+        newArray.push(fofc);
+      }
+    });
+    return newArray;
+  }),
+  optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
+  
+  baseChallenges:  computed(function() {
+    return this.get('store').findAll('challenge');
+  }),
   optionsForWritingType: computed(function() {
     return Challenge.optionsForWritingType;
   }),
@@ -20,24 +108,70 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-    //this._resetProjectChallenge();
+    //get the projectChallenge
+    let pc = this.get('projectChallenge');
+    //we are editing if the projectChallenge has been persisted and has an id
+    if (pc && pc.id ){ 
+      this.set('editting', true);
+      this.set('newDuration', pc.duration);      
+    }
   },
 
   actions: {
-
+     associateChallengeSelect(challengeID) {
+      this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
+    },
+    clickedAssociateCheckbox() {
+      this.toggleProperty("associateWithChallenge");
+      if (this.get('associateWithChallenge')) {
+        //get the challenge
+        if (this.get("associatedChallenge") === null) {
+          //set the challenge id to the id of the first object in options for Challenges
+          this.set('associatedChallenge', this.get('optionsForChallenges.firstObject'));
+        }
+        this._setProjectChallengeFromChallenge();
+        
+      } else {
+        //reset the project Challenge
+        this._resetProjectChallenge();
+      }
+    },
+    
+    goalChange(v) {
+      this.set("projectChallenge.goal", v);
+    },
     onShow() {
-      this._resetProjectChallenge();
+      if( this.get('editting') ){
+        let pc = this.get('projectChallenge');
+        this.set('displayStartsAt', moment(pc.startsAt).format("YYYY-MM-DD"));
+       
+      } else {
+        this._resetProjectChallenge();
+      }
     },
     onHidden() {
-     
+      this.set('open', false);
     },
     saveProjectChallenge() {
-      //hide the modal
-      this.set('open', false);
-      //assign the project to the project challenge
-      let pc = this.get('projectChallenge');
-      pc.set('project', this.get('project'));
-      pc.save();
+      this._validate();
+      if (this.get('projectChallengeIsValid') ){
+        //hide the modal
+        this.set('open', false);
+        //assign the project to the project challenge
+        let pc = this.get('projectChallenge');
+        pc.set('project', this.get('project'));
+        //set the project-challenge starts at
+        pc.set('startsAt', moment(this.get('newStartsAt')).toDate() );
+        pc.set('endsAt', moment(this.get('newEndsAt')).toDate() );
+        //are we associating with an event?
+        if (this.get('associateWithChallenge') ) {
+          pc.set('challenge', this.get('associatedChallenge'));
+        }
+        pc.save();
+      }
+    },
+    closeModal() {
+       this.set('open', false);
     },
     writingTypeChanged(val) {
       this.set('projectChallenge.writingType', val);
@@ -48,14 +182,14 @@ export default Component.extend({
      durationChanged(val) {
       this.set('newDuration', val);
       this.recomputeEndsAt();
+      this._validate();
     },
     startsAtChanged(val) {
       //set the new StartsAt
       let m = moment.utc(val);
       this.set('newStartsAt', m);
-      //set the project-challenge starts at
-      this.set('projectChallenge.startsAt', m.toDate());
       this.recomputeEndsAt();
+      this._validate();
     }
   },
   
@@ -68,7 +202,67 @@ export default Component.extend({
     let now = moment();
     this.set('displayStartsAt', now.format("YYYY-MM-DD"));
     projectChallenge.set('startsAt', now.toDate()); 
+    this.set('newStartsAt', now.toDate());
     projectChallenge.set('endsAt', now.add(30,'d').toDate()); 
+    this.set('newEndsAt', now.toDate());
     this.set('newDuration', 30);
+  },
+  
+  _setProjectChallengeFromChallenge(){
+    let projectChallenge = this.get('projectChallenge');
+    let challenge = this.get('associatedChallenge');
+    projectChallenge.set('name',challenge.name);
+    projectChallenge.set('unitType',"0");
+    projectChallenge.set('goal',challenge.defaultGoal);
+    let start = moment.utc(challenge.startsAt);
+    this.set('displayStartsAt', start.format("YYYY-MM-DD"));
+    projectChallenge.set('startsAt', challenge.startsAt); 
+    
+    projectChallenge.set('endsAt', challenge.endsAt); 
+    this.set('newEndsAt', challenge.endsAt);
+    this.set('newDuration', challenge.duration);
+  },
+  
+   recomputeEndsAt: function() {
+    let start = moment.utc( this.get('newStartsAt') );
+    let duration = this.get('newDuration');
+    let newEndsAt = start.add(duration, 'days');
+    this.set('newEndsAt', newEndsAt.toDate());
+  },
+  
+  _validate(){
+    //get the current projectChallenge
+    let currentpc = this.get('projectChallenge');
+    let errors = {"startOverlap":false, "endOverlap": false, "fullOverlap":false, "badEnd":false, "badStart":false };
+    //get the proposed start and end as moments
+    let startTime = moment(this.get('newStartsAt'));
+    let endTime = moment(this.get('newEndsAt'));
+    //loop through this project's projectChallenges
+    let pcs = this.get('project.projectChallenges');
+    
+    pcs.forEach((pc)=>{
+      //don't validate against self
+      if (pc !== currentpc) {
+        let pcStart = moment(pc.startsAt);
+        let pcEnd = moment(pc.endsAt);
+        //check for a start overlap
+        if (startTime.isBefore(pcEnd) && startTime.isAfter(pcStart) ) {
+          errors.startOverlap = true;
+          errors.badStart=true;
+        }
+        //check for an end overlap
+        if (endTime.isBefore(pcEnd) && endTime.isAfter(pcStart) ) {
+          errors.endOverlap = true;
+          errors.badEnd=true;
+        }
+        //check for the full overlap
+        if (startTime.isBefore(pcStart) && endTime.isAfter(pcEnd) ) {
+          errors.fullOverlap = true;
+          errors.badStart=true;
+          errors.badEnd=true;
+        }
+      }
+    });
+    this.set('validationErrors', errors);
   }
 });
