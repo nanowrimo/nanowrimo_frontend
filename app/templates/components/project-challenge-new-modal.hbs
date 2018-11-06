@@ -5,10 +5,35 @@
   as |modal|
 }}
   {{#modal.header closeButton=false}}
-    New Goal
+    {{#if editting }}
+      Edit Goal
+    {{else}}
+      New Goal
+    {{/if}}
   {{/modal.header}}
   {{#modal.body}}
-
+    {{#if optionsForChallenges}}
+      <div class="form-group">
+        {{input class= 'form-control' 
+          id='associateCheckbox'
+          name='associateCheckbox'
+          type="checkbox"
+          checked=associateWithChallenge
+          change=(action "clickedAssociateCheckbox")
+        }}
+        <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
+      </div>
+      <div class="form-group {{hideClass}}">
+        <div class="select-container">
+          <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+            {{#each optionsForChallenges as |c|}}
+              <option value="{{c.id}}" selected={{if (eq c.id associatedChallengeId) 'true'}}>{{c.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    
+    {{/if}}          
     <div class="form-group">
       <label for='name'>Goal name</label>
         {{input
@@ -35,7 +60,7 @@
       <div class="side-by-side">
         <div class="form-group side-by-side-even">
           <label for='goal'>What is your goal?</label>
-          <input id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableDefaultGoal 'disabled' ''}}/>
+          <input id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
          
         </div>
         <div class="form-group side-by-side-even">
