@@ -75,7 +75,7 @@ export default Component.extend({
   }),
   
   filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  unassignedOptionsForChallenges: computed('filteredOptionsForChallenges', function() {
+  unassignedOptionsForChallenges: computed('project.projectChallenges.[]', 'filteredOptionsForChallenges', function() {
     let newArray = [];
     let fofcs = this.get('filteredOptionsForChallenges');
     let pcs = this.get('project.projectChallenges');
@@ -84,7 +84,7 @@ export default Component.extend({
       pcs.forEach(function(pc) {
         let id = pc.get('challenge.id');
         if (id === fofc.id) {
-         found = true;
+          found = true;
         }
       });
       if (!found) {
@@ -168,6 +168,8 @@ export default Component.extend({
           pc.set('challenge', this.get('associatedChallenge'));
         }
         pc.save();
+        //reset the projectchallenge
+        this._resetProjectChallenge();
       }
     },
     closeModal() {
@@ -194,6 +196,9 @@ export default Component.extend({
   },
   
   _resetProjectChallenge(){
+    if (this.get('associateWithChallenge')) {
+      this.toggleProperty("associateWithChallenge");
+    }
     let projectChallenge = this.get('store').createRecord('projectChallenge');
     this.set('projectChallenge', projectChallenge);
     projectChallenge.set('name',"My New Goal");
