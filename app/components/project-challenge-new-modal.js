@@ -75,7 +75,7 @@ export default Component.extend({
   }),
   
   filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  unassignedOptionsForChallenges: computed('filteredOptionsForChallenges', function() {
+  unassignedOptionsForChallenges: computed('project.projectChallenges.[]', 'filteredOptionsForChallenges', function() {
     let newArray = [];
     let fofcs = this.get('filteredOptionsForChallenges');
     let pcs = this.get('project.projectChallenges');
@@ -84,7 +84,7 @@ export default Component.extend({
       pcs.forEach(function(pc) {
         let id = pc.get('challenge.id');
         if (id === fofc.id) {
-         found = true;
+          found = true;
         }
       });
       if (!found) {
@@ -161,13 +161,15 @@ export default Component.extend({
         let pc = this.get('projectChallenge');
         pc.set('project', this.get('project'));
         //set the project-challenge starts at
-        pc.set('startsAt', moment(this.get('newStartsAt')).toDate() );
-        pc.set('endsAt', moment(this.get('newEndsAt')).toDate() );
+        pc.set('startsAt', moment.utc(this.get('newStartsAt')).toDate() );
+        pc.set('endsAt', moment.utc(this.get('newEndsAt')).toDate() );
         //are we associating with an event?
         if (this.get('associateWithChallenge') ) {
           pc.set('challenge', this.get('associatedChallenge'));
         }
         pc.save();
+        //reset the projectchallenge
+        this._resetProjectChallenge();
       }
     },
     closeModal() {
@@ -194,6 +196,9 @@ export default Component.extend({
   },
   
   _resetProjectChallenge(){
+    if (this.get('associateWithChallenge')) {
+      this.toggleProperty("associateWithChallenge");
+    }
     let projectChallenge = this.get('store').createRecord('projectChallenge');
     this.set('projectChallenge', projectChallenge);
     projectChallenge.set('name',"My New Goal");
@@ -219,7 +224,8 @@ export default Component.extend({
     projectChallenge.set('startsAt', challenge.startsAt); 
     
     projectChallenge.set('endsAt', challenge.endsAt); 
-    this.set('newEndsAt', challenge.endsAt);
+    this.set('newEndsAt', moment.utc(challenge.endsAt).toDate());
+    this.set('newStartsAt', moment.utc(challenge.startsAt).toDate());
     this.set('newDuration', challenge.duration);
   },
   
@@ -235,8 +241,8 @@ export default Component.extend({
     let currentpc = this.get('projectChallenge');
     let errors = {"startOverlap":false, "endOverlap": false, "fullOverlap":false, "badEnd":false, "badStart":false };
     //get the proposed start and end as moments
-    let startTime = moment(this.get('newStartsAt'));
-    let endTime = moment(this.get('newEndsAt'));
+    let startTime = moment.utc(this.get('newStartsAt'));
+    let endTime = moment.utc(this.get('newEndsAt'));
     //loop through this project's projectChallenges
     let pcs = this.get('project.projectChallenges');
     
