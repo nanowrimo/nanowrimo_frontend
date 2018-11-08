@@ -6,6 +6,7 @@ import moment from 'moment';
 import Challenge from 'nanowrimo/models/challenge';
 
 export default Component.extend({
+  currentUser: service(),
   store: service(),
   newDuration:null,
   displayStartsAt: null,
@@ -13,18 +14,21 @@ export default Component.extend({
   editing: false,
   newStartsAt: null,
   newEndsAt:null,
-  
   //challenge stuff
   associateWithChallenge:false,
   associatedChallenge: null,
   
-  challengeSortingDesc: Object.freeze(['startsAt:desc']),
-  
   canEditName: computed('projectChallenge', function(){
-    let pcu = this.get('projectChallenge.user');
-    let pccu = this.get('projectChallenge.challenge.user');
-    return pcu === pccu;
+    if (this.get('editing') ){
+      let cuid = this.get('projectChallenge.challenge.userId');
+      let uid = this.get('currentUser.user.id');
+      return cuid === uid;
+    } else {
+      return true;
+    }
   }),
+  
+  challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
   disableName: computed('canEditName','associateWithChallenge', function(){
     return !this.get('canEditName') || this.get('associateWithChallenge');
@@ -38,6 +42,9 @@ export default Component.extend({
         retval=true;
       }
     }
+    if (this.get('projectChallenge.challenge.eventType')==0) {
+      retval=true;
+    }
     return retval;
   }),
   
@@ -50,6 +57,9 @@ export default Component.extend({
         retval=true;
       }
     }
+    if (this.get('projectChallenge.challenge.isNaNoEvent')){
+      retval=true;
+    }
     return retval;
   }),
   
@@ -60,6 +70,9 @@ export default Component.extend({
       if (this.get('associatedChallenge.eventType')==0) {
         retval=true;
       }
+    }
+    if (this.get('projectChallenge.challenge.eventType')===0){
+      retval=true;
     }
     return retval;
   }),
@@ -108,13 +121,7 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-    //get the projectChallenge
-    let pc = this.get('projectChallenge');
-    //we are editing if the projectChallenge has been persisted and has an id
-    if (pc && pc.id ){ 
-      this.set('editting', true);
-      this.set('newDuration', pc.duration);      
-    }
+   
   },
 
   actions: {
@@ -141,14 +148,23 @@ export default Component.extend({
       this.set("projectChallenge.goal", v);
     },
     onShow() {
+      //get the projectChallenge
+      let pc = this.get('projectChallenge');
+      //we are editing if the projectChallenge has been persisted and has an id
+      if (pc && pc.id ){ 
+        this.set('editting', true);
+        this.set('newDuration', pc.duration);  
+      }
+      
       if( this.get('editting') ){
         let pc = this.get('projectChallenge');
-        this.set('displayStartsAt', moment(pc.startsAt).format("YYYY-MM-DD"));
+        this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
        
       } else {
         this._resetProjectChallenge();
       }
     },
+    
     onHidden() {
       this.set('open', false);
     },
@@ -194,7 +210,7 @@ export default Component.extend({
       this._validate();
     }
   },
-  
+
   _resetProjectChallenge(){
     if (this.get('associateWithChallenge')) {
       this.toggleProperty("associateWithChallenge");

@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { hasMany } from 'ember-data/relationships';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
 import moment from 'moment';
 
@@ -10,6 +10,7 @@ const Challenge = Model.extend({
   startsAt: attr('date'),
   winAllowedAt: attr('date'),
   eventType: attr('number'),
+  userId: attr('number'),
   //eventType is defined in the api as:
   // 0 = NaNoWriMo
   // 1 = Camp
@@ -26,6 +27,7 @@ const Challenge = Model.extend({
   // 0 = words
   // 1 = hours
   
+  user: belongsTo('user'),
   projects: hasMany('project'),
   
   // Used here but not on API side

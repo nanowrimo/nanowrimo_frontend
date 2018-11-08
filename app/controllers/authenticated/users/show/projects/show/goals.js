@@ -23,7 +23,7 @@ export default Controller.extend({
           let end = moment(pc.endsAt);
           if (ft==1) {
             //hasn't ended
-            if (now.isBefore(end) ){
+            if (now.isSameOrBefore(end) ){
               array.push(pc);
             }
           } else {
