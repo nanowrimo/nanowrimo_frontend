@@ -121,7 +121,13 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-   
+    //get the projectChallenge
+    let pc = this.get('projectChallenge');
+    //we are editing if the projectChallenge has been persisted and has an id
+    if (pc && pc.id ){ 
+      this.set('editing', true);
+      this.set('newDuration', pc.duration);  
+    }
   },
 
   actions: {
@@ -148,15 +154,7 @@ export default Component.extend({
       this.set("projectChallenge.goal", v);
     },
     onShow() {
-      //get the projectChallenge
-      let pc = this.get('projectChallenge');
-      //we are editing if the projectChallenge has been persisted and has an id
-      if (pc && pc.id ){ 
-        this.set('editting', true);
-        this.set('newDuration', pc.duration);  
-      }
-      
-      if( this.get('editting') ){
+      if( this.get('editing') ){
         let pc = this.get('projectChallenge');
         this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
        

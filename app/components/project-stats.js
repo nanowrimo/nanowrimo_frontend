@@ -35,7 +35,7 @@ export default Component.extend({
       
       //loop the sessions
       css.forEach((cs)=>{
-        var k = moment(cs.createdAt).format("YYYY-MM-DD");
+        var k = moment.utc(cs.createdAt).format("YYYY-MM-DD");
         aggs[k]+=cs.count;
       });
       return aggs;
@@ -86,12 +86,12 @@ export default Component.extend({
   }),
   
   count: computed('challengeSessions','project.projectSessions.[]', function() {
-  let sessions = this.get('challengeSessions');
-  let sum = 0;
-  if (sessions) {
-    sessions.forEach((s)=>{ sum+= s.count});
-  }
-  return sum;
+    let sessions = this.get('challengeSessions');
+    let sum = 0;
+    if (sessions) {
+      sessions.forEach((s)=>{ sum+= s.count});
+    }
+    return sum;
   }),
   
   //
