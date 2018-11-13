@@ -199,7 +199,7 @@ export default Component.extend({
       session.set('project', project);
       session.set('projectChallenge', this.get('activeProjectChallenge'));
       session.set('unitType', 0);
-      let count = this.get('countValue');
+      let count = parseInt( this.get('countValue'));
       //do we need to determine the session count based on the total count?
       if (this.get('countType')===0) {
         //session count is based on total
