@@ -59,14 +59,19 @@
           {{stats-my-overall-progress userDailyTotals=userDailyTotals projectChallenge=projectChallenge class="g3-sub2 g2-sub2"}}
         {{/if}}
       </div>
-
-      <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
-        {{stats-when-i-write hourAggregates=userHourAggregates}}
-      </div>      
-{{!--     
-      <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
-        {{stats-my-daily-word-count}}
-      </div>
+      
+      {{#if hasHourAggregates}}
+        <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
+          {{stats-when-i-write hourAggregates=userHourAggregates}}
+        </div>   
+      {{/if}}   
+     
+      {{#if hasDailyAggregates}}
+        <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
+          {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
+        </div>
+      {{/if}}
+{{!--      
       <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
         {{stats-where-i-write}}
       </div>

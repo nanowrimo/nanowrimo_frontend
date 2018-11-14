@@ -21,26 +21,44 @@ export default Component.extend({
     };
     return data;
   }),
-  
+  hasDailyAggregates: computed('userDailyAggregates.[]', function(){
+    let das = this.get('userDailyAggregates');
+    if (das) {
+      return true;
+    }else{
+      return false;
+    }
+  }),
   userDailyAggregates: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
     let dates = this.get('projectChallenge.dates');
     if(dates) {
+      let today = moment().format("YYYY-MM-DD");
+      let todayFound = false;
       //create an aggregates array
       let aggs = {};
       for (var i = 0; i < dates.length; i++) {
         let key = dates[i];
-        aggs[key] = 0;
+        if (todayFound) {
+          aggs[key] = null;
+        } else {
+          aggs[key] = 0;
+        }
+        if (key == today) {
+          todayFound = true;
+        }
       }
       
       //loop the sessions
       css.forEach((cs)=>{
-        var k = moment.utc(cs.createdAt).format("YYYY-MM-DD");
+        var k = moment(cs.createdAt).format("YYYY-MM-DD");
         aggs[k]+=cs.count;
       });
       return aggs;
     }
   }),
+  
+  // determine which hours of the day the user is writing during 
   userHourAggregates: computed('challengeSessions.[]',function() {
     //get the sessions
     let hoursObject = Array(24);
@@ -67,6 +85,20 @@ export default Component.extend({
       }
     });
     return hoursObject;
+  }),
+  
+  // determine if there is data in the userHourAggregates
+  hasHourAggregates: computed('userHourAggregates.[]', function(){
+    let aggs = this.get('userHourAggregates');
+    let retval = false;
+    //loop!
+    for (var i=0; i < aggs.length; i++) {
+      if(aggs[i] > 0) {
+        retval = true;
+        break;
+      }
+    }
+    return retval;
   }),
   userDailyTotals: computed('userDailyAggregates.[]', function() {
     let udas = this.get('userDailyAggregates');

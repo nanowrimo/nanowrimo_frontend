@@ -6,19 +6,14 @@ export default ChartBaseComponent.extend({
   countData: computed('myChartType',function() {
     let cData = [
       {
-        name: 'My word count',
+        name: 'My count',
         type: get(this,'myChartType'),
         color: '#2f3061',
         
-        data: [500,800,0,50,900,3000,456,789,987,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
-      },
-      {
-        name: "Dave Williams' word count",
-        type: 'spline',
-        color: '#edbb82',
-        
-        data: [0, 0, 400, 1667, 1667, 99, 3000, 444, 555,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
-      },
+        data: this.get('userData')
+      }
+      // TODO: if making comparisons with other users, push that data onto the cData 
+     
     ];
     return cData;
   }),
@@ -40,7 +35,7 @@ export default ChartBaseComponent.extend({
       },
       title: null,
       xAxis: {
-        categories: ['Nov 1', 'Nov 2', 'Nov 3', 'Nov 4', 'Nov 5', 'Nov 6', 'Nov 7', 'Nov 8', 'Today', 'Nov 10', 'Nov 11', 'Nov 12', 'Nov 13', 'Nov 14', 'Nov 15', 'Nov 16','Nov 17', 'Nov 18', 'Nov 19', 'Nov 20', 'Nov 21', 'Nov 22', 'Nov 23', 'Nov 24', 'Nov 25', 'Nov 26', 'Nov 27', 'Nov 28', 'Nov 29', 'Nov 30'],
+        categories: this.get('xAxisRange'),
         tickPositions: [0,8,29],
         tickLength: 0,
         title: null,
@@ -100,7 +95,18 @@ export default ChartBaseComponent.extend({
   chartData: computed('countData',function() {
     let cData = get(this,'countData');
     return cData;
-  })
+  }),
   
-
+  userData: computed('userDailyAggregates.[]', function(){
+    let aggs = this.get('userDailyAggregates');
+    if(aggs) {
+      return Object.values(aggs);
+    }
+  }),
+  xAxisRange: computed('userDailyAggregates.[]', function(){
+    let aggs = this.get('userDailyAggregates');
+    if(aggs) {
+      return Object.keys(aggs);
+    }
+  })
 });
