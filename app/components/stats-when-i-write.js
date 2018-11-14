@@ -3,13 +3,12 @@ import { get,computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
   // The data must be an array of 24 numbers, one for each hour of the day, beginning at midnight
-  countData: computed(function() {
-    let cData = [0,0,0,0,50,200, 300, 900, 1000, 1100, 1200, 1250, 800, 500, 300, 200, 100, 50, 0, 0, 0, 0,0,0];
-    return cData;
+  countData: computed('hourAggregates.[]', function() {
+    return this.get('hourAggregates');
   }),
   
   // Finds the hour with the maximum count
-  maxHour: computed(function() {
+  maxHour: computed('countData.[]', function() {
     var cData = get(this,'countData');
     var mVal = 0;
     var mHour = 0;

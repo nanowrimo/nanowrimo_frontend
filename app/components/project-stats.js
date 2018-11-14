@@ -41,7 +41,33 @@ export default Component.extend({
       return aggs;
     }
   }),
-
+  userHourAggregates: computed('challengeSessions.[]',function() {
+    //get the sessions
+    let hoursObject = Array(24);
+    hoursObject.fill(0);
+    let sessions = this.get('challengeSessions');
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      //is there a start and end?
+      if(s.start && s.end) {
+        let start = moment(s.start);
+        let end = moment(s.end);
+        //get the hour of the start
+        var h1 = start.hour();
+        var hn = end.hour();
+        //how many hours are we dealing with?
+        var numHours = 1 + (hn - h1);
+        var countPerHour = s.count/numHours;
+        for (var x = h1; x <= hn; x++) {
+          hoursObject[x] += countPerHour;
+        }
+      } else {
+        //TODO: get some data based on when the session was created 
+        
+      }
+    });
+    return hoursObject;
+  }),
   userDailyTotals: computed('userDailyAggregates.[]', function() {
     let udas = this.get('userDailyAggregates');
     let dates = this.get('projectChallenge.dates');
@@ -124,8 +150,8 @@ export default Component.extend({
   let newSessions = [];
   sessions.forEach((s)=>{
     var sCreated = moment(s.createdAt);
-      if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
-    newSessions.push(s);
+    if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
+      newSessions.push(s);
     }
   });
   //loop the sessions 
