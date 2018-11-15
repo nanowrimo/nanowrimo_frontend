@@ -8,12 +8,15 @@ import moment from 'moment';
 export default Component.extend({
   currentUser: service(),
   session: service(),
+  store: service(),
   
   project: null,
   projectChallenge: null,
   projectChallenges: null,
   
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
+    //now is a good time to update the whereIwrite
+    this._updateWhereIWrite();
     var data = {
       name: this.get('currentUser.user.name'),
       countToday: this.get('todaysCount'),
@@ -21,6 +24,7 @@ export default Component.extend({
     };
     return data;
   }),
+  
   hasDailyAggregates: computed('userDailyAggregates.[]', function(){
     let das = this.get('userDailyAggregates');
     if (das) {
@@ -175,21 +179,20 @@ export default Component.extend({
   }),
   
   challengeSessions: computed('projectChallenge','project.projectSessions.[]', function() {
-  let cStart = moment( this.get('projectChallenge.startsAt') );
-  let cEnd = moment( this.get('projectChallenge.endsAt') );
-  //get the projectSessions created during the projectChallenge
-  let sessions = this.get('project.projectSessions');
-  let newSessions = [];
-  sessions.forEach((s)=>{
-    var sCreated = moment(s.createdAt);
-    if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
-      newSessions.push(s);
-    }
-  });
-  //loop the sessions 
-  return newSessions;
+    let cStart = moment( this.get('projectChallenge.startsAt') );
+    let cEnd = moment( this.get('projectChallenge.endsAt') );
+    //get the projectSessions created during the projectChallenge
+    let sessions = this.get('project.projectSessions');
+    let newSessions = [];
+    sessions.forEach((s)=>{
+      var sCreated = moment(s.createdAt);
+      if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
+        newSessions.push(s);
+      }
+    });
+    return newSessions;
   }),
-  
+
   init(){
     this._super(...arguments);
     var p = this.get('currentUser.user.primaryProject');
@@ -254,6 +257,31 @@ export default Component.extend({
       alert('Failed to get aggregates');
     });
      
+  },
+  _updateWhereIWrite: function(){
+    //default to null
+    this.set('whereIWrite', null);
+    let sessions = this.get('challengeSessions');
+    let whereObj = {0:0};
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      //is there a where?
+      if(s.where) {
+        if (whereObj[s.where]>0) {
+          whereObj[s.where]+=s.count;
+        }else{
+          whereObj[s.where]=s.count;
+        }
+      }
+    });
+    //determine the key with the max value 
+    let max = Object.keys(whereObj).reduce((a, b) => whereObj[a] > whereObj[b] ? a : b);
+    if (max > 0) {
+      //there is a max that is not 0, find the dang location name
+      this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
+        this.set('whereIWrite', loc.name);
+      });   
+    }
   }
   
 });

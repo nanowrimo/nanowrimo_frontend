@@ -71,10 +71,12 @@
           {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
         </div>
       {{/if}}
+      {{#if whereIWrite}}
+        <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
+          {{stats-where-i-write whereIWrite=whereIWrite}}
+        </div>
+      {{/if}}
 {{!--      
-      <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
-        {{stats-where-i-write}}
-      </div>
       <div class="nano-card g3-col2 g3-row4 g2-col1 g2-row5 flippable">
         {{stats-my-daily-count}}
       </div>
