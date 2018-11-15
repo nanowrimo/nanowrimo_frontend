@@ -1,13 +1,11 @@
 <div class="nano-subcard-face face-front filled-grey">
   <div class="nano-subcard-header">
     <div class="corner-label">When I'll Finish</div>
-    <div class="nano-subcard-toggle" {{action "toggleSubcard"}}>
-      <div>{{fa-icon "list-ul"}}</div>
-    </div>
+    
   </div>
   <div class="nano-subcard-content">
     <div class="nano-card-icon"><img src="/images/cards/mountain.svg" /></div>
-    <div class="icon-summary">At this rate you'll be done on<div class="max-color">November 28!</div></div>
+    <div class="icon-summary">At this rate you'll be done on<div class="max-color">{{finishDate}}!</div></div>
   </div>
 </div>
 <div class="nano-subcard-face face-back filled-grey">

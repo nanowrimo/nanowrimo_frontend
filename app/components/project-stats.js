@@ -173,7 +173,14 @@ export default Component.extend({
     }
     return sum;
   }),
-  
+  projectedFinishDate: computed('challengeSessions.[]', function() {
+    //  today's date + (goal remaining / average per day) days  
+    let today = moment();
+    let remaining = this.get('goal') - this.get('count');
+    let daysToGo = remaining/this.get('dailyAverage');
+    today.add(daysToGo, 'd');
+    return today.format("MMMM d");
+  }),
   //
   todaysSessions: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
