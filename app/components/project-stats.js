@@ -126,7 +126,22 @@ export default Component.extend({
       return totals;
     }
   }),
-  
+  dailyAverage: computed('userDailyAggregates.[]', function(){
+    let aggs = this.get('userDailyAggregates');
+    if (aggs) {
+      let values = Object.values(aggs);
+      let sum = 0;
+      for (var i=0 ; i < values.length ; i++) {
+        let val = values[i];
+        if(val==null) {
+          break;
+        }
+        sum+=val;
+      }
+      let average = parseInt(sum/i)
+      return average;
+    }
+  }),
   userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
     //create the data thingy for the current user 
     let percent = parseInt(this.get('count')*100/this.get('goal'));
@@ -145,6 +160,9 @@ export default Component.extend({
   }),
   goalUnit: computed('projectChallenge', function() {
    return this.get('projectChallenge.unitTypePlural'); 
+  }),
+  goalUnitSingular: computed('projectChallenge', function() {
+   return this.get('projectChallenge.unitTypeSingular'); 
   }),
   
   count: computed('challengeSessions','project.projectSessions.[]', function() {

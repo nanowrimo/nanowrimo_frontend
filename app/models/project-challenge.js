@@ -69,6 +69,14 @@ const ProjectChallenge = Model.extend({
       return 'hours';
     }
   }),
+  unitTypeSingular: computed("unitType", function(){
+    let type = this.get('unitType');
+    if (type===0) {
+      return "word";
+    } else if (type===1) {
+      return 'hour';
+    }
+  }),
   count: computed('projectSessions.[]', function(){
     let pss = this.get('projectSessions');
     let sum = 0;
