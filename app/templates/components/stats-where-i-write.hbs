@@ -3,7 +3,11 @@
     <div class="corner-label">Where I Write</div>
   </div>
   <div class="nano-subcard-content">
-    <div class="nano-card-icon"><img src="/images/cards/house.svg" /></div>
-    <div class="icon-summary">You've written mostly<div class="max-color">at home!</div></div>
+    <div class="nano-card-icon">
+    {{#if svgPath}}
+      <img src="{{svgPath}}" />
+    {{/if}}
+    </div>
+    <div class="icon-summary">You've written mostly<div class="max-color">at {{whereIWrite}}!</div></div>
   </div>
 </div>

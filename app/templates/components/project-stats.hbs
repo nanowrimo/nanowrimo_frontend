@@ -59,22 +59,32 @@
           {{stats-my-overall-progress userDailyTotals=userDailyTotals projectChallenge=projectChallenge class="g3-sub2 g2-sub2"}}
         {{/if}}
       </div>
-{{!--
-      <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
-        {{stats-when-i-write}}
-      </div>
-      <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
-        {{stats-my-daily-word-count}}
-      </div>
-      <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
-        {{stats-where-i-write}}
-      </div>
+      
+      {{#if hasHourAggregates}}
+        <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
+          {{stats-when-i-write hourAggregates=userHourAggregates}}
+        </div>   
+      {{/if}}   
+     
+      {{#if hasDailyAggregates}}
+        <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
+          {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
+        </div>
+      {{/if}}
+      {{#if whereIWrite}}
+        <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
+          {{stats-where-i-write whereIWrite=whereIWrite}}
+        </div>
+      {{/if}}
+     
       <div class="nano-card g3-col2 g3-row4 g2-col1 g2-row5 flippable">
-        {{stats-my-daily-count}}
+        {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular}}
       </div>
+     
       <div class="nano-card g3-col3 g3-row4 g2-col2 g2-row5 flippable">
-        {{stats-when-ill-finish}}
+        {{stats-when-ill-finish finishDate=projectedFinishDate}}
       </div>
+{{!--   
       <div class="nano-card g3-col1 g3-row5 g2-col1 g2-row6 flippable">
         {{stats-my-writing-speed}}
       </div>

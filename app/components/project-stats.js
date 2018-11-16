@@ -8,12 +8,15 @@ import moment from 'moment';
 export default Component.extend({
   currentUser: service(),
   session: service(),
+  store: service(),
   
   project: null,
   projectChallenge: null,
   projectChallenges: null,
   
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
+    //now is a good time to update the whereIwrite
+    this._updateWhereIWrite();
     var data = {
       name: this.get('currentUser.user.name'),
       countToday: this.get('todaysCount'),
@@ -22,26 +25,85 @@ export default Component.extend({
     return data;
   }),
   
+  hasDailyAggregates: computed('userDailyAggregates.[]', function(){
+    let das = this.get('userDailyAggregates');
+    if (das) {
+      return true;
+    }else{
+      return false;
+    }
+  }),
   userDailyAggregates: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
     let dates = this.get('projectChallenge.dates');
     if(dates) {
+      let today = moment().format("YYYY-MM-DD");
+      let todayFound = false;
       //create an aggregates array
       let aggs = {};
       for (var i = 0; i < dates.length; i++) {
         let key = dates[i];
-        aggs[key] = 0;
+        if (todayFound) {
+          aggs[key] = null;
+        } else {
+          aggs[key] = 0;
+        }
+        if (key == today) {
+          todayFound = true;
+        }
       }
       
       //loop the sessions
       css.forEach((cs)=>{
-        var k = moment.utc(cs.createdAt).format("YYYY-MM-DD");
+        var k = moment(cs.createdAt).format("YYYY-MM-DD");
         aggs[k]+=cs.count;
       });
       return aggs;
     }
   }),
-
+  
+  // determine which hours of the day the user is writing during 
+  userHourAggregates: computed('challengeSessions.[]',function() {
+    //get the sessions
+    let hoursObject = Array(24);
+    hoursObject.fill(0);
+    let sessions = this.get('challengeSessions');
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      //is there a start and end?
+      if(s.start && s.end) {
+        let start = moment(s.start);
+        let end = moment(s.end);
+        //get the hour of the start
+        var h1 = start.hour();
+        var hn = end.hour();
+        //how many hours are we dealing with?
+        var numHours = 1 + (hn - h1);
+        var countPerHour = s.count/numHours;
+        for (var x = h1; x <= hn; x++) {
+          hoursObject[x] += countPerHour;
+        }
+      } else {
+        //TODO: get some data based on when the session was created 
+        
+      }
+    });
+    return hoursObject;
+  }),
+  
+  // determine if there is data in the userHourAggregates
+  hasHourAggregates: computed('userHourAggregates.[]', function(){
+    let aggs = this.get('userHourAggregates');
+    let retval = false;
+    //loop!
+    for (var i=0; i < aggs.length; i++) {
+      if(aggs[i] > 0) {
+        retval = true;
+        break;
+      }
+    }
+    return retval;
+  }),
   userDailyTotals: computed('userDailyAggregates.[]', function() {
     let udas = this.get('userDailyAggregates');
     let dates = this.get('projectChallenge.dates');
@@ -64,7 +126,22 @@ export default Component.extend({
       return totals;
     }
   }),
-  
+  dailyAverage: computed('userDailyAggregates.[]', function(){
+    let aggs = this.get('userDailyAggregates');
+    if (aggs) {
+      let values = Object.values(aggs);
+      let sum = 0;
+      for (var i=0 ; i < values.length ; i++) {
+        let val = values[i];
+        if(val==null) {
+          break;
+        }
+        sum+=val;
+      }
+      let average = parseInt(sum/i)
+      return average;
+    }
+  }),
   userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
     //create the data thingy for the current user 
     let percent = parseInt(this.get('count')*100/this.get('goal'));
@@ -84,6 +161,9 @@ export default Component.extend({
   goalUnit: computed('projectChallenge', function() {
    return this.get('projectChallenge.unitTypePlural'); 
   }),
+  goalUnitSingular: computed('projectChallenge', function() {
+   return this.get('projectChallenge.unitTypeSingular'); 
+  }),
   
   count: computed('challengeSessions','project.projectSessions.[]', function() {
     let sessions = this.get('challengeSessions');
@@ -93,7 +173,14 @@ export default Component.extend({
     }
     return sum;
   }),
-  
+  projectedFinishDate: computed('challengeSessions.[]', function() {
+    //  today's date + (goal remaining / average per day) days  
+    let today = moment();
+    let remaining = this.get('goal') - this.get('count');
+    let daysToGo = remaining/this.get('dailyAverage');
+    today.add(daysToGo, 'd');
+    return today.format("MMMM d");
+  }),
   //
   todaysSessions: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
@@ -117,21 +204,20 @@ export default Component.extend({
   }),
   
   challengeSessions: computed('projectChallenge','project.projectSessions.[]', function() {
-  let cStart = moment( this.get('projectChallenge.startsAt') );
-  let cEnd = moment( this.get('projectChallenge.endsAt') );
-  //get the projectSessions created during the projectChallenge
-  let sessions = this.get('project.projectSessions');
-  let newSessions = [];
-  sessions.forEach((s)=>{
-    var sCreated = moment(s.createdAt);
+    let cStart = moment( this.get('projectChallenge.startsAt') );
+    let cEnd = moment( this.get('projectChallenge.endsAt') );
+    //get the projectSessions created during the projectChallenge
+    let sessions = this.get('project.projectSessions');
+    let newSessions = [];
+    sessions.forEach((s)=>{
+      var sCreated = moment(s.createdAt);
       if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
-    newSessions.push(s);
-    }
-  });
-  //loop the sessions 
-  return newSessions;
+        newSessions.push(s);
+      }
+    });
+    return newSessions;
   }),
-  
+
   init(){
     this._super(...arguments);
     var p = this.get('currentUser.user.primaryProject');
@@ -196,6 +282,31 @@ export default Component.extend({
       alert('Failed to get aggregates');
     });
      
+  },
+  _updateWhereIWrite: function(){
+    //default to null
+    this.set('whereIWrite', null);
+    let sessions = this.get('challengeSessions');
+    let whereObj = {0:0};
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      //is there a where?
+      if(s.where) {
+        if (whereObj[s.where]>0) {
+          whereObj[s.where]+=s.count;
+        }else{
+          whereObj[s.where]=s.count;
+        }
+      }
+    });
+    //determine the key with the max value 
+    let max = Object.keys(whereObj).reduce((a, b) => whereObj[a] > whereObj[b] ? a : b);
+    if (max > 0) {
+      //there is a max that is not 0, find the dang location name
+      this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
+        this.set('whereIWrite', loc.name);
+      });   
+    }
   }
   
 });
