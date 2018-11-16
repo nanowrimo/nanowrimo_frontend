@@ -61,7 +61,26 @@ export default Component.extend({
       return aggs;
     }
   }),
-  
+  writingSpeed: computed('challengeSessions.[]',function() {
+    let sessions = this.get('challengeSessions');
+    let minutes = 0;
+    let count = 0;
+    
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      //is there a start and end?
+      if(s.start && s.end) {
+        let start = moment(s.start);
+        let end = moment(s.end);
+        //get the difference in minutes
+        minutes += end.diff(start,'minutes');
+        count+= s.count;
+      }
+    });
+    if (minutes && count) {
+      return parseInt(count/minutes);
+    }
+  }),
   // determine which hours of the day the user is writing during 
   userHourAggregates: computed('challengeSessions.[]',function() {
     //get the sessions
