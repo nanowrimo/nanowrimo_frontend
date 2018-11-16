@@ -61,7 +61,26 @@ export default Component.extend({
       return aggs;
     }
   }),
-  
+  writingSpeed: computed('challengeSessions.[]',function() {
+    let sessions = this.get('challengeSessions');
+    let minutes = 0;
+    let count = 0;
+    
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      //is there a start and end?
+      if(s.start && s.end) {
+        let start = moment(s.start);
+        let end = moment(s.end);
+        //get the difference in minutes
+        minutes += end.diff(start,'minutes');
+        count+= s.count;
+      }
+    });
+    if (minutes && count) {
+      return parseInt(count/minutes);
+    }
+  }),
   // determine which hours of the day the user is writing during 
   userHourAggregates: computed('challengeSessions.[]',function() {
     //get the sessions
@@ -175,11 +194,11 @@ export default Component.extend({
   }),
   projectedFinishDate: computed('challengeSessions.[]', function() {
     //  today's date + (goal remaining / average per day) days  
-    let today = moment();
-    let remaining = this.get('goal') - this.get('count');
-    let daysToGo = remaining/this.get('dailyAverage');
-    today.add(daysToGo, 'd');
-    return today.format("MMMM d");
+    let date = moment();
+    let remainingCount = this.get('goal') - this.get('count');
+    let daysToGo = remainingCount/this.get('dailyAverage');
+    date.add(daysToGo, 'd');
+    return date.format("MMMM D");
   }),
   //
   todaysSessions: computed('challengeSessions.[]', function() {
