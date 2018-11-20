@@ -81,6 +81,27 @@ export default Component.extend({
       return parseInt(count/minutes);
     }
   }),
+  hasAverageFeeling: computed('averageFeeling', function() {
+    return (this.get('averageFeeling') > 0);
+  }),
+  averageFeeling: computed('challengeSessions.[]',function() {
+    let sessions = this.get('challengeSessions');
+    let feelings = {};
+    //loop through the sessions
+    sessions.forEach((s)=>{
+      if (s.feeling) {
+        
+        if ( feelings[s.feeling])
+        {
+          feelings[s.feeling]+=1;
+        } else {
+          feelings[s.feeling]=1;
+        }
+      }
+    });
+    let key = this._objectKeyWithHighestValue(feelings);
+    return key;
+  }),
   // determine which hours of the day the user is writing during 
   userHourAggregates: computed('challengeSessions.[]',function() {
     //get the sessions
@@ -319,13 +340,20 @@ export default Component.extend({
       }
     });
     //determine the key with the max value 
-    let max = Object.keys(whereObj).reduce((a, b) => whereObj[a] > whereObj[b] ? a : b);
+    let max = this._objectKeyWithHighestValue(whereObj);
     if (max > 0) {
       //there is a max that is not 0, find the dang location name
       this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
         this.set('whereIWrite', loc.name);
       });   
     }
-  }
+  },
   
+  _objectKeyWithHighestValue: function(object) {
+    if (Object.keys(object).length > 0) {
+      return Object.keys(object).reduce((a, b) => object[a] > object[b] ? a : b);
+    } else {
+      return null;
+    }
+  }
 });
