@@ -109,7 +109,7 @@ export default Component.extend({
       this.set('_projectAdditionalInfoShow',show);
       if (show) {
         //get the writing locations
-        this.get('store').findAll('writingLocation')
+        this.get('store').findAll('writingLocation', { reload: true })
         .then((locations)=>{
           let names = locations.map((l)=>{return {"value": l.id, "name":l.name}});
           //set the whereList
