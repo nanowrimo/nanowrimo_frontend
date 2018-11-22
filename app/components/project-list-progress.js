@@ -21,10 +21,9 @@ export default Component.extend({
     }
   }),
 
-  goal: computed('project.challenges.[]', function(){
+  goal: computed('project.projectChallenges.[]', function(){
     let proj = this.get('project');
     if (proj) {
-      //let dc = proj.displayChallenge;
       return get(proj, 'challenges.firstObject.defaultGoal');
     } else {
       return 0;

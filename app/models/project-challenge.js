@@ -16,6 +16,7 @@ const ProjectChallenge = Model.extend({
   
   challenge: belongsTo('challenge'),
   project: belongsTo('project'),
+  user: belongsTo('user'),
   projectSessions: hasMany('projectSession'),
   
   countPerDay: computed('goal', 'duration', function(){
@@ -28,11 +29,11 @@ const ProjectChallenge = Model.extend({
     let s = moment(this.get('startsAt'));
     let e = moment(this.get('endsAt'));
     let duration = moment.duration(e.diff(s));
-    return duration.asDays();
+    return Math.round(duration.asDays());
   }),
   dates: computed("startsAt", "endsAt", function(){
-    let s = moment(this.get('startsAt'));
-    let e = moment(this.get('endsAt'));
+    let s = moment.utc(this.get('startsAt'));
+    let e = moment.utc(this.get('endsAt'));
     let range = [];
     //loop while the s is not the same as e day
     while(! s.isSame(e, 'day')) {
@@ -45,8 +46,10 @@ const ProjectChallenge = Model.extend({
   }),
   
   datesShortMonthDayFormat: computed("startsAt", "endsAt", function(){
-    let s = moment(this.get('startsAt'));
-    let e = moment(this.get('endsAt'));
+    let start = this.get('startsAt');
+    let end = this.get('endsAt');
+    let s = moment.utc(start);
+    let e = moment.utc(end);
     let range = [];
     //loop while the s is not the same as e day
     while(! s.isSame(e, 'day')) {
@@ -64,6 +67,14 @@ const ProjectChallenge = Model.extend({
       return "words";
     } else if (type===1) {
       return 'hours';
+    }
+  }),
+  unitTypeSingular: computed("unitType", function(){
+    let type = this.get('unitType');
+    if (type===0) {
+      return "word";
+    } else if (type===1) {
+      return 'hour';
     }
   }),
   count: computed('projectSessions.[]', function(){
