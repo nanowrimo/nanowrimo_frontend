@@ -14,7 +14,11 @@ export default Controller.extend({
   selectedSortOption: null,
   user: null,
 
-  sortedProjects: sort('projects', 'selectedSortOption'),
+  sortedProjects: sort('displayProjects', 'selectedSortOption'),
+  
+  displayProjects: computed('projects.{[],@each.primary}', function(){
+    return this.get('projects');
+  }),
   
   canAddProject: computed('currentUser.user.id', 'user.id', function() {
     return this.get('currentUser.user.id') === this.get('user.id');

@@ -1,7 +1,7 @@
 <div class="nano-card project-challenge-listing-card">
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front filled-grey">
-      <div class='project-top-right'>
+      <div class='project-challenge-listing-top-right'>
         {{#if projectChallenge.isPrimary}}
           <i class='fa fa-thumb-tack primary-thumb-tack'></i>
         {{/if}}
@@ -11,7 +11,7 @@
             {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu align='right' as |menu|}}
               {{#menu.item}}
-                <a href="#" {{action "editProjectChallenge"}}>Edit Project</a>
+                <a href="#" {{action "editProjectChallenge"}}>Edit Goal</a>
               {{/menu.item}}
                {{menu.divider}}
               {{#menu.item}}
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  {{project-challenge-edit-modal project=project open=editProject}}
+  {{project-challenge-new-modal project=project projectChallenge=projectChallenge open=editProjectChallenge}}
   {{confirmation-modal
     yes=deleteConfirmationYesText 
     no=deleteConfirmationNoText 

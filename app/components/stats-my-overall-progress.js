@@ -3,10 +3,23 @@ import { get,computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
 
+  successData: computed('projectChallenge', function() {
+    let pc = this.get('projectChallenge');
+    let data = [];
+    for (var i=0; i < pc.duration; i++) {
+      let v = (i+1)*pc.countPerDay;
+      if (i==pc.duration-1) {
+        //this is the last day
+        v = pc.goal;
+      }
+      data.push(v)
+    }
+    return data;
+  }),
   countData: computed('myChartType','userDailyTotals',function() {
     let cData = [
       {
-        name: 'My word count',
+        name: 'My count',
         type: get(this,'myChartType'),
         color: '#2f3061',
         data: this.get('userDailyTotals')
@@ -14,21 +27,33 @@ export default ChartBaseComponent.extend({
     ];
     //TODO: if comparison data, create object, push object onto cData
     /*
-      {
-        name: "Dave Williams' word count",
-        type: 'spline',
-        color: '#edbb82',
-        data: [0, 2299, 2300, 4300, 5500, 12397, 13465, 15300, 15500]
-      },
-      {
-        name: "Path to success",
-        type: 'line',
-        dashStyle: 'ShortDash',
-        connectNulls: true,
-        data: [0, null, null, 3000, null, null, null, 7000, null, null, null, 10000,null, null, null, 20000, null, null, null, 27000, null, null, null, 30000,null, null, null, 43000, null, null, 50000]
-      }
-     * 
-     */ 
+    {
+      name: "Dave Williams' word count",
+      type: 'spline',
+      color: '#edbb82',
+      data: [0, 2299, 2300, 4300, 5500, 12397, 13465, 15300, 15500]
+    },
+    {
+      name: "Path to success",
+      type: 'line',
+      dashStyle: 'ShortDash',
+      connectNulls: true,
+      data: [0, null, null, 3000, null, null, null, 7000, null, null, null, 10000,null, null, null, 20000, null, null, null, 27000, null, null, null, 30000,null, null, null, 43000, null, null, 50000]
+    }
+    * 
+    */ 
+     
+     //
+    let successPath = {
+      name: "Path to success",
+      type: 'line',
+      dashStyle: 'ShortDash',
+      connectNulls: true,
+      data: this.get('successData')
+    }
+     
+    //push the path to success onto the cData array
+    cData.push(successPath);
     return cData;
   }),
 

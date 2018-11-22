@@ -79,12 +79,11 @@
             property="playlistUrl"
           }}
         </div>
-        {{#if isNotPrimary}}
+        {{#if project.isNotPrimary}}
           <div class="form-group">
             {{f.checkbox
               label="Make this my primary project"
               property="primary"
-              value=newPrimaryValue
             }}
           </div>
         {{/if}}

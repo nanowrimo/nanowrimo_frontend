@@ -23,13 +23,14 @@
     transition: all 0.3s;
 
     max-height: 0;
-    display: block;
+    display: none;
     overflow: visible;
     opacity: 0;
 
     &.show {
       max-height: 300px;
       opacity: 1;
+      display:block;
     }
     
     .dropdown-item {

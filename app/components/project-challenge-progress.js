@@ -21,12 +21,12 @@ export default Component.extend({
   
     if (proj) {
       let start = proj.startsAt;
-      let time = moment(start);
+      let time = moment.utc(start);
       if (time.month()===4) {
         //may does not need to be formatted with a period
-        return moment(start).format("MMM YYYY");
+        return time.format("MMM YYYY");
       } else {
-        return moment(start).format("MMM. YYYY");
+        return time.format("MMM. YYYY");
       }
     }
     
