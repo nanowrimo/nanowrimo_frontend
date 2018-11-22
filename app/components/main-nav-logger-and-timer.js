@@ -26,10 +26,12 @@ export default Component.extend({
 
   primaryProject: computed("currentUser.user.primaryProject", function(){
     let p = this.get('currentUser.user.primaryProject');
-    p.activeProjectChallenge.then((data)=>{
-      this.set('activeProjectChallenge', data);
-    });
-    return p;
+    if (p) {
+      p.activeProjectChallenge.then((data)=>{
+        this.set('activeProjectChallenge', data);
+      });
+      return p;
+    }
   }),
 
   init(){
@@ -38,7 +40,7 @@ export default Component.extend({
     this._checkTimer();
     this._checkStopwatch();
     //this will perform the check for an activeProjectChallenge
-    let p = this.get('primaryProject');
+    this.get('primaryProject');
   },
 
   actions: {
