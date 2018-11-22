@@ -14,7 +14,8 @@ export default Component.extend({
   timeProgress: null,
   referenceStart: null,
   referenceEnd: null,
-
+  activeProjectChallenge: null,
+    
   displaySessionButton: computed('displayTimeOnButton', function(){
     return !this.get('displayTimeOnButton');
   }),
@@ -23,11 +24,23 @@ export default Component.extend({
     return ( this.get('timeProgress') );
   }),
 
+  primaryProject: computed("currentUser.user.primaryProject", function(){
+    let p = this.get('currentUser.user.primaryProject');
+    if (p) {
+      p.activeProjectChallenge.then((data)=>{
+        this.set('activeProjectChallenge', data);
+      });
+      return p;
+    }
+  }),
+
   init(){
     this._super(...arguments);
     // does the current user have an active timer?
     this._checkTimer();
     this._checkStopwatch();
+    //this will perform the check for an activeProjectChallenge
+    this.get('primaryProject');
   },
 
   actions: {
