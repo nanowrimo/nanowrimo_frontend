@@ -2,48 +2,48 @@
   margin: auto;
   /*background-color: #ff0000;*/
   @media (max-width: $screen-xs) {
-    width: 274px;
+    width: 300px;
     :nth-child(5n-2) {
       margin-right: 0px;
     }
     :nth-child(5n-1) {
-      margin-left: 49px;
+      margin-left: 53px;
     }
   }
   @media (min-width: $screen-xs) and (max-width: $screen-xs-max) {
-    width: 392px;
-    :nth-child(8n) {
+    width: 346px;
+    :nth-child(6n) {
       margin-right: 0px;
     }
-    :nth-child(8n-3) {
-      margin-left: 49px;
+    :nth-child(6n-2) {
+      margin-left: 53px;
     }
   }
   @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
-    width: 322px;
-    :nth-child(5n-2) {
+    width: 636px;
+    :nth-child(11n) {
       margin-right: 0px;
     }
-    :nth-child(5n-1) {
-      margin-left: 49px;
+    :nth-child(11n-4) {
+      margin-left: 53px;
     }
   }
   @media (min-width: $screen-md) and (max-width: $screen-md-max) {
-    width: 322px;
-    :nth-child(4n) {
+    width: 437px;
+    :nth-child(6n) {
       margin-right: 0px;
     }
-    :nth-child(4n-1) {
-      margin-left: 49px;
+    :nth-child(6n-2) {
+      margin-left: 53px;
     }
   }
   @media (min-width: $screen-lg) {
-    width: 392px;
+    width: 510px;
     :nth-child(8n) {
       margin-right: 0px;
     }
     :nth-child(8n-3) {
-      margin-left: 49px;
+      margin-left: 53px;
     }
   }
   display: flex;
@@ -52,7 +52,7 @@
   li{
     flex: 0 0 82px;
     height: 93px;
-    margin-right: 14px;
+    margin-right: 24px;
     /*background-color: #0000FF;*/
     border-radius: 12px;
     overflow: visible;

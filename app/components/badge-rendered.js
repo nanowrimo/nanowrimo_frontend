@@ -2,28 +2,24 @@ import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
-import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
-import { alias } from '@ember/object/computed';
 
 
 export default Component.extend({
   currentUser: service(),
   store: service(),
-  session: service(),
+  badgesService: service(),
   badge: null,
   userBadgeEndpoint: `${ENV.APP.API_HOST}/user-badges/`,
   
   projectChallenge: null,
   user: null,
   renderSize: null,
-  recomputeBadges: alias('parentRecomputeBadges'),
-  userBadges: computed('recomputeBadges', function() {
+  userBadges: computed('badgesService.recomputeBadges', function() {
     return this.get('store').peekAll('user-badge');
   }),
-  userBadge: computed('userBadges.[]',function() {
+  userBadge: computed('badgesService.recomputeBadges',function() {
     let ubs = this.get('userBadges');
-    console.log(ubs.length);
     let b = this.get('badge');
     let ad = false;
     let pc = this.get('projectChallenge');
@@ -125,28 +121,23 @@ export default Component.extend({
     toggleBadge() {
       let badge = this.get('badge');
       let ownsBadge = this.get('ownsBadge');
-      let note = "";
       if (ownsBadge) {
         if (badge.badge_type=='self-awarded') {
           if (this.get('awardDate')) {
             let ub = this.get('userBadge');
             ub.destroyRecord().then(() => {
-              //this.set('userBadge',null);
-              let rb = this.get('recomputeBadges') + 1;
-              this.set('recomputeBadges',rb);
-              
+              let bs = this.get('badgesService');
+              bs.incrementRecomputeBadges();
             });
           } else {
             let store = this.get('store');
-            let ub = store.createRecord('user-badge', {
+            store.createRecord('user-badge', {
               user_id: this.get('currentUser.user.id'),
               badge_id: this.get('badge.id'),
               project_challenge_id: this.get('projectChallenge.id'),
-            });
-            ub.save().then(() => {
-              //this.set('userBadge',ub);
-              let rb = this.get('recomputeBadges') + 1;
-              this.set('recomputeBadges',rb);
+            }).save().then(() => {
+              let bs = this.get('badgesService');
+              bs.incrementRecomputeBadges();
             });
           }
         }
