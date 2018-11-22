@@ -16,6 +16,7 @@ export default Component.extend({
   user: null,
   renderSize: null,
   userBadges: computed('badgesService.recomputeBadges', function() {
+    console.log(this.get('badge.name'));
     return this.get('store').peekAll('user-badge');
   }),
   userBadge: computed('badgesService.recomputeBadges',function() {
@@ -24,7 +25,7 @@ export default Component.extend({
     let ad = false;
     let pc = this.get('projectChallenge');
     ubs.forEach(function(ub) {
-      if ((b.id==ub.badge_id)&&(pc.id==ub.project_challenge_id)) {
+      if ((b.id==ub.badge_id)&&(pc.get('id')==ub.project_challenge_id)) {
         ad = ub;
       }
     });

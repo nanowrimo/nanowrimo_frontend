@@ -85,7 +85,6 @@ const User = Model.extend({
   regions: filterBy('groups', 'groupType', 'region'),
   recalculateHome: 0,
   homeRegion: computed('regions.[]','recalculateHome', {
-    //homeRegion: computed('regions.[]', 'groupUsers.[]',{
     get() {
       let r = this.get('regions');
       let gu = this.get('groupUsers');

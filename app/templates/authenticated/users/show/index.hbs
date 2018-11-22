@@ -50,15 +50,12 @@
       }}
     {{/if}}
   </div>
-  <div class="nano-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row2 g2-hspan2">
-    {{badges-card cardTitle='Participation badges' badgeType='participation'}}
-  </div>
-  {{#if user.primaryProject.projectChallenges.last }}
+  {{#if user.primaryProject.latestProjectChallenge }}
     <div class="nano-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
-      {{badges-card cardTitle='Writing badges' badgeType='word count' user=user projectChallenge=user.primaryProject.projectChallenges.last}}
+      {{badges-card cardTitle='Writing badges' badgeType='word count' user=user projectChallenge=user.primaryProject.latestProjectChallenge}}
     </div>
     <div class="nano-card g3-col1 g3-row4 g3-hspan3 g2-col1 g2-row4 g2-hspan2">
-      {{badges-card cardTitle='Personal achievement badges' badgeType='self-awarded' user=user projectChallenge=user.primaryProject.projectChallenges.last}}
+      {{badges-card cardTitle='Personal achievement badges' badgeType='self-awarded' user=user projectChallenge=user.primaryProject.latestProjectChallenge}}
     </div>
   {{/if}}
 </div>

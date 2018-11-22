@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import { debounce } from '@ember/runloop';
 export default NanoSubcard.extend({
   store: service(),
-  
+  badgesService: service(),
   cardTitle: null,
   badgeType: null,
   user: null,
@@ -12,7 +12,7 @@ export default NanoSubcard.extend({
   parentRecomputeBadges: 0,
   init() {
     this._super(...arguments);
-    debounce(this, this.checkForUpdates, 50000, false);
+    //debounce(this, this.checkForUpdates, 50000, false);
   },
   checkForUpdates() {
     let u = this.get('user');
@@ -28,7 +28,7 @@ export default NanoSubcard.extend({
     if (recompute) {
       this.set('parentRecomputeBadges',nprb+1);
     }
-    debounce(this, this.checkForUpdates, 50000, false);
+    //debounce(this, this.checkForUpdates, 50000, false);
   },
   badges: computed('badgeType','parentRecomputeBadges', function() {
     
