@@ -1,3 +1,16 @@
+.icon-list {
+  width: 100%;
+  li {
+    font-family: 'SourceSansPro-Regular', sans-serif;
+    font-size: 16px;
+    color: #343434;
+    width: 100%;
+    .fa {
+      color: #75abbc;
+      width: 20px;
+    }
+  }
+}
 .nano-list-message {
   font-family: 'SourceSansPro-Regular', sans-serif;
   padding-left: 14px;

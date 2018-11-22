@@ -64,15 +64,38 @@
   }
   .nano-panel-tools {
     width: 100%;
+    min-height: 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     padding: 28px;
-    padding-top: 10px;
+    padding-top: 0px;
     padding-bottom: 0px;
     margin-bottom: -14px;
     font-family: SourceSansPro-Regular;
     font-size: 14px;
+    span {
+      font-size: 14px;
+      height: 30px;
+      padding: 4px;
+    }
+    .select-container {
+      max-width: 200px;
+      height: 30px;
+      padding: 0px;
+      select {
+        max-width: 200px;
+        height: 30px;
+        padding: 4px;
+        
+        font-weight: bold;
+        font-size: 14px;
+      }
+      &:after {
+        padding: 8px 8px;
+      }  
+      
+    }
     .panel-comparison {
       cursor: default;
       border-radius: 6px;
