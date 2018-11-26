@@ -13,26 +13,29 @@ export default Service.extend({
   },
   
   checkForUpdates() {
-    console.log('checking for badges');
+    //console.log('checking for badges');
     let t = this;
     let u = this.get('currentUser.user');
     let recompute = false;
-    this.store.query('user-badge', {
-      filter: {
-        user_id: u.get('id')
-      }
-    }).then(function() {
-      console.log('yo');
-      recompute = true;
-      t.incrementRecomputeBadges();
-    });
+    // is there a user?
+    if (u) {
+      this.store.query('user-badge', {
+        filter: {
+          user_id: u.get('id')
+        }
+      }).then(function() {
+        //console.log('yo');
+        recompute = true;
+        t.incrementRecomputeBadges();
+      });
+    }
     debounce(this, this.checkForUpdates, 15000, false);
   },
   
   incrementRecomputeBadges() {
     let rb  = this.get('recomputeBadges')+1;
     this.set('recomputeBadges',rb);
-    console.log(rb);
+    //console.log(rb);
     
   },
 });
