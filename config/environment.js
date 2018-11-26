@@ -90,9 +90,6 @@ module.exports = function(environment) {
     //ENV.APP.UI_HOST = 'http://localhost:4200';
   }
 
-  if (environment === 'development-api') {
-  }
-
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
@@ -107,8 +104,6 @@ module.exports = function(environment) {
     ENV.APP.DEBOUNCE_MS = 0;
     ENV.APP.MODAL_BACKGROUND_TRANSITION_MS = 0;
     ENV.APP.MODAL_TRANSITION_MS = 0;
-  }
-  if (environment === 'production') {
   }
   if (environment === 'production') {
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
