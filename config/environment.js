@@ -91,7 +91,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'development-api') {
-    //ENV['ember-cli-mirage'] = { enabled: false };
   }
 
   if (environment === 'test') {
@@ -108,14 +107,8 @@ module.exports = function(environment) {
     ENV.APP.DEBOUNCE_MS = 0;
     ENV.APP.MODAL_BACKGROUND_TRANSITION_MS = 0;
     ENV.APP.MODAL_TRANSITION_MS = 0;
-    ENV['ember-cli-mirage'] = {
-      enabled: false
-    }
   }
   if (environment === 'production') {
-    ENV['ember-cli-mirage'] = {
-      enabled: false
-    }
   }
   if (environment === 'production') {
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
