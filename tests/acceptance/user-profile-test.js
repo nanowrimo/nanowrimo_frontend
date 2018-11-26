@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { currentURL, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+//import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
 module('Acceptance | User profile', function(hooks) {
@@ -17,7 +17,7 @@ module('Acceptance | User profile', function(hooks) {
   });
 
   module('Authenticated', function(hooks) {
-    setupMirage(hooks);
+    //setupMirage(hooks);
 
     let user;
 
