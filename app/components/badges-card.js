@@ -1,7 +1,7 @@
 import NanoSubcard from 'nanowrimo/components/nano-subcard';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-import { debounce } from '@ember/runloop';
+//import { debounce } from '@ember/runloop';
 export default NanoSubcard.extend({
   store: service(),
   badgesService: service(),

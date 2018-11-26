@@ -62,6 +62,8 @@ export default function() {
   //this.resource('locations', { only: ['index'] });
   
   this.resource('challenges', { only: ['index'] });
+  this.resource('badges', { only: ['index'] });
+  this.resource('user-badges', { only: ['index'] });
   this.resource('external-links', { only: ['create', 'update'] });
   this.del('external-links/:id', ({ externalLinks }, request) => {
     let id = request.params.id;

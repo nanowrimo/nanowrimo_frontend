@@ -16,7 +16,6 @@ export default Component.extend({
   user: null,
   renderSize: null,
   userBadges: computed('badgesService.recomputeBadges', function() {
-    console.log(this.get('badge.name'));
     return this.get('store').peekAll('user-badge');
   }),
   userBadge: computed('badgesService.recomputeBadges',function() {
