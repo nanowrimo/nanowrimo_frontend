@@ -63,22 +63,24 @@ export default Component.extend({
   }),
   writingSpeed: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
-    let minutes = 0;
-    let count = 0;
-    
-    //loop through the sessions
-    sessions.forEach((s)=>{
-      //is there a start and end?
-      if(s.start && s.end) {
-        let start = moment(s.start);
-        let end = moment(s.end);
-        //get the difference in minutes
-        minutes += end.diff(start,'minutes');
-        count+= s.count;
+    if (sessions) {
+      let minutes = 0;
+      let count = 0;
+      
+      //loop through the sessions
+      sessions.forEach((s)=>{
+        //is there a start and end?
+        if(s.start && s.end) {
+          let start = moment(s.start);
+          let end = moment(s.end);
+          //get the difference in minutes
+          minutes += end.diff(start,'minutes');
+          count+= s.count;
+        }
+      });
+      if (minutes && count) {
+        return parseInt(count/minutes);
       }
-    });
-    if (minutes && count) {
-      return parseInt(count/minutes);
     }
   }),
   hasAverageFeeling: computed('averageFeeling', function() {
@@ -86,21 +88,23 @@ export default Component.extend({
   }),
   averageFeeling: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
-    let feelings = {};
-    //loop through the sessions
-    sessions.forEach((s)=>{
-      if (s.feeling) {
-        
-        if ( feelings[s.feeling])
-        {
-          feelings[s.feeling]+=1;
-        } else {
-          feelings[s.feeling]=1;
+    if (sessions) {
+      let feelings = {};
+      //loop through the sessions
+      sessions.forEach((s)=>{
+        if (s.feeling) {
+          
+          if ( feelings[s.feeling])
+          {
+            feelings[s.feeling]+=1;
+          } else {
+            feelings[s.feeling]=1;
+          }
         }
-      }
-    });
-    let key = this._objectKeyWithHighestValue(feelings);
-    return key;
+      });
+      let key = this._objectKeyWithHighestValue(feelings);
+      return key;
+    }
   }),
   // determine which hours of the day the user is writing during 
   userHourAggregates: computed('challengeSessions.[]',function() {
@@ -108,27 +112,29 @@ export default Component.extend({
     let hoursObject = Array(24);
     hoursObject.fill(0);
     let sessions = this.get('challengeSessions');
-    //loop through the sessions
-    sessions.forEach((s)=>{
-      //is there a start and end?
-      if(s.start && s.end) {
-        let start = moment(s.start);
-        let end = moment(s.end);
-        //get the hour of the start
-        var h1 = start.hour();
-        var hn = end.hour();
-        //how many hours are we dealing with?
-        var numHours = 1 + (hn - h1);
-        var countPerHour = s.count/numHours;
-        for (var x = h1; x <= hn; x++) {
-          hoursObject[x] += countPerHour;
+    if(sessions) {
+      //loop through the sessions
+      sessions.forEach((s)=>{
+        //is there a start and end?
+        if(s.start && s.end) {
+          let start = moment(s.start);
+          let end = moment(s.end);
+          //get the hour of the start
+          var h1 = start.hour();
+          var hn = end.hour();
+          //how many hours are we dealing with?
+          var numHours = 1 + (hn - h1);
+          var countPerHour = s.count/numHours;
+          for (var x = h1; x <= hn; x++) {
+            hoursObject[x] += countPerHour;
+          }
+        } else {
+          //TODO: get some data based on when the session was created 
+          
         }
-      } else {
-        //TODO: get some data based on when the session was created 
-        
-      }
-    });
-    return hoursObject;
+      });
+      return hoursObject;
+    }
   }),
   
   // determine if there is data in the userHourAggregates
@@ -136,10 +142,12 @@ export default Component.extend({
     let aggs = this.get('userHourAggregates');
     let retval = false;
     //loop!
-    for (var i=0; i < aggs.length; i++) {
-      if(aggs[i] > 0) {
-        retval = true;
-        break;
+    if (aggs) {
+      for (var i=0; i < aggs.length; i++) {
+        if(aggs[i] > 0) {
+          retval = true;
+          break;
+        }
       }
     }
     return retval;
@@ -224,38 +232,45 @@ export default Component.extend({
   //
   todaysSessions: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
-    let todays = [];
-    let now = moment();
-    css.forEach((cs)=>{
-      if (moment(cs.createdAt).isSame(now, 'day') ) {
-        todays.push(cs);
-      }
-    });
-    return todays;
+    if (css) {
+      let todays = [];
+      let now = moment();
+      css.forEach((cs)=>{
+        if (moment(cs.createdAt).isSame(now, 'day') ) {
+          todays.push(cs);
+        }
+      });
+      return todays;
+    }
   }),
   
   todaysCount: computed('todaysSessions.[]', function() {
-  let sum = 0;
-  let ts = this.get('todaysSessions');
-  ts.forEach((s)=>{
-    sum+=s.count;
-  });
-  return sum;
+    let sum = 0;
+    let ts = this.get('todaysSessions');
+    if (ts) {
+      ts.forEach((s)=>{
+        sum+=s.count;
+      });
+      return sum;
+    }
   }),
   
-  challengeSessions: computed('projectChallenge','project.projectSessions.[]', function() {
+  challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
     let cStart = moment( this.get('projectChallenge.startsAt') );
     let cEnd = moment( this.get('projectChallenge.endsAt') );
-    //get the projectSessions created during the projectChallenge
-    let sessions = this.get('project.projectSessions');
-    let newSessions = [];
-    sessions.forEach((s)=>{
-      var sCreated = moment(s.createdAt);
-      if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
-        newSessions.push(s);
-      }
-    });
-    return newSessions;
+    let p = this.get('project');
+    if (p) {
+      //get the projectSessions created during the projectChallenge
+      let sessions = this.get('project.projectSessions');
+      let newSessions = [];
+      sessions.forEach((s)=>{
+        var sCreated = moment(s.createdAt);
+        if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
+          newSessions.push(s);
+        }
+      });
+      return newSessions;
+    }
   }),
 
   init(){
@@ -294,12 +309,15 @@ export default Component.extend({
   },
 
   getProjectChallenges: function(){
-    return this.get('project.projectChallenges').then((pcs)=>{
-      this.set('projectChallenges', pcs);
-      this.set('projectChallenge', pcs.firstObject);
-      //now is a good time to fetch the aggregates
-      this.fetchAggregates();
-    });
+    let p = this.get('project');
+    if (p) {
+      return this.get('project.projectChallenges').then((pcs)=>{
+        this.set('projectChallenges', pcs);
+        this.set('projectChallenge', pcs.firstObject);
+        //now is a good time to fetch the aggregates
+        this.fetchAggregates();
+      });
+    }
   },
   
   fetchAggregates: function(){
@@ -328,24 +346,26 @@ export default Component.extend({
     this.set('whereIWrite', null);
     let sessions = this.get('challengeSessions');
     let whereObj = {0:0};
-    //loop through the sessions
-    sessions.forEach((s)=>{
-      //is there a where?
-      if(s.where) {
-        if (whereObj[s.where]>0) {
-          whereObj[s.where]+=s.count;
-        }else{
-          whereObj[s.where]=s.count;
+    if(sessions) {
+      //loop through the sessions
+      sessions.forEach((s)=>{
+        //is there a where?
+        if(s.where) {
+          if (whereObj[s.where]>0) {
+            whereObj[s.where]+=s.count;
+          }else{
+            whereObj[s.where]=s.count;
+          }
         }
+      });
+      //determine the key with the max value 
+      let max = this._objectKeyWithHighestValue(whereObj);
+      if (max > 0) {
+        //there is a max that is not 0, find the dang location name
+        this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
+          this.set('whereIWrite', loc.name);
+        });   
       }
-    });
-    //determine the key with the max value 
-    let max = this._objectKeyWithHighestValue(whereObj);
-    if (max > 0) {
-      //there is a max that is not 0, find the dang location name
-      this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
-        this.set('whereIWrite', loc.name);
-      });   
     }
   },
   
