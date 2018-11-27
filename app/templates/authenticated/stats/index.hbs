@@ -1,6 +1,8 @@
 <div class="content-gutters">
   <div class="container-fluid">
-    {{project-stats}}
+    {{#if currentUser.user }}
+      {{project-stats}}
+    {{/if}}
   </div>
 </div>
 
