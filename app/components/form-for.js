@@ -92,6 +92,7 @@ export default Component.extend({
          
           
         } else {
+          this._callAction('submitFailed');
           this.set('hasAttemptedSubmit', true);
         }
       } else {

@@ -1,5 +1,6 @@
 {{#form-for
-        afterError=(action (mut error))
+        afterError=(action 'receivedError')
+        submitFailed=(action "signInValidationFailed")
         model=signInAttempt
         class='full-width'
         as |f|
@@ -27,7 +28,6 @@
           <div class="alert alert-danger">{{error}}</div>
         {{/if}}
 
-
-        <button data-test-sign-in-submit type="submit" class="full-width nano-button-large full-width">Sign In</button>
+          <button data-test-sign-in-submit type="submit" {{action "submitClicked" preventDefault=isSubmitting}} class="full-width nano-button-large full-width">{{buttonText}}</button>
 
       {{/form-for}}
