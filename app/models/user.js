@@ -71,6 +71,9 @@ const User = Model.extend({
   emailNanomessagesHq: attr('boolean'),
   emailWritingReminders: attr('boolean'),
 
+  // Awarded badges
+  userBadges: hasMany('user-badge'),
+  
   //a user has many timers
   timers: hasMany('timer'),
   //a user has many stopwatches
@@ -82,7 +85,6 @@ const User = Model.extend({
   regions: filterBy('groups', 'groupType', 'region'),
   recalculateHome: 0,
   homeRegion: computed('regions.[]','recalculateHome', {
-    //homeRegion: computed('regions.[]', 'groupUsers.[]',{
     get() {
       let r = this.get('regions');
       let gu = this.get('groupUsers');

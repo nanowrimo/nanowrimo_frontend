@@ -62,15 +62,20 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.LOG_RESOLVER = true;
+    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'development-local') {
-    ENV['ember-cli-mirage'] = { enabled: false };
+    //ENV.APP.LOG_RESOLVER = true;
+    //ENV.APP.LOG_ACTIVE_GENERATION = true;
+    //ENV.APP.LOG_TRANSITIONS = true;
+    //ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    //ENV.APP.LOG_VIEW_LOOKUPS = true;
+    //ENV['ember-cli-mirage'] = { enabled: false };
     //pull in the os lib so we can get the hostname
     var os = require("os");
     //define hosts based on hostname
@@ -83,10 +88,6 @@ module.exports = function(environment) {
     }
     //ENV.APP.API_HOST = 'http://localhost:3000';
     //ENV.APP.UI_HOST = 'http://localhost:4200';
-  }
-
-  if (environment === 'development-api') {
-    ENV['ember-cli-mirage'] = { enabled: false };
   }
 
   if (environment === 'test') {
@@ -103,11 +104,6 @@ module.exports = function(environment) {
     ENV.APP.DEBOUNCE_MS = 0;
     ENV.APP.MODAL_BACKGROUND_TRANSITION_MS = 0;
     ENV.APP.MODAL_TRANSITION_MS = 0;
-  }
-  if (environment === 'production') {
-    ENV['ember-cli-mirage'] = {
-      enabled: false
-    }
   }
   if (environment === 'production') {
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';

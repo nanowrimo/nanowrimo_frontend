@@ -61,7 +61,9 @@
     <div class="nano-panel">
       <div class="grid-wrapper">
         <div class="nano-card g3-col1 g3-row1 g3-hspan2 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1">
-          {{dashboard-my-badges}}
+          {{#if currentUser.user.primaryProject.latestProjectChallenge }}
+              {{badges-card cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=currentUser.user.primaryProject.latestProjectChallenge}}
+          {{/if}}
         </div>
         <div class="nano-card g3-col3 g3-row1 g3-hspan1 g3-vspan2 g2-col2 g2-row3 g2-hspan1 g2-vspan2">
           {{dashboard-my-buddies}}

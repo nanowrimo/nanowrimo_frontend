@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { belongsTo, hasMany } from 'ember-data/relationships';
+import { hasMany, belongsTo } from 'ember-data/relationships';
 import { computed } from '@ember/object';
 import moment from 'moment';
 
@@ -18,6 +18,9 @@ const ProjectChallenge = Model.extend({
   project: belongsTo('project'),
   user: belongsTo('user'),
   projectSessions: hasMany('projectSession'),
+  
+  // Awarded badges
+  userBadges: hasMany('user-badge'),
   
   countPerDay: computed('goal', 'duration', function(){
     let g = this.get('goal');

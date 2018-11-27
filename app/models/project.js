@@ -30,6 +30,9 @@ const Project = Model.extend({
 
   user: belongsTo('user'),
 
+  // Awarded badges
+  userBadges: hasMany('user-badge'),
+
 
   activeChallengeUnitTypePlural: null,
 
@@ -87,6 +90,27 @@ const Project = Model.extend({
         }
       });
       return active;
+    });
+    return  DS.PromiseObject.create({promise});
+  }),
+
+  latestProjectChallenge: computed('projectChallenges.[]', function(){
+    const promise = this.get('projectChallenges').then((pcs)=>{
+      //loop through the pcs
+      let latest = null;
+      pcs.forEach((pc)=>{
+        if (latest==null) {
+          latest = pc;
+        } else {
+          let lend = moment(latest.endsAt);
+          let end = moment(pc.endsAt);
+          if (end.isSameOrAfter(lend) ) {
+            //this is the latest project challenge
+            latest = pc;
+          }
+        }
+      });
+      return latest;
     });
     return  DS.PromiseObject.create({promise});
   }),
