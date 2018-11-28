@@ -17,7 +17,7 @@ export default Component.extend({
   },
   
   actions: { 
-    submitClicked() {
+    onSubmit() {
       if (this.get('isSubmitting') ) {
         return false;
       } else {
