@@ -80,7 +80,8 @@ export default Component.extend({
         let changeset = this.get('changeset');
         if (isNone(this.get('model.relationshipErrors')) && changeset.get('isValid')) {
           let modelIsNew = this.get('model.isNew');
-          
+          // call the onSubmit action, if there is one
+          this._callAction('onSubmit');
           return changeset.save()
           .then(() => {
             this._saveAfterSave();
@@ -92,7 +93,7 @@ export default Component.extend({
          
           
         } else {
-          this._callAction('submitFailed');
+          this._callAction('submitValidationError');
           this.set('hasAttemptedSubmit', true);
         }
       } else {
