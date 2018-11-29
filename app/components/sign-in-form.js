@@ -7,7 +7,6 @@ export default Component.extend({
   error: null,
   signInAttempt: null,
   isSubmitting: false,
-  buttonText : null,
   
   init(){
     this._super(...arguments);
@@ -36,12 +35,10 @@ export default Component.extend({
   
   // class functions
   submitting: function(){
-    this.set('buttonText', "Signing In...");
     this.set('isSubmitting', true);
   },
   
   defaultButton: function() {
-    this.set('buttonText', 'Sign In');
     this.set('isSubmitting', false);
   }
 });

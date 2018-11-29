@@ -29,6 +29,14 @@
           <div class="alert alert-danger">{{error}}</div>
         {{/if}}
 
-          <button data-test-sign-in-submit type="submit" class="full-width nano-button-large full-width {{if isSubmitting "disabled" ""}}">{{buttonText}}</button>
+          <button data-test-sign-in-submit type="submit" class="full-width nano-button-large full-width {{if isSubmitting "disabled" ""}}">
+            {{#if isSubmitting}}
+              Signing In
+              <img class='spinner' src="/images/spinner.svg">
+            {{else}}
+              Sign In
+            {{/if}}
+          </button>
+
 
       {{/form-for}}
