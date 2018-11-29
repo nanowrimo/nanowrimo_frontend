@@ -28,7 +28,9 @@
             {{/if}}
 
             {{#form-for
-              afterError=(action (mut error))
+              afterError=(action 'receivedError')
+              submitValidationError=(action "signUpValidationFailed")
+              onSubmit=(action "onSubmit")
               class="full-width"
               model=signUpAttempt
               steps=steps
@@ -71,7 +73,14 @@
                   }}
                 </div>
 
-              <button data-test-sign-up-submit type="submit" class="full-width nano-button-large">Sign Up</button>
+              <button data-test-sign-up-submit type="submit" class="full-width nano-button-large">
+                {{#if isSubmitting}}
+                  Signing Up
+                  <img class='spinner' src="/images/spinner.svg">
+                {{else}}
+                  Sign Up
+                {{/if}}
+              </button>
 
             {{/form-for}}
       

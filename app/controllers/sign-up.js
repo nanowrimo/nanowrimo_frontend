@@ -6,7 +6,8 @@ import TimeZones from 'nanowrimo/lib/time-zones';
 export default Controller.extend({
 
   error: null, // String OR object
-
+  isSubmitting: false,
+  
   signUpAttempt: alias('model'),
 
   errorString: computed('error', function() {
@@ -25,5 +26,18 @@ export default Controller.extend({
 
   timeZoneOptions: computed(function() {
     return TimeZones;
-  })
+  }),
+  
+  actions: {
+    onSubmit(){
+      this.set('isSubmitting', true);
+    },
+    receivedError(e) {
+      this.set('error', e);
+      this.set('isSubmitting', false);
+    },
+    signUpValidationFailed() {
+      this.set('isSubmitting', false);
+    }
+  }
 });
