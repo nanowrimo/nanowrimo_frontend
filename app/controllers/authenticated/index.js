@@ -10,7 +10,11 @@ export default Controller.extend({
   currentUserEmail: reads('currentUser.user.email'),
   currentUserIsNotConfirmed: reads('currentUser.user.isNotConfirmed'),
   currentUserHasProject: computed('currentUser.user.projects.[]', function() {
-    return this.get('currentUser.user').projects.length > 0;
+    let cu = this.get('currentUser.user');
+    if (cu) {
+      return cu.projects.length > 0;
+    }
+    
   }),
   queryParams: ['addProject'],
   
