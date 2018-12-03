@@ -9,6 +9,7 @@ export default Component.extend({
   currentUser: service(),
   store: service(),
   newDuration:null,
+  displayName: null,
   displayStartsAt: null,
   validationErrors: null,
   editing: false,
@@ -22,7 +23,7 @@ export default Component.extend({
     if (this.get('editing') ){
       let cuid = this.get('projectChallenge.challenge.userId');
       let uid = this.get('currentUser.user.id');
-      return cuid === uid;
+      return cuid == uid;
     } else {
       return true;
     }
@@ -118,18 +119,6 @@ export default Component.extend({
     return Challenge.optionsForUnitType;
   }),
 
-
-  init(){
-    this._super(...arguments);
-    //get the projectChallenge
-    let pc = this.get('projectChallenge');
-    //we are editing if the projectChallenge has been persisted and has an id
-    if (pc && pc.id ){ 
-      this.set('editing', true);
-      this.set('newDuration', pc.duration);  
-    }
-  },
-
   actions: {
      associateChallengeSelect(challengeID) {
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
@@ -154,12 +143,17 @@ export default Component.extend({
       this.set("projectChallenge.goal", v);
     },
     onShow() {
-      if( this.get('editing') ){
-        let pc = this.get('projectChallenge');
+      let pc = this.get('projectChallenge');
+      //we are editing if the projectChallenge has been persisted and has an id
+      if (pc && pc.id ){ 
+        this.set('editing', true);
+        this.set('newDuration', pc.duration);  
         this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
-       
+        this.set('displayName', pc.name);
+        this.set('newStartsAt', pc.startsAt);
+        this.set('newEndsAt', pc.endsAt);
       } else {
-        this._resetProjectChallenge();
+        this._newProjectChallenge();
       }
     },
     
@@ -180,10 +174,10 @@ export default Component.extend({
         //are we associating with an event?
         if (this.get('associateWithChallenge') ) {
           pc.set('challenge', this.get('associatedChallenge'));
+        } else {
+          pc.set('name', this.get('displayName'));
         }
         pc.save();
-        //reset the projectchallenge
-        this._resetProjectChallenge();
       }
     },
     closeModal() {
@@ -209,13 +203,14 @@ export default Component.extend({
     }
   },
 
-  _resetProjectChallenge(){
+  _newProjectChallenge(){
     if (this.get('associateWithChallenge')) {
       this.toggleProperty("associateWithChallenge");
     }
     let projectChallenge = this.get('store').createRecord('projectChallenge');
     this.set('projectChallenge', projectChallenge);
     projectChallenge.set('name',"My New Goal");
+    this.set('displayName', "My New Goal");
     projectChallenge.set('unitType',"0");
     projectChallenge.set('goal',50000);
     let now = moment();
