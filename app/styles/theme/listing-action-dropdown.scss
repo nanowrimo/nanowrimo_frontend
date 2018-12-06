@@ -1,0 +1,19 @@
+.listing-action-dropdown {
+  .dropdown-toggle {
+    color: #5f8c7f;
+  }
+  .dropdown-menu {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #5f8c7f;
+    background-color: #73ab9b;
+    a {
+      color: white;
+      .full-width-menu-item {
+        width: 100%;
+      }
+      
+    }
+  }
+}
