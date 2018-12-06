@@ -6,16 +6,20 @@
           <i class='fa fa-thumb-tack primary-thumb-tack'></i>
         {{/if}}
         {{#if canEdit}}
-          <span class='action-dropdown'>
+          <span class='listing-action-dropdown'>
           {{#bs-dropdown as |dd|}}
             {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu align='right' as |menu|}}
               {{#menu.item}}
-                <a href="#" {{action "editProjectChallenge"}}>Edit Goal</a>
+                <a href="#" {{action "editProjectChallenge"}}>
+                  <div class='full-width-menu-item'>Edit Goal</div>
+                </a>
               {{/menu.item}}
                {{menu.divider}}
               {{#menu.item}}
-                <a href="#" {{action "confirmDelete"}}>Delete</a>
+                <a href="#" {{action "confirmDelete"}}>
+                  <div class='full-width-menu-item'>Delete</div>
+                </a>
               {{/menu.item}}
             {{/dd.menu}}
           {{/bs-dropdown}}
