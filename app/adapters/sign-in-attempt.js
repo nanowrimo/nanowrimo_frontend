@@ -8,9 +8,9 @@ export default ApplicationAdapter.extend(AdaptersUuidMixin, {
   session: service(),
 
   createRecord(store, type, snapshot) {
-    let { email, password } = get(snapshot, '_attributes');
+    let { identifier, password } = get(snapshot, '_attributes');
     return new Promise ((resolve, reject) => {
-      return this.get('session').authenticate('authenticator:nanowrimo', email, password)
+      return this.get('session').authenticate('authenticator:nanowrimo', identifier, password)
       .then(() => {
         resolve();
       })
