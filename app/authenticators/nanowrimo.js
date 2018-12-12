@@ -8,12 +8,12 @@ export default BaseAuthenticator.extend({
   serverTokenEndpoint: `${ENV.APP.API_HOST}/users/sign_in`,
   tokenAttributeName: "auth_token",
   
-  authenticate(email, password) {
+  authenticate(identifier, password) {
     return new Promise((resolve, reject) => {
       return fetch(this.get('serverTokenEndpoint'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ identifier, password })
       })
       .then((response) => {
         return response.json()
