@@ -5,7 +5,9 @@
   <div class="nano-subcard-content side-by-side badge-subcard">
     <div class="side-by-side-even">
       <div class="full-width">
-        {{badge-rendered badge=firstBadge user=user projectChallenge=projectChallenge renderSize='large'}}
+        {{#if firstBadge}}
+          {{badge-rendered badge=firstBadge user=user projectChallenge=projectChallenge renderSize='large'}}
+        {{/if}}
       </div>
     </div>
     <div class="side-by-side-even">

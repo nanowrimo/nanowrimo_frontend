@@ -8,7 +8,7 @@ export default Service.extend({
   recomputeBadges: 0,
 
   load() {
-    debounce(this, this.checkForUpdates, 15000, false);
+    debounce(this, this.checkForUpdates, 5000, false);
     return this.get('store').query('badge',{});
   },
   
