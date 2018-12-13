@@ -11,7 +11,7 @@ export default Service.extend({
   load() {
     if (this.get('session.isAuthenticated')) {
       return this.get('store').queryRecord('user',
-      { current: true, include: 'projects,timers,stopwatches,user-badges,badges'}).then((user) => {
+      { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
         this.set('user', user);
 
         //get the current user's projects
