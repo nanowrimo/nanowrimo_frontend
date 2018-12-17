@@ -10,7 +10,6 @@ export default Route.extend({
       console.log(endpoint);
       return fetch(endpoint).then((data)=>{
         return data.json().then((json)=>{
-          console.log(json);
           return json;
         });
       });
