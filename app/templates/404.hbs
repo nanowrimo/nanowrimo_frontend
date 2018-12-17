@@ -1,5 +1,11 @@
 <div class="nano-panel">
-  <div class="col-12">
-    <h1 data-test-not-found-header>404 Not Found</h1>
-  </div>
+  {{#if model.data.attributes.body}}
+    <div>
+      {{{model.data.attributes.body}}}
+    </div>
+  {{else}}
+    <div class="col-12">
+      <h1 data-test-not-found-header>404 Not Found</h1>
+    </div>
+  {{/if}}
 </div>
