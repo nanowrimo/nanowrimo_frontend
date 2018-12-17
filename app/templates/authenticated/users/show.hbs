@@ -9,7 +9,7 @@
       {{#if canEditUser}}
         {{!-- TODO: CSS styling for this edit link to show/hide --}}
         <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
-          <img src="/images/global/flip_corner.svg" alt="Edit User Images" />
+          <img src="/images/global/flip_corner.png" alt="Edit User Images" />
         </div>
       {{/if}}
 
@@ -39,7 +39,7 @@
             {{#if canEditUser}}
 
               <div class="flip-corner-link" {{action "openEditModal"}} data-test-user-profile-edit>
-                <img src="/images/global/flip_corner.svg" alt="Edit User Profile" />
+                <img src="/images/global/flip_corner.png" alt="Edit User Profile" />
               </div>
 
               {{user-edit-profile-modal
