@@ -7,7 +7,6 @@ export default Route.extend({
   model(params) {
     if (params.path) {
       let endpoint =  `${ENV.APP.API_HOST}/pages/${params.path}`;
-      console.log(endpoint);
       return fetch(endpoint).then((data)=>{
         return data.json().then((json)=>{
           return json;
