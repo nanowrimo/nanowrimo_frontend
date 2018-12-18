@@ -4,7 +4,11 @@
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          {{fa-icon (if link.service link.service "link") fixedWidth=true}}
+          {{#if link.isWattpad}}
+            <img src="/images/users/social/wattpad.png">
+          {{else}}
+            {{fa-icon (if link.service link.service "link") fixedWidth=true}}
+          {{/if}}
         </div>
       </div>
       {{input
