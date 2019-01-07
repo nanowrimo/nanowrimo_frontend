@@ -50,20 +50,13 @@ export default Model.extend({
   link: computed('url', function(){
     //get the url
     let link = this.get('url');
-    let ll = link.toLowerCase();
-    //does the url start with http:// or https://?
-    if ( !ll.startsWith('https://') && !ll.startsWith('http://') ) {
-      link = `https://${link}`;
-    } 
-    return link;
-  }),
-  
-  isWattpad: computed('service', function(){
-    let service = this.get('service');
-    if (service) {
-      return service.toLowerCase().includes('wattpad');
-    } else {
-      return false;
+    if (link) {
+      let ll = link.toLowerCase();
+      //does the url start with http:// or https://?
+      if ( !ll.startsWith('https://') && !ll.startsWith('http://') ) {
+        link = `https://${link}`;
+      } 
+      return link;
     }
   }),
   

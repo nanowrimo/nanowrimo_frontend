@@ -1,12 +1,6 @@
 <div class="nano-user-social">
   {{#each socialLinks as |link|}}
-    {{#if link.isWattpad}}
-      <a href={{link.link}} class="social-button">
-        <img src='/images/users/social/wattpad.png'>
-      </a>
-    {{else}}
-      <a href={{link.link}} class="social-button">{{fa-icon link.service}}</a>
-    {{/if}}
+    <a href={{link.link}} class="social-button">{{fa-icon link.service}}</a>
   {{/each}}
 </div>
 {{#each otherLinks as |link|}}
