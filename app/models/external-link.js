@@ -46,7 +46,20 @@ export default Model.extend({
       return value;
     }
   }),
-
+  
+  link: computed('url', function(){
+    //get the url
+    let link = this.get('url');
+    if (link) {
+      let ll = link.toLowerCase();
+      //does the url start with http:// or https://?
+      if ( !ll.startsWith('https://') && !ll.startsWith('http://') ) {
+        link = `https://${link}`;
+      } 
+      return link;
+    }
+  }),
+  
   persistChanges() {
     if (this.get('isDeleted')) {
       this.save();
