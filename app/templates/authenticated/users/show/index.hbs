@@ -9,6 +9,7 @@
           <div class="info-text side-by-side-even" data-test-user-bio>
             {{truncate-multiline
               text=user.bio
+              lines=numberOfFavorites
             }}
           </div>
         </div>
@@ -19,15 +20,15 @@
         <div class="nano-subcard-header">
           <div class="corner-label">Favorites</div>
         </div>
-        <div class="nano-subcard-content">
-          <ul class="icon-list">
+        <div class="nano-subcard-content" id='favorite-lists'>
+          <ul class="icon-list" id='favorite-books-list'>
             {{#each favoriteBooks as |book|}}
               <li>{{fa-icon "book"}} {{book.title}}</li>
             {{else}}
               <li><em>No favorite books</em></li>
             {{/each}}
           </ul>
-          <ul class="icon-list">
+          <ul class="icon-list" id='favorite-authors-list'>
             {{#each favoriteAuthors as |author|}}
               <li>{{fa-icon "user"}} {{author.name}}</li>
             {{else}}

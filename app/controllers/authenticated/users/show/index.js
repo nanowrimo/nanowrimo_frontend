@@ -14,7 +14,19 @@ export default Controller.extend({
   user: alias('model'),
 
   bioExpanded: false,
-
+  
+  numberOfFavorites: computed('favoriteAuthors', 'favoriteBooks', function(){
+    let a = this.get('favoriteAuthors');
+    let b = this.get('favoriteBooks');
+    //get the total number of this user's favorites
+    let num = a.length + b.length;
+    //set a minimum
+    if (num < 4) { num=3 }
+    //add some extra
+    num += num*0.3;
+    return num;
+  }),
+  
   favoriteAuthors: filterBy('user.favoriteAuthors', 'isNew', false),
   favoriteBooks: filterBy('user.favoriteBooks', 'isNew', false),
   showBioReadMore: not('bioExpanded'),
