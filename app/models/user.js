@@ -254,7 +254,7 @@ const User = Model.extend({
     get() {
       let avatar = this.get('avatar');
       if (avatar && avatar.includes(':')) {
-        this.set('_avatarUrl', avatar);
+        this.set('_avatarUrl', avatar); 
       }
       return this.get('_avatarUrl');
     }
@@ -265,7 +265,7 @@ const User = Model.extend({
     get() {
       let plate = this.get('plate');
       if (plate && plate.includes(':')) {
-        this.set('_plateUrl', plate);
+        this.set('_plateUrl', plate); 
       }
       return this.get('_plateUrl');
     }
