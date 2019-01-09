@@ -15,6 +15,11 @@ export default Controller.extend({
 
   bioExpanded: false,
   
+  hasBio: computed('user.bio', function(){
+    let b = this.get('user.bio')
+    return b && b.length>0;
+  }),
+  
   numberOfFavorites: computed('favoriteAuthors', 'favoriteBooks', function(){
     let a = this.get('favoriteAuthors');
     let b = this.get('favoriteBooks');
