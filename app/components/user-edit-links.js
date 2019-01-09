@@ -63,12 +63,8 @@ export default Component.extend({
     },
 
     clearLink(link) {
-      if (link.get('service')) {
-        link.set('changeset.url', null);
-      } else {
-        this.get('_newLinks').removeObject(link);
-        link.deleteRecord();
-      }
+      this.get('_newLinks').removeObject(link);
+      link.deleteRecord();
     }
   }
 });
