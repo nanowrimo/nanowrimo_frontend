@@ -107,6 +107,17 @@
   }
 }
 
+#missing-bio {
+  color: #979797;
+  text-align: center;
+  font-size: 16px;
+
+  a {
+    color: #343434;
+    text-decoration: underline;
+  }
+}
+
 #favorite-books-list {
   margin-bottom: 10px;
 }

@@ -14,9 +14,14 @@
               }}
             {{ else }}
               {{#if canEditUser}}
-                <a href="#" {{action "showEditBio"}} >
-                  Tell your fellow writers a little bit more about yourself! What better way to practice for your book jacket blurb?
-                </a>
+                <div id='missing-bio'>
+                  <div>
+                    Ready to practice for your book jacket blurb?
+                  </div>
+                  <a href="#" {{action "showEditBio"}} >
+                    Tell your fellow writers more about yourself! 
+                  </a>
+                </div>
               {{else}}
                 Nothing is known about this author.
               {{/if}}
