@@ -24,7 +24,7 @@ export default Component.extend({
     let ad = false;
     let pc = this.get('projectChallenge');
     ubs.forEach(function(ub) {
-      if ((b.id==ub.badge_id)&&(pc.get('id')==ub.project_challenge_id)) {
+      if (b && (b.id==ub.badge_id)&&(pc.get('id')==ub.project_challenge_id)) {
         ad = ub;
       }
     });
@@ -57,7 +57,9 @@ export default Component.extend({
   // Returns true if the user can award themselves the badge
   awardable: computed('badge.badge_type','ownsBadge',function() {
     let badge = this.get('badge');
-    return ((badge.badge_type=='self-awarded')&&(this.get('ownsBadge')));// {
+    if (badge) {
+      return ((badge.badge_type=='self-awarded')&&(this.get('ownsBadge')));// {
+    }
   }),
   
   // Changes the cursor on self-awardable badges
@@ -72,20 +74,24 @@ export default Component.extend({
   
   badgeImageUrl: computed('userBadges.[]',function() {
     let b = this.get('badge');
-    let imageUrl = b.unawarded;
-    if (this.get('awardDate')) {
-      imageUrl = b.awarded;
+    if (b) {
+      let imageUrl = b.unawarded;
+      if (this.get('awardDate')) {
+        imageUrl = b.awarded;
+      }
+      return imageUrl;
     }
-    return imageUrl;
   }),
   badgeDescription: computed('userBadges.[]',function() {
     let b = this.get('badge');
     let desc = '';
-    if (this.get('ownsBadge')) {
-      if (this.get('awardDate')) {
-        desc = b.awarded_description;
-      } else {
-        desc = b.description;
+    if (b) {
+      if (this.get('ownsBadge')) {
+        if (this.get('awardDate')) {
+          desc = b.awarded_description;
+        } else {
+          desc = b.description;
+        }
       }
     }
     return desc;
@@ -95,13 +101,16 @@ export default Component.extend({
     let badge = this.get('badge');
     let ownsBadge = this.get('ownsBadge');
     let note = "";
-    if (ownsBadge) {
+    if (badge && ownsBadge) {
       if (badge.badge_type=='self-awarded') {
+        note = "Click on a badge to award it to yourself! Click on it again to remove it."
+        /*
         if (awardDate) {
           note = "You gave yourself this badge. If you feel you don't deserve it, click on it to remove it.";
         } else {
           note = "Click on this badge to award it to yourself!";
         }
+        */
       } else {
         if (awardDate) {
           let str_val = moment(awardDate).fromNow(); 
