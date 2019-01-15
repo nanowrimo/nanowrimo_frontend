@@ -72,23 +72,21 @@ const Project = Model.extend({
     return genreNames.join(", ");
   }),
 
-  activeProjectChallenge: computed('projectChallenges.[]', function(){
-    const promise = this.get('projectChallenges').then((pcs)=>{
-      let now = moment();
-      //loop through the pcs
-      let active = null;
-      pcs.forEach((pc)=>{
-        let start = moment(pc.startsAt);
-        let end = moment(pc.endsAt);
-        //is now between pc start and pc end?
-        if (now.isSameOrAfter(start) && now.isSameOrBefore(end) ) {
-          //this is the active project challenge
-          active = pc;
-        }
-      });
-      return active;
+  activeProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
+    let active = null;
+    //get the time now in user's timezone 
+    let now = moment().tz(this.get('user.timeZone'));
+    //loop through this project's projectChallenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //get the start and end as moments
+      let endsAt = moment(pc.endsAt);
+      let startsAt = moment(pc.startsAt);
+      //is this pc active?
+      if (now.isAfter(startsAt) && now.isBefore(endsAt)) {
+        active = pc;
+      }
     });
-    return  DS.PromiseObject.create({promise});
+    return active;
   }),
 
   latestProjectChallenge: computed('projectChallenges.[]', function(){

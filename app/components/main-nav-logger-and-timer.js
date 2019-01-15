@@ -14,7 +14,10 @@ export default Component.extend({
   timeProgress: null,
   referenceStart: null,
   referenceEnd: null,
-  activeProjectChallenge: null,
+  
+  activeProjectChallenge: computed('primaryProject.activeProjectChallenge',function(){
+    return this.get('primaryProject.activeProjectChallenge');
+  }),
     
   displaySessionButton: computed('displayTimeOnButton', function(){
     return !this.get('displayTimeOnButton');
@@ -27,9 +30,6 @@ export default Component.extend({
   primaryProject: computed("currentUser.user.primaryProject", function(){
     let p = this.get('currentUser.user.primaryProject');
     if (p) {
-      p.activeProjectChallenge.then((data)=>{
-        this.set('activeProjectChallenge', data);
-      });
       return p;
     }
   }),
