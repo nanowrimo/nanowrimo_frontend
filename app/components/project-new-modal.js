@@ -22,6 +22,7 @@ export default Component.extend({
   formStepOverride: 0,
   projectChallengeChangeset: null,
   recalculateEvents: 0,
+  validChallengeDates: true,
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
@@ -81,6 +82,9 @@ export default Component.extend({
   }),
   optionsForWritingType: computed(function() {
     return Project.optionsForWritingType;
+  }),
+  invalidChallengeDates: computed('validChallengeDates', function(){
+    return !this.get('validChallengeDates');
   }),
 
   steps: computed(function() {
