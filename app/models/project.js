@@ -32,10 +32,7 @@ const Project = Model.extend({
 
   // Awarded badges
   userBadges: hasMany('user-badge'),
-
-
-  activeChallengeUnitTypePlural: null,
-
+  
   _coverUrl: "/images/projects/unknown-cover.png",
   coverUrl: computed('cover', {
     get() {
@@ -124,15 +121,60 @@ const Project = Model.extend({
         promiseArray.push( genre.save() );
       }
     });
+    
     let _super = this._super;
     //resolve all of the genre save promises before saving this project
     return Promise.all(promiseArray).then(() => {
       return _super.call(this).then(()=>{
       });
     });
-
-
-  }
+  },
+  
+  currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}', function() {
+    let active = null;
+    let latest = null;
+    let pending = null;
+    //get the time now in user's timezone 
+    let now = moment().tz(this.get('user.timeZone'));
+    //loop through this project's projectChallenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //get the start and end as moments
+      let endsAt = moment(pc.endsAt);
+      let startsAt = moment(pc.startsAt);
+      //is this pc active?
+      if (now.isAfter(startsAt) && now.isBefore(endsAt)) {
+        active = pc;
+      }
+      // determine the lastest projectChallenge
+      if (latest==null) {
+        latest = pc;
+      }else{
+        let lend = moment(latest.endsAt);
+        if (endsAt.isSameOrAfter(lend) ) {
+          //this is the latest project challenge
+          latest = pc;
+        }
+      }
+      //determine the pending?
+      
+      if (startsAt.isAfter(now) ) {
+        if (pending==null) {
+          pending = pc;
+        } else {
+          if (startsAt.isBefore( moment(pending.startsAt) )){
+            pending = pc;
+          }
+        }
+      }
+    });
+    if (active) {
+      return active;
+    } else if (pending){ 
+      return pending;
+    } else {
+      return latest;
+    }
+  })
 });
 
 Project.reopenClass({

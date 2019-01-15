@@ -4,9 +4,11 @@ import moment from 'moment';
 
 export default Component.extend({
   project: null,
+  
   count: computed('project.unitCount', function(){
     return this.get('project').unitCount;
   }),
+  
   formattedStart: computed("project.challenges.[]", function(){
     let proj = this.get('project');
     if (proj) {
@@ -20,19 +22,10 @@ export default Component.extend({
       }
     }
   }),
-
-  goal: computed('project.projectChallenges.[]', function(){
-    let proj = this.get('project');
-    if (proj) {
-      return get(proj, 'challenges.firstObject.defaultGoal');
-    } else {
-      return 0;
-    }
-  }),
+  
   goalMet: computed("percentCompleted", function(){
     return this.get('percentCompleted') === 100;
   }),
-
 
   percentCompleted: computed("goal","project.unitCount",function(){
     let proj = this.get('project');

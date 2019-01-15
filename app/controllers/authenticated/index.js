@@ -12,7 +12,7 @@ export default Controller.extend({
   currentUserHasProject: computed('currentUser.user.projects.[]', function() {
     let cu = this.get('currentUser.user');
     if (cu) {
-      return cu.projects.length > 0;
+      return cu.persistedProjects.length > 0;
     }
     
   }),
