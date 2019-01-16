@@ -92,18 +92,24 @@
           {{/if}}
         </div>
         <div class="form-group side-by-side-even">
-          <label for='challenge-duration'>How many days do you want to write for?</label>
-          <input type='number' min='1' max='31' value={{newDuration}}
-            class='form-control {{if validationErrors.badEnd 'is-invalid' ''}}' 
-            oninput={{action "durationChanged" value="target.value"}}
+        
+          <label for='challenge-last-day'>{{durationLabel}}</label>
+          <input name='challenge-last-day' type='date' class='form-control'
+            oninput={{action "endsAtChanged" value="target.value"}} 
+            value={{displayEndsAt}}
             disabled={{disableStartEnd}}
-            >
+            min='1999-07-01'>
+     
+            
              {{#if validationErrors.endOverlap}}
             <span class='invalid-feedback'>a goal can't end after another goal has started</span>
           {{/if}}
         </div>
         {{#if validationErrors.fullOverlap}}
-          <span class='invalid-feedback'>a goal can not take place within another goal</span>
+          <span class='text-danger'>a goal can not take place within another goal</span>
+        {{/if}}
+        {{#if validationErrors.endsBeforeStart}}
+          <span class='text-danger'>a goal can not end before it starts</span>
         {{/if}}
       </div>
       
@@ -149,7 +155,7 @@
 
   {{#modal.footer}}
 
-    <input type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
+    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
     <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
 
   {{/modal.footer}}

@@ -11,6 +11,7 @@ export default Component.extend({
   newDuration:null,
   displayName: null,
   displayStartsAt: null,
+  displayEndsAt: null,
   validationErrors: null,
   editing: false,
   newStartsAt: null,
@@ -18,6 +19,7 @@ export default Component.extend({
   //challenge stuff
   associateWithChallenge:false,
   associatedChallenge: null,
+  hasValidationError: false,
   
   canEditName: computed('projectChallenge', function(){
     if (this.get('editing') ){
@@ -149,6 +151,7 @@ export default Component.extend({
         this.set('editing', true);
         this.set('newDuration', pc.duration);  
         this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
+        this.set('displayEndsAt', moment.utc(pc.endsAt).format("YYYY-MM-DD"));
         this.set('displayName', pc.name);
         this.set('newStartsAt', pc.startsAt);
         this.set('newEndsAt', pc.endsAt);
@@ -189,16 +192,18 @@ export default Component.extend({
     unitTypeChanged(val) {
       this.set('projectChallenge.unitType', val);
     },
-     durationChanged(val) {
-      this.set('newDuration', val);
-      this.recomputeEndsAt();
-      this._validate();
-    },
+    
     startsAtChanged(val) {
       //set the new StartsAt
       let m = moment.utc(val);
       this.set('newStartsAt', m);
-      this.recomputeEndsAt();
+      this._validate();
+    },
+    
+    endsAtChanged(val) {
+      //set the new StartsAt
+      let m = moment.utc(val);
+      this.set('newEndsAt', m);
       this._validate();
     }
   },
@@ -229,7 +234,9 @@ export default Component.extend({
     projectChallenge.set('unitType',"0");
     projectChallenge.set('goal',challenge.defaultGoal);
     let start = moment.utc(challenge.startsAt);
+    let end = moment.utc(challenge.endsAt);
     this.set('displayStartsAt', start.format("YYYY-MM-DD"));
+    this.set('displayEndsAt', end.format("YYYY-MM-DD"));
     projectChallenge.set('startsAt', challenge.startsAt); 
     
     projectChallenge.set('endsAt', challenge.endsAt); 
@@ -248,10 +255,11 @@ export default Component.extend({
   _validate(){
     //get the current projectChallenge
     let currentpc = this.get('projectChallenge');
-    let errors = {"startOverlap":false, "endOverlap": false, "fullOverlap":false, "badEnd":false, "badStart":false };
+    let errors = {"endsBeforeStart": false, "startOverlap":false, "endOverlap": false, "fullOverlap":false, "badEnd":false, "badStart":false };
     //get the proposed start and end as moments
     let startTime = moment.utc(this.get('newStartsAt'));
     let endTime = moment.utc(this.get('newEndsAt'));
+    errors.endsBeforeStart = endTime.isBefore(startTime);
     //loop through this project's projectChallenges
     let pcs = this.get('project.projectChallenges');
     
@@ -279,5 +287,13 @@ export default Component.extend({
       }
     });
     this.set('validationErrors', errors);
+    //assume no errors were found
+    this.set('hasValidationError', false);
+    //loop through the errors array to determine if there is an error
+    Object.keys(errors).forEach((k)=>{
+      if( errors[k] ){
+        this.set('hasValidationError', true);
+      }
+    });
   }
 });
