@@ -23,8 +23,10 @@ export default Component.extend({
   referenceTimer: null,
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
-  activeProjectChallenge:null,
-
+  
+  activeProjectChallenge: computed('primaryProject', function(){
+    return this.get('primaryProject.activeProjectChallenge');
+  }),
   feeling1Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 1;
   }),
@@ -51,9 +53,6 @@ export default Component.extend({
   }),
   primaryProject: computed("user.primaryProject", function(){
     let p = this.get('user.primaryProject');
-    p.activeProjectChallenge.then((data)=>{
-      this.set('activeProjectChallenge', data);
-    });
     return p;
   }),
 
