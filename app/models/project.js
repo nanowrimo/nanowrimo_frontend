@@ -33,7 +33,7 @@ const Project = Model.extend({
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
-  _coverUrl: "/images/projects/unknown-cover.png",
+  _coverUrl: "/images/projects/default-cover.svg",
   coverUrl: computed('cover', {
     get() {
       let cover = this.get('cover');
