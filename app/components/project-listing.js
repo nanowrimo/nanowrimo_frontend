@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   currentUser: service(),
+  router: service(),
   
   queryParams: ['editCover', 'editCoverTab'],
   
@@ -67,7 +68,7 @@ export default Component.extend({
     },
     
     viewGoals() {
-      
+      this.get('router').transitionTo('authenticated.users.show.projects.show.goals', this.get('currentUser.user.slug'), this.get('project.slug') );
     }
   }
   
