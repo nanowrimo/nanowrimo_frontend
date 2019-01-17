@@ -38,15 +38,15 @@ export default DS.Model.extend({
       this.set('hours', fh);
     }
     let fm = dur.minutes();
-    if (fh || fm) {
+   // if (fh || fm) {
       if (( fm < 10 )&&(fh!==0)) { fm = "0"+fm}
       formatted = `${formatted}${fm}:`;
       this.set('minutes', fm);
-    }
+   // }
 
     let fs = dur.seconds();
     this.set('seconds', fs);
-    if (fm && fs < 10 ) { fs = "0"+fs}
+    if ( fs < 10 ) { fs = "0"+fs}
     formatted = `${formatted}${fs}`;
     return formatted;
   }
