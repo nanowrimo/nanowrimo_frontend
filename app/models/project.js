@@ -33,11 +33,27 @@ const Project = Model.extend({
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
-  _coverUrl: "/images/projects/default-cover.svg",
-  coverUrl: computed('cover', {
+  _coverUrl: null,
+  defaultCoverUrl: computed('genres.[]', function(){
+    let cover = "/images/projects/default-cover.svg";
+    this.get('genres').forEach((g)=>{
+      if (g.name.toLowerCase() == "science fiction") {
+        cover = "/images/projects/default-science-fiction-cover.svg";
+      } else if (g.name.toLowerCase() == "romance") {
+        cover = "/images/projects/default-romance-cover.svg";
+      } else if (g.name.toLowerCase() == "fantasy") {
+        cover = "/images/projects/default-fantasy-cover.svg";
+      }
+    });
+    return cover;
+  }),
+  coverUrl: computed('cover', 'defaultCoverUrl', {
     get() {
       let cover = this.get('cover');
       if (cover && cover.includes(':')) {
+        this.set('_coverUrl', cover);
+      } else {
+        cover = this.get('defaultCoverUrl');
         this.set('_coverUrl', cover);
       }
       return this.get('_coverUrl');
