@@ -162,9 +162,11 @@ input:disabled, select:disabled {
   }
   
 }
-.modal-content .modal-body .tab-content .form-group input[type="date"] {
+.form-group input[type="date"] {
   background-image: url('/images/global/calendar.svg');
   background-repeat: no-repeat;
   background-size: 16px 16px;
   background-position: 180px center;
+  font-family: 'SourceSansPro-Regular', sans-serif;
+  max-width: 210px;
 }
