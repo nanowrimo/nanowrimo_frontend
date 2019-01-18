@@ -25,7 +25,7 @@ export default Component.extend({
     this._super(...arguments);
     this.set('confirmationDeleteTitleText', "Confirm Delete");
     this.set('deleteConfirmationBodyText', "Deleting your project will also delete all associated goals and writing progress. Are you sure you want to wield that white-out?");
-    this.set('deleteConfirmationYesText','Yes, delete my project and its goals'); 
+    this.set('deleteConfirmationYesText','Yes, delete my project and its goals.'); 
     this.set('deleteConfirmationNoText','No, nevermind.'); 
   },
   actions: {
