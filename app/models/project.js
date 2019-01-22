@@ -32,15 +32,28 @@ const Project = Model.extend({
 
   // Awarded badges
   userBadges: hasMany('user-badge'),
-
-
-  activeChallengeUnitTypePlural: null,
-
-  _coverUrl: "/images/projects/unknown-cover.png",
-  coverUrl: computed('cover', {
+  
+  _coverUrl: null,
+  defaultCoverUrl: computed('genres.[]', function(){
+    let cover = "/images/projects/default-cover.svg";
+    this.get('genres').forEach((g)=>{
+      if (g.name.toLowerCase() == "science fiction") {
+        cover = "/images/projects/default-science-fiction-cover.svg";
+      } else if (g.name.toLowerCase() == "romance") {
+        cover = "/images/projects/default-romance-cover.svg";
+      } else if (g.name.toLowerCase() == "fantasy") {
+        cover = "/images/projects/default-fantasy-cover.svg";
+      }
+    });
+    return cover;
+  }),
+  coverUrl: computed('cover', 'defaultCoverUrl', {
     get() {
       let cover = this.get('cover');
       if (cover && cover.includes(':')) {
+        this.set('_coverUrl', cover);
+      } else {
+        cover = this.get('defaultCoverUrl');
         this.set('_coverUrl', cover);
       }
       return this.get('_coverUrl');
@@ -75,23 +88,21 @@ const Project = Model.extend({
     return genreNames.join(", ");
   }),
 
-  activeProjectChallenge: computed('projectChallenges.[]', function(){
-    const promise = this.get('projectChallenges').then((pcs)=>{
-      let now = moment();
-      //loop through the pcs
-      let active = null;
-      pcs.forEach((pc)=>{
-        let start = moment(pc.startsAt);
-        let end = moment(pc.endsAt);
-        //is now between pc start and pc end?
-        if (now.isSameOrAfter(start) && now.isSameOrBefore(end) ) {
-          //this is the active project challenge
-          active = pc;
-        }
-      });
-      return active;
+  activeProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
+    let active = null;
+    //get the time now in user's timezone 
+    let now = moment().tz(this.get('user.timeZone'));
+    //loop through this project's projectChallenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //get the start and end as moments
+      let endsAt = moment(pc.endsAt);
+      let startsAt = moment(pc.startsAt);
+      //is this pc active?
+      if (now.isAfter(startsAt) && now.isBefore(endsAt)) {
+        active = pc;
+      }
     });
-    return  DS.PromiseObject.create({promise});
+    return active;
   }),
 
   latestProjectChallenge: computed('projectChallenges.[]', function(){
@@ -124,15 +135,60 @@ const Project = Model.extend({
         promiseArray.push( genre.save() );
       }
     });
+    
     let _super = this._super;
     //resolve all of the genre save promises before saving this project
     return Promise.all(promiseArray).then(() => {
       return _super.call(this).then(()=>{
       });
     });
-
-
-  }
+  },
+  
+  currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}', function() {
+    let active = null;
+    let latest = null;
+    let pending = null;
+    //get the time now in user's timezone 
+    let now = moment().tz(this.get('user.timeZone'));
+    //loop through this project's projectChallenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //get the start and end as moments
+      let endsAt = moment(pc.endsAt);
+      let startsAt = moment(pc.startsAt);
+      //is this pc active?
+      if (now.isAfter(startsAt) && now.isBefore(endsAt)) {
+        active = pc;
+      }
+      // determine the lastest projectChallenge
+      if (latest==null) {
+        latest = pc;
+      }else{
+        let lend = moment(latest.endsAt);
+        if (endsAt.isSameOrAfter(lend) ) {
+          //this is the latest project challenge
+          latest = pc;
+        }
+      }
+      //determine the pending?
+      
+      if (startsAt.isAfter(now) ) {
+        if (pending==null) {
+          pending = pc;
+        } else {
+          if (startsAt.isBefore( moment(pending.startsAt) )){
+            pending = pc;
+          }
+        }
+      }
+    });
+    if (active) {
+      return active;
+    } else if (pending){ 
+      return pending;
+    } else {
+      return latest;
+    }
+  })
 });
 
 Project.reopenClass({

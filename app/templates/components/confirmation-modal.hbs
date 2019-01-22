@@ -2,6 +2,7 @@
   open=open
   onShow=(action "onShow")
   onHidden=(action "onHidden")
+  size='confirmation'
   as |modal|
 }}
   {{#modal.header closeButton=false}}
@@ -9,10 +10,9 @@
   {{/modal.header}}
   {{#modal.body}}
     {{body}}
-
   {{/modal.body}}
   {{#modal.footer}}
-    <button class="nano-button-dark-blue full-width" {{action 'yes'}}>{{yes}}</button>
+    <button class="nano-button-green full-width" {{action 'yes'}}>{{yes}}</button>
     <button class="nano-button-red full-width" {{action 'no'}}>{{no}}</button>
   {{/modal.footer}}
 {{/bs-modal}}

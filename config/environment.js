@@ -5,7 +5,10 @@ module.exports = function(environment) {
     modulePrefix: 'nanowrimo',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    //locationType: 'auto',
+    locationType: 'router-scroll',
+    historySupportMiddleware: true,
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -22,7 +25,7 @@ module.exports = function(environment) {
       // when it is created
       API_HOST: 'https://api.nanowrimo.org',
       DEBOUNCE_MS: 250,
-      SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr'],
+      SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr', 'youtube'],
       MODAL_BACKGROUND_TRANSITION_MS: 150,
       MODAL_TRANSITION_MS: 300
     },

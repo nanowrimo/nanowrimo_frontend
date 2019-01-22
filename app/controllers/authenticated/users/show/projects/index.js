@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   currentUser: service(),
-
+  
   queryParams: ['addProject'],
 
   addProject: false,
@@ -35,7 +35,7 @@ export default Controller.extend({
   actions: {
     afterProjectModalClose() {
       this.set('addProject', null);
-      //this.send('refreshModel');
+      
     },
     openNewProjectModal() {
       if (this.get('canAddProject')) {

@@ -21,11 +21,17 @@ export default Component.extend({
   _socialLinks: computed('_existingLinks.@each.service', function() {
     let links = this.get('_existingLinks');
 
-    return ENV.APP.SOCIAL_SERVICES.reduce((acc, service) => {
+    let socialLinks = ENV.APP.SOCIAL_SERVICES.reduce((acc, service) => {
       let link = links.findBy('service', service);
-      if (!link) { link = this._newExternalLink({ service }); }
-      return acc.concat(link);
+      if (!link || link.url == null) { 
+        //link = this._newExternalLink({ service }); 
+      } else {
+        if (acc) {
+          return acc.concat(link);
+        }
+      }
     }, []);
+    return socialLinks;
   }),
 
   canAddAnotherLink: computed('_otherSavedLinks.[]', '_newLinks.[]', function() {
@@ -57,12 +63,8 @@ export default Component.extend({
     },
 
     clearLink(link) {
-      if (link.get('service')) {
-        link.set('changeset.url', null);
-      } else {
-        this.get('_newLinks').removeObject(link);
-        link.deleteRecord();
-      }
+      this.get('_newLinks').removeObject(link);
+      link.deleteRecord();
     }
   }
 });

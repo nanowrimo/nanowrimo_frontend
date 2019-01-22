@@ -1,10 +1,35 @@
 import Controller from '@ember/controller';
 import ENV from 'nanowrimo/config/environment';
+import {computed} from '@ember/object';
 import fetch from 'fetch';
+
 export default Controller.extend({
   emailError: false,
   successMessage: false,
   errorMessage: null,
+  
+  displayForm: computed('successMessage', function(){
+    return !this.get('successMessage');
+  }),
+  
+  cardTitle: computed('successMessage', 'errorMessage', function(){
+    let sm = this.get('successMessage');
+    if (sm) {
+      return "Great! Check your email.";
+    } else { 
+      return "Let's get your password reset";
+    }
+  }),
+  
+  cardInstruction: computed('successMessage', 'errorMessage', function(){
+    let sm = this.get('successMessage');
+    if (sm) {
+      return "We've sent you a link to reset your password. Please check your email inbox!";
+    } else { 
+      return "Please enter your email address below and we'll send you a link so you can reset your password!";
+    }
+  }),
+  
   actions: {
     submit(form) {
       let email = form.get('email');
