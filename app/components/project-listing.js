@@ -15,7 +15,8 @@ export default Component.extend({
   deleteConfirmationTitleText: null,
   deleteConfirmationYesText:null,
   deleteConfirmationNoText:null,
-  deleteConfirmationBodyText: null,
+  deleteConfirmationQuestion: null,
+  deleteConfirmationQuestionAddendum: null,
   
   canEdit: computed('project', function(){
     return this.get('currentUser.user') === this.get('author');
@@ -23,10 +24,12 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-    this.set('confirmationDeleteTitleText', "Confirm Delete");
-    this.set('deleteConfirmationBodyText', "Deleting your project will also delete all associated goals and writing progress. Are you sure you want to wield that white-out?");
-    this.set('deleteConfirmationYesText','Yes, delete my project and its goals.'); 
-    this.set('deleteConfirmationNoText','No, nevermind.'); 
+    this.set('deleteConfirmationTitleText', "Confirm Delete");
+    let title = this.get('project.title');
+    this.set('deleteConfirmationQuestion', `Delete "${title}"?`);
+    this.set('deleteConfirmationQuestionAddendum', "Deleting your project will also delete all associated goals and writing progress.");
+    this.set('deleteConfirmationYesText','Delete'); 
+    this.set('deleteConfirmationNoText','Cancel'); 
   },
   actions: {
     doNothing() {
