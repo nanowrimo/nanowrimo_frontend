@@ -9,10 +9,17 @@
       {{title}}
   {{/modal.header}}
   {{#modal.body}}
-    {{body}}
+    <div class='confirmation-question'>
+      {{question}}
+    </div>
+    {{#if questionAddendum}}
+      <div class='confirmation-question-addendum'>
+        {{questionAddendum}}
+      </div>
+    {{/if}}
   {{/modal.body}}
   {{#modal.footer}}
-    <button class="nano-button-green full-width" {{action 'yes'}}>{{yes}}</button>
-    <button class="nano-button-red full-width" {{action 'no'}}>{{no}}</button>
+    <button class="nano-button-green" {{action 'yes'}}>{{yes}}</button>
+    <a href='#' class='nano-link' {{action 'no'}}>{{no}}</a>
   {{/modal.footer}}
 {{/bs-modal}}
