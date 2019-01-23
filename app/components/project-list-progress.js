@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed, get } from '@ember/object';
+import { computed } from '@ember/object';
 import moment from 'moment';
 
 export default Component.extend({
@@ -10,9 +10,7 @@ export default Component.extend({
   }),
   
   formattedStart: computed("project.challenges.[]", function(){
-    let proj = this.get('project');
     let pc = this.get('project.currentProjectChallenge');
-  
     if (pc) {
       let time = moment(pc.startsAt);
       if (time.month()===4) {
