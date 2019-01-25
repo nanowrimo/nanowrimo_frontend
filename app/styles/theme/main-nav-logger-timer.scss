@@ -143,6 +143,7 @@
       #progress-update-form {
         .more-info-toggle {
           font-family: 'SourceSansPro-Regular', sans-serif;
+          color: #343434;
           font-size: 14px;
           padding-left: 15px;
           padding-right: 15px;
@@ -150,12 +151,12 @@
           cursor: pointer;
           &.info-hidden {
             display: block;
-            .fa-chevron-up {
+            .fa-caret-up {
               display: none;
             }
           }
           &.info-visible {
-            .fa-chevron-down {
+            .fa-caret-down {
               display: none;
             }
           }
