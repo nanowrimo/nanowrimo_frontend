@@ -60,8 +60,8 @@ export default Service.extend({
   }),
   helpLinks: computed(function() {
     let links = [
-      {label: "Help Center", url: "index"},
-      {label: "Get Involved", url: "index"}
+      {label: "Email Help Desk", url: "mailto:help@nanowrimo.org"}
+
     ];
     return links;
   }),
