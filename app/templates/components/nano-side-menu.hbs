@@ -33,7 +33,12 @@
     <li><a href="{{storeLink.url}}">{{storeLink.label}}</a></li>
   {{/each}}
   {{#each helpLinks as |helpLink|}}
-    <li>{{#nano-side-menu-link-to helpLink.url}}{{helpLink.label}}{{/nano-side-menu-link-to}}</li>
+    <li>
+      <a href="{{helpLink.url}}">{{helpLink.label}}</a>
+      {{!--
+      {{#nano-side-menu-link-to helpLink.url}}{{helpLink.label}}{{/nano-side-menu-link-to}}
+      --}}
+    </li>
   {{/each}}
   <li><a href="#" {{action 'invalidateSession'}}>Logout</a></li>
 </ul>
