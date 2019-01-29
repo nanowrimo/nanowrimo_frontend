@@ -5,13 +5,14 @@
   as |modal|
 }}
   {{#modal.header closeButton=false}}
-    {{#if editting }}
+    {{#if editing }}
       Edit Goal
     {{else}}
       New Goal
     {{/if}}
   {{/modal.header}}
   {{#modal.body}}
+    <div class="project-challenge-new-form">
     {{#if optionsForChallenges}}
       <div class="form-group">
         {{input class= 'form-control' 
@@ -150,7 +151,7 @@
         </div>
       {{/if}}
 
-
+  </div>
   {{/modal.body}}
 
   {{#modal.footer}}

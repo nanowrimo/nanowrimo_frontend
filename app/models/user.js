@@ -70,6 +70,9 @@ const User = Model.extend({
   emailNanomessagesBuddies: attr('boolean'),
   emailNanomessagesHq: attr('boolean'),
   emailWritingReminders: attr('boolean'),
+  
+  settingSessionMoreInfo: attr('boolean'),
+  settingSessionCountBySession: attr('boolean'),
 
   // Awarded badges
   userBadges: hasMany('user-badge'),
@@ -303,8 +306,7 @@ const User = Model.extend({
     });
   },
 
-
-  primaryProject: computed('projects.@each.primary', function(){
+  primaryProject: computed('projects.{[],@each.primary}', function(){
     let ps = this.get('projects');
     let prime = ps.firstObject;
 

@@ -39,12 +39,14 @@
           {{#dd.toggle class="user-menu"}}Hi, <u>{{currentUserName}}!</u> <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
             <ul>
+              {{!--
               {{#ddm.item tagName="li"}}
                 <a href="/" class="dropdown-item d-flex">
                   <div class="dropdown-icon">{{fa-icon "list-alt"}}</div>
                   <div class="dropdown-headline">Activity Log</div>
                 </a>
               {{/ddm.item}}
+              --}}
               {{#ddm.item tagName="li"}}
                 {{#ddm.link-to 'authenticated.settings.account' class="dropdown-item d-flex"}}
                   <div class="dropdown-icon">{{fa-icon "cog"}}</div>
@@ -63,7 +65,9 @@
         
         <div class="nav-notify-buttons d-flex">
           {{#if media.isDesktop}}
+            {{!--
             {{nanomessages-menu}}
+            --}}
           {{/if}}
           {{#if media.isMobile}}
             {{#nano-side-menu-toggle}}

@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed, get } from '@ember/object';
+import { computed } from '@ember/object';
 import moment from 'moment';
 
 export default Component.extend({
@@ -10,15 +10,14 @@ export default Component.extend({
   }),
   
   formattedStart: computed("project.challenges.[]", function(){
-    let proj = this.get('project');
-    if (proj) {
-      let start = get(proj, 'challenges.firstObject.startsOn');
-      let time = moment(start);
+    let pc = this.get('project.currentProjectChallenge');
+    if (pc) {
+      let time = moment(pc.startsAt);
       if (time.month()===4) {
         //may does not need to be formatted with a period
-        return moment(start).format("MMM YYYY");
+        return time.format("MMM YYYY");
       } else {
-        return moment(start).format("MMM. YYYY");
+        return time.format("MMM. YYYY");
       }
     }
   }),

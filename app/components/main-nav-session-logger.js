@@ -24,6 +24,16 @@ export default Component.extend({
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
   
+  countTypeTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
+    let setting = this.get('currentUser.user.settingSessionCountBySession');
+    return !setting;  
+  }),
+  
+  countTypeSessionSelected: computed('currentUser.user.settingSessionCountBySession', function(){
+    let setting = this.get('currentUser.user.settingSessionCountBySession');
+    return (setting===true);  
+  }),
+  
   activeProjectChallenge: computed('primaryProject', function(){
     return this.get('primaryProject.activeProjectChallenge');
   }),
@@ -60,13 +70,21 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('currentUser.user');
     this.set('user',  user);
-
-    this.set('countType',0);
-    this.set('countValue', this.get("primaryProject.unitCount"));
-    this.set('initialValue', this.get("primaryProject.unitCount"));
+    // count by session?
+    let cbs = user.settingSessionCountBySession;
+    if (cbs) {
+      this.set('countValue', 0);
+      this.set('countType', 1);
+    } else {
+    
+      this.set('countValue', this.get("primaryProject.unitCount"));
+      this.set('initialValue', this.get("primaryProject.unitCount"));
+    }
     let t = this.get('referenceEnd');
     let s = this.get('referenceStart');
-    if(t && s){
+    //did the user previously select 'show more'?
+    let ussmi = user.settingSessionMoreInfo;
+    if((t && s) || ussmi){
       //there is a referenceTimer or stopwatch?
       //force the 'extra' stuff to be displayed
 
@@ -235,6 +253,18 @@ export default Component.extend({
 
       session.set('count', count);
       session.save();
+      
+      let user = this.get('currentUser.user');
+      // check if the user has changed the counting type
+      user.set("settingSessionCountBySession", (this.get('countType')===1));
+      // check if the user is entering more data
+      user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
+      let isDirty = user.get('hasDirtyAttributes');
+      if (isDirty) {
+        //save the user
+        user.save();
+      }
+      
       let cfa = this.get('closeFormAction');
       cfa();
 

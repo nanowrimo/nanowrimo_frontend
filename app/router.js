@@ -19,7 +19,6 @@ Router.map(function() {
       this.route('new');
     });
 
-
     this.route('users', { path: 'participants'}, function() {
       this.route('show', { path: '/:slug'}, function() {
         this.route('projects', function() {
