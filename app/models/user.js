@@ -306,8 +306,7 @@ const User = Model.extend({
     });
   },
 
-
-  primaryProject: computed('projects.[]','projects.@each.primary', function(){
+  primaryProject: computed('projects.{[],@each.primary}', function(){
     let ps = this.get('projects');
     let prime = ps.firstObject;
 
