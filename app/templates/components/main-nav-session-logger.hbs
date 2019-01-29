@@ -30,7 +30,7 @@
                   </select>
                 </div>
               </div>
-              <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>Record more details {{fa-icon "caret-down"}}{{fa-icon "caret-up"}}</div>
+              <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>{{if _projectAdditionalInfoShow 'Hide' 'Show'}} more options {{fa-icon "caret-down"}}{{fa-icon "caret-up"}}</div>
               <div class="project-additional-info {{projectAdditionalInfoShow}}">
                 <fieldset>
                   <label>How did it go?</label>

@@ -149,6 +149,9 @@
           padding-right: 15px;
           padding-bottom: 10px;
           cursor: pointer;
+          i {
+            padding-left: 5px;
+          }
           &.info-hidden {
             display: block;
             .fa-caret-up {
