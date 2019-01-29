@@ -30,7 +30,7 @@
                   </select>
                 </div>
               </div>
-              <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>More metrics for the intrepid wrimo {{fa-icon "chevron-down"}}{{fa-icon "chevron-up"}}</div>
+              <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>{{if _projectAdditionalInfoShow 'Hide' 'Show'}} more options {{fa-icon "caret-down"}}{{fa-icon "caret-up"}}</div>
               <div class="project-additional-info {{projectAdditionalInfoShow}}">
                 <fieldset>
                   <label>How did it go?</label>
@@ -108,7 +108,7 @@
               </div>
               <div id="progress-update-form-buttons" class='form-group'> 
                 <input class='form-control nano-button' type='submit' value='Update progress' {{action "formSubmit" }}>
-                <a href="#" {{action 'cancel'}}>Close</a>
+                <a href="#" {{action 'cancel'}}>Cancel</a>
               </div>
             </div>
           </form>

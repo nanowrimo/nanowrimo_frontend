@@ -1,11 +1,13 @@
 <nav class="navbar micronav navbar-expand-lg" aria-label="secondary">
   <div class="container-fluid d-flex">
     <div class="shield-logo-container" aria="hidden">{{#link-to nanoMenuService.homeUrl class="shield-logo"}}<img src="/images/logo/logo.svg" alt="" />{{/link-to}}</div>
+   {{!--
     {{#if session.isAuthenticated}}
       <div class="nano-search d-flex flex-row">
         {{search-field}}
       </div>
     {{/if}}
+    --}}
     <div class="nav-store d-flex flex-row-reverse">
       <ul class="navbar-nav store-blue">
         {{#each storeLinks as |storeLink|}}
