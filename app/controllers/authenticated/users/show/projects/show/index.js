@@ -13,8 +13,6 @@ export default Controller.extend({
   
   actions: {
     editProject(){
-      //get the main controller for a project
-      let ps = this.get('projectShow');
       //send it the 'editProject' action
       this.get('projectShow').send('editProject');
     }
