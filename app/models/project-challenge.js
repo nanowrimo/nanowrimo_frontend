@@ -85,7 +85,15 @@ const ProjectChallenge = Model.extend({
     let sum = 0;
     pss.forEach((ps)=> {sum+=ps.count });
     return sum;
-  })
+  }),
+  
+  numElapsedDays: function(){
+    // return the difference between start and end in number of days
+    let s = moment(this.get('startsAt'));
+    let now = moment();
+    let duration = moment.duration(now.diff(s));
+    return Math.round(duration.asDays());
+  }
 });
 
 export default ProjectChallenge;
