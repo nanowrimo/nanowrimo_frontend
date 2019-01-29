@@ -21,10 +21,11 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    this.set('deleteConfirmationYesText', 'Yes');
-    this.set('deleteConfirmationNoText', 'No'); 
-    this.set('deleteConfirmationTitleText', 'Confirm');
-    this.set('deleteConfirmationBodyText', 'Do you really wish to delete this goal?');
+    this.set('deleteConfirmationYesText', 'Delete');
+    this.set('deleteConfirmationNoText', 'Cancel'); 
+    this.set('deleteConfirmationTitleText', 'Confirm Delete');
+    let name = this.get('projectChallenge.name');
+    this.set('deleteConfirmationQuestion', `Do you really want to delete the "${name}" goal?`);
   },
   
   

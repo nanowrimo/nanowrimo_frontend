@@ -223,6 +223,7 @@ export default Component.extend({
     projectChallenge.set('startsAt', now.toDate()); 
     this.set('newStartsAt', now.toDate());
     projectChallenge.set('endsAt', now.add(30,'d').toDate()); 
+    this.set('displayEndsAt', now.format("YYYY-MM-DD"))
     this.set('newEndsAt', now.toDate());
     this.set('newDuration', 30);
   },

@@ -8,8 +8,9 @@ export default Component.extend({
     },
     
     onHidden() {
-      // do nothing
+      this.set('open', null);
     },
+
     yes() {
       let ya = this.get('yesAction');
       if (ya) {

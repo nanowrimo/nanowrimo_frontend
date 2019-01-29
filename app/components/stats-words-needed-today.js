@@ -60,21 +60,18 @@ export default ChartBaseComponent.extend({
     }
     return data;
   }),
-
-  countNeededToday: computed('unitsTodayData.[]', function(){
-    let utd = this.get('unitsTodayData');
-    if(utd.length>0) {
-      let firstData = utd[0];
-      let cnt = firstData.countPerDay - firstData.countToday;
-      if(cnt<0) {
-          cnt=0;
-      }
-      return cnt;
-    } else {
-      return 0;
+  percentNeededToday: computed("countNeededTodayData", function(){
+    let cntd = this.get('countNeededTodayData');
+    if(cntd) {
+      return cntd.percent;
     }
   }),
-  
+  countNeededToday: computed("countNeededTodayData", function(){
+    let cntd = this.get('countNeededTodayData');
+    if(cntd) {
+      return cntd.needed;
+    }
+  }), 
   paneBackground: computed('unitsTodayData', function(){
     let l = this.get('unitsTodayData.length');
     let pbgs = this.get('paneBackgrounds');
@@ -94,7 +91,7 @@ export default ChartBaseComponent.extend({
       // get the count data for user i
       var c = ud[i];
       //create the percent complete based on count and goal
-      var percent = parseInt(c.countToday*100/c.countPerDay);
+      var percent = this.get('percentNeededToday');
       
       //get the colors and radius number i
       var cr = car[i];

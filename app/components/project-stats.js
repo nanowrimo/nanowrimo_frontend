@@ -33,6 +33,7 @@ export default Component.extend({
       return false;
     }
   }),
+  
   userDailyAggregates: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
     let dates = this.get('projectChallenge.dates');
@@ -59,6 +60,22 @@ export default Component.extend({
         aggs[k]+=cs.count;
       });
       return aggs;
+    }
+  }),
+  countNeededTodayData: computed('count', function() {
+    let count = this.get('count');
+    let countPerDay = this.get('projectChallenge.countPerDay');
+    let pc = this.get('projectChallenge');
+    if (pc) {
+      let elapsedDays = pc.numElapsedDays();
+      let targetCount = elapsedDays*countPerDay;
+      let needed = targetCount-count;
+      let percent = Math.round(count*100/targetCount);
+      if (needed>0){
+        return {'needed':needed,"percent":percent};
+      }else{
+        return {'needed':0,"percent":100};
+      }
     }
   }),
   writingSpeed: computed('challengeSessions.[]',function() {
@@ -313,7 +330,7 @@ export default Component.extend({
     if (p) {
       return this.get('project.projectChallenges').then((pcs)=>{
         this.set('projectChallenges', pcs);
-        this.set('projectChallenge', pcs.firstObject);
+        this.set('projectChallenge', p.currentProjectChallenge);
         //now is a good time to fetch the aggregates
         this.fetchAggregates();
       });

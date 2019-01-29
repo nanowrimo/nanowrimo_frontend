@@ -192,5 +192,8 @@
   .modal-body {
     font-family: 'SourceSansPro-Regular', sans-serif;
     margin: 10px;
+    .confirmation-question {
+      font-weight: bold;
+    }
   }
 }
