@@ -60,7 +60,7 @@ export default Service.extend({
   }),
   helpLinks: computed(function() {
     let links = [
-      {label: "Email Help Desk", url: "mailto:help@nanowrimo.org"}
+      {label: "Email Help Desk", url: "mailto:support@nanowrimo.zohodesk.com"}
 
     ];
     return links;
