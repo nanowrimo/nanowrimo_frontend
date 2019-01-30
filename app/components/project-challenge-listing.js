@@ -24,7 +24,7 @@ export default Component.extend({
     this.set('deleteConfirmationYesText', 'Delete');
     this.set('deleteConfirmationNoText', 'Cancel'); 
     this.set('deleteConfirmationTitleText', 'Confirm Delete');
-    let name = this.get('projectChallenge.name');
+    //let name = this.get('projectChallenge.name');
     this.set('deleteConfirmationQuestion', `Do you really want to delete the "${name}" goal?`);
   },
   
