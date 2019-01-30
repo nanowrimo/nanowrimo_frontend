@@ -5,6 +5,9 @@ import moment from 'moment';
 export default Component.extend({
   project: null,
   
+  goal: computed("project", function() {
+    return this.get('project').currentProjectChallenge.goal;
+  }),
   count: computed('project.unitCount', function(){
     return this.get('project').unitCount;
   }),
@@ -37,7 +40,7 @@ export default Component.extend({
       }
       return percent;
     } else {
-      0;
+      return 0;
     }
   })
 });
