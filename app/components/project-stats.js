@@ -274,7 +274,7 @@ export default Component.extend({
   
   challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
     let cStart = moment( this.get('projectChallenge.startsAt') );
-    let cEnd = moment( this.get('projectChallenge.endsAt') );
+    let cEnd = moment( this.get('projectChallenge.endsAt') ).add(1,'d');
     let p = this.get('project');
     if (p) {
       //get the projectSessions created during the projectChallenge
