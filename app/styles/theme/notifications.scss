@@ -1,0 +1,88 @@
+.nav-notify-buttons {
+  .noti-modal {
+    margin-top: 0px;
+    .nano-menu-tab {
+    }
+    .noti-modal-header {
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      a {
+        color: #fff;
+        text-transform: capitalize;
+        font-family: SourceSansPro-Regular;
+        font-size: 12px;
+        line-height: 1.67;
+        text-decoration: underline;
+      }
+      .noti-header-left {
+        flex: 1 1 100%;
+        text-align: left;
+        padding-left: 10px;
+      }
+      .noti-header-right {
+        flex: 1 1 100%;
+        text-align: right;
+        padding-right: 10px;
+      }
+    }
+    .noti-modal-body {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      max-height: 250px;
+      overflow: scroll;
+      .notification {
+        padding: 13px;
+        padding-left: 17px;
+        padding-right: 15px;
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        &.noti-new {
+          background-color: #f2f8fa;
+        }
+        .noti-image {
+          flex: 0 0 56px;
+        }
+        .noti-content-container {
+          flex: 1 1 100%;
+          padding-left: 15px;
+          .noti-content {
+            width: 100%;
+            font-family: SourceSansPro-Regular;
+            font-size: 14px;
+            line-height: 1.29;
+            color: #41426f;
+            .noti-headline-string {
+              font-family: SourceSansPro-Bold;
+            }
+          }
+          .noti-tools-container {
+            display: flex;
+            justify-content: space-between;
+            .noti-time-ago {
+              flex: 1 1 100%;
+              font-family: SourceSansPro-Regular;
+              font-size: 12px;
+              line-height: 1.67;
+              color: #000;
+            }
+            .noti-button {
+              flex: 1 1 100%;
+              text-align: right;
+              button {
+                font-family: SourceSansPro-Bold;
+                font-size: 12px;
+                line-height: 1.83;
+                letter-spacing: 0.2px;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }
+    .noti-modal-footer {
+    }
+  }
+}

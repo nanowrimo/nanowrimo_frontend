@@ -5,18 +5,21 @@ import { inject as service } from '@ember/service';
 export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
   badgesService: service(),
+  notificationsService: service(),
   session: service(),
   
   routeAfterAuthentication: 'authenticated',
 
   beforeModel() {
     this._loadBadgesService();
+    this._loadNotificationsService();
     return this._loadCurrentUser();
   },
 
   sessionAuthenticated() {
     this._super(...arguments);
     this._loadBadgesService();
+    this._loadNotificationsService();
     this._loadCurrentUser();
   },
 
@@ -25,6 +28,9 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   _loadBadgesService() {
     return this.get('badgesService').load();
+  },
+  _loadNotificationsService() {
+    return this.get('notificationsService').load();
   },
 
   actions: {

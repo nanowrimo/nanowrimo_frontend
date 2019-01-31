@@ -9,6 +9,7 @@ const User = Model.extend({
   bio: attr('string'),
   createdAt: attr('date'),
   confirmedAt: attr('date'),
+  notificationsViewedAt: attr('date'),
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
@@ -73,6 +74,9 @@ const User = Model.extend({
   
   settingSessionMoreInfo: attr('boolean'),
   settingSessionCountBySession: attr('boolean'),
+
+  // Notifications
+  notifications: hasMany('notification'),
 
   // Awarded badges
   userBadges: hasMany('user-badge'),
