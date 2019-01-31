@@ -94,7 +94,6 @@ const ProjectChallenge = Model.extend({
     let now = moment();
     let duration;
     if (now.isSameOrAfter(e,'d') ) {
-      console.log('is after');
       duration = moment.duration(e.diff(s));
     } else {
       duration = moment.duration(now.diff(s));
