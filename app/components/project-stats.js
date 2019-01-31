@@ -67,6 +67,9 @@ export default Component.extend({
     let countPerDay = this.get('projectChallenge.countPerDay');
     let pc = this.get('projectChallenge');
     if (pc) {
+      if (pc.hasEnded) {
+        return {'needed':0,"percent":0};
+      }
       let elapsedDays = pc.numElapsedDays();
       let targetCount = elapsedDays*countPerDay;
       let needed = targetCount-count;

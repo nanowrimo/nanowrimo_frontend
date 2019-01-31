@@ -94,11 +94,17 @@ const ProjectChallenge = Model.extend({
     let now = moment();
     let duration;
     if (now.isSameOrAfter(e,'d') ) {
-      duration = moment.duration(now.diff(e));
+      console.log('is after');
+      duration = moment.duration(e.diff(s));
     } else {
       duration = moment.duration(now.diff(s));
     }
     return Math.round(duration.asDays());
+  },
+  hasEnded: function() {
+    let e = moment(this.get('endsAt')).add(1,'d');
+    let now = moment();
+    return now.isAfter(e,'d');
   }
 });
 
