@@ -67,6 +67,9 @@ export default Component.extend({
     let countPerDay = this.get('projectChallenge.countPerDay');
     let pc = this.get('projectChallenge');
     if (pc) {
+      if (pc.hasEnded) {
+        return {'needed':0,"percent":0};
+      }
       let elapsedDays = pc.numElapsedDays();
       let targetCount = elapsedDays*countPerDay;
       let needed = targetCount-count;
@@ -274,7 +277,7 @@ export default Component.extend({
   
   challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
     let cStart = moment( this.get('projectChallenge.startsAt') );
-    let cEnd = moment( this.get('projectChallenge.endsAt') );
+    let cEnd = moment( this.get('projectChallenge.endsAt') ).add(1,'d');
     let p = this.get('project');
     if (p) {
       //get the projectSessions created during the projectChallenge

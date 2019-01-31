@@ -9,7 +9,7 @@ export default Controller.extend({
   
   filterType: 0,
   
-  filteredProjectChallenges: computed('filterType', function(){
+  filteredProjectChallenges: computed('project', 'filterType', function(){
       let ft = this.get('filterType');
       if (ft==0) {
         //show all
@@ -38,9 +38,10 @@ export default Controller.extend({
       }
   }),
   
-  projectChallenges: computed('project.projectChallenges.[]', function(){
+  projectChallenges: computed('project', 'project.projectChallenges.[]', function(){
     return this.get('project.projectChallenges');
   }),
+  
 
 
   init(){

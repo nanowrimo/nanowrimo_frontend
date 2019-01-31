@@ -30,13 +30,13 @@ const ProjectChallenge = Model.extend({
   duration: computed("startsAt", "endsAt", function(){
     // return the difference between start and end in number of days
     let s = moment(this.get('startsAt'));
-    let e = moment(this.get('endsAt'));
+    let e = moment(this.get('endsAt')).add(1,'d');
     let duration = moment.duration(e.diff(s));
     return Math.round(duration.asDays());
   }),
   dates: computed("startsAt", "endsAt", function(){
     let s = moment.utc(this.get('startsAt'));
-    let e = moment.utc(this.get('endsAt'));
+    let e = moment.utc(this.get('endsAt')).add(1,'d');
     let range = [];
     //loop while the s is not the same as e day
     while(! s.isSame(e, 'day')) {
@@ -52,7 +52,7 @@ const ProjectChallenge = Model.extend({
     let start = this.get('startsAt');
     let end = this.get('endsAt');
     let s = moment.utc(start);
-    let e = moment.utc(end);
+    let e = moment.utc(end).add(1,'d');
     let range = [];
     //loop while the s is not the same as e day
     while(! s.isSame(e, 'day')) {
@@ -88,11 +88,22 @@ const ProjectChallenge = Model.extend({
   }),
   
   numElapsedDays: function(){
-    // return the difference between start and end in number of days
+    // return the difference between start and now in number of days
     let s = moment(this.get('startsAt'));
+    let e = moment(this.get('endsAt')).add(1,'d');
     let now = moment();
-    let duration = moment.duration(now.diff(s));
+    let duration;
+    if (now.isSameOrAfter(e,'d') ) {
+      duration = moment.duration(e.diff(s));
+    } else {
+      duration = moment.duration(now.diff(s));
+    }
     return Math.round(duration.asDays());
+  },
+  hasEnded: function() {
+    let e = moment(this.get('endsAt')).add(1,'d');
+    let now = moment();
+    return now.isAfter(e,'d');
   }
 });
 
