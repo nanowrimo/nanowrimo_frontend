@@ -9,6 +9,7 @@ export default Component.extend({
   currentUser: service(),
   session: service(),
   store: service(),
+  statsParams: service(),
   
   project: null,
   projectChallenge: null,
@@ -295,9 +296,25 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-    var p = this.get('currentUser.user.primaryProject');
-    this.set('project', p);
-    this.getProjectChallenges();
+    // are there statsParams?
+    let sp = this.get('statsParams');
+    //does the statsParams service have data?
+    if (sp.hasData() ) {
+      let p = sp.getProject();
+      this.set('project', p);
+      this.set('projectChallenges', p.projectChallenges );
+      this.set('projectChallenge', sp.getProjectChallenge() );
+      //clear the statsParams data
+      sp.clear();
+    } else {
+      let p = this.get('currentUser.user.primaryProject');
+      this.set('project', p);
+      this.set('projectChallenges', p.projectChallenges );
+      this.set('projectChallenge', p.currentProjectChallenge );
+    }
+    
+    //fetch the aggregates
+    this.fetchAggregates();
   },
 
   actions: {
@@ -328,18 +345,6 @@ export default Component.extend({
     }
   },
 
-  getProjectChallenges: function(){
-    let p = this.get('project');
-    if (p) {
-      return this.get('project.projectChallenges').then((pcs)=>{
-        this.set('projectChallenges', pcs);
-        this.set('projectChallenge', p.currentProjectChallenge);
-        //now is a good time to fetch the aggregates
-        this.fetchAggregates();
-      });
-    }
-  },
-  
   fetchAggregates: function(){
     let pc = this.get('projectChallenge');
     let { auth_token }  = this.get('session.data.authenticated');
