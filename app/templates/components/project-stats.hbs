@@ -27,7 +27,7 @@
       <div class='switcher-select'>
       <select class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged' value='target.value'}}>
         {{#each project.projectChallenges as |pc|}}
-          <option value='{{pc.id}}' selected={{eq pc project.currentProjectChallenge}}>{{pc.name}}</option>
+          <option value='{{pc.id}}' selected={{eq pc projectChallenge}}>{{pc.name}}</option>
         {{/each}}
       </select>
       </div>

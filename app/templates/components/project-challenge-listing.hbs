@@ -28,7 +28,11 @@
       </div>
       
       <div class='flex-container'>
-        <div class='title'>{{projectChallenge.name}}</div>
+        <div class='title'>
+          <a href="#" {{action "redirectToStats"}}>
+            {{projectChallenge.name}}
+          </a>
+        </div>
 
         <div class='project-challenge-progress'>{{project-challenge-progress projectChallenge=projectChallenge}}</div>
         
