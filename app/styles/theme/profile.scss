@@ -45,14 +45,33 @@
   }
 }
 .nano-avatar-large {
+  position: relative;
   width: 100%;
   text-align: center;
   margin-top: -70px;
   height: 140px;
-  img {
+  img, .avatar-editable-overlay{
     width: 140px;
     height: 140px;
     border-radius: 70px;
+  }
+  .avatar-editable-overlay {
+    display: none;
+  }
+  &.user-editable:hover{
+    .avatar-editable-overlay {
+      position: relative;
+      margin: auto;
+      margin-top: -140px;
+      left: auto;
+      display: block;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
   }
 }
 .nano-avatar-medium {

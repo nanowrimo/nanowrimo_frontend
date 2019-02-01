@@ -21,8 +21,11 @@
         <div class="nano-panel left-sidebar nano-profile">
           <div class="flip-corner">
 
-            <div class="nano-avatar-large" {{action "openImagesModal"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
+            <div class="nano-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openImagesModal"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
               <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
+              <div class='avatar-editable-overlay'>{{fa-icon "edit"}}</div>
+              
+              
             </div>
             <div class="nano-user-name" data-test-user-name>
               {{user.name}}
