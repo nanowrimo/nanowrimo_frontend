@@ -494,3 +494,32 @@
   width: 100%;
   height: 100%;
 }
+
+.nano-listing-mini-card {
+ position: relative;
+  
+  min-height: 151px;
+  max-height: none;
+  
+  border-radius: 6px;
+  background-image: repeating-linear-gradient(90deg, #f7f7f7, #f7f7f7 2px, #ededed 3px, #ededed 4px);
+  border: solid 1px #dfe4e6;
+  
+  .top-right {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    .primary-thumb-tack {
+      float: left;
+      color: #75abbc;
+    }
+    .listing-action-dropdown {
+      float: left;  
+    }
+  }
+  .primary-text {
+    font-family: 'SourceSerifPro-Regular', serif ;
+    font-size: 20px;
+    color: black;
+  }
+}
