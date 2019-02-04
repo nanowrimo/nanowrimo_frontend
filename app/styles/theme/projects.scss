@@ -46,27 +46,7 @@
 }
 
 .project-listing-card {
-  position: relative;
-  
-  min-height: 151px;
-  max-height: none;
-  
-  border-radius: 6px;
-  background-image: repeating-linear-gradient(90deg, #f7f7f7, #f7f7f7 2px, #ededed 3px, #ededed 4px);
-  border: solid 1px #dfe4e6;
-  
-  .project-top-right {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    .primary-thumb-tack {
-      float: left;
-      color: #75abbc;
-    }
-    .listing-action-dropdown {
-      float: left;  
-    }
-  }
+ 
 }
 .flex-container {
   display: flex;
@@ -103,12 +83,8 @@
     align-items: center;
     .project-title {
       flex: 0 0 100%;
-      font-family: 'SourceSerifPro-Regular', serif ;
-      font-size: 20px;
-      color: black;
-      margin-bottom: 7px;
       text-align: left;
-  
+      margin-bottom: 7px;
     }
     .project-genres {
       flex: 0 0 100%;

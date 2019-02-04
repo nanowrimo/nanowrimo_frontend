@@ -37,12 +37,6 @@
     }
   }
   .project-challenge-listing-card {
-    min-height: 100px;
-    .project-challenge-listing-top-right{
-      position: absolute;
-      right: 0px;
-      top: 0px;
-    }
     .flex-container {
       display: flex;
       flex-wrap: wrap;
@@ -51,10 +45,6 @@
       .title {
         margin-left: 28px;
         width: 24%;
-        font-family: SourceSerifPro;
-        font-size: 26px;
-        font-weight: 600;
-        color: #41426f;
       }
       .project-challenge-progress {
         width: 40%;
