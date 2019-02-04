@@ -1,4 +1,4 @@
-<div class="grid-wrapper">
+<div class="grid-wrapper profile-view">
   <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
     <div class="nano-subcard g3-sub1 g2-sub1">
       <div class="nano-subcard-face face-front filled-grey">
@@ -8,10 +8,9 @@
         <div class="nano-subcard-content">
           <div class="info-text side-by-side-even" data-test-user-bio>
             {{#if hasBio}}
-              {{truncate-multiline
-                text=user.bio
-                lines=numberOfFavorites
-              }}
+              <div class='user-bio'>
+                {{{newline-to-br user.bio}}}
+              </div>
             {{ else }}
               {{#if canEditUser}}
                 <div id='missing-bio'>
