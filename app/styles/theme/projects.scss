@@ -46,7 +46,14 @@
 }
 
 .project-listing-card {
- 
+  .project-status {
+    position: absolute;
+    top: -5px;
+    left: 250px;
+    @media(max-width: $screen-md) {
+      left: 10px;
+    }
+  }
 }
 .flex-container {
   display: flex;
