@@ -115,6 +115,7 @@
   }
   
   #project-information {
+    position: relative;
     /* box-shadow: 7px 7px 0px 0px #2f3061; */
     padding: 28px;
     background: #e2eff3;
@@ -132,15 +133,18 @@
       color: #979797;
     }
     #project-summary {
+      width: 100%;
+      position: relative;
       font-family: "SourceSerifPro-Regular", serif;
       font-size: 16px;
       color: #343434;
-      max-height: 480px;
+      max-height: 395px;
       overflow: auto;
     }
     #genres-and-links {
       position: absolute;
       bottom: 27px;
+      width: 90%;
       
       #genres-label {
         font-family:'SourceSansPro-Regular', sans-serif;
@@ -149,6 +153,9 @@
         padding-bottom: 7px;
       }
       #genres-list {
+        max-height: 65px;
+        width: 402px;
+        overflow: auto;
         .genre {
           font-family: 'SourceSerifPro-Regular', serif;
           color: #343434;
