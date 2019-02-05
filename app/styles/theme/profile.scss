@@ -126,6 +126,14 @@
   }
 }
 
+/*---   start getting profile specific stuff all within the profile view   ---*/
+.profile-view {
+  .user-bio {
+    max-height: 280px;
+    overflow: auto;
+  }
+}
+
 #missing-bio {
   color: #979797;
   text-align: center;
