@@ -1,6 +1,5 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { get,computed } from '@ember/object';
-import EmberHighChartsComponent from 'ember-highcharts/components/high-charts';
 
 export default ChartBaseComponent.extend({
 
