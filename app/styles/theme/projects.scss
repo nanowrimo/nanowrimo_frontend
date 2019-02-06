@@ -71,12 +71,23 @@
       width: 189px;
       height: 172px;
       clip-path: inset(0px 0px 0px -50px);
-      img {
+      img, .listing-cover-overlay {
         transform: rotate(-15deg);
         transform-origin: bottom right;
         width: 122px;
         height: 172px;
         border-radius: 3px;
+      }
+      .listing-cover-overlay {
+         display:none;
+        
+      }
+      &.user-editable:hover {
+        .listing-cover-overlay {
+          display:flex;
+          position:relative;
+          margin-top: -172px;
+        }
       }
     }
   }
@@ -149,5 +160,4 @@
 .project-announce-quote {
   max-width: 380px;
 }
-
 

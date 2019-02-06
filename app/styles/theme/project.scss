@@ -107,10 +107,21 @@
     width: 460px;
     /* box-shadow: 7px 7px -3px -3px #2f3061; */
     
-    img {
+    img, .large-cover-overlay {
       height: 630px;
       width: 460px;
       border-radius: 6px;
+    }
+   .large-cover-overlay {
+       display:none;
+      
+    }
+    &.user-editable:hover {
+      .large-cover-overlay {
+        display:flex;
+        position:relative;
+        margin-top: -630px;
+      }
     }
   }
   

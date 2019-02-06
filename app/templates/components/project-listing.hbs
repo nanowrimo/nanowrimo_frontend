@@ -39,10 +39,14 @@
         {{/if}}
       </div>
       <div class='flex-container'>
-        <div class='project-cover' {{action (if canEdit "openCoverModal" 'doNothing')}}>
-          <div class='project-cover-clip'>
+        <div class='project-cover' >
+
+          <div class='project-cover-clip {{if canEdit "user-editable" ""}}'>
             <img src="{{project.coverUrl}}">
+            <div class="listing-cover-overlay image-editable-overlay" {{action (if canEdit "openCoverModal" 'doNothing')}}>{{fa-icon 'edit'}}</div>
           </div>
+
+
         </div>
         <div class='project-name-genres'>
           <div class='project-title primary-text'>

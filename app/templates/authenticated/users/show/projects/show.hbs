@@ -59,4 +59,9 @@
     </div>
   </div>
 </div>
-
+{{project-edit-cover-modal
+  onHidden=(action "afterCoverModalClose")
+  open=displayCoverEditModal
+  project=project
+  tab=editCoverTab
+}}

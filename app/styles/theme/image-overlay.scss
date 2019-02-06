@@ -1,0 +1,11 @@
+// overlays for editable images
+.image-editable-overlay { 
+  background-color: rgba(255,255,255,0.7);
+  color: black;
+  display:block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
