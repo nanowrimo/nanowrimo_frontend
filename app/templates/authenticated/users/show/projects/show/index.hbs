@@ -1,8 +1,9 @@
 {{#if hasDetails}}  
   <div class ='nano-card' id='project-details-card'>
     <div id='project-details'>
-      <div id='project-cover-large'>
+      <div id='project-cover-large' class="{{if canEdit 'user-editable'}}">
         <img src={{project.coverUrl}}>
+        <div class="large-cover-overlay image-editable-overlay" {{action 'editCover'}}>{{fa-icon "edit"}}</div>
       </div>
       <div id='project-information' >
         <div id='project-title'>{{project.title}}</div>
@@ -49,12 +50,16 @@
 {{else}}
   <div id='project-needs-details'>
     <div id="texts">
-      <div id='line-1'>You haven't told us much about your new project.</div>
-      <div id='line-2'>
-        <a href="#" {{action "editProject"}}>
-          Fill out your project details here.
-        </a>
-      </div>
+      {{#if canEdit }}
+        <div id='line-1'>You haven't told us much about your new project.</div>
+        <div id='line-2'>
+          <a href="#" {{action "editProject"}}>
+            Fill out your project details
+          </a>
+        </div>
+      {{else}}
+        Nothing is known about this project
+      {{/if}}
     </div>
     <div id='graphic'>
       <img src='/images/projects/pencilandpen.svg'>

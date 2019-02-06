@@ -9,6 +9,7 @@ export default Controller.extend({
   router: service(),
   project: alias('model'),
   displayEditModal: false,
+  displayCoverEditModal: false,
   author: null,
   projectSlug: null,
 
@@ -28,7 +29,9 @@ export default Controller.extend({
         this.set('displayEditModal', true);
       }
     },
-
+    afterCoverModalClose() {
+      this.set('displayCoverEditModal', false);
+    },
     afterEditProjectModalClose(){
       this.set('displayEditModal', false);
       if (this._needsURLUpdate()) {
@@ -36,6 +39,11 @@ export default Controller.extend({
         let newURL = this.get('router.currentURL').replace(this.get('projectSlug'), projectSlug);
         this.set('projectSlug', projectSlug);
         this.get('router').replaceWith(newURL);
+      }
+    },
+    editCover() {
+      if(this.get('canEdit')){
+        this.set('displayCoverEditModal', true);
       }
     }
   },
