@@ -56,21 +56,15 @@
     border-radius: 70px;
   }
   .avatar-editable-overlay {
-    display: none;
+    display:none;
   }
   &.user-editable:hover{
     .avatar-editable-overlay {
+      display:flex;
       position: relative;
       margin: auto;
       margin-top: -140px;
       left: auto;
-      display: block;
-      background-color: rgba(255,255,255,0.7);
-      color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
     }
   }
 }
