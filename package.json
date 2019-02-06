@@ -68,10 +68,9 @@
     "ember-simple-auth": "^1.5.1",
     "ember-source": "~3.4",
     "ember-test-selectors": "^1.0.0",
-    "ember-truncate": "^1.0.1",
     "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.2.0",
-    "highcharts": "^6.1.0",
+    "highcharts": "^7.0.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
     "torii": "^0.10.1"
