@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
+import { next } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
@@ -326,7 +327,7 @@ export default Component.extend({
         let p = projects.objectAt(i);
         if (p.id == v) {
           this.set('project', p);
-          this.getProjectChallenges();
+          this._changeProjectChallenge(p.currentProjectChallenge);
           break;
         }
       }
@@ -338,7 +339,8 @@ export default Component.extend({
       for(var i=0; i<len; i++){
         let pc = pcs.objectAt(i);
         if (pc.id == v) {
-          this.set('projectChallenge', pc);
+          this._changeProjectChallenge(pc);
+          //this.set('projectChallenge', pc);
           break;
         }
       }
@@ -400,5 +402,14 @@ export default Component.extend({
     } else {
       return null;
     }
+  },
+  //change the projectChallenge with a slight delay
+  _changeProjectChallenge: function(newPC) {
+    //set the pc to null -- this will hide charts that depends upon projectChallenge
+    this.set('projectChallenge', null);
+    //wait a bit and set the pc to the proper value
+    next(()=>{
+      this.set('projectChallenge', newPC);
+    });
   }
 });
