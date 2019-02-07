@@ -32,7 +32,6 @@ export default ChartBaseComponent.extend({
         }
       }
     }
-    console.log(retval);
     return retval;
   }),
   // Gets the animal type from time period with the most writing
