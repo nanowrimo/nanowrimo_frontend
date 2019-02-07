@@ -60,23 +60,17 @@
         {{/if}}
       </div>
       
-      {{#if hasHourAggregates}}
-        <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
-          {{stats-when-i-write hourAggregates=userHourAggregates}}
-        </div>   
-      {{/if}}   
-     
-      {{#if hasDailyAggregates}}
-        <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
-          {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
-        </div>
-      {{/if}}
-      {{#if whereIWrite}}
-        <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
-          {{stats-where-i-write whereIWrite=whereIWrite}}
-        </div>
-      {{/if}}
-     
+      <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
+        {{stats-when-i-write hourAggregates=userHourAggregates}}
+      </div>   
+
+      <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
+        {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
+      </div>
+    
+      <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
+        {{stats-where-i-write whereIWrite=whereIWrite user=currentUser.user}}
+      </div>
       <div class="nano-card g3-col2 g3-row4 g2-col1 g2-row5 flippable">
         {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular}}
       </div>
