@@ -103,7 +103,6 @@ const ProjectChallenge = Model.extend({
   hasEnded: function() {
     let e = moment(this.get('endsAt')).add(1,'d');
     let now = moment();
-    console.log(e);
     return now.isAfter(e,'d');
   }
 });
