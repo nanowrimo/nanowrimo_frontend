@@ -44,7 +44,14 @@
   <div class='nano-card' id='project-excerpt-card'>
     <div id='project-excerpt-display'>
       <div id='project-excerpt-label'>Excerpt</div>
-      <div id='project-excerpt'>{{{newline-to-br project.excerpt}}}</div>
+      <div id='project-excerpt'>
+        {{{newline-to-br project.excerpt}}}
+        {{#if canEdit}}
+          <div {{action "editProject"}} class="flip-corner-link" >
+            <img src="/images/global/flip_corner.png" alt="Edit User Bio" />
+          </div>
+        {{/if}}
+      </div>
     </div>
   </div>
 {{else}}
