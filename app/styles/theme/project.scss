@@ -24,12 +24,22 @@
       height: 172px;
       left: 70px;
       clip-path: inset(0px 0px 0px -50px);
-      img {
+      img, .cover-overlay {
         transform: rotate(-15deg);
         transform-origin: bottom right;
         width: 122px;
         height: 172px;
         border-radius: 3px;
+      }
+      .cover-overlay {
+        display: none;
+      }
+      &.user-editable:hover {
+        .cover-overlay {
+          position: relative;
+          margin-top: -172px;
+          display: flex;
+        }
       }
     }
   }

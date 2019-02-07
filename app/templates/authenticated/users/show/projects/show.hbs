@@ -2,8 +2,11 @@
   <div class="container-fluid">
     <div id='project' class='nano-panel full-width no-margin'>
       <div class='project-cover'>
-        <div class='project-cover-clip'>
+        <div class='project-cover-clip {{if canEdit "user-editable" ""}}'>
           <img src="{{project.coverUrl}}">
+          <div class="cover-overlay image-editable-overlay" {{action "editCover"}}>
+            {{fa-icon "edit"}}
+          </div>
         </div>
       </div>
       <div class='project-name-genres'>
