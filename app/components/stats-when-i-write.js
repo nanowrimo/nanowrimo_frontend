@@ -20,7 +20,20 @@ export default ChartBaseComponent.extend({
     }
     return mHour;
   }),
-  
+  hasData: computed('hourAggregates.[]', function(){
+    let aggs = this.get('hourAggregates');
+    let retval = false;
+    //loop!
+    if (aggs) {
+      for (var i=0; i < aggs.length; i++) {
+        if(aggs[i] > 0) {
+          retval = true;
+          break;
+        }
+      }
+    }
+    return retval;
+  }),
   // Gets the animal type from time period with the most writing
   animalType: computed('maxHour',function() {
     var mHour = get(this,'maxHour');

@@ -69,7 +69,7 @@ export default Component.extend({
     let countPerDay = this.get('projectChallenge.countPerDay');
     let pc = this.get('projectChallenge');
     if (pc) {
-      if (pc.hasEnded) {
+      if (pc.hasEnded()) {
         return {'needed':0,"percent":0};
       }
       let elapsedDays = pc.numElapsedDays();
@@ -235,7 +235,7 @@ export default Component.extend({
    return this.get('projectChallenge.unitTypeSingular'); 
   }),
   
-  count: computed('challengeSessions','project.projectSessions.[]', function() {
+  count: computed('challengeSessions.[]','project.projectSessions.[]', function() {
     let sessions = this.get('challengeSessions');
     let sum = 0;
     if (sessions) {
