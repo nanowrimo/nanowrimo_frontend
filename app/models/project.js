@@ -98,7 +98,7 @@ const Project = Model.extend({
       let endsAt = moment(pc.endsAt);
       let startsAt = moment(pc.startsAt);
       //is this pc active?
-      if (now.isAfter(startsAt) && now.isBefore(endsAt)) {
+      if (now.isSameOrAfter(startsAt,'d') && now.isSameOrBefore(endsAt,'d')) {
         active = pc;
       }
     });
