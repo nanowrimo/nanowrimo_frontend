@@ -14,4 +14,10 @@ export default Component.extend({
     let t = moment(n.displayAt).fromNow();
     return t;
   }),
+  renderButton: computed('notification',function() {
+    return false;
+  }),
+  renderImage: computed('notification',function() {
+    return "/images/other/helmet_image.svg";
+  }),
 });

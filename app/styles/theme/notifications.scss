@@ -48,6 +48,9 @@
         }
         .noti-image {
           flex: 0 0 56px;
+          img {
+            width: 56px;
+          }
         }
         .noti-content-container {
           flex: 1 1 100%;

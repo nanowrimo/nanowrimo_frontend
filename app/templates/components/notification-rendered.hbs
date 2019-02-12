@@ -1,5 +1,6 @@
 <div class="notification noti-new">
   <div class="noti-image">
+    <img src="{{renderImage}}" />
   </div>
   <div class="noti-content-container">
     <div class="noti-content">
@@ -8,11 +9,13 @@
     </div>
     <div class="noti-tools-container">
       <div class="noti-time-ago">
-        {{timeSince}}
+        Posted {{timeSince}}
       </div>
-      <div class="noti-button">
-        <button>View Badge</button>
-      </div>
+      {{#if renderButton}}
+        <div class="noti-button">
+          <button>View Badge</button>
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>
