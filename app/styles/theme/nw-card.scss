@@ -8,8 +8,8 @@
   background-repeat: repeat-x;
   background-size: 4px 100%;
   box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
-  .header{
-    .title {
+  .nw-card-header{
+    .nw-card-title {
       display: inline-block;
       padding: 4px;
       padding-right: 14px;
@@ -22,22 +22,22 @@
       text-transform: uppercase;
       color: #979797;
     }
-    .actions {
+    .nw-card-actions {
       display: inline;
-      .display-actions {
+      .nw-card-display-actions {
         display:inline;
       }
-      .model-actions {
+      .nw-card-model-actions {
         display:inline;
         float:right;
       }
     }
   }
-  .content {
+  .nw-card-content {
     position: relative;
     padding: 20px;
   }
-  .footer {
+  .nw-card-footer {
   
   }
 }
