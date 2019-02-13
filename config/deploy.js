@@ -12,6 +12,7 @@ module.exports = function(deployTarget) {
     assetsBucket = process.env.ASSETS_PRODUCTION_BUCKET;
     indexBucket = process.env.INDEX_PRODUCTION_BUCKET;
   }
+  
   var ENV = {
     build: {
       environment: "production"
