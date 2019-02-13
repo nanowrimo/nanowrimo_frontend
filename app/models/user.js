@@ -365,37 +365,32 @@ User.reopenClass({
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
+    {value:'2', name:'Anyone Can See'},
 
   ],
   optionsForPrivacyViewProjects:
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
+    {value:'2', name:'Anyone Can See'},
   ],
   optionsForPrivacyViewBuddies:
   [
     {value:'0', name:'Only I Can See'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
+    {value:'2', name:'Anyone Can See'},
   ],
   optionsForPrivacyViewSearch:
   [
     {value:'0', name:'No One'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
+    {value:'2', name:'Anyone Can See'},
   ],
   optionsForPrivacySendNanomessages:
   [
     {value:'0', name:'No One'},
     {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
+    {value:'2', name:'Anyone Can See'},
   ],
 
 
