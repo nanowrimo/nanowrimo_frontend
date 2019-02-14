@@ -3,10 +3,11 @@
 module.exports = function(deployTarget) {
   var assetsBucket;
   var indexBucket;
+  var bEnv = "production";
   if (deployTarget === 'staging') {
     assetsBucket = process.env.ASSETS_STAGING_BUCKET;
     indexBucket = process.env.INDEX_STAGING_BUCKET;
-    
+    bEnv = "staging";
   }
   if (deployTarget === 'production') {
     assetsBucket = process.env.ASSETS_PRODUCTION_BUCKET;
@@ -16,7 +17,7 @@ module.exports = function(deployTarget) {
   
   var ENV = {
     build: {
-      environment: "production"
+      environment: bEnv
     },
     pipeline: {
       // This setting runs the ember-cli-deploy activation hooks on every deploy
