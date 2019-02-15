@@ -29,6 +29,7 @@ export default Component.extend({
       this._resetShowSelect();
     }
     
+    //is the current property of the changeset the value that has changed?
     let cc = this.get('changeset.changes');
     cc.forEach((c)=>{
       if (c.key == this.get('property')) {

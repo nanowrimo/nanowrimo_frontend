@@ -12,7 +12,6 @@ export default Component.extend({
   actions: {
     rollbackChanges: function() {
       //rollback the changeset
-      let cs = this.get('changeset');
       this.get('changeset').rollback();
     }
   }
