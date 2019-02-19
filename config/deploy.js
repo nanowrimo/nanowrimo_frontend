@@ -7,7 +7,7 @@ module.exports = function(deployTarget) {
   if (deployTarget === 'staging') {
     assetsBucket = process.env.ASSETS_STAGING_BUCKET;
     indexBucket = process.env.INDEX_STAGING_BUCKET;
-    bEnv = "staging";
+    bEnv = "production";
   }
   if (deployTarget === 'production') {
     assetsBucket = process.env.ASSETS_PRODUCTION_BUCKET;
