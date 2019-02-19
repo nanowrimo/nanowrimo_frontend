@@ -8,6 +8,9 @@
   background-repeat: repeat-x;
   background-size: 4px 100%;
   box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
+  &.nw-card-white {
+    background: white;
+  }
   .nw-card-header{
     .nw-card-title {
       display: inline-block;
@@ -42,10 +45,3 @@
   }
 }
 
-#fakeimage {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background-color:purple;
-  bottom: -25px;
-}
