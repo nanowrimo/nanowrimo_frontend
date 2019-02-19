@@ -1,12 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
-  if (environment === 'staging') {
-    environment = 'production'
-    var isStaging = true;
-  } else {
-    var isStaging = false;
-  }
+module.exports = function(environment,isStaging) {
   let ENV = {
     modulePrefix: 'nanowrimo',
     environment,
