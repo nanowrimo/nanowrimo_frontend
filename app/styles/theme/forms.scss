@@ -141,7 +141,7 @@ select.form-control:focus {
     }
   }
 }
-input:disabled, select:disabled {
+input:disabled, select:disabled, button:disabled {
   opacity: 0.3 !important;
 }
 .form-instruction {

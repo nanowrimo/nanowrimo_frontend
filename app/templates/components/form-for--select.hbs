@@ -8,12 +8,15 @@
   <div class="select-container">
     <select id={{name}} name={{name}} disabled={{if isDisabled 'disabled' ''}}
       class={{concat 'form-control' (if hasError ' is-invalid')}}
-      onchange={{action (mut (get changeset property)) value="target.value"}}>
-      {{#each normalizedOptions as |opt|}}
-        <option value={{opt.value}} selected={{eq opt.value (get changeset property)}}>
-          {{opt.name}}
-        </option>
-      {{/each}}
+      onchange={{action 'valueChanged' value="target.value"}}>
+      {{#if showSelect}}
+        {{#each normalizedOptions as |opt|}}
+          <option value={{opt.value}} selected={{eq opt.value valueAsString}}>
+            {{opt.name}}
+          </option>
+        {{/each}}
+      {{/if}}
     </select>
   </div>
+  {{didChange}}
 {{/validation-error}}
