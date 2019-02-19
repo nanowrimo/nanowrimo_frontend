@@ -63,9 +63,11 @@
       <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
         {{stats-when-i-write hourAggregates=userHourAggregates}}
       </div>   
-
+      
       <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
-        {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
+        {{#if projectChallenge}}
+          {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
+        {{/if}}
       </div>
     
       <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
