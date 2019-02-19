@@ -97,6 +97,7 @@ Router.map(function() {
   this.route('password-reset');
   this.route('confirm-email-change');
   this.route('revert-email-change');
+  this.route('widgets');
 });
 
 export default Router;
