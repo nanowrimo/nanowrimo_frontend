@@ -1,6 +1,12 @@
 'use strict';
 
 module.exports = function(environment) {
+  if (environment === 'staging') {
+    environment = 'production'
+    var isStaging = true;
+  } else {
+    var isStaging = false;
+  }
   let ENV = {
     modulePrefix: 'nanowrimo',
     environment,
@@ -108,6 +114,9 @@ module.exports = function(environment) {
     ENV.APP.MODAL_TRANSITION_MS = 0;
   }
   if (environment === 'production') {
+    if (isStaging) {
+      ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
+    }
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
     ENV.torii.providers['custom-google'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
     ENV.torii.providers['custom-google'].redirectUri = 'https://preview.nanowrimo.org/oauth2callback';
