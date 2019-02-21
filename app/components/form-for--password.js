@@ -40,7 +40,7 @@ export default Component.extend({
         this.set('iconClass', 'eye');
       }
       // After toggling visibility, put the focus back in the password field...
-      var obj = document.getElementById("password");
+      var obj = document.getElementById(this.get('property'));
       obj.focus();
       // ...and put the cursor at the end of the entered text
       if (!(obj.updating)) {

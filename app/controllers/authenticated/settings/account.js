@@ -49,7 +49,12 @@ export default Controller.extend({
         this.set("showPasswordConfirm", val.length > 0);
       }
     },
-    
+    afterError(error) {
+      this.set('error', error);
+      console.log('after error');
+      console.log(error);
+      console.log(JSON.stringify(error.errors[0].detail));
+    },
     afterSubmit() {
       let u = this.get('currentUser.user');
       let ne = this.get('newEmail');
