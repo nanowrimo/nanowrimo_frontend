@@ -8,20 +8,22 @@ export default Service.extend({
   recomputeBadges: 0,
 
   load() {
-    debounce(this, this.checkForUpdates, 5000, false);
+    debounce(this, this.checkForUpdates, 10000, false);
     return this.get('store').query('badge',{});
   },
   
   checkForUpdates() {
     let t = this;
     let u = this.get('currentUser.user');
-    this.store.query('user-badge', {
-      filter: {
-        user_id: u.get('id')
-      }
-    }).then(function() {
-      t.incrementRecomputeBadges();
-    });
+    if (u) {
+      this.store.query('user-badge', {
+        filter: {
+          user_id: u.get('id')
+        }
+      }).then(function() {
+        t.incrementRecomputeBadges();
+      });
+    }
     debounce(this, this.checkForUpdates, 15000, false);
   },
   
