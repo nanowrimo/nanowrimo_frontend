@@ -38,11 +38,14 @@
           }}
         </div>
         {{#if showPasswordConfirm}}
-          <div class="form-group full-width">
+          <div class="form-group full-width {{if confirmationPasswordError 'invalid' ''}}">
             {{f.password
               label="Enter Your Current Password to Confirm"
               property="currentPassword"
             }}
+            {{#if confirmationPasswordError}}
+              <div class='invalid-feedback'>the supplied current password is incorrect</div>
+            {{/if}}
           </div>
         {{/if}}
       {{else}}
