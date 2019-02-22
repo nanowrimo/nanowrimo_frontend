@@ -1,6 +1,6 @@
 /* jshint node: true */
 
-module.exports = function(deployTarget) {
+module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
 
   var assetsBucket;
   var indexBucket;
