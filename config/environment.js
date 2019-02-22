@@ -23,7 +23,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API_HOST: 'https://api.nanowrimo.org',
+      API_HOST: (process.env.TARGET==='staging') ? 'https://staging.api.nanowrimo.org' : 'https://api.nanowrimo.org',
       DEBOUNCE_MS: 250,
       SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr', 'youtube'],
       MODAL_BACKGROUND_TRANSITION_MS: 150,
@@ -63,7 +63,6 @@ module.exports = function(environment) {
       'style-src': "'self' fonts.googleapis.com"
     }
   };
-
   if (environment === 'development') {
     ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
