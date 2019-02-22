@@ -1,6 +1,17 @@
 /* jshint node: true */
 
-module.exports = function(deployTarget) {
+module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
+
+  var assetsBucket;
+  var indexBucket;
+  if (process.env.TARGET=='staging') {
+    assetsBucket = process.env.ASSETS_STAGING_BUCKET;
+    indexBucket = process.env.INDEX_STAGING_BUCKET;
+  } else {
+    assetsBucket = process.env.ASSETS_PRODUCTION_BUCKET;
+    indexBucket = process.env.INDEX_PRODUCTION_BUCKET;
+  }
+  
   var ENV = {
     build: {
       environment: "production"
@@ -16,13 +27,13 @@ module.exports = function(deployTarget) {
     s3: {
       accessKeyId: process.env.ASSETS_PRODUCTION_AWS_KEY,
       secretAccessKey: process.env.ASSETS_PRODUCTION_AWS_SECRET,
-      bucket: (deployTarget==='staging') ? process.env.ASSETS_STAGING_BUCKET : process.env.ASSETS_PRODUCTION_BUCKET,
+      bucket: assetsBucket,
       region: process.env.ASSETS_PRODUCTION_REGION
     },
     "s3-index": {
       accessKeyId: process.env.INDEX_PRODUCTION_AWS_KEY,
       secretAccessKey: process.env.INDEX_PRODUCTION_AWS_SECRET,
-      bucket: (deployTarget==='staging') ? process.env.INDEX_STAGING_BUCKET : process.env.INDEX_PRODUCTION_BUCKET,
+      bucket: indexBucket,
       region: process.env.INDEX_PRODUCTION_REGION
     }
   };

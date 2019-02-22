@@ -108,12 +108,18 @@ module.exports = function(environment) {
     ENV.APP.MODAL_TRANSITION_MS = 0;
   }
   if (environment === 'production') {
+    
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
     ENV.torii.providers['custom-google'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
     ENV.torii.providers['custom-google'].redirectUri = 'https://preview.nanowrimo.org/oauth2callback';
   }
   ENV['g-map'] = {
     key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss'
+  }
+  
+  //is this a staging target?
+  if (process.env.TARGET=='staging') {
+    ENV.APP.API_HOST = 'http://staging.api.nanowrimo.org';
   }
   
   return ENV;
