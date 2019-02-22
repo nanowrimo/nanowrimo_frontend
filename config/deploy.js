@@ -1,17 +1,17 @@
 /* jshint node: true */
 
 module.exports = function(deployTarget) {
+  
   var assetsBucket;
   var indexBucket;
-  if (deployTarget === 'staging') {
+  if (process.env.TARGET=='staging') {
     assetsBucket = process.env.ASSETS_STAGING_BUCKET;
     indexBucket = process.env.INDEX_STAGING_BUCKET;
-    
-  }
-  if (deployTarget === 'production') {
+  } else {
     assetsBucket = process.env.ASSETS_PRODUCTION_BUCKET;
     indexBucket = process.env.INDEX_PRODUCTION_BUCKET;
   }
+  
   var ENV = {
     build: {
       environment: "production"

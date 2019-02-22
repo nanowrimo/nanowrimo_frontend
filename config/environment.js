@@ -118,5 +118,10 @@ module.exports = function(environment) {
     key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss'
   }
   
+  //is this a staging target?
+  if (process.env.TARGET=='staging') {
+    ENV.APP.API_HOST = 'http://staging.api.nanowrimo.org';
+  }
+  
   return ENV;
 };
