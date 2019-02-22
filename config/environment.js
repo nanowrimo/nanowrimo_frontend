@@ -119,7 +119,7 @@ module.exports = function(environment) {
   
   //is this a staging target?
   if (process.env.TARGET=='staging') {
-    ENV.APP.API_HOST = 'http://staging.api.nanowrimo.org';
+    ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
   }
   
   return ENV;
