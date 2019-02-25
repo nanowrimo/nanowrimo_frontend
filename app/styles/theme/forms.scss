@@ -20,6 +20,20 @@ form {
       }
     }
   }
+  &.invalid{
+    .invalid-feedback {
+      display: block;
+      text-align: right;
+      font-family: 'SourceSansPro-Italic', sans-serif;
+      font-size: 14px;
+      line-height: 1.43;
+      color: #e37f82; 
+    }
+    input {
+      border-color: #e37f82;
+      background-color: rgba(227, 127, 130, 0.3);
+    }
+  }
   .ember-checkbox {
     width: 20px;
     display: inline;
@@ -148,6 +162,7 @@ input:disabled, select:disabled, button:disabled {
   font-family: 'SourceSansPro-Regular', sans-serif;
   font-size: 14px;
   color: $nano-mediumgrey;
+  margin-bottom: 14px;
 }
 .save-cancel {
   display: flex;

@@ -1,86 +1,76 @@
 {{#form-for
-  afterError=(action (mut error))
+  afterError=(action "afterError")
   afterSubmit=(action "afterSubmit")
   model=currentUser.user
   as |f|
 }}
-  <div class="nano-card">
-    <div class="nano-subcard">
-      <div class="nano-subcard-face face-front filled-grey">
-        <div class="nano-subcard-content">
-          <div class="form-group full-width">
-            {{f.input
-              autocomplete="username"
-              label="Username"
-              property="name"
-            }}
-          </div>
-          <div class="form-group full-width">
-            {{f.input
-              autocomplete="email"
-              label="Email Address"
-              property="email"
-              type="email"
-              value=newEmail
-              change=(action (mut newEmail) value="target.value")
-            }}
-          </div>
-        </div>
-      </div>
+  <div class='nw-card'>
+    <div class='nw-card-header'>
+      <div class='nw-card-title'>Settings</div>
     </div>
-  </div>
-  <div class="nano-card">
-    <div class="nano-subcard">
-      <div class="nano-subcard-face face-front filled-grey">
-        <div class="nano-subcard-content">
-          {{#if hasPassword}}
-            <div class="form-group full-width">
-              {{f.password
-                label="New Password"
-                property="newPassword"
-                change=(action (mut newPassword) value="target.value")
-                valueChangedCallback=(action "newPasswordChanged")
-              }}
-            </div>
-            {{#if showPasswordConfirm}}
-              <div class="form-group full-width">
-                {{f.password
-                  label="Enter Your Current Password to Confirm"
-                  property="currentPassword"
-                }}
-              </div>
-            {{/if}}
-          {{else}}
-            <label class="full-width">Password</label>
-            <div class="form-instruction">Your password cannot be changed because you signed up via {{registrationPath}}.</div>
-          {{/if}} 
-        </div>
+    <div class='nw-card-content'>
+      <div class="form-group full-width">
+        {{f.input
+          autocomplete="username"
+          label="Username"
+          property="name"
+        }}
       </div>
-    </div>
-  </div>
-  <div class="nano-card">
-    <div class="nano-subcard">
-      <div class="nano-subcard-face face-front filled-grey">
-        <div class="nano-subcard-content">
-          <div class="form-group full-width">
-            {{f.select
-              label="Time Zone"
-              options=timeZoneOptions
-              property="timeZone"
+      <div class="form-group full-width">
+        {{f.input
+          autocomplete="email"
+          label="Email Address"
+          property="email"
+          type="email"
+          value=newEmail
+          change=(action (mut newEmail) value="target.value")
+        }}
+      </div>
+
+
+      {{#if hasPassword}}
+        <div class="form-group full-width">
+          {{f.password
+            label="New Password"
+            property="newPassword"
+            change=(action (mut newPassword) value="target.value")
+            valueChangedCallback=(action "newPasswordChanged")
           }}
-          </div>
         </div>
+        {{#if showPasswordConfirm}}
+          <div class="form-group full-width {{if confirmationPasswordError 'invalid' ''}}">
+            {{f.password
+              label="Enter Your Current Password to Confirm"
+              property="currentPassword"
+            }}
+            {{#if confirmationPasswordError}}
+              <div class='invalid-feedback'>the supplied current password is incorrect</div>
+            {{/if}}
+          </div>
+        {{/if}}
+      {{else}}
+        <label class="full-width">Password</label>
+        <div class="form-instruction">Your password cannot be changed because you signed up via {{registrationPath}}.</div>
+      {{/if}} 
+
+
+      <div class="form-group full-width">
+        {{f.select
+          label="Time Zone"
+          options=timeZoneOptions
+          property="timeZone"
+      }}
       </div>
+
+
+
+
+      <div class="form-instruction" style="margin-left: 20px; margin-top: 10px; max-width: 70%;">{{form-for--response-message responseMessage=formResponseMessage}}</div>
+  
     </div>
   </div>
-  <div class="nano-card card-submit">
-    <div class="nano-subcard">
-      <div class="nano-subcard-face face-front">
-        <div class="nano-subcard-content">
-          <button type="submit" class="nano-button-large">Save Changes</button>
-          <div class="form-instruction" style="margin-left: 20px; margin-top: 10px; max-width: 70%;">{{form-for--response-message responseMessage=formResponseMessage}}</div>
-        </div>
-      </div>
-    </div>
+  {{errorString}}
+  <div class='nano-panel-footer'>
+    {{f.save-cancel class="save-cancel"}}
   </div>
 {{/form-for}}

@@ -47,8 +47,10 @@ export default Component.extend({
   }),
   
   valueAsString: computed('value', function() {
-    let value = this.get('value').toString();
-    return value;
+    let value = this.get('value');
+    if (value) {
+      return value.toString();
+    }
   }),
   
   init() {
