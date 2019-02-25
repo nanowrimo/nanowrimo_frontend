@@ -6,7 +6,7 @@ export default Component.extend({
   project: null,
   
   goal: computed("project", function() {
-    return this.get('project').currentProjectChallenge.goal;
+    return this.get('project').get('currentProjectChallenge.goal');
   }),
   count: computed('project.unitCount', function(){
     return this.get('project').unitCount;
