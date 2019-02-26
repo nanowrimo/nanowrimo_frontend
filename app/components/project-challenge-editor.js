@@ -185,8 +185,9 @@ export default Component.extend({
     endsAtChanged(val) {
       let m = moment.utc(val);
       this.set('newEndsAt', m);
-       this.set('changeset.EndsAt', m.toDate());
+      this.set('changeset.endsAt', m.toDate());
       this.recomputeValidChallengeDates();
+
     },
     startsAtChanged(val) {
       //set the new StartsAt
