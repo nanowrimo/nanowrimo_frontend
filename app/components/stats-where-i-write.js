@@ -8,22 +8,22 @@ export default ChartBaseComponent.extend({
     if(where) {
       switch (where.toLowerCase()) {
         case 'at home':
-          retval = "/images/cards/house.svg";
+          retval = "/images/cards/where-i-write/house.svg";
           break;
         case "at the office":
-          retval = '';
+          retval = '/images/cards/where-i-write/office.svg';
           break;
         case 'at the library':
-          retval='';
+          retval='/images/cards/where-i-write/library.svg';
           break;
         case 'at a café':
-          retval='';
+          retval='/images/cards/where-i-write/cafe.svg';
           break;
         default:
-          retval = '';
+          retval = '/images/cards/where-i-write/custom.svg';
       }
     } else {
-      retval =''; //the empty graphic
+      retval ='/images/cards/where-i-write/custom.svg'; //the empty graphic
     }
       return retval;
   })
