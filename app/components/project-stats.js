@@ -65,17 +65,25 @@ export default Component.extend({
     }
   }),
   countNeededTodayData: computed('count', function() {
-    let count = this.get('count');
-    let countPerDay = this.get('projectChallenge.countPerDay');
     let pc = this.get('projectChallenge');
     if (pc) {
       if (pc.hasEnded()) {
         return {'needed':0,"percent":0};
       }
-      let elapsedDays = pc.numElapsedDays();
-      let targetCount = elapsedDays*countPerDay;
-      let needed = targetCount-count;
-      let percent = Math.round(count*100/targetCount);
+      
+      //countRemaining
+      let countRemaining = this.get('projectChallenge.countRemaining');
+      //daysRemaining
+      let daysRemaining = this.get('projectChallenge').daysRemaining();
+      //countToday
+      let todayCount = this.get('projectChallenge.todayCount');
+      //countPerDayToFinishOnTime = countRemaining+countToday/daysRemaining
+      let countPerDay = parseInt((countRemaining+todayCount) / daysRemaining);
+      //needed = countPerDayToFinishOnTime - countToday
+      let needed = countPerDay - todayCount;
+      //percent = needed*100/countPerDayToFinishOnTime
+      let percent = Math.round(todayCount*100/countPerDay);
+
       if (needed>0){
         return {'needed':needed,"percent":percent};
       }else{
