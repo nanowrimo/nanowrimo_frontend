@@ -20,10 +20,10 @@ export default ChartBaseComponent.extend({
           retval='/images/cards/where-i-write/cafe.svg';
           break;
         default:
-          retval = '/images/cards/where-i-write/custom.svg';
+          retval = '/images/cards/where-i-write/default.svg';
       }
     } else {
-      retval ='/images/cards/where-i-write/faded-house.svg'; //the empty graphic
+      retval ='/images/cards/where-i-write/no-data.svg'; //the empty graphic
     }
       return retval;
   })

@@ -3,7 +3,14 @@
     <div class="corner-label">How I Feel</div>
   </div>
   <div class="nano-subcard-content">
-    <div class="nano-card-icon"><img src="{{feelingImg}}" /></div>
-    <div class="chart-summary">{{feelingIntroString}}! Looks like you <span class="max-color">felt {{feelingString}}</span> working on this goal!</div>
+  
+    {{#if hasAverageFeeling }}
+      <div class="nano-card-icon"><img src="{{feelingImg}}" /></div>
+      <div class="chart-summary">{{feelingIntroString}}! Looks like you <span class="max-color">felt {{feelingString}}</span> working on this goal!</div>
+    {{else}}
+      <div class="nano-card-icon"><img src="/images/cards/how-i-feel/no-data.svg" /></div>
+      <div class="chart-summary">Happiness is when your body releases endorphins…</div>
+      <div class="chart-summary">Or it’s writing a kickass novel!</div>
+    {{/if}}
   </div>
 </div>
