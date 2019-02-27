@@ -95,10 +95,9 @@ const Project = Model.extend({
     //loop through this project's projectChallenges
     this.get('projectChallenges').forEach((pc)=>{
       //get the start and end as moments
-      let endsAt = moment(pc.endsAt);
-      let startsAt = moment(pc.startsAt);
+      let startsAt = moment(pc.startsAt).tz(this.get('user.timeZone'));
       //is this pc active?
-      if (now.isSameOrAfter(startsAt,'d') && now.isSameOrBefore(endsAt,'d')) {
+      if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded() ) {
         active = pc;
       }
     });
