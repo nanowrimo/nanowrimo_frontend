@@ -113,9 +113,7 @@ export default Component.extend({
       }
     }
   }),
-  hasAverageFeeling: computed('averageFeeling', function() {
-    return (this.get('averageFeeling') > 0);
-  }),
+  
   averageFeeling: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
     if (sessions) {
@@ -133,7 +131,7 @@ export default Component.extend({
         }
       });
       let key = this._objectKeyWithHighestValue(feelings);
-      return key;
+      return parseInt(key);
     }
   }),
   // determine which hours of the day the user is writing during 
