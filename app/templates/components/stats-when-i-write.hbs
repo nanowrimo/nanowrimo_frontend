@@ -12,9 +12,9 @@
       <div class="chart-summary">{{catchyPhrase}} You write the most between <span class="max-color">{{dataPhrase}}!</span></div>
  
     {{else}}
+      <div class="nano-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
       <div class='no-data'>Time is meaningless. Either that, or you haven't logged when you write.</div>
     {{/if}}
- 
     
   </div>
 </div>
@@ -28,9 +28,10 @@
   </div>
   <div class="nano-subcard-content">
     {{#if hasData}}
-      <div class="nano-card-icon"><img src="/images/cards/{{animalType}}.svg" /></div>
+      <div class="nano-card-icon"><img src="/images/cards/when-i-write/{{animalType}}.svg" /></div>
       <div class="icon-summary">{{catchyPhrase}}<br />You write the most between<div class="max-color">{{dataPhrase}}!</div></div>
     {{else}}
+      <div class="nano-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
       <div class='no-data'>Time is meaningless. Either that, or you haven't logged when you write.</div>
     {{/if}}
   </div>
