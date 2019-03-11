@@ -16,7 +16,7 @@ const Project = Model.extend({
   privacy: attr('number', { defaultValue: '2' }),
   slug: attr('string'),
   summary: attr('string'),
-  status: attr('string', { defaultValue: 'Ready for Progress' }),
+  status: attr('string', { defaultValue: 'Prepping' }),
   title: attr('string'),
   //unitCount: attr('number'),
   unitType: attr('string'),
@@ -79,6 +79,14 @@ const Project = Model.extend({
     }
   }),
 
+  dasherizedStatus: computed('status', function(){
+    let status = this.get('status').toLowerCase();
+    if (status.startsWith("ready") ) {
+      status='prepping';
+    }
+    return status.replace(/ /g,"-");
+  }),
+  
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
@@ -195,7 +203,7 @@ Project.reopenClass({
    *  before editing these options, check that they match the API
    *  */
   optionsForStatus: [
-    'Ready for Progress', 'In Progress', 'Drafted', 'Completed','Published'
+    'Prepping', 'In Progress', 'Drafted', 'Completed', 'Published'
   ],
   /* from the API:
     ## PRIVACY ##

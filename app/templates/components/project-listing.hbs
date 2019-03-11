@@ -67,14 +67,12 @@
           tab=editCoverTab
         }}
         
-
         <div class='project-status'>
-          {{#if project.completed}}
-            <img src="/images/users/projects/flippy-doodle-completed.png">
-          {{else}}
-            <img src="/images/users/projects/flippy-doodle-in-progress.png">
-          {{/if}}
+          {{project.status}}*{{project.dasherizedStatus}}
+          <img src="/images/users/projects/flippy-doodle-{{project.dasherizedStatus}}.png">
+          
         </div>
+        
       </div>
     </div>
   </div>
