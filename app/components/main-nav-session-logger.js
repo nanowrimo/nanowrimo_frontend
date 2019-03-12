@@ -12,7 +12,6 @@ export default Component.extend({
   showForm: false,
   user: null,
   countValue: null,
-  initialValue: null,
   selectedFeeling: null,
   selectedHow: null,
   selectedWhere: null,
@@ -26,12 +25,17 @@ export default Component.extend({
   
   countTypeTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
     let setting = this.get('currentUser.user.settingSessionCountBySession');
-    return !setting;  
+    return setting===-1;  
+  }),
+  
+  countTypeGoalTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
+    let setting = this.get('currentUser.user.settingSessionCountBySession');
+    return setting===0;  
   }),
   
   countTypeSessionSelected: computed('currentUser.user.settingSessionCountBySession', function(){
     let setting = this.get('currentUser.user.settingSessionCountBySession');
-    return (setting===true);  
+    return (setting===1);  
   }),
   
   activeProjectChallenge: computed('primaryProject', function(){
@@ -72,14 +76,20 @@ export default Component.extend({
     this.set('user',  user);
     // count by session?
     let cbs = user.settingSessionCountBySession;
-    if (cbs) {
-      this.set('countValue', 0);
-      this.set('countType', 1);
-    } else {
-    
+     this.set('countType', cbs);  
+    switch(cbs) {
+      case -1:
       this.set('countValue', this.get("primaryProject.unitCount"));
-      this.set('initialValue', this.get("primaryProject.unitCount"));
+      break;
+    
+      case 0:
+      this.set('countValue', this.get("activeProjectChallenge.count"));
+      break;
+      
+      case 1: 
+      this.set('countValue', 0);
     }
+
     let t = this.get('referenceEnd');
     let s = this.get('referenceStart');
     //did the user previously select 'show more'?
@@ -204,11 +214,29 @@ export default Component.extend({
       this.set('countType',v);
       if (v === 1) {
         this.set('countValue', 0);
-      } else if (v===0){
+      } else if (v===-1){
         this.set('countValue', this.get("primaryProject.unitCount"));
+      } else if (v===0){
+        this.set('countValue', this.get("activeProjectChallenge.count"));
       }
     },
     formSubmit() {
+      //determine what 'count' we need to send to the API
+      let count = parseInt( this.get('countValue'));
+      //do we need to determine the session count based on the total count?
+      let ct = this.get('countType');
+      if (ct < 1) {
+        //session count is based on some total total
+        let initial = 0;
+        //get the initial value based on countType
+        if (ct==-1) {
+          initial = this.get("primaryProject.unitCount");
+        } else {
+          initial = this.get("activeProjectChallenge.count");
+        }
+        count -= initial;
+      }
+      
       //what project are we actually dealing with?
       let project = this.get('store').peekRecord('project', this.get('primaryProject.id') );
       //create a session for the primary project
@@ -216,14 +244,7 @@ export default Component.extend({
       session.set('project', project);
       session.set('projectChallenge', this.get('activeProjectChallenge'));
       session.set('unitType', 0);
-      let count = parseInt( this.get('countValue'));
-      //do we need to determine the session count based on the total count?
-      if (this.get('countType')===0) {
-        //session count is based on total
-        let iv = this.get("initialValue");
-        count -= iv;
-      }
-
+      
       //check for other metrics
       session.set('feeling', this.get('selectedFeeling'));
       if (this.get('selectedWhere') ) {
@@ -256,7 +277,7 @@ export default Component.extend({
       
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
-      user.set("settingSessionCountBySession", (this.get('countType')===1));
+      user.set("settingSessionCountBySession", this.get('countType'));
       // check if the user is entering more data
       user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
       let isDirty = user.get('hasDirtyAttributes');
