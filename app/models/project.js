@@ -142,6 +142,23 @@ const Project = Model.extend({
       });
     });
   },
+  //define the path to the flippyDoodle graphical asset  
+  flippyDoodlePath: computed('status', function(){
+    let status = this.get('status');
+    switch(status){
+      case "In Progress":
+        return `/images/users/projects/flippy-doodle-in-progress.png`;
+      case "Prepping":
+      case "Ready for Progress":
+        return `/images/users/projects/flippy-doodle-prepping.png`;
+      case "Drafted":
+        return `/images/users/projects/flippy-doodle-drafted.png`;
+      case "Completed":
+        return `/images/users/projects/flippy-doodle-completed.png`;
+      case "Published":
+        return `/images/users/projects/flippy-doodle-published.png`;
+    }
+  }),
   
   currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;

@@ -21,23 +21,6 @@ export default Component.extend({
   canEdit: computed('project', function(){
     return this.get('currentUser.user') === this.get('author');
   }),
-  
-  flippyDoodlePath: computed('project.status', function(){
-    let status = this.get('project.status');
-    switch(status){
-      case "In Progress":
-        return `/images/users/projects/flippy-doodle-in-progress.png`;
-      case "Prepping":
-      case "Ready for Progress":
-        return `/images/users/projects/flippy-doodle-prepping.png`;
-      case "Drafted":
-        return `/images/users/projects/flippy-doodle-drafted.png`;
-      case "Completed":
-        return `/images/users/projects/flippy-doodle-completed.png`;
-      case "Published":
-        return `/images/users/projects/flippy-doodle-published.png`;
-    }
-  }),
 
   init(){
     this._super(...arguments);
