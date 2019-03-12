@@ -25,6 +25,7 @@ module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
       "type": "version-commit"
     },
     s3: {
+      filePattern: '**/*.{mpa,ogg,mp3,js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,wasm}',
       accessKeyId: process.env.ASSETS_PRODUCTION_AWS_KEY,
       secretAccessKey: process.env.ASSETS_PRODUCTION_AWS_SECRET,
       bucket: assetsBucket,
