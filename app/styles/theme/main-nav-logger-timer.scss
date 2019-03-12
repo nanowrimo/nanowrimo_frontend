@@ -72,14 +72,20 @@
           }
         }
       }
-      .project-title {
+      #project-text {
         position: absolute;
         top: 0px;
         left: 80px;
         font-family: 'SourceSerifPro-Regular';
-        font-size: 16px;
-        line-height: 1.38;
+        
         color: #343434;
+        .project-title {
+          font-size: 16px;
+          line-height: 1.38;
+        }
+        .project-goal-title {
+          font-size: 12px;
+        }
       }
     }
   }
