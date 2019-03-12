@@ -78,14 +78,6 @@ const Project = Model.extend({
       return count;
     }
   }),
-
-  dasherizedStatus: computed('status', function(){
-    let status = this.get('status').toLowerCase();
-    if (status.startsWith("ready") ) {
-      status='prepping';
-    }
-    return status.replace(/ /g,"-");
-  }),
   
   completed: computed('status', function() {
     return this.get('status') === "Completed";
