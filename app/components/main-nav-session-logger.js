@@ -217,7 +217,10 @@ export default Component.extend({
       } else if (v===-1){
         this.set('countValue', this.get("primaryProject.unitCount"));
       } else if (v===0){
-        this.set('countValue', this.get("activeProjectChallenge.count"));
+        //set countValue to the activeProjectChallenge's count or currentCount whichever is higher
+        let c = this.get("activeProjectChallenge.count");
+        let cc = this.get("activeProjectChallenge.currentCount");
+        this.set('countValue', (c > cc) ? c:cc);
       }
     },
     formSubmit() {
