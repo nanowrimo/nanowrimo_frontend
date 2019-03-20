@@ -1,13 +1,13 @@
 {{#if showWordCount}}
   <div class="plate-area">
-    <div class="plate-stat" data-test-user-stats-word-count>{{format-number wordCount}}</div>
+    <div class="plate-stat" data-test-user-stats-word-count>{{format-number user.totalWordCount}}</div>
     <div class="plate-descriptor">words written</div>
   </div>
 {{/if}}
 
 {{#if showYears}}
   <div class="plate-area">
-    <div class="plate-stat" data-test-user-stats-years>{{format-number yearsDoneCount}}</div>
+    <div class="plate-stat" data-test-user-stats-years>{{format-number user.yearsDone}}</div>
     <div class="plate-descriptor">time NaNo participant</div>
     {{#bs-tooltip placement="bottom"}}
       <div>Years Done/Won</div>

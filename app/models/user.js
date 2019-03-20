@@ -47,8 +47,6 @@ const User = Model.extend({
   externalLinks: hasMany('externalLink'),
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
-  projectSessions: hasMany('projectSession'),
-
 
   //notification and emails
   notificationBuddyRequests: attr('boolean'),
@@ -73,7 +71,7 @@ const User = Model.extend({
   
   settingSessionMoreInfo: attr('boolean'),
   settingSessionCountBySession: attr('number'),
-
+  projects: hasMany('project'),
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
@@ -86,6 +84,7 @@ const User = Model.extend({
   groups: hasMany('group'),
   groupUsers: hasMany('group-user'),
   regions: filterBy('groups', 'groupType', 'region'),
+  
   recalculateHome: 0,
   homeRegion: computed('regions.[]','recalculateHome', {
     get() {
@@ -104,8 +103,6 @@ const User = Model.extend({
       return maxRegion;
     }
   }),
-
-  projects: hasMany('project'),
 
   //activeGroupUsers: filterBy('groupUsers','exit_at',
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
@@ -347,6 +344,35 @@ const User = Model.extend({
   persistedProjects: filter('projects.@each.id', function(project) {
     return project.id > 0;
   }),
+  /* stats */
+  //total word count
+  
+  totalWordCount: computed('projects.@each.projectSessions', function(){
+    let sum = 0;
+    this.get('projects').forEach((p)=>{
+      p.projectSessions.forEach((ps)=>{
+        if(ps.unitType===0) { // counting words
+          sum+=ps.count;
+        }
+      });
+    });
+    return sum;
+  }),
+  //
+  yearsDone: computed('projects.@each.projectChallenges', function(){
+    let sum = 0;
+    let ids = [];
+    this.get('projects').forEach((p)=>{
+      p.challenges.forEach((c)=>{
+        if(c.unitType===0 && !ids.includes(c.id)) { // counting words
+          sum+=1;
+          ids.push(c.id);
+        }
+      });
+    });
+    return sum;
+  }),
+  
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
