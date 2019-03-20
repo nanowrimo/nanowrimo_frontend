@@ -364,7 +364,7 @@ const User = Model.extend({
     let ids = [];
     this.get('projects').forEach((p)=>{
       p.challenges.forEach((c)=>{
-        if(c.unitType===0 && !ids.includes(c.id)) { // counting words
+        if(c.eventType===0 && !ids.includes(c.id)) { // counting words
           sum+=1;
           ids.push(c.id);
         }
