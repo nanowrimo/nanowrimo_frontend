@@ -12,9 +12,7 @@ export default Component.extend({
   projects: alias('user.statsProjects'),
   showProjects: alias('user.statsProjectsEnabled'),
   showWordCount: alias('user.statsWordCountEnabled'),
-  showYears: alias('user.statsYearsEnabled'),
   streak: alias('user.statsStreak'),
-  wordCount: alias('user.statsWordCount'),
   wordiest: alias('user.statsWordiest'),
   writingPace: alias('user.statsWritingPace'),
 

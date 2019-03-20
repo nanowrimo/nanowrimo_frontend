@@ -373,6 +373,38 @@ const User = Model.extend({
     return sum;
   }),
   
+  longestNanoStreak: computed('projects.@each.projectChallenges', function(){
+    let ids = []; //track the ids of the challenges
+    let years = []; //track the years participated
+    this.get('projects').forEach((p)=>{
+      p.challenges.forEach((c)=>{
+        if(c.eventType===0 && !ids.includes(c.id)) { // nano event
+          ids.push(c.id);
+          years.push( c.startsAt.getYear() );
+        }
+      });
+    });
+    // sort the years array
+    years.sort;
+    let longest = 0;
+    let count = 0;
+    for(var i=0; i<years.length; i++) {
+      let y1 = years[i];
+      if (y1==years[0]) {
+        count = 1;
+      } else if (years[i]-1 == years[i-1]) {
+        count+=1;
+      } else {
+        count = 1;
+      }
+      if (count > longest) {
+        longest = count;
+      }
+    }
+    
+    return longest;
+  }),
+  
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());

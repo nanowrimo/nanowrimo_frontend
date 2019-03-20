@@ -1,11 +1,11 @@
-{{#if showWordCount}}
+{{#if user.statsWordCountEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-word-count>{{format-number user.totalWordCount}}</div>
     <div class="plate-descriptor">words written</div>
   </div>
 {{/if}}
 
-{{#if showYears}}
+{{#if user.statsYearsEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-years>{{format-number user.yearsDone}}</div>
     <div class="plate-descriptor">time NaNo participant</div>
@@ -43,9 +43,9 @@
   </div>
 {{/if}}
 
-{{#if showStreak}}
+{{#if user.statsStreakEnabled}}
   <div class="plate-area">
-    <div class="plate-stat" data-test-user-stats-streak>{{format-number streak}}</div>
+    <div class="plate-stat" data-test-user-stats-streak>{{format-number user.longestNanoStreak}}</div>
     <div class="plate-descriptor">longest NaNo streak</div>
   </div>
 {{/if}}
