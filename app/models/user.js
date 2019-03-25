@@ -72,7 +72,7 @@ const User = Model.extend({
   emailWritingReminders: attr('boolean'),
   
   settingSessionMoreInfo: attr('boolean'),
-  settingSessionCountBySession: attr('boolean'),
+  settingSessionCountBySession: attr('number'),
 
   // Awarded badges
   userBadges: hasMany('user-badge'),

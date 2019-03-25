@@ -16,7 +16,7 @@ const Project = Model.extend({
   privacy: attr('number', { defaultValue: '2' }),
   slug: attr('string'),
   summary: attr('string'),
-  status: attr('string', { defaultValue: 'Ready for Progress' }),
+  status: attr('string', { defaultValue: 'Prepping' }),
   title: attr('string'),
   //unitCount: attr('number'),
   unitType: attr('string'),
@@ -78,7 +78,7 @@ const Project = Model.extend({
       return count;
     }
   }),
-
+  
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
@@ -142,6 +142,23 @@ const Project = Model.extend({
       });
     });
   },
+  //define the path to the flippyDoodle graphical asset  
+  flippyDoodlePath: computed('status', function(){
+    let status = this.get('status');
+    switch(status){
+      case "In Progress":
+        return `/images/users/projects/flippy-doodle-in-progress.png`;
+      case "Prepping":
+      case "Ready for Progress":
+        return `/images/users/projects/flippy-doodle-prepping.png`;
+      case "Drafted":
+        return `/images/users/projects/flippy-doodle-drafted.png`;
+      case "Completed":
+        return `/images/users/projects/flippy-doodle-completed.png`;
+      case "Published":
+        return `/images/users/projects/flippy-doodle-published.png`;
+    }
+  }),
   
   currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;
@@ -195,7 +212,7 @@ Project.reopenClass({
    *  before editing these options, check that they match the API
    *  */
   optionsForStatus: [
-    'Ready for Progress', 'In Progress', 'Drafted', 'Completed','Published'
+    'Prepping', 'In Progress', 'Drafted', 'Completed', 'Published'
   ],
   /* from the API:
     ## PRIVACY ##

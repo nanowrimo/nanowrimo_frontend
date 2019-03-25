@@ -23,9 +23,11 @@ export default Component.extend({
   didChange: computed('changeset.changes.[]', function(){
     //the changeset changed, is it now pristine?
     let isPristine = this.get('changeset.isPristine');
+    //get the pristine value
+    let pValue = this.get(`changeset.${this.get('property')}`)
     
     if (isPristine && this.get('hasChange') ) {
-      this.set('value', this.get('initialValue') );
+      this.set('value', pValue );
       this._resetShowSelect();
     }
     
