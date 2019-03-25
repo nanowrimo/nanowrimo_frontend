@@ -358,21 +358,48 @@ const User = Model.extend({
     });
     return sum;
   }),
-  //
+  //get an array of nano years done
   yearsDone: computed('projects.@each.projectChallenges', function(){
-    let sum = 0;
     let ids = [];
+    let years = [];
     this.get('projects').forEach((p)=>{
       p.challenges.forEach((c)=>{
         if(c.eventType===0 && !ids.includes(c.id)) { // counting words
-          sum+=1;
           ids.push(c.id);
+          years.push(c.startsAt.getYear());
         }
       });
     });
-    return sum;
+    return years;
+  }),
+  //get an array of nano years won
+   yearsWon: computed('projects.@each.projectChallenges', function(){
+    let ids = [];
+    let years = [];
+    //loop the user's projects
+    this.get('projects').forEach((p)=>{
+      //loop the project's projectChallenges
+      console.log(p.title);
+      p.projectChallenges.forEach((pc)=>{
+        //get the challenge of the projectChallenge
+        let c = pc.challenge;
+        console.log(c);
+        if(c.eventType===0 && !ids.includes(pc.id)) { // counting words
+          console.log(pc);
+          ids.push(pc.id);
+          
+          //did the project challenge win?
+          if (pc.metGoal) {
+            years.push(c.startsAt.getYear());
+          }
+        }
+      });
+    });
+    console.log(years);
+    return years;
   }),
   
+  //most nanowrimo years in a row
   longestNanoStreak: computed('projects.@each.projectChallenges', function(){
     let ids = []; //track the ids of the challenges
     let years = []; //track the years participated

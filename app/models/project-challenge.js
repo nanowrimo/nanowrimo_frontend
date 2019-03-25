@@ -110,6 +110,12 @@ const ProjectChallenge = Model.extend({
     return sum;
   }),
   
+  metGoal: computed('goal', 'count', function(){
+    let g = this.get('goal');
+    let c = this.get('count');
+    return c>=g;
+  }),
+  
   daysRemaining: function() {
      // return the difference between start and now in number of days
     let now = moment();
