@@ -3,6 +3,7 @@ import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { filter, filterBy }  from '@ember/object/computed';
+import moment from 'moment';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -449,11 +450,11 @@ const User = Model.extend({
         pc.projectSessions.forEach( (ps)=>{
           //is there a start and end?
           if(ps.start && ps.end) {
-            let start = moment(s.start);
-            let end = moment(s.end);
+            let start = moment(ps.start);
+            let end = moment(ps.end);
             //get the difference in minutes
             minutes += end.diff(start,'minutes');
-            count+= s.count;
+            count+= ps.count;
           }
         });
       }
