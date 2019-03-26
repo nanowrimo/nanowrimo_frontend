@@ -13,6 +13,6 @@ export default Model.extend({
   unitType: attr('number'),
   
   project: belongsTo('project'),
-  projectChallenge: belongsTo('projectChallenge')
-
+  projectChallenge: belongsTo('projectChallenge'),
+  user: belongsTo('user')
 });

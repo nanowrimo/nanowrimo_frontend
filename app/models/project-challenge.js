@@ -13,12 +13,13 @@ const ProjectChallenge = Model.extend({
   writingType: attr('number'),
   unitType: attr('number'),
   name: attr('string'),
-  
+  isNanoEvent: attr('boolean'),
+  latestCount: attr('number'), // the lastest count according to the API server 
+  //relationships
   challenge: belongsTo('challenge'),
   project: belongsTo('project'),
   user: belongsTo('user'),
   projectSessions: hasMany('projectSession'),
-  
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
@@ -82,11 +83,13 @@ const ProjectChallenge = Model.extend({
       return 'hour';
     }
   }),
-  count: computed('projectSessions.[]', function(){
+  count: computed('projectSessions.@each.count', function(){
     let pss = this.get('projectSessions');
     let sum = 0;
     pss.forEach((ps)=> {sum+=ps.count });
-    return sum;
+    //get the latest count according to the API server
+    let lc = this.get('latestCount');
+    return (sum>lc) ? sum : lc ;
   }),
   
   countRemaining: computed('count', function(){
@@ -108,6 +111,12 @@ const ProjectChallenge = Model.extend({
       }
     });
     return sum;
+  }),
+  
+  metGoal: computed('goal', 'count', function(){
+    let g = this.get('goal');
+    let c = this.get('count');
+    return c>=g;
   }),
   
   daysRemaining: function() {
@@ -140,7 +149,7 @@ const ProjectChallenge = Model.extend({
     let e = moment(this.get('endsAt')).add(1,'d');
     let now = moment();
     return now.isAfter(e,'d');
-  }
+  },  
 });
 
 export default ProjectChallenge;

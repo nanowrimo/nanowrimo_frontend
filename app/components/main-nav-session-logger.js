@@ -82,10 +82,12 @@ export default Component.extend({
       this.set('countValue', this.get("primaryProject.unitCount"));
       break;
     
-      case 0:
-      this.set('countValue', this.get("activeProjectChallenge.count"));
-      break;
-      
+      case 0: {
+        let c = this.get("activeProjectChallenge.count");
+        let cc = this.get("activeProjectChallenge.currentCount");
+        this.set('countValue', (c > cc) ? c:cc);
+        break;
+      }
       case 1: 
       this.set('countValue', 0);
     }
@@ -220,7 +222,11 @@ export default Component.extend({
         //set countValue to the activeProjectChallenge's count or currentCount whichever is higher
         let c = this.get("activeProjectChallenge.count");
         let cc = this.get("activeProjectChallenge.currentCount");
-        this.set('countValue', (c > cc) ? c:cc);
+        if (cc == null) {
+          this.set('countValue', c);
+        } else {
+          this.set('countValue', (c > cc) ? c:cc);
+        }
       }
     },
     formSubmit() {
