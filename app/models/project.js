@@ -18,11 +18,7 @@ const Project = Model.extend({
   summary: attr('string'),
   status: attr('string', { defaultValue: 'Prepping' }),
   title: attr('string'),
-  //unitCount: attr('number'),
-  unitType: attr('string'),
-  wordCount: attr('number'),
   writingType: attr('number', { defaultValue: '0' }),
-
   challenges: hasMany('challenge'),
   projectChallenges: hasMany('projectChallenge'),
   projectSessions: hasMany('projectSession'),
@@ -124,7 +120,18 @@ const Project = Model.extend({
     });
     return  DS.PromiseObject.create({promise});
   }),
-
+  // compute total word count for this a project
+  totalWordCount: computed('projectSessions.[]', function(){
+    let count=0;
+    //get the project challenges 
+    this.get('projectChallenges').forEach((pc)=>{
+      if(pc.unitType===0) { //counting words
+        count+=pc.count;
+      }
+    });
+    return count;
+  }),
+  
   save() {
     let promiseArray = [];
     //persist the genres

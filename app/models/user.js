@@ -72,6 +72,7 @@ const User = Model.extend({
   settingSessionMoreInfo: attr('boolean'),
   settingSessionCountBySession: attr('number'),
   projects: hasMany('project'),
+  projectChallenges: hasMany('projectChallenge'),
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
@@ -346,18 +347,16 @@ const User = Model.extend({
   }),
   /* stats */
   //total word count
-  
-  totalWordCount: computed('projects.@each.projectSessions', function(){
+  totalWordCount: computed('projectChallenges.@each.count', function(){
     let sum = 0;
-    this.get('projects').forEach((p)=>{
-      p.projectSessions.forEach((ps)=>{
-        if(ps.unitType===0) { // counting words
-          sum+=ps.count;
-        }
-      });
+    this.get('projectChallenges').forEach( (pc)=>{
+      if(pc.unitType===0) {//counting words
+        sum+=pc.count;
+      }
     });
     return sum;
   }),
+  
   //get an array of nano years done
   yearsDone: computed('projects.@each.projectChallenges', function(){
     let ids = [];
@@ -372,30 +371,23 @@ const User = Model.extend({
     });
     return years;
   }),
+  
   //get an array of nano years won
-   yearsWon: computed('projects.@each.projectChallenges', function(){
+   yearsWon: computed('projectChallenge.@each.metGoal', function(){
     let ids = [];
     let years = [];
     //loop the user's projects
-    this.get('projects').forEach((p)=>{
-      //loop the project's projectChallenges
-      console.log(p.title);
-      p.projectChallenges.forEach((pc)=>{
-        //get the challenge of the projectChallenge
-        let c = pc.challenge;
-        console.log(c);
-        if(c.eventType===0 && !ids.includes(pc.id)) { // counting words
-          console.log(pc);
-          ids.push(pc.id);
-          
-          //did the project challenge win?
-          if (pc.metGoal) {
-            years.push(c.startsAt.getYear());
-          }
+    this.get('projectChallenges').forEach((pc)=>{
+      //is the projectChallenge a nanowrimo?
+      if(pc.isNanoEvent && !ids.includes(pc.id)) { // counting words
+        ids.push(pc.id);
+        
+        //did the project challenge win?
+        if (pc.metGoal) {
+          years.push(pc.startsAt.getYear());
         }
-      });
+      }
     });
-    console.log(years);
     return years;
   }),
   
@@ -430,6 +422,20 @@ const User = Model.extend({
     }
     
     return longest;
+  }),
+  
+  highestWordCountProject: computed('projects.[]', function(){
+    let highest;
+    let highestCount=0;
+    this.get('projects').forEach( (p)=>{
+      
+      if (p.totalWordCount > highestCount ){
+        highest = p;
+        highestCount = p.totalWordcount;
+      }
+
+    });
+    return highest;
   }),
   
   save() {
