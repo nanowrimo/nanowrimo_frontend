@@ -438,6 +438,33 @@ const User = Model.extend({
     return highest;
   }),
   
+  writingPace: computed('projectChallenge.@each.count', function(){
+    let minutes = 0;
+    let count = 0;
+    //loop the project challenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //is this a word based challenge?
+      if(pc.unitType===0) {
+        //loop the projectChallenge's projectSessions 
+        pc.projectSessions.forEach( (ps)=>{
+          //is there a start and end?
+          if(ps.start && ps.end) {
+            let start = moment(s.start);
+            let end = moment(s.end);
+            //get the difference in minutes
+            minutes += end.diff(start,'minutes');
+            count+= s.count;
+          }
+        });
+      }
+    }); 
+    if (minutes>0 && count) {
+      return parseInt(count/minutes);
+    } else {
+      return 0;
+    }
+  }),
+  
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());

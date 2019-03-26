@@ -36,9 +36,9 @@
   </div>
 {{/if}}
 
-{{#if user.stats.WritingPaceEnabled}}
+{{#if user.statsWritingPaceEnabled}}
   <div class="plate-area">
-    <div class="plate-stat" data-test-user-stats-writing-pace>{{format-number writingPace}}</div>
+    <div class="plate-stat" data-test-user-stats-writing-pace>{{format-number user.writingPace}}</div>
     <div class="plate-descriptor">average writing pace</div>
   </div>
 {{/if}}
