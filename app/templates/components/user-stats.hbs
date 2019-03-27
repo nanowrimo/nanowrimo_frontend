@@ -1,14 +1,14 @@
 {{#if user.statsWordCountEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-word-count>{{format-number user.totalWordCount}}</div>
-    <div class="plate-descriptor">words written</div>
+    <div class="plate-descriptor">Words written</div>
   </div>
 {{/if}}
 
 {{#if user.statsYearsEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-years>{{format-number yearsDoneCount}}</div>
-    <div class="plate-descriptor">time NaNo participant</div>
+    <div class="plate-descriptor">Time NaNo participant</div>
     {{#bs-tooltip placement="bottom"}}
       <div>Years Done/Won</div>
       <div>
@@ -25,27 +25,27 @@
 {{#if user.statsProjectsEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-projects>{{format-number user.projects.length}}</div>
-    <div class="plate-descriptor">NaNo projects</div>
+    <div class="plate-descriptor">Total projects</div>
   </div>
 {{/if}}
 
 {{#if user.statsWordiestEnabled}}
   <div class="plate-area">
-    <div class="plate-stat" data-test-user-stats-wordiest>{{format-number user.highestWordCountProject.totalWordCount}}</div>
-    <div class="plate-descriptor">wordiest novel</div>
+    <div class="plate-stat" data-test-user-stats-wordiest>{{format-number user.highestWordCountProjectCount}}</div>
+    <div class="plate-descriptor">Wordiest project</div>
   </div>
 {{/if}}
 
 {{#if user.statsWritingPaceEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-writing-pace>{{format-number user.writingPace}}</div>
-    <div class="plate-descriptor">average writing pace</div>
+    <div class="plate-descriptor">Average writing pace</div>
   </div>
 {{/if}}
 
 {{#if user.statsStreakEnabled}}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-streak>{{format-number user.longestNanoStreak}}</div>
-    <div class="plate-descriptor">longest NaNo streak</div>
+    <div class="plate-descriptor">Longest NaNo streak</div>
   </div>
 {{/if}}

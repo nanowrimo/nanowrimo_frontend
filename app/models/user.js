@@ -439,6 +439,15 @@ const User = Model.extend({
     return highest;
   }),
   
+  highestWordCountProjectCount: computed('highestWordCountProject', function(){
+    let c = this.get("highestWordCountProject.totalCount");
+    if (!c>0) {
+      return 0;
+    } else {
+      return c;
+    }
+  }),
+  
   writingPace: computed('projectChallenge.@each.count', function(){
     let minutes = 0;
     let count = 0;

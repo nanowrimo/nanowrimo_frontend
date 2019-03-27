@@ -23,9 +23,9 @@ export default Component.extend({
     //define an object to store stats properties 
     let stats = [
       {"label":"Lifetime word count", 'property':"statsWordCountEnabled"},
-      {"label":"Number of projects", 'property':"statsProjectsEnabled"},
+      {"label":"Total projects", 'property':"statsProjectsEnabled"},
       {"label":"Years done and won", 'property':"statsYearsEnabled"},
-      {"label":"Wordiest novel", 'property':"statsWordiestEnabled"},
+      {"label":"Wordiest project", 'property':"statsWordiestEnabled"},
       {"label":"Average writing pace", 'property':"statsWritingPaceEnabled"},
       {"label":"Longest NaNo streak", 'property':"statsStreakEnabled"},
     ];
