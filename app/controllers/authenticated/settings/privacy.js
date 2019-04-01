@@ -2,27 +2,36 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import User from 'nanowrimo/models/user';
+import { next }  from '@ember/runloop';
+
 export default Controller.extend({
   error: null, // String OR object
   currentUser: service(),
-
+  showForm: false,
+  
+  init(){
+    this._super(...arguments);
+    this.set('showFormRadios', true);
+  },
   user: computed('currentUser.user',function() {
     return this.get('currentUser.user');
   }),
   
-  optionsForPrivacyViewProfile: computed(function() {
-    return User.optionsForPrivacyViewProfile;
+  optionsForPrivacyAccount: computed(function(){
+    return User.optionsForPrivacyAccount;
   }),
-  optionsForPrivacyViewProjects: computed(function() {
-    return User.optionsForPrivacyViewProjects;
+
+  optionsForPrivacyProjects: computed(function() {
+    return User.optionsForPrivacyProjects;
   }),
-  optionsForPrivacyViewBuddies: computed(function() {
-    return User.optionsForPrivacyViewBuddies;
+  optionsForPrivacyBuddies: computed(function() {
+    return User.optionsForPrivacyBuddies;
   }),
-  optionsForPrivacyViewSearch: computed(function() {
-    return User.optionsForPrivacyViewSearch;
-  }),
-  optionsForPrivacySendNanomessages: computed(function() {
-    return User.optionsForPrivacySendNanomessages;
-  }),
+  actions:{
+    resetCallback(){
+      this.set('showFormRadios', false);
+      next(()=>{  this.set('showFormRadios', true) });
+    }
+  }
+
 });
