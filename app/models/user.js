@@ -491,21 +491,21 @@ User.reopenClass({
 
   optionsForPrivacyAccount:
   [
-    {value:'0', name:'public',description:"Anyone with an account will be able to search for and view my profile"},
-    {value:'1', name:'private',description:"Only my buddies can view my profile"},
+    {value:'1', name:'public', description:"Anyone with an account will be able to search for and view my profile"},
+    {value:'0', name:'private', description:"Only my buddies can view my profile"},
   ],
 
   optionsForPrivacyProjects:
   [
-    {value:'0', name:'Anyone with an account'},
+    {value:'2', name:'Anyone with an account'},
     {value:'1', name:'Only my buddies'},
-    {value:'2', name:'Only me'},
+    {value:'0', name:'Only me'},
   ],
   optionsForPrivacyBuddies:
   [
-    {value:'0', name:'Anyone with an account'},
+    {value:'2', name:'Anyone with an account'},
     {value:'1', name:'Only my buddies'},
-    {value:'2', name:'Only me'},
+    {value:'0', name:'Only me'},
   ]
   
 });

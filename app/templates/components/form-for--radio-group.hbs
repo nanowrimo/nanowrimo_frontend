@@ -9,14 +9,15 @@
   <div class='radio-group-title'>{{title}}</div>
   {{#if showRadios}}
     {{#each options as |option|}}
+    
       <div>
-      <input align='middle' class='' type='radio' onClick={{action 'clicked' value='target.value'}}
+      <input type='radio' onClick={{action 'clicked' value='target.value'}}
         id="{{property}}{{option.value}}" name={{property}} 
         value={{option.value}}
         checked = {{eq option.value initialValue}}
-        >
+        > 
       <label for="{{property}}{{option.value}}">
-        {{option.name}}
+        {{option.name}} {{option.disabled}}
         {{#if option.description}}
           | <span class='option-description'>{{option.description}}</span>
         {{/if}}
