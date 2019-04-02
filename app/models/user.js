@@ -489,39 +489,25 @@ User.reopenClass({
    *  before editing these options, check that they match the API
    *  */
 
-  optionsForPrivacyViewProfile:
+  optionsForPrivacyAccount:
   [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Anyone Can See'},
-
-  ],
-  optionsForPrivacyViewProjects:
-  [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Anyone Can See'},
-  ],
-  optionsForPrivacyViewBuddies:
-  [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Anyone Can See'},
-  ],
-  optionsForPrivacyViewSearch:
-  [
-    {value:'0', name:'No One'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Anyone Can See'},
-  ],
-  optionsForPrivacySendNanomessages:
-  [
-    {value:'0', name:'No One'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Anyone Can See'},
+    {value:'1', name:'public', description:"Anyone with an account will be able to search for and view my profile"},
+    {value:'0', name:'private', description:"Only my buddies can view my profile"},
   ],
 
-
+  optionsForPrivacyProjects:
+  [
+    {value:'2', name:'Anyone with an account'},
+    {value:'1', name:'Only my buddies'},
+    {value:'0', name:'Only me'},
+  ],
+  optionsForPrivacyBuddies:
+  [
+    {value:'2', name:'Anyone with an account'},
+    {value:'1', name:'Only my buddies'},
+    {value:'0', name:'Only me'},
+  ]
+  
 });
 
 export default User;
