@@ -84,6 +84,16 @@ const Project = Model.extend({
     return genreNames.join(", ");
   }),
 
+  hasProjectChallenges: computed('projectChallenges.[]', function(){
+    let pc = this.get('projectChallenges');
+    if (pc) {
+      return (pc.length>0) ? true : false; 
+    } else {
+      return false;
+    }
+
+  }),
+
   activeProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;
     //get the time now in user's timezone 

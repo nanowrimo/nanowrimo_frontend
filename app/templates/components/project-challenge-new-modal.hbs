@@ -61,12 +61,12 @@
       <div class="side-by-side">
         <div class="form-group side-by-side-even">
           <label for='goal'>What is your goal?</label>
-          <input id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
+          <input class='form-control' id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
          
         </div>
-        <div class="form-group side-by-side-even">
+        <div class="form-group side-by-side-even"> 
+          <label for='unitType'></label>
           <div class="select-container">
-            <label for='unitType'></label>
             <select id='unitType' name='unitType' disabled={{if disableWritingType 'disabled' ''}}
               class='form-control' 
               onchange={{action 'unitTypeChanged' value="target.value"}}>

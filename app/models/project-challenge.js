@@ -13,7 +13,7 @@ const ProjectChallenge = Model.extend({
   writingType: attr('number'),
   unitType: attr('number'),
   name: attr('string'),
-  isNanoEvent: attr('boolean'),
+  nanoEvent: attr('boolean'),
   latestCount: attr('number'), // the lastest count according to the API server 
   //relationships
   challenge: belongsTo('challenge'),

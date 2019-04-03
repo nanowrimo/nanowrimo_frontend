@@ -16,6 +16,7 @@ export default Component.extend({
   projectChallenge: null,
   projectChallenges: null,
   
+  
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     //now is a good time to update the whereIwrite
     this._updateWhereIWrite();
@@ -315,13 +316,19 @@ export default Component.extend({
       sp.clear();
     } else {
       let p = this.get('currentUser.user.primaryProject');
-      this.set('project', p);
-      this.set('projectChallenges', p.projectChallenges );
-      this.set('projectChallenge', p.currentProjectChallenge );
+      if (p) {
+        this.set('project', p);
+        this.set('projectChallenges', p.projectChallenges );
+        this.set('projectChallenge', p.currentProjectChallenge );
+      } else {
+        //the user has no projects :/
+      }
     }
-    
-    //fetch the aggregates
-    this.fetchAggregates();
+    // if there is no projectChallenge, there are no stats to display
+    if (this.get('projectChallenge') ) {
+      //fetch the aggregates
+      this.fetchAggregates();
+    }
   },
 
   actions: {
