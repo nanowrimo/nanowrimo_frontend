@@ -305,7 +305,7 @@ const User = Model.extend({
     });
   },
 
-  projectsSortingCreatedDesc: ['createdAt:desc'],
+  projectsSortingCreatedDesc: Object.freeze(['createdAt:desc']),
   projectsSortedCreatedDesc: sort('projects','projectsSortingCreatedDesc'),
   
   primaryProject: computed('projects.{[],@each.primary}', function(){
