@@ -85,14 +85,12 @@ const Project = Model.extend({
   }),
 
   hasProjectChallenges: computed('projectChallenges.[]', function(){
-    let bool;
     let pc = this.get('projectChallenges');
-      console.log(pc);
-      if (pc) {
-        return (pc.length>0) ? true : false; 
-      } else {
-        return false;
-      }
+    if (pc) {
+      return (pc.length>0) ? true : false; 
+    } else {
+      return false;
+    }
 
   }),
 
