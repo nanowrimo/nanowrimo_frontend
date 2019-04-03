@@ -58,7 +58,12 @@
             {{project.concatGenres}}
           </div>
         </div>
-        {{project-list-progress project=project}}
+        
+        {{#if project.hasProjectChallenges}} 
+          {{project-list-progress project=project}}
+        {{else}}
+          [create challenge]
+        {{/if}}
         
         {{project-edit-cover-modal
           onHidden=(action "afterCoverModalClose")
