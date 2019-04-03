@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { filter, filterBy }  from '@ember/object/computed';
+import { sort, filter, filterBy }  from '@ember/object/computed';
 import moment from 'moment';
 
 const User = Model.extend({
@@ -305,6 +305,9 @@ const User = Model.extend({
     });
   },
 
+  projectsSortingCreatedDesc: ['createdAt:desc'],
+  projectsSortedCreatedDesc: sort('projects','projectsSortingCreatedDesc'),
+  
   primaryProject: computed('projects.{[],@each.primary}', function(){
     let ps = this.get('projects');
     let prime = ps.firstObject;

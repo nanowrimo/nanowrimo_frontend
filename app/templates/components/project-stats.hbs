@@ -14,7 +14,7 @@
       </div>
       <div class='switcher-select'>
       <select class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'}}>
-        {{#each currentUser.user.projects as |p|}}
+        {{#each currentUser.user.projectsSortedCreatedDesc as |p|}}
           <option value='{{p.id}}' selected ={{eq p project}}>{{p.title}}</option>
         {{/each}}
       </select>
