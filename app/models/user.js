@@ -383,7 +383,7 @@ const User = Model.extend({
     //loop the user's projects
     this.get('projectChallenges').forEach((pc)=>{
       //is the projectChallenge a nanowrimo?
-      if(pc.isNanoEvent && !ids.includes(pc.id)) { // counting words
+      if(pc.nanoEvent && !ids.includes(pc.id)) { // counting words
         ids.push(pc.id);
         
         //did the project challenge win?
