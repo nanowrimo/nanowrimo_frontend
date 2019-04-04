@@ -191,18 +191,7 @@ export default Component.extend({
 
     deleteBook(book) {
       book.deleteRecord();
-    },
-    
-    onHidden() {
-      this.get('user').rollbackFavorites();
-      let callback = this.get('onHidden');
-      if (callback) {
-        callback();
-      } else {
-        this.set('open', null);
-      }
     }
-    
   },
   /* component methods */
   _addAuthor() {

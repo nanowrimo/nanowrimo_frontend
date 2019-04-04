@@ -36,11 +36,6 @@ export default Controller.extend({
   }),
 
   actions: {
-    afterModalClose() {
-      this.set('editBio', null);
-      this.set('editBioTab', null);
-    },
-
     showEditBio() {
       if (this.get('canEditUser')) {
         this.get('userShow').send("openEditModal",'biography');
