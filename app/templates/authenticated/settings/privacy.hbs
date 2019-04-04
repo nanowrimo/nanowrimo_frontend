@@ -6,7 +6,7 @@
   {{#if displayForm}}
   
     <div class='nw-card-content'>
-      <div class="form-group">
+      <div class="form-group radio-group">
         <div class="radio-group-title">Account Privacy</div>
         <div>
           <input  id="privacyViewProfile1" name="privacyViewProfile" 
@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group radio-group">
         <div class="radio-group-title">Who can view your projects?</div>
         <div>
           <input  id="privacyViewProjects2" name="privacyViewProjects" type="radio" value="2"
@@ -44,7 +44,7 @@
           onClick={{action 'clickedProjects' value='target.value'}}
           disabled={{privacyViewProjects2Disabled}}
           > 
-          <label for="privacyViewProjects2">
+          <label for="privacyViewProjects2" class='{{if privacyViewProjects2Disabled 'disabled'}}'>
             Anyone with an account 
           </label> 
         </div>
@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group radio-group">
         <div class="radio-group-title">Who can view your buddies?</div>
         <div>
           <input  id="privacyViewBuddies2" name="privacyViewBuddies" type="radio" value="2"
@@ -80,7 +80,7 @@
           onClick={{action 'clickedBuddies' value='target.value'}}
           disabled={{privacyViewBuddies2Disabled}}
           > 
-          <label for="privacyViewBuddies2">
+          <label for="privacyViewBuddies2"  class='{{if privacyViewBuddies2Disabled 'disabled'}}'>
             Anyone with an account 
           </label> 
         </div>
