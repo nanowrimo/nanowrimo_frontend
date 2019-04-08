@@ -1,6 +1,6 @@
 {{#if showUserContent}}
-  <div class='plate-wrapper {{if canEditUser "user-editable" ""}}' {{action "openImagesModal" "headerTab" bubbles=false}}>
-    <div class="nano-user-plate full-width d-flex " {{action "openImagesModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
+  <div class='plate-wrapper {{if canEditUser "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
+    <div class="nano-user-plate full-width d-flex " {{action "openEditModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
       <div class="plate-cover">
 
         <div class="container-fluid">
@@ -9,7 +9,7 @@
 
         {{#if canEditUser}}
           {{!-- TODO: CSS styling for this edit link to show/hide --}}
-          <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
+          <div class="flip-corner-link" {{action "openEditModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
             <img src="/images/global/flip_corner.png" alt="Edit User Images" />
           </div>
         {{/if}}
@@ -24,7 +24,7 @@
         <div class="nano-panel left-sidebar nano-profile">
           <div class="flip-corner">
 
-            <div class="nano-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openImagesModal"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
+            <div class="nano-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openEditModal" "avatarTab"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
               <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
               <div class='avatar-editable-overlay image-editable-overlay'>{{fa-icon "edit"}}</div>
               
@@ -53,13 +53,6 @@
                 open=edit
                 user=user
                 tab=editTab
-              }}
-
-              {{user-edit-images-modal
-                onHidden=(action "afterImagesModalClose")
-                open=editImages
-                user=user
-                tab=editImagesTab
               }}
 
             {{/if}}
