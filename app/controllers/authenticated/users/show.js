@@ -10,8 +10,6 @@ export default Controller.extend({
   queryParams: ['edit', 'editImages', 'editImagesTab', 'editTab'],
 
   edit: null,
-  editImages: null,
-  editImagesTab: null,
   editTab: null,
   userParam: null,
 
@@ -57,23 +55,12 @@ export default Controller.extend({
       }
     },
 
-    afterImagesModalClose() {
-      this.set('editImages', null);
-      this.set('editImagesTab', null);
-    },
-
     openEditModal(tab) {
       if (this.get('canEditUser')) {
         this.set('edit', true);
         if (tab) { this.set('editTab', tab); }
       }
-    },
-
-    openImagesModal(tab) {
-      if (this.get('canEditUser')) {
-        this.set('editImages', true);
-        if (tab) { this.set('editImagesTab', tab); }
-      }
-    },
+    }
+    
   }
 });

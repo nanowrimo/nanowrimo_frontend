@@ -1,77 +1,123 @@
-{{#form-for model=user as |f| }}        
-  <div class='nw-card'>      
-    <div class='nw-card-header'>
-       <div class='nw-card-title'>Profile</div>
-    </div>
+<div class='nw-card'>      
+  <div class='nw-card-header'>
+     <div class='nw-card-title'>Privacy</div>
+  </div>
+  
+  {{#if displayForm}}
+  
     <div class='nw-card-content'>
-        <div class="form-group">
-          {{f.select
-            label="Who can view your profile?"
-            options=optionsForPrivacyViewProfile
-            property="privacyViewProfile"
-          }}
+      <div class="form-group radio-group">
+        <div class="radio-group-title">Account Privacy</div>
+        <div>
+          <input  id="privacyViewProfile1" name="privacyViewProfile" 
+            type="radio" value="1" 
+            checked="{{privacyViewProfile1Checked}}" 
+            onClick={{action 'clickedProfile' value='target.value'}}
+            > 
+          <label for="privacyViewProfile1">
+            public | 
+            <span class="option-description">
+              Anyone with an account will be able to search for and view my profile
+            </span>
+          </label> 
         </div>
-        <div class="form-group">
-          {{f.select
-            label="Who can view your projects?"
-            options=optionsForPrivacyViewProjects
-            property="privacyViewProjects"
-          }}
-        </div>
-        <div class="form-group">
-          {{f.select
-            label="Who can view your buddies?"
-            options=optionsForPrivacyViewBuddies
-            property="privacyViewBuddies"
-          }}
-        </div>
-        <div class="form-group">
-          {{f.select
-            label="Who can see you in search results?"
-            options=optionsForPrivacyViewSearch
-            property="privacyViewSearch"
-          }}
-        </div>
-        <div class="form-group">
-          {{f.select
-            label="Who can send you NaNoMessages?"
-            options=optionsForPrivacySendNanomessages
-            property="privacySendNanomessages"
-          }}
-        </div>
-        
-      </div>
-    </div>
 
-  <div class='nw-card'>      
-    <div class='nw-card-header'>
-       <div class='nw-card-title'>Visibility</div>
-    </div>
-    <div class='nw-card-content'>
-      <div class="nano-subcard-body">
-        <div class="form-group inline-checkbox">
-          {{f.checkbox
-            label="Visible to my regions"
-            property="privacyVisibilityRegions"
-          }}
+        <div>
+          <input  id="privacyViewProfile0" name="privacyViewProfile" type="radio" value="0"
+          onClick={{action 'clickedProfile' value='target.value'}}
+          checked="{{privacyViewProfile0Checked}}" 
+          > 
+          <label for="privacyViewProfile0">
+            private | 
+            <span class="option-description">
+              Only my buddies can view my profile
+            </span>
+          </label> 
         </div>
-        <div class="form-group inline-checkbox">
-          {{f.checkbox
-            label="Visible on buddy lists"
-            property="privacyVisibilityBuddyLists"
-          }}
+      </div>
+
+      <div class="form-group radio-group">
+        <div class="radio-group-title">Who can view your projects?</div>
+        <div>
+          <input  id="privacyViewProjects2" name="privacyViewProjects" type="radio" value="2"
+          checked="{{privacyViewProjects2Checked}}" 
+          onClick={{action 'clickedProjects' value='target.value'}}
+          disabled={{privacyViewProjects2Disabled}}
+          > 
+          <label for="privacyViewProjects2" class='{{if privacyViewProjects2Disabled 'disabled'}}'>
+            Anyone with an account 
+          </label> 
         </div>
-        <div class="form-group inline-checkbox">
-          {{f.checkbox
-            label="Visible on activity logs"
-            options=optionsForPrivacyViewBuddies
-            property="privacyVisibilityActivityLogs"
-          }}
+
+        <div>
+          <input  id="privacyViewProjects1" name="privacyViewProjects" type="radio" value="1"
+          checked="{{privacyViewProjects1Checked}}" 
+          onClick={{action 'clickedProjects' value='target.value'}}
+          disabled={{privacyViewProjects1Disabled}}
+          > 
+          <label for="privacyViewProjects1">
+            Only my buddies 
+          </label> 
+        </div>
+
+        <div>
+          <input  id="privacyViewProjects0" name="privacyViewProjects" type="radio" value="0"
+          checked="{{privacyViewProjects0Checked}}" 
+          onClick={{action 'clickedProjects' value='target.value'}}
+          disabled={{privacyViewProjects0Disabled}}
+          > 
+          <label for="privacyViewProjects0">
+            Only me 
+          </label> 
+        </div>
+      </div>
+
+      <div class="form-group radio-group">
+        <div class="radio-group-title">Who can view your buddies?</div>
+        <div>
+          <input  id="privacyViewBuddies2" name="privacyViewBuddies" type="radio" value="2"
+          checked="{{privacyViewBuddies2Checked}}" 
+          onClick={{action 'clickedBuddies' value='target.value'}}
+          disabled={{privacyViewBuddies2Disabled}}
+          > 
+          <label for="privacyViewBuddies2"  class='{{if privacyViewBuddies2Disabled 'disabled'}}'>
+            Anyone with an account 
+          </label> 
+        </div>
+
+        <div>
+        <input id="privacyViewBuddies1" name="privacyViewBuddies" type="radio" value="1"
+        checked="{{privacyViewBuddies1Checked}}" 
+          onClick={{action 'clickedBuddies' value='target.value'}}
+          disabled={{privacyViewBuddies1Disabled}}
+        > 
+          <label for="privacyViewBuddies1">
+            Only my buddies 
+          </label> 
+        </div>
+
+        <div>
+        <input id="privacyViewBuddies0" name="privacyViewBuddies" type="radio" value="0"
+        checked="{{privacyViewBuddies0Checked}}" 
+          onClick={{action 'clickedBuddies' value='target.value'}}
+          disabled={{privacyViewBuddies0Disabled}}
+        > 
+          <label for="privacyViewBuddies0">
+            Only me 
+          </label> 
         </div>
       </div>
     </div>
+  
+  {{/if}}
+  
+</div>
+
+<div class='nano-panel-footer'>
+  <div class='save-cancel'>
+    <button disabled={{submitDisabled}} class="nano-button-large form-save" type="submit" {{action "submitForm"}}>Save Changes</button>
+    <a href="#" class="form-cancel" {{action "resetForm"}}>Reset Form</a>
   </div>
-  <div class='nano-panel-footer'>
-    {{f.save-cancel class="save-cancel"}}
-  </div>
-{{/form-for}}
+</div>
+
+

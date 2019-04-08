@@ -5,20 +5,20 @@ export default ChartBaseComponent.extend({
 
   feelingString: computed('averageFeeling', function(){
     let strings = ['upset','stressed','just ok', 'pretty good', 'great'];
-    return strings[this._feeling()-1 ];
+    return strings[this.get('averageFeeling')-1 ];
   }),
   
   feelingIntroString: computed('averageFeeling', function(){
     let strings = ['Oh no','Uh oh','Hmmm', 'Nice', 'Nice'];
-    return strings[this._feeling()-1 ];
+    return strings[this.get('averageFeeling')-1 ];
   }),
   
   feelingImg: computed('averageFeeling', function(){
-    return `/images/cards/smiley${this._feeling()}.svg`;
+    return `/images/cards/how-i-feel/smiley${this.get('averageFeeling')}.svg`;
     
   }),
   
-  _feeling: function(){
-    return parseInt(this.get('averageFeeling'));
-  }
+  hasAverageFeeling: computed('averageFeeling', function() {
+    return (this.get('averageFeeling') > 0);
+  })
 });

@@ -9,6 +9,7 @@ export default Controller.extend({
   newEmail: null,
   newPassword: null,
   showPasswordConfirm: false,
+  confirmationPasswordError: false,
   // For displaying response messages
   _formResponseMessage: null,
   formResponseMessage: computed('_formResponseMessage',function() {
@@ -41,16 +42,19 @@ export default Controller.extend({
   }),
   
   actions: {
-    //willTransition: function(transition) {
-      //this.set('_formResponseMessage',null);
-    //},
     newPasswordChanged(val) {
       if (val) {
         this.set("showPasswordConfirm", val.length > 0);
       }
     },
-    
+    afterError(error) {
+      this.set('error', error);
+      if (error.errors[0].title=="BAD-AUTH") {
+        this.set('confirmationPasswordError', true);
+      }
+    },
     afterSubmit() {
+      this.set('confirmationPasswordError', false);
       let u = this.get('currentUser.user');
       let ne = this.get('newEmail');
       let r = "Your changes have been saved.";

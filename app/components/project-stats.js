@@ -16,6 +16,7 @@ export default Component.extend({
   projectChallenge: null,
   projectChallenges: null,
   
+  
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     //now is a good time to update the whereIwrite
     this._updateWhereIWrite();
@@ -65,17 +66,25 @@ export default Component.extend({
     }
   }),
   countNeededTodayData: computed('count', function() {
-    let count = this.get('count');
-    let countPerDay = this.get('projectChallenge.countPerDay');
     let pc = this.get('projectChallenge');
     if (pc) {
       if (pc.hasEnded()) {
         return {'needed':0,"percent":0};
       }
-      let elapsedDays = pc.numElapsedDays();
-      let targetCount = elapsedDays*countPerDay;
-      let needed = targetCount-count;
-      let percent = Math.round(count*100/targetCount);
+      
+      //countRemaining
+      let countRemaining = this.get('projectChallenge.countRemaining');
+      //daysRemaining
+      let daysRemaining = this.get('projectChallenge').daysRemaining();
+      //countToday
+      let todayCount = this.get('projectChallenge.todayCount');
+      //countPerDayToFinishOnTime = countRemaining+countToday/daysRemaining
+      let countPerDay = parseInt((countRemaining+todayCount) / daysRemaining);
+      //needed = countPerDayToFinishOnTime - countToday
+      let needed = countPerDay - todayCount;
+      //percent = needed*100/countPerDayToFinishOnTime
+      let percent = Math.round(todayCount*100/countPerDay);
+
       if (needed>0){
         return {'needed':needed,"percent":percent};
       }else{
@@ -105,9 +114,7 @@ export default Component.extend({
       }
     }
   }),
-  hasAverageFeeling: computed('averageFeeling', function() {
-    return (this.get('averageFeeling') > 0);
-  }),
+  
   averageFeeling: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
     if (sessions) {
@@ -125,7 +132,7 @@ export default Component.extend({
         }
       });
       let key = this._objectKeyWithHighestValue(feelings);
-      return key;
+      return parseInt(key);
     }
   }),
   // determine which hours of the day the user is writing during 
@@ -309,13 +316,19 @@ export default Component.extend({
       sp.clear();
     } else {
       let p = this.get('currentUser.user.primaryProject');
-      this.set('project', p);
-      this.set('projectChallenges', p.projectChallenges );
-      this.set('projectChallenge', p.currentProjectChallenge );
+      if (p) {
+        this.set('project', p);
+        this.set('projectChallenges', p.projectChallenges );
+        this.set('projectChallenge', p.currentProjectChallenge );
+      } else {
+        //the user has no projects :/
+      }
     }
-    
-    //fetch the aggregates
-    this.fetchAggregates();
+    // if there is no projectChallenge, there are no stats to display
+    if (this.get('projectChallenge') ) {
+      //fetch the aggregates
+      this.fetchAggregates();
+    }
   },
 
   actions: {
