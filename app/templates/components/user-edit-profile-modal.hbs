@@ -92,7 +92,7 @@
           </div>
         {{/tab.pane}}
 
-        {{#tab.pane title="Favorite Books and Authors" id="favorites"}}
+        {{#tab.pane title="Favorites" id="favorites"}}
           <div class="form-group">
             <label>What are your (up to) 5 favorite books?</label>
           </div>
@@ -144,6 +144,23 @@
           {{/if}}
         {{/tab.pane}}
         
+        {{#tab.pane title="Avatar" id="avatarTab"}}
+          <div class="form-group">
+            {{f.imageUpload
+              label="Update your avatar image"
+              property="avatar"
+            }}
+          </div>
+        {{/tab.pane}}
+
+        {{#tab.pane title="Cover Plate" id="headerTab"}}
+          <div class="form-group">
+            {{f.imageUpload
+              label="Update your cover plate"
+              property="plate"
+            }}
+          </div>
+        {{/tab.pane}}
 
       {{/bs-tab}}
 
