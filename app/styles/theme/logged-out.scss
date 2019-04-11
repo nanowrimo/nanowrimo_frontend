@@ -278,6 +278,52 @@ footer .link:hover, footer .social:hover { opacity: .7; }
 .programming-and-impact .hero:before {background-image:url('/images/logged-out/programming-and-impact-2x.jpg')}
 
 .nano-resources .hero:before {background-image: url('/images/logged-out/nanowrimo-pep-talks-2x.jpg')}
+/* CMS Hero */
+.cms-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height:25rem;
+  &:before {position: absolute;content:"";top:0;left:0;height:100%;width:100%;background-color: #5f8c7f;background-size:cover;}
+  &:after {position: absolute;content: "";top:0;left:0;width:100%;height:100%;background-color: #5f8c7f;}
+  .container {width:100%}
+  .wrapper {
+    width: 100%;
+    margin: auto;
+    max-width:42.75rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .wrapper-card {
+      flex: 0 0 300px;
+      align-items: center;
+    }
+    .wrapper-content {
+      max-width: 400px;
+      flex: 1 1 100%;
+      align-items: center;
+    }
+    .superhead {font-size:1.0rem;letter-spacing: 0.0156rem;line-height:3.125rem;color:#F2F8FA;font-weight: bold; margin: 0;display: inline-block;overflow: hidden}
+    .headline {font-size:2.5rem;letter-spacing: 0.0156rem;line-height:3.125rem;color:#F2F8FA;margin: 0;font-family: "Source Serif Pro Bold";display: inline-block;overflow: hidden}
+    .copy {font-size:1rem;line-height:1.375rem;color:#F2F8FA;margin:0.4375rem 0 0.875rem;}
+    .btn-wrapper {display: flex;align-items:center;}
+    .btn-wrapper .btn:nth-of-type(1) {margin-right:0.875rem;}
+    .cta {font-family: "Source Sans Pro Italic";line-height: 1.375rem;color:#F2F8FA;margin-top:1.75rem}
+    .cta a {color:inherit}
+  }
+}
+
+/* CMS content */
+.cms-content {position: relative;background-color: #f2f8fa;box-shadow: 0 0.1875rem 0.875rem rgba(47,48,97,0.1);overflow: hidden;}
+.cms-content .wrapper {max-width:42.75rem;padding:2.625rem 0; margin: auto}
+.cms-content .wrapper img {max-width:42.75rem; height: auto}
+.cms-content .subtitle {font-size:1rem;font-family: "Source Sans Pro Bold";color:#2F3061;line-height: 1.625rem;margin:0;}
+.cms-content .headline {font-size:1.875rem;color:#2F3061;line-height: 2.5rem;margin: 0.4375rem 0 0;font-family: "Source Serif Pro";font-weight: normal}
+.cms-content .copy {margin-top:0.9375rem;color:#343434;font-size:1rem;line-height: 1.375rem;margin-bottom:1.75rem;}
+/*.cms-content img {position: absolute;right:4.75rem;top:9.3125rem;width:18.9375rem;height:18.1875rem;}*/
 
 /* About */
 .about {position: relative;background: #FFF;box-shadow: 0 0.1875rem 0.875rem rgba(47,48,97,0.1);overflow: hidden;}

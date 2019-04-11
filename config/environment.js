@@ -72,6 +72,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'development-local') {
+    //console.log(port);
     //ENV.APP.LOG_RESOLVER = true;
     //ENV.APP.LOG_ACTIVE_GENERATION = true;
     //ENV.APP.LOG_TRANSITIONS = true;
@@ -85,7 +86,7 @@ module.exports = function(environment) {
       ENV.APP.API_HOST = 'http://localhost:3002';
       ENV.APP.UI_HOST = 'http://localhost:4200';
     } else {
-      ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
+      ENV.APP.API_HOST = 'http://'+os.hostname()+':3002';
       ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';
     }
     //ENV.APP.API_HOST = 'http://localhost:3000';
