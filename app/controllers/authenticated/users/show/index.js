@@ -1,18 +1,13 @@
-import Controller from '@ember/controller';
+import Controller, {inject as controller} from '@ember/controller';
 import { computed }  from '@ember/object';
 import { alias, filterBy, not }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   currentUser: service(),
-
-  queryParams: ['editBio', 'editBioTab'],
-
-  editBio: null,
-  editBioTab: null,
-
+  userShow: controller("authenticated.users.show"),
   user: alias('model'),
-
+  
   bioExpanded: false,
   
   hasBio: computed('user.bio', function(){
@@ -41,14 +36,9 @@ export default Controller.extend({
   }),
 
   actions: {
-    afterModalClose() {
-      this.set('editBio', null);
-      this.set('editBioTab', null);
-    },
-
     showEditBio() {
       if (this.get('canEditUser')) {
-        this.set('editBio', true);
+        this.get('userShow').send("openEditModal",'biography');
       }
     }
   }

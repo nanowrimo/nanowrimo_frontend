@@ -16,13 +16,9 @@ const Project = Model.extend({
   privacy: attr('number', { defaultValue: '2' }),
   slug: attr('string'),
   summary: attr('string'),
-  status: attr('string', { defaultValue: 'Ready for Progress' }),
+  status: attr('string', { defaultValue: 'Prepping' }),
   title: attr('string'),
-  //unitCount: attr('number'),
-  unitType: attr('string'),
-  wordCount: attr('number'),
   writingType: attr('number', { defaultValue: '0' }),
-
   challenges: hasMany('challenge'),
   projectChallenges: hasMany('projectChallenge'),
   projectSessions: hasMany('projectSession'),
@@ -78,7 +74,7 @@ const Project = Model.extend({
       return count;
     }
   }),
-
+  
   completed: computed('status', function() {
     return this.get('status') === "Completed";
   }),
@@ -88,6 +84,16 @@ const Project = Model.extend({
     return genreNames.join(", ");
   }),
 
+  hasProjectChallenges: computed('projectChallenges.[]', function(){
+    let pc = this.get('projectChallenges');
+    if (pc) {
+      return (pc.length>0) ? true : false; 
+    } else {
+      return false;
+    }
+
+  }),
+
   activeProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;
     //get the time now in user's timezone 
@@ -95,10 +101,9 @@ const Project = Model.extend({
     //loop through this project's projectChallenges
     this.get('projectChallenges').forEach((pc)=>{
       //get the start and end as moments
-      let endsAt = moment(pc.endsAt);
-      let startsAt = moment(pc.startsAt);
+      let startsAt = moment(pc.startsAt).tz(this.get('user.timeZone'));
       //is this pc active?
-      if (now.isAfter(startsAt) && now.isBefore(endsAt)) {
+      if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded() ) {
         active = pc;
       }
     });
@@ -125,7 +130,18 @@ const Project = Model.extend({
     });
     return  DS.PromiseObject.create({promise});
   }),
-
+  // compute total word count for this a project
+  totalWordCount: computed('projectSessions.[]', function(){
+    let count=0;
+    //get the project challenges 
+    this.get('projectChallenges').forEach((pc)=>{
+      if(pc.unitType===0) { //counting words
+        count+=pc.count;
+      }
+    });
+    return count;
+  }),
+  
   save() {
     let promiseArray = [];
     //persist the genres
@@ -143,6 +159,23 @@ const Project = Model.extend({
       });
     });
   },
+  //define the path to the flippyDoodle graphical asset  
+  flippyDoodlePath: computed('status', function(){
+    let status = this.get('status');
+    switch(status){
+      case "In Progress":
+        return `/images/users/projects/flippy-doodle-in-progress.png`;
+      case "Prepping":
+      case "Ready for Progress":
+        return `/images/users/projects/flippy-doodle-prepping.png`;
+      case "Drafted":
+        return `/images/users/projects/flippy-doodle-drafted.png`;
+      case "Completed":
+        return `/images/users/projects/flippy-doodle-completed.png`;
+      case "Published":
+        return `/images/users/projects/flippy-doodle-published.png`;
+    }
+  }),
   
   currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;
@@ -196,7 +229,7 @@ Project.reopenClass({
    *  before editing these options, check that they match the API
    *  */
   optionsForStatus: [
-    'Ready for Progress', 'In Progress', 'Drafted', 'Completed','Published'
+    'Prepping', 'In Progress', 'Drafted', 'Completed', 'Published'
   ],
   /* from the API:
     ## PRIVACY ##

@@ -8,8 +8,10 @@
   {{/modal.header}}
   {{#form-for
     afterSubmit=modal.close
+    onSubmit=(action "updateChangeset")
     model=user
     data-test-user-edit-profile-form=true
+    changeset=changeset
     as |f|
   }}
     {{#modal.body}}
@@ -20,7 +22,7 @@
         as |tab|
       }}
 
-        {{#tab.pane title="Overview" id="overview"}}
+        {{#tab.pane title="Your Details" id="overview"}}
           <div class="form-group">
             {{f.input
               label="What is your username?"
@@ -38,42 +40,124 @@
 
         {{#tab.pane title="Stats" id="stats"}}
           <div class="form-group">
-            <label>Select up to three stats you wish to show</label>
+            <label>Select the stats you wish to show</label>
           </div>
+          
+          <div class='form-group'>
+            <label for='statsSelect1'>Stat 1: </label>
+              <div class="select-container">
+                <select class='form-control' id='statsSelect1' onChange={{action "statsSelect1Changed" value="target.value"}}>
+                   <option value="">None</option>
+                  {{#each statsObject as |stat|}} 
+                    <option disabled={{ if (eq stat2 stat.property) 'true' (if (eq stat3 stat.property ) "true" )}} selected={{eq stat1 stat.property}} value={{stat.property}}>{{stat.label}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+          </div>
+          <div class='form-group'>
+            <label for='statsSelect2'>Stat 2: </label>
+              <div class="select-container">
+                <select class='form-control' id='statsSelect1' onChange={{action "statsSelect2Changed" value="target.value"}}>
+                  <option value="">None</option>
+                  {{#each statsObject as |stat|}} 
+                    <option disabled={{ if (eq stat1 stat.property) 'true' (if (eq stat3 stat.property ) "true" )}} selected={{eq stat2 stat.property}} value={{stat.property}}>{{stat.label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+          </div>
+          <div class='form-group'>
+            <label for='statsSelect3'>Stat 3: </label>
+              <div class="select-container">
+                <select class='form-control' id='statsSelect1' onChange={{action "statsSelect3Changed" value="target.value"}}>
+                   <option value="">None</option>
+                  {{#each statsObject as |stat|}} 
+                    <option disabled={{ if (eq stat2 stat.property) 'true' (if (eq stat1 stat.property ) "true" )}} selected={{eq stat3 stat.property}} value={{stat.property}}>{{stat.label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+          </div>
+          
+        {{/tab.pane}}
+        
+        
+        {{#tab.pane title="Bio" id="biography"}}
           <div class="form-group">
-            {{f.checkbox
-              label="Lifetime word count"
-              property="statsWordCountEnabled"
+            {{f.textarea
+              label="Say something about yourself!"
+              property="bio"
+              placeholder=(concat "Hi there, my name is " user.name "...")
+              rows="15"
             }}
           </div>
+        {{/tab.pane}}
+
+        {{#tab.pane title="Favorites" id="favorites"}}
           <div class="form-group">
-            {{f.checkbox
-              label="Number of projects"
-              property="statsProjectsEnabled"
+            <label>What are your (up to) 5 favorite books?</label>
+          </div>
+          {{#each favoriteBooks as |book|}}
+            <div class="form-group">
+              <div class="input-group">
+                {{input
+                  data-test-favorite-book-input=(concat "" book.id)
+                  class="form-control"
+                  value=book.changeset.title
+                }}
+                <div {{action "deleteBook" book}} class="input-group-append" style="cursor:pointer" data-test-favorite-book-delete={{concat "" book.id}}>
+                  <div class="input-group-text">
+                    {{fa-icon "minus-circle" fixedWidth=true}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{#if canAddAnotherBook}}
+            <div class="form-group">
+              <button class="btn-underlined" {{action "addBook"}}>Add another book</button>
+            </div>
+          {{/if}}
+
+          <div class="form-group">
+            <label>What are your (up to) 5 favorite authors?</label>
+          </div>
+          {{#each favoriteAuthors as |author|}}
+            <div class="form-group">
+              <div class="input-group">
+                {{input
+                  data-test-favorite-author-input=(concat "" author.id)
+                  class="form-control"
+                  value=author.changeset.name
+                }}
+                <div {{action "deleteAuthor" author}} class="input-group-append" style="cursor:pointer" data-test-favorite-author-delete={{concat "" author.id}}>
+                  <div class="input-group-text">
+                    {{fa-icon "minus-circle" fixedWidth=true}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{#if canAddAnotherAuthor}}
+            <div class="form-group">
+              <button class="btn-underlined" {{action "addAuthor"}}>Add another author</button>
+            </div>
+          {{/if}}
+        {{/tab.pane}}
+        
+        {{#tab.pane title="Avatar" id="avatarTab"}}
+          <div class="form-group">
+            {{f.imageUpload
+              label="Update your avatar image"
+              property="avatar"
             }}
           </div>
+        {{/tab.pane}}
+
+        {{#tab.pane title="Cover Plate" id="headerTab"}}
           <div class="form-group">
-            {{f.checkbox
-              label="Years done and won"
-              property="statsYearsEnabled"
-            }}
-          </div>
-          <div class="form-group">
-            {{f.checkbox
-              label="Wordiest novel"
-              property="statsWordiestEnabled"
-            }}
-          </div>
-          <div class="form-group">
-            {{f.checkbox
-              label="Average writing pace"
-              property="statsWritingPaceEnabled"
-            }}
-          </div>
-          <div class="form-group">
-            {{f.checkbox
-              label="Longest NaNo streak"
-              property="statsStreakEnabled"
+            {{f.imageUpload
+              label="Update your cover plate"
+              property="plate"
             }}
           </div>
         {{/tab.pane}}

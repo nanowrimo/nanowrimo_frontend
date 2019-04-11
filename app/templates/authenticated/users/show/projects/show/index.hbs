@@ -1,14 +1,15 @@
 {{#if hasDetails}}  
   <div class ='nano-card' id='project-details-card'>
     <div id='project-details'>
-      <div id='project-cover-large'>
+      <div id='project-cover-large' class="{{if canEdit 'user-editable'}}">
         <img src={{project.coverUrl}}>
+        <div class="large-cover-overlay image-editable-overlay" {{action 'editCover'}}>{{fa-icon "edit"}}</div>
       </div>
       <div id='project-information' >
         <div id='project-title'>{{project.title}}</div>
         <div id='project-summary-label'>Summary</div>
         <div id='project-summary'>
-          {{project.summary}}
+          {{{newline-to-br project.summary}}}
         </div>
         <div id='genres-and-links'>
           <div id='genres-label'>Genres</div>
@@ -43,18 +44,29 @@
   <div class='nano-card' id='project-excerpt-card'>
     <div id='project-excerpt-display'>
       <div id='project-excerpt-label'>Excerpt</div>
-      <div id='project-excerpt'>{{{newline-to-br project.excerpt}}}</div>
+      <div id='project-excerpt'>
+        {{{newline-to-br project.excerpt}}}
+        {{#if canEdit}}
+          <div {{action "editProject"}} class="flip-corner-link" >
+            <img src="/images/global/flip_corner.png" alt="Edit User Bio" />
+          </div>
+        {{/if}}
+      </div>
     </div>
   </div>
 {{else}}
   <div id='project-needs-details'>
     <div id="texts">
-      <div id='line-1'>You haven't told us much about your new project.</div>
-      <div id='line-2'>
-        <a href="#" {{action "editProject"}}>
-          Fill out your project details here.
-        </a>
-      </div>
+      {{#if canEdit }}
+        <div id='line-1'>You haven't told us much about your new project.</div>
+        <div id='line-2'>
+          <a href="#" {{action "editProject"}}>
+            Fill out your project details
+          </a>
+        </div>
+      {{else}}
+        Nothing is known about this project
+      {{/if}}
     </div>
     <div id='graphic'>
       <img src='/images/projects/pencilandpen.svg'>

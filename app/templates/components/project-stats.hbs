@@ -14,7 +14,7 @@
       </div>
       <div class='switcher-select'>
       <select class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'}}>
-        {{#each currentUser.user.projects as |p|}}
+        {{#each currentUser.user.projectsSortedCreatedDesc as |p|}}
           <option value='{{p.id}}' selected ={{eq p project}}>{{p.title}}</option>
         {{/each}}
       </select>
@@ -27,7 +27,7 @@
       <div class='switcher-select'>
       <select class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged' value='target.value'}}>
         {{#each project.projectChallenges as |pc|}}
-          <option value='{{pc.id}}' selected={{eq pc project.currentProjectChallenge}}>{{pc.name}}</option>
+          <option value='{{pc.id}}' selected={{eq pc projectChallenge}}>{{pc.name}}</option>
         {{/each}}
       </select>
       </div>
@@ -60,23 +60,19 @@
         {{/if}}
       </div>
       
-      {{#if hasHourAggregates}}
-        <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
-          {{stats-when-i-write hourAggregates=userHourAggregates}}
-        </div>   
-      {{/if}}   
-     
-      {{#if hasDailyAggregates}}
-        <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
+      <div class="nano-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
+        {{stats-when-i-write hourAggregates=userHourAggregates}}
+      </div>   
+      
+      <div class="nano-card g3-col2 g3-row3 g3-hspan2 g2-col2 g2-row2">
+        {{#if projectChallenge}}
           {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates}}
-        </div>
-      {{/if}}
-      {{#if whereIWrite}}
-        <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
-          {{stats-where-i-write whereIWrite=whereIWrite}}
-        </div>
-      {{/if}}
-     
+        {{/if}}
+      </div>
+    
+      <div class="nano-card g3-col1 g3-row4 g2-col2 g2-row4">
+        {{stats-where-i-write whereIWrite=whereIWrite user=currentUser.user}}
+      </div>
       <div class="nano-card g3-col2 g3-row4 g2-col1 g2-row5 flippable">
         {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular}}
       </div>
@@ -88,18 +84,17 @@
       <div class="nano-card g3-col1 g3-row5 g2-col1 g2-row6 flippable">
         {{stats-my-writing-speed writingSpeed=writingSpeed}}
       </div>
-{{!-- 
+
       
       <div class="nano-card g3-col2 g3-row5 g2-col2 g2-row6">
-        {{stats-my-sprintiness}}
+         {{stats-how-i-feel averageFeeling=averageFeeling}}
       </div>
       
---}}  
-      {{#if hasAverageFeeling}}
-        <div class="nano-card g3-col3 g3-row5 g2-col1 g2-row7">
-          {{stats-how-i-feel averageFeeling=averageFeeling}}
-        </div>
-      {{/if}}
+{{!-- 
+      <div class="nano-card g3-col3 g3-row5 g2-col1 g2-row7">
+        {{stats-my-sprintiness}}
+      </div>
+--}} 
 
     </div>
   </div>

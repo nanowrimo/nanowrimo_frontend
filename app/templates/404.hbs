@@ -1,11 +1,38 @@
-<div class="nano-panel">
-  {{#if model.data.attributes.body}}
-    <div>
-      {{{model.data.attributes.body}}}
-    </div>
-  {{else}}
+{{#if model.data.attributes.body}}
+  <main>
+
+    <!-- Hero -->
+    <section class="cms-hero">
+      <div class="container">
+        <div class="wrapper">
+          <div class="wrapper-content">
+            <h4 class="superhead">{{{model.data.attributes.content-type}}}</h4>
+            <h1 class="headline">{{{model.data.attributes.headline}}}</h1>
+          </div>
+          <div class="wrapper-card">
+            {{#each model.included as |post|}}
+              <div class="nano-card flippable user-card">
+                {{user-card post=post}}
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="cms-content">
+      <div class="container">
+        <div class="wrapper">
+          {{{model.data.attributes.body}}}
+        </div>
+      </div>
+    </section>
+  </main>
+{{else}}
+  <div class="nano-panel">
     <div class="col-12">
       <h1 data-test-not-found-header>404 Not Found</h1>
     </div>
-  {{/if}}
-</div>
+  </div>
+{{/if}}

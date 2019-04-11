@@ -1,19 +1,22 @@
 {{#if showUserContent}}
-  <div class="nano-user-plate full-width d-flex" {{action "openImagesModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
-    <div class="plate-cover">
+  <div class='plate-wrapper {{if canEditUser "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
+    <div class="nano-user-plate full-width d-flex " {{action "openEditModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
+      <div class="plate-cover">
 
-      <div class="container-fluid">
-        {{user-stats user=user}}
-      </div>
-
-      {{#if canEditUser}}
-        {{!-- TODO: CSS styling for this edit link to show/hide --}}
-        <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
-          <img src="/images/global/flip_corner.png" alt="Edit User Images" />
+        <div class="container-fluid">
+          {{user-stats user=user}}
         </div>
-      {{/if}}
 
+        {{#if canEditUser}}
+          {{!-- TODO: CSS styling for this edit link to show/hide --}}
+          <div class="flip-corner-link" {{action "openEditModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
+            <img src="/images/global/flip_corner.png" alt="Edit User Images" />
+          </div>
+        {{/if}}
+
+      </div>
     </div>
+     <div class='plate-editable-overlay image-editable-overlay'>{{fa-icon "edit"}}</div>
   </div>
   <div class="content-gutters">
     <div class="container-fluid">
@@ -21,8 +24,11 @@
         <div class="nano-panel left-sidebar nano-profile">
           <div class="flip-corner">
 
-            <div class="nano-avatar-large" {{action "openImagesModal"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
+            <div class="nano-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openEditModal" "avatarTab"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
               <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
+              <div class='avatar-editable-overlay image-editable-overlay'>{{fa-icon "edit"}}</div>
+              
+              
             </div>
             <div class="nano-user-name" data-test-user-name>
               {{user.name}}
@@ -47,13 +53,6 @@
                 open=edit
                 user=user
                 tab=editTab
-              }}
-
-              {{user-edit-images-modal
-                onHidden=(action "afterImagesModalClose")
-                open=editImages
-                user=user
-                tab=editImagesTab
               }}
 
             {{/if}}

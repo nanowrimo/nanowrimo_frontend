@@ -1,0 +1,47 @@
+.nw-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  border: solid 1px #dfe4e6;
+  background-image: url('/images/global/card_back.png');
+  background-repeat: repeat-x;
+  background-size: 4px 100%;
+  box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
+  &.nw-card-white {
+    background: white;
+  }
+  .nw-card-header{
+    .nw-card-title {
+      display: inline-block;
+      padding: 4px;
+      padding-right: 14px;
+      padding-left: 14px;
+      border-bottom-right-radius: 6px;
+      background-color: #dfe4e6;
+      font-family: SourceSansPro-Bold;
+      line-height: 20px;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #979797;
+    }
+    .nw-card-actions {
+      display: inline;
+      .nw-card-display-actions {
+        display:inline;
+      }
+      .nw-card-model-actions {
+        display:inline;
+        float:right;
+      }
+    }
+  }
+  .nw-card-content {
+    position: relative;
+    padding: 20px;
+  }
+  .nw-card-footer {
+  
+  }
+}
+

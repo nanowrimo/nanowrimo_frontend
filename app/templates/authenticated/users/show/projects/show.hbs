@@ -2,8 +2,11 @@
   <div class="container-fluid">
     <div id='project' class='nano-panel full-width no-margin'>
       <div class='project-cover'>
-        <div class='project-cover-clip'>
+        <div class='project-cover-clip {{if canEdit "user-editable" ""}}'>
           <img src="{{project.coverUrl}}">
+          <div class="cover-overlay image-editable-overlay" {{action "editCover"}}>
+            {{fa-icon "edit"}}
+          </div>
         </div>
       </div>
       <div class='project-name-genres'>
@@ -38,11 +41,7 @@
         </div>
       </div>
       <div class='project-status'>
-        {{#if project.completed}}
-          <img src="/images/users/projects/flippy-doodle-completed.png">
-        {{else}}
-          <img src="/images/users/projects/flippy-doodle-in-progress.png">
-        {{/if}}
+        <img src="{{project.flippyDoodlePath}}">
       </div>
     </div>
     <div class="d-flex align-top">
@@ -59,4 +58,9 @@
     </div>
   </div>
 </div>
-
+{{project-edit-cover-modal
+  onHidden=(action "afterCoverModalClose")
+  open=displayCoverEditModal
+  project=project
+  tab=editCoverTab
+}}

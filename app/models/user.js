@@ -2,7 +2,8 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
-import { filter, filterBy }  from '@ember/object/computed';
+import { sort, filter, filterBy }  from '@ember/object/computed';
+import moment from 'moment';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -48,8 +49,6 @@ const User = Model.extend({
   externalLinks: hasMany('externalLink'),
   favoriteAuthors: hasMany('favoriteAuthor'),
   favoriteBooks: hasMany('favoriteBook'),
-  projectSessions: hasMany('projectSession'),
-
 
   //notification and emails
   notificationBuddyRequests: attr('boolean'),
@@ -73,11 +72,10 @@ const User = Model.extend({
   emailWritingReminders: attr('boolean'),
   
   settingSessionMoreInfo: attr('boolean'),
-  settingSessionCountBySession: attr('boolean'),
-
-  // Notifications
   notifications: hasMany('notification'),
-
+  settingSessionCountBySession: attr('number'),
+  projects: hasMany('project'),
+  projectChallenges: hasMany('projectChallenge'),
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
@@ -90,6 +88,7 @@ const User = Model.extend({
   groups: hasMany('group'),
   groupUsers: hasMany('group-user'),
   regions: filterBy('groups', 'groupType', 'region'),
+  
   recalculateHome: 0,
   homeRegion: computed('regions.[]','recalculateHome', {
     get() {
@@ -108,8 +107,6 @@ const User = Model.extend({
       return maxRegion;
     }
   }),
-
-  projects: hasMany('project'),
 
   //activeGroupUsers: filterBy('groupUsers','exit_at',
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
@@ -310,6 +307,9 @@ const User = Model.extend({
     });
   },
 
+  projectsSortingCreatedDesc: Object.freeze(['createdAt:desc']),
+  projectsSortedCreatedDesc: sort('projects','projectsSortingCreatedDesc'),
+  
   primaryProject: computed('projects.{[],@each.primary}', function(){
     let ps = this.get('projects');
     let prime = ps.firstObject;
@@ -351,6 +351,135 @@ const User = Model.extend({
   persistedProjects: filter('projects.@each.id', function(project) {
     return project.id > 0;
   }),
+  /* stats */
+  //total word count
+  totalWordCount: computed('projectChallenges.@each.count', function(){
+    let sum = 0;
+    this.get('projectChallenges').forEach( (pc)=>{
+      if(pc.unitType===0) {//counting words
+        sum+=pc.count;
+      }
+    });
+    return sum;
+  }),
+  
+  //get an array of nano years done
+  yearsDone: computed('projects.@each.projectChallenges', function(){
+    let ids = [];
+    let years = [];
+    this.get('projects').forEach((p)=>{
+      p.challenges.forEach((c)=>{
+        if(c.eventType===0 && !ids.includes(c.id)) { // counting words
+          ids.push(c.id);
+          years.push(c.startsAt.getYear());
+        }
+      });
+    });
+    return years;
+  }),
+  
+  //get an array of nano years won
+   yearsWon: computed('projectChallenge.@each.metGoal', function(){
+    let ids = [];
+    let years = [];
+    //loop the user's projects
+    this.get('projectChallenges').forEach((pc)=>{
+      //is the projectChallenge a nanowrimo?
+      if(pc.nanoEvent && !ids.includes(pc.id)) { // counting words
+        ids.push(pc.id);
+        
+        //did the project challenge win?
+        if (pc.metGoal) {
+          years.push(pc.startsAt.getYear());
+        }
+      }
+    });
+    return years;
+  }),
+  
+  //most nanowrimo years in a row
+  longestNanoStreak: computed('projects.@each.projectChallenges', function(){
+    let ids = []; //track the ids of the challenges
+    let years = []; //track the years participated
+    this.get('projects').forEach((p)=>{
+      p.challenges.forEach((c)=>{
+        if(c.eventType===0 && !ids.includes(c.id)) { // nano event
+          ids.push(c.id);
+          years.push( c.startsAt.getYear() );
+        }
+      });
+    });
+    // sort the years array
+    years.sort;
+    let longest = 0;
+    let count = 0;
+    for(var i=0; i<years.length; i++) {
+      let y1 = years[i];
+      if (y1==years[0]) {
+        count = 1;
+      } else if (years[i]-1 == years[i-1]) {
+        count+=1;
+      } else {
+        count = 1;
+      }
+      if (count > longest) {
+        longest = count;
+      }
+    }
+    
+    return longest;
+  }),
+  
+  highestWordCountProject: computed('projects.[]', function(){
+    let highest;
+    let highestCount=0;
+    this.get('projects').forEach( (p)=>{
+      
+      if (p.totalWordCount > highestCount ){
+        highest = p;
+        highestCount = p.totalWordcount;
+      }
+
+    });
+    return highest;
+  }),
+  
+  highestWordCountProjectCount: computed('highestWordCountProject', function(){
+    let c = this.get("highestWordCountProject.totalCount");
+    if (!c>0) {
+      return 0;
+    } else {
+      return c;
+    }
+  }),
+  
+  writingPace: computed('projectChallenge.@each.count', function(){
+    let minutes = 0;
+    let count = 0;
+    //loop the project challenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //is this a word based challenge?
+      if(pc.unitType===0) {
+        //loop the projectChallenge's projectSessions 
+        pc.projectSessions.forEach( (ps)=>{
+          //is there a start and end?
+          if(ps.start && ps.end) {
+            let start = moment(ps.start);
+            let end = moment(ps.end);
+            //get the difference in minutes
+            minutes += end.diff(start,'minutes');
+            count+= ps.count;
+          }
+        });
+      }
+    }); 
+    if (minutes>0 && count) {
+      return parseInt(count/minutes);
+    } else {
+      return 0;
+    }
+  }),
+  
   save() {
     return this._super().then(() => {
       this.get('externalLinks').forEach(link => link.persistChanges());
@@ -365,44 +494,25 @@ User.reopenClass({
    *  before editing these options, check that they match the API
    *  */
 
-  optionsForPrivacyViewProfile:
+  optionsForPrivacyAccount:
   [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
-
-  ],
-  optionsForPrivacyViewProjects:
-  [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
-  ],
-  optionsForPrivacyViewBuddies:
-  [
-    {value:'0', name:'Only I Can See'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
-  ],
-  optionsForPrivacyViewSearch:
-  [
-    {value:'0', name:'No One'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
-  ],
-  optionsForPrivacySendNanomessages:
-  [
-    {value:'0', name:'No One'},
-    {value:'1', name:'Only My Buddies And MLs Can See'},
-    {value:'2', name:'Only MLs, And Buddies Of My Buddies Can See'},
-    {value:'3', name:'Anyone Can See'},
+    {value:'1', name:'public', description:"Anyone with an account will be able to search for and view my profile"},
+    {value:'0', name:'private', description:"Only my buddies can view my profile"},
   ],
 
-
+  optionsForPrivacyProjects:
+  [
+    {value:'2', name:'Anyone with an account'},
+    {value:'1', name:'Only my buddies'},
+    {value:'0', name:'Only me'},
+  ],
+  optionsForPrivacyBuddies:
+  [
+    {value:'2', name:'Anyone with an account'},
+    {value:'1', name:'Only my buddies'},
+    {value:'0', name:'Only me'},
+  ]
+  
 });
 
 export default User;

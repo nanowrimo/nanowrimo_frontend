@@ -4,15 +4,18 @@ import { computed } from '@ember/object';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
+import { next } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
   session: service(),
   store: service(),
+  statsParams: service(),
   
   project: null,
   projectChallenge: null,
   projectChallenges: null,
+  
   
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     //now is a good time to update the whereIwrite
@@ -63,14 +66,25 @@ export default Component.extend({
     }
   }),
   countNeededTodayData: computed('count', function() {
-    let count = this.get('count');
-    let countPerDay = this.get('projectChallenge.countPerDay');
     let pc = this.get('projectChallenge');
     if (pc) {
-      let elapsedDays = pc.numElapsedDays();
-      let targetCount = elapsedDays*countPerDay;
-      let needed = targetCount-count;
-      let percent = Math.round(count*100/targetCount);
+      if (pc.hasEnded()) {
+        return {'needed':0,"percent":0};
+      }
+      
+      //countRemaining
+      let countRemaining = this.get('projectChallenge.countRemaining');
+      //daysRemaining
+      let daysRemaining = this.get('projectChallenge').daysRemaining();
+      //countToday
+      let todayCount = this.get('projectChallenge.todayCount');
+      //countPerDayToFinishOnTime = countRemaining+countToday/daysRemaining
+      let countPerDay = parseInt((countRemaining+todayCount) / daysRemaining);
+      //needed = countPerDayToFinishOnTime - countToday
+      let needed = countPerDay - todayCount;
+      //percent = needed*100/countPerDayToFinishOnTime
+      let percent = Math.round(todayCount*100/countPerDay);
+
       if (needed>0){
         return {'needed':needed,"percent":percent};
       }else{
@@ -100,9 +114,7 @@ export default Component.extend({
       }
     }
   }),
-  hasAverageFeeling: computed('averageFeeling', function() {
-    return (this.get('averageFeeling') > 0);
-  }),
+  
   averageFeeling: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
     if (sessions) {
@@ -120,7 +132,7 @@ export default Component.extend({
         }
       });
       let key = this._objectKeyWithHighestValue(feelings);
-      return key;
+      return parseInt(key);
     }
   }),
   // determine which hours of the day the user is writing during 
@@ -230,7 +242,7 @@ export default Component.extend({
    return this.get('projectChallenge.unitTypeSingular'); 
   }),
   
-  count: computed('challengeSessions','project.projectSessions.[]', function() {
+  count: computed('challengeSessions.[]','project.projectSessions.[]', function() {
     let sessions = this.get('challengeSessions');
     let sum = 0;
     if (sessions) {
@@ -274,7 +286,7 @@ export default Component.extend({
   
   challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
     let cStart = moment( this.get('projectChallenge.startsAt') );
-    let cEnd = moment( this.get('projectChallenge.endsAt') );
+    let cEnd = moment( this.get('projectChallenge.endsAt') ).add(1,'d');
     let p = this.get('project');
     if (p) {
       //get the projectSessions created during the projectChallenge
@@ -292,9 +304,31 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-    var p = this.get('currentUser.user.primaryProject');
-    this.set('project', p);
-    this.getProjectChallenges();
+    // are there statsParams?
+    let sp = this.get('statsParams');
+    //does the statsParams service have data?
+    if (sp.hasData() ) {
+      let p = sp.getProject();
+      this.set('project', p);
+      this.set('projectChallenges', p.projectChallenges );
+      this.set('projectChallenge', sp.getProjectChallenge() );
+      //clear the statsParams data
+      sp.clear();
+    } else {
+      let p = this.get('currentUser.user.primaryProject');
+      if (p) {
+        this.set('project', p);
+        this.set('projectChallenges', p.projectChallenges );
+        this.set('projectChallenge', p.currentProjectChallenge );
+      } else {
+        //the user has no projects :/
+      }
+    }
+    // if there is no projectChallenge, there are no stats to display
+    if (this.get('projectChallenge') ) {
+      //fetch the aggregates
+      this.fetchAggregates();
+    }
   },
 
   actions: {
@@ -306,7 +340,7 @@ export default Component.extend({
         let p = projects.objectAt(i);
         if (p.id == v) {
           this.set('project', p);
-          this.getProjectChallenges();
+          this._changeProjectChallenge(p.currentProjectChallenge);
           break;
         }
       }
@@ -318,25 +352,14 @@ export default Component.extend({
       for(var i=0; i<len; i++){
         let pc = pcs.objectAt(i);
         if (pc.id == v) {
-          this.set('projectChallenge', pc);
+          this._changeProjectChallenge(pc);
+          //this.set('projectChallenge', pc);
           break;
         }
       }
     }
   },
 
-  getProjectChallenges: function(){
-    let p = this.get('project');
-    if (p) {
-      return this.get('project.projectChallenges').then((pcs)=>{
-        this.set('projectChallenges', pcs);
-        this.set('projectChallenge', p.currentProjectChallenge);
-        //now is a good time to fetch the aggregates
-        this.fetchAggregates();
-      });
-    }
-  },
-  
   fetchAggregates: function(){
     let pc = this.get('projectChallenge');
     let { auth_token }  = this.get('session.data.authenticated');
@@ -392,5 +415,14 @@ export default Component.extend({
     } else {
       return null;
     }
+  },
+  //change the projectChallenge with a slight delay
+  _changeProjectChallenge: function(newPC) {
+    //set the pc to null -- this will hide charts that depends upon projectChallenge
+    this.set('projectChallenge', null);
+    //wait a bit and set the pc to the proper value
+    next(()=>{
+      this.set('projectChallenge', newPC);
+    });
   }
 });

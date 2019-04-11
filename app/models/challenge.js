@@ -41,7 +41,7 @@ const Challenge = Model.extend({
   duration: computed("startsAt", "endsAt", function(){
     // return the difference between start and end in number of days
     let s = moment(this.get('startsAt'));
-    let e = moment(this.get('endsAt'));
+    let e = moment(this.get('endsAt')).add(1,'d');
     let duration = moment.duration(e.diff(s));
     return duration.asDays();
   }),

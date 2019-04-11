@@ -5,6 +5,9 @@
   &.short-card {
     min-height: 80px;
   }
+  a {
+    color: #343434;
+  }
   align-items: stretch;
   align-content: stretch;
   box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
@@ -490,4 +493,39 @@
 .ember-google-map {
   width: 100%;
   height: 100%;
+}
+
+.nano-listing-mini-card {
+ position: relative;
+  min-height: 116px;
+
+  border-radius: 6px;
+  background-image: repeating-linear-gradient(90deg, #f7f7f7, #f7f7f7 2px, #ededed 3px, #ededed 4px);
+  border: solid 1px #dfe4e6;
+  
+  .top-right {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    .primary-thumb-tack {
+      float: left;
+      color: #75abbc;
+    }
+    .listing-action-dropdown {
+      float: left;  
+    }
+  }
+  .primary-text {
+    font-family: 'SourceSerifPro-Regular', serif ;
+    font-size: 20px;
+    color: black;
+  }
+}
+
+.centered {
+  text-align: center;
+}
+
+.highcharts-tooltip {
+  font-family: 'SourceSerifPro-Regular', serif ;
 }

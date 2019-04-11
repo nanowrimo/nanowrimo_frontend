@@ -23,7 +23,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API_HOST: 'https://api.nanowrimo.org',
+      API_HOST: (process.env.TARGET==='staging') ? 'https://staging.api.nanowrimo.org' : 'https://api.nanowrimo.org',
       DEBOUNCE_MS: 250,
       SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr', 'youtube'],
       MODAL_BACKGROUND_TRANSITION_MS: 150,
@@ -63,7 +63,6 @@ module.exports = function(environment) {
       'style-src': "'self' fonts.googleapis.com"
     }
   };
-
   if (environment === 'development') {
     ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -73,6 +72,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'development-local') {
+    //console.log(port);
     //ENV.APP.LOG_RESOLVER = true;
     //ENV.APP.LOG_ACTIVE_GENERATION = true;
     //ENV.APP.LOG_TRANSITIONS = true;
@@ -83,10 +83,10 @@ module.exports = function(environment) {
     var os = require("os");
     //define hosts based on hostname
     if (os.hostname()=='beck') {
-      ENV.APP.API_HOST = 'http://localhost:3000';
+      ENV.APP.API_HOST = 'http://localhost:3002';
       ENV.APP.UI_HOST = 'http://localhost:4200';
     } else {
-      ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
+      ENV.APP.API_HOST = 'http://'+os.hostname()+':3002';
       ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';
     }
     //ENV.APP.API_HOST = 'http://localhost:3000';
@@ -109,12 +109,19 @@ module.exports = function(environment) {
     ENV.APP.MODAL_TRANSITION_MS = 0;
   }
   if (environment === 'production') {
+    
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
     ENV.torii.providers['custom-google'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
-    ENV.torii.providers['custom-google'].redirectUri = 'http://ember.nanowrimo.org/oauth2callback';
+    ENV.torii.providers['custom-google'].redirectUri = 'https://preview.nanowrimo.org/oauth2callback';
   }
   ENV['g-map'] = {
     key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss'
+  }
+  
+  //is this a staging target?
+  if (process.env.TARGET=='staging') {
+    ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
+    ENV.torii.providers['custom-google'].redirectUri = 'https://staging.preview.nanowrimo.org/oauth2callback';
   }
   
   return ENV;

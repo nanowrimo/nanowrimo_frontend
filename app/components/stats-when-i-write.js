@@ -1,5 +1,5 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
-import { get,computed } from '@ember/object';
+import { computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
   // The data must be an array of 24 numbers, one for each hour of the day, beginning at midnight
@@ -9,7 +9,7 @@ export default ChartBaseComponent.extend({
   
   // Finds the hour with the maximum count
   maxHour: computed('countData.[]', function() {
-    var cData = get(this,'countData');
+    var cData = this.get('countData');
     var mVal = 0;
     var mHour = 0;
     for (var i = 0; i < cData.length; i++) { 
@@ -20,10 +20,23 @@ export default ChartBaseComponent.extend({
     }
     return mHour;
   }),
-  
+  hasData: computed('hourAggregates.[]', function(){
+    let aggs = this.get('hourAggregates');
+    let retval = false;
+    //loop!
+    if (aggs) {
+      for (var i=0; i < aggs.length; i++) {
+        if(aggs[i] > 0) {
+          retval = true;
+          break;
+        }
+      }
+    }
+    return retval;
+  }),
   // Gets the animal type from time period with the most writing
   animalType: computed('maxHour',function() {
-    var mHour = get(this,'maxHour');
+    var mHour = this.get('maxHour');
     if (mHour<5) {
       return "nightowl";
     } else if (mHour<12) {
@@ -37,14 +50,23 @@ export default ChartBaseComponent.extend({
   
   // Returns the catchy phrase for each animal type
   catchyPhrase: computed('animalType',function() {
-    if (get(this,'animalType')=='earlybird') return "The early bird gets the worm!";
-    if (get(this,'animalType')=='flamingo') return "What's up, mid-day flamingo?";
-    if (get(this,'animalType')=='nightowl') return "Hoot hoot, you're a night owl!";
+    let str = "";
+    switch(this.get('animalType') ){
+      case "earlybird":
+        str = "The early bird gets the worm!";
+        break;
+      case "flamingo":
+        str = "What's up, mid-day flamingo?";
+        break;
+      case "nightowl":
+        str = "Hoot hoot, you're a night owl!"
+    }
+    return str;
   }),
   
   // Returns the time frame as a phrase
   dataPhrase: computed('maxHour',function() {
-    return this._timeHourString(get(this,'maxHour'),' and ');
+    return this._timeHourString(this.get('maxHour'),' and ');
   }),
   
   // Options for Highcharts
@@ -52,7 +74,7 @@ export default ChartBaseComponent.extend({
     // Set _this equal to component for later reference
     let _this = this;
     // Get the user data
-    let aData = get(this,'countData');
+    let aData = this.get('countData');
     // Figure out the max value
     let mValue = Math.max(...aData);
     // Set the Highcharts options
@@ -149,7 +171,7 @@ export default ChartBaseComponent.extend({
   chartData: computed('countData',function() {
     let cData = [
       {
-        data: get(this,'countData')
+        data: this.get('countData')
       },
     ];
     return cData;

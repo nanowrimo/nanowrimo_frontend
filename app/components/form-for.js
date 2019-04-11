@@ -34,15 +34,18 @@ export default Component.extend({
     let model = this.get('model');
     assert('Must pass a model into {{form-for}}', this.get('model'));
 
-    let validator = this._factoryForValidator(model);
-    let changeset;
-    if (validator) {
-      changeset = new Changeset(model, lookupValidator(validator), validator);
-      changeset.validate();
-    } else {
-      changeset = new Changeset(model);
+    // if there was not a supplied changeset 
+    if (!this.get('changeset')) {
+      let validator = this._factoryForValidator(model);
+      let changeset;
+      if (validator) {
+        changeset = new Changeset(model, lookupValidator(validator), validator);
+        changeset.validate();
+      } else {
+        changeset = new Changeset(model);
+      }
+      this.set('changeset', changeset);
     }
-    this.set('changeset', changeset);
   },
 
   _callAction(action, args) {
@@ -78,10 +81,10 @@ export default Component.extend({
     submitForm() {
       if (this.get('isLastStep')) {
         let changeset = this.get('changeset');
+        // call the onSubmit action, if there is one
+        this._callAction('onSubmit');
         if (isNone(this.get('model.relationshipErrors')) && changeset.get('isValid')) {
           let modelIsNew = this.get('model.isNew');
-          // call the onSubmit action, if there is one
-          this._callAction('onSubmit');
           return changeset.save()
           .then(() => {
             this._saveAfterSave();

@@ -25,7 +25,6 @@ export default Component.extend({
   
   metGoal: computed('changeset.{startCount,currentCount,goal}', function() {
     let diff = this.get('changeset.currentCount') - this.get('changeset.startCount');
-    //console.log(diff);
     if (this.get('changeset.goal') <= diff) {
       return true;
     }
@@ -124,7 +123,7 @@ export default Component.extend({
     }
     
     //get the time now
-    let newStartsAt = moment();
+    let newStartsAt = moment().utc();
     let newEndsAt = moment().add(30,'d');
     //get the time now
     let newWinAt = moment();
@@ -159,10 +158,6 @@ export default Component.extend({
     this.set('newEndsAt', newEndsAt);
     this.set('changeset.startsAt', newStartsAt.toDate());
     this.set('changeset.endsAt', newEndsAt.toDate());
-    
-    //this.set('newDuration', 30);
-    //initial compute of endsat 
-    //this.recomputeEndsAt();
    
     this.set('displayWinAt', newWinAt.format("YYYY-MM-DD"));
     this.set('newWinAt', newWinAt);
@@ -172,19 +167,14 @@ export default Component.extend({
   recomputeValidChallengeDates: function(){
     let e = moment(this.get('newEndsAt'));
     let s = moment(this.get('newStartsAt'));
-    this.set('validChallengeDates', s.isBefore(e));
-  },
-  recomputeEndsAt: function() {
-    let start = moment.utc( this.get('newStartsAt') );
-    let duration = this.get('newDuration');
-    let newEndsAt = start.add(duration, 'days');
-    this.set('changeset.endsAt', newEndsAt.toDate());
+    let valid = s.isSameOrBefore(e,'d');
+    this.set('validChallengeDates', valid);
   },
   
   endsBeforeStarts: computed('newEndsAt', 'newStartsAt', function(){
     let e = moment(this.get('newEndsAt'));
     let s = moment(this.get('newStartsAt'));
-    return e.isBefore(s);
+    return e.isBefore(s, 'd');
   }),
   
   actions: {
@@ -195,8 +185,9 @@ export default Component.extend({
     endsAtChanged(val) {
       let m = moment.utc(val);
       this.set('newEndsAt', m);
-       this.set('changeset.EndsAt', m.toDate());
+      this.set('changeset.endsAt', m.toDate());
       this.recomputeValidChallengeDates();
+
     },
     startsAtChanged(val) {
       //set the new StartsAt

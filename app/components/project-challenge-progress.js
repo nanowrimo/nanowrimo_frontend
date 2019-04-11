@@ -13,6 +13,9 @@ export default Component.extend({
     //if c>=g then goal met!
     this._updateGoalMet(c,g);
     let percent = c*100/g; 
+    if (percent>100) {
+      percent=100;
+    }
     return percent;
   }),
   

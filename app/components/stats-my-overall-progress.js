@@ -16,7 +16,7 @@ export default ChartBaseComponent.extend({
     }
     return data;
   }),
-  countData: computed('myChartType','userDailyTotals',function() {
+  countData: computed('myChartType','userDailyTotals.[]',function() {
     let cData = [
       {
         name: 'My count',
@@ -131,11 +131,8 @@ export default ChartBaseComponent.extend({
     };
     return cOptions;
   }),
-
   chartData: computed('countData',function() {
     let cData = get(this,'countData');
     return cData;
   })
-  
-
 });

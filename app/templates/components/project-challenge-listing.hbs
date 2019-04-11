@@ -1,7 +1,7 @@
-<div class="nano-card project-challenge-listing-card">
+<div class="nano-card project-challenge-listing-card nano-listing-mini-card">
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front filled-grey">
-      <div class='project-challenge-listing-top-right'>
+      <div class='top-right'>
         {{#if projectChallenge.isPrimary}}
           <i class='fa fa-thumb-tack primary-thumb-tack'></i>
         {{/if}}
@@ -28,7 +28,11 @@
       </div>
       
       <div class='flex-container'>
-        <div class='title'>{{projectChallenge.name}}</div>
+        <div class='title primary-text'>
+          <a href="#" {{action "redirectToStats"}}>
+            {{projectChallenge.name}}
+          </a>
+        </div>
 
         <div class='project-challenge-progress'>{{project-challenge-progress projectChallenge=projectChallenge}}</div>
         

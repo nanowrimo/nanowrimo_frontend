@@ -46,25 +46,12 @@
 }
 
 .project-listing-card {
-  position: relative;
-  
-  min-height: 151px;
-  max-height: none;
-  
-  border-radius: 6px;
-  background-image: repeating-linear-gradient(90deg, #f7f7f7, #f7f7f7 2px, #ededed 3px, #ededed 4px);
-  border: solid 1px #dfe4e6;
-  
-  .project-top-right {
+  .project-status {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    .primary-thumb-tack {
-      float: left;
-      color: #75abbc;
-    }
-    .listing-action-dropdown {
-      float: left;  
+    top: -5px;
+    left: 250px;
+    @media(max-width: $screen-md) {
+      left: 10px;
     }
   }
 }
@@ -84,12 +71,23 @@
       width: 189px;
       height: 172px;
       clip-path: inset(0px 0px 0px -50px);
-      img {
+      img, .listing-cover-overlay {
         transform: rotate(-15deg);
         transform-origin: bottom right;
         width: 122px;
         height: 172px;
         border-radius: 3px;
+      }
+      .listing-cover-overlay {
+         display:none;
+        
+      }
+      &.user-editable:hover {
+        .listing-cover-overlay {
+          display:flex;
+          position:relative;
+          margin-top: -172px;
+        }
       }
     }
   }
@@ -103,14 +101,8 @@
     align-items: center;
     .project-title {
       flex: 0 0 100%;
-      font-family: 'SourceSerifPro-Regular', serif ;
-      font-size: 20px;
-      color: black;
-      margin-bottom: 7px;
       text-align: left;
-      a {
-        color: #343434;
-      }
+      margin-bottom: 7px;
     }
     .project-genres {
       flex: 0 0 100%;
@@ -168,5 +160,4 @@
 .project-announce-quote {
   max-width: 380px;
 }
-
 

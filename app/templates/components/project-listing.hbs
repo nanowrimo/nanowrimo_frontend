@@ -1,7 +1,7 @@
-<div class="nano-card project-listing-card">
+<div class="nano-card nano-listing-mini-card project-listing-card">
   <div class="nano-subcard">
     <div class="nano-subcard-face face-front filled-grey">
-      <div class='project-top-right'>
+      <div class='top-right'>
         {{#if project.isPrimary}}
           <i class='fa fa-thumb-tack primary-thumb-tack'></i>
         {{/if}}
@@ -39,13 +39,17 @@
         {{/if}}
       </div>
       <div class='flex-container'>
-        <div class='project-cover' {{action (if canEdit "openCoverModal" 'doNothing')}}>
-          <div class='project-cover-clip'>
+        <div class='project-cover' >
+
+          <div class='project-cover-clip {{if canEdit "user-editable" ""}}'>
             <img src="{{project.coverUrl}}">
+            <div class="listing-cover-overlay image-editable-overlay" {{action (if canEdit "openCoverModal" 'doNothing')}}>{{fa-icon 'edit'}}</div>
           </div>
+
+
         </div>
         <div class='project-name-genres'>
-          <div class='project-title'>
+          <div class='project-title primary-text'>
           {{#link-to 'authenticated.users.show.projects.show' project.slug}}
             {{project.title}}
           {{/link-to}}
@@ -54,7 +58,12 @@
             {{project.concatGenres}}
           </div>
         </div>
-        {{project-list-progress project=project}}
+        
+        {{#if project.hasProjectChallenges}} 
+          {{project-list-progress project=project}}
+        {{else}}
+          <!-- [create challenge] -->
+        {{/if}}
         
         {{project-edit-cover-modal
           onHidden=(action "afterCoverModalClose")
@@ -63,14 +72,10 @@
           tab=editCoverTab
         }}
         
-
         <div class='project-status'>
-          {{#if project.completed}}
-            <img src="/images/users/projects/flippy-doodle-completed.png">
-          {{else}}
-            <img src="/images/users/projects/flippy-doodle-in-progress.png">
-          {{/if}}
+          <img src="{{project.flippyDoodlePath}}">
         </div>
+        
       </div>
     </div>
   </div>

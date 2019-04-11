@@ -4,6 +4,8 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   currentUser: service(),
+  statsParams: service(),
+  router: service(),
   editProjectChallenge: false,
   showConfirmDelete: false,
   
@@ -18,17 +20,13 @@ export default Component.extend({
     return `/images/goals/${str}.svg`
   }),
   
-  
   init() {
     this._super(...arguments);
     this.set('deleteConfirmationYesText', 'Delete');
     this.set('deleteConfirmationNoText', 'Cancel'); 
     this.set('deleteConfirmationTitleText', 'Confirm Delete');
-    let name = this.get('projectChallenge.name');
     this.set('deleteConfirmationQuestion', `Do you really want to delete the "${name}" goal?`);
   },
-  
-  
   
   actions: {
     editProjectChallenge(){
@@ -50,6 +48,15 @@ export default Component.extend({
     deleteConfirmationNo(){
       //close the modal
       this.set('showConfirmDelete', false);
+    },
+    redirectToStats(){
+      //get the statsParams service
+      let sp = this.get('statsParams');
+      //set project and projectChallenge
+      sp.setProject(this.get('project'));
+      sp.setProjectChallenge(this.get('projectChallenge'));
+      //do the redirect
+      this.get('router').transitionTo('/stats');
     }
   }
 });
