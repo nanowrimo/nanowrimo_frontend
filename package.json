@@ -49,7 +49,7 @@
     "ember-cli-uuid": "^0.7.1",
     "ember-data": "~3.4",
     "ember-export-application-global": "^2.0.0",
-    "ember-fetch": "^5.0.0",
+    "ember-fetch": "^6.5.1",
     "ember-file-upload": "^2.5.3",
     "ember-font-awesome": "^4.0.0-rc.4",
     "ember-g-map": "^0.0.25",
