@@ -35,6 +35,11 @@
       justify-content: space-evenly;
       align-items: center;
       .plate-area {
+         background-color:  rgba(0,0,0, 0.7);
+         border: 2px solid black;
+         border-radius: 5px;
+         padding: 10px;
+         
         text-align: center;
         .plate-stat {
           font-family: SourceSerifPro-Regular;
