@@ -1,0 +1,54 @@
+{{#if isPepTalk}}
+  <section class="nw-cms-hero nw-no-plate">
+    <div class="nw-container">
+      <div class="nw-wrapper">
+        <div class="nw-wrapper-content">
+          <h4 class="nw-superhead"><strong>{{{page.data.attributes.content-type}}}</strong> | {{{computeShowAfter}}}</h4>
+          <h1 class="nw-headline">{{{page.data.attributes.headline}}}</h1>
+        </div>
+        <div class="nw-wrapper-card">
+          {{#each page.author_cards.data as |post|}}
+            {{cms-user-card post=post}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="nw-cms-content">
+    <div class="nw-container">
+      <div class="nw-wrapper nw-plain-text">
+        {{{page.data.attributes.body}}}
+      </div>
+    </div>
+  </section>
+{{/if}}
+{{#if isPlainText}}
+  <section class="nw-cms-content">
+    <div class="nw-container">
+      <div class="nw-wrapper nw-plain-text">
+        <h1>
+          {{{page.data.attributes.headline}}}
+        </h1>
+        {{{page.data.attributes.body}}}
+      </div>
+    </div>
+  </section>
+{{/if}}
+{{#if isStackedContent}}
+  {{#each page.before_posts as |post|}}
+    {{cms-post post=post}}
+  {{/each}}
+  <section class="nw-cms-content">
+    <div class="nw-container">
+      <div class="nw-wrapper nw-plain-text">
+        <h1>
+          {{{page.data.attributes.headline}}}
+        </h1>
+        {{{page.data.attributes.body}}}
+      </div>
+    </div>
+  </section>
+  {{#each page.after_posts as |post|}}
+    {{cms-post post=post}}
+  {{/each}}
+{{/if}}

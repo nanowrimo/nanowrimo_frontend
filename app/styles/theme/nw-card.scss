@@ -39,9 +39,90 @@
   .nw-card-content {
     position: relative;
     padding: 20px;
+    .nw-card-headline {
+      font-family: 'SourceSerifPro-Regular', serif;
+      font-size: 20px;
+      color: #343434;
+      line-height: 1.4;
+      margin-top: 10px;
+    }
+    .nw-card-subhead {
+      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.57;
+      text-align: center;
+      color: #b8b8b8;
+      margin-top: 10px;
+    }
+    
   }
   .nw-card-footer {
   
   }
 }
-
+.nw-flippy-card {
+  min-width: 300px;
+  min-height: 300px;
+  perspective: 1000px;
+  &.nw-flipped {
+    .nw-flippy-wrapper {
+      -ms-transform: rotateY(-180deg); /* IE 9 */
+      -webkit-transform: rotateY(-180deg); /* Safari */
+      transform: rotateY(-180deg);
+    }
+  }
+  .nw-flippy-wrapper {
+    width: 100%;
+    height: 100%;
+    transform-style:preserve-3d;
+    -webkit-transition: transform 0.6s;
+    transition: transform 0.6s;
+    .nw-card {
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      flex-direction: column;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform-style:preserve-3d;
+      -webkit-transition: transform 0.6s;
+      transition: transform 0.6s;
+      .nw-card-actions {
+        display: block;
+        text-align: right;
+        width: 100%;
+        height: 28px;
+        .nw-flippy-card-toggle {
+          cursor: pointer;
+          text-align: center;
+          color: $nano-lightgrey;
+          width: 28px;
+          margin-left: 7px;
+          padding: 4px;
+          line-height: 20px;
+        }
+      }
+      &.nw-card-face-back{
+        -ms-transform: rotateY(-180deg); /* IE 9 */
+        -webkit-transform: rotateY(-180deg); /* Safari */
+        transform: rotateY(-180deg);
+      }
+      .nw-card-content {
+        height: 272px;
+        padding-top: 10px;
+        padding-right: 10px;
+        .nw-card-scrollable {
+          height: 100%;
+          align-items: stretch;
+          overflow: scroll;
+          font-size: 13px;
+        }
+        .nw-centered {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

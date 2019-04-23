@@ -83,10 +83,10 @@ module.exports = function(environment) {
     var os = require("os");
     //define hosts based on hostname
     if (os.hostname()=='beck') {
-      ENV.APP.API_HOST = 'http://localhost:3002';
+      ENV.APP.API_HOST = 'http://localhost:3000';
       ENV.APP.UI_HOST = 'http://localhost:4200';
     } else {
-      ENV.APP.API_HOST = 'http://'+os.hostname()+':3002';
+      ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
       ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';
     }
     //ENV.APP.API_HOST = 'http://localhost:3000';

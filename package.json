@@ -72,9 +72,13 @@
     "highcharts": "^7.0.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
+    "semantic-ui-ember": "^3.0.3",
     "torii": "^0.10.1"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
+  },
+  "dependencies": {
+    "gulp": "^4.0.0"
   }
 }
