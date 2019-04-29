@@ -30,9 +30,9 @@
                 {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
                 <div class='select-container'>
                   <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
-                   {{#if (eq currentUser.user.name 'jezra')}}
+                   {{!--
                       <option value='-1' selected={{countTypeTotalSelected}}>project total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
-                   {{/if}}
+                   --}}
                     <option value='0' selected={{countTypeGoalTotalSelected}}>goal total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
                     <option value='1' selected={{countTypeSessionSelected}}>{{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>
                   </select>
