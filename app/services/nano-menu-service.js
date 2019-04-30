@@ -34,7 +34,7 @@ export default Service.extend({
       {
         toggleLabel: "Community",
         submenuItems: [
-         // {label: "Forums", url: "index", segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
+          {label: "Forums", url: "authenticated.forums", segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
           this.get('homeRegionItem'),
           {label: "Find a Region", url: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"}
           //{label: "Word Sprints", url: "index", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
