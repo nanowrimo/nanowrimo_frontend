@@ -8,7 +8,7 @@ export default Route.extend({
   session: service(),
   
   model(params) {
-    console.log(JSON.stringify(params));
+    //console.log(JSON.stringify(params));
     // Define the search URL
     if (params.input) {
       //define the API url for processing the SSO request
