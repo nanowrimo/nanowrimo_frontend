@@ -21,6 +21,9 @@
       </div>
     </div>
   </section>
+  {{#each page.after_posts as |post|}}
+    {{cms-post post=post currentUrl=page.data.attributes.url}}
+  {{/each}}
 {{/if}}
 {{#if isPlainText}}
   <section class="nw-cms-content">
@@ -36,7 +39,7 @@
 {{/if}}
 {{#if isStackedContent}}
   {{#each page.before_posts as |post|}}
-    {{cms-post post=post}}
+    {{cms-post post=post currentUrl=page.data.attributes.url}}
   {{/each}}
   <section class="nw-cms-content">
     <div class="nw-container">
@@ -49,6 +52,6 @@
     </div>
   </section>
   {{#each page.after_posts as |post|}}
-    {{cms-post post=post}}
+    {{cms-post post=post currentUrl=page.data.attributes.url}}
   {{/each}}
 {{/if}}

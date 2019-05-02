@@ -4,6 +4,7 @@ import { htmlSafe } from '@ember/template';
 
 export default Component.extend({
   post: null,
+  currentUrl: null,
   subposts: null,
   
   // Returns html-safe background style for the plate image
@@ -16,9 +17,14 @@ export default Component.extend({
     return this.get('post.data.attributes.content-type')=='Plate';
   }),
   
-  // Returns true if this is a Plate
+  // Returns true if this is a group of people
   isGroupOfPeople: computed(function() {
     return this.get('post.data.attributes.content-type')=='Group of people';
+  }),
+  
+  // Returns true if this is a group of page cards
+  isGroupOfPageCards: computed(function() {
+    return this.get('post.data.attributes.content-type')=='Group of page cards';
   }),
   
 });

@@ -2,6 +2,10 @@
   position: relative;
   width: 100%;
   height: 100%;
+  &.nw-card-fixed-size {
+    width: 300px;
+    height: 262px;
+  }
   border-radius: 5px;
   border: solid 1px #dfe4e6;
   background-image: url('/images/global/card_back.png');
@@ -11,6 +15,7 @@
   &.nw-card-white {
     background: white;
   }
+  
   .nw-card-header{
     .nw-card-title {
       display: inline-block;
@@ -35,10 +40,32 @@
         float:right;
       }
     }
+    .nw-promo-image {
+      position: relative;
+      text-align: center;
+      height: 144px;
+      width: 300px;
+      overflow: hidden;
+      display: inline-block;
+      background-size: cover;
+      border-radius: 5px 5px 0px 0px;
+      background-position: center center;
+    }
   }
   .nw-card-content {
     position: relative;
     padding: 20px;
+    &.nw-fixed-card {
+      padding-top: 5px;
+    }
+    .nw-card-superhead {
+      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.57;
+      color: #b8b8b8;
+      margin-top: 10px;
+    }
     .nw-card-headline {
       font-family: 'SourceSerifPro-Regular', serif;
       font-size: 20px;
