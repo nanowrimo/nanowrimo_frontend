@@ -1,7 +1,8 @@
-<div id='session-logger-display' class='logger-timer-modal'>
+<div id='session-logger-display' class='logger-timer-modal' 
+  role='dialog' aria-modal='true' aria-labelledby="main-nav-session-logger-header">
   <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
   <div class="modal-content">
-    <div class="modal-header">
+    <div id='main-nav-session-logger-header' class="modal-header">
       How's your writing going?
     </div>
     <div class="modal-body">
@@ -30,9 +31,9 @@
                 {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
                 <div class='select-container'>
                   <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
-                   {{#if (eq currentUser.user.name 'jezra')}}
+                   {{!--
                       <option value='-1' selected={{countTypeTotalSelected}}>project total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
-                   {{/if}}
+                   --}}
                     <option value='0' selected={{countTypeGoalTotalSelected}}>goal total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
                     <option value='1' selected={{countTypeSessionSelected}}>{{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>
                   </select>

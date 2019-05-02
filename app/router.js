@@ -67,6 +67,9 @@ Router.map(function() {
     
     // callback for discourse SSO
     this.route('sso');
+    
+    //dummy route to redirect to the forums
+    this.route('forums');
   });
 
   //email confirmations

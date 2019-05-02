@@ -3,9 +3,12 @@ import { isEmpty } from '@ember/utils';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
+import { inject as service } from '@ember/service';
 
 export default BaseAuthenticator.extend({
+  session: service(),
   serverTokenEndpoint: `${ENV.APP.API_HOST}/users/sign_in`,
+  serverLogoutEndpoint: `${ENV.APP.API_HOST}/users/logout`,
   tokenAttributeName: "auth_token",
   
   authenticate(identifier, password) {
@@ -42,6 +45,17 @@ export default BaseAuthenticator.extend({
   },
 
   invalidate() {
+    // get the auth_token from the session data
+    let { auth_token }  = this.get('session.data.authenticated');
+    // make a POST request to the API's logout endpoint 
+    fetch(this.get('serverLogoutEndpoint'), { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+    }).then(()=>{
+      //we do nothing
+    });
+    
+    //return a resolved promise to unauthenticate 
     return Promise.resolve();
   },
 
