@@ -50,7 +50,9 @@ export default Controller.extend({
   },
   gotoBottom(){
     var objDiv = document.getElementById("convo-content");
-    objDiv.scrollTop = objDiv.scrollHeight;
+    if (objDiv) {
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }
   },
   checkForMessages() {
     this.send('refreshModel');
