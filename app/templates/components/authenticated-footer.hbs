@@ -28,6 +28,7 @@
             <div class="nano-subcard-face">
               <div class="nano-subcard-content">
                 {{#if currentUserName}}
+                
                   {{#each footerSubmenus as |footerSubmenu|}}
                     <div class="footer-submenu">
                       <div class="footer-header">
@@ -37,12 +38,16 @@
                         {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
                           {{#if footerSubmenuItem}}
                             <li>
-                              {{#if footerSubmenuItem.segment}}
-                                {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
-                                  {{footerSubmenuItem.label}}
-                                {{/link-to}}
+                              {{#if footerSubmenuItem.url}}
+                                <a href="{{footerSubmenuItem.url}}" >{{footerSubmenuItem.label}}</a> 
                               {{else}}
-                                {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
+                                {{#if footerSubmenuItem.segment}}
+                                  {{#link-to footerSubmenuItem.route footerSubmenuItem.segment}}
+                                    {{footerSubmenuItem.label}}
+                                  {{/link-to}}
+                                {{else}}
+                                  {{link-to footerSubmenuItem.label footerSubmenuItem.route}}
+                                {{/if}}
                               {{/if}}
                             </li>
                           {{/if}}
@@ -50,6 +55,8 @@
                       </ul>
                     </div>
                   {{/each}}
+                  
+                  
                 {{/if}}
               </div>
             </div>

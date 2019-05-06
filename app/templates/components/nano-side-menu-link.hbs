@@ -1,0 +1,15 @@
+{{#if menuItem.url}}
+  <a href="{{menuItem.url}}">
+    {{menuItem.label}}
+  </a>
+{{else}}
+  {{#if menuItem.segment}}
+    {{#link-to menuItem.route menuItem.segment}}
+      {{menuItem.label}}
+    {{/link-to}}
+  {{else}}
+    {{#link-to menuItem.route}}
+      {{menuItem.label}}
+    {{/link-to}}
+  {{/if}}
+{{/if}}
