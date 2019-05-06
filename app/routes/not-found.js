@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 
+
 export default Route.extend({
   templateName: '404',
   model(params) {

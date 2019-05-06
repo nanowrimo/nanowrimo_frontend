@@ -58,7 +58,7 @@ body {
   .page-background {
     width: 100%;
     height: 100%;
-    padding-bottom: 336px;
+    /*padding-bottom: 336px;*/
     
     @media (min-width: $screen-sm) {
       background-color: $nano-lightblue;
@@ -71,8 +71,12 @@ body {
 body.full-screen > .ember-view {
   height: 100%;
 }
-main.logged-in {
-  margin-top: 120px;
+main {
+  margin-top: 90px;
+  @media (max-width: $screen-lg) {
+    margin-top: 42px;
+  }
+  
 }
 .clickable {
   cursor: pointer;
@@ -83,9 +87,7 @@ body.full-screen {
   margin-bottom: 0px;
   .page-background {
     padding-bottom: 0px;
-    main.logged-in {
-      margin-top: 0px;
-      padding-top: 120px;
+    main {
       height: 100%;
       padding-bottom: 20px;
       .content-gutters {

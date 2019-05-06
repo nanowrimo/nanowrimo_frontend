@@ -44,6 +44,46 @@
     }
   }
 }
+.nano-card.user-card.flippable {
+  max-width: 300px;
+  max-height: 300px;
+  min-height: 300px;
+  .nano-subcard {
+    height: 300px;
+    min-height: 300px;
+    .nano-subcard-face {
+      background: #FFFFFF;
+      .nano-subcard-header {
+        flex: 0 0 30px;
+        height: 30px;
+      }
+      .nano-subcard-content {
+        height: 260px;
+        .nano-card-icon {
+          height: 140px;
+        }
+        .small-text {
+          font-size: 12px;
+          color:#000;
+          font-family: 'SourceSansPro-Regular', sans-serif;
+        }
+      }
+    }
+  }
+}
+.nw-avatar-irregular {
+  position: relative;
+  text-align: center;
+  height: 140px;
+  width: 140px;
+  overflow: hidden;
+  border-radius: 70px;
+  display: inline-block;
+  background-position: center center;
+  background-size: cover;
+  backface-visibility: hidden;
+}
+
 .nano-avatar-large {
   position: relative;
   width: 100%;
