@@ -25,12 +25,16 @@
             {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
               {{#if footerSubmenuItem}}
                 <li>
-                  {{#if footerSubmenuItem.segment}}
-                    {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
-                      {{footerSubmenuItem.label}}
-                    {{/link-to}}
+                  {{#if footerSubmenuItem.url}}
+                    <a href="{{footerSubmenuItem.url}}">{{footerSubmenuItem.label}}</a>
                   {{else}}
-                    {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
+                    {{#if footerSubmenuItem.segment}}
+                      {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
+                        {{footerSubmenuItem.label}}
+                      {{/link-to}}
+                    {{else}}
+                      {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
+                    {{/if}}
                   {{/if}}
                 </li>
               {{/if}}

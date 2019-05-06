@@ -6,7 +6,8 @@
   <div class="form-group">
     {{f.textarea
       property="content"
+      onKeyPress=(action "keyPress")
     }}
   </div>
-  <input type="submit" value="send" class="nano-button" />
+  <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" />
 {{/form-for}}

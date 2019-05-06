@@ -2,11 +2,9 @@
   <div onclick={{action 'toggleSubmenu'}} class="nano-side-menu-submenu-toggle">{{thisSubmenu.toggleLabel}} <span class={{caretClass}}>{{fa-icon "caret-down"}}</span></div>
   <ul class="nano-side-menu-submenu" style={{menuMaxHeight}}>
     {{#each thisSubmenu.submenuItems as |submenuItem|}}
-      {{#if submenuItem.segment}}
-        <li>{{#nano-side-menu-link-to submenuItem.url submenuItem.segment}}{{submenuItem.label}}{{/nano-side-menu-link-to}}</li>
-      {{else}}
-        <li>{{#nano-side-menu-link-to submenuItem.url}}{{submenuItem.label}}{{/nano-side-menu-link-to}}</li>
-      {{/if}}
+      <li>
+        {{nano-side-menu-link menuItem=submenuItem}}
+      </li> 
     {{/each}}
   </ul>
 </li>

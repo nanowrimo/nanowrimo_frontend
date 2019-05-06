@@ -20,24 +20,23 @@
           {{search-field}}
         </div>
       </li>
-      <li>{{#nano-side-menu-link-to "index"}}Home{{/nano-side-menu-link-to}}</li>
+      <li>{{nano-side-menu-link menuItem='{route:"index",label:"Home"}' }}</li>
       {{#each submenus as |submenu|}}
         {{nano-side-menu-submenu thisSubmenu=submenu}}
       {{/each}}
       <li class="menu-break"></li>
-      <li>{{#nano-side-menu-link-to "authenticated.settings.account"}}Account Settings{{/nano-side-menu-link-to}}</li>
+      <li>
+        {{nano-side-menu-link menuItem=nanoMenuService.accountSettings }}
+      </li>
       <li class="menu-break"></li>
     {{/if}}
   {{/if}}
   {{#each storeLinks as |storeLink|}}
-    <li><a href="{{storeLink.url}}">{{storeLink.label}}</a></li>
+    <li>{{nano-side-menu-link menuItem=storeLink}}</li>
   {{/each}}
   {{#each helpLinks as |helpLink|}}
     <li>
-      <a href="{{helpLink.url}}">{{helpLink.label}}</a>
-      {{!--
-      {{#nano-side-menu-link-to helpLink.url}}{{helpLink.label}}{{/nano-side-menu-link-to}}
-      --}}
+      {{nano-side-menu-link menuItem=helpLink.url}}
     </li>
   {{/each}}
   <li><a href="#" {{action 'invalidateSession'}}>Logout</a></li>
