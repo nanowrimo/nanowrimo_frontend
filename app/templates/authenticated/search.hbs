@@ -8,11 +8,18 @@
       </div>
     </div>
     {{#if model.data}}
-      hello
+      <div class="nano-panel">
+        <div class="col-12">
+          {{#each model.data as |user|}}
+            {{search-user searchUser=user}}
+          {{/each}}
+        </div>
+      </div>
+      {{{resultString}}}
     {{else}}
       <div class="nano-panel">
         <div class="col-12">
-          <h1 data-test-not-found-header>404 Not Found</h1>
+          <p>No users found! Please try another search.</p>
         </div>
       </div>
     {{/if}}
