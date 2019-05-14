@@ -13,18 +13,27 @@
                   {{#each submenu.submenuItems as |submenuItem|}}
                     {{#if submenuItem}}
                       {{#ddm.item tagName="li"}}
-                        {{#if submenuItem.segment}}
-                          {{#ddm.link-to submenuItem.url submenuItem.segment class="dropdown-item d-flex"}}
+                      {{!-- if the submenuItem has a URL, create the link, else handle the route --}}
+                        {{#if submenuItem.url}}
+                          <a href="{{submenuItem.url}}" class="dropdown-item d-flex">
                             <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
                             <div class="dropdown-headline">{{submenuItem.label}}</div>
                             <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                          {{/ddm.link-to}}
+                          </a>
                         {{else}}
-                          {{#ddm.link-to submenuItem.url class="dropdown-item d-flex"}}
-                            <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                            <div class="dropdown-headline">{{submenuItem.label}}</div>
-                            <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                          {{/ddm.link-to}}
+                          {{#if submenuItem.segment}}
+                            {{#ddm.link-to submenuItem.route submenuItem.segment class="dropdown-item d-flex"}}
+                              <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                              <div class="dropdown-headline">{{submenuItem.label}}</div>
+                              <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                            {{/ddm.link-to}}
+                          {{else}}
+                            {{#ddm.link-to submenuItem.route class="dropdown-item d-flex"}}
+                              <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                              <div class="dropdown-headline">{{submenuItem.label}}</div>
+                              <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                            {{/ddm.link-to}}
+                          {{/if}}
                         {{/if}}
                       {{/ddm.item}}
                     {{/if}}

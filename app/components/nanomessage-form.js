@@ -7,6 +7,7 @@ export default Component.extend({
   newNanomessage: null,
   refreshMessages: null,
   group: null,
+  
   _callAfterSubmit() {
     let callback = this.get('afterSubmit');
     if (callback) { callback(); }
@@ -27,5 +28,12 @@ export default Component.extend({
       let rm = this.get('refreshMessages');
       rm();
     },
+    keyPress(){
+      if( event.key=='Enter' && event.ctrlKey) {
+        //perform submit
+        let s = document.getElementById('nanomessage-form-submit');
+        s.click();
+      }
+    }
   }
 });
