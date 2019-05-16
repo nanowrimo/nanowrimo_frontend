@@ -24,6 +24,7 @@ export default Route.extend(ApplicationRouteMixin, {
     return this.get('currentUser').load().catch(() => this.get('session').invalidate());
   },
   _loadBadgesService() {
+    console.log('load badges service');
     return this.get('badgesService').load();
   },
 
