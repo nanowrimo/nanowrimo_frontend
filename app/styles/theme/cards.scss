@@ -10,7 +10,7 @@
   }
   align-items: stretch;
   align-content: stretch;
-  box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
+  /*box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);*/
   border-radius: 6px;
   border: solid 1px #dfe4e6;
   .flip-corner-link {
@@ -380,7 +380,7 @@
         transform: rotateY(-180deg);
       }
       .nano-subcard-face {
-        box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
+        /*box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);*/
         border-radius: 6px;
         border: solid 1px #dfe4e6;
         position: absolute;

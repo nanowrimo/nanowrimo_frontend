@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Service.extend({
   currentUser: service(),
   store: service(),
+  session: service(),
   recomputeBadges: 0,
 
   load() {
@@ -22,6 +23,15 @@ export default Service.extend({
         }
       }).then(function() {
         t.incrementRecomputeBadges();
+      }).catch((error)=>{
+        for (var i=0; i<error.errors.length; i++) {
+          let e = error.errors[i];
+          if (e.status=="401") {
+            //authorization has failed, de-auth now
+            this.get('session').invalidate();
+            break;
+          }
+        }
       });
     }
     debounce(this, this.checkForUpdates, 15000, false);

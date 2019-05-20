@@ -25,7 +25,7 @@
     "ember-changeset-hofs": "kpfefferle/ember-changeset-hofs#b27303af3c848975c57e87a3bd041946ae6f5e71",
     "ember-changeset-validations": "^1.2.11",
     "ember-chrome-devtools": "^0.2.0",
-    "ember-cli": "~3.4",
+    "ember-cli": "~3.8",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-autocomplete-input": "^1.1.0",
     "ember-cli-babel": "^7.1.2",
@@ -46,7 +46,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.2",
     "ember-cli-uuid": "^0.7.1",
-    "ember-data": "~3.4",
+    "ember-data": "~3.8",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^5.0.0",
     "ember-file-upload": "^2.5.3",
@@ -65,7 +65,7 @@
     "ember-responsive": "^3.0.0-beta.3",
     "ember-router-scroll": "^1.0.2",
     "ember-simple-auth": "^1.5.1",
-    "ember-source": "~3.4",
+    "ember-source": "~3.8",
     "ember-test-selectors": "^1.0.0",
     "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.2.0",
@@ -76,5 +76,8 @@
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
+  },
+  "dependencies": {
+    "gulp": "^4.0.0"
   }
 }

@@ -128,6 +128,7 @@ export default Component.extend({
   
   actions: {
     toggleBadge() {
+      alert('toggled');
       let badge = this.get('badge');
       let ownsBadge = this.get('ownsBadge');
       if (ownsBadge) {

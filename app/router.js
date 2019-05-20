@@ -10,6 +10,7 @@ const Router = EmberRouter.extend( RouterScroll, {
 
 Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
+    this.route('search');
     this.route('genres', function() {
       this.route('new');
       this.route('show', { path: '/:genre_id' });
@@ -66,6 +67,9 @@ Router.map(function() {
     
     // callback for discourse SSO
     this.route('sso');
+    
+    //dummy route to redirect to the forums
+    this.route('forums');
   });
 
   //email confirmations

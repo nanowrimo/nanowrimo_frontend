@@ -1,0 +1,27 @@
+<div class="content-gutters">
+  <div class="container-fluid">
+    <div class="d-flex align-top">
+      <div class="nano-panel with-tabs">
+        <div id="settings-panel-layout">
+          Search form
+        </div>
+      </div>
+    </div>
+    {{#if model.data}}
+      <div class="nano-panel">
+        <div class="col-12">
+          {{#each model.data as |user|}}
+            {{search-user searchUser=user}}
+          {{/each}}
+        </div>
+      </div>
+      {{{resultString}}}
+    {{else}}
+      <div class="nano-panel">
+        <div class="col-12">
+          <p>No users found! Please try another search.</p>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>

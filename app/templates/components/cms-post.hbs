@@ -1,0 +1,48 @@
+{{#if isPlate}}
+  <style>
+    {{safePlateSrc}}
+  </style>
+  <section class="nw-cms-hero">
+    <div class="nw-container">
+      <div class="nw-wrapper">
+        <div class="nw-wrapper-content">
+          <h1 class="nw-headline">{{{post.data.attributes.headline}}}</h1>
+          <div class="nw-copy">{{{post.data.attributes.body}}}</div>
+        </div>
+        <div class="nw-wrapper-card">
+        </div>
+      </div>
+    </div>
+  </section>
+{{/if}}
+{{#if isGroupOfPeople}}
+  <section class="nw-cms-content">
+    <div class="nw-container">
+      <div class="nw-wrapper">
+        <div class="nw-flex">
+          {{#each post.included as |subpost|}}
+            {{cms-user-card post=subpost}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+{{/if}}
+{{#if isGroupOfPageCards}}
+  <section class="nw-cms-content">
+    <div class="nw-container">
+      <div class="nw-wrapper">
+        <div class="nw-wrapper-content">
+          <div class="nw-section-headline">
+            {{{post.data.attributes.headline}}}
+          </div>
+        </div>
+        <div class="nw-flex">
+          {{#each post.included as |subpost|}}
+            {{cms-page-card page=subpost currentUrl=currentUrl}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+{{/if}}

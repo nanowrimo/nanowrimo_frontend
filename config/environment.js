@@ -82,15 +82,16 @@ module.exports = function(environment) {
     //pull in the os lib so we can get the hostname
     var os = require("os");
     //define hosts based on hostname
-    if (os.hostname()=='beck') {
-      ENV.APP.API_HOST = 'http://localhost:3002';
+    if (os.hostname()=='beck.local') {
+      ENV.APP.API_HOST = 'http://localhost:3000';
       ENV.APP.UI_HOST = 'http://localhost:4200';
     } else {
-      ENV.APP.API_HOST = 'http://'+os.hostname()+':3002';
+      ENV.APP.API_HOST = 'http://'+os.hostname()+':3000';
       ENV.APP.UI_HOST = 'http://'+os.hostname()+':4200';
     }
     //ENV.APP.API_HOST = 'http://localhost:3000';
     //ENV.APP.UI_HOST = 'http://localhost:4200';
+    ENV.forumsUrl = "http://localhost:9292";
   }
 
   if (environment === 'test') {
@@ -113,6 +114,8 @@ module.exports = function(environment) {
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
     ENV.torii.providers['custom-google'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
     ENV.torii.providers['custom-google'].redirectUri = 'https://preview.nanowrimo.org/oauth2callback';
+    //the url of the forums
+    ENV.forumsUrl = "https://forums.nanowrimo.org";
   }
   ENV['g-map'] = {
     key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss'
@@ -122,6 +125,7 @@ module.exports = function(environment) {
   if (process.env.TARGET=='staging') {
     ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
     ENV.torii.providers['custom-google'].redirectUri = 'https://staging.preview.nanowrimo.org/oauth2callback';
+    ENV.forumsUrl = "https://staging.forums.nanowrimo.org";
   }
   
   return ENV;
