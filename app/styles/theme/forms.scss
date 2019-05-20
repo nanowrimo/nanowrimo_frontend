@@ -4,27 +4,24 @@ form {
 .form-group {
   margin-bottom: 10px;
   label {
-    font-family: 'SourceSansPro-Regular', sans-serif;
-    font-size: 14px;
     text-align: left;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
     margin-bottom: 3px;
   }
   &.inline-checkbox {
     width: 100%;
     label {
       &.checkbox-label {
-        font-family: 'SourceSansPro-Regular', sans-serif;
         font-size: 16px;
-        color: $nano-darkgrey;
+        color: $nw-darkgrey;
       }
     }
   }
   &.radio-group {
     label {
-      color: $nano-darkgrey;
+      color: $nw-darkgrey;
       &.disabled {
-        color: $nano-mediumgrey;
+        color: $nw-mediumgrey;
       }
     }
   }
@@ -32,14 +29,13 @@ form {
     .invalid-feedback {
       display: block;
       text-align: right;
-      font-family: 'SourceSansPro-Italic', sans-serif;
-      font-size: 14px;
+      font-family: 'SansItalic', sans-serif;
       line-height: 1.43;
-      color: #e37f82; 
+      color: $nw-darkred; 
     }
     input {
-      border-color: #e37f82;
-      background-color: rgba(227, 127, 130, 0.3);
+      border-color: $nw-darkred;
+      background-color: $nw-pink30;
     }
   }
   .ember-checkbox {
@@ -54,28 +50,27 @@ form {
   }
   .ember-text-field {
     border-radius: 3px;
-    box-shadow: inset 0 1px 4px 0 rgba(151, 151, 151, 0.5);
-    background-color: #f7f7f7;
+    box-shadow: inset 0 1px 4px 0 $nw-grey50;
+    background-color: $nw-white-1;
     border: solid 1px #699c8d;
-    font-family: 'SourceSansPro-Regular', sans-serif;
     font-size: 20px;
     line-height: 22px;
-    color: $nano-darkgrey;
+    color: $nw-darkgrey;
     text-align: left;
     &.is-invalid {
-      border-color: #e37f82;
-      background-color: rgba(227, 127, 130, 0.3);
+      border-color: $nw-darkred;
+      background-color: $nw-pink30;
     }
   }
   .ember-text-field::placeholder, .ember-text-field:-ms-input-placeholder, .ember-text-field::-ms-input-placeholder {
-    font-family: 'SourceSansPro-Italic', sans-serif;
+    font-family: 'SansItalic', sans-serif;
     font-size: 14px;
     line-height: 1.57;
-    color: #939393;
+    color: $nw-mediumgrey;
   }
   .is-invalid .ember-power-select-trigger {
-    border-color: #e37f82;
-    background-color: rgba(227, 127, 130, 0.3);
+    border-color: $nw-darkred;
+    background-color: $nw-pink30;
     &--active {
       box-shadow: 0 0 0 0.2rem rgba($form-feedback-invalid-color, 0.25);
     }
@@ -84,10 +79,10 @@ form {
   .is-invalid ~ .invalid-feedback {
     display: block;
     text-align: right;
-    font-family: 'SourceSansPro-Italic', sans-serif;
+    font-family: 'SansItalic', sans-serif;
     font-size: 14px;
     line-height: 1.43;
-    color: #e37f82;
+    color: $nw-darkred;
   }
 }
 select {
@@ -102,7 +97,7 @@ select {
   &:after {
     content:"\f0d7";
     font-family: FontAwesome;
-    color: #000;
+    color: $nw-black;
     padding: 12px 8px;
     position: absolute; right: 0; top: 0;
     z-index: 1;
@@ -122,9 +117,9 @@ select.form-control {
   padding: 4px;
   padding-left: 0px;
   font-size: 16px;
-  color: $nano-darkgrey;
+  color: $nw-darkgrey;
   border: none;
-  border-bottom: 2px solid $nano-mediumgrey;
+  border-bottom: 2px solid $nw-mediumgrey;
   border-radius: 0;
   -webkit-appearance: none;
 }
@@ -132,7 +127,7 @@ select.form-control:focus {
   background-color: transparent;
   outline: none;
   border: none;
-  border-bottom: 1px solid $nano-mediumgrey;
+  border-bottom: 1px solid $nw-mediumgrey;
 }
 .ember-checkbox {
   &.form-control {
@@ -140,10 +135,8 @@ select.form-control:focus {
   }
 }
 .alert-danger {
-  font-family: 'SourceSansPro-Regular', sans-serif;
-  font-size: 14px;
   line-height: 1.43;
-  color: #e37f82;
+  color: $nw-darkred;
   border: 0;
   padding: 0;
 }
@@ -167,9 +160,7 @@ input:disabled, select:disabled, button:disabled {
   opacity: 0.3 !important;
 }
 .form-instruction {
-  font-family: 'SourceSansPro-Regular', sans-serif;
-  font-size: 14px;
-  color: $nano-mediumgrey;
+  color: $nw-mediumgrey;
   margin-bottom: 14px;
 }
 .save-cancel {
@@ -179,9 +170,8 @@ input:disabled, select:disabled, button:disabled {
   flex-wrap: nowrap;
   a {
     font-size: 16px;
-    font-family: 'SourceSansPro-Regular', sans-serif;
     text-align: right;
-    color: #979797;
+    color: $nw-mediumgrey;
   }
   
 }
@@ -190,6 +180,5 @@ input:disabled, select:disabled, button:disabled {
   background-repeat: no-repeat;
   background-size: 16px 16px;
   background-position: 180px center;
-  font-family: 'SourceSansPro-Regular', sans-serif;
   max-width: 210px;
 }

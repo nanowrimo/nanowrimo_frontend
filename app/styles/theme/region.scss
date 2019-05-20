@@ -1,14 +1,11 @@
 .nano-panel.left-sidebar.region-summary {
-  font-size: 14px;
-  font-family: 'SourceSansPro-Bold', sans-serif;
+  font-family: 'SansBold', sans-serif;
   padding: 0px;
   padding-bottom: 0px;
   .nano-region-name-prelim {
     width: 100%;
     text-align: center;
-    font-family: 'SourceSansPro-Bold', sans-serif;
-    color: $nano-mediumgrey;
-    font-size: 14px;
+    color: $nw-mediumgrey;
     line-height: 16px;
     margin-bottom: 5px;
     
@@ -16,8 +13,7 @@
   .nano-region-name {
     width: 100%;
     text-align: center;
-    font-family: 'SourceSansPro-Bold', sans-serif;
-    color: $nano-darkblue;
+    color: $nw-darkblue;
     font-size: 26px;
     line-height: 28px;
     margin-bottom: 20px;
@@ -25,30 +21,28 @@
   .nano-region-description-label {
     width: 100%;
     text-align: center;
-    font-family: 'SourceSansPro-Bold', sans-serif;
-    font-size: 14px;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
     margin-bottom: 10px;
   }
   .nano-region-description {
-    border-top: solid 2px #dfe4e6;
+    border-top: solid 2px $nw-lightgreyblue;
     padding-top: 14px;
-    font-family: 'SourceSansPro-Regular', sans-serif;
+    font-family: 'SansRegular', sans-serif;
     font-size: 16px;
     line-height: 1.38;
     text-align: left;
-    color: $nano-darkgrey;
+    color: $nw-darkgrey;
   }
   .nano-user-location {
     width: 100%;
     text-align: center;
-    color: #000000;
+    color: $nw-black;
     font-style: italic;
   }
   .nano-member-since {
     width: 100%;
     text-align: center;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
     font-style: italic;
   }
   .nano-user-social {
@@ -59,9 +53,9 @@
       width: 26px;
       height: 26px;
       margin: 7px;
-      background-color: $nano-lightblue;
+      background-color: $nw-lightblue;
       border-radius: 13px;
-      color: #7880b5;
+      color: $nw-mediumgreyblue;
       font-size: 12px;
       line-height: 26px;
     }
@@ -69,9 +63,8 @@
   .nano-user-link {
     width: 100%;
     text-align: center;
-    font-family: 'SourceSansPro-Bold', sans-serif;
     a {
-      color: $nano-mediumlightblue;
+      color: $nw-darkaqua;
     }
   }
 }

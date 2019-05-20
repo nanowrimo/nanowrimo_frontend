@@ -1,51 +1,4 @@
 // ----------------------------------
-// Fonts
-// ----------------------------------
-
-@font-face {
-  font-family: 'SourceSansPro-Regular';
-  src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SourceSansPro-Bold';
-  src: url('../fonts/SourceSansPro-Bold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SourceSansPro-SemiBold';
-  src: url('../fonts/SourceSansPro-SemiBold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SourceSansPro-Italic';
-  src: url('../fonts/SourceSansPro-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SourceSerifPro-Regular';
-  src: url('/fonts/SourceSerifPro-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SourceSerifPro-Bold';
-  src: url('../fonts/SourceSerifPro-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SourceSerifPro-SemiBold';
-  src: url('../fonts/SourceSerifPro-SemiBold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-// ----------------------------------
 // Body and container styles
 // ----------------------------------
 
@@ -54,14 +7,18 @@ html {
 }
 body {
   min-height: 100%;
-  background-color: $nano-lightblue;
+  background-color: $nw-lightblue;
+  font-family: 'SourceSansPro-Regular', sans-serif;
+  font-size: 14px;
+  color: $nw-darkgrey;
+  line-height: 1.4;
   .page-background {
     width: 100%;
     height: 100%;
     /*padding-bottom: 336px;*/
     
     @media (min-width: $screen-sm) {
-      background-color: $nano-lightblue;
+      background-color: $nw-lightblue;
       background-image: url("/images/backgrounds/camp_back.png");
       background-repeat: repeat-x; 
       background-position: bottom;
@@ -165,12 +122,11 @@ body.full-screen {
   display: flex;
   justify-content: space-between;
   a, div {
-    font-family: 'SourceSansPro-Regular', sans-serif;
     font-size: 16px;
     line-height: 1.38;
     letter-spacing: 0.3px;
     text-align: left;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
   }
 }
 .full-width {
@@ -181,10 +137,9 @@ body.full-screen {
 div {
   &.remove-element {
     cursor: pointer;
-    color: $nano-lightred;
-    font-family: 'SourceSansPro-Regular';
+    color: $nw-lightred;
     &:hover {
-      color: $nano-darkred;
+      color: $nw-darkred;
     }
   }
 }
@@ -194,7 +149,7 @@ div {
 // ----------------------------------
 
 button.btn {
-  font-family: 'SourceSansPro-Bold', sans-serif;
+  font-family: 'SansBold', sans-serif;
   cursor: pointer;
   width: 100%;
   max-width: 394px;
@@ -202,9 +157,9 @@ button.btn {
   margin-top: 4px;
   margin-bottom: 4px;
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, $nano-mediumgreen, $nano-darkgreen);
-  border: solid 1px $nano-darkgreen;
-  color: $nano-lightblue;
+  background-image: linear-gradient(to bottom, $nw-mediumgreen, $nw-darkgreen);
+  border: solid 1px $nw-darkgreen;
+  color: $nw-lightblue;
   font-size: 16px;
   text-transform: uppercase;
   line-height: 16px;
@@ -232,13 +187,13 @@ button.btn {
     font-family: FontAwesome;
     font-size: 20px;
     line-height: 1.1;
-    color: $nano-mediumblue;
+    color: $nw-mediumblue;
     position: absolute;
     bottom: 0;
     right: 0;
     align-content: center;
     &:hover {
-      color: $nano-mediumblue;
+      color: $nw-mediumblue;
     }
     &.is-invalid {
       bottom: 24px;
@@ -258,14 +213,14 @@ button.btn {
   width: 100%;
   overflow: hidden;
   text-align: center;
-  color: $nano-lightgrey;
-  font-family: 'SourceSansPro-Bold', sans-serif;
+  color: $nw-lightgrey;
+  font-family: 'SansBold', sans-serif;
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 .nano-hr:before, .nano-hr:after {
-  background-color: #dfe4e6;
+  background-color: $nw-lightgreyblue;
   content: "";
   display: inline-block;
   height: 2px;
@@ -290,7 +245,7 @@ button.btn {
 .unread-circle {
   width: 17px;
   height: 17px;
-  background-color: #FF6B6B;
+  background-color: $nw-mediumred;
   border-radius: 8.5px;
   font-size: 9px;
   color: $white;

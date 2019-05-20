@@ -19,12 +19,11 @@
         border: 0px;
         border-bottom: 1px solid black;
         padding-right: 25px;
-        font-family: 'SourceSansPro-Regular', sans-serif;
       }
       &:after {
         content:"\f0d7";
         font-family: FontAwesome;
-        color: #000;
+        color: $nw-black;
         position: absolute; right: 0; bottom: -7px;
         z-index: 1;
         text-align: center;
@@ -61,25 +60,21 @@
           .progress-text {
             margin-top: 7.5px;
             height: 18px;
-            font-family: 'SourceSansPro-Regular', sans-serif;
-            font-size: 14px;
-            font-weight: bold;
+            font-family: 'SansBold', sans-serif;
             .count{
-              color: $nano-mediumlightblue;
+              color: $nw-darkaqua;
             }
             .count.goal-met {
-              color: #834da9;
+              color: $nw-purple;
             }
           }
           .challenge-start {
             position: absolute;
             right: 0px;
             top: 0px;
-            font-size: 14px;
-            font-family: 'SourceSansPro-Regular', sans-serif;
             float: right;
             .started {
-              color: $nano-lightgrey;
+              color: $nw-lightgrey;
             }
           }
         

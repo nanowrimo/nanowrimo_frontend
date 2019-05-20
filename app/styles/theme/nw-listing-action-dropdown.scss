@@ -1,13 +1,13 @@
-.listing-action-dropdown {
+.nw-listing-action-dropdown {
   .dropdown-toggle {
-    color: #5f8c7f;
+    color: $nw-darkgreen;
   }
   .dropdown-menu {
     padding-left: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
-    border: 2px solid #5f8c7f;
-    background-color: #73ab9b;
+    border: 2px solid $nw-darkgreen;
+    background-color: $nw-mediumgreen;
     a {
       color: white;
       .full-width-menu-item {

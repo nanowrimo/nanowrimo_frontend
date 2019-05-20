@@ -7,11 +7,10 @@
     height: 262px;
   }
   border-radius: 5px;
-  border: solid 1px #dfe4e6;
+  border: solid 1px $nw-lightgreyblue;
   background-image: url('/images/global/card_back.png');
   background-repeat: repeat-x;
   background-size: 4px 100%;
-  /*box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);*/
   &.nw-card-white {
     background: white;
   }
@@ -23,12 +22,12 @@
       padding-right: 14px;
       padding-left: 14px;
       border-bottom-right-radius: 6px;
-      background-color: #dfe4e6;
-      font-family: SourceSansPro-Bold;
+      background-color: $nw-lightgreyblue;
+      font-family: 'SourceSansPro-Bold', sans-serif;
       line-height: 20px;
       font-size: 14px;
       text-transform: uppercase;
-      color: #979797;
+      color: $nw-mediumgrey;
     }
     .nw-card-actions {
       display: inline;
@@ -63,13 +62,13 @@
       font-size: 14px;
       font-weight: 600;
       line-height: 1.57;
-      color: #b8b8b8;
+      color: $nw-lightgrey;
       margin-top: 10px;
     }
     .nw-card-headline {
       font-family: 'SourceSerifPro-Regular', serif;
       font-size: 20px;
-      color: #343434;
+      color: $nw-darkgrey;
       line-height: 1.4;
       margin-top: 10px;
     }
@@ -79,7 +78,7 @@
       font-weight: 600;
       line-height: 1.57;
       text-align: center;
-      color: #b8b8b8;
+      color: $nw-lightgrey;
       margin-top: 10px;
     }
     
@@ -123,7 +122,7 @@
         .nw-flippy-card-toggle {
           cursor: pointer;
           text-align: center;
-          color: $nano-lightgrey;
+          color: $nw-lightgrey;
           width: 28px;
           margin-left: 7px;
           padding: 4px;

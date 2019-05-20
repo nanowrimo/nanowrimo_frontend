@@ -14,7 +14,7 @@
   padding: 0;
   padding-left: 0;
   padding-right: 0;
-  box-shadow: 0 0 14px 3px rgba(47,48,97,0.12);
+  box-shadow: 0 0 14px 3px $nw-darkblue10;
   background: repeating-linear-gradient(0deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
   margin-bottom: 35px;
   &.no-margin {
@@ -72,8 +72,6 @@
     padding-top: 0px;
     padding-bottom: 0px;
     margin-bottom: -14px;
-    font-family: SourceSansPro-Regular;
-    font-size: 14px;
     span {
       font-size: 14px;
       height: 30px;
@@ -107,11 +105,11 @@
       }
       .fa-times {
         margin-left: 3px;
-        color: #e37f82;
+        color: $nw-darkred;
         visibility: hidden;
       }
       &:hover {
-        border: solid 2px #edbb82;
+        border: solid 2px $nw-lightorange;
         padding: 4px;
         .fa-times {
           cursor: pointer;
@@ -289,10 +287,10 @@
       display: flex;
       list-style-type: none;
       height: 20px;
-      font-family: 'SourceSansPro-SemiBold', sans-serif;
+      font-family: 'SansSemiBold', sans-serif;
       font-size: 16px;
       text-align: left;
-      color: $nano-lightgrey;
+      color: $nw-lightgrey;
       margin-top: -28px;
       &.narrow {
         justify-content: center;
@@ -303,14 +301,14 @@
         margin-right: 10px;
         a {
           font-size: 16px;
-          color: $nano-lightgrey;
+          color: $nw-lightgrey;
           border-radius: 4px;
           padding-bottom: 8px;
         }
         a.active, a:hover {
           text-decoration: none;
-          color: $nano-mediumlightblue;
-          background: linear-gradient(to top, $nano-mediumlightblue 0px,$nano-mediumlightblue 3px,transparent 3px,transparent 500px);
+          color: $nw-darkaqua;
+          background: linear-gradient(to top, $nw-darkaqua 0px,$nw-darkaqua 3px,transparent 3px,transparent 500px);
 
         }
         &.nano-panel-tabs-spacer {
@@ -355,22 +353,18 @@
           .nano-subcard-face {
             .nano-subcard-content {
               .card-title {
-                font-family: 'SourceSansPro-Bold', sans-serif;
-                font-size: 14px;
+                font-family: 'SansBold', sans-serif;
                 text-transform: uppercase;
               }
               padding-top: 21px;
               padding-bottom: 21px;
               label {
-                font-family: 'SourceSansPro-Regular', sans-serif;
-                font-size: 14px;
-                color: #979797;
+                color: $nw-mediumgrey;
               }
               &.inline-checkbox {
                 label {
-                  font-family: 'SourceSansPro-Regular', sans-serif;
                   font-size: 16px;
-                  color: #343434;
+                  color: $nw-darkgrey;
                 }
               }
               

@@ -1,6 +1,5 @@
 .badges {
   margin: auto;
-  /*background-color: #ff0000;*/
   @media (max-width: $screen-xs) {
     width: 300px;
     :nth-child(5n-2) {
@@ -53,7 +52,6 @@
     flex: 0 0 82px;
     height: 93px;
     margin-right: 24px;
-    /*background-color: #0000FF;*/
     border-radius: 12px;
     overflow: visible;
     list-style-type: none;

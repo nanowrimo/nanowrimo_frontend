@@ -13,9 +13,8 @@
       display: flex;
       justify-content: space-between;
       a {
-        color: #fff;
+        color: $nw-white;
         text-transform: capitalize;
-        font-family: SourceSansPro-Regular;
         font-size: 12px;
         line-height: 1.67;
         text-decoration: underline;
@@ -42,9 +41,9 @@
         padding-right: 15px;
         display: flex;
         border-bottom: 1px solid #ddd;
-        background-color: #fff;
+        background-color: $nw-white;
         &.noti-new {
-          background-color: #f2f8fa;
+          background-color: $nw-white-1;
         }
         .noti-image {
           flex: 0 0 56px;
@@ -57,12 +56,10 @@
           padding-left: 15px;
           .noti-content {
             width: 100%;
-            font-family: SourceSansPro-Regular;
-            font-size: 14px;
             line-height: 1.29;
-            color: #41426f;
+            color: $nw-darkgreyblue;
             .noti-headline-string {
-              font-family: SourceSansPro-Bold;
+              font-family: "SansBold", sans-serif;
             }
           }
           .noti-tools-container {
@@ -70,16 +67,15 @@
             justify-content: space-between;
             .noti-time-ago {
               flex: 1 1 100%;
-              font-family: SourceSansPro-Regular;
               font-size: 12px;
               line-height: 1.67;
-              color: #000;
+              color: $nw-black;
             }
             .noti-button {
               flex: 1 1 100%;
               text-align: right;
               button {
-                font-family: SourceSansPro-Bold;
+                font-family: 'SansBold', sans-serif;
                 font-size: 12px;
                 line-height: 1.83;
                 letter-spacing: 0.2px;

@@ -1,5 +1,5 @@
 // Config
-@import "nano-colors";
+@import "nw-colors";
 @import "nano-bootstrap-config";
 
 //Bootstrap
@@ -16,6 +16,7 @@
 // Project
 @import "theme/normalize";
 @import "theme/logged-out";
+@import "theme/nw-fonts";
 @import "theme/general";
 @import "theme/buttons";
 @import "theme/buddies";
@@ -33,7 +34,6 @@
 @import "theme/region";
 @import "theme/plates";
 @import "theme/cards";
-@import "theme/charts";
 @import "theme/lists";
 @import "theme/badges";
 @import "theme/notifications";
@@ -45,12 +45,12 @@
 @import "theme/main-nav-logger-timer";
 @import "theme/project-stats";
 @import "theme/goals";
-@import "theme/listing-action-dropdown";
+@import "theme/nw-listing-action-dropdown";
 @import "theme/forgot-password";
-@import "theme/image-overlay";
-@import "theme/stats";
-@import "theme/cms";
+@import "theme/nw-image-overlay";
+@import "theme/nw-stats";
+@import "theme/nw-cms";
 @import "theme/nw-card";
-@import "theme/settings";
+@import "theme/nw-settings";
 
 

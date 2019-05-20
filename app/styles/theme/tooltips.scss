@@ -1,38 +1,32 @@
 .nano-tooltip {
   .tooltip-inner {
-    box-shadow: 0 0 14px 0 rgba(52, 52, 52, 0.2);
-    background-image: linear-gradient(to bottom, #a5d9e4, #96c6d0);
+    box-shadow: 0 0 14px 0 $nw-darkgrey20;
+    background-image: linear-gradient(to bottom, $nw-mediumlightblue, $nw-lightaqua);
     padding: 21px;
-    color: #000;
+    color: $nw-black;
     max-width: 363px;
     text-align: left;
     .nano-tooltip-title {
-      font-family: "SourceSerifPro-Bold", serif;
-      font-weight: bold;
+      font-family: "SerifBold", serif;
       font-size: 20px;
-      color: #415f68;
+      color: $nw-darkgreygreen;
     }
     .nano-tooltip-content {
-      font-family: "SourceSerifPro-Regular", serif;
-      font-weight: normal;
+      font-family: "SerifRegular", serif;
       font-size: 16px;
-      color: #000;
+      color: $nw-black;
       line-height: 1.28;
     }
     .nano-tooltip-date {
       margin-top: 10px;
-      font-family: "SourceSerifPro-Regular", serif;
-      font-style: italic;
-      font-weight: normal;
-      font-size: 14px;
-      color: #000;
+      font-family: "SerifItalic", serif;
+      color: $nw-black;
       line-height: 1.2;
-      
     }
     
   }
   .arrow::before {
-    border-bottom-color: #a5d9e4;
-    border-top-color: #96c6d0;
+    border-bottom-color: $nw-mediumlightblue;
+    border-top-color: $nw-lightaqua;
   }
 }

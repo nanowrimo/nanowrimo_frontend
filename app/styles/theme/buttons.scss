@@ -10,11 +10,8 @@ button, input.nano-button {
   margin-bottom: 4px;
   
   /* Button text */
-  font-family: 'SourceSansPro-Bold', sans-serif;
-  color: $nano-lightblue;
-  font-size: 14px;
-  font-style: normal;
-  font-stretch: normal;
+  font-family: 'SansBold', sans-serif;
+  color: $nw-lightblue;
   text-transform: uppercase;
   letter-spacing: 0.3px;
   line-height: 14px;
@@ -22,46 +19,46 @@ button, input.nano-button {
   
   /* Background and border */
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, $nano-mediumgreen, $nano-darkgreen);
+  background-image: linear-gradient(to bottom, $nw-mediumgreen, $nw-darkgreen);
   &:hover, &:active {
-    background-image: linear-gradient(to bottom, $nano-lightgreen, $nano-mediumgreen);
+    background-image: linear-gradient(to bottom, $nw-lightgreen, $nw-mediumgreen);
   }
-  border: solid 2px $nano-darkgreen;
+  border: solid 2px $nw-darkgreen;
   
   /* Reversed green button */
   &.button-reversed {
-    background-image: linear-gradient(to bottom, $nano-white-1, $nano-white-2);
-    border: solid 2px $nano-darkgreen;
-    color: $nano-darkgreen;
+    background-image: linear-gradient(to bottom, $nw-white-1, $nw-white-2);
+    border: solid 2px $nw-darkgreen;
+    color: $nw-darkgreen;
     padding-top: 0.1rem;
     &:hover, &:active {
-      background-image: linear-gradient(to bottom, $nano-lightgreen, $nano-mediumgreen);
-      color: $nano-lightblue;
+      background-image: linear-gradient(to bottom, $nw-lightgreen, $nw-mediumgreen);
+      color: $nw-lightblue;
       &.button-danger {
-        background-image: linear-gradient(to bottom, $nano-lightred, $nano-mediumred);
-        color: $nano-white;
+        background-image: linear-gradient(to bottom, $nw-lightred, $nw-mediumred);
+        color: $nw-white;
       }
       
     }
     &.button-danger {
-      border: solid 2px $nano-darkred;
-      color: $nano-darkred;
+      border: solid 2px $nw-darkred;
+      color: $nw-darkred;
       
     }
   }
   
   /* Blue buttons */
   &.nano-button-blue {
-    background-image: linear-gradient(to bottom, $nano-mediumlightblue, $nano-mediumblue);
-    border: solid 1px $nano-mediumblue;
+    background-image: linear-gradient(to bottom, $nw-darkaqua, $nw-mediumblue);
+    border: solid 1px $nw-mediumblue;
     &:hover, &:active {
-      background-image: linear-gradient(to bottom, $nano-lightblue, $nano-mediumlightblue);
+      background-image: linear-gradient(to bottom, $nw-lightblue, $nw-darkaqua);
     }
     
     /* Blue buttons reversed */
     &.button-reversed {
-      border: solid 2px $nano-mediumblue;
-      color: $nano-mediumblue;
+      border: solid 2px $nw-mediumblue;
+      color: $nw-mediumblue;
     }
   }
   
@@ -89,7 +86,7 @@ button, input.nano-button {
     font-size: 12px;
     line-height: 12px;
     &.button-reversed {
-      border: solid 1px $nano-mediumblue;
+      border: solid 1px $nw-mediumblue;
     }
     
   }
@@ -98,10 +95,9 @@ button, input.nano-button {
     background: transparent;
     border: 0px;
     text-decoration: underline;
-    font-family: SourceSansPro-Regular;
     font-size: 16px;
     letter-spacing: 0.3px;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
     text-transform: none;
     
   }
@@ -124,8 +120,7 @@ button .spinner {
 }
 
 .nano-link {
-  font-family: SourceSansPro-Regular;
   font-size: 16px;
-  color: #979797;
+  color: $nw-mediumgrey;
   text-decoration: underline;
 }

@@ -14,10 +14,8 @@
     margin-right: 30px;
     margin-bottom: 15px;
     #project-listing-sort-by-text {
-      font-family: 'SourceSansPro-It', sans-serif;
-      font-size: 14px;
-      font-style: italic;
-      color: $nano-mediumgrey; 
+      font-family: 'SansItalic', sans-serif;
+      color: $nw-mediumgrey; 
     }
     select {
       position: relative;
@@ -28,12 +26,11 @@
       border: 0px;
       border-bottom: 1px solid black;
       padding-right: 25px;
-      font-family: 'SourceSansPro-Regular', sans-serif;
     }
     &:after {
       content:"\f0d7";
       font-family: FontAwesome;
-      color: #000;
+      color: $nw-black;
       position: absolute; right: 0; top: 0;
       z-index: 1;
       text-align: center;
@@ -107,11 +104,9 @@
     .project-genres {
       flex: 0 0 100%;
       height: 22px;
-      font-family: 'SourceSansPro-Regular', sans-serif;
-      font-size: 14px;
       line-height: 1.57;
       text-align: left;
-      color: #939393;
+      color: $nw-mediumgrey;
     }
   }
   .project-progress {
@@ -124,9 +119,8 @@
       font-size: 16px;
       height: 20px;
       text-align: left;
-      font-family: 'SourceSansPro-Regular', sans-serif;
       .goal {
-        color: $nano-mediumgrey
+        color: $nw-mediumgrey
       }
     }
     .nano-progress-bar{
@@ -136,23 +130,19 @@
     .progress-text {
       margin-top: 7.5px;
       height: 18px;
-      font-family: 'SourceSansPro-Regular', sans-serif;
-      font-size: 14px;
       font-weight: bold;
       .count{
-        color: $nano-mediumlightblue;
+        color: $nw-darkaqua;
       }
       .count.goal-met {
-        color: #834da9;
+        color: $nw-purple;
       }
     }
     .challenge-start {
       margin-top: 7.5px;
-      font-size: 14px;
-      font-family: 'SourceSansPro-Regular', sans-serif;
       float: right;
       .started {
-        color: $nano-lightgrey;
+        color: $nw-lightgrey;
       }
     }
   }

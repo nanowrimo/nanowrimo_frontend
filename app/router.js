@@ -87,6 +87,7 @@ Router.map(function() {
   this.route('connect');
   this.route('press');
   this.route('about');
+  this.route('test');
   this.route('pep-talks');
   this.route('nano-prep');
   this.route('offers');

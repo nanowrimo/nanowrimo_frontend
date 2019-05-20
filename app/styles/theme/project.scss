@@ -50,18 +50,16 @@
     width: 39%;
     margin-left: 20%;
     .project-title {
-      font-family: 'SourceSerifPro-regular', serif ;
+      font-family: 'SerifRegular', serif ;
       font-size: 26px;
-      color: #343434;
+      color: $nw-darkgrey;
       margin-bottom: 7px;
     }
     .project-genres {
       margin-top: 7px;
-      font-family: 'SourceSansPro-regular', sans-serif;
-      font-size: 14px;
       line-height: 22px;
       text-align: left;
-      color: #979797;
+      color: $nw-mediumgrey;
     }
   }
   .project-count-display {
@@ -76,27 +74,23 @@
     
     .count{
       font-size: 56px;
-      font-family: 'SourceSerifPro-Regular', serif;
-      color: #2f3061;
+      font-family: 'SerifRegular', serif;
+      color: $nw-darkblue;
       height: 70px;
     }
     .unit-text {
       font-weight: bold;
-      font-family: 'SourceSerifPro-Bold', serif;
+      font-family: 'SerifBold', serif;
       font-size: 16px;
-      color: #979797;
+      color: $nw-mediumgrey;
       
       .count{
         font-size: 56px;
-        font-family: 'SourceSerifPro-Regular', serif;
-        color: $nano-darkblue;
+        font-family: 'SerifRegular', serif;
+        color: $nw-darkblue;
       }
       .unit-text {
-        font-weight: bold;
-        font-family: 'SourceSerifPro-Bold', serif;
-        font-size: 16px;
-        color: $nano-mediumgrey;
-        
+        color: $nw-mediumgrey;
       }
     }
   }
@@ -111,11 +105,11 @@
     position: relative;
     background: #cfcfcf;
     border-radius: 6px;
-    border: 1px solid #2f3061;
+    border: 1px solid $nw-darkblue;
     float: left;
     height: 630px;
     width: 460px;
-    /* box-shadow: 7px 7px -3px -3px #2f3061; */
+    /* box-shadow: 7px 7px -3px -3px $nw-darkblue; */
     
     img, .large-cover-overlay {
       height: 630px;
@@ -137,11 +131,11 @@
   
   #project-information {
     position: relative;
-    /* box-shadow: 7px 7px 0px 0px #2f3061; */
+    /* box-shadow: 7px 7px 0px 0px $nw-darkblue; */
     padding: 28px;
-    background: #e2eff3;
+    background: $nw-lightblue;
     border-radius: 6px;
-    border: 1px solid #2f3061;
+    border: 1px solid $nw-darkblue;
     float: left;
     height: 630px;
     width: 460px;
@@ -149,16 +143,14 @@
       display: none;
     }
     #project-summary-label {
-      font-family: "SourceSansPro-Regular", sans-serif;
-      font-size: 14px;
-      color: #979797;
+      color: $nw-mediumgrey;
     }
     #project-summary {
       width: 100%;
       position: relative;
-      font-family: "SourceSerifPro-Regular", serif;
+      font-family: "SerifRegular", serif;
       font-size: 16px;
-      color: #343434;
+      color: $nw-darkgrey;
       max-height: 395px;
       overflow: auto;
     }
@@ -168,9 +160,7 @@
       width: 90%;
       
       #genres-label {
-        font-family:'SourceSansPro-Regular', sans-serif;
-        font-size: 14px;
-        color: #979797;
+        color: $nw-mediumgrey;
         padding-bottom: 7px;
       }
       #genres-list {
@@ -178,8 +168,8 @@
         width: 402px;
         overflow: auto;
         .genre {
-          font-family: 'SourceSerifPro-Regular', serif;
-          color: #343434;
+          font-family: 'SerifRegular', serif;
+          color: $nw-darkgrey;
           font-size: 18px;
           margin-right: 21px;
         }
@@ -188,7 +178,7 @@
         a {
           font-family: SourceSerifPro, serif;
           font-size: 16px;
-          color: #343434;
+          color: $nw-darkgrey;
         }
       }
     }
@@ -202,7 +192,7 @@
     font-family: "SourceSansPro", sans-serif;
     font-size: 14px;
     font-weight: bold;
-    color: #979797;
+    color: $nw-mediumgrey;
     text-transform: uppercase;
     margin-bottom: 7px;
   }
@@ -210,7 +200,7 @@
     font-family: "SourceSansPro", sans-serif;
     font-size: 16px;
     line-height: 1.38;
-    color: #343434;
+    color: $nw-darkgrey;
   }
 
 }
@@ -224,13 +214,13 @@
   #texts {
     text-align: center;
     font-size: 26px;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
     #line-1 {
     
     }
     #line-2 {
       a{
-        color: $nano-darkgrey;
+        color: $nw-darkgrey;
         text-decoration: underline;
       }
     }
@@ -283,10 +273,10 @@
         display: none;
       }
       #project-information {
-        /* box-shadow: 7px 7px 0px 0px #2f3061; */
+        /* box-shadow: 7px 7px 0px 0px $nw-darkblue; */
         padding: 28px;
-        background: #e2eff3;
-        border: 1px solid #979797;
+        background: $nw-lightblue;
+        border: 1px solid $nw-mediumgrey;
         float: none;
         height: auto;
         width: 100%;
@@ -295,7 +285,7 @@
        
         #project-title {
           display: block;
-          color: #2f3061;
+          color: $nw-darkblue;
           font-weight: bold;
           font-family: 'SourceSerifPro', serif;
           font-size: 26px;

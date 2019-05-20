@@ -1,15 +1,13 @@
 .nw-footer-container {
-  background: #DFE4E6;
-  color: $nano-mediumdarkgrey;
+  background: $nw-lightgreyblue;
+  color: $nw-mediumdarkgrey;
   a {
-    color: $nano-mediumdarkgrey;
+    color: $nw-mediumdarkgrey;
     &:hover {
       transition: .3s opacity;
       opacity: .7;
     }
   }
-  font-family: 'SourceSansPro-Regular', sans-serif;
-  font-size: 14px;
   .nw-footer {
     padding-left: 15px;
     padding-right: 15px;
@@ -50,7 +48,7 @@
 .nw-footer-header {
   margin-top: 12px;
   margin-bottom: 12px;
-  font-family: 'SourceSansPro-Bold', sans-serif;
+  font-family: 'SansBold', sans-serif;
   text-transform: uppercase;
   line-height: 16px;
   a { margin-right: 15px; }

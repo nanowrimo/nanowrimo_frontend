@@ -18,12 +18,10 @@
       .conversation-header {
         flex: 0 0 46px;
         padding: 14px;
-        font-family: 'SourceSansPro-Regular', sans-serif;
-        font-size: 14px;
-        color: #979797;
+        color: $nw-mediumgrey;
         .conversation-name {
-          font-family: 'SourceSansPro-Bold', sans-serif;
-          color: #75abbc;
+          font-family: 'SansBold', sans-serif;
+          color: $nw-darkaqua;
         }
       }
       .conversation-content {
@@ -79,20 +77,17 @@
               max-width: 527px;
               .nanomessage-content {
                 padding: 14px;
-                background-color: #dfe4e6;
+                background-color: $nw-lightgreyblue;
                 border-radius: 6px;
-                font-family: 'SourceSansPro-Regular', sans-serif;
                 font-size: 16px;
                 line-height: 1.25;
                 text-align: left;
-                color: $nano-darkgrey;
+                color: $nw-darkgrey;
               }
               .nanomessage-timesince {
-                font-family: 'SourceSansPro-Regular', sans-serif;
-                font-size: 14px;
                 line-height: 1.57;
                 letter-spacing: 0.3px;
-                color: $nano-mediumgrey;
+                color: $nw-mediumgrey;
               }
             }
             &.nanomessage-left {
@@ -111,7 +106,7 @@
       
               .nanomessage-content-container {
                 .nanomessage-content {
-                  background-image: linear-gradient(to bottom, #e2eff3, #d5e2e6);
+                  background-image: linear-gradient(to bottom, $nw-lightblue, #d5e2e6);
                 }
                 .nanomessage-timesince {
                   margin-right: 24px;
