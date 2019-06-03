@@ -2,6 +2,7 @@
 $nw-white: #ffffff;
 $nw-white-1: #F2F8FA;
 $nw-white-2: #ededed;
+$nw-verylightgrey: #e0e0e0;
 $nw-lightgrey: #b8b8b8;
 $nw-mediumgrey: #979797;
 $nw-mediumdarkgrey: #666666;
@@ -56,3 +57,7 @@ $nw-darkblue0: rgba(47, 48, 97, 0.00);
 $nw-darkblue10: rgba(47, 48, 97, 0.10);
 $nw-darkblue30: rgba(47, 48, 97, 0.30);
 $nw-pink30: rgba(227, 127, 130, 0.30);
+
+
+$nw-horiz-stripes: repeating-linear-gradient(0deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
+$nw-box-shadow: 0 0 14px 3px $nw-darkblue10;

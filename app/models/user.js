@@ -108,7 +108,18 @@ const User = Model.extend({
     }
   }),
 
-  //activeGroupUsers: filterBy('groupUsers','exit_at',
+  //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
+  convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+    let gus = this.get('groupUsers');
+    let bgus = [];
+    gus.forEach(function(gu) {
+      if (((gu.groupType=='buddies')||(gu.groupType=='region'))&&(gu.exitAt==null)) {
+        bgus.push(gu.group);
+      }
+    });
+    return bgus;
+  }),
+  
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   buddyGroupUsers: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');

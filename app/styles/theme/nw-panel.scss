@@ -1,0 +1,70 @@
+.nw-panel {
+  position: relative;
+  background: white;
+  border: 0px solid #FAFAFA;
+  box-shadow: $nw-box-shadow;
+  background: $nw-horiz-stripes;
+  flex: 1 1 100%;
+  @media (min-width: $screen-sm) {
+    border-radius: $border-radius;
+  }
+  &.nw-with-tabs {
+    margin-top: 40px;
+    flex: 1 1 100%;
+  }
+  .nw-panel-secondary-container {
+    position: relative;
+    .nw-panel-secondary {
+      background-color: $nw-white-2;
+      margin-left: -28px;
+      margin-right: -28px;
+      margin-bottom: -28px;
+      margin-top: 28px;
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      @media (min-width: $screen-sm) {
+        border-radius: 0 0 $border-radius $border-radius;
+      }
+      &.nw-panel-hidden {
+        display: none;
+      }
+    }
+    .nw-panel-secondary > div {
+      margin:10px;
+    }
+  }
+}
+.nw-panel.nw-page-top {
+  margin-top: 120px;
+}
+.nw-panel-tabs {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  font-family: 'SansSemiBold', sans-serif;
+  font-size: 16px;
+  text-align: left;
+  color: $nw-lightgrey;
+  margin-top: -29px;  
+  div {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: $nw-lightgrey;
+    border-radius: 4px;
+    padding-bottom: 8px;
+    height: 36px;
+    &.nw-active-tab, &:hover {
+      text-decoration: none;
+      color: $nw-darkaqua;
+      background: linear-gradient(to top, $nw-darkaqua 0px,$nw-darkaqua 7px,transparent 7px,transparent 500px);
+    }
+  }
+}

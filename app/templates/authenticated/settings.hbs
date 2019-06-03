@@ -1,16 +1,14 @@
 <div class="content-gutters">
   <div class="container-fluid narrow">
-    <div class="d-flex align-top">
-      <div class="nano-panel with-tabs">
-        <ul class="nano-panel-tabs narrow">
-          <li>{{link-to 'Account' 'authenticated.settings.account'}}</li>
-          <li>{{link-to 'Privacy' 'authenticated.settings.privacy'}}</li>
-          <li>{{link-to 'Preferences' 'authenticated.settings.preferences'}}</li>
-          <!-- <li>{{link-to 'Blocked' 'authenticated.settings.blocked'}}</li> -->
-        </ul>
-        <div id="nw-settings-panel-layout">
-          {{outlet}}
-        </div>
+    <div class="nw-panel nw-page-top nw-with-tabs">
+      <ul class="nw-panel-tabs narrow">
+        <li>{{link-to 'Account' 'authenticated.settings.account'}}</li>
+        <li>{{link-to 'Privacy' 'authenticated.settings.privacy'}}</li>
+        <li>{{link-to 'Preferences' 'authenticated.settings.preferences'}}</li>
+        <!-- <li>{{link-to 'Blocked' 'authenticated.settings.blocked'}}</li> -->
+      </ul>
+      <div id="nw-settings-panel-layout">
+        {{outlet}}
       </div>
     </div>
   </div>

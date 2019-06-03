@@ -1,0 +1,27 @@
+.nw-sidebar {
+  background: white;
+  border: 0px solid #FAFAFA;
+  box-shadow: $nw-box-shadow;
+  background: $nw-horiz-stripes;
+  text-align: center;
+  @media (min-width: $screen-sm) {
+    flex: 0 0 299px;
+    width: 299px;
+    border-radius: 0;
+    margin-right: 28px;
+  }
+  @media (max-width: $screen-xs-max) {
+    flex: 0 0 100%;
+  }
+  .nw-sidebar-divot {
+    @media (min-width: $screen-sm) {
+      width: 299px;
+      height: 7px;
+      position: absolute;
+      bottom: -20;
+      background-image: url("/images/global/leftside_bottom.png");
+      background-size: 299px 7px;
+    }
+  }
+  
+}

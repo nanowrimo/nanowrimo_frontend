@@ -10,5 +10,6 @@ export default Model.extend({
   content: attr('string'),
   actionType: attr('string'),
   actionId: attr('string'),
+  imageUrl: attr('string'),
   user: belongsTo('user'),
 });

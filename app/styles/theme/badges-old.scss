@@ -1,0 +1,73 @@
+.badges {
+  margin: auto;
+  @media (max-width: $screen-xs) {
+    width: 300px;
+    :nth-child(5n-2) {
+      margin-right: 0px;
+    }
+    :nth-child(5n-1) {
+      margin-left: 53px;
+    }
+  }
+  @media (min-width: $screen-xs) and (max-width: $screen-xs-max) {
+    width: 346px;
+    :nth-child(6n) {
+      margin-right: 0px;
+    }
+    :nth-child(6n-2) {
+      margin-left: 53px;
+    }
+  }
+  @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    width: 636px;
+    :nth-child(11n) {
+      margin-right: 0px;
+    }
+    :nth-child(11n-4) {
+      margin-left: 53px;
+    }
+  }
+  @media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    width: 437px;
+    :nth-child(6n) {
+      margin-right: 0px;
+    }
+    :nth-child(6n-2) {
+      margin-left: 53px;
+    }
+  }
+  @media (min-width: $screen-lg) {
+    width: 510px;
+    :nth-child(8n) {
+      margin-right: 0px;
+    }
+    :nth-child(8n-3) {
+      margin-left: 53px;
+    }
+  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  li{
+    flex: 0 0 82px;
+    height: 93px;
+    margin-right: 24px;
+    border-radius: 12px;
+    overflow: visible;
+    list-style-type: none;
+    img {
+      width: 82px;
+      height: auto;
+      margin-top: -2px;
+    }
+  }
+}
+.nano-card-icon {
+  &.badge-large {
+    height: 120px;
+    img {
+      width: 130px;
+      height: 147px;
+    }
+  }
+}

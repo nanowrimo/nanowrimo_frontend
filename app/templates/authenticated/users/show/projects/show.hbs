@@ -1,6 +1,6 @@
 <div class="content-gutters">
   <div class="container-fluid">
-    <div id='project' class='nano-panel full-width no-margin'>
+    <div id='project' class='nw-panel full-width no-margin'>
       <div class='project-cover'>
         <div class='project-cover-clip {{if canEdit "user-editable" ""}}'>
           <img src="{{project.coverUrl}}">
@@ -44,16 +44,14 @@
         <img src="{{project.flippyDoodlePath}}">
       </div>
     </div>
-    <div class="d-flex align-top">
-      <div class="nano-panel with-tabs full-width" id='nano-panel-project'>
-        <ul class="nano-panel-tabs">
-          <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
-          <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
-          <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
-        </ul>
-        <div style="padding-top: 28px;">
-          {{outlet}}
-        </div>
+    <div class="nw-panel nw-with-tabs full-width">
+      <ul class="nw-panel-tabs">
+        <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
+        <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
+        <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
+      </ul>
+      <div style="padding-top: 28px;">
+        {{outlet}}
       </div>
     </div>
   </div>

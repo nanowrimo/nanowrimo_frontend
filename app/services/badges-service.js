@@ -34,7 +34,7 @@ export default Service.extend({
         }
       });
     }
-    debounce(this, this.checkForUpdates, 15000, false);
+    //debounce(this, this.checkForUpdates, 15000, false);
   },
   
   incrementRecomputeBadges() {

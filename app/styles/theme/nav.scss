@@ -34,6 +34,7 @@
     }
     
     .dropdown-item {
+      display: flex;
       overflow: hidden;
       padding: 0;
       height: 35px;
@@ -130,6 +131,7 @@
         }
       }
       .nav-store {
+        display: flex;
         margin-right: -1rem;
         .store-blue {
           padding-left: 10px;
@@ -380,52 +382,5 @@
         }
       }
     }
-  }
-}
-.nano-search {
-  .search-field {
-    position: relative;
-    margin-bottom: 0;
-    label {
-      display: none;
-    }
-    .ember-text-field {
-      font-size: 14px;
-      height: 28px;
-      width: 220px;
-    }
-    .search-button { 
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      font-size: 14px;
-      height: 28px;
-      line-height: 28px;
-      color: $nw-mediumgreen;
-      border: 0px;
-      border-radius: 0px;
-      border-left: solid 1px $nw-mediumgreen;
-      background: transparent;
-      background-image: none;
-    }
-  }
-}
-.nano-side-menu {
-  .nano-search {
-    .ember-text-field {
-      height: 35px;
-    }
-    .search-button {
-      height: 35px;
-      width: 35px;
-    }
-  }
-}
-.navbar .nano-search {
-  flex: 1 1 408px;
-  .ember-text-field {
-    width: 408px;
   }
 }

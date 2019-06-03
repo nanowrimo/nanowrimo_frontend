@@ -18,6 +18,11 @@ export default Component.extend({
     return false;
   }),
   renderImage: computed('notification',function() {
-    return "/images/other/helmet_image.svg";
+    let url = this.get('notification.imageUrl');
+    if (url) {
+      return url;
+    } else {
+      return "/images/other/helmet_image.svg";
+    }
   }),
 });

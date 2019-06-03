@@ -216,7 +216,7 @@
           
           align-items: stretch;
           flex-wrap: nowrap;
-          @media (max-width: $screen-md) {
+          @media (max-width: $screen-lg) {
             flex-wrap: wrap;
           }
           padding-top: 21px;

@@ -1,12 +1,15 @@
-<div class="form-group search-field">
-  {{validated-input
-    errors=changeset.errors
-    hasAttemptedSubmit=hasAttemptedSubmit
-    label="Search"
-    name="search"
-    placeholder="Search for users..."
-    type="text"
-    value=changeset.search
-  }}
-  <button class="search-button" aria-label="search"><span aria-hidden="true">{{fa-icon "search"}}</span></button>
+<div class="nw-search">
+  <div class="form-group nw-search-field {{sizeClass}}">
+    <form action="/search">
+      <input
+        class="ember-text-field"
+        label="Search"
+        name="q"
+        placeholder="Search for users..."
+        type="text"
+        value={{q}}
+      />
+      <button class="nw-search-button" aria-label="search"><span aria-hidden="true">{{fa-icon "search"}}</span></button>
+    </form>
+  </div>
 </div>

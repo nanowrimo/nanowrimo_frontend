@@ -1,0 +1,42 @@
+<div class='nw-flippy-wrapper'>
+  <div class='nw-card nw-card-white nw-card-face-back'>
+    <div class='nw-card-header'>
+      <div class='nw-card-actions'>
+        <div class='nw-card-model-actions'>
+          <div class="nw-flippy-card-toggle" {{action "toggleSubcard"}}>
+            <div>{{fa-icon "repeat"}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='nw-card-content'>
+      <div class='nw-card-scrollable'>{{user.bio}}</div>
+    </div>
+  </div>
+  <div class='nw-card nw-card-white nw-card-face-front'>
+    <div class='nw-card-header'>
+      <div class='nw-card-actions'>
+        <div class='nw-card-model-actions'>
+          <div class="nw-flippy-card-toggle" {{action "toggleSubcard"}}>
+            <div>{{fa-icon "repeat"}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='nw-card-content nw-centered'>
+      <div class="nw-card-icon nw-centered">
+        <div class="nw-avatar-large">
+          {{#link-to 'authenticated.users.show' user.slug}}
+            <img src={{avatarUrl}} alt={{user.name}}>
+          {{/link-to}}
+        </div>
+      </div>
+      <div class='nw-card-headline nw-centered'>
+        {{#link-to 'authenticated.users.show' user.slug}}
+          {{user.name}}
+        {{/link-to}}
+      </div>
+      <div class='nw-card-subhead nw-centered'>{{user.location}}</div>
+    </div>
+  </div>
+</div>

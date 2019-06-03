@@ -2,13 +2,16 @@ import Service from '@ember/service';
 import { computed }  from '@ember/object';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
+import moment from "moment"
 
 export default Service.extend({
   currentUser: service(),
   store: service(),
   recomputeNotifications: 0,
+  lastCheck: null,
 
   load() {
+    this.set('lastCheck',moment());
     debounce(this, this.checkForUpdates, 5000, false);
     return this.get('store').query('notification',{});
   },
@@ -19,7 +22,7 @@ export default Service.extend({
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();
     });
-    debounce(this, this.checkForUpdates, 15000, false);
+    //debounce(this, this.checkForUpdates, 15000, false);
   },
   
   incrementRecomputeNotifications() {
@@ -28,8 +31,15 @@ export default Service.extend({
   },
   
   newNotificationsCount: computed('recomputeNotifications', function() {
-    var l = this.store.peekAll('notification').get('length');
-    return l;
+    var ns = this.store.peekAll('notification')
+    var count = 0;
+    var lc = this.get('lastCheck');
+    ns.forEach(function(obj) {
+      if (obj.displayAt>lc) {
+        count += 1;
+      }
+    });
+    return count;
   }),
   
 });

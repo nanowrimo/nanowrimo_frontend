@@ -1,0 +1,15 @@
+{{search-field size='big' q=q}}
+<div class="nw-panel-secondary-container">
+  {{#if (eq currentPanel "writers")}}
+    <div class="nw-panel-secondary nw-panel-flex">
+      {{#if searchResults.data}}
+        {{#each searchResults.data as |u|}}
+          {{user-card user=u.attributes}}
+        {{/each}}
+      {{/if}}
+    </div>
+  {{/if}}
+  <div class="nw-panel-tabs">
+    <div id="writers" onclick={{action 'switchSection' val='writers'}} class={{if (eq currentPanel "writers") 'nw-active-tab' }}>Writers ({{searchResults.data.length}})</div>
+  </div>
+</div>

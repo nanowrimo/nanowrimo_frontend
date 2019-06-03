@@ -1,5 +1,5 @@
 // Config
-@import "nw-colors";
+@import "nw-variables";
 @import "nano-bootstrap-config";
 
 //Bootstrap
@@ -22,6 +22,7 @@
 @import "theme/buddies";
 @import "theme/nano-progress-bar";
 @import "theme/nav";
+@import "theme/nw-search";
 @import "theme/sidemenu";
 @import "theme/page-intro";
 @import "theme/fundometer";
@@ -29,14 +30,16 @@
 @import "theme/nw-footer";
 @import "theme/tooltips";
 @import "theme/modals";
-@import "theme/panels";
+@import "theme/nw-grid";
+@import "theme/nw-avatar";
+@import "theme/nw-panel";
+@import "theme/nw-sidebar";
 @import "theme/profile";
 @import "theme/region";
 @import "theme/plates";
-@import "theme/cards";
 @import "theme/lists";
 @import "theme/badges";
-@import "theme/notifications";
+@import "theme/nw-notifications";
 @import "theme/nanomessages";
 @import "theme/forms";
 @import "theme/login";

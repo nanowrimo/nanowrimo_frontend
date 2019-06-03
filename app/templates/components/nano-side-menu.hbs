@@ -5,7 +5,7 @@
   {{#if session.isAuthenticated}}
     {{#if currentUserName}}
       <li>
-        <a href="/" class="d-flex user-link">
+        <a href="/" class="user-link">
           <div class="nano-avatar-small">
             <img src={{currentUserAvatar}} alt={{currentUserName}} data-test-user-avatar>
           </div>
@@ -16,7 +16,7 @@
       </li>
       <li class="menu-break"></li>
       <li>
-        <div class="nano-search d-flex flex-row">
+        <div class="nano-search flex-row">
           {{search-field}}
         </div>
       </li>

@@ -1,14 +1,12 @@
-<div class="content-gutters">
+<div class="content-gutters nw-pad-top">
   <div class="container-fluid">
-    <div class="d-flex align-top">
-      <div class="nano-panel with-tabs">
-        <ul class="nano-panel-tabs">
-          <li class="nano-panel-tabs-spacer"></li>
-          <li>{{link-to "Find a Region" "authenticated.regions.find"}}</li>
-          <li>{{link-to "Regional Leaderboard" "authenticated.regions.leaderboard"}}</li>
-        </ul>
-        {{region-find class='grid-wrapper' model=model}}
-      </div>
+    <div class="nw-panel nw-with-tabs nw-with-grid">
+      <ul class="nw-panel-tabs">
+        <li class="nw-panel-tabs-spacer"></li>
+        <li>{{link-to "Find a Region" "authenticated.regions.find"}}</li>
+        <li>{{link-to "Regional Leaderboard" "authenticated.regions.leaderboard"}}</li>
+      </ul>
+      {{region-find class='grid-wrapper' model=model}}
     </div>
   </div>
 </div>

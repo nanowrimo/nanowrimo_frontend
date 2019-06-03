@@ -1,14 +1,14 @@
-.nav-notify-buttons {
+.nw-nav-notify-buttons {
   .nav-item {
     .dropdown-toggle::after {
       display: none;
     }
   }
-  .noti-modal {
-    margin-top: 0px;
+  .nw-noti-modal {
+    margin-top: -16px;
     .nano-menu-tab {
     }
-    .noti-modal-header {
+    .nw-noti-modal-header {
       height: 30px;
       display: flex;
       justify-content: space-between;
@@ -19,42 +19,42 @@
         line-height: 1.67;
         text-decoration: underline;
       }
-      .noti-header-left {
+      .nw-noti-header-left {
         flex: 1 1 100%;
         text-align: left;
         padding-left: 10px;
       }
-      .noti-header-right {
+      .nw-noti-header-right {
         flex: 1 1 100%;
         text-align: right;
         padding-right: 10px;
       }
     }
-    .noti-modal-body {
+    .nw-noti-modal-body {
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-      max-height: 250px;
+      max-height: 330px;
       overflow: scroll;
-      .notification {
+      .nw-notification {
         padding: 13px;
         padding-left: 17px;
         padding-right: 15px;
         display: flex;
         border-bottom: 1px solid #ddd;
         background-color: $nw-white;
-        &.noti-new {
+        &.nw-noti-new {
           background-color: $nw-white-1;
         }
-        .noti-image {
-          flex: 0 0 56px;
+        .nw-noti-image {
+          flex: 0 0 62px;
           img {
-            width: 56px;
+            width: 62px;
           }
         }
-        .noti-content-container {
+        .nw-noti-content-container {
           flex: 1 1 100%;
           padding-left: 15px;
-          .noti-content {
+          .nw-noti-content {
             width: 100%;
             line-height: 1.29;
             color: $nw-darkgreyblue;
@@ -62,16 +62,16 @@
               font-family: "SansBold", sans-serif;
             }
           }
-          .noti-tools-container {
+          .nw-noti-tools-container {
             display: flex;
             justify-content: space-between;
-            .noti-time-ago {
+            .nw-noti-time-ago {
               flex: 1 1 100%;
               font-size: 12px;
               line-height: 1.67;
               color: $nw-black;
             }
-            .noti-button {
+            .nw-noti-button {
               flex: 1 1 100%;
               text-align: right;
               button {
@@ -86,7 +86,7 @@
         }
       }
     }
-    .noti-modal-footer {
+    .nw-noti-modal-footer {
     }
   }
 }
