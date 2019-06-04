@@ -18,7 +18,7 @@ export default Service.extend({
   
   checkForUpdates() {
     let t = this;
-    let u = this.get('currentUser.user');
+    //let u = this.get('currentUser.user');
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();
     });

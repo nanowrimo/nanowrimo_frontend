@@ -1,5 +1,6 @@
 import NwPanel from 'nanowrimo/components/nw-panel';
-import { computed } from '@ember/object';
+//import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default NwPanel.extend({
@@ -8,7 +9,7 @@ export default NwPanel.extend({
   searchService: service(),
   
   queryParams: ['q'],
-  q: Ember.computed.alias('searchService.q'),
+  q: alias('searchService.q'),
   currentPanel: 'writers',
 
   actions: {

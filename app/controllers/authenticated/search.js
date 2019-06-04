@@ -1,13 +1,14 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
 export default Controller.extend({
   currentUser: service(),
   router: service(),
   searchService: service(),
   
   queryParams: ['q'],
-  q: Ember.computed.alias('searchService.q'),
+  q: alias('searchService.q'),
   
   //Returns the result string
   resultString: computed('size', function() {
