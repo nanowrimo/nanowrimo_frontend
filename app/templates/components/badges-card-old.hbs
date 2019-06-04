@@ -1,0 +1,19 @@
+<div class="nw-card-header">
+  <div class="nw-card-title">{{cardTitle}}</div>
+</div>
+<div class="nw-card-content nw-horiz-flex badge-subcard">
+  <div>
+    {{#if firstBadge}}
+      {{badge-rendered badge=firstBadge user=user projectChallenge=projectChallenge renderSize='large'}}
+    {{/if}}
+  </div>
+  <div>
+    <ul class="badges">
+      {{#each badges as |badge|}}
+        <li>
+          {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

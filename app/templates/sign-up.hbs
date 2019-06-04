@@ -1,97 +1,93 @@
 <div class="nano-centered">
   <div>
     <div class="login_image"><img src="/images/other/login_image.svg" alt="" /></div>
-    <div class="nano-card login">
-      <div class="nano-subcard">
-        <div class="nano-subcard-face face-front filled-grey">
-          <div class="nano-subcard-content">
-            <h2 class="card-title">Welcome! Let's start writing!</h2>
+    <div class="nw-card login">
+      <div class="nw-card-content">
+        <h2 class="card-title">Welcome! Let's start writing!</h2>
 
-            {{#if errorString}}
-              <div class="alert alert-danger">{{errorString}}</div>
-            {{/if}}
-            {{#if errorObject}}
-              <div class="alert alert-danger">
-                <ul>
-                  {{#each-in error as |key messages|}}
-                    <li>
-                      {{key}}
-                      <ul>
-                        {{#each messages as |message|}}
-                          <li>{{message}}</li>
-                        {{/each}}
-                      </ul>
-                    </li>
-                  {{/each-in}}
-                </ul>
-              </div>
-            {{/if}}
-
-            {{#form-for
-              afterError=(action 'receivedError')
-              submitValidationError=(action "signUpValidationFailed")
-              onSubmit=(action "onSubmit")
-              class="full-width"
-              model=signUpAttempt
-              steps=steps
-              as |f|
-            }}
-
-
-                <div class="form-group">
-                  {{f.input
-                    autocomplete="email"
-                    autofocus=true
-                    label="Email"
-                    placeholder="user@domain.com"
-                    property="email"
-                    type="email"
-                  }}
-                </div>
-                <div class="form-group">
-                  {{f.password
-                    autocomplete="new-password"
-                    label="Password"
-                    property="password"
-                  }}
-                </div>
-
-
-                <div class="form-group">
-                  {{f.input
-                    autocomplete="username"
-                    label="Username"
-                    property="username"
-                  }}
-                </div>
-        
-                 <div class="form-group">
-                  {{f.select
-                    label="Time Zone"
-                    options=timeZoneOptions
-                    property="timeZone"
-                  }}
-                </div>
-
-              <button data-test-sign-up-submit type="submit" class="full-width nano-button-large">
-                {{#if isSubmitting}}
-                  Signing Up
-                  <img class='spinner' src="/images/spinner.svg">
-                {{else}}
-                  Sign Up
-                {{/if}}
-              </button>
-
-            {{/form-for}}
-      
-
-            <div class="left-right-links">{{link-to "Forgot password" 'forgot-password' bubble=false}}{{link-to "I have an account" 'sign-in' bubble=false}}</div>
-            <div class="nano-hr">OR</div>
-            {{continue-with}}
-            <div class="nano-hr">TERMS</div>
-            <div class="left-right-links"><div>By signing up for NaNoWriMo, you agree to our Terms of Use and Privacy Policy.</div></div>
+        {{#if errorString}}
+          <div class="alert alert-danger">{{errorString}}</div>
+        {{/if}}
+        {{#if errorObject}}
+          <div class="alert alert-danger">
+            <ul>
+              {{#each-in error as |key messages|}}
+                <li>
+                  {{key}}
+                  <ul>
+                    {{#each messages as |message|}}
+                      <li>{{message}}</li>
+                    {{/each}}
+                  </ul>
+                </li>
+              {{/each-in}}
+            </ul>
           </div>
-        </div>
+        {{/if}}
+
+        {{#form-for
+          afterError=(action 'receivedError')
+          submitValidationError=(action "signUpValidationFailed")
+          onSubmit=(action "onSubmit")
+          class="full-width"
+          model=signUpAttempt
+          steps=steps
+          as |f|
+        }}
+
+
+            <div class="form-group">
+              {{f.input
+                autocomplete="email"
+                autofocus=true
+                label="Email"
+                placeholder="user@domain.com"
+                property="email"
+                type="email"
+              }}
+            </div>
+            <div class="form-group">
+              {{f.password
+                autocomplete="new-password"
+                label="Password"
+                property="password"
+              }}
+            </div>
+
+
+            <div class="form-group">
+              {{f.input
+                autocomplete="username"
+                label="Username"
+                property="username"
+              }}
+            </div>
+    
+             <div class="form-group">
+              {{f.select
+                label="Time Zone"
+                options=timeZoneOptions
+                property="timeZone"
+              }}
+            </div>
+
+          <button data-test-sign-up-submit type="submit" class="full-width nano-button-large">
+            {{#if isSubmitting}}
+              Signing Up
+              <img class='spinner' src="/images/spinner.svg">
+            {{else}}
+              Sign Up
+            {{/if}}
+          </button>
+
+        {{/form-for}}
+  
+
+        <div class="left-right-links">{{link-to "Forgot password" 'forgot-password' bubble=false}}{{link-to "I have an account" 'sign-in' bubble=false}}</div>
+        <div class="nano-hr">OR</div>
+        {{continue-with}}
+        <div class="nano-hr">TERMS</div>
+        <div class="left-right-links"><div>By signing up for NaNoWriMo, you agree to our Terms of Use and Privacy Policy.</div></div>
       </div>
     </div>
   </div>

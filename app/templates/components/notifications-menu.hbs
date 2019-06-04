@@ -1,4 +1,4 @@
-{{#bs-nav class="nav-notify-buttons" type="pills" as |nav|}}
+{{#bs-nav class="nw-nav-notify-buttons" type="pills" as |nav|}}
   {{#nav.dropdown as |dd|}}
     {{#dd.toggle}}
       <button class="button-clear button-bell">
@@ -8,22 +8,11 @@
         {{#if media.isMobile}}
           <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
         {{/if}}
-        <div class="unread-circle">1</div>
+        <div class="unread-circle">{{newNotificationsCount}}</div>
       </button>
     {{/dd.toggle}}
     {{#dd.menu align="right" as |ddm|}}
-      <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
-      <div class="modal-content">
-        <div class="modal-header">
-          Notifications
-        </div>
-        <div class="modal-body">
-    
-        </div>
-        <div class="modal-footer">
-          How's your writing going?
-        </div>
-      </div>
+      {{notifications-menu-dropdown allNotifications=allNotifications}}
     {{/dd.menu}}
   {{/nav.dropdown}}
 {{/bs-nav}}

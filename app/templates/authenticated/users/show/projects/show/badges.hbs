@@ -1,18 +1,21 @@
-<div class='nano-panel-tools'>
-  <span>Showing badges for:</span>
-  <div class="select-container">
-    <select class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged' value='target.value'}}>
-      {{#each project.projectChallenges as |pc|}}
-        <option value='{{pc.id}}'>{{pc.name}}</option>
-      {{/each}}
-    </select>
+<div class='nw-panel-actions'>
+  <div></div>
+  <div class='nw-panel-actions-select' >
+    <span id='project-listing-sort-by-text'>Show badges for </span>
+    <span id='project-listing-sort-by-select'>
+      <select class='form-control' onChange={{action 'challengeSelectChanged' value='target.value'}}>
+        {{#each project.projectChallenges as |pc|}}
+          <option value='{{pc.id}}'>{{pc.name}}</option>
+        {{/each}}
+      </select>
+    </span>
   </div>
 </div>
 {{#if projectChallenge}}
-  <div class="nano-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
+  <div class="nw-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
     {{badges-card cardTitle='Writing badges' badgeType='word count' user=user projectChallenge=projectChallenge}}
   </div>
-  <div class="nano-card g3-col1 g3-row4 g3-hspan3 g2-col1 g2-row4 g2-hspan2">
+  <div class="nw-card g3-col1 g3-row4 g3-hspan3 g2-col1 g2-row4 g2-hspan2">
     {{badges-card cardTitle='Personal achievement badges' badgeType='self-awarded' user=user projectChallenge=projectChallenge}}
   </div>
 {{/if}}

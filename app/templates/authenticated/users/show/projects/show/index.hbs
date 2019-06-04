@@ -1,9 +1,9 @@
 {{#if hasDetails}}  
-  <div class ='nano-card' id='project-details-card'>
+  <div class ='nw-card' id='project-details-card'>
     <div id='project-details'>
       <div id='project-cover-large' class="{{if canEdit 'user-editable'}}">
         <img src={{project.coverUrl}}>
-        <div class="large-cover-overlay image-editable-overlay" {{action 'editCover'}}>{{fa-icon "edit"}}</div>
+        <div class="large-cover-overlay nw-image-editable-overlay" {{action 'editCover'}}>{{fa-icon "edit"}}</div>
       </div>
       <div id='project-information' >
         <div id='project-title'>{{project.title}}</div>

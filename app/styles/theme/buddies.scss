@@ -4,13 +4,11 @@
 .buddy-buttons {
   padding: 10px;
   .buddy-status {
-    font-family: 'SourceSansPro-Regular';
-    font-weight: normal;
   }
   &.button-danger {
     .buddy-status {
-      color: $nano-darkred;
-      font-family: 'SourceSansPro-Bold';
+      color: $nw-darkred;
+      font-family: 'SansBold', sans-serif;
     }
   }
 }

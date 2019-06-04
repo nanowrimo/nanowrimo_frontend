@@ -22,7 +22,7 @@
     background-image: url("/images/banners/banner_right.png");
     font-size: 24px;
     text-align: right;
-    color: $nano-lightblue;
+    color: $nw-lightblue;
     padding-right: 20px;
     padding-top: 5px;
     @media (max-width: $screen-xs-max) {
@@ -40,8 +40,8 @@
     margin-right: -30px;
     min-height: 112px;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #4e4f82, $nano-darkblue);
-    border: solid 1px #dfe4e6;
+    background-image: linear-gradient(to bottom, #4e4f82, $nw-darkblue);
+    border: solid 1px $nw-lightgreyblue;
     display: flex;
     justify-content: stretch;
     align-items: stretch;
@@ -79,10 +79,10 @@
       }
       .flash-text {
         flex: 1 1 100%;
-        font-family: 'SourceSerifPro-Regular', serif;
+        font-family: 'SerifRegular', serif;
         line-height: 1.4;
         text-align: left;
-        color: $nano-lightblue;
+        color: $nw-lightblue;
         font-size: 20px;
         padding-top: 10px;
         padding-bottom: 10px;

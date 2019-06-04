@@ -1,22 +1,20 @@
-<div id='goals-tab'>
-  <div class='panel-actions'>
+<div class='nw-panel-actions'>
+  <div>
     <button id='create-new-goal-button' {{action 'newProjectChallenge'}}>create new goal</button>
-    
-    <div class='right-actions'>
+  </div>
+  <div class='nw-panel-actions-select' >
+    <span id='project-listing-sort-by-text'>Show badges for </span>
+    <span id='project-listing-sort-by-select'>
       <select onChange={{action 'filterChanged' value='target.value'}}>
         <option value='0'>show all goals</option>
         <option value='1'>show active goals</option>
         <option value='2'>show past goals</option>
       </select>
-    </div>
+    </span>
   </div>
-
-  {{#each filteredProjectChallenges as |pc|}}
-    {{project-challenge-listing projectChallenge=pc author=author project=project}}
-  {{/each}}
-
-   
-
 </div>
+{{#each filteredProjectChallenges as |pc|}}
+  {{project-challenge-listing projectChallenge=pc author=author project=project}}
+{{/each}}
 
 {{project-challenge-new-modal project=project open=newProjectChallenge}}

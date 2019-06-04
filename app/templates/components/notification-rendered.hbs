@@ -1,0 +1,21 @@
+<div class="nw-notification nw-noti-new">
+  <div class="nw-noti-image nano-avatar nano-avatar-medium">
+    <img src="{{renderImage}}" />
+  </div>
+  <div class="nw-noti-content-container">
+    <div class="nw-noti-content">
+      <span class="nw-noti-headline-string">{{notification.headline}}</span>
+      <span class="nw-noti-content-string">{{notification.content}}</span>
+    </div>
+    <div class="nw-noti-tools-container">
+      <div class="nw-noti-time-ago">
+        Posted {{timeSince}}
+      </div>
+      {{#if renderButton}}
+        <div class="nw-noti-button">
+          <button>View Badge</button>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

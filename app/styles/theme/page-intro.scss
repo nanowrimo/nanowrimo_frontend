@@ -24,14 +24,14 @@
       margin-bottom: 20px;
     }
     h1 {
-      font-family: SourceSerifPro-Bold;
+      font-family: 'SerifBold', serif;
       font-size: 40px;
       font-style: normal;
       font-stretch: normal;
       line-height: 1.25;
       letter-spacing: -0.1px;
       text-align: left;
-      color: #ab6a57;
+      color: $nw-brick;
     }
   }
 }

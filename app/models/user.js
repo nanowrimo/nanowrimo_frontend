@@ -10,6 +10,7 @@ const User = Model.extend({
   bio: attr('string'),
   createdAt: attr('date'),
   confirmedAt: attr('date'),
+  notificationsViewedAt: attr('date'),
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
@@ -71,6 +72,7 @@ const User = Model.extend({
   emailWritingReminders: attr('boolean'),
   
   settingSessionMoreInfo: attr('boolean'),
+  notifications: hasMany('notification'),
   settingSessionCountBySession: attr('number'),
   projects: hasMany('project'),
   projectChallenges: hasMany('projectChallenge'),
@@ -106,7 +108,18 @@ const User = Model.extend({
     }
   }),
 
-  //activeGroupUsers: filterBy('groupUsers','exit_at',
+  //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
+  convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+    let gus = this.get('groupUsers');
+    let bgus = [];
+    gus.forEach(function(gu) {
+      if (((gu.groupType=='buddies')||(gu.groupType=='region'))&&(gu.exitAt==null)) {
+        bgus.push(gu.group);
+      }
+    });
+    return bgus;
+  }),
+  
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   buddyGroupUsers: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');

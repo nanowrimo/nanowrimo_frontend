@@ -1,0 +1,16 @@
+<img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
+<div class="modal-content nw-noti-modal">
+  <div class="modal-header nw-noti-modal-header">
+    <div class="nw-noti-header-left">
+      {{link-to 'Notification Preferences' 'authenticated.settings.preferences'}}
+    </div>
+    <div class="nw-noti-header-right">
+      {{link-to 'View All Notifications' 'authenticated.settings.preferences'}}
+    </div>
+  </div>
+  <div class="modal-body nw-noti-modal-body">
+    {{#each allNotifications as |notification|}}
+      {{notification-rendered notification=notification}}
+    {{/each}}
+  </div>
+</div>

@@ -1,0 +1,34 @@
+{{#bs-nav class="nw-nav-notify-buttons" type="pills" as |nav|}}
+  {{#nav.dropdown as |dd|}}
+    {{#dd.toggle}}
+      <button class="button-clear button-bell">
+        {{#if media.isDesktop}}
+          <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
+        {{/if}}
+        {{#if media.isMobile}}
+          <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
+        {{/if}}
+        <div class="unread-circle">{{newNotificationsCount}}</div>
+      </button>
+    {{/dd.toggle}}
+    {{#dd.menu align="right" as |ddm|}}
+      <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
+      <div class="modal-content noti-modal">
+        <div class="modal-header noti-modal-header">
+          <div class="noti-header-left">
+            {{link-to 'Notification Preferences' 'authenticated.settings.preferences'}}
+          </div>
+          <div class="noti-header-right">
+            {{link-to 'View All Notifications' 'authenticated.settings.preferences'}}
+          </div>
+        </div>
+        <div class="modal-body noti-modal-body">
+          {{#each allNotifications as |notification|}}
+            {{notification-rendered notification=notification}}
+          {{/each}}
+        </div>
+      </div>
+      
+    {{/dd.menu}}
+  {{/nav.dropdown}}
+{{/bs-nav}}

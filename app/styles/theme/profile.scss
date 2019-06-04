@@ -1,23 +1,21 @@
-.nano-panel.left-sidebar.nano-profile {
-  font-size: 14px;
-  font-family: 'SourceSansPro-Bold', sans-serif;
-  .nano-user-name {
+.nw-sidebar.nw-profile {
+  font-family: 'SansBold', sans-serif;
+  .nw-user-name {
     width: 100%;
     text-align: center;
-    font-family: 'SourceSansPro-Bold', sans-serif;
-    color: $nano-darkblue;
+    color: $nw-darkblue;
     font-size: 26px;
   }
-  .nano-user-location {
+  .nw-user-location {
     width: 100%;
     text-align: center;
-    color: #000000;
+    color: $nw-black;
     font-style: italic;
   }
   .nano-member-since {
     width: 100%;
     text-align: center;
-    color: $nano-mediumgrey;
+    color: $nw-mediumgrey;
     font-style: italic;
   }
   .nano-user-social {
@@ -28,9 +26,9 @@
       width: 26px;
       height: 26px;
       margin: 7px;
-      background-color: $nano-lightblue;
+      background-color: $nw-lightblue;
       border-radius: 13px;
-      color: #7880b5;
+      color: $nw-mediumgreyblue;
       font-size: 12px;
       line-height: 26px;
     }
@@ -38,9 +36,8 @@
   .nano-user-link {
     width: 100%;
     text-align: center;
-    font-family: 'SourceSansPro-Bold', sans-serif;
     a {
-      color: $nano-mediumlightblue;
+      color: $nw-darkaqua;
     }
   }
 }
@@ -52,7 +49,7 @@
     height: 300px;
     min-height: 300px;
     .nano-subcard-face {
-      background: #FFFFFF;
+      background: $nw-white;
       .nano-subcard-header {
         flex: 0 0 30px;
         height: 30px;
@@ -64,69 +61,13 @@
         }
         .small-text {
           font-size: 12px;
-          color:#000;
-          font-family: 'SourceSansPro-Regular', sans-serif;
+          color:$nw-black;
         }
       }
     }
   }
 }
-.nw-avatar-irregular {
-  position: relative;
-  text-align: center;
-  height: 140px;
-  width: 140px;
-  overflow: hidden;
-  border-radius: 70px;
-  display: inline-block;
-  background-position: center center;
-  background-size: cover;
-  backface-visibility: hidden;
-}
 
-.nano-avatar-large {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  margin-top: -70px;
-  height: 140px;
-  img, .avatar-editable-overlay{
-    width: 140px;
-    height: 140px;
-    border-radius: 70px;
-  }
-  .avatar-editable-overlay {
-    display:none;
-  }
-  &.user-editable:hover{
-    .avatar-editable-overlay {
-      display:flex;
-      position: relative;
-      margin: auto;
-      margin-top: -140px;
-      left: auto;
-    }
-  }
-}
-.nano-avatar-medium {
-  width: 62px;
-  text-align: center;
-  height: 62px;
-  img {
-    width: 62px;
-    height: 62px;
-    border-radius: 31px;
-  }
-}
-.nano-avatar-small {
-  width: 36px;
-  height: 36px;
-  img {
-    width: 36px;
-    height: 36px;
-    border-radius: 18px;
-  }
-}
 .user-listing {
   padding: 15px;
   display: flex;
@@ -136,20 +77,18 @@
   }
   .user-info {
     flex: 1 1 100%;
-    .nano-user-name {
-      font-family: 'SourceSansPro-Bold', sans-serif;
+    .nw-user-name {
+      font-family: 'SansBold', sans-serif;
       font-size: 20px;
-      color: #343434;
+      color: $nw-darkgrey;
       a {
-        color: #343434;
+        color: $nw-darkgrey;
         
       }
     }
-    .nano-user-location {
-      font-family: 'SourceSansPro-Regular', sans-serif;
-      font-size: 14px;
-      font-style: italic;
-      color: #343434;
+    .nw-user-location {
+      font-family: 'SansItalic', sans-serif;
+      color: $nw-darkgrey;
     }
   }
   .user-buttons {
@@ -169,12 +108,12 @@
 }
 
 #missing-bio {
-  color: #979797;
+  color: $nw-mediumgrey;
   text-align: center;
   font-size: 16px;
 
   a {
-    color: #343434;
+    color: $nw-darkgrey;
     text-decoration: underline;
   }
 }
@@ -183,6 +122,3 @@
   margin-bottom: 10px;
 }
 
-#favorite-lists {
-  display: initial;
-}

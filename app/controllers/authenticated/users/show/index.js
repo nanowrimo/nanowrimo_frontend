@@ -40,6 +40,12 @@ export default Controller.extend({
       if (this.get('canEditUser')) {
         this.get('userShow').send("openEditModal",'biography');
       }
+    },
+    showEditFavorites() {
+      if (this.get('canEditUser')) {
+        this.get('userShow').send("openEditModal",'favorites');
+      }
     }
+    
   }
 });

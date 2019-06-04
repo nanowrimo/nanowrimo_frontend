@@ -1,62 +1,22 @@
 .badges {
-  margin: auto;
-  /*background-color: #ff0000;*/
-  @media (max-width: $screen-xs) {
-    width: 300px;
-    :nth-child(5n-2) {
-      margin-right: 0px;
-    }
-    :nth-child(5n-1) {
-      margin-left: 53px;
-    }
+  .nw-honeycomb {
+    content: '';
+    float: left;
+    width: 54px;
+    height: 513px;
+    overflow: hidden;
+    -webkit-shape-outside: polygon(0px 140px, 54px 140px, 54px 141px, 0 141px, 0px 326px, 54px 326px, 54px 327px, 0px 327px, 0px 512px, 54px 512px, 54px 513px, 0px 513px);
+    shape-outside: polygon(0px 140px, 54px 140px, 54px 141px, 0 141px, 0px 326px, 54px 326px, 54px 327px, 0px 327px, 0px 512px, 54px 512px, 54px 513px, 0px 513px);
+    -webkit-clip-path: polygon(0px 140px, 54px 140px, 54px 141px, 0 141px, 0px 326px, 54px 326px, 54px 327px, 0px 327px, 0px 512px, 54px 512px, 54px 513px, 0px 513px);
+    clip-path: polygon(0px 140px, 54px 140px, 54px 141px, 0 141px, 0px 326px, 54px 326px, 54px 327px, 0px 327px, 0px 512px, 54px 512px, 54px 513px, 0px 513px);
   }
-  @media (min-width: $screen-xs) and (max-width: $screen-xs-max) {
-    width: 346px;
-    :nth-child(6n) {
-      margin-right: 0px;
-    }
-    :nth-child(6n-2) {
-      margin-left: 53px;
-    }
-  }
-  @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
-    width: 636px;
-    :nth-child(11n) {
-      margin-right: 0px;
-    }
-    :nth-child(11n-4) {
-      margin-left: 53px;
-    }
-  }
-  @media (min-width: $screen-md) and (max-width: $screen-md-max) {
-    width: 437px;
-    :nth-child(6n) {
-      margin-right: 0px;
-    }
-    :nth-child(6n-2) {
-      margin-left: 53px;
-    }
-  }
-  @media (min-width: $screen-lg) {
-    width: 510px;
-    :nth-child(8n) {
-      margin-right: 0px;
-    }
-    :nth-child(8n-3) {
-      margin-left: 53px;
-    }
-  }
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  li{
-    flex: 0 0 82px;
+  
+  div {
+    display: inline-block;
     height: 93px;
     margin-right: 24px;
-    /*background-color: #0000FF;*/
     border-radius: 12px;
     overflow: visible;
-    list-style-type: none;
     img {
       width: 82px;
       height: auto;

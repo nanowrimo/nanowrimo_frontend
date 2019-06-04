@@ -7,31 +7,49 @@
     height: 262px;
   }
   border-radius: 5px;
-  border: solid 1px #dfe4e6;
+  border: solid 1px $nw-lightgreyblue;
   background-image: url('/images/global/card_back.png');
   background-repeat: repeat-x;
   background-size: 4px 100%;
-  box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
   &.nw-card-white {
     background: white;
   }
   
-  .nw-card-header{
+  .nw-card-header {
+    display: flex;
+    justify-content: space-between;
+    height: 28px;
+    &.nw-card-header-no-height {
+      height: 0px;
+    }
     .nw-card-title {
-      display: inline-block;
+      flex: 0 0 auto;
       padding: 4px;
       padding-right: 14px;
       padding-left: 14px;
       border-bottom-right-radius: 6px;
-      background-color: #dfe4e6;
-      font-family: SourceSansPro-Bold;
+      background-color: $nw-lightgreyblue;
+      font-family: 'SansBold', sans-serif;
       line-height: 20px;
       font-size: 14px;
       text-transform: uppercase;
-      color: #979797;
+      color: $nw-mediumgrey;
     }
     .nw-card-actions {
-      display: inline;
+      flex: 1 1 50%;
+      text-align: right;
+      padding-right: 5px;
+      z-index: 500;
+      i {
+        min-width: 32px;
+        line-height: 28px;
+        color: $nw-verylightgrey;
+        font-size: 18px;
+        cursor: pointer;
+        &:hover {
+          color: $nw-mediumgrey;
+        }
+      }
       .nw-card-display-actions {
         display:inline;
       }
@@ -55,6 +73,22 @@
   .nw-card-content {
     position: relative;
     padding: 20px;
+    &.no-padding {
+      height: 100%;
+      display: flex;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      border-radius: 6px;
+    }
+    &.nw-horiz-flex {
+      display: flex;
+      align-items: center;
+    }
+    &.nw-horiz-flex > div {
+      flex: 1 1 50%;
+    }
     &.nw-fixed-card {
       padding-top: 5px;
     }
@@ -63,15 +97,21 @@
       font-size: 14px;
       font-weight: 600;
       line-height: 1.57;
-      color: #b8b8b8;
+      color: $nw-lightgrey;
       margin-top: 10px;
     }
     .nw-card-headline {
-      font-family: 'SourceSerifPro-Regular', serif;
+      font-family: 'SerifBold', serif;
       font-size: 20px;
-      color: #343434;
+      color: $nw-darkgrey;
       line-height: 1.4;
       margin-top: 10px;
+      a {
+        color: $nw-darkgrey;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
     .nw-card-subhead {
       font-family: 'SourceSansPro-Regular', sans-serif;
@@ -79,18 +119,27 @@
       font-weight: 600;
       line-height: 1.57;
       text-align: center;
-      color: #b8b8b8;
+      color: $nw-lightgrey;
       margin-top: 10px;
     }
     
   }
+  .nw-card-flippy-doodle {
+    position: absolute;
+    top: -5px;
+    left: 180px;
+    @media(max-width: $screen-md) {
+      left: 10px;
+    }
+  }
+  
   .nw-card-footer {
   
   }
 }
 .nw-flippy-card {
-  min-width: 300px;
-  min-height: 300px;
+  min-width: 280px;
+  min-height: 280px;
   perspective: 1000px;
   &.nw-flipped {
     .nw-flippy-wrapper {
@@ -106,8 +155,8 @@
     -webkit-transition: transform 0.6s;
     transition: transform 0.6s;
     .nw-card {
-      width: 300px;
-      height: 300px;
+      width: 280px;
+      height: 280px;
       position: absolute;
       flex-direction: column;
       -webkit-backface-visibility: hidden;
@@ -123,7 +172,7 @@
         .nw-flippy-card-toggle {
           cursor: pointer;
           text-align: center;
-          color: $nano-lightgrey;
+          color: $nw-lightgrey;
           width: 28px;
           margin-left: 7px;
           padding: 4px;
@@ -136,7 +185,7 @@
         transform: rotateY(-180deg);
       }
       .nw-card-content {
-        height: 272px;
+        height: 252px;
         padding-top: 10px;
         padding-right: 10px;
         .nw-card-scrollable {

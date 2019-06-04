@@ -14,20 +14,19 @@
   z-index: 1000;
   width: 285px;
   height: 100%;
-  background-color: $nano-mediumgreen;
-  box-shadow: 0 0 14px 2px rgba(47, 48, 97, 0.12);
-  font-family: "SourceSansPro-Regular", sans-serif;
+  background-color: $nw-mediumgreen;
+  box-shadow: 0 0 14px 2px $nw-darkblue10;
   font-size: 16px;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.38;
   letter-spacing: normal;
   text-align: left;
-  color: $nano-lightblue;
+  color: $nw-lightblue;
   padding: 28px;
   padding-top: 14px;
   a {
-    color: $nano-lightblue;
+    color: $nw-lightblue;
   }
   .nano-side-menu-toggle {
     position: absolute;
@@ -66,7 +65,7 @@
     }
     .nano-side-menu-submenu-toggle {
       cursor: pointer;
-      font-family: "SourceSansPro-SemiBold", sans-serif;
+      font-family: "SansSemiBold", sans-serif;
       .flipped {
         i {
           -moz-transform: scaleY(-1);
@@ -82,7 +81,7 @@
   li.menu-break {
     width: 100%;
     height: 1px;
-    background-color: #dfe4e6;
+    background-color: $nw-lightgreyblue;
     margin-top: 10px;
     margin-bottom: 10px;
   }

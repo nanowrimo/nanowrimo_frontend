@@ -1,28 +1,26 @@
-<div class="nano-card short-card small-gap">
-  <div class="nano-subcard">
-    <div class="nano-subcard-face face-front filled-grey">
-      <div class='user-listing'>
-        <div class="nano-avatar nano-avatar-medium">
+<div class="nw-card short-card small-gap">
+  <div class="nano-card-content">
+    <div class='user-listing'>
+      <div class="nw-avatar nw-avatar-medium">
+        {{#link-to 'authenticated.users.show' user.slug}}
+          <img src={{user.avatarUrl}} alt={{user.name}}>
+        {{/link-to}}
+      </div>
+      <div class='user-info'>
+        <div class="nw-user-name">
           {{#link-to 'authenticated.users.show' user.slug}}
-            <img src={{user.avatarUrl}} alt={{user.name}}>
+            {{user.name}}
           {{/link-to}}
         </div>
-        <div class='user-info'>
-          <div class="nano-user-name">
-            {{#link-to 'authenticated.users.show' user.slug}}
-              {{user.name}}
-            {{/link-to}}
-          </div>
-          <div class="nano-user-location">
-            {{user.location}}
-          </div>
+        <div class="nw-user-location">
+          {{user.location}}
         </div>
-        {{#if buttons}}
-          <div class='user-buttons'>
-            {{buddy-buttons user=user}}
-          </div>
-        {{/if}}
       </div>
+      {{#if buttons}}
+        <div class='user-buttons'>
+          {{buddy-buttons user=user}}
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>

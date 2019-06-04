@@ -1,70 +1,69 @@
 <div class="grid-wrapper profile-view">
-  <div class="nano-card short-card g3-col1 g3-row1 g3-hspan3 g2-col1 g2-row1 g2-hspan2">
-    <div class="nano-subcard g3-sub1 g2-sub1">
-      <div class="nano-subcard-face face-front filled-grey">
-        <div class="nano-subcard-header">
-          <div class="corner-label">About {{user.name}}</div>
+  <div class="nw-card g3-col1 g3-row1 g3-hspan2 g2-col1 g2-row1 g2-hspan1">
+    <div class="nw-card-header">
+      <div class="nw-card-title">About {{user.name}}</div>
+      {{#if canEditUser}}
+        <div class="nw-card-actions">
+          <i {{action "showEditBio"}} class="fa fa-edit"></i>
         </div>
-        <div class="nano-subcard-content">
-          <div class="info-text side-by-side-even" data-test-user-bio>
-            {{#if hasBio}}
-              <div class='user-bio'>
-                {{{newline-to-br user.bio }}}
-              </div>
-            {{ else }}
-              {{#if canEditUser}}
-                <div id='missing-bio'>
-                  <div>
-                    Ready to practice for your book jacket blurb?
-                  </div>
-                  <a href="#" {{action "showEditBio"}} >
-                    Tell your fellow writers more about yourself! 
-                  </a>
-                </div>
-              {{else}}
-                Nothing is known about this author.
-              {{/if}}
-              
-            {{/if}}
-            
+      {{/if}}
+    </div>
+    <div class="nw-card-content">
+      <div class="info-text" data-test-user-bio>
+        {{#if hasBio}}
+          <div class='user-bio'>
+            {{{newline-to-br user.bio }}}
           </div>
-        </div>
+        {{ else }}
+          {{#if canEditUser}}
+            <div id='missing-bio'>
+              <div>
+                Ready to practice for your book jacket blurb?
+              </div>
+              <a href="#" {{action "showEditFavorites"}} >
+                Tell your fellow writers more about yourself! 
+              </a>
+            </div>
+          {{else}}
+            Nothing is known about this author.
+          {{/if}}
+          
+        {{/if}}
+        
       </div>
     </div>
-    <div class="nano-subcard g3-sub1 g2-sub1">
-      <div class="nano-subcard-face face-front filled-grey">
-        <div class="nano-subcard-header">
-          <div class="corner-label">Favorites</div>
+  </div>
+  <div class="nw-card g3-col3 g3-row1 g3-hspan1 g2-col2 g2-row1 g2-hspan1">
+    <div class="nw-card-header">
+      <div class="nw-card-title">Favorites</div>
+      {{#if canEditUser}}
+        <div class="nw-card-actions">
+          <i {{action "showEditFavorites"}} class="fa fa-edit"></i>
         </div>
-        <div class="nano-subcard-content" id='favorite-lists'>
-          <ul class="icon-list" id='favorite-books-list'>
-            {{#each favoriteBooks as |book|}}
-              <li>{{fa-icon "book"}} {{book.title}}</li>
-            {{else}}
-              <li><em>No favorite books</em></li>
-            {{/each}}
-          </ul>
-          <ul class="icon-list" id='favorite-authors-list'>
-            {{#each favoriteAuthors as |author|}}
-              <li>{{fa-icon "user"}} {{author.name}}</li>
-            {{else}}
-              <li><em>No favorite authors</em></li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
+      {{/if}}
     </div>
-    {{#if canEditUser}}
-      <div {{action "showEditBio"}} class="flip-corner-link" data-test-user-edit-bio>
-        <img src="/images/global/flip_corner.png" alt="Edit User Bio" />
-      </div>
-    {{/if}}
+    <div class="nw-card-content" id='favorite-lists'>
+      <ul class="icon-list" id='favorite-books-list'>
+        {{#each favoriteBooks as |book|}}
+          <li>{{fa-icon "book"}} {{book.title}}</li>
+        {{else}}
+          <li><em>No favorite books</em></li>
+        {{/each}}
+      </ul>
+      <ul class="icon-list" id='favorite-authors-list'>
+        {{#each favoriteAuthors as |author|}}
+          <li>{{fa-icon "user"}} {{author.name}}</li>
+        {{else}}
+          <li><em>No favorite authors</em></li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
   {{#if user.primaryProject.latestProjectChallenge }}
-    <div class="nano-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
+    <div class="nw-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row2 g2-hspan2">
       {{badges-card cardTitle='Writing badges' badgeType='word count' user=user projectChallenge=user.primaryProject.latestProjectChallenge}}
     </div>
-    <div class="nano-card g3-col1 g3-row4 g3-hspan3 g2-col1 g2-row4 g2-hspan2">
+    <div class="nw-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
       {{badges-card cardTitle='Personal achievement badges' badgeType='self-awarded' user=user projectChallenge=user.primaryProject.latestProjectChallenge}}
     </div>
   {{/if}}

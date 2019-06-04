@@ -1,18 +1,16 @@
 .icon-list {
   width: 100%;
   li {
-    font-family: 'SourceSansPro-Regular', sans-serif;
     font-size: 16px;
-    color: #343434;
+    color: $nw-darkgrey;
     width: 100%;
     .fa {
-      color: #75abbc;
+      color: $nw-darkaqua;
       width: 20px;
     }
   }
 }
 .nano-list-message {
-  font-family: 'SourceSansPro-Regular', sans-serif;
   padding-left: 14px;
   padding-right: 14px;
   padding-bottom: 7px;
@@ -29,10 +27,9 @@
     width: 100%;
     height: 36px;
     border-radius: 6px;
-    box-shadow: inset 0 1px 4px 0 rgba(151, 151, 151, 0.5);
-    background-color: #f7f7f7;
-    border: solid 1px #979797;
-    font-family: 'SourceSansPro-Regular', sans-serif;
+    box-shadow: inset 0 1px 4px 0 $nw-grey50;
+    background-color: $nw-white-1;
+    border: solid 1px $nw-mediumgrey;
     font-size: 16px;
     line-height: 1.38;
     outline: none;
@@ -44,7 +41,7 @@
   overflow-y: scroll;
   padding-left: 14px;
   padding-right: 14px;
-  border-top: solid 1px #dfe4e6;
+  border-top: solid 1px $nw-lightgreyblue;
   
   .nano-list-item {
     display: flex;
@@ -52,26 +49,25 @@
     margin-top: 7px;
     padding: 7px;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #ffffff, #f7f7f7);
-    border: solid 1px #dfe4e6;
+    background-image: linear-gradient(to bottom, $nw-white, $nw-white-1);
+    border: solid 1px $nw-lightgreyblue;
     .nano-list-icon {
       flex: 0 0 20px;
       font-size: 16px;
       text-align: center;
-      color: #b8b8b8;
+      color: $nw-lightgrey;
       &.icon-highlighted {
-        color: $nano-mediumgreen;
+        color: $nw-mediumgreen;
       }
       .fa-home {
-        color: $nano-mediumgreen;
+        color: $nw-mediumgreen;
       }
     }
     .nano-list-item-content {
       flex: 1 1 100%;
       .nano-list-item-title {
-        font-family: 'SourceSansPro-Regular', sans-serif;
         font-size: 16px;
-        color: #979797;
+        color: $nw-mediumgrey;
       }
       .nano-list-item-subcontent {
         display: flex;
@@ -79,9 +75,8 @@
         align-items: center;
         .nano-list-item-info {
           flex: 1 1 50%;
-          font-family: 'SourceSansPro-Regular', sans-serif;
           font-size: 14px;
-          color: #b8b8b8;
+          color: $nw-lightgrey;
         }
         .nano-list-item-buttons {
           flex: 1 1 50%;
@@ -93,11 +88,11 @@
   }
   .nano-list-item:hover {
     cursor: pointer;
-    background-image: linear-gradient(to bottom, #f7f7f7, #ededed);
-    border: solid 1px #b8b8b8;
+    background-image: linear-gradient(to bottom, $nw-white-1, $nw-white-2);
+    border: solid 1px $nw-lightgrey;
     .nano-list-item-content {
       .nano-list-item-title {
-        color: #343434;
+        color: $nw-darkgrey;
       }
       .nano-list-item-subcontent {
         .nano-list-item-info {

@@ -82,7 +82,7 @@ module.exports = function(environment) {
     //pull in the os lib so we can get the hostname
     var os = require("os");
     //define hosts based on hostname
-    if (os.hostname()=='beck') {
+    if (os.hostname()=='beck.local') {
       ENV.APP.API_HOST = 'http://localhost:3000';
       ENV.APP.UI_HOST = 'http://localhost:4200';
     } else {

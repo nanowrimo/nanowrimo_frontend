@@ -5,20 +5,20 @@
     width: 100%;
     height: 14px;
     border-radius: 6px;
-    box-shadow: inset 0 2px 4px 0 rgba(52, 52, 52, 0.2);
-    background-color: #dfe4e6;
-    border: solid 1px #dfe4e6;
+    box-shadow: inset 0 2px 4px 0 $nw-darkgrey20;
+    background-color: $nw-lightgreyblue;
+    border: solid 1px $nw-lightgreyblue;
     .progress-bar-fill {
       height: 13px;
       width: 0%;
       border-radius: 6px;
-      box-shadow: inset 0 2px 4px 0 rgba(255, 255, 255, 0.4);      
+      box-shadow: inset 0 2px 4px 0 $nw-white40;      
     }
     .progress-bar-fill {
-      background-image: linear-gradient(to right, $nano-mediumlightblue, $nano-mediumblue);
+      background-image: linear-gradient(to right, $nw-darkaqua, $nw-mediumblue);
     }
     .progress-bar-fill.goal-met {
-      background-image: linear-gradient(to right, #834da9, #633b80);
+      background-image: linear-gradient(to right, $nw-purple, #633b80);
     }
   }
 }

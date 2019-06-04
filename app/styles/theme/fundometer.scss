@@ -14,10 +14,10 @@
       position: absolute;
       top: 0;
       width: 100%;
-      font-family: SourceSansPro-Bold;
+      font-family: 'SansBold', sans-serif;
       font-size: 10px;
       letter-spacing: 0.2px;
-      color: $nano-darkblue;
+      color: $nw-darkblue;
       text-transform: uppercase;
       text-align: center;
       margin-top: 5px;
@@ -30,23 +30,22 @@
     justify-content: center;
     align-items: center;
     margin-left: 30px;
-    font-family: SourceSansPro-Regular;
     font-size: 16px;
     line-height: 1.38;
     letter-spacing: normal;
     text-align: center;
-    color: $nano-darkgrey;
+    color: $nw-darkgrey;
     div {
       flex: 0 0 auto;
       &.fundometer-raised {
-        font-family: SourceSerifPro-Bold;
+        font-family: 'SerifBold', serif;
         font-size: 20px;
         line-height: 1.25;
-        color: $nano-darkblue;
+        color: $nw-darkblue;
         margin-bottom: 10px;
       }
       a {
-        color: $nano-darkgrey;
+        color: $nw-darkgrey;
         text-decoration: underline;
       }
     }

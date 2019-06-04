@@ -41,16 +41,6 @@
   {{#each page.before_posts as |post|}}
     {{cms-post post=post currentUrl=page.data.attributes.url}}
   {{/each}}
-  <section class="nw-cms-content">
-    <div class="nw-container">
-      <div class="nw-wrapper nw-plain-text">
-        <h1>
-          {{{page.data.attributes.headline}}}
-        </h1>
-        {{{page.data.attributes.body}}}
-      </div>
-    </div>
-  </section>
   {{#each page.after_posts as |post|}}
     {{cms-post post=post currentUrl=page.data.attributes.url}}
   {{/each}}

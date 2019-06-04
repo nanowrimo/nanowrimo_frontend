@@ -1,0 +1,63 @@
+// WHITE to BLACK
+$nw-white: #ffffff;
+$nw-white-1: #F2F8FA;
+$nw-white-2: #ededed;
+$nw-verylightgrey: #e0e0e0;
+$nw-lightgrey: #b8b8b8;
+$nw-mediumgrey: #979797;
+$nw-mediumdarkgrey: #666666;
+$nw-darkgrey: #343434;
+$nw-black: #000000;
+
+// REDS
+$nw-lightred: #F0AEB0;
+$nw-mediumred: #E99A9C;
+$nw-darkred: #e37f82;
+$nw-brick: #ab6a57;
+
+// ORANGES
+$nw-lightorange: #EDBB82;
+$nw-darkbrown: #54301A;
+
+// YELLOWS
+
+// GREENS
+$nw-lightgreen: #95d0bf;
+$nw-mediumgreen: #73ab9b;
+$nw-darkgreen: #5f8c7f;
+$nw-darkgreygreen: #415f68;
+
+// BLUES
+$nw-lightaqua: #96c6d0;
+$nw-lightblue: #e2eff3;
+$nw-lightgreyblue: #dfe4e6;
+$nw-mediumlightblue: #a5d9e4;
+$nw-mediumaqua: #00A0A3;
+$nw-darkaqua: #75abbc;
+$nw-mediumblue: #6595a3;
+$nw-mediumgreyblue: #7880b5;
+$nw-darkblue: #2f3061;
+$nw-darkgreyblue: #41426f;
+
+// VIOLETS
+
+$nw-purple: #834da9;
+
+// SEMI-TRANSPARENT
+$nw-black10: rgba(0,0,0, 0.10);
+$nw-black70: rgba(0,0,0, 0.70);
+$nw-white40: rgba(255,255,255, 0.40);
+$nw-white75: rgba(255,255,255, 0.75);
+$nw-grey50: rgba(151, 151, 151, 0.50);
+$nw-darkgrey0: rgba(52, 52, 52, 0.00);
+$nw-darkgrey20: rgba(52, 52, 52, 0.20);
+$nw-darkgrey50: rgba(52, 52, 52, 0.50);
+$nw-darkgrey75: rgba(52, 52, 52, 0.75);
+$nw-darkblue0: rgba(47, 48, 97, 0.00);
+$nw-darkblue10: rgba(47, 48, 97, 0.10);
+$nw-darkblue30: rgba(47, 48, 97, 0.30);
+$nw-pink30: rgba(227, 127, 130, 0.30);
+
+
+$nw-horiz-stripes: repeating-linear-gradient(0deg, #fff, #fff 7px, #fafafa 7px, #fafafa 8px);
+$nw-box-shadow: 0 0 14px 3px $nw-darkblue10;

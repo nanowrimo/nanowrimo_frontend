@@ -1,11 +1,9 @@
-<div class="nano-subcard-face face-front filled-grey">
-  <div class="nano-subcard-content side-by-side">
-    <div class="side-by-side-left">{{high-charts content=chartData chartOptions=chartOptions theme=theme}}</div>
-    <div class="side-by-side-right">
-      <div class='centered'>
-        <div><span class='max-color'>{{count}}</span> / {{goal}}</div>
-        <div>total {{goalUnit}}</div>
-      </div>
+<div class="nw-card-content nw-horiz-flex">
+  <div>{{high-charts content=chartData chartOptions=chartOptions theme=theme}}</div>
+  <div>
+    <div class='centered'>
+      <div><span class='nw-card-headline'>{{count}}</span> / {{goal}}</div>
+      <div>total {{goalUnit}}</div>
     </div>
   </div>
 </div>

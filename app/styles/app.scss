@@ -1,5 +1,5 @@
 // Config
-@import "nano-colors";
+@import "nw-variables";
 @import "nano-bootstrap-config";
 
 //Bootstrap
@@ -16,11 +16,13 @@
 // Project
 @import "theme/normalize";
 @import "theme/logged-out";
+@import "theme/nw-fonts";
 @import "theme/general";
 @import "theme/buttons";
 @import "theme/buddies";
 @import "theme/nano-progress-bar";
 @import "theme/nav";
+@import "theme/nw-search";
 @import "theme/sidemenu";
 @import "theme/page-intro";
 @import "theme/fundometer";
@@ -28,28 +30,29 @@
 @import "theme/nw-footer";
 @import "theme/tooltips";
 @import "theme/modals";
-@import "theme/panels";
+@import "theme/nw-grid";
+@import "theme/nw-avatar";
+@import "theme/nw-panel";
+@import "theme/nw-project";
+@import "theme/nw-sidebar";
 @import "theme/profile";
 @import "theme/region";
 @import "theme/plates";
-@import "theme/cards";
-@import "theme/charts";
 @import "theme/lists";
 @import "theme/badges";
+@import "theme/nw-notifications";
 @import "theme/nanomessages";
 @import "theme/forms";
 @import "theme/login";
-@import "theme/projects";
-@import "theme/project";
 @import "theme/main-nav-logger-timer";
 @import "theme/project-stats";
 @import "theme/goals";
-@import "theme/listing-action-dropdown";
+@import "theme/nw-listing-action-dropdown";
 @import "theme/forgot-password";
-@import "theme/image-overlay";
-@import "theme/stats";
-@import "theme/cms";
+@import "theme/nw-image-overlay";
+@import "theme/nw-stats";
+@import "theme/nw-cms";
 @import "theme/nw-card";
-@import "theme/settings";
+@import "theme/nw-settings";
 
 

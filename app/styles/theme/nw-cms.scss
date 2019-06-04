@@ -13,7 +13,7 @@
     left:0;
     width:100%;
     height:100%;
-    background: linear-gradient(90deg, rgba(52, 52, 52, 0.75), rgba(52, 52, 52, 0));
+    background: linear-gradient(90deg, $nw-darkgrey75, $nw-darkgrey0);
   }
   .nw-container {
     width:100%;
@@ -41,26 +41,26 @@
       flex: 1 1 100%;
       align-items: center;
     }
-    .nw-superhead {font-size:1.0rem;letter-spacing: 0.0156rem;line-height:3.125rem;color:#F2F8FA;font-weight: bold; margin: 0;display: inline-block;overflow: hidden}
+    .nw-superhead {font-size:1.0rem;letter-spacing: 0.0156rem;line-height:3.125rem;color: $nw-white-1;font-weight: bold; margin: 0;display: inline-block;overflow: hidden}
     .nw-headline {
       font-size:2.5rem;
       letter-spacing: 0.0156rem;
       line-height:3.125rem;
-      color:#F2F8FA;
+      color: $nw-white-1;
       margin: 0;
       font-family: "Source Serif Pro Bold";
       display: inline-block;
       overflow: hidden;
     }
-    .nw-copy {font-size:1rem;line-height:1.375rem;color:#F2F8FA;margin:0.4375rem 0 0.875rem;}
+    .nw-copy {font-size:1rem;line-height:1.375rem;color: $nw-white-1;margin:0.4375rem 0 0.875rem;}
     .btn-wrapper {display: flex;align-items:center;}
     .btn-wrapper .btn:nth-of-type(1) {margin-right:0.875rem;}
-    .cta {font-family: "Source Sans Pro Italic";line-height: 1.375rem;color:#F2F8FA;margin-top:1.75rem}
+    .cta {font-family: "Source Sans Pro Italic";line-height: 1.375rem;color: $nw-white-1;margin-top:1.75rem}
     .cta a {color:inherit}
   }
 }
 .nw-cms-hero.nw-no-plate {
-  background-color: #5f8c7f;
+  background-color: $nw-darkgreen;
   min-height: 374px;
 }
 
@@ -74,14 +74,13 @@
   justify-content: center;
 }
 .nw-flex > div {
-  margin:14px;
+  margin:10px;
 }
 
 /* CMS content */
 .nw-cms-content {
   position: relative;
-  background-color: #f2f8fa;
-  /*box-shadow: 0 0.1875rem 0.875rem rgba(47,48,97,0.1);*/
+  background-color: $nw-white-1;
   overflow: hidden;
   .nw-wrapper {
     max-width:100%;
@@ -101,7 +100,7 @@
         figcaption {
           font-size: 12px;
           a {
-            color: #888;
+            color: $nw-mediumgrey;
           }
         }
       }
@@ -111,20 +110,20 @@
   .subtitle {
     font-size:1rem;
     font-family: "Source Sans Pro Bold";
-    color:#2F3061;
+    color:$nw-darkblue;
     line-height: 1.625rem;
     margin:0;
   }
   .nw-section-headline {
     font-size: 20px;
     line-height: 1.4;
-    color: #2f3061;
-    font-family: 'SourceSansPro-Bold', sans-serif;
+    color: $nw-darkblue;
+    font-family: 'SansBold', sans-serif;
     text-align: center;
   }
   .headline {
     font-size:1.875rem;
-    color:#2F3061;
+    color:$nw-darkblue;
     line-height: 2.5rem;
     margin: 0.4375rem 0 0;
     font-family: "Source Serif Pro";
@@ -132,16 +131,16 @@
   }
   .copy {
     margin-top:0.9375rem;
-    color:#343434;
+    color:$nw-darkgrey;
     font-size:1rem;
     line-height: 1.375rem;
     margin-bottom:1.75rem;
   }
   .nw-inline-menu {
     width: 100%;
-    border-bottom: solid 1px #b8b8b8;
+    border-bottom: solid 1px $nw-lightgrey;
     ul {
-      font-family: 'SourceSansPro-Bold', sans-serif;
+      font-family: 'SansBold', sans-serif;
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -155,12 +154,12 @@
           padding-right:20px;
           padding-left: 0px;
           text-decoration: none;
-          color: #b8b8b8;
+          color: $nw-lightgrey;
           &:hover {
-            color: #6595a3;
+            color: $nw-mediumblue;
           }
           &.nw-link-active {
-            color: #6595a3;
+            color: $nw-mediumblue;
           }
         }
       }
