@@ -20,7 +20,7 @@
               <div>
                 Ready to practice for your book jacket blurb?
               </div>
-              <a href="#" {{action "showEditBio"}} >
+              <a href="#" {{action "showEditFavorites"}} >
                 Tell your fellow writers more about yourself! 
               </a>
             </div>
@@ -33,12 +33,12 @@
       </div>
     </div>
   </div>
-  <div class="nw-card g3-col3 g3-row1 g3-hspan1 g2-col1 g2-row1 g2-hspan1">
+  <div class="nw-card g3-col3 g3-row1 g3-hspan1 g2-col2 g2-row1 g2-hspan1">
     <div class="nw-card-header">
       <div class="nw-card-title">Favorites</div>
       {{#if canEditUser}}
         <div class="nw-card-actions">
-          <i {{action "showEditBio"}} class="fa fa-edit"></i>
+          <i {{action "showEditFavorites"}} class="fa fa-edit"></i>
         </div>
       {{/if}}
     </div>

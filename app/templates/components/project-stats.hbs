@@ -39,9 +39,7 @@
     <div class="nw-panel-tools">
     </div>
     <div class="grid-wrapper">
-      <div class="nw-card g3-col1 g3-row1 g2-col1 g2-row1 short-card">
-        {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit}}
-      </div>
+      {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit class="nw-card g3-col1 g3-row1 g2-col1 g2-row1 short-card"}}
       <div class="nw-card g3-col2 g3-row1 g2-col2 g2-row1 short-card">
         {{stats-words-needed-today countNeededTodayData=countNeededTodayData userUnitsToday=userUnitsToday comparisonUnitsTodayData=comparisonUnitsTodayData goalUnit=goalUnit}}
       </div>
@@ -51,14 +49,9 @@
       </div>
       
   
-      <div class="nw-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row3 g2-hspan2">
-{{!--
-        {{stats-my-milestones class="g3-sub1 g2-sub1"}}
---}}   
-        {{#if projectChallenge}}
-          {{stats-my-overall-progress userDailyTotals=userDailyTotals projectChallenge=projectChallenge class="g3-sub2 g2-sub2"}}
-        {{/if}}
-      </div>
+      {{#if projectChallenge}}
+        {{stats-my-overall-progress userDailyTotals=userDailyTotals projectChallenge=projectChallenge class="nw-card g3-col1 g3-row2 g3-hspan3 g2-col1 g2-row3 g2-hspan2"}}
+      {{/if}}
       
       <div class="nw-card g3-col1 g3-row3 g2-col1 g2-row4 flippable">
         {{stats-when-i-write hourAggregates=userHourAggregates}}

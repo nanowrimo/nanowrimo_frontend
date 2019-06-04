@@ -1,57 +1,18 @@
-<div class="content-gutters">
+<div class="content-gutters nw-pad-top">
   <div class="container-fluid">
-    <div id='project' class='nw-panel full-width no-margin'>
-      <div class='project-cover'>
-        <div class='project-cover-clip {{if canEdit "user-editable" ""}}'>
-          <img src="{{project.coverUrl}}">
-          <div class="cover-overlay nw-image-editable-overlay" {{action "editCover"}}>
-            {{fa-icon "edit"}}
-          </div>
-        </div>
+    <div class='nw-panel'>
+      <div class="nw-panel-primary-container">
+        {{project-listing project=project author=user}}
       </div>
-      <div class='project-name-genres'>
-        <div class='project-title'>
-            {{project.title}}
+      <div class="nw-panel-secondary-container">
+        <div class="nw-panel-secondary nw-panel-flex">
+          {{outlet}}
         </div>
-        <div class='by'>
-          by {{link-to project.user.name 'authenticated.users.show' project.user.slug}}
-        </div>
-        <div class='project-genres'>
-          {{project.concatGenres}}
-        </div>
-        <div id='project-badges'> </div>
-
-      </div>
-      <div class='project-count-display'>
-        <div>
-          <div class='count'>
-            {{format-number project.unitCount}}
-          </div>
-          <div class='unit-text'>
-            total {{project.unitType}} count
-          </div>
-            {{#if canEdit}}
-              <button class="btn btn-primary" {{action "editProject"}}>Edit Project</button>
-            {{/if}}
-             {{project-edit-modal
-                onHidden=(action "afterEditProjectModalClose")
-                open=displayEditModal
-                project=project
-              }}
-        </div>
-      </div>
-      <div class='project-status'>
-        <img src="{{project.flippyDoodlePath}}">
-      </div>
-    </div>
-    <div class="nw-panel nw-with-tabs full-width">
-      <ul class="nw-panel-tabs">
-        <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
-        <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
-        <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
-      </ul>
-      <div style="padding-top: 28px;">
-        {{outlet}}
+        <ul class="nw-panel-tabs">
+          <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
+          <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
+          <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
+        </ul>
       </div>
     </div>
   </div>

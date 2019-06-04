@@ -17,8 +17,11 @@
   
   .nw-card-header {
     display: flex;
-    height: 28px;
     justify-content: space-between;
+    height: 28px;
+    &.nw-card-header-no-height {
+      height: 0px;
+    }
     .nw-card-title {
       flex: 0 0 auto;
       padding: 4px;
@@ -33,15 +36,15 @@
       color: $nw-mediumgrey;
     }
     .nw-card-actions {
-      flex: 0 0 50%;
+      flex: 1 1 50%;
       text-align: right;
+      padding-right: 5px;
+      z-index: 500;
       i {
         min-width: 32px;
         line-height: 28px;
         color: $nw-verylightgrey;
         font-size: 18px;
-        margin-left: 4px;
-        margin-right: 4px;
         cursor: pointer;
         &:hover {
           color: $nw-mediumgrey;
@@ -70,6 +73,22 @@
   .nw-card-content {
     position: relative;
     padding: 20px;
+    &.no-padding {
+      height: 100%;
+      display: flex;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      border-radius: 6px;
+    }
+    &.nw-horiz-flex {
+      display: flex;
+      align-items: center;
+    }
+    &.nw-horiz-flex > div {
+      flex: 1 1 50%;
+    }
     &.nw-fixed-card {
       padding-top: 5px;
     }
@@ -82,7 +101,7 @@
       margin-top: 10px;
     }
     .nw-card-headline {
-      font-family: 'SourceSerifPro-Regular', serif;
+      font-family: 'SerifBold', serif;
       font-size: 20px;
       color: $nw-darkgrey;
       line-height: 1.4;
@@ -105,6 +124,15 @@
     }
     
   }
+  .nw-card-flippy-doodle {
+    position: absolute;
+    top: -5px;
+    left: 180px;
+    @media(max-width: $screen-md) {
+      left: 10px;
+    }
+  }
+  
   .nw-card-footer {
   
   }

@@ -1,4 +1,6 @@
-{{search-field size='big' q=q}}
+<div class="nw-panel-primary-container">
+  {{search-field size='big' q=q}}
+</div>
 <div class="nw-panel-secondary-container">
   {{#if (eq currentPanel "writers")}}
     <div class="nw-panel-secondary nw-panel-flex">
@@ -9,7 +11,7 @@
       {{/if}}
     </div>
   {{/if}}
-  <div class="nw-panel-tabs">
-    <div id="writers" onclick={{action 'switchSection' val='writers'}} class={{if (eq currentPanel "writers") 'nw-active-tab' }}>Writers ({{searchResults.data.length}})</div>
-  </div>
+  <ul class="nw-panel-tabs">
+    <li><a id="writers" onclick={{action 'switchSection' val='writers'}} class={{if (eq currentPanel "writers") 'active' }}>Writers ({{searchResults.data.length}})</a></li>
+  </ul>
 </div>

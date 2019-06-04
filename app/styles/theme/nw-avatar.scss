@@ -21,7 +21,6 @@
   position: relative;
   width: 100%;
   text-align: center;
-  margin-top: -70px;
   height: 140px;
   img, .avatar-editable-overlay{
     width: 140px;
@@ -40,4 +39,21 @@
       left: auto;
     }
   }
+}
+.nw-sidebar {
+  .nw-avatar-large {
+    margin-top: -70px;
+  }
+}
+.nw-avatar-irregular {
+  position: relative;
+  text-align: center;
+  height: 140px;
+  width: 140px;
+  overflow: hidden;
+  border-radius: 70px;
+  display: inline-block;
+  background-position: center center;
+  background-size: cover;
+  backface-visibility: hidden;
 }

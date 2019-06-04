@@ -1,25 +1,27 @@
-<div class='buddy-listings'>
-  <div>
-    {{#each user.buddiesInvited as |buddy|}}
-      {{buddy-listing user=buddy buttons=true}}
-    {{/each}}
-  </div>
-  <div>
-    {{#each user.buddiesInvitedBy as |buddy|}}
-      {{buddy-listing user=buddy buttons=true}}
-    {{/each}}
-  </div>
-</div>
-<div class='buddy-listings'>
-  <div class='nano-card short-card no-gap header-card'>
-    <div class="nano-subcard">
-      <div class="nano-subcard-face face-front">
-      </div>
+<div class="nw-panel-primary-container">
+  <div class='buddy-listings'>
+    <div>
+      {{#each user.buddiesInvited as |buddy|}}
+        {{buddy-listing user=buddy buttons=true}}
+      {{/each}}
+    </div>
+    <div>
+      {{#each user.buddiesInvitedBy as |buddy|}}
+        {{buddy-listing user=buddy buttons=true}}
+      {{/each}}
     </div>
   </div>
-  <div>
-    {{#each user.buddiesActive as |buddy|}}
-      {{buddy-listing user=buddy buttons=true}}
-    {{/each}}
+  <div class='buddy-listings'>
+    <div class='nano-card short-card no-gap header-card'>
+      <div class="nano-subcard">
+        <div class="nano-subcard-face face-front">
+        </div>
+      </div>
+    </div>
+    <div>
+      {{#each user.buddiesActive as |buddy|}}
+        {{buddy-listing user=buddy buttons=true}}
+      {{/each}}
+    </div>
   </div>
 </div>

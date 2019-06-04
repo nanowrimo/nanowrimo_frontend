@@ -1,0 +1,90 @@
+.nw-project {
+  display: flex;
+  align-items: center;
+  .nw-project-cover {
+    flex: 0 0 189px;
+    height: 150px;
+    text-align: center;
+    @media(max-width: $screen-md) {
+      order: 3;
+    }
+    .nw-project-cover-clip {
+      position: absolute;
+      bottom: 0px;
+      width: 189px;
+      height: 172px;
+      clip-path: inset(0px 0px 0px -50px);
+      img, .listing-cover-overlay {
+        transform: rotate(-15deg);
+        transform-origin: bottom right;
+        width: 122px;
+        height: 172px;
+        border-radius: 3px;
+      }
+      .nw-listing-cover-overlay {
+         display:none;
+      
+      }
+      &.nw-user-editable:hover {
+        .listing-cover-overlay {
+          display:flex;
+          position:relative;
+          margin-top: -172px;
+        }
+      }
+    }
+  }
+  .nw-project-name-genres {
+    flex: 1 1 100%;
+    .nw-project-title {
+      font-family: 'SerifRegular', serif ;
+      font-size: 26px;
+      color: $nw-darkgrey;
+      margin-bottom: 7px;
+    }
+    .nw-project-genres {
+      margin-top: 7px;
+      line-height: 22px;
+      text-align: left;
+      color: $nw-mediumgrey;
+    }
+  }
+}
+.nw-project-progress {
+  margin-top: 18px;
+  width: 352px;
+  margin-left: 20px;
+  flex: 0 0 352px;
+
+  .goal-text{ 
+    margin-bottom: 7.5px;
+    font-size: 16px;
+    height: 20px;
+    text-align: left;
+    .goal {
+      color: $nw-mediumgrey
+    }
+  }
+  .nano-progress-bar{
+    width: 100%;
+  }
+  
+  .progress-text {
+    margin-top: 7.5px;
+    height: 18px;
+    font-weight: bold;
+    .count{
+      color: $nw-darkaqua;
+    }
+    .count.goal-met {
+      color: $nw-purple;
+    }
+  }
+  .challenge-start {
+    margin-top: 7.5px;
+    float: right;
+    .started {
+      color: $nw-lightgrey;
+    }
+  }
+}

@@ -1,51 +1,53 @@
-<div id='project-listing-actions'>
-  {{#if canAddProject}}
-    <button id="announce-new-project-button" class="nano-button-large" {{action "openNewProjectModal"}} data-test-new-project>
-      Announce New Project
-    </button>
+<div class="nw-panel-primary-container">
+  <div class='nw-panel-actions'>
+    {{#if canAddProject}}
+      <button id="announce-new-project-button" class="nano-button-large" {{action "openNewProjectModal"}} data-test-new-project>
+        Announce New Project
+      </button>
 
-    {{project-new-modal
-      onHidden=(action "afterProjectModalClose")
-      open=addProject
-      user=user
+      {{project-new-modal
+        onHidden=(action "afterProjectModalClose")
+        open=addProject
+        user=user
       
-    }}
-  {{/if}}
-  <div id='project-listing-sort' >
-    <label id='project-listing-sort-by-text' for='sort-by'>Sort by</label>
-    <span id='project-listing-sort-by-select'>
-      <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
-        <option value='0'>Date Created</option>
-        <option value='1'>Project Title</option>
-      </select>
-    </span>
+      }}
+    {{/if}}
+    <div class='nw-panel-actions-select' >
+      <span id='project-listing-sort-by-text' for='sort-by'>Sort by</span>
+      <span id='project-listing-sort-by-select'>
+        <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
+          <option value='0'>Date Created</option>
+          <option value='1'>Project Title</option>
+        </select>
+      </span>
+    </div>
   </div>
-</div>
 
-<div data-test-project-list>
-  {{#each sortedProjects as |project|}}
-    {{project-listing project=project author=user}}
-  {{/each}}
-</div>
+  <div data-test-project-list>
+    {{#each sortedProjects as |project|}}
+      {{project-listing project=project author=user}}
+    {{/each}}
+  </div>
 
-{{#if canAddProject}}
-  <div class="nano-card prompt-card short-card g3-hspan3 g2-hspan2">
-    <div class="nano-subcard">
-      <div class="nano-subcard-face">
-        <div class="nano-subcard-content side-by-side">
-          <div class="project-announce-quote">
-            <div class="quote-text">"Keep your head in the clouds and your hands on the keyboard."<br />
-              <span class="quotee">Marissa Meyer</span>
+  {{#if canAddProject}}
+    <div class="nano-card prompt-card short-card g3-hspan3 g2-hspan2">
+      <div class="nano-subcard">
+        <div class="nano-subcard-face">
+          <div class="nano-subcard-content side-by-side">
+            <div class="project-announce-quote">
+              <div class="quote-text">"Keep your head in the clouds and your hands on the keyboard."<br />
+                <span class="quotee">Marissa Meyer</span>
+              </div>
             </div>
-          </div>
-          <div>
-            <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
-          </div>
-          <div>
-            <img src="/images/users/projects/megaphone.svg" class="prompt-image">
+            <div>
+              <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
+            </div>
+            <div>
+              <img src="/images/users/projects/megaphone.svg" class="prompt-image">
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-{{/if}}
+  {{/if}}
+</div>
