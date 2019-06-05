@@ -1,8 +1,10 @@
 .nw-project {
   display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
   align-items: center;
   .nw-project-cover {
-    flex: 0 0 189px;
+    flex: 1 1 189px;
     height: 150px;
     text-align: center;
     @media(max-width: $screen-md) {
@@ -35,7 +37,7 @@
     }
   }
   .nw-project-name-genres {
-    flex: 1 1 100%;
+    flex: 1 1 auto;
     .nw-project-title {
       font-family: 'SerifRegular', serif ;
       font-size: 26px;
@@ -55,6 +57,10 @@
   width: 352px;
   margin-left: 20px;
   flex: 0 0 352px;
+   @media(max-width: $screen-md) {
+      width: 100%;
+      margin-left: 0px;
+    }
 
   .goal-text{ 
     margin-bottom: 7.5px;

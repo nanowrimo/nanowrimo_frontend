@@ -38,7 +38,7 @@
       {{/if}}
     </div>
   </div>
-  <div class="nw-card-content no-padding nw-horiz-flex">
+  <div class="nw-card-content">
     <div class="nw-project">
       <div class='nw-project-cover' >
         <div class='nw-project-cover-clip {{if canEdit "user-editable" ""}}'>
@@ -53,6 +53,7 @@
         }}
         
       </div>
+      
       <div class='nw-project-name-genres'>
         <div class='nw-project-title nw-card-headline'>
         {{#link-to 'authenticated.users.show.projects.show' project.slug}}
@@ -63,13 +64,14 @@
           {{project.concatGenres}}
         </div>
       </div>
+      {{#if project.hasProjectChallenges}} 
+        {{project-list-progress project=project}}
+      {{else}}
+        <!-- [create challenge] -->
+      {{/if}}
+      
     </div>
-    {{#if project.hasProjectChallenges}} 
-      {{project-list-progress project=project}}
-    {{else}}
-      <!-- [create challenge] -->
-    {{/if}}
-  
+   
   
   </div>
   <div class='nw-card-flippy-doodle'>

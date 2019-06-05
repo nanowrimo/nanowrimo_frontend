@@ -1,0 +1,17 @@
+.nw-hflex {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  &> div {
+    flex: 1 1 auto;
+  }
+}
+
+.nw-vflex {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  &> div {
+    flex: 1 1 auto;
+  }
+}
