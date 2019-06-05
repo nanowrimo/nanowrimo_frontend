@@ -89,6 +89,7 @@
   width: 100%;
   position: relative;
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-between;
   #announce-new-project-button {
     width: 291px;

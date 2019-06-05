@@ -6,13 +6,26 @@
     width: 300px;
     height: 262px;
   }
+  &.nw-prompt-card {
+    border: dashed 2px $nw-lightgreyblue;
+    background-color: $nw-white;
+    background-image: none;
+    color: $nw-lightgrey;
+    
+    a {
+      color: $nw-lightgrey;
+      font-family: SourceSerifPro;
+      font-size: 26px;
+      text-align: center;
+    }
+  }
   border-radius: 5px;
   border: solid 1px $nw-lightgreyblue;
   background-image: url('/images/global/card_back.png');
   background-repeat: repeat-x;
   background-size: 4px 100%;
   &.nw-card-white {
-    background: white;
+    background: $nw-white;
   }
   
   .nw-card-header {
@@ -35,20 +48,24 @@
       text-transform: uppercase;
       color: $nw-mediumgrey;
     }
+    .nw-card-indicator {
+      flex: 1 1 50%;
+      text-align: right;
+      padding-right: 5px;
+    }
     .nw-card-actions {
       flex: 1 1 50%;
       text-align: right;
       padding-right: 5px;
       z-index: 500;
+      .dropdown {
+        display: inline;
+      }
       i {
         min-width: 32px;
         line-height: 28px;
-        color: $nw-verylightgrey;
+        color: $nw-darkaqua;
         font-size: 18px;
-        cursor: pointer;
-        &:hover {
-          color: $nw-mediumgrey;
-        }
       }
       .nw-card-display-actions {
         display:inline;
@@ -199,6 +216,36 @@
           text-align: center;
         }
       }
+    }
+  }
+}
+
+/* -- CSS for specific card instances -- */
+#projects-new-project-card {
+  .project-announce-quote {
+    flex: 1 1 50%;
+    .quote-text {
+      text-align: center;
+      font-size: 20px
+    }
+    .quotee{
+      font-size: 16px;
+    }
+  }
+  .action {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .prompt-image {
+    width: 112px;
+    position: relative;
+    height: 151px;
+    flex: 1 1 auto;
+    align-self: flex-end;
+    img {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
     }
   }
 }
