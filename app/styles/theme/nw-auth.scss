@@ -1,0 +1,18 @@
+.nw-login-image {
+  width: 100%;
+  height: 135px;
+  overflow: hidden;
+  text-align: center;
+}
+.nw-forgot-password-card{
+  min-height: initial;
+  max-width: 436px;
+  .nw-card-instruction {
+    font-size: 16px;
+    line-height: 1.38;
+    letter-spacing: .3px;
+    text-align: left;
+    color: $nw-mediumgrey;
+    margin-bottom: 10px;
+  }
+}

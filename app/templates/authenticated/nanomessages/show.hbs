@@ -1,26 +1,20 @@
 <div class="content-gutters nw-pad-top">
   <div class="container-fluid">
-    <div class="nw-panel nanomessages-panel">
-      <div class="nano-card one-third">
-        <div class="nano-subcard">
-          <div class="nano-subcard-face face-front filled-grey">
-            <div class="nano-subcard-header">
-              <div class="corner-label-full">Conversations</div>
-            </div>
-            <div class="nano-subcard-content no-padding full-width">
-              {{conversations-list class="full-width"}}
-            </div>
+    <div class="nw-panel nw-with-grid">
+      <div class="grid-wrapper">
+        <div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan1">
+          <div class="nw-card-header">
+            <div class="nw-card-title">Conversations</div>
+          </div>
+          <div class="nw-card-content">
+            {{conversations-list class="full-width"}}
           </div>
         </div>
-      </div>
-      <div class="nano-card two-thirds">
-        <div class="nano-subcard">
-          <div class="nano-subcard-face face-front filled-grey">
-            {{#if hasGroup}}
-              {{outlet}}
-            {{else}}
-            {{/if}}
-          </div>
+        <div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1">
+          {{#if hasGroup}}
+            {{outlet}}
+          {{else}}
+          {{/if}}
         </div>
       </div>
     </div>

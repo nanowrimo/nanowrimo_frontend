@@ -1,4 +1,4 @@
-.nano-tooltip {
+.nw-tooltip {
   .tooltip-inner {
     box-shadow: 0 0 14px 0 $nw-darkgrey20;
     background-image: linear-gradient(to bottom, $nw-mediumlightblue, $nw-lightaqua);
@@ -6,18 +6,19 @@
     color: $nw-black;
     max-width: 363px;
     text-align: left;
-    .nano-tooltip-title {
+    .nw-tooltip-title {
       font-family: "SerifBold", serif;
       font-size: 20px;
+      line-height: 20px;
       color: $nw-darkgreygreen;
     }
-    .nano-tooltip-content {
+    .nw-tooltip-content {
       font-family: "SerifRegular", serif;
       font-size: 16px;
       color: $nw-black;
       line-height: 1.28;
     }
-    .nano-tooltip-date {
+    .nw-tooltip-date {
       margin-top: 10px;
       font-family: "SerifItalic", serif;
       color: $nw-black;

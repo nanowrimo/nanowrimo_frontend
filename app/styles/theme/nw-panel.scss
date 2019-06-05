@@ -128,3 +128,100 @@
 .nw-panel-actions > div {
   flex: 1 1 50%;
 }
+.nw-panel-intro {
+  min-height: 140px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  @media (max-width: $screen-xs-max) {
+    margin-right: 20px;
+    margin-left: 20px;
+    flex-wrap: wrap;
+  }
+  .left-side {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+  .right-side {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .welcome-content {
+    height: 100%;
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'SerifBold', serif;
+      font-size: 40px;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.25;
+      letter-spacing: -0.1px;
+      text-align: left;
+      color: $nw-brick;
+    }
+  }
+  display: flex;
+  #stats-project-cover {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 150px;
+    
+    .project-cover {
+      width: 255px;
+      float: left;
+      @media(max-width: $screen-md) {
+        order: 3;
+      }
+      .project-cover-clip {
+        position: absolute;
+        bottom: 0px;
+        width: 189px;
+        height: 172px;
+        left: 70px;
+        clip-path: inset(0px 0px 0px -50px);
+        img {
+          transform: rotate(-15deg);
+          transform-origin: bottom right;
+          width: 122px;
+          height: 172px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+  .switcher{
+    position: relative;
+    margin-right: 10px;
+    .switcher-select { 
+      position: relative;
+      
+      select {
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: none;
+        border: 0px;
+        border-bottom: 1px solid black;
+        padding-right: 25px;
+      }
+      &:after {
+        content:"\f0d7";
+        font-family: FontAwesome;
+        color: $nw-black;
+        position: absolute; right: 0; bottom: -7px;
+        z-index: 1;
+        text-align: center;
+        width: 10%;
+        height: 100%;      
+        pointer-events: none;
+        box-sizing: border-box; 
+      }
+    }
+  }
+}
