@@ -202,12 +202,16 @@
     }
   }
   .switcher{
+    min-width: 200px;
     position: relative;
     margin-right: 10px;
     .switcher-select { 
       position: relative;
-      
+      font-size: 20px;
       select {
+        font-size: 20px;
+        
+        font-family: "SerifSemiBold";
         position: relative;
         -webkit-appearance: none;
         -moz-appearance: none;
