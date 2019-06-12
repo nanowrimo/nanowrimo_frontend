@@ -6,6 +6,19 @@
     width: 300px;
     height: 262px;
   }
+  &.nw-prompt-card {
+    border: dashed 2px $nw-lightgreyblue;
+    background-color: $nw-white;
+    background-image: none;
+    color: $nw-lightgrey;
+    
+    a {
+      color: $nw-lightgrey;
+      font-family: SourceSerifPro;
+      font-size: 26px;
+      text-align: center;
+    }
+  }
   border-radius: 5px;
   border: solid 1px $nw-lightgreyblue;
   background-image: url('/images/global/card_back.png');
@@ -57,6 +70,22 @@
         display:inline;
         float:right;
       }
+      .nw-subcard-toggle {
+        cursor: pointer;
+        text-align: center;
+        color: $nw-darkgrey;
+        width: 28px;
+        margin-left: 7px;
+        padding: 4px;
+        line-height: 20px;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+        background-color: $nw-lightblue;
+        &:hover {
+          background-color: rgb(190, 242, 253);
+        }
+      }
+      
     }
     .nw-promo-image {
       position: relative;
@@ -128,8 +157,8 @@
     position: absolute;
     top: -5px;
     left: 180px;
-    @media(max-width: $screen-md) {
-      left: 10px;
+    @media(max-width: $screen-sm-max) {
+      left: 120px;
     }
   }
   

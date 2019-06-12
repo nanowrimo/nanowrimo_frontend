@@ -8,6 +8,10 @@
   margin-bottom: 60px;
   &.nw-panel-with-padding {
     padding: 28px;
+    @media(max-width: $screen-md) {
+      padding: 10px;
+    }
+    
   }
   @media (min-width: $screen-sm) {
     border-radius: $border-radius;
@@ -18,6 +22,9 @@
   }
   .nw-panel-primary-container {
     padding: 28px;
+    @media(max-width: $screen-md) {
+      padding: 10px;
+    }
     padding-bottom: 1px;
     .nw-card {
       margin-bottom: 28px;

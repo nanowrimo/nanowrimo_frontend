@@ -1,4 +1,4 @@
-<div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2">
+<div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan3 g2-col2 g2-row1 g2-hspan1 g2-vspan3">
   <div class="nw-card-content no-padding">
     {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
       {{#each sortedRegions as |region index|}}
@@ -7,11 +7,11 @@
     {{/g-map}}
   </div>
 </div>
-<div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2">
+<div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan1">
   <div class="nw-card-header">
     <div class="nw-card-title">My Regions</div>
   </div>
-  <div class="nw-card-content">
+  <div class="nw-card-content no-padding">
     <div class="nano-list-message {{userHasNoRegions}}">
       You haven't joined a region! Please select one of the regions from the list below.
       <br />
@@ -28,25 +28,25 @@
   <div class="nw-card-header">
     <div class="nw-card-title">Find a Region</div>
     <div class="nw-card-actions">
-      <div class="nano-subcard-tab {{searchTab}}" {{action 'findByString'}}>
-        Search
+      <div class="nw-subcard-toggle {{searchTab}}" {{action 'findByString'}}>
+        <i class="fa fa-search"></i>
       </div>
-      <div class="nano-subcard-tab {{proximityTab}}" {{action 'getUserLocation'}}>
-        Nearest to me
+      <div class="nw-subcard-toggle {{proximityTab}}" {{action 'getUserLocation'}}>
+        <i class="fa fa-map-marker"></i>
       </div>
     </div>
-    <div class="nw-card-content">
-      <div class="nano-list-message {{processingShow}}">
-        Determining location...
-      </div>
-      <div class="nano-list-search {{proximityHide}}">
-        {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
-      </div>
-      <ul class="nano-list {{processingHide}}" style="height: 700px; ">
-        {{#each sortedRegions as |regionContainer index|}}
-          {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
-        {{/each}}
-      </ul>
+  </div>
+  <div class="nw-card-content no-padding">
+    <div class="nano-list-message {{processingShow}}">
+      Determining location...
     </div>
+    <div class="nano-list-search {{proximityHide}}">
+      {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
+    </div>
+    <ul class="nano-list {{processingHide}}" style="height: 700px; ">
+      {{#each sortedRegions as |regionContainer index|}}
+        {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
+      {{/each}}
+    </ul>
   </div>
 </div>

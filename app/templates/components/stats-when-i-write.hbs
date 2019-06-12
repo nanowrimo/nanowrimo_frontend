@@ -8,11 +8,11 @@
   <div class="nano-subcard-content">
   
     {{#if hasData}}
-      {{high-charts content=chartData chartOptions=chartOptions theme=theme class="nano-card-icon"}}
+      {{high-charts content=chartData chartOptions=chartOptions theme=theme class="nw-card-icon"}}
       <div class="chart-summary">{{catchyPhrase}} You write the most between <span class="max-color">{{dataPhrase}}!</span></div>
  
     {{else}}
-      <div class="nano-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
+      <div class="nw-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
       <div class='nw-no-data'>Time is meaningless. Either that, or you haven't logged when you write.</div>
     {{/if}}
     
@@ -20,7 +20,7 @@
 </div>
 
 <div class="nano-subcard-face face-front filled-grey">
-  <div class="nano-subcard-header">
+  <div class="nw-subcard-header">
     <div class="corner-label">When I Write</div>
     <div class="nano-subcard-toggle" {{action "toggleSubcard"}}>
       <div>{{fa-icon "bar-chart"}}</div>
@@ -28,10 +28,10 @@
   </div>
   <div class="nano-subcard-content">
     {{#if hasData}}
-      <div class="nano-card-icon"><img src="/images/cards/when-i-write/{{animalType}}.svg" /></div>
+      <div class="nw-card-icon"><img src="/images/cards/when-i-write/{{animalType}}.svg" /></div>
       <div class="icon-summary">{{catchyPhrase}}<br />You write the most between<div class="max-color">{{dataPhrase}}!</div></div>
     {{else}}
-      <div class="nano-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
+      <div class="nw-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
       <div class='nw-no-data'>Time is meaningless. Either that, or you haven't logged when you write.</div>
     {{/if}}
   </div>
