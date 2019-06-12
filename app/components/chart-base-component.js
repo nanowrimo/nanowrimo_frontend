@@ -1,4 +1,6 @@
 import Component from '@ember/component';
+import { get,set,computed } from '@ember/object';
+
 export default Component.extend({
   
   _shortTimeString(i) {
@@ -22,6 +24,27 @@ export default Component.extend({
     if (i>11) ampm1 = 'PM';
     if (endHour>11) ampm2 = 'PM';
     return (i % 12 || 12) + ':00' + ampm1 + connector + (endHour % 12 || 12) + ':00' + ampm2;
+  },
+  
+  primaryDisplay: true,
+  cardPrimaryStyle: computed('primaryDisplay',function() {
+    if (get(this,'primaryDisplay')) {
+      return "display: block".htmlSafe();
+    } else {
+      return "display: none".htmlSafe();
+    }
+  }),
+  cardSecondaryStyle: computed('primaryDisplay',function() {
+    if (get(this,'primaryDisplay')) {
+      return "display: none".htmlSafe();
+    } else {
+      return "display: block".htmlSafe();
+    }
+  }),
+  actions: {
+    toggleSubcard() {
+      set(this,"primaryDisplay",!get(this,"primaryDisplay"));
+    }
   }
   
 });

@@ -56,16 +56,24 @@
     .nw-card-actions {
       flex: 1 1 50%;
       text-align: right;
+      &.nw-card-actions-left {
+        text-align: left;
+        padding-left: 10px;
+      }
       padding-right: 5px;
       z-index: 500;
       .dropdown {
         display: inline;
       }
       i {
+        cursor: pointer;
         min-width: 32px;
         line-height: 28px;
-        color: $nw-darkaqua;
+        color: $nw-lightgrey;
         font-size: 18px;
+        &:hover {
+          color: $nw-darkblue;
+        }
       }
       .nw-card-display-actions {
         display:inline;
@@ -74,22 +82,39 @@
         display:inline;
         float:right;
       }
-      .nw-subcard-toggle {
-        cursor: pointer;
-        text-align: center;
-        color: $nw-darkgrey;
-        width: 28px;
-        margin-left: 7px;
-        padding: 4px;
-        line-height: 20px;
-        border-bottom-right-radius: 6px;
-        border-bottom-left-radius: 6px;
-        background-color: $nw-lightblue;
-        &:hover {
-          background-color: rgb(190, 242, 253);
+      .btn-group {
+        height: 28px;
+        button {
+          padding: 0px;
+          height: 28px;
+          border: solid 0px #000000;
+          border-top-right-radius: 0px;
+          border-top-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+          border-bottom-left-radius: 0px;
+          margin-top: 0px;
+          margin-bottom: 0px;
+          background-image: none;
+          background-color: none;
+          i {
+            color: $nw-lightgrey;
+          }
+          &.active {
+            background-color: none;
+            border-bottom: solid 3px $nw-lightorange;
+            box-shadow: none;
+            i {
+              color: $nw-mediumdarkgrey;
+            }
+          }
+          &:hover {
+            background-color: none;
+            i {
+              color: $nw-mediumdarkgrey;
+            }
+          }
         }
       }
-      
     }
     .nw-promo-image {
       position: relative;

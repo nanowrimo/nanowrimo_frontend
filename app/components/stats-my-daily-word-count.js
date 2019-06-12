@@ -20,9 +20,9 @@ export default ChartBaseComponent.extend({
 
   myChartType: computed('primaryDisplay',function() {
     if (get(this,'primaryDisplay')) {
-      return 'column';
-    } else {
       return 'spline';
+    } else {
+      return 'column';
     }
   }),
   chartOptions: computed(function() {
