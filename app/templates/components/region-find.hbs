@@ -17,7 +17,7 @@
       <br />
       
     </div>
-    <ul class="nano-list" style="max-height: 300px;">
+    <ul class="nw-list" style="max-height: 300px;">
       {{#each userRegions as |regionContainer index|}}
         {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' leavable=true}}
       {{/each}}
@@ -27,13 +27,12 @@
 <div class="nw-card g3-col1 g3-row2 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2 wrap-content">
   <div class="nw-card-header">
     <div class="nw-card-title">Find a Region</div>
-    <div class="nw-card-actions">
-      <div class="nw-subcard-toggle {{searchTab}}" {{action 'findByString'}}>
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="nw-subcard-toggle {{proximityTab}}" {{action 'getUserLocation'}}>
-        <i class="fa fa-map-marker"></i>
-      </div>
+    <div class="nw-card-actions nw-card-actions-left">
+      {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
+        {{#bg.button type="default" value=true}}{{fa-icon "search"}}{{/bg.button}}
+        {{#bg.button type="default" value=false}}{{fa-icon "map-marker"}}{{/bg.button}}
+      {{/bs-button-group}}
+      
     </div>
   </div>
   <div class="nw-card-content no-padding">
@@ -43,7 +42,9 @@
     <div class="nano-list-search {{proximityHide}}">
       {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
     </div>
-    <ul class="nano-list {{processingHide}}" style="height: 700px; ">
+    
+    
+    <ul class="nw-list {{processingHide}}" style="height: 700px; ">
       {{#each sortedRegions as |regionContainer index|}}
         {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
       {{/each}}

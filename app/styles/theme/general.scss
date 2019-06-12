@@ -332,3 +332,15 @@ ul {
   height: 100%;
   border-radius: 6px;
 }
+// ---------------
+// Congratulations
+// ---------------
+.congratulations {
+  width: 400px;
+  height: 200px;
+  font-family: "SerifSemiBold", serif;
+  font-size: 40px;
+  text {
+    fill: #ffe680;
+  }
+}
