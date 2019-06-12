@@ -9,7 +9,7 @@ import Changeset from 'ember-changeset';
 export default Component.extend({
   store: service(),
 
-  tagName: '',
+  tagName: 'span',
 
   associatedChallenge: null,
   associatedChallengeId: 0,

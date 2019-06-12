@@ -2,11 +2,11 @@
   <div class='nw-card-header nw-card-header-no-height'>
     <div class='nw-card-actions'>
       {{#if project.isPrimary}}
-        <i class='fa fa-thumb-tack primary-thumb-tack'></i>
+        <i class='fa fa-thumb-tack primary-thumb-tack indicator'></i>
       {{/if}}
       {{#if canEdit}}
         <span class='nw-listing-action-dropdown'>
-        {{#bs-dropdown as |dd|}}
+        {{#bs-dropdown class='project-listing-dropdown' as |dd|}}
           {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu align='right' as |menu|}}
             {{#menu.item}}
@@ -69,9 +69,7 @@
         {{project-list-progress project=project class="nw-project-progress"}}
       {{else}}
         <!-- [create challenge] -->
-      {{/if}}
-  
-  
+      {{/if}}  
     </div>
     <div class='nw-card-flippy-doodle'>
       <img src="{{project.flippyDoodlePath}}">

@@ -1,6 +1,8 @@
 .nw-project-container {
   width: 100%;
   display: flex;
+  //flex-flow: row wrap;
+  justify-content: space-between;
   align-items: center;
   @media(max-width: $screen-md) {
     flex-wrap: wrap;
@@ -62,7 +64,6 @@
     }
     @media(max-width: $screen-md) {
     }
-  
   }
   .nw-project-progress {
     padding: 20px;
@@ -79,7 +80,6 @@
     .nano-progress-bar{
       width: 100%;
     }
-  
     .progress-text {
       margin-top: 7.5px;
       height: 18px;

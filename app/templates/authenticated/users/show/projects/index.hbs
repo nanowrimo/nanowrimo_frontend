@@ -27,9 +27,7 @@
     {{#each sortedProjects as |project|}}
       {{project-listing project=project author=user}}
     {{/each}}
-  </div>
-
-  {{#if canAddProject}}
+    {{#if canAddProject}}
       <div id="projects-new-project-card" class="nw-card nw-prompt-card">
         <div class='nw-hflex'>
           <div class="project-announce-quote">
@@ -45,5 +43,6 @@
           </div>
         </div>
       </div>
-  {{/if}}
+    {{/if}}
+  </div>
 </div>
