@@ -1,4 +1,4 @@
-<div class="nw-card nano-listing-mini-card project-listing-card">
+<div class="nw-card nano-listing-mini-card project-summary-card">
   <div class='nw-card-header nw-card-header-no-height'>
     <div class='nw-card-actions'>
       {{#if project.isPrimary}}
@@ -6,7 +6,7 @@
       {{/if}}
       {{#if canEdit}}
         <span class='nw-listing-action-dropdown'>
-        {{#bs-dropdown class='project-listing-dropdown' as |dd|}}
+        {{#bs-dropdown class='project-summary-dropdown' as |dd|}}
           {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu align='right' as |menu|}}
             {{#menu.item}}
