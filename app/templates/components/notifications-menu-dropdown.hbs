@@ -10,7 +10,7 @@
   </div>
   <div class="modal-body nw-noti-modal-body">
     {{#each allNotifications as |notification|}}
-      {{notification-rendered notification=notification}}
+      {{notification-rendered notification=notification clickAction=clickAction}}
     {{/each}}
   </div>
 </div>

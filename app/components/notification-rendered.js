@@ -9,6 +9,8 @@ export default Component.extend({
   store: service(),
   notificationsService: service(),
   notification: null,
+  clickAction:null,
+  
   timeSince: computed('notification',function() {
     let n = this.get('notification');
     let t = moment(n.displayAt).fromNow();
@@ -25,4 +27,15 @@ export default Component.extend({
       return "/images/other/helmet_image.svg";
     }
   }),
+  
+  
+  actions: {
+    clicked() {
+      let ca = this.get('clickAction');
+      if (ca) {
+        let n = this.get('notification');
+        ca(n);
+      }
+    }
+  }
 });
