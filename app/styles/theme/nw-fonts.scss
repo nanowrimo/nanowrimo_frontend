@@ -45,3 +45,19 @@
   font-style: normal;
 }
 
+
+.nw-promo-text {
+  font-family: 'SerifSemiBold';
+  text-align: center;
+  color: $nw-mediumgrey;
+  font-size: 20px;
+  .nw-highlight {
+    font-size: 30px;
+    color: $nw-mediumgreen;
+    .nw-dehighlight {
+      font-family: 'SansSemiBold';
+      font-size: 16px;
+      color: $nw-mediumgrey;
+    }
+  }
+}

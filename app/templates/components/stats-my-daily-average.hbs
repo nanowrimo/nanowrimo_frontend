@@ -1,22 +1,7 @@
-<div class="nano-subcard-face face-front filled-grey">
-  <div class="nano-subcard-header">
-    <div class="corner-label">My Daily {{goalUnitSingular}} Count</div>
-    
-  </div>
-  <div class="nano-subcard-content">
-    <div class="nw-card-icon"><img src="/images/cards/calendar.svg" /></div>
-    <div class="icon-summary">On average, you write<div class="max-color">{{format-number dailyAverage}} {{goalUnit}} per day!</div></div>
-  </div>
+<div class="nw-card-header">
+  <div class="nw-card-title">My Daily {{goalUnitSingular}} Count</div>
 </div>
-<div class="nano-subcard-face face-back filled-grey">
-  <div class="nano-subcard-header">
-    <div class="corner-label">My Daily Word Count</div>
-    <div class="nano-subcard-toggle" {{action "toggleSubcard"}}>
-      <div>{{fa-icon "picture-o"}}</div>
-    </div>
-    
-  </div>
-  <div class="nano-subcard-content">
-    <div class="icon-summary">[list goes here]</div>
-  </div>
+<div class="nw-card-content">
+  <div class="nw-card-icon"><img src="/images/cards/calendar.svg" /></div>
+  <div class="nw-promo-text">On average, you write<div class="nw-highlight">{{format-number dailyAverage}} {{goalUnit}} per day!</div></div>
 </div>

@@ -1,17 +1,15 @@
-<div class="nano-subcard-face face-front filled-grey">
-  <div class="nano-subcard-header">
-    <div class="corner-label">Where I Write</div>
-  </div>
-  <div class="nano-subcard-content">
-    <div class="nw-card-icon">
+<div class="nw-card-header">
+  <div class="nw-card-title">Where I Write</div>
+</div>
+<div class="nw-card-content">
+  <div class="nw-card-icon">
     {{#if svgPath}}
       <img src="{{svgPath}}" />
     {{/if}}
-    </div>
-    {{#if whereIWrite}}
-      <div class="icon-summary">You've written mostly<div class="max-color">{{whereIWrite}}!</div></div>
-    {{else}}
-       <div class="nw-no-data">Where in the world is {{user.name}} writing? We don't know yet.</div>
-    {{/if}}
   </div>
+  {{#if whereIWrite}}
+    <div class="nw-promo-text">You've written mostly<div class="nw-highlight">{{whereIWrite}}!</div></div>
+  {{else}}
+    <div class="nw-promo-text">Where in the world is {{user.name}} writing? We don't know yet.</div>
+  {{/if}}
 </div>

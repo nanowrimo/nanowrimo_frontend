@@ -52,7 +52,10 @@
       .nw-project-title {
         font-family: 'SerifRegular', serif ;
         font-size: 26px;
-        color: $nw-darkgrey;
+        a {
+          color: $nw-link-color;
+        }
+        /*color: $nw-darkgrey;*/
         margin-bottom: 7px;
       }
       .nw-project-genres {
