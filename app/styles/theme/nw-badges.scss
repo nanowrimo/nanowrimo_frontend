@@ -24,6 +24,21 @@
     }
   }
 }
+.nw-card-icon {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 140px;
+  margin-bottom: 28px;
+  &.badge-large {
+    height: 147px;
+    img {
+      width: 130px;
+      height: 147px;
+    }
+  }
+}
 .nano-card-icon {
   &.badge-large {
     height: 120px;

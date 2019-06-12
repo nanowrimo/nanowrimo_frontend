@@ -5,6 +5,10 @@
     margin-right: 0px;
   }
   padding: 28px;
+  @media(max-width: $screen-md) {
+    padding: 10px;
+  }
+  
   width: 100%;
   display: grid;
   grid-gap: 28px;
