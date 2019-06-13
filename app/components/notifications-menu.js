@@ -24,7 +24,6 @@ export default Component.extend({
         //get the badge
         let id = notification.actionId;
         let badge = this.get('store').peekRecord('badge', id);
-        console.log(badge);
         this.set("badgeForSplash", badge);
         //display the splash
         this.set('showBadgeSplash', true);
