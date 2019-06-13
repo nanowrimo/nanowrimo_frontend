@@ -10,18 +10,21 @@
     }
   }
 }
-.nano-list-message {
+.nw-list-message {
   padding-left: 14px;
   padding-right: 14px;
   padding-bottom: 7px;
+  padding-top: 14px;
   font-size: 14px;
   width: 100%;
-  min-height: 70px;
+  min-height: 60px;
 }
-.nano-list-search {
+.nw-list-search {
   padding-left: 14px;
   padding-right: 14px;
   padding-bottom: 7px;
+  padding-top: 14px;
+  min-height: 60px;
   width: 100%;
   input {
     width: 100%;

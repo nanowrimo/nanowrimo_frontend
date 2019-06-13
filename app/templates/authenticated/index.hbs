@@ -64,15 +64,6 @@
     {{/unless}} 
     <div class="nw-panel nw-with-grid">
       <div class="grid-wrapper">
-        <div class="nw-card prompt-card short-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1">
-          <div class="nw-card-content">
-            <Congratulations />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="nw-panel nw-with-grid">
-      <div class="grid-wrapper">
         <div class="nw-card g3-col1 g3-row2 g3-hspan3 g3-vspan1 g2-col1 g2-row2 g2-hspan2 g2-vspan1">
           {{#if currentUser.user.primaryProject.latestProjectChallenge }}
               {{badges-card cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=currentUser.user.primaryProject.latestProjectChallenge}}

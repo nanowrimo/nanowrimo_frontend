@@ -35,15 +35,15 @@
       
     </div>
   </div>
-  <div class="nw-card-content no-padding">
-    <div class="nano-list-message {{processingShow}}">
-      Determining location...
+  <div class="nw-card-content no-padding" style="flex-wrap: wrap;">
+    <div>
+      <div class="nw-list-message" style={{cardSecondaryStyle}}>
+        Determining location...
+      </div>
+      <div class="nw-list-search" style={{cardPrimaryStyle}}>
+        {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
+      </div>
     </div>
-    <div class="nano-list-search {{proximityHide}}">
-      {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
-    </div>
-    
-    
     <ul class="nw-list {{processingHide}}" style="height: 700px; ">
       {{#each sortedRegions as |regionContainer index|}}
         {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
