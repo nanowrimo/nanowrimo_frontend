@@ -17,6 +17,11 @@
     </div>
   </div>
 </div>
+{{project-edit-modal
+  onHidden=(action "afterEditProjectModalClose")
+  open=displayEditModal
+  project=project
+}}
 {{project-edit-cover-modal
   onHidden=(action "afterCoverModalClose")
   open=displayCoverEditModal
