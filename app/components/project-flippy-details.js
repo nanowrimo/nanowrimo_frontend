@@ -1,6 +1,6 @@
 import NwFlippyCard from 'nanowrimo/components/nw-flippy-card';
-import { computed } from '@ember/object';
-import { htmlSafe } from '@ember/template';
+//import { computed } from '@ember/object';
+//import { htmlSafe } from '@ember/template';
 
 export default NwFlippyCard.extend({
   project: null,
