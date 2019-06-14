@@ -1,9 +1,10 @@
 {{#if hasDetails}}
-  <div class='nw-panel-actions'>
+  <div class='nw-panel-actions nw-horiz-flex'>
     <div>
-      <button id='create-new-goal-button' {{action 'editProjectDetails'}}>Edit Details</button>
+      <button {{action 'editProject'}}>Edit Details</button>
+      <button {{action 'editCover'}}>Edit Cover</button>
     </div>
-  </div>
+  </div>  
   {{project-flippy-details project=project class='nw-flippy-project-cover' }}
 {{else}}
   <div id='project-needs-details'>

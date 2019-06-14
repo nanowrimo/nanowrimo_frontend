@@ -71,6 +71,12 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
+  if (environment === 'development-dave') {
+    ENV.APP.API_HOST = 'http://localhost:3000';
+    ENV.APP.UI_HOST = 'http://localhost:4200';
+    ENV.forumsUrl = "http://localhost:9292";
+  }
+  
   if (environment === 'development-local') {
     //console.log(port);
     //ENV.APP.LOG_RESOLVER = true;

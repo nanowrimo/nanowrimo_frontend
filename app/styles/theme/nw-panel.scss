@@ -91,8 +91,8 @@
   }
 }
 .nw-panel-actions {
-  height: 60px;
-  margin-bottom: 10px;
+  height: 28px;
+  margin-bottom: 15px;
   width: 100%;
   position: relative;
   display: flex;
@@ -102,7 +102,6 @@
     width: 291px;
   }
   .nw-panel-actions-select {
-    max-width: 200px;
     align-self: flex-end;
     text-align: right;
     #project-summary-sort-by-text {
