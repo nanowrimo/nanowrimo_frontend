@@ -14,51 +14,47 @@
   </div>
 </div>
 <div class="content-gutters">
-  <div class="container-fluid">
-    <div class="nw-sidebar region-summary">
-      <div class="flip-corner">
-        <div class="padding-14px">
-          <div class="nano-region-name-prelim">
-            {{namePrelim}}
-          </div>
-          <div class="nano-region-name">
-            {{nameFinal}}
-          </div>
-          <div class="nano-region-description-label">
-            DESCRIPTION
-          </div>
-          <div class="nano-region-description">
-            {{group.description}}
-          </div>
+  <div class="container-fluid align-top">
+    <div class="nw-sidebar nw-region-summary">
+      <div class="padding-14px">
+        <div class="nw-region-name-prelim">
+          {{namePrelim}}
         </div>
-        {{group-links links=group.groupExternalLinks}}
-        
-        {{#if false}}
-
-          <div class="flip-corner-link" {{action "openEditModal"}}>
-            <img src="/images/global/flip_corner.png" alt="Edit Region Info" />
-          </div>
-
-          {{group-edit-info-modal
-            onHidden=(action "afterEditModalClose")
-            open=edit
-            group=group
-            tab=editTab
-          }}
-
-          {{group-edit-images-modal
-            onHidden=(action "afterImagesModalClose")
-            open=editImages
-            group=group
-            tab=editImagesTab
-          }}
-
-        {{/if}}
+        <div class="nw-region-name">
+          {{nameFinal}}
+        </div>
+        <div class="nw-region-description-label">
+          DESCRIPTION
+        </div>
+        <div class="nw-region-description">
+          {{group.description}}
+        </div>
       </div>
-      <div class="nw-sidbar-divot"></div>
+      {{group-links links=group.groupExternalLinks}}
+      
+      {{#if false}}
+
+        <div class="flip-corner-link" {{action "openEditModal"}}>
+          <img src="/images/global/flip_corner.png" alt="Edit Region Info" />
+        </div>
+
+        {{group-edit-info-modal
+          onHidden=(action "afterEditModalClose")
+          open=edit
+          group=group
+          tab=editTab
+        }}
+
+        {{group-edit-images-modal
+          onHidden=(action "afterImagesModalClose")
+          open=editImages
+          group=group
+          tab=editImagesTab
+        }}
+
+      {{/if}}
+      <div class="nw-sidebar-divot"></div>
     </div>
-
     {{outlet}}
-
   </div>
 </div>
