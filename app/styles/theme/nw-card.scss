@@ -140,13 +140,6 @@
       padding-right: 0px;
       border-radius: 6px;
     }
-    &.nw-horiz-flex {
-      display: flex;
-      align-items: center;
-    }
-    &.nw-horiz-flex > div {
-      flex: 1 1 50%;
-    }
     &.nw-fixed-card {
       padding-top: 5px;
     }
@@ -289,4 +282,19 @@
       right: 0px;
     }
   }
+}
+.nw-horiz-flex {
+  display: flex;
+  align-items: center;
+}
+.nw-horiz-flex > div {
+  flex: 1 1 100%;
+  text-align: center;
+}
+.nw-scrollable {
+  overflow: scroll;
+}
+.nw-label {
+  text-align: center;
+  font-family: 'SansSemiBold', sans;
 }
