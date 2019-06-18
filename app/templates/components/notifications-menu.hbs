@@ -12,7 +12,10 @@
       </button>
     {{/dd.toggle}}
     {{#dd.menu align="right" as |ddm|}}
-      {{notifications-menu-dropdown allNotifications=allNotifications}}
+      {{notifications-menu-dropdown allNotifications=allNotifications clickAction=(action 'notificationClicked')}}
     {{/dd.menu}}
   {{/nav.dropdown}}
 {{/bs-nav}}
+{{#if showBadgeSplash}}
+  {{badge-splash badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
+{{/if}}

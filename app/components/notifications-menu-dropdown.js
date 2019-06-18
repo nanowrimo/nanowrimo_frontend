@@ -7,7 +7,7 @@ export default Component.extend({
   notificationsService: service(),
   allNotifications: null,
   newNotificationsCount: null,
-  
   actions: {
+    
   }
 });

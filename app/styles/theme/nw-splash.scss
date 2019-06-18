@@ -1,0 +1,52 @@
+.nw-splash {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 5000;
+  text-align: center;
+}
+
+.nw-badge-splash {
+  background-color: rgba(52, 52, 52, 0.94);
+  
+  .congratulations {
+    text {
+      font-family: "SourceSerifPro";
+      font-size: 40px;
+      font-weight: bold;
+      color: $nw-yellow;
+      text-transform: uppercase;
+    }
+  }
+ .unlocked{
+    font-family: SourceSerifPro;
+    font-size: 26px;
+    text-align: center;
+    color: $nw-lightgreyblue;
+    margin-bottom: 35px;
+  }
+  .badge-image{
+    margin-bottom: 28px;
+    img{
+      width: 95.3px;
+      height: 107.8px;
+    }
+  }
+  .badge-title {
+    font-family: SourceSerifPro;
+    font-size: 26px;
+    color: $nw-yellow;
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
+  .badge-description {
+    font-family: SourceSerifPro;
+    font-size: 16px;
+    line-height: 1.38;
+    text-align: center;
+    color: $nw-lightgreyblue;
+    margin-bottom: 37px;
+  }
+}
