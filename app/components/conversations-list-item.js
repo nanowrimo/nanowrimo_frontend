@@ -8,6 +8,7 @@ export default Component.extend({
   group: null,
   conversationLabel: computed('group',function() {
     let g = this.get('group');
+    console.log(g.groupType);
     let store = this.get('store');
     let email = this.get('currentUser.user.email');
     let name = g.get('name');
@@ -29,10 +30,13 @@ export default Component.extend({
     let store = this.get('store');
     let email = this.get('currentUser.user.email');
     let avatarUrl = '';
+    //console.log(email);
     if (g.get('groupType')=='buddies') {
+      //console.log('yo');
       let gus = g.get('groupUsers');
       gus.forEach(function(gu) {
         if (gu.user_id) {
+          console.log(gu.user_id);
           let u = store.peekRecord('user', gu.user_id);
           if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
             avatarUrl = u.avatarUrl;

@@ -113,7 +113,7 @@ const User = Model.extend({
     let gus = this.get('groupUsers');
     let bgus = [];
     gus.forEach(function(gu) {
-      if (((gu.groupType=='buddies')||(gu.groupType=='region'))&&(gu.exitAt==null)) {
+      if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
         bgus.push(gu.group);
       }
     });

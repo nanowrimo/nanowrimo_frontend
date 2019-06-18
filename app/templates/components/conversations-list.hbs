@@ -1,5 +1,6 @@
 <ul class="nano-list">
   {{#each conversations as |conversation index|}}
+    {{conversation.groupType}}
     {{conversations-list-item group=conversation}}
   {{/each}}
 </ul>
