@@ -40,6 +40,5 @@ export default Service.extend({
   incrementRecomputeBadges() {
     let rb  = this.get('recomputeBadges')+1;
     this.set('recomputeBadges',rb);
-    console.log(this.get('recomputeBadges'));
   },
 });
