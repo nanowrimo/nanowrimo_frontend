@@ -45,12 +45,14 @@
 .nw-user-listing {
   padding: 15px;
   display: flex;
+  align-items: center;
   .nano-avatar {
     flex: 0 0 62px;
     margin-right: 10px;
   }
-  .user-info {
+  .nw-user-info {
     flex: 1 1 100%;
+    padding-left: 10px;
     .nw-user-name {
       font-family: 'SansBold', sans-serif;
       font-size: 20px;

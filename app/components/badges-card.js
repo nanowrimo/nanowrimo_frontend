@@ -1,7 +1,8 @@
-import NanoSubcard from 'nanowrimo/components/nano-subcard';
+//import NanoSubcard from 'nanowrimo/components/nano-subcard';
+import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-export default NanoSubcard.extend({
+export default Component.extend({
   store: service(),
   badgesService: service(),
   cardTitle: null,

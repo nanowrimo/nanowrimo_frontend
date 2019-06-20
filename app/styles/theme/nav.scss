@@ -22,13 +22,11 @@
     -o-transition: all 0.3s;
     transition: all 0.3s;
 
-    max-height: 0;
     display: none;
     overflow: visible;
     opacity: 0;
 
     &.show {
-      max-height: 300px;
       opacity: 1;
       display:block;
     }
@@ -247,8 +245,7 @@
               left: 14px;
             }
             &.dropdown-menu-right {
-              margin-top: 10px;
-              margin-right: -5px;
+              
               border: 0px;
               padding-top: 0px;
               background: transparent;
@@ -303,11 +300,13 @@
         line-height: 23px;
         &.button-clear {
           width: 32px;
+          height: 38px;
           border: 0;
           background-image: none;
           background-color: transparent;
           color: $nw-darkgreen;
-          font-size: 16px;
+          font-size: 20px;
+          line-height: 38px;
           position: relative;
           .fa-bell-o {
             font-size: 18px;

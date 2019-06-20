@@ -7,6 +7,7 @@ import moment from "moment"
 export default Service.extend({
   currentUser: service(),
   store: service(),
+  badgesService: service(),
   recomputeNotifications: 0,
   lastCheck: null,
 
@@ -22,7 +23,7 @@ export default Service.extend({
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();
     });
-    //debounce(this, this.checkForUpdates, 15000, false);
+    debounce(this, this.checkForUpdates, 15000, false);
   },
   
   incrementRecomputeNotifications() {
@@ -33,12 +34,19 @@ export default Service.extend({
   newNotificationsCount: computed('recomputeNotifications', function() {
     var ns = this.store.peekAll('notification')
     var count = 0;
+    var new_badge = false;
     var lc = this.get('lastCheck');
     ns.forEach(function(obj) {
       if (obj.displayAt>lc) {
         count += 1;
+        if (obj.actionType=="BADGE_AWARDED") {
+          new_badge = true;
+        }
       }
     });
+    if (new_badge) {
+      this.get('badgesService').checkForUpdates();
+    }
     return count;
   }),
   

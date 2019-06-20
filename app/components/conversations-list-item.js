@@ -8,7 +8,6 @@ export default Component.extend({
   group: null,
   conversationLabel: computed('group',function() {
     let g = this.get('group');
-    console.log(g.groupType);
     let store = this.get('store');
     let email = this.get('currentUser.user.email');
     let name = g.get('name');

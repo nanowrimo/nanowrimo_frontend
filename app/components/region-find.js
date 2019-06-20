@@ -96,7 +96,7 @@ export default Component.extend({
         newArray.push(o);
       });
     }
-    var sorted = this.mergeSort(newArray);
+    var sorted = this.assignSort(newArray);
     return sorted;
   }),
   
@@ -120,16 +120,16 @@ export default Component.extend({
   }),
   
   
-  mergeSort(a, sortOption) {
+  assignSort(a, sortOption) {
     var len = a.length;
     if(len < 2) { 
       return a;
     }
     var pivot = Math.ceil(len/2);
-    return this.merge(this.mergeSort(a.slice(0,pivot), sortOption), this.mergeSort(a.slice(pivot), sortOption), sortOption);
+    return this.assign(this.assignSort(a.slice(0,pivot), sortOption), this.assignSort(a.slice(pivot), sortOption), sortOption);
   },
 
-  merge(left, right, sortOption) {
+  assign(left, right, sortOption) {
     var result = [];
     if (sortOption=='name') {
       while((left.length > 0) && (right.length > 0)) {
@@ -189,7 +189,7 @@ export default Component.extend({
         newArray.splice(i, 1);
       }
     }
-    var sorted = this.mergeSort(newArray, s);
+    var sorted = this.assignSort(newArray, s);
     var sliced = sorted.slice(0,listLength);
     //var sorted = newArray.sortBy(s);
     //var date2 = new Date();

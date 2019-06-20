@@ -16,6 +16,7 @@ export default Component.extend({
   user: null,
   renderSize: null,
   userBadges: computed('badgesService.recomputeBadges', function() {
+    console.log('recomputing');
     return this.get('store').peekAll('user-badge');
   }),
   userBadge: computed('badgesService.recomputeBadges',function() {
@@ -72,7 +73,7 @@ export default Component.extend({
   }),
   
   
-  badgeImageUrl: computed('userBadges.[]',function() {
+  badgeImageUrl: computed('badgesService.recomputeBadges',function() {
     let b = this.get('badge');
     if (b) {
       let imageUrl = b.unawarded;
@@ -104,13 +105,6 @@ export default Component.extend({
     if (badge && ownsBadge) {
       if (badge.badge_type=='self-awarded') {
         note = "Click on a badge to award it to yourself! Click on it again to remove it."
-        /*
-        if (awardDate) {
-          note = "You gave yourself this badge. If you feel you don't deserve it, click on it to remove it.";
-        } else {
-          note = "Click on this badge to award it to yourself!";
-        }
-        */
       } else {
         if (awardDate) {
           let str_val = moment(awardDate).fromNow(); 

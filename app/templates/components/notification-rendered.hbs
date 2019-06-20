@@ -1,5 +1,5 @@
 <div class="nw-notification nw-noti-new" {{action "clicked"}}>
-  <div class="nw-noti-image nano-avatar nano-avatar-medium">
+  <div class="nw-noti-image {{imageStyle}}">
     <img src="{{renderImage}}" />
   </div>
   <div class="nw-noti-content-container">
@@ -11,11 +11,6 @@
       <div class="nw-noti-time-ago">
         Posted {{timeSince}}
       </div>
-      {{#if renderButton}}
-        <div class="nw-noti-button">
-          <button>View Badge</button>
-        </div>
-      {{/if}}
     </div>
   </div>
 </div>
