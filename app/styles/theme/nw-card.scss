@@ -8,7 +8,7 @@
   }
   &.nw-prompt-card {
     border: dashed 2px $nw-lightgreyblue;
-    background-color: $nw-white;
+    background-color: transparent;
     background-image: none;
     color: $nw-lightgrey;
     
@@ -255,7 +255,7 @@
 }
 
 /* -- CSS for specific card instances -- */
-#projects-new-project-card {
+.nw-prompt-card {
   .project-announce-quote {
     flex: 1 1 50%;
     .quote-text {

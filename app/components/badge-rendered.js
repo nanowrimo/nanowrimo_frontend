@@ -82,7 +82,7 @@ export default Component.extend({
       return imageUrl;
     }
   }),
-  badgeDescription: computed('userBadges.[]',function() {
+  badgeDescription: computed('badgesService.recomputeBadges',function() {
     let b = this.get('badge');
     let desc = '';
     if (b) {

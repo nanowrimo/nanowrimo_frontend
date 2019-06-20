@@ -7,21 +7,19 @@
   </div>  
   {{project-flippy-details project=project class='nw-flippy-project-cover' }}
 {{else}}
-  <div id='project-needs-details'>
-    <div id="texts">
-      {{#if canEdit }}
-        <div id='line-1'>You haven't told us much about your new project.</div>
-        <div id='line-2'>
-          <a href="#" {{action "editProject"}}>
-            Fill out your project details
-          </a>
+  <div id="projects-new-project-card" class="nw-card nw-prompt-card">
+    <div class='nw-hflex'>
+      <div class="project-announce-quote">
+        <div class="quote-text">
+          You haven't told us much about your new project.
         </div>
-      {{else}}
-        Nothing is known about this project
-      {{/if}}
-    </div>
-    <div id='graphic'>
-      <img src='/images/projects/pencilandpen.svg'>
+      </div>
+      <div class='action'>
+        <a href="#" {{action "editProject"}}>Fill out your project details!</a>
+      </div>
+      <div class='prompt-image'>
+        <img src='/images/projects/pencilandpen.svg'>
+      </div>
     </div>
   </div>
 {{/if}}
