@@ -12,9 +12,11 @@ export default Service.extend({
   lastCheck: null,
 
   load() {
-    this.set('lastCheck',moment());
-    debounce(this, this.checkForUpdates, 5000, false);
-    return this.get('store').query('notification',{});
+    if (this.get('session.isAuthenticated')) {
+      this.set('lastCheck',moment());
+      debounce(this, this.checkForUpdates, 5000, false);
+      return this.get('store').query('notification',{});
+    }
   },
   
   checkForUpdates() {
