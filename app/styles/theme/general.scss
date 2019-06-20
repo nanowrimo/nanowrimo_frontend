@@ -297,7 +297,13 @@ ul {
     flex-wrap: wrap;
   }
   .side-by-side-even {
-    width: 47%;
+    width: 100%;
+    @media (max-width: $screen-sm) {
+      width: 106%;
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+    
   }
 }
 // --------------
