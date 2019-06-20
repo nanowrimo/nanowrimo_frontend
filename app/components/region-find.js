@@ -194,7 +194,6 @@ export default Component.extend({
     //var sorted = newArray.sortBy(s);
     //var date2 = new Date();
     //var timestamp2 = date2.getTime();
-    //console.log("sortedRegions: " + (timestamp2-timestamp));
     return sliced;
   }),
   
