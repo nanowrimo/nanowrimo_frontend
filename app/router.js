@@ -88,7 +88,7 @@ Router.map(function() {
   this.route('press');
   this.route('about');
   this.route('test');
-  this.route('pep-talks');
+  //this.route('pep-talks');
   this.route('nano-prep');
   this.route('offers');
   this.route('programming-and-impact');

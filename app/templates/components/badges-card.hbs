@@ -13,9 +13,11 @@
     <div class="nw-badges">
       <div class="nw-honeycomb" style="{{honeycombHeight}}">
       </div>
-      {{#each badges as |badge|}}
-        {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
-      {{/each}}
+      {{#if firstBadge}}
+        {{#each badges as |badge|}}
+          {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
+        {{/each}}
+      {{/if}}
     </div>
   </div>
 </div>

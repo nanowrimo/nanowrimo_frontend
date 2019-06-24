@@ -9,13 +9,17 @@ export default Controller.extend({
   currentUserName: reads('currentUser.user.name'),
   currentUserEmail: reads('currentUser.user.email'),
   currentUserIsNotConfirmed: reads('currentUser.user.isNotConfirmed'),
-  currentUserHasProject: computed('currentUser.user.projects.[]', function() {
+  currentUserHasProject: computed('currentUser.user.projects.{[],@each.primary}', function() {
     let cu = this.get('currentUser.user');
     if (cu) {
       return cu.persistedProjects.length > 0;
     }
-    
   }),
+  primaryProject: computed("currentUser.user.primaryProject", function(){
+    let p = this.get('currentUser.user.primaryProject');
+    return p;
+  }),
+  
   queryParams: ['addProject'],
   
   addProject: false,
