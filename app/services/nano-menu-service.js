@@ -50,7 +50,7 @@ export default Service.extend({
         toggleLabel: "Writer's Resources",
         submenuItems: [
          // {label: "NaNo Prep", route: "nano-prep", segment: null, teaser: "Get ready for the big event", src: "/images/nav/thought_bubble.svg"},
-          {label: "Pep Talks", route: "pep-talks", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg"},
+          {label: "Pep Talks", url: "/pep-talks", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg"},
           {label: "Offers", route: "offers", segment: null, teaser: "Discounts on writer tools", src: "/images/nav/present.svg"}
         ]
       }

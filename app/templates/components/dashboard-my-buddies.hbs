@@ -1,6 +1,16 @@
 <div class="nw-card-header">
   <div class="nw-card-title">My Buddies</div>
 </div>
-<div class="nw-card-content center-vertically" style="background-image: url('/images/cards/handsclapping.svg'); background-position: bottom center;">
-  <div>You're three times more likely to finish a novel with a buddy!<br /><button type="submit" class="">Connect My Social Accounts</button><br /><button type="submit" class=" button-reversed">Find Wrimos Near Me</button></div>
+<div class="nw-card-content nw-card-content-vert nw-center-horiz">
+  <div>
+    <div class="nw-promo-text">
+      You're three times more likely to finish a novel with a buddy!
+    </div>
+    <div>
+      {{#link-to "authenticated.search"}}
+        <button type="submit">Find buddies!</button>
+      {{/link-to}}
+    </div>
+  </div>
+  <div class="nw-card-bottom-image"><img src="/images/cards/handsclapping.svg" /></div>
 </div>

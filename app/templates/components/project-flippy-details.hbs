@@ -42,13 +42,17 @@
       <div>
         <div class='nw-label'>Summary</div>
         <div class='nw-scrollable'>
-          {{{newline-to-br project.summary}}}
+          {{#if project.summary}}
+            {{{newline-to-br project.summary}}}
+          {{/if}}
         </div>
       </div>
       <div>
         <div  class='nw-label'>Excerpt</div>
         <div class='nw-scrollable'>
-          {{{newline-to-br project.excerpt}}}
+          {{#if project.excerpt}}
+            {{{newline-to-br project.excerpt}}}
+          {{/if}}
         </div>
       </div>
     </div>
