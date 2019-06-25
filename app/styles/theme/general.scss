@@ -342,6 +342,10 @@ ul {
   flex-direction: column;
 }
 .nw-flippy-wrapper {
+  .nw-card-content {
+    display: flex;
+    flex-direction: column;
+  }
   .nw-vertical-flex > div {
     flex: 0 0 37%;
     overflow: scroll;
