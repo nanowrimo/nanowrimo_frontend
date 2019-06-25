@@ -144,3 +144,24 @@
   text-align: left;
   color: $nw-mediumgrey;
 }
+.nw-project-details > div {
+  flex: 0 0 37%;
+  overflow: scroll;
+  padding: 10px;
+  background-color: $nw-white-2;
+  border-radius: 12px;
+  margin-top: 12px;
+  @media (max-width: $screen-xs) {
+    flex: 0 0 28%;
+  }
+  &.nw-project-flippy-title {
+    background-color: transparent;
+    padding-top: 0px;
+    border-top: 0px;
+    flex: 0 0 15%;
+    @media (max-width: $screen-xs) {
+      flex: 0 0 28%;
+    }
+  
+  }
+}

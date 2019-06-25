@@ -137,24 +137,21 @@
   }
   .nw-card-content {
     display: flex;
-    &.nw-card-content-vert {
-      flex-direction: column;
-      justify-content: space-between;
-    }
+    flex-direction: column;
+    justify-content: space-between;
     flex: 1 1 100%;
     position: relative;
     padding: 20px;
+    &.nw-card-horizontal {
+      flex-direction: row;
+      align-items: center;
+    }
     iframe {
       height: 300px;
-    }
-    &.nw-center-vert {
-      height: 100%;
-      align-items: center;
     }
     &.nw-center-horiz {
       text-align: center;
     }
-    
     &.no-padding {
       height: 100%;
       padding-top: 0px;
