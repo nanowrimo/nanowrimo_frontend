@@ -332,3 +332,18 @@ ul {
     fill: #ffe680;
   }
 }
+.nw-title {
+  font-family: 'SerifRegular', serif ;
+  font-size: 26px;
+  a {
+    color: $nw-link-color;
+  }
+  /*color: $nw-darkgrey;*/
+  margin-bottom: 7px;
+}
+a {
+  .nw-title {
+    color: $nw-link-color;
+  }
+}
+

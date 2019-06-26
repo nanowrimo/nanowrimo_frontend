@@ -145,6 +145,9 @@
     &.nw-card-horizontal {
       flex-direction: row;
       align-items: center;
+      @media (max-width: $screen-xs-max) {
+        flex-direction: column;
+      }
     }
     iframe {
       height: 300px;
@@ -162,6 +165,7 @@
     }
     &.nw-fixed-card {
       padding-top: 5px;
+      justify-content: flex-start;
     }
     .nw-card-superhead {
       font-family: 'SourceSansPro-Regular', sans-serif;
@@ -176,7 +180,6 @@
       font-size: 20px;
       color: $nw-darkgrey;
       line-height: 1.4;
-      margin-top: 10px;
       a {
         color: $nw-darkgrey;
         &:hover {

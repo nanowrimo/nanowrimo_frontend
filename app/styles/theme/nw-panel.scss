@@ -96,14 +96,23 @@
   width: 100%;
   position: relative;
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
+  @media (max-width: $screen-xs-max) {
+    flex-direction: column;
+    > div {
+      align-self: center;
+    }
+  }
   justify-content: space-between;
   #announce-new-project-button {
     width: 291px;
   }
   .nw-panel-actions-select {
     align-self: flex-end;
-    text-align: right;
+    @media (max-width: $screen-xs-max) {
+      align-self: center;
+    }
+    
     #project-summary-sort-by-text {
       font-family: 'SansItalic', sans-serif;
       color: $nw-mediumgrey; 
@@ -130,9 +139,6 @@
       box-sizing: border-box; 
     }
   }
-}
-.nw-panel-actions > div {
-  flex: 1 1 50%;
 }
 .nw-panel-intro {
   min-height: 140px;

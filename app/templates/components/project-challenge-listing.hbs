@@ -1,4 +1,4 @@
-<div class='nw-card-header'>
+<div class='nw-card-header nw-card-header-no-height'>
   <div class='nw-card-actions'>
     {{#if projectChallenge.isPrimary}}
       <i class='fa fa-thumb-tack primary-thumb-tack'></i>
@@ -25,8 +25,8 @@
     {{/if}}
   </div>
 </div>
-<div class="nw-card-content">
-  <div class='title primary-text'>
+<div class="nw-card-content nw-card-horizontal">
+  <div class='nw-title'>
     <a href="#" {{action "redirectToStats"}}>
       {{projectChallenge.name}}
     </a>
