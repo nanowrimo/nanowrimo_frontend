@@ -1,0 +1,182 @@
+{{#bs-modal
+  open=open
+  onShow=(action "onShow")
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    This is a Great Start!
+  {{/modal.header}}
+  {{#form-for
+    data-test-project-form=true
+    afterSubmit=(action 'afterSubmit')
+    currentStepIndex=formStepOverride
+    model=project
+    steps=steps
+    saveAfterSave=locationChangeset
+    as |f|
+  }}
+    {{#modal.body}}
+
+      <div class="steps">
+        {{#if (eq f.currentStepIndex 0)}}
+          <div class="step step-current">
+            <div>Event Details</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          <div class="step step-completed" {{action "setStep" 0}}>
+            <div>Event Details</div>
+            <div>{{fa-icon "check-circle"}}</div>
+          </div>
+        {{/if}}
+        {{#if f.isLastStep}}
+          <div class="step-connector connector-blue">
+            <hr />
+          </div>
+          <div class="step step-current">
+            <div>Location</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          <div class="step-connector">
+            <hr />
+          </div>
+          <div class="step">
+            <div>Location</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{/if}}
+      </div>
+
+      <div class="tab-content">
+
+        {{#if (eq f.currentStepIndex 0)}}
+
+          <div class="form-group">
+            {{f.input
+              label="What is the name of your project?"
+              property="title"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="What is the project status?"
+              options=optionsForStatus
+              property="status"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="How much privacy do you want?"
+              options=optionsForPrivacy
+              property="privacy"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.select
+              label="What type of project is this?"
+              options=optionsForWritingType
+              property="writingType"
+            }}
+          </div>
+          
+          {{#if optionsForChallenges}}
+            <div class="form-group">
+              {{input class= 'form-control' 
+                id='associateCheckbox'
+                name='associateCheckbox'
+                type="checkbox"
+                checked=associateWithChallenge
+                change=(action "clickedAssociateCheckbox")
+              }}
+              <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
+            </div>
+            <div class="form-group {{hideClass}}">
+              <div class="select-container">
+                <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+                  {{#each optionsForChallenges as |c|}}
+                    <option value="{{c.id}}" selected={{if (eq c.id associatedChallengeId) 'true'}}>{{c.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          
+          {{/if}}          
+        {{else if (eq f.currentStepIndex 1)}}
+          {{#if (lte challenge.eventType 1)}}
+            <div id='you-chose-nanowrimo'>
+            Because you have chosen {{challenge.name}}, some information cannot be edited. 
+            (Go <a href=# {{action "setStep" 0}}>back</a> if needed)
+            </div>
+          {{/if}}
+          {{project-challenge-editor project=project 
+            challenge=challenge projectChallenge=projectChallenge 
+            changeset=projectChallengeChangeset validChallengeDates=validChallengeDates}}
+
+        {{else}}
+
+          <div class="form-group">
+            {{f.input
+              label="What is the current total word count?"
+              property="wordCount"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.multiselect
+              createOptionModel="genre"
+              label="What is/are the genre(s)?"
+              options=optionsForGenres
+              property="genres"
+              searchField="name"
+              searchEnabled=true
+              
+            }}
+          </div>
+          <div class="form-group">
+            {{f.textarea
+              label="Add a project summary"
+              property="summary"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.textarea
+              label="Add an excerpt"
+              property="excerpt"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.input
+              label="What is the project's Pinterest?"
+              placeholder="https://"
+              property="pinterestUrl"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.input
+              label="What is the project's playlist?"
+              placeholder="https://"
+              property="playlistUrl"
+            }}
+          </div>
+          <div class="form-group">
+            {{f.checkbox
+              label="Make this my primary project"
+              property="primary"
+              value=newPrimaryValue
+            }}
+          </div>
+
+        {{/if}}
+
+      </div>
+
+    {{/modal.body}}
+    {{#modal.footer}}
+
+      <input disabled={{invalidChallengeDates}} type="submit" class="nano-button" value={{if f.isLastStep "Save Project" (if (eq f.currentStepIndex 0) "On To Your Goal" "On To Details")}} data-test-project-submit />
+      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} data-test-project-cancel />
+
+    {{/modal.footer}}
+  {{/form-for}}
+{{/bs-modal}}
