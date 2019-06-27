@@ -7,7 +7,6 @@ export default Controller.extend({
   currentUser: service(),
   projectShow: controller("authenticated.users.show.projects.show"),
   project: alias('model'),
-  
   hasDetails: computed("project.{summary,excerpt,pinterestUrl,playlistUrl}", function(){
     //what constitutes 'details'? 
     let p = this.get('project');

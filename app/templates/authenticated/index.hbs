@@ -34,28 +34,30 @@
     </div>
     <div class="nw-panel nw-with-grid">
       <div class="grid-wrapper">
-        {{#unless currentUserHasProject}} 
-          <div class="nw-card nw-prompt-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1">
-            <div class='nw-hflex'>
-              <div class="project-announce-quote">
-                <div class="quote-text">"Keep your head in the clouds and your hands on the keyboard."<br />
-                  <span class="quotee">Marissa Meyer</span>
+        {{#if currentUserName}}
+          {{#unless currentUserHasProject}} 
+            <div class="nw-card nw-prompt-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1">
+              <div class='nw-hflex'>
+                <div class="project-announce-quote">
+                  <div class="quote-text">"Keep your head in the clouds and your hands on the keyboard."<br />
+                    <span class="quotee">Marissa Meyer</span>
+                  </div>
+                </div>
+                <div class='action'>
+                  <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
+                </div>
+                <div class='prompt-image'>
+                  <img src="/images/users/projects/megaphone.svg">
                 </div>
               </div>
-              <div class='action'>
-                <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
-              </div>
-              <div class='prompt-image'>
-                <img src="/images/users/projects/megaphone.svg">
-              </div>
             </div>
-          </div>
-          {{project-new-modal
-            onHidden=(action "afterProjectModalClose")
-            open=addProject
-            user=currentUser.user
-          }}
-        {{/unless}} 
+            {{project-new-modal
+              onHidden=(action "afterProjectModalClose")
+              open=addProject
+              user=currentUser.user
+            }}
+          {{/unless}}
+        {{/if}} 
         {{#if currentUserHasProject}}
           {{project-summary project=primaryProject author=currentUser.user class="nw-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1"}}
         {{/if}} 

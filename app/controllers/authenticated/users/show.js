@@ -8,20 +8,19 @@ export default Controller.extend({
   currentUser: service(),
   router: service(),
   queryParams: ['edit', 'editImages', 'editImagesTab', 'editTab'],
-
   edit: null,
   editTab: null,
   userParam: null,
 
   user: alias('model'),
-  showUserContent: computed('router.currentURL',function() {
+  /*showUserContent: computed('router.currentURL',function() {
     let r = this.get('router.currentURL');
     if (r.indexOf('/projects/')>0) {
-      return false;
+      return true;
     } else {
       return true;
     }
-  }),
+  }),*/
   canEditUser: computed('currentUser.user.id', 'user.id', function() {
     return this.get('currentUser.user.id') === this.get('user.id');
   }),

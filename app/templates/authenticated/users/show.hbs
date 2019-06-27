@@ -1,63 +1,59 @@
-{{#if showUserContent}}
-  <div class='plate-wrapper {{if canEditUser "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
-    <div class="nano-user-plate full-width" {{action "openEditModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
-      <div class="plate-cover">
-        <div class="container-fluid">
-          {{user-stats user=user}}
+<div class='plate-wrapper {{if canEditUser "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
+  <div class="nano-user-plate full-width" {{action "openEditModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
+    <div class="plate-cover">
+      <div class="container-fluid">
+        {{user-stats user=user}}
+      </div>
+      {{#if canEditUser}}
+        {{!-- TODO: CSS styling for this edit link to show/hide --}}
+        <div class="flip-corner-link" {{action "openEditModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
+          <img src="/images/global/flip_corner.png" alt="Edit User Images" />
         </div>
-        {{#if canEditUser}}
-          {{!-- TODO: CSS styling for this edit link to show/hide --}}
-          <div class="flip-corner-link" {{action "openEditModal" "headerTab" bubbles=false}} data-test-user-profile-edit-stats>
-            <img src="/images/global/flip_corner.png" alt="Edit User Images" />
-          </div>
-        {{/if}}
+      {{/if}}
 
-      </div>
-    </div>
-     <div class='plate-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
-  </div>
-  <div class="content-gutters">
-    <div class="container-fluid align-top">
-      <div class="nw-sidebar nw-profile">
-        <div class="nw-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openEditModal" "avatarTab"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
-          <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
-          <div class='avatar-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
-        </div>
-        <div class="nw-user-name" data-test-user-name>
-          {{user.name}}
-        </div>
-        <div class="nw-user-location" data-test-user-location>
-          {{user.location}}
-        </div>
-        <div class="nw-member-since" data-test-user-since>
-          Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
-        </div>
-
-        {{user-links links=user.externalLinks}}
-        {{buddy-buttons user=user}}
-        {{#if canEditUser}}
-          <div>
-            <i {{action "openEditModal"}} class="fa fa-edit"></i>
-          </div>
-          {{user-edit-profile-modal
-            onHidden=(action "afterEditModalClose")
-            open=edit
-            user=user
-            tab=editTab
-          }}
-        {{/if}}
-        <div class="nw-sidebar-divot"></div>
-      </div>
-      <div class="nw-panel nw-with-tabs">
-        <ul class="nw-panel-tabs">
-          <li>{{link-to 'Profile' 'authenticated.users.show.index'}}</li>
-          <li>{{link-to 'Projects' 'authenticated.users.show.projects' }}</li>
-          <li>{{link-to 'Buddies' 'authenticated.users.show.buddies' }}</li>
-        </ul>
-        {{outlet}}
-      </div>
     </div>
   </div>
-{{else}}
-  {{outlet}}
-{{/if}}
+   <div class='plate-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
+</div>
+<div class="content-gutters">
+  <div class="container-fluid align-top">
+    <div class="nw-sidebar nw-profile">
+      <div class="nw-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openEditModal" "avatarTab"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
+        <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
+        <div class='avatar-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
+      </div>
+      <div class="nw-user-name" data-test-user-name>
+        {{user.name}}
+      </div>
+      <div class="nw-user-location" data-test-user-location>
+        {{user.location}}
+      </div>
+      <div class="nw-member-since" data-test-user-since>
+        Member since {{moment-format user.createdAt 'MMM D, YYYY'}}
+      </div>
+
+      {{user-links links=user.externalLinks}}
+      {{buddy-buttons user=user}}
+      {{#if canEditUser}}
+        <div>
+          <i {{action "openEditModal"}} class="fa fa-edit"></i>
+        </div>
+        {{user-edit-profile-modal
+          onHidden=(action "afterEditModalClose")
+          open=edit
+          user=user
+          tab=editTab
+        }}
+      {{/if}}
+      <div class="nw-sidebar-divot"></div>
+    </div>
+    <div class="nw-panel nw-with-tabs">
+      <ul class="nw-panel-tabs">
+        <li>{{link-to 'Profile' 'authenticated.users.show.index' }}</li>
+        <li>{{link-to 'Projects' 'authenticated.users.show.projects' }}</li>
+        <li>{{link-to 'Buddies' 'authenticated.users.show.buddies' }}</li>
+      </ul>
+      {{outlet}}
+    </div>
+  </div>
+</div>

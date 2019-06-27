@@ -2,7 +2,6 @@ import Controller from '@ember/controller';
 import { alias } from '@ember/object/computed';
 import { computed } from '@ember/object';
 export default Controller.extend({
-
   project: alias('model'),
   _projectChallenge: null,
   projectChallenge: computed('_projectChallenge','project.projectChallenges',function() {

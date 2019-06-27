@@ -3,10 +3,12 @@ import config from './config/environment';
 
 import RouterScroll from 'ember-router-scroll';
 
-const Router = EmberRouter.extend( RouterScroll, {
+const Router = EmberRouter.extend(RouterScroll, {
   location: config.locationType,
+  historySupportMiddleware: true,
   rootURL: config.rootURL
 });
+//const Router = EmberRouter;
 
 Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
@@ -61,9 +63,9 @@ Router.map(function() {
       this.route('show', { path: '/:slug'}, function() {
       });
     });
-    this.route('project',function(){
-      this.route('show', { path: '/:project_slug'}, function(){});
-    });
+    //this.route('project',function(){
+      //this.route('show', { path: '/:project_slug'}, function(){});
+    //});
     
     // callback for discourse SSO
     this.route('sso');
