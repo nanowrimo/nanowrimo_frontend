@@ -28,7 +28,7 @@ export default Component.extend({
       this.set('parentRecomputeBadges',nprb+1);
     }
   },
-  badges: computed('badgeType','parentRecomputeBadges','user.projects.{[],@each.primary}', function() {
+  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges','user.userBadges.{[]}', function() {
     let bt = this.get('badgeType');
     let bs = this.get('store').peekAll('badge');
     let newbs = [];
@@ -39,7 +39,7 @@ export default Component.extend({
     });
     return newbs;
   }),
-  firstBadge: computed('badges','parentRecomputeBadges','user.projects.{[],@each.primary}', function() {
+  firstBadge: computed('badgesService.recomputeBadges','badges','parentRecomputeBadges','user.projects.{[],@each.primary}', function() {
     let bs = this.get('badges');
     return bs[0];
   }),

@@ -8,7 +8,6 @@
     Submit an Event
   {{/modal.header}}
   {{#form-for
-    data-test-project-form=true
     afterSubmit=(action 'afterSubmit')
     currentStepIndex=formStepOverride
     model=project
@@ -58,6 +57,28 @@
               label="What is the name of your event?"
               property="name"
             }}
+            <div class="side-by-side" style="justify-content: space-between">
+              <div>
+                {{f.input
+                  type="date"
+                  label="Date of the event:"
+                  property="date"
+                }}
+              </div>
+              <div>
+                {{f.input
+                  type="Time"
+                  label="Time of the event:"
+                  property="time"
+                }}
+              </div>
+            </div>
+            {{f.textarea
+              label="Event details:"
+              property="description"
+              rows="5"
+            }}
+            
           </div>
         {{else if (eq f.currentStepIndex 1)}}
         {{else}}
