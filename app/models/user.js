@@ -90,22 +90,20 @@ const User = Model.extend({
   regions: filterBy('groups', 'groupType', 'region'),
   
   recalculateHome: 0,
-  homeRegion: computed('regions.[]','recalculateHome', {
-    get() {
-      let r = this.get('regions');
-      let gu = this.get('groupUsers');
-      let maxPrimary = -1;
-      let maxRegion = null;
-      r.forEach(function(tgroup) {
-        gu.forEach(function(tgu) {
-          if (tgu.group_id==tgroup.id && tgu.primary>maxPrimary) {
-            maxPrimary = tgu.primary;
-            maxRegion = tgroup;
-          }
-        });
+  homeRegion: computed('regions.[]','groupUsers.[]','recalculateHome', function(){
+    let r = this.get('regions');
+    let gu = this.get('groupUsers');
+    let maxPrimary = -1;
+    let maxRegion = null;
+    r.forEach(function(tgroup) {
+      gu.forEach(function(tgu) {
+        if (tgu.group_id==tgroup.id && tgu.primary>maxPrimary) {
+          maxPrimary = tgu.primary;
+          maxRegion = tgroup;
+        }
       });
-      return maxRegion;
-    }
+    });
+    return maxRegion;
   }),
 
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
