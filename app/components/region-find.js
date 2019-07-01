@@ -10,6 +10,7 @@ export default Component.extend({
   store: service(),
   pageLoaded: false,
   regions: alias('model'),
+  primaryDisplay: true,
   
   init() {
     this._super(...arguments);
@@ -45,15 +46,15 @@ export default Component.extend({
     }
     return '';
   }),
-  searchHide: computed('sortOption', function() {
-    if (this.get('sortOption')!='name') {
+  searchHide: computed('primaryDisplay', function() {
+    if (this.get('primaryDisplay')==false) {
       return 'nano-show';
     } else {
       return 'nano-hide';
     }
   }),
-  proximityHide: computed('sortOption', function() {
-    if (this.get('sortOption')=='proximity') {
+  proximityHide: computed('primaryDisplay', function() {
+    if (this.get('primaryDisplay')==true) {
       return 'nano-hide';
     }
   }),
@@ -249,18 +250,36 @@ export default Component.extend({
     this.set('searchString',this.get('tempSearchString'));
   },
   
+  cardPrimaryStyle: computed('primaryDisplay',function() {
+    if (this.get('primaryDisplay')) {
+      return "display: block".htmlSafe();
+    } else {
+      return "display: none".htmlSafe();
+    }
+  }),
+  cardSecondaryStyle: computed('primaryDisplay',function() {
+    if (this.get('primaryDisplay')) {
+      this.set('sortOption', 'name');
+      return "display: none".htmlSafe();
+    } else {
+      //this.set('sortOption', 'proximity');
+      this.set('_processing', true);
+      this.getLoc();
+      return "display: block".htmlSafe();
+    }
+  }),
   actions: {
     remapCenter: function(longitude, latitude) {
       this.set('_longitude', longitude);
       this.set('_latitude', latitude);
     },
-    getUserLocation: function() {
+    /*getUserLocation: function() {
       this.set('_processing', true);
       this.getLoc();
     },
     findByString: function() {
       this.set('sortOption', 'name');
-    },
+    },*/
     searchStringChange: function() {
       debounce(this, this.updateSearch, 1000, false);
     }
