@@ -1,0 +1,97 @@
+{{#bs-modal
+  open=open
+  onShow=(action "onShow")
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    Submit an Event
+  {{/modal.header}}
+  {{#form-for
+    afterSubmit=(action 'afterSubmit')
+    currentStepIndex=formStepOverride
+    model=project
+    steps=steps
+    saveAfterSave=locationChangeset
+    as |f|
+  }}
+    {{#modal.body}}
+
+      <div class="steps">
+        {{#if (eq f.currentStepIndex 0)}}
+          <div class="step step-current">
+            <div>Details</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          <div class="step step-completed" {{action "setStep" 0}}>
+            <div>Details</div>
+            <div>{{fa-icon "check-circle"}}</div>
+          </div>
+        {{/if}}
+        {{#if f.isLastStep}}
+          <div class="step-connector connector-blue">
+            <hr />
+          </div>
+          <div class="step step-current">
+            <div>Location</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          <div class="step-connector">
+            <hr />
+          </div>
+          <div class="step">
+            <div>Location</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{/if}}
+      </div>
+
+      <div class="tab-content">
+
+        {{#if (eq f.currentStepIndex 0)}}
+
+          <div class="form-group">
+            {{f.input
+              label="What is the name of your event?"
+              property="name"
+            }}
+            <div class="side-by-side" style="justify-content: space-between">
+              <div>
+                {{f.input
+                  type="date"
+                  label="Date of the event:"
+                  property="date"
+                }}
+              </div>
+              <div>
+                {{f.input
+                  type="Time"
+                  label="Time of the event:"
+                  property="time"
+                }}
+              </div>
+            </div>
+            {{f.textarea
+              label="Event details:"
+              property="description"
+              rows="5"
+            }}
+            
+          </div>
+        {{else if (eq f.currentStepIndex 1)}}
+        {{else}}
+        {{/if}}
+
+      </div>
+
+    {{/modal.body}}
+    {{#modal.footer}}
+
+      <input disabled={{invalidChallengeDates}} type="submit" class="nano-button" value={{if f.isLastStep "Submit Event for Approval" (if (eq f.currentStepIndex 0) "Next: Location")}} />
+      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
+
+    {{/modal.footer}}
+  {{/form-for}}
+{{/bs-modal}}

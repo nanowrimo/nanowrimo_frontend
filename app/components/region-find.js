@@ -10,6 +10,7 @@ export default Component.extend({
   store: service(),
   pageLoaded: false,
   regions: alias('model'),
+  primaryDisplay: true,
   
   init() {
     this._super(...arguments);
@@ -45,15 +46,15 @@ export default Component.extend({
     }
     return '';
   }),
-  searchHide: computed('sortOption', function() {
-    if (this.get('sortOption')!='name') {
+  searchHide: computed('primaryDisplay', function() {
+    if (this.get('primaryDisplay')==false) {
       return 'nano-show';
     } else {
       return 'nano-hide';
     }
   }),
-  proximityHide: computed('sortOption', function() {
-    if (this.get('sortOption')=='proximity') {
+  proximityHide: computed('primaryDisplay', function() {
+    if (this.get('primaryDisplay')==true) {
       return 'nano-hide';
     }
   }),
@@ -95,7 +96,7 @@ export default Component.extend({
         newArray.push(o);
       });
     }
-    var sorted = this.mergeSort(newArray);
+    var sorted = this.assignSort(newArray);
     return sorted;
   }),
   
@@ -119,16 +120,16 @@ export default Component.extend({
   }),
   
   
-  mergeSort(a, sortOption) {
+  assignSort(a, sortOption) {
     var len = a.length;
     if(len < 2) { 
       return a;
     }
     var pivot = Math.ceil(len/2);
-    return this.merge(this.mergeSort(a.slice(0,pivot), sortOption), this.mergeSort(a.slice(pivot), sortOption), sortOption);
+    return this.assign(this.assignSort(a.slice(0,pivot), sortOption), this.assignSort(a.slice(pivot), sortOption), sortOption);
   },
 
-  merge(left, right, sortOption) {
+  assign(left, right, sortOption) {
     var result = [];
     if (sortOption=='name') {
       while((left.length > 0) && (right.length > 0)) {
@@ -188,12 +189,11 @@ export default Component.extend({
         newArray.splice(i, 1);
       }
     }
-    var sorted = this.mergeSort(newArray, s);
+    var sorted = this.assignSort(newArray, s);
     var sliced = sorted.slice(0,listLength);
     //var sorted = newArray.sortBy(s);
     //var date2 = new Date();
     //var timestamp2 = date2.getTime();
-    //console.log("sortedRegions: " + (timestamp2-timestamp));
     return sliced;
   }),
   
@@ -249,18 +249,36 @@ export default Component.extend({
     this.set('searchString',this.get('tempSearchString'));
   },
   
+  cardPrimaryStyle: computed('primaryDisplay',function() {
+    if (this.get('primaryDisplay')) {
+      return "display: block".htmlSafe();
+    } else {
+      return "display: none".htmlSafe();
+    }
+  }),
+  cardSecondaryStyle: computed('primaryDisplay',function() {
+    if (this.get('primaryDisplay')) {
+      this.set('sortOption', 'name');
+      return "display: none".htmlSafe();
+    } else {
+      //this.set('sortOption', 'proximity');
+      this.set('_processing', true);
+      this.getLoc();
+      return "display: block".htmlSafe();
+    }
+  }),
   actions: {
     remapCenter: function(longitude, latitude) {
       this.set('_longitude', longitude);
       this.set('_latitude', latitude);
     },
-    getUserLocation: function() {
+    /*getUserLocation: function() {
       this.set('_processing', true);
       this.getLoc();
     },
     findByString: function() {
       this.set('sortOption', 'name');
-    },
+    },*/
     searchStringChange: function() {
       debounce(this, this.updateSearch, 1000, false);
     }

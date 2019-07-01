@@ -2,13 +2,15 @@
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   &.nw-card-fixed-size {
     width: 300px;
     height: 262px;
   }
   &.nw-prompt-card {
     border: dashed 2px $nw-lightgreyblue;
-    background-color: $nw-white;
+    background-color: transparent;
     background-image: none;
     color: $nw-lightgrey;
     
@@ -29,11 +31,16 @@
   }
   
   .nw-card-header {
+    flex: 0 0 28px;
     display: flex;
     justify-content: space-between;
     height: 28px;
     &.nw-card-header-no-height {
+      flex: 0 0 0px;
       height: 0px;
+    }
+    &.nw-card-page-card {
+      height: 144px;
     }
     .nw-card-title {
       flex: 0 0 auto;
@@ -56,16 +63,24 @@
     .nw-card-actions {
       flex: 1 1 50%;
       text-align: right;
+      &.nw-card-actions-left {
+        text-align: left;
+        padding-left: 10px;
+      }
       padding-right: 5px;
       z-index: 500;
       .dropdown {
         display: inline;
       }
       i {
+        cursor: pointer;
         min-width: 32px;
         line-height: 28px;
-        color: $nw-darkaqua;
+        color: $nw-lightgrey;
         font-size: 18px;
+        &:hover {
+          color: $nw-darkblue;
+        }
       }
       .nw-card-display-actions {
         display:inline;
@@ -73,6 +88,39 @@
       .nw-card-model-actions {
         display:inline;
         float:right;
+      }
+      .btn-group {
+        height: 28px;
+        button {
+          padding: 0px;
+          height: 28px;
+          border: solid 0px #000000;
+          border-top-right-radius: 0px;
+          border-top-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+          border-bottom-left-radius: 0px;
+          margin-top: 0px;
+          margin-bottom: 0px;
+          background-image: none;
+          background-color: none;
+          i {
+            color: $nw-lightgrey;
+          }
+          &.active {
+            background-color: none;
+            border-bottom: solid 3px $nw-lightorange;
+            box-shadow: none;
+            i {
+              color: $nw-mediumdarkgrey;
+            }
+          }
+          &:hover {
+            background-color: none;
+            i {
+              color: $nw-mediumdarkgrey;
+            }
+          }
+        }
       }
     }
     .nw-promo-image {
@@ -88,26 +136,36 @@
     }
   }
   .nw-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 100%;
     position: relative;
     padding: 20px;
+    &.nw-card-horizontal {
+      flex-direction: row;
+      align-items: center;
+      @media (max-width: $screen-xs-max) {
+        flex-direction: column;
+      }
+    }
+    iframe {
+      height: 300px;
+    }
+    &.nw-center-horiz {
+      text-align: center;
+    }
     &.no-padding {
       height: 100%;
-      display: flex;
       padding-top: 0px;
       padding-bottom: 0px;
       padding-left: 0px;
       padding-right: 0px;
       border-radius: 6px;
     }
-    &.nw-horiz-flex {
-      display: flex;
-      align-items: center;
-    }
-    &.nw-horiz-flex > div {
-      flex: 1 1 50%;
-    }
     &.nw-fixed-card {
       padding-top: 5px;
+      justify-content: flex-start;
     }
     .nw-card-superhead {
       font-family: 'SourceSansPro-Regular', sans-serif;
@@ -122,7 +180,6 @@
       font-size: 20px;
       color: $nw-darkgrey;
       line-height: 1.4;
-      margin-top: 10px;
       a {
         color: $nw-darkgrey;
         &:hover {
@@ -139,14 +196,18 @@
       color: $nw-lightgrey;
       margin-top: 10px;
     }
+    .nw-card-bottom-image {
+      padding-top:10px;
+      margin-bottom: -20px;
+    }
     
   }
   .nw-card-flippy-doodle {
     position: absolute;
     top: -5px;
     left: 180px;
-    @media(max-width: $screen-md) {
-      left: 10px;
+    @media(max-width: $screen-sm-max) {
+      left: 120px;
     }
   }
   
@@ -202,7 +263,7 @@
         transform: rotateY(-180deg);
       }
       .nw-card-content {
-        height: 252px;
+        height: 222px;
         padding-top: 10px;
         padding-right: 10px;
         .nw-card-scrollable {
@@ -221,7 +282,7 @@
 }
 
 /* -- CSS for specific card instances -- */
-#projects-new-project-card {
+.nw-prompt-card {
   .project-announce-quote {
     flex: 1 1 50%;
     .quote-text {
@@ -248,4 +309,19 @@
       right: 0px;
     }
   }
+}
+.nw-horiz-flex {
+  display: flex;
+  align-items: center;
+}
+.nw-horiz-flex > div {
+  flex: 1 1 100%;
+  text-align: center;
+}
+.nw-scrollable {
+  overflow: scroll;
+}
+.nw-label {
+  text-align: center;
+  font-family: 'SansSemiBold', sans;
 }

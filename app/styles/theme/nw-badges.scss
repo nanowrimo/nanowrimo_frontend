@@ -14,7 +14,8 @@
   div {
     display: inline-block;
     height: 93px;
-    margin-right: 24px;
+    margin-left: 12px;
+    margin-right: 12px;
     border-radius: 12px;
     overflow: visible;
     img {
@@ -22,6 +23,24 @@
       height: auto;
       margin-top: -2px;
     }
+  }
+}
+.nw-card-icon {
+  flex: 0 0 140px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 140px;
+  margin-bottom: 14px;
+  &.badge-large {
+    height: 147px;
+    img {
+      width: 130px;
+      height: 147px;
+    }
+  }
+  &.nw-card-icon-bottom {
+    margin-bottom: -20px;
   }
 }
 .nano-card-icon {

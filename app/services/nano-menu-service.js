@@ -34,7 +34,7 @@ export default Service.extend({
           {label: "Profile", route: "authenticated.users.show.index", segment: get(this,"currentUserObj"), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
           {label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
           {label: "Projects", route: "authenticated.users.show.projects", segment: get(this,"currentUserObj"), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
-          //{label: "Buddies", route: "authenticated.users.show.buddies", segment: get(this,"currentUserObj"), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
+          {label: "Buddies", route: "authenticated.users.show.buddies", segment: get(this,"currentUserObj"), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
         ]
       },
       {
@@ -50,7 +50,7 @@ export default Service.extend({
         toggleLabel: "Writer's Resources",
         submenuItems: [
          // {label: "NaNo Prep", route: "nano-prep", segment: null, teaser: "Get ready for the big event", src: "/images/nav/thought_bubble.svg"},
-          {label: "Pep Talks", route: "pep-talks", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg"},
+          {label: "Pep Talks", url: "/pep-talks", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg"},
           {label: "Offers", route: "offers", segment: null, teaser: "Discounts on writer tools", src: "/images/nav/present.svg"}
         ]
       }

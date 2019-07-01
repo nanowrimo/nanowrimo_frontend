@@ -35,65 +35,61 @@
       
     }
   }
-  .project-challenge-listing-card {
-    .flex-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+}
+.project-challenge-listing-card {
+  height: 100px;
+  .nw-card-content {
+    height: 80px;
+  }
+  .project-challenge-progress {
+    min-width: 260px;
+    .challenge-progress {
+      width: 100%;
+    }
+    .nano-progress-bar{
+      width: 100%;
+    }
+    .challenge-info {
+      position: relative;
       
-      .title {
-        margin-left: 28px;
-        width: 24%;
+      .progress-text {
+        margin-top: 7.5px;
+        height: 18px;
+        font-family: 'SansBold', sans-serif;
+        .count{
+          color: $nw-darkaqua;
+        }
+        .count.goal-met {
+          color: $nw-purple;
+        }
       }
-      .project-challenge-progress {
-        width: 40%;
-        .challenge-progress {
-          width: 100%;
-        }
-        
-        .nano-progress-bar{
-          width: 100%;
-        }
-        .challenge-info {
-          position: relative;
-          
-          .progress-text {
-            margin-top: 7.5px;
-            height: 18px;
-            font-family: 'SansBold', sans-serif;
-            .count{
-              color: $nw-darkaqua;
-            }
-            .count.goal-met {
-              color: $nw-purple;
-            }
-          }
-          .challenge-start {
-            position: absolute;
-            right: 0px;
-            top: 0px;
-            float: right;
-            .started {
-              color: $nw-lightgrey;
-            }
-          }
-        
-        }
-        
-      }
-      .filler-image {
-        position: relative;
-        height: 115px;
-        width: 15%;
-        text-align: center;
-        img {
-          position: absolute;
-          bottom: 0px;
+      .challenge-start {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        float: right;
+        .started {
+          color: $nw-lightgrey;
         }
       }
     }
   }
+  .filler-image {
+    flex: 0 0 135px;
+    height: 77px;
+    width: 15%;
+    text-align: center;
+    img {
+      position: relative;
+      bottom: -20px;
+    }
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+    
+  }
 }
+
 .project-challenge-new-form {
   margin: 28px 28px 4px 28px;
 }

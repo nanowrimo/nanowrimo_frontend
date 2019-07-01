@@ -102,6 +102,7 @@ export default Component.extend({
     this.set('project', newProject);
     //by default, we want this new project to be 'primary'
     newProject.set('primary', true);
+    newProject.set('wordCount', 0);
     //create the newProjectChallenge for the newProject
     let newProjectChallenge = this.get('store').createRecord('projectChallenge');
     //push the projectChallenge onto the project
@@ -114,7 +115,6 @@ export default Component.extend({
   actions: {
     associateChallengeSelect(challengeID) {
       this.set('associatedChallengeId', challengeID);
-      //console.log(this.get('associatedChallengeId'));
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
       if (this.get("associateWithChallenge") ) {
         this.set('challenge', this.get("associatedChallenge"));

@@ -1,17 +1,15 @@
-<div class='nw-project-progress'>
-  <div class='goal-text'>
-    <span class='goal'>Goal: </span>
-    <span class=''>Write {{format-number project.currentProjectChallenge.goal}} words</span>
+<div class='goal-text'>
+  <span class='goal'>Goal: </span>
+  <span class=''>Write {{format-number project.currentProjectChallenge.goal}} words</span>
+</div>
+
+{{nano-progress-bar percent=percentCompleted}}
+<div class="left-right-links">
+  <div class='progress-text'>
+    <span class="count {{if goalMet 'goal-met' ''}}">{{format-number project.currentProjectChallenge.count}}</span><span class='goal'> / {{format-number project.currentProjectChallenge.goal}} WORDS</span>
   </div>
-  
-  {{nano-progress-bar percent=percentCompleted}}
-  <div class="left-right-links">
-    <div class='progress-text'>
-      <span class="count {{if goalMet 'goal-met' ''}}">{{format-number project.currentProjectChallenge.count}}</span><span class='goal'> / {{format-number project.currentProjectChallenge.goal}} WORDS</span>
-    </div>
-    <div class='challenge-start'>
-      <span class="started">Started</span>
-      <span class="date">{{formattedStart}}</span>
-    </div>
+  <div class='challenge-start'>
+    <span class="started">Started</span>
+    <span class="date">{{formattedStart}}</span>
   </div>
 </div>

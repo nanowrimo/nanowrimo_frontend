@@ -6,7 +6,7 @@ export default Service.extend({
   currentUser: service(),
   store: service(),
   session: service(),
-  recomputeBadges: 0,
+  recomputeBadges: -1,
 
   load() {
     debounce(this, this.checkForUpdates, 10000, false);

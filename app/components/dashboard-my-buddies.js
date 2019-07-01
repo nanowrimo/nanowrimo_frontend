@@ -1,4 +1,3 @@
-import NanoSubcard from 'nanowrimo/components/nano-subcard';
-
-export default NanoSubcard.extend({
+import Component from '@ember/component';
+export default Component.extend({
 });

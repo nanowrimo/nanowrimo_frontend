@@ -7,7 +7,6 @@ export default Controller.extend({
   currentUser: service(),
   userShow: controller("authenticated.users.show"),
   user: alias('model'),
-  
   bioExpanded: false,
   
   hasBio: computed('user.bio', function(){

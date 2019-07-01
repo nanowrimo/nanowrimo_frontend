@@ -1,22 +1,28 @@
-<div class="content-gutters nw-pad-top">
-  <div class="container-fluid">
-    <div class='nw-panel'>
-      <div class="nw-panel-primary-container">
-        {{project-listing project=project author=user}}
-      </div>
-      <div class="nw-panel-secondary-container">
-        <div class="nw-panel-secondary nw-panel-flex">
-          {{outlet}}
-        </div>
-        <ul class="nw-panel-tabs">
-          <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
-          <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals'}}</li>
-          <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
-        </ul>
-      </div>
-    </div>
+<div class="nw-panel-primary-container">
+  <div class='nw-panel-actions'>
+    {{#link-to "authenticated.users.show.projects" tagName="button" class="button-reversed"}}
+      <i class="fa fa-arrow-left" />
+      Back to all projects
+    {{/link-to}}
   </div>
+  {{project-summary project=project author=user}}
 </div>
+<div class="nw-panel-secondary-container">
+  <div class="nw-panel-secondary nw-panel-flex">
+    {{outlet}}
+  </div>
+  <ul class="nw-panel-tabs">
+    <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
+    <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals' }}</li>
+    <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
+  </ul>
+</div>
+
+{{project-edit-modal
+  onHidden=(action "afterEditProjectModalClose")
+  open=displayEditModal
+  project=project
+}}
 {{project-edit-cover-modal
   onHidden=(action "afterCoverModalClose")
   open=displayCoverEditModal

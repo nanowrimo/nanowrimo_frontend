@@ -1,75 +1,26 @@
-{{#if hasDetails}}  
-  <div class ='nw-card' id='project-details-card'>
-    <div id='project-details'>
-      <div id='project-cover-large' class="{{if canEdit 'user-editable'}}">
-        <img src={{project.coverUrl}}>
-        <div class="large-cover-overlay nw-image-editable-overlay" {{action 'editCover'}}>{{fa-icon "edit"}}</div>
-      </div>
-      <div id='project-information' >
-        <div id='project-title'>{{project.title}}</div>
-        <div id='project-summary-label'>Summary</div>
-        <div id='project-summary'>
-          {{{newline-to-br project.summary}}}
-        </div>
-        <div id='genres-and-links'>
-          <div id='genres-label'>Genres</div>
-          <div id='genres-list'>
-            {{#each project.genres as |genre|}}
-              <span class='genre'>{{genre.name}}</span>
-            {{/each}}
-          </div>
-          <hr>
-          <div id='external-links'>
-            {{#if project.playlistUrl}}
-              <span class='external-link'>
-                <a href='{{project.playlistUrl}}' target='_blank'>
-                  <i class="fa fa-music" aria-hidden="true"></i>
-                  Listen to the soundtrack
-                </a>
-              </span>
-            {{/if}}
-            {{#if project.pinterestUrl}}
-              <span class='external-link'>
-                <a href='{{project.pinterestUrl}}' target='_blank'>
-                  <i class="fa fa-pinterest" aria-hidden="true"></i>
-                  View the inspiration
-                </a>
-              </span>
-            {{/if}}
-          </div>
-        </div>
-      </div>
+{{#if hasDetails}}
+  <div class='nw-panel-actions nw-horiz-flex'>
+    <div>
+      <button {{action 'editProject'}}>Edit Details</button>
+      <button {{action 'editCover'}}>Edit Cover</button>
     </div>
-  </div>
-  <div class='nano-card' id='project-excerpt-card'>
-    <div id='project-excerpt-display'>
-      <div id='project-excerpt-label'>Excerpt</div>
-      <div id='project-excerpt'>
-        {{{newline-to-br project.excerpt}}}
-        {{#if canEdit}}
-          <div {{action "editProject"}} class="flip-corner-link" >
-            <img src="/images/global/flip_corner.png" alt="Edit User Bio" />
-          </div>
-        {{/if}}
-      </div>
-    </div>
-  </div>
+  </div>  
+  {{project-flippy-details project=project class='nw-flippy-project-cover' }}
 {{else}}
-  <div id='project-needs-details'>
-    <div id="texts">
-      {{#if canEdit }}
-        <div id='line-1'>You haven't told us much about your new project.</div>
-        <div id='line-2'>
-          <a href="#" {{action "editProject"}}>
-            Fill out your project details
-          </a>
+  <div id="projects-new-project-card" class="nw-card nw-prompt-card">
+    <div class='nw-hflex'>
+      <div class="project-announce-quote">
+        <div class="quote-text">
+          You haven't told us much about your new project.
         </div>
-      {{else}}
-        Nothing is known about this project
-      {{/if}}
-    </div>
-    <div id='graphic'>
-      <img src='/images/projects/pencilandpen.svg'>
+      </div>
+      <div class='action'>
+        <a href="#" {{action "editProject"}}>Fill out your project details!</a>
+      </div>
+      <div class='prompt-image'>
+        <img src='/images/projects/pencilandpen.svg'>
+      </div>
     </div>
   </div>
 {{/if}}
+

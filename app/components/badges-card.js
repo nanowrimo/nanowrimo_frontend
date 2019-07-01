@@ -1,7 +1,8 @@
-import NanoSubcard from 'nanowrimo/components/nano-subcard';
+//import NanoSubcard from 'nanowrimo/components/nano-subcard';
+import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-export default NanoSubcard.extend({
+export default Component.extend({
   store: service(),
   badgesService: service(),
   cardTitle: null,
@@ -27,7 +28,7 @@ export default NanoSubcard.extend({
       this.set('parentRecomputeBadges',nprb+1);
     }
   },
-  badges: computed('badgeType','parentRecomputeBadges', function() {
+  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges','user.userBadges.{[]}', function() {
     let bt = this.get('badgeType');
     let bs = this.get('store').peekAll('badge');
     let newbs = [];
@@ -38,7 +39,7 @@ export default NanoSubcard.extend({
     });
     return newbs;
   }),
-  firstBadge: computed('badges', function() {
+  firstBadge: computed('badgesService.recomputeBadges','badges','parentRecomputeBadges','user.projects.{[],@each.primary}', function() {
     let bs = this.get('badges');
     return bs[0];
   }),

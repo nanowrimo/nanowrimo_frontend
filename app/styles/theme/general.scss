@@ -257,24 +257,6 @@ button.btn {
 }
 
 // ----------------------------------
-// Styling for the red notifications
-// circle
-// ----------------------------------
-
-.unread-circle {
-  width: 17px;
-  height: 17px;
-  background-color: $nw-mediumred;
-  border-radius: 8.5px;
-  font-size: 9px;
-  color: $white;
-  line-height: 17px;
-  position: absolute;
-  right: 0;
-  bottom: 1px;
-}
-
-// ----------------------------------
 // Resetting list styles
 // ----------------------------------
 
@@ -315,7 +297,13 @@ ul {
     flex-wrap: wrap;
   }
   .side-by-side-even {
-    width: 47%;
+    width: 100%;
+    @media (max-width: $screen-sm) {
+      width: 106%;
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+    
   }
 }
 // --------------
@@ -332,3 +320,30 @@ ul {
   height: 100%;
   border-radius: 6px;
 }
+// ---------------
+// Congratulations
+// ---------------
+.congratulations {
+  width: 400px;
+  height: 120px;
+  font-family: "SerifSemiBold", serif;
+  font-size: 40px;
+  text {
+    fill: #ffe680;
+  }
+}
+.nw-title {
+  font-family: 'SerifRegular', serif ;
+  font-size: 26px;
+  a {
+    color: $nw-link-color;
+  }
+  /*color: $nw-darkgrey;*/
+  margin-bottom: 7px;
+}
+a {
+  .nw-title {
+    color: $nw-link-color;
+  }
+}
+

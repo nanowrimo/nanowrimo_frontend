@@ -1,12 +1,12 @@
-<div class="nano-subcard-face face-front filled-white">
-  <div class="nano-subcard-header">
-    <div class="corner-label">My Daily Word Count</div>
-    <div class="nano-subcard-toggle" {{action "toggleSubcard"}}>
-      <div style="{{cardPrimaryStyle}}">{{fa-icon "line-chart"}}</div>
-      <div style="{{cardSecondaryStyle}}">{{fa-icon "bar-chart"}}</div>
-    </div>
+<div class="nw-card-header">
+  <div class="nw-card-title">My Daily Word Count</div>
+  <div class="nw-card-actions nw-card-actions-left">
+    {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
+      {{#bg.button type="default" value=true}}{{fa-icon "line-chart"}}{{/bg.button}}
+      {{#bg.button type="default" value=false}}{{fa-icon "bar-chart"}}{{/bg.button}}
+    {{/bs-button-group}}
   </div>
-  <div class="nano-subcard-content">
-    {{high-charts content=chartData chartOptions=chartOptions theme=theme}}
-  </div>
+</div>
+<div class="nw-card-content">
+  {{high-charts content=chartData chartOptions=chartOptions theme=theme}}
 </div>

@@ -1,12 +1,16 @@
-<div class="nano-subcard-face face-front filled-grey">
-  <div class="nano-subcard-header">
-    <div class="corner-label">{{fa-icon "home"}} Home Region</div>
-  </div>
-  <div class="nano-subcard-content center-vertically center-horizontally" style="background-image: url('/images/cards/homeregion.svg')">
-    <div class="center-horizontally">There are lots of fun things going on around you, but we don't know your home region yet.<br />
+<div class="nw-card-header">
+  <div class="nw-card-title">{{fa-icon "home"}} Home Region</div>
+</div>
+<div class="nw-card-content nw-center-horiz">
+  <div>
+    <div class="nw-promo-text">
+      There are lots of fun things going on around you, but we don't know your home region yet.
+    </div>
+    <div>
       {{#link-to "authenticated.regions.find" tagName="button"}}
         Find Home Region
       {{/link-to}}
     </div>
   </div>
+  <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>
 </div>

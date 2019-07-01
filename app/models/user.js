@@ -113,7 +113,7 @@ const User = Model.extend({
     let gus = this.get('groupUsers');
     let bgus = [];
     gus.forEach(function(gu) {
-      if (((gu.groupType=='buddies')||(gu.groupType=='region'))&&(gu.exitAt==null)) {
+      if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
         bgus.push(gu.group);
       }
     });
@@ -172,7 +172,7 @@ const User = Model.extend({
         gus.forEach(function(gu) {
           if (gu.user_id) {
             let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
+            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
               buddyGroups.push(bgu.group);
             }
           }
@@ -193,7 +193,7 @@ const User = Model.extend({
         gus.forEach(function(gu) {
           if (gu.user_id) {
             let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
+            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
               buddies.push(u);
             }
           }

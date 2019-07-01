@@ -3,7 +3,7 @@
     {{#link-to nanoMenuService.homeUrl class="navbar-brand text-logo"}}<img src="/images/logo/logo_text.svg" alt="" />{{/link-to}}
     {{#if session.isAuthenticated}}
       {{#if currentUserName}}
-        {{#bs-nav type="pills" as |nav|}}
+        {{#bs-nav as |nav|}}
           {{#each submenus as |submenu|}}
             {{#nav.dropdown as |dd|}}
               {{#dd.toggle}}{{submenu.toggleLabel}} <span class="caret"></span>{{/dd.toggle}}
@@ -71,17 +71,12 @@
             </ul>
           {{/dd.menu}}
         {{/bs-dropdown}}
-        
-        <div class="nw-nav-notify-buttons">
-          {{#if media.isDesktop}}
-            {{notifications-menu}}
-          {{/if}}
-          {{#if media.isMobile}}
-            {{#nano-side-menu-toggle}}
-              <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
-            {{/nano-side-menu-toggle}}
-          {{/if}}
-        </div>
+        {{notifications-menu}}
+        {{#if media.isMobile}}
+          {{#nano-side-menu-toggle}}
+            <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
+          {{/nano-side-menu-toggle}}
+        {{/if}}
         
       {{/if}}
     {{/if}}

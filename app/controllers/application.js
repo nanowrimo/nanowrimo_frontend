@@ -14,7 +14,6 @@ export default Controller.extend({
   show_footer: computed('routeName', function() {
     let no_footer_routes = ["authenticated.nanomessages.index","authenticated.nanomessages.show.index"];
     let rn = this.get('routeName');
-    //console.log(rn);
     let body = document.body;
     let t = no_footer_routes.includes(rn);
     if (t) {

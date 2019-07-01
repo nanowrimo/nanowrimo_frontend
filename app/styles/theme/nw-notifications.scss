@@ -1,13 +1,25 @@
 .nw-nav-notify-buttons {
+  height: 38px;
   .nav-item {
-    .dropdown-toggle::after {
-      display: none;
+    line-height: 38px;
+    .dropdown-toggle {
+      &.nav-link {
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+      &::after {
+        display: none;
+      }
+    }
+    .dropdown-menu {
+      margin-top: -16px;
     }
   }
+  .nw-noti-modal-container {
+    max-height: 350px;
+  }
+  
   .nw-noti-modal {
-    margin-top: -16px;
-    .nano-menu-tab {
-    }
     .nw-noti-modal-header {
       height: 30px;
       display: flex;
@@ -33,17 +45,24 @@
     .nw-noti-modal-body {
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-      max-height: 330px;
+      max-height: 320px;
       overflow: scroll;
       .nw-notification {
+        cursor: pointer;
         padding: 13px;
         padding-left: 17px;
         padding-right: 15px;
         display: flex;
         border-bottom: 1px solid #ddd;
         background-color: $nw-white;
+        &:hover {
+          background-color: $nw-lightaqua;
+        }
         &.nw-noti-new {
           background-color: $nw-white-1;
+          &:hover {
+            background-color: $nw-lightaqua;
+          }
         }
         .nw-noti-image {
           flex: 0 0 62px;
@@ -58,7 +77,7 @@
             width: 100%;
             line-height: 1.29;
             color: $nw-darkgreyblue;
-            .noti-headline-string {
+            .nw-noti-headline-string {
               font-family: "SansBold", sans-serif;
             }
           }
@@ -90,3 +109,24 @@
     }
   }
 }
+// ----------------------------------
+// Styling for the red notifications
+// circle
+// ----------------------------------
+
+.nw-unread-circle {
+  width: 16px;
+  height: 16px;
+  background-color: $nw-mediumred;
+  border-radius: 8px;
+  font-size: 9px;
+  color: $white;
+  line-height: 16px;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  &.nw-hidden {
+    display: none;
+  }
+}
+

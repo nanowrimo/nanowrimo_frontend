@@ -11,7 +11,7 @@ export default ChartBaseComponent.extend({
     //create an array of colors and radiuses. radii?
     this.set('colorsAndRadius', [
       {
-        color: '#2f3061',
+        color: '#73ab9b',
         radius: '114%',
         innerRadius: '98%'
       }, 

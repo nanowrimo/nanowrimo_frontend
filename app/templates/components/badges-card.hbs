@@ -1,7 +1,7 @@
 <div class="nw-card-header">
   <div class="nw-card-title">{{cardTitle}}</div>
 </div>
-<div class="nw-card-content side-by-side badge-subcard">
+<div class="nw-card-content nw-card-horizontal side-by-side badge-subcard">
   <div class="side-by-side-even">
     <div class="full-width">
       {{#if firstBadge}}
@@ -13,9 +13,11 @@
     <div class="nw-badges">
       <div class="nw-honeycomb" style="{{honeycombHeight}}">
       </div>
-      {{#each badges as |badge|}}
-        {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
-      {{/each}}
+      {{#if firstBadge}}
+        {{#each badges as |badge|}}
+          {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
+        {{/each}}
+      {{/if}}
     </div>
   </div>
 </div>

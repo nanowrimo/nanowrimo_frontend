@@ -1,0 +1,110 @@
+.nw-sidebar.nw-profile {
+  font-family: 'SansBold', sans-serif;
+  .nw-user-name {
+    width: 100%;
+    text-align: center;
+    color: $nw-darkblue;
+    font-size: 26px;
+  }
+  .nw-user-location {
+    width: 100%;
+    text-align: center;
+    color: $nw-black;
+    font-style: italic;
+  }
+  .nw-member-since {
+    width: 100%;
+    text-align: center;
+    color: $nw-mediumgrey;
+    font-style: italic;
+  }
+  .nw-user-social {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .social-button {
+      width: 26px;
+      height: 26px;
+      margin: 7px;
+      background-color: $nw-lightblue;
+      border-radius: 13px;
+      color: $nw-mediumgreyblue;
+      font-size: 12px;
+      line-height: 26px;
+    }
+  }
+  .nw-user-link {
+    width: 100%;
+    text-align: center;
+    a {
+      color: $nw-darkaqua;
+    }
+  }
+  i {
+    cursor: pointer;
+    min-width: 32px;
+    line-height: 28px;
+    color: $nw-lightgrey;
+    font-size: 18px;
+    &:hover {
+      color: $nw-darkblue;
+    }
+  }
+}
+
+.nw-user-listing {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  .nano-avatar {
+    flex: 0 0 62px;
+    margin-right: 10px;
+  }
+  .nw-user-info {
+    flex: 1 1 100%;
+    padding-left: 10px;
+    .nw-user-name {
+      font-family: 'SansBold', sans-serif;
+      font-size: 20px;
+      color: $nw-darkgrey;
+      a {
+        color: $nw-darkgrey;
+        
+      }
+    }
+    .nw-user-location {
+      font-family: 'SansItalic', sans-serif;
+      color: $nw-darkgrey;
+    }
+  }
+  .user-buttons {
+    flex: 1 1 100%;
+    .buddy-buttons {
+      padding: 0px;
+    }
+  }
+}
+
+/*---   start getting profile specific stuff all within the profile view   ---*/
+.profile-view {
+  .user-bio {
+    max-height: 280px;
+    overflow: auto;
+  }
+}
+
+#missing-bio {
+  color: $nw-mediumgrey;
+  text-align: center;
+  font-size: 16px;
+
+  a {
+    color: $nw-darkgrey;
+    text-decoration: underline;
+  }
+}
+
+#favorite-books-list {
+  margin-bottom: 10px;
+}
+

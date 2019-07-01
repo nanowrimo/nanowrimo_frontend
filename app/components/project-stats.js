@@ -111,6 +111,8 @@ export default Component.extend({
       });
       if (minutes && count) {
         return parseInt(count/minutes);
+      } else {
+        return 0;
       }
     }
   }),

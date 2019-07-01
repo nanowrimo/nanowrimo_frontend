@@ -1,18 +1,31 @@
-{{#bs-nav class="nw-nav-notify-buttons" type="pills" as |nav|}}
+{{#bs-nav class="nw-nav-notify-buttons" as |nav|}}
   {{#nav.dropdown as |dd|}}
     {{#dd.toggle}}
-      <button class="button-clear button-bell">
+      {{#link-to  "authenticated.nanomessages"}}
+        <button class="button-clear">
+          <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
+        </button>
+      {{/link-to}}
+    {{/dd.toggle}}
+  {{/nav.dropdown}}
+
+  {{#nav.dropdown as |dd|}}
+    {{#dd.toggle}}
+      <button class="button-clear">
         {{#if media.isDesktop}}
           <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
         {{/if}}
         {{#if media.isMobile}}
           <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
         {{/if}}
-        <div class="unread-circle">{{newNotificationsCount}}</div>
+        <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>
       </button>
     {{/dd.toggle}}
     {{#dd.menu align="right" as |ddm|}}
-      {{notifications-menu-dropdown allNotifications=allNotifications}}
+      {{notifications-menu-dropdown allNotifications=allNotifications clickAction=(action 'notificationClicked')}}
     {{/dd.menu}}
   {{/nav.dropdown}}
 {{/bs-nav}}
+{{#if showBadgeSplash}}
+  {{badge-splash badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
+{{/if}}

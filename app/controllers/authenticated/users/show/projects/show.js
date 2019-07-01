@@ -12,6 +12,7 @@ export default Controller.extend({
   displayCoverEditModal: false,
   author: null,
   projectSlug: null,
+  
 
   canEdit: computed('author','currentUser.user', function(){
     let a = this.get('author');

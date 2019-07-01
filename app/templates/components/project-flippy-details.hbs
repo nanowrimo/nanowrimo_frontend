@@ -1,0 +1,67 @@
+<div class='nw-flippy-wrapper'>
+  <div class='nw-card nw-card-white nw-card-face-back'>
+    <div class='nw-card-header'>
+      <div class='nw-card-actions'>
+        <div class='nw-card-model-actions'>
+          <div class="nw-flippy-card-toggle" {{action "toggleSubcard"}}>
+            <div>{{fa-icon "repeat"}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='nw-card-content nw-project-details'>
+      <div class='nw-project-flippy-title'>
+        <div class='nw-promo-text'>{{project.title}}</div>
+        <div>
+          <div class='nw-project-genres nw-horiz-flex'>
+            {{#each project.genres as |genre|}}
+              <div class='genre'>{{genre.name}}</div>
+            {{/each}}
+          </div>
+          <div class='nw-horiz-flex'>
+            <hr />
+            {{#if project.playlistUrl}}
+              <div>
+                <a href='{{project.playlistUrl}}' target='_blank'>
+                  <i class="fa fa-music" aria-hidden="true"></i>
+                  Soundtrack
+                </a>
+              </div>
+            {{/if}}
+            {{#if project.pinterestUrl}}
+              <div>
+                <a href='{{project.pinterestUrl}}' target='_blank'>
+                  <i class="fa fa-pinterest" aria-hidden="true"></i>
+                  Inspiration
+                </a>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class='nw-label'>Summary</div>
+        <div class='nw-scrollable'>
+          {{#if project.summary}}
+            {{{newline-to-br project.summary}}}
+          {{/if}}
+        </div>
+      </div>
+      <div>
+        <div  class='nw-label'>Excerpt</div>
+        <div class='nw-scrollable'>
+          {{#if project.excerpt}}
+            {{{newline-to-br project.excerpt}}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='nw-card nw-card-white nw-card-face-front'>
+    <div class='nw-card-content nw-centered no-padding'>
+      <div class='nw-project-cover-large' {{action "toggleSubcard"}}>
+        <img src={{project.coverUrl}}>
+      </div>
+    </div>
+  </div>
+</div>
