@@ -1,6 +1,6 @@
-import Route from '@ember/routing/route';
+import ScrollRoute from 'nanowrimo/routes/scroll-route'
 
-export default Route.extend({
+export default ScrollRoute.extend({
   model(params) {
     return this.get('store').queryRecord('user', { name: params.slug, include: 'externalLinks,favoriteBooks,favoriteAuthors,projects,projectChallenges,projectSessions,user-badges' });
   },
