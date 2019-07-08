@@ -69,3 +69,18 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
 * Addons
   * [EmberAddons.com](https://www.emberaddons.com/)
   * [EmberObserver.com](https://emberobserver.com/)
+
+### Development
+
+ * scroll to top / maintaining scroll position 
+    Scroll To Top is handled at the route level by using scroll-route instead
+    of the default route code
+
+    import ScrollRoute from 'nanowrimo/routes/scroll-route'
+    
+    export default ScrollRoute.extend({
+    });
+
+    to preserve scroll position when linking to a route, include "ps=true" query params in the link  
+    {{link-to "SomeRoute" 'some.route' ((query-params ps="true"))}}
+

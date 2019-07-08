@@ -1,6 +1,7 @@
 <div class="nw-panel-primary-container">
   <div class='nw-panel-actions'>
     {{#link-to "authenticated.users.show.projects" tagName="button" class="button-reversed"}}
+      <i class="fa fa-arrow-left" />
       Back to all projects
     {{/link-to}}
   </div>
@@ -11,9 +12,9 @@
     {{outlet}}
   </div>
   <ul class="nw-panel-tabs">
-    <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' }}</li>
-    <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals' }}</li>
-    <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' }}</li>
+    <li>{{link-to 'Details' 'authenticated.users.show.projects.show.index' (query-params ps="true")}}</li>
+    <li>{{link-to 'Goals' 'authenticated.users.show.projects.show.goals' (query-params ps="true")}}</li>
+    <li>{{link-to 'Badges' 'authenticated.users.show.projects.show.badges' (query-params ps="true")}}</li>
   </ul>
 </div>
 

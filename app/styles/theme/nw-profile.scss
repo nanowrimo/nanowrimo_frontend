@@ -40,6 +40,16 @@
       color: $nw-darkaqua;
     }
   }
+  i {
+    cursor: pointer;
+    min-width: 32px;
+    line-height: 28px;
+    color: $nw-lightgrey;
+    font-size: 18px;
+    &:hover {
+      color: $nw-darkblue;
+    }
+  }
 }
 
 .nw-user-listing {
