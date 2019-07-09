@@ -27,5 +27,8 @@
   {{/nav.dropdown}}
 {{/bs-nav}}
 {{#if showBadgeSplash}}
-  {{badge-splash badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
+  {{splash-badge badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
+{{/if}}
+{{#if showWinnerSplash}}
+  {{splash-won closeAction=(action 'hideWinnerSplash')}}
 {{/if}}
