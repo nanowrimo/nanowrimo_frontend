@@ -1,8 +1,4 @@
-import Route from '@ember/routing/route';
+import ScrollRoute from 'nanowrimo/routes/scroll-route'
 
-export default Route.extend({
-  actions: {
-    willTransition: function() {
-    }
-  }
+export default ScrollRoute.extend({
 });

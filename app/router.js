@@ -1,14 +1,10 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-import RouterScroll from 'ember-router-scroll';
-
-const Router = EmberRouter.extend(RouterScroll, {
+const Router = EmberRouter.extend( {
   location: config.locationType,
-  historySupportMiddleware: true,
   rootURL: config.rootURL
 });
-//const Router = EmberRouter;
 
 Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
