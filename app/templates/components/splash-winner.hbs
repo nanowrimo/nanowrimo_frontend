@@ -1,0 +1,20 @@
+{{#ember-wormhole to="ember-bootstrap-wormhole"}}
+  <div class='nw-splash nw-badge-splash '>
+    <div class="nw-vflex">
+      {{svg-congratulations}}
+      <div class='unlocked'>You unlocked a badge</div>
+      <div class='badge-image'>
+        <img src='{{badge.awarded}}' title='{{badge.title}}'>
+      </div>
+      <div class='badge-title'>
+        {{badge.title}}
+      </div>
+      <div class='badge-description'>
+        {{badge.awarded_description}}
+      </div>
+      <button {{action "closeClicked"}}>close</button>
+    </div>
+  </div>
+{{/ember-wormhole}}
+
+
