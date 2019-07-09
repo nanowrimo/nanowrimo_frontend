@@ -1,0 +1,129 @@
+<svg id='svgMain' xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="100%" height="75%" 
+  >
+  
+  <rect id='background' width="100%" height="100%" fill="none"/>  
+  <script type='text/javascript'> <![CDATA[
+    let colors =['red','green','blue','purple','yellow','orange'];
+    let confettoWidth = 12;
+    var xmlns = "http://www.w3.org/2000/svg";
+    var xlinkns = "http://www.w3.org/1999/xlink";
+    //update stuff on resize
+    window.onresize=resized;
+    //run an initial resized
+    resized();
+    
+    function randomDropSpeed(){
+      var fast = 3;
+      var slow = 10;
+      return Math.random() * (slow - fast) + fast;
+    }
+    
+    function randomFlipSpeed() {
+      let min=0.5;
+      let max=2;
+      let speed = Math.random()*(max-min)+min;
+      return speed.toString()+"s";
+    }
+    
+    function randomColor() {
+      return colors[Math.floor(Math.random()*colors.length)]
+    }
+    
+    function randomShimmy(){
+      var fast = 2;
+      var slow = 10;
+      var min = 5;
+      var max = 15;
+      var left = - (Math.random() * (max-min)+max);
+      var right =  Math.random() * (max-min)+max;
+      var speed = Math.random() * (slow - fast) + fast;
+      return [left, right, speed];
+    }
+    
+    // The main function
+    function resized(){
+      let bg = document.getElementById('background');
+      let w = bg.getBBox().width;
+      let h = bg.getBBox().height;
+      
+      //how many fettos? 1 per confettoWidth, all across the screen
+      let confettoCount = w*2/confettoWidth;
+      let confettoSpace = w/confettoCount;
+      //confettoCount = 1;
+      for(var i=0; i<confettoCount; i++) {
+        //create some various random numbers
+        var flipSpeed = randomFlipSpeed();
+
+        //create a confetto
+        let confetto = document.createElementNS(xmlns, "polygon");
+        confetto.setAttributeNS(null, "points","5,0 15,0 10,5 0,5");
+        confetto.setAttributeNS(null,'x',"0");
+        confetto.setAttributeNS(null,'y',"0");
+        let rc = randomColor();
+        confetto.setAttributeNS(null, "style", "fill:"+rc+"; stroke:"+rc);
+        //create an animate transform to "flip" the confetto
+        let atScale = document.createElementNS(xmlns, "animateTransform");
+        atScale.setAttributeNS(null, 'attributeName', 'transform');
+        atScale.setAttributeNS(null,'attributeType', 'XML');
+        atScale.setAttributeNS(null, 'type', 'scale');
+        atScale.setAttributeNS(null, 'values', "1,1;1,-1;1,1");
+        atScale.setAttributeNS(null,'dur', flipSpeed);
+        atScale.setAttributeNS(null,'additive', 'sum');
+        atScale.setAttributeNS(null,'repeatCount', 'indefinite');
+        //create an animatetransform to maintain position while "flipping"
+        let atMove = document.createElementNS(xmlns, "animateTransform");
+        atMove.setAttributeNS(null, 'attributeName', 'transform');
+        atMove.setAttributeNS(null,'attributeType', 'XML');
+        atMove.setAttributeNS(null, 'type', 'translate');
+        atMove.setAttributeNS(null, 'from', "0,0");
+        atMove.setAttributeNS(null, 'to', "0, -12");
+        atMove.setAttributeNS(null,'dur', flipSpeed);
+        atMove.setAttributeNS(null,'additive', 'sum');
+        atMove.setAttributeNS(null,'repeatCount', 'indefinite');
+        
+        //append the animations to the confetto
+        confetto.appendChild(atScale);
+        confetto.appendChild(atMove);
+        
+        // create an svg element to hold the confetto
+        let confettoWrapper = document.createElementNS(xmlns, "svg");
+        //add the confetto
+        confettoWrapper.appendChild(confetto);
+        confettoWrapper.setAttributeNS(null, "x", (i*confettoSpace));
+        confettoWrapper.setAttributeNS(null, "y", 0);
+        
+        //animate the wrapper vertically
+        let animateV = document.createElementNS(xmlns, "animate");
+        animateV.setAttributeNS(null, 'attributeName', 'y');
+        animateV.setAttributeNS(null, 'from', '-75');
+        animateV.setAttributeNS(null, 'to', h);
+        animateV.setAttributeNS(null, 'begin', '-10s');
+        animateV.setAttributeNS(null, 'dur', randomDropSpeed().toString()+'s');
+        animateV.setAttributeNS(null, 'repeatCount', 'indefinite');
+        animateV.setAttributeNS(null,'additive', 'sum');
+        
+         //create an animation for horizontal shimmy 
+        let animateH = document.createElementNS(xmlns, "animate");
+        let rs = randomShimmy();
+        animateH.setAttributeNS(null, 'attributeName', 'x');
+        animateH.setAttributeNS(null, 'values', rs[0].toString()+";"+rs[1].toString()+";"+rs[0].toString());
+        animateH.setAttributeNS(null, 'begin', 0);
+        animateH.setAttributeNS(null, 'dur', rs[2].toString()+'s');
+        animateH.setAttributeNS(null, 'repeatCount', 'indefinite');
+        animateH.setAttributeNS(null,'additive', 'sum');
+        
+        //append the animations to the confettoWrapper
+        confettoWrapper.appendChild(animateH);
+        confettoWrapper.appendChild(animateV);
+        
+        //add the confettoWrapper to the svgMain element
+        document.getElementById('svgMain').appendChild(confettoWrapper);
+      }
+    }
+    ]]>
+  </script>
+</svg>
+
+
