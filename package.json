@@ -47,6 +47,7 @@
     "ember-cli-uglify": "^2.0.2",
     "ember-cli-uuid": "^0.7.1",
     "ember-data": "~3.8",
+    "ember-datetimepicker": "^4.0.1",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^5.0.0",
     "ember-file-upload": "^2.5.3",
@@ -59,6 +60,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-modal-dialog": "^3.0.0-beta.0",
     "ember-moment": "^7.7.0",
+    "ember-place-autocomplete": "^2.0.0",
     "ember-power-select": "^2.0.3",
     "ember-power-select-with-create": "^0.6.0",
     "ember-resolver": "^5.0.1",
@@ -70,6 +72,7 @@
     "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "highcharts": "^7.0.0",
+    "jquery-datetimepicker": "^2.5.21",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
     "torii": "^0.10.1"
