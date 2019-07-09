@@ -89,6 +89,9 @@ const User = Model.extend({
   groupUsers: hasMany('group-user'),
   regions: filterBy('groups', 'groupType', 'region'),
   
+  //groupUsersLoaded is false by default, is updated when groupUsers are loaded 
+  groupUsersLoaded: false,
+  
   recalculateHome: 0,
   homeRegion: computed('regions.[]','groupUsers.[]','recalculateHome', function(){
     let r = this.get('regions');
@@ -119,7 +122,7 @@ const User = Model.extend({
   }),
   
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
-  buddyGroupUsers: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
     gus.forEach(function(gu) {
@@ -129,7 +132,7 @@ const User = Model.extend({
     });
     return bgus;
   }),
-  buddyGroupUsersAccepted: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersAccepted: computed('buddyGroupUsers.[]','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let accepted = [];
     bgus.forEach(function(bgu) {
@@ -159,8 +162,9 @@ const User = Model.extend({
     });
     return blocked;
   }),
-  buddyGroupsActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
-    get() {
+  buddyGroupsActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
+
+    if (this.get('groupUsersLoaded')) {
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddyGroups = [];
       let store = this.get('store');
@@ -313,6 +317,8 @@ const User = Model.extend({
       group_types: group_types,
       include: 'user,group'
 
+    }).then(()=>{
+      this.set('groupUsersLoaded', true);
     });
   },
 
