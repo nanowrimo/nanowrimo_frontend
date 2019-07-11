@@ -65,7 +65,6 @@
     "ember-power-select-with-create": "^0.6.0",
     "ember-resolver": "^5.0.1",
     "ember-responsive": "^3.0.0-beta.3",
-    "ember-router-scroll": "^1.0.2",
     "ember-simple-auth": "^1.5.1",
     "ember-source": "~3.8",
     "ember-test-selectors": "^1.0.0",

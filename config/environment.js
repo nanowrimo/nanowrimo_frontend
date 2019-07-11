@@ -5,9 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'nanowrimo',
     environment,
     rootURL: '/',
-    //locationType: 'auto',
-    locationType: 'router-scroll',
-    historySupportMiddleware: true,
+    locationType: 'auto',
 
     EmberENV: {
       FEATURES: {
