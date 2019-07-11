@@ -9,11 +9,12 @@ export default Service.extend({
   recomputeBadges: -1,
 
   load() {
-    debounce(this, this.checkForUpdates, 10000, false);
+    debounce(this, this.checkForUpdates, 1000, false);
     return this.get('store').query('badge',{});
   },
   
   checkForUpdates() {
+    debounce(this, this.checkForUpdates, 15000, false);
     let t = this;
     let u = this.get('currentUser.user');
     if (u) {
@@ -34,7 +35,6 @@ export default Service.extend({
         }
       });
     }
-    //debounce(this, this.checkForUpdates, 15000, false);
   },
   
   incrementRecomputeBadges() {
