@@ -39,9 +39,9 @@ module.exports = function(environment) {
     },
     'place-autocomplete': {
       //exclude: true,
-      key: 'AIzaSyCwhHSPwwhEE6m7LhLlhU14uy63iSB_VlE',
+      key: 'AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4',
       //client: 'gme-myclientid',
-      version: 3.27, // Optional - if client is set version must be above 3.24
+      //version: 3.27, // Optional - if client is set version must be above 3.24
       language: 'en', // Optional - be default will be based on your browser language
       region: 'US' // Optional
     },

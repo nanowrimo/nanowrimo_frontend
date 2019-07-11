@@ -1,11 +1,12 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { filterBy }  from '@ember/object/computed';
 
 const Group = Model.extend({
   name: attr('string'),
+  groupId: attr('number'),
   userId: attr('number'),
   createdAt: attr('date'),
   updatedAt: attr('date'),
@@ -24,10 +25,36 @@ const Group = Model.extend({
   // Members
   users: hasMany('user'),
   groupUsers: hasMany('group-user'),
+  events: hasMany('group'),
+  
   invitedGroupUsers: filterBy('groupUsers', 'invitationAccepted', '0'),
   activeGroupUsers: filterBy('groupUsers', 'invitationAccepted', '1'),
   
   groupExternalLinks: hasMany('group-external-link'),
+  
+  locationGroups: hasMany('location-group'),
+  /*events: filter('projects.@each.id', function(project) {
+    return project.id > 0;
+  }),*/
+  /*eventsActive: observer('locationGroups', {
+    get() {
+      let lgs = this.get('locationGroups');
+      let store = this.get('store');
+      lgs.forEach(function(bgu) {
+        console.log(lg.id);
+      });
+      return lgs;
+    }
+  }),*/
+  
+  /*loadLocationGroups() {
+    let g = this;
+    this.get('store').query('location-group',
+    {
+      filter: { group_id: g.id },
+      include: 'location'
+    });
+  },*/
   
   _plateUrl: null,
   plateUrl: computed('plate', {

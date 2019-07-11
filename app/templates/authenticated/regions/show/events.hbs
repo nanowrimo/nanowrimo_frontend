@@ -17,6 +17,9 @@
                 user=user
               }}
               <h6>{{group.name}} Events</h6>
+              {{#each group.events as |e|}}
+                {{e.id}}
+              {{/each}}
             </div>
           </div>
         </div>

@@ -8,6 +8,8 @@ export default Controller.extend({
   router: service(),
   currentUser: service(),
   group: alias('model'),
+  dataLoaded: false,
+  
   addEvent: false,
   canAddEvent: computed('currentUser.user.name', function() {
     return (this.get('currentUser.user.name')=="Dave Beck");

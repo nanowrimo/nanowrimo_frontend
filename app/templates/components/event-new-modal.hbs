@@ -50,7 +50,7 @@
 
       <div class="tab-content">
 
-        {{#if (eq f.currentStepIndex 0)}}
+        {{#if (eq f.currentStepIndex 1)}}
 
           <div class="form-group">
             {{f.input
@@ -94,7 +94,20 @@
               rows="3"
             }}
           </div>
-        {{else if (eq f.currentStepIndex 1)}}
+        {{else if (eq f.currentStepIndex 0)}}
+          {{#if baseLocations}}
+            <div class="form-group">
+              <div class="select-container">
+                <select id='associateSelect' class='form-control'>
+                  {{#each baseLocations as |c|}}
+                    <option value="{{c.id}}">{{c.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+        
+          {{/if}}          
+        
           <div class="form-group">
             {{f.input
               type="text"
@@ -102,13 +115,19 @@
               property="locationName"
             }}
           </div>
-          <div>
+          <div class="form-group">
+            <label for='time' class='form-group'>Street Address</label>
             {{place-autocomplete-field
               value=address2
-              inputClass= 'place-autocomplete--input-2'
+              inputClass= 'place-autocomplete--input form-control ember-text-field'
               placeChangedCallback=(action "placeChangedSecondInput")
-              restrictions=restrictions
             }}
+          </div>
+          <div class="form-group">
+            <label for='city' class='form-group'>What is the city?</label>
+            <input name='city' type='text' class='form-control'
+              value={{city}}
+            />
           </div>
         {{else}}
         {{/if}}
