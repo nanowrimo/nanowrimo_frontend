@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { hasMany } from 'ember-data/relationships';
+import { hasMany, belongsTo } from 'ember-data/relationships';
 import { computed, observer }  from '@ember/object';
 import { filterBy }  from '@ember/object/computed';
 
@@ -25,7 +25,8 @@ const Group = Model.extend({
   // Members
   users: hasMany('user'),
   groupUsers: hasMany('group-user'),
-  events: hasMany('group'),
+  parentGroup: belongsTo('group', { inverse: 'childGroups' }),
+  childGroups: hasMany('group', { inverse: 'parentGroup' }),
   
   invitedGroupUsers: filterBy('groupUsers', 'invitationAccepted', '0'),
   activeGroupUsers: filterBy('groupUsers', 'invitationAccepted', '1'),
@@ -33,6 +34,18 @@ const Group = Model.extend({
   groupExternalLinks: hasMany('group-external-link'),
   
   locationGroups: hasMany('location-group'),
+  
+  groupsLoaded: false,
+  loadGroups(group_types) {
+    let g = this;
+    this.get('store').query('groups',
+    {
+      filter: { group_id: g.id },
+      group_types: group_types,
+    }).then(()=>{
+      this.set('groupsLoaded', true);
+    });
+  },
   /*events: filter('projects.@each.id', function(project) {
     return project.id > 0;
   }),*/

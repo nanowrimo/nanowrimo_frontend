@@ -17,9 +17,14 @@
                 user=user
               }}
               <h6>{{group.name}} Events</h6>
-              {{#each group.events as |e|}}
-                {{e.id}}
-              {{/each}}
+              {{#if group.groupsLoaded}}
+                groups loaded
+                {{#each group.groups as |e|}}
+                  {{e.id}}
+                {{/each}}
+              {{else}}
+                groups not loaded
+              {{/if}}
             </div>
           </div>
         </div>
