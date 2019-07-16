@@ -12,7 +12,6 @@ export default Model.extend({
 
   changeset: null,
   
-  
   init() {
     this._super(...arguments);
     // if no changeset, make changeset 

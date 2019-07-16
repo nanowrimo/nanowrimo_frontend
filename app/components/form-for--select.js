@@ -27,7 +27,7 @@ export default Component.extend({
     let pValue = this.get(`changeset.${this.get('property')}`)
     
     if (isPristine && this.get('hasChange') ) {
-      this.set('value', pValue );
+      this._setValue( pValue );
       this._resetShowSelect();
     }
     
@@ -35,7 +35,7 @@ export default Component.extend({
     let cc = this.get('changeset.changes');
     cc.forEach((c)=>{
       if (c.key == this.get('property')) {
-        this.set('hasChange', true);
+        this._setHasChange(true);
       }
     });
     
@@ -76,5 +76,11 @@ export default Component.extend({
     next(()=>{
       this.set('showSelect', true);
     });
+  },
+  _setValue: function(v){
+    this.set('value', v);
+  },
+  _setHasChange: function(v){
+    this.set('hasChange', v);
   }
 });
