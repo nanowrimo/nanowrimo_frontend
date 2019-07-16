@@ -38,9 +38,9 @@ const Group = Model.extend({
   groupsLoaded: false,
   loadGroups(group_types) {
     let g = this;
-    this.get('store').query('groups',
+    this.get('store').query('group',
     {
-      filter: { group_id: g.id },
+      filter: { groupId: g.id },
       group_types: group_types,
     }).then(()=>{
       this.set('groupsLoaded', true);
