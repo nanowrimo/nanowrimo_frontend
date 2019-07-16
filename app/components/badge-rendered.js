@@ -15,6 +15,12 @@ export default Component.extend({
   projectChallenge: null,
   user: null,
   renderSize: null,
+  
+  init(){
+    this._super(...arguments);
+    this.get('badgesService.recomputeBadges');
+  },
+  
   userBadges: computed('badgesService.recomputeBadges', function() {
     return this.get('store').peekAll('user-badge');
   }),
