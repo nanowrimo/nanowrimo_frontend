@@ -27,14 +27,13 @@ export default Model.extend({
   
   groupExternalLinks: hasMany('group-external-link'),
   
-  _plateUrl: null,
   plateUrl: computed('plate', {
     get() {
       let plate = this.get('plate');
       if (plate && plate.includes(':')) {
-        this.set('_plateUrl', plate);
+        return plate;
       }
-      return this.get('_plateUrl');
+      return null;
     }
   }),
 

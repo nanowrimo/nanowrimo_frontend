@@ -29,7 +29,6 @@ const Project = Model.extend({
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
-  _coverUrl: null,
   defaultCoverUrl: computed('genres.[]', function(){
     let cover = "/images/projects/default-cover.svg";
     this.get('genres').forEach((g)=>{
@@ -43,16 +42,13 @@ const Project = Model.extend({
     });
     return cover;
   }),
-  coverUrl: computed('cover', 'defaultCoverUrl', {
-    get() {
-      let cover = this.get('cover');
-      if (cover && cover.includes(':')) {
-        this.set('_coverUrl', cover);
-      } else {
-        cover = this.get('defaultCoverUrl');
-        this.set('_coverUrl', cover);
-      }
-      return this.get('_coverUrl');
+  coverUrl: computed('cover', 'defaultCoverUrl', function(){
+
+    let cover = this.get('cover');
+    if (cover && cover.includes(':')) {
+      return cover;
+    } else {
+      return this.get('defaultCoverUrl');
     }
   }),
 

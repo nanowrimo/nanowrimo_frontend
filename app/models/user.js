@@ -92,6 +92,9 @@ const User = Model.extend({
   //groupUsersLoaded is false by default, is updated when groupUsers are loaded 
   groupUsersLoaded: false,
   
+  avatarUnknownUrl: "/images/users/unknown-avatar.png",
+  plateUnknownUrl: null,
+  
   recalculateHome: 0,
   homeRegion: computed('regions.[]','groupUsers.[]','recalculateHome', function(){
     let r = this.get('regions');
@@ -266,25 +269,21 @@ const User = Model.extend({
     }
   }),
 
-  _avatarUrl: "/images/users/unknown-avatar.png",
-  avatarUrl: computed('avatar', {
-    get() {
-      let avatar = this.get('avatar');
-      if (avatar && avatar.includes(':')) {
-        this.set('_avatarUrl', avatar); 
-      }
-      return this.get('_avatarUrl');
+  avatarUrl: computed('avatar', function() {
+    let avatar = this.get('avatar');
+    if (avatar && avatar.includes(':')) {
+      return avatar; 
+    } else {
+      return this.get('avatarUnknownUrl');
     }
   }),
 
-  _plateUrl: null,
-  plateUrl: computed('plate', {
-    get() {
-      let plate = this.get('plate');
-      if (plate && plate.includes(':')) {
-        this.set('_plateUrl', plate); 
-      }
-      return this.get('_plateUrl');
+  plateUrl: computed('plate', function() {
+    let plate = this.get('plate');
+    if (plate && plate.includes(':')) {
+      return plate; 
+    } else {
+      return this.get('plateUnknownUrl');
     }
   }),
 
