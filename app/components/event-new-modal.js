@@ -23,6 +23,8 @@ export default Component.extend({
   formStepOverride: 0,
   recalculateEvents: 0,
   
+  street1: null,
+  street2: null,
   city: null,
   
   baseLocations:  computed(function() {
@@ -79,12 +81,38 @@ export default Component.extend({
       let p = place;
       let t = this;
       p.address_components.forEach(function(ac) {
-        console.log(ac.types[0]);
+        if (ac.types[0]=="street_number") {
+          t.set("street1",ac.long_name);
+        }
+        if (ac.types[0]=="route") {
+          t.set("street2",ac.long_name);
+        }
+        if (ac.types[0]=="neighborhood") {
+          t.set("neighborhood",ac.long_name);
+        }
+        if (ac.types[0]=="sublocality") {
+          t.set("municipality",ac.long_name);
+        }
         if (ac.types[0]=="locality") {
           t.set("city",ac.long_name);
-          console.log(ac.long_name);
+        }
+        if (ac.types[0]=="administrative_area_level_2") {
+          t.set("county",ac.long_name);
+        }
+        if (ac.types[0]=="administrative_area_level_1") {
+          t.set("state",ac.long_name);
+        }
+        if (ac.types[0]=="postal_code") {
+          t.set("postal_code",ac.long_name);
+        }
+        if (ac.types[0]=="country") {
+          t.set("country",ac.long_name);
         }
       });
+      t.set("formatted_address",p.formatted_address);
+      t.set("longitude",p.geometry.location.lng());
+      t.set("latitude",p.geometry.location.lat());
+      t.set("utc_offset",p.utc_offset);
       this._refreshPrettyResponse('placeJSONSecondInput', place);
     },
     setStep(stepNum) {

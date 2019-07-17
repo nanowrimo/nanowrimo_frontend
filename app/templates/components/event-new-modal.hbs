@@ -50,7 +50,7 @@
 
       <div class="tab-content">
 
-        {{#if (eq f.currentStepIndex 1)}}
+        {{#if (eq f.currentStepIndex 0)}}
 
           <div class="form-group">
             {{f.input
@@ -94,7 +94,7 @@
               rows="3"
             }}
           </div>
-        {{else if (eq f.currentStepIndex 0)}}
+        {{else if (eq f.currentStepIndex 1)}}
           {{#if baseLocations}}
             <div class="form-group">
               <div class="select-container">
@@ -124,9 +124,81 @@
             }}
           </div>
           <div class="form-group">
-            <label for='city' class='form-group'>What is the city?</label>
+            <label for='street1' class='form-group'>street1</label>
+            <input name='street1' type='text' class='form-control'
+              value={{street1}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='street2' class='form-group'>street2</label>
+            <input name='street2' type='text' class='form-control'
+              value={{street2}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='neighborhood' class='form-group'>neighborhood</label>
+            <input name='neighborhoody' type='text' class='form-control'
+              value={{neighborhood}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='municipality' class='form-group'>municipality</label>
+            <input name='municipality' type='text' class='form-control'
+              value={{municipality}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='city' class='form-group'>city</label>
             <input name='city' type='text' class='form-control'
               value={{city}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='county' class='form-group'>county</label>
+            <input name='county' type='text' class='form-control'
+              value={{county}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='state' class='form-group'>state</label>
+            <input name='state' type='text' class='form-control'
+              value={{state}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='postal_code' class='form-group'>postal_code</label>
+            <input name='postal_code' type='text' class='form-control'
+              value={{postal_code}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='country' class='form-group'>country</label>
+            <input name='country' type='text' class='form-control'
+              value={{country}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='formatted_address' class='form-group'>formatted_address</label>
+            <input name='formatted_address' type='text' class='form-control'
+              value={{formatted_address}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='longitude' class='form-group'>longitude</label>
+            <input name='longitude' type='text' class='form-control'
+              value={{longitude}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='latitude' class='form-group'>latitude</label>
+            <input name='latitude' type='text' class='form-control'
+              value={{latitude}}
+            />
+          </div>
+          <div class="form-group">
+            <label for='utc_offset' class='form-group'>utc_offset</label>
+            <input name='utc_offset' type='text' class='form-control'
+              value={{utc_offset}}
             />
           </div>
         {{else}}
