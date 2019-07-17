@@ -9,6 +9,6 @@ export default Controller.extend({
   currentUser: service(),
   
   canAddEvent: computed('currentUser.user.name', function() {
-    return ((this.get('currentUser.user.name')=="Dave Beck")||(this.get('currentUser.user.name')=="Jezra"));
+    return true;//((this.get('currentUser.user.name')=="Dave Beck")||(this.get('currentUser.user.name')=="Jezra"));
   }),
 });

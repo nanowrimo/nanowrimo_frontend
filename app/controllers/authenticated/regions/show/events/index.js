@@ -12,7 +12,7 @@ export default Controller.extend({
   
   addEvent: false,
   canAddEvent: computed('currentUser.user.name', function() {
-    return (this.get('currentUser.user.name')=="Dave Beck");
+    return true;//(this.get('currentUser.user.name')=="Dave Beck");
   }),
   
   actions: {
