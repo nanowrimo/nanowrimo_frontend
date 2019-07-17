@@ -21,15 +21,11 @@ export default Model.extend({
     if (!this.get('changeset')) {
       this.set('changeset', new Changeset(this));
     }
+    this.determineService();
   },
   
   urlChanged: observer('url', function(){
-    let service = ENV.APP.SOCIAL_SERVICES.find(service => {
-      return this.get('url').includes(`${service}.com`);
-    });
-    if (service) {
-      this.set('service', service);
-    }
+    this.determineService();
   }),
 
   link: computed('url', function(){
@@ -44,6 +40,20 @@ export default Model.extend({
       return link;
     }
   }),
+  
+  determineService() {
+    let url = this.get('url');
+    if (url) { 
+      for (var i =0; i < ENV.APP.SOCIAL_SERVICES.length; i++) {
+        let service = ENV.APP.SOCIAL_SERVICES[i];
+        // is service  in the url?
+        if (url.includes(`${service}.com`)) {
+          this.set('service', service);
+          break;
+        }
+      }
+    }
+  },
   
   persistChanges() {
     if (this.get('isDeleted')) {
