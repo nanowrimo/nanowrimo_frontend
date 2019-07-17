@@ -1,7 +1,7 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany, belongsTo } from 'ember-data/relationships';
-import { computed, observer }  from '@ember/object';
+import { computed }  from '@ember/object';
 import { filterBy }  from '@ember/object/computed';
 
 const Group = Model.extend({
