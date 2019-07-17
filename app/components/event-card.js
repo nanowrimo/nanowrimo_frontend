@@ -30,11 +30,22 @@ export default Component.extend({
     this.set('deleteConfirmationTitleText', 'Confirm Delete');
     this.set('deleteConfirmationQuestion', `Do you really want to delete the "${name}" goal?`);
   },
+  
   // Returns the start date as a readable string
   startDateTime: computed(function() {
-    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("hh:mm a") + " to " + moment(this.get('event.endDt')).format("hh:mm a");
+    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("hh:mm a");
   }),
   
+  // Returns the start date as a readable string
+  startMo: computed(function() {
+    return moment(this.get('event.startDt')).format("MMM");
+  }),
+
+  // Returns the start date as a readable string
+  startDate: computed(function() {
+    return moment(this.get('event.startDt')).format("d");
+  }),
+
   actions: {
     editProjectChallenge(){
        this.set('editProjectChallenge', true);

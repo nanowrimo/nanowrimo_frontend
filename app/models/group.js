@@ -34,6 +34,7 @@ const Group = Model.extend({
   groupExternalLinks: hasMany('group-external-link'),
   
   locationGroups: hasMany('location-group'),
+  locations: hasMany('location'),
   
   groupsLoaded: false,
   loadGroups(group_types) {

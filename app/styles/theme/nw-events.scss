@@ -4,3 +4,27 @@
     height: 80px;
   }
 }
+.nw-card.event-card {
+  .nw-card-content.nw-card-horizontal {
+    align-items: flex-start;
+    .nw-title {
+      font-family: "SerifSemiBold", serif;
+    }
+    .nw-event-dates {
+      width: 60px;
+      margin-right: 29px;
+      color: $nw-darkgreen;
+      text-transform: uppercase;
+      text-align: center;
+      .nw-event-mo {
+        font-family: 'SansBold', sans-serif;;
+        font-size: 31px;
+      }
+      .nw-event-date {
+        font-family: 'SansSemiBold', sans-serif;
+        font-size: 56px;
+        line-height: 56px;
+      }
+    }
+  }
+}

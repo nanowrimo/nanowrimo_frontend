@@ -3,11 +3,25 @@
   </div>
 </div>
 <div class="nw-card-content nw-card-horizontal">
-  <div class='nw-title'>
-    {{#link-to 'authenticated.regions.show.events.show' group.slug event.slug}}
-      {{event.name}}
-    {{/link-to}}
-    {{startDateTime}}
+  <div class="nw-event-dates">
+    <div class="nw-event-mo">
+      {{startMo}}
+    </div>
+    <div class="nw-event-date">
+      {{startDate}}
+    </div>
   </div>
-
+  <div>
+    <div class='nw-title'>
+      {{#link-to 'authenticated.regions.show.events.show' group.slug event.slug}}
+        {{event.name}}
+      {{/link-to}}
+    </div>
+    <div>
+      {{startDateTime}}
+    </div>
+    <div>
+      {{event.description}}
+    </div>
+  </div>
 </div>
