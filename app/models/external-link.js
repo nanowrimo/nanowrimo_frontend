@@ -47,7 +47,7 @@ export default Model.extend({
       for (var i =0; i < ENV.APP.SOCIAL_SERVICES.length; i++) {
         let service = ENV.APP.SOCIAL_SERVICES[i];
         // is service  in the url?
-        if (url.includes(service)) {
+        if (url.includes(`${service}.com`)) {
           this.set('service', service);
           break;
         }
