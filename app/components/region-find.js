@@ -256,13 +256,14 @@ export default Component.extend({
       return "display: none".htmlSafe();
     }
   }),
+  
   cardSecondaryStyle: computed('primaryDisplay',function() {
     if (this.get('primaryDisplay')) {
-      this.set('sortOption', 'name');
+      this._setSortOption('name');
       return "display: none".htmlSafe();
     } else {
       //this.set('sortOption', 'proximity');
-      this.set('_processing', true);
+      this._setProcessing(true);
       this.getLoc();
       return "display: block".htmlSafe();
     }
@@ -282,6 +283,13 @@ export default Component.extend({
     searchStringChange: function() {
       debounce(this, this.updateSearch, 1000, false);
     }
+  },
+  _setSortOption: function(value){
+    this.set('sortOption', value);
+  },
+  _setProcessing: function(value){
+    this.set('_processing', value);
   }
+  
   
 });

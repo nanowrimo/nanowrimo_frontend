@@ -46,37 +46,15 @@ const Group = Model.extend({
       this.set('groupsLoaded', true);
     });
   },
-  /*events: filter('projects.@each.id', function(project) {
-    return project.id > 0;
-  }),*/
-  /*eventsActive: observer('locationGroups', {
-    get() {
-      let lgs = this.get('locationGroups');
-      let store = this.get('store');
-      lgs.forEach(function(bgu) {
-        console.log(lg.id);
-      });
-      return lgs;
-    }
-  }),*/
-  
-  /*loadLocationGroups() {
-    let g = this;
-    this.get('store').query('location-group',
-    {
-      filter: { group_id: g.id },
-      include: 'location'
-    });
-  },*/
   
   _plateUrl: null,
   plateUrl: computed('plate', {
     get() {
       let plate = this.get('plate');
       if (plate && plate.includes(':')) {
-        this.set('_plateUrl', plate);
+        return plate;
       }
-      return this.get('_plateUrl');
+      return null;
     }
   }),
 

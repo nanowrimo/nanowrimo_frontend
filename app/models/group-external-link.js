@@ -1,7 +1,7 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
-import { computed }  from '@ember/object';
+import { observer }  from '@ember/object';
 import { next }  from '@ember/runloop';
 import { isPresent }  from '@ember/utils';
 import Changeset from 'ember-changeset';
@@ -12,38 +12,23 @@ export default Model.extend({
 
   group: belongsTo(),
 
-  _changeset: null,
-  changeset: computed({
-    get() {
-      if (!this.get('_changeset')) {
-        this.set('_changeset', new Changeset(this));
-      }
-      return this.get('_changeset');
-    },
-    set(key, value) {
-      this.set('_changeset', value);
-      return value;
+  changeset: null,
+  service: null,
+  
+  init() {
+    this._super(...arguments);
+    // if no changeset, make changeset 
+    if (!this.get('changeset')) {
+      this.set('changeset', new Changeset(this));
     }
-  }),
+  },
 
-  _service: null,
-  service: computed('url', {
-    get() {
-      let url = this.get('url');
-      if (!url) { return this.get('_service'); }
-
-      let service = ENV.APP.SOCIAL_SERVICES.find(service => {
-        return this.get('url').includes(`${service}.com`);
-      });
-      if (service) {
-        this.set('_service', service);
-      }
-
-      return service || this.get('_service');
-    },
-    set(key, value) {
-      this.set('_service', value);
-      return value;
+  urlChanged: observer('url', function(){
+    let service = ENV.APP.SOCIAL_SERVICES.find(service => {
+      return this.get('url').includes(`${service}.com`);
+    });
+    if (service) {
+      this.set('service', service);
     }
   }),
 

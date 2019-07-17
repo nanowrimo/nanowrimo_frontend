@@ -1,7 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
-import { computed }  from '@ember/object';
 import { next }  from '@ember/runloop';
 import { isPresent }  from '@ember/utils';
 import Changeset from 'ember-changeset';
@@ -11,20 +10,16 @@ export default Model.extend({
 
   user: belongsTo(),
 
-  _changeset: null,
-  changeset: computed({
-    get() {
-      if (!this.get('_changeset')) {
-        this.set('_changeset', new Changeset(this));
-      }
-      return this.get('_changeset');
-    },
-    set(key, value) {
-      this.set('_changeset', value);
-      return value;
+  changeset: null,
+  
+  init() {
+    this._super(...arguments);
+    // if no changeset, make changeset 
+    if (!this.get('changeset')) {
+      this.set('changeset', new Changeset(this));
     }
-  }),
-
+  },
+  
   persistChanges() {
     if (this.get('isDeleted')) {
       this.save();
