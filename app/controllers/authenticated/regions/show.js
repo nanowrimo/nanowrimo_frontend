@@ -7,6 +7,7 @@ import { htmlSafe }  from '@ember/string';
 export default Controller.extend({
   router: service(),
   group: alias('model'),
+  dataLoaded: false,
   canEditGroup: computed(function() {
     return true;
   }),

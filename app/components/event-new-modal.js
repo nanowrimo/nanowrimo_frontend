@@ -1,146 +1,129 @@
 import Component from '@ember/component';
 //import { assert } from '@ember/debug';
-import { filterBy, sort } from '@ember/object/computed';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-import Project from 'nanowrimo/models/project';
-import Changeset from 'ember-changeset';
+import Group from 'nanowrimo/models/group';
+import moment from 'moment';
+import { later, next } from "@ember/runloop";
 
 export default Component.extend({
   store: service(),
-
+  changeset: null,
+  
   tagName: 'span',
 
-  associatedChallenge: null,
-  associatedChallengeId: 0,
-  challenge: null,
-  projectChallenge: null,
   tab: null,
   open: null,
-  project: null,
+  group: null,
   user: null,
+  startDate: null,
+  startTime: null,
+  durationHours: 1,
+  durationMinutes: null,
   formStepOverride: 0,
-  projectChallengeChangeset: null,
   recalculateEvents: 0,
-  validChallengeDates: true,
   
-  challengeSortingDesc: Object.freeze(['startsAt:desc']),
-  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  unassignedOptionsForChallenges: computed('user.projects.[]','recalculateEvents',function() {
-    let newArray = [];
-    let acs = this.get('filteredOptionsForChallenges');
-    let ucs = this.get('user.projects');
-    acs.forEach(function(ac) {
-      let found = false;
-      ucs.forEach(function(uc) {
-        let pcs = uc.challenges;
-        pcs.forEach(function(pc) {
-          if (ac.id == pc.id) {
-            found = true;
-          }
-        });
-      });
-      if (!found) {
-        newArray.push(ac);
-      }
-    });
-    return newArray;
-  }),
-  optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
+  street1: null,
+  street2: null,
+  city: null,
   
-  associateWithChallenge: computed(function() {
-    let challenges = this.get('optionsForChallenges');
-    if (challenges.length > 0) {
-      let latest = challenges[0];
-      let d = new Date();
-      if (latest.endsAt > d) {
-        return true;
-      }
-    }
-    return false;
+  baseLocations:  computed(function() {
+    return this.get('store').findAll('location');
   }),
-  
-  hideClass: computed('associateWithChallenge',function() {
-    let s = this.get('associateWithChallenge');
-    if (s) {
-      return '';
-    }
-    return 'nano-hide';
+  optionsForHours: computed(function() {
+    return Group.optionsForHours;
   }),
-  
-  baseChallenges:  computed(function() {
-    return this.get('store').findAll('challenge');
+  optionsForMinutes: computed(function() {
+    return Group.optionsForMinutes;
   }),
-  optionsForGenres: computed(function() {
-    return this.get('store').findAll('genre');
-  }),
-  optionsForPrivacy: computed(function() {
-    return Project.optionsForPrivacy;
-  }),
-  optionsForStatus: computed(function() {
-    return Project.optionsForStatus;
-  }),
-  optionsForWritingType: computed(function() {
-    return Project.optionsForWritingType;
-  }),
-  invalidChallengeDates: computed('validChallengeDates', function(){
-    return !this.get('validChallengeDates');
-  }),
-
   steps: computed(function() {
     return [
-      ['title', 'status', 'privacy', 'writingType'],
-      ['name','writingType', 'defaultGoal', 'unitType', 'startsAt', 'endsAt'],
-      ['wordCount', 'summary', 'excerpt', 'pinterest', 'playlist']
+      ['name', 'date', 'time'],
+      []
     ]
   }),
   init() {
     this._super(...arguments);
     //let user = this.get('user');
     //assert('Must pass a user into {{event-new-modal}}', user);
-    let newProject = this.get('store').createRecord('project');
-    this.set('project', newProject);
-    //by default, we want this new project to be 'primary'
-    newProject.set('primary', true);
-    newProject.set('wordCount', 0);
-    //create the newProjectChallenge for the newProject
-    let newProjectChallenge = this.get('store').createRecord('projectChallenge');
-    //push the projectChallenge onto the project
-    newProject.projectChallenges.pushObject(newProjectChallenge);
-    
-    this.set('projectChallenge', newProject);
-    this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
+    let now = moment();
+    let newGroup = this.get('store').createRecord('group');
+    newGroup.set('startDt',now);
+    this.set('startDate', now.format("YYYY-MM-DD"));
+    this.set('startTime', "19:00");
+    this.set('durationHours', "1");
+    this.set('group', newGroup);
+    this.setProperties({ googleAuto: null });
   },
 
+  _refreshPrettyResponse(blockProperty, placeDetails) {
+    this.set(blockProperty, null);
+    next(() => {
+      this.set(blockProperty, JSON.stringify(placeDetails, undefined, 2));
+    });
+  },
+  
   actions: {
-    associateChallengeSelect(challengeID) {
-      this.set('associatedChallengeId', challengeID);
-      this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
-      if (this.get("associateWithChallenge") ) {
-        this.set('challenge', this.get("associatedChallenge"));
-      }
+    done() {
+      let messageElement = document.getElementById('message');
+      messageElement.classList.add('fade-in-element');
+      later(() => messageElement.classList.remove('fade-in-element'), 2000);
+      this.set('message', 'blur blur blur');
     },
-    clickedAssociateCheckbox() {
-      this.toggleProperty("associateWithChallenge");
-      if (this.get('associateWithChallenge')) {
-        //get the challenge
-        if (this.get("associatedChallenge") === null) {
-          //set the challenge id to the id of the first object in options for Challenges
-          this.set('associatedChallenge', this.get('optionsForChallenges.firstObject'));
+
+    placeChanged(place) {
+      this._refreshPrettyResponse('placeJSON', place);
+      this.set('googleAuto', 'done');
+      this.set('model.address', place.formatted_address);
+    },
+
+    placeChangedSecondInput(place) {
+      let p = place;
+      let t = this;
+      p.address_components.forEach(function(ac) {
+        if (ac.types[0]=="street_number") {
+          t.set("street1",ac.long_name);
         }
-        this.set('challenge', this.get("associatedChallenge"));
-      } else {
-        this.set('challenge', null);
-      }
+        if (ac.types[0]=="route") {
+          t.set("street2",ac.long_name);
+        }
+        if (ac.types[0]=="neighborhood") {
+          t.set("neighborhood",ac.long_name);
+        }
+        if (ac.types[0]=="sublocality") {
+          t.set("municipality",ac.long_name);
+        }
+        if (ac.types[0]=="locality") {
+          t.set("city",ac.long_name);
+        }
+        if (ac.types[0]=="administrative_area_level_2") {
+          t.set("county",ac.long_name);
+        }
+        if (ac.types[0]=="administrative_area_level_1") {
+          t.set("state",ac.long_name);
+        }
+        if (ac.types[0]=="postal_code") {
+          t.set("postal_code",ac.long_name);
+        }
+        if (ac.types[0]=="country") {
+          t.set("country",ac.long_name);
+        }
+      });
+      t.set("formatted_address",p.formatted_address);
+      t.set("longitude",p.geometry.location.lng());
+      t.set("latitude",p.geometry.location.lat());
+      t.set("utc_offset",p.utc_offset);
+      this._refreshPrettyResponse('placeJSONSecondInput', place);
     },
     setStep(stepNum) {
       this.set("formStepOverride", stepNum);
     },
     onShow() {
       //assign the user to the project
-      this.set('project.user', this.get('user'));
+      this.set('group.user', this.get('user'));
       
     },
+    
     onHidden() {
       let callback = this.get('onHidden');
       this.set('formStepOverride',0);

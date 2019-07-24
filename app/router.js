@@ -51,7 +51,9 @@ Router.map(function() {
       this.route('find');
       this.route('leaderboard');
       this.route('show', { path: '/:slug'}, function() {
-        this.route('events');
+        this.route('events', function() {
+          this.route('show', { path: '/:event_slug' });
+        });
         this.route('members');
       });
     });
