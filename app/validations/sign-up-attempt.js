@@ -4,7 +4,7 @@ import {
   validateLength,
   validatePresence
 } from 'ember-changeset-validations/validators';
-import and from 'ember-changeset-hofs/utils/and'
+import and from 'nanowrimo/lib/ember-changeset-validations-and'
 import validateUniqueness from 'nanowrimo/validators/uniqueness';
 //import validateThirteen from 'nanowrimo/validators/thirteen';
 //import validateTerms from 'nanowrimo/validators/terms';
