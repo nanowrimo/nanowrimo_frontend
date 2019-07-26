@@ -24,53 +24,47 @@
             </ul>
           </div>
         {{/if}}
-
-        {{#form-for
-          afterError=(action 'receivedError')
-          submitValidationError=(action "signUpValidationFailed")
-          onSubmit=(action "onSubmit")
-          class="full-width"
-          model=signUpAttempt
-          steps=steps
-          as |f|
-        }}
-
-
-            <div class="form-group">
-              {{f.input
-                autocomplete="email"
-                autofocus=true
-                label="Email"
-                placeholder="user@domain.com"
-                property="email"
-                type="email"
-              }}
-            </div>
-            <div class="form-group">
-              {{f.password
-                autocomplete="new-password"
-                label="Password"
-                property="password"
-              }}
-            </div>
-
-
-            <div class="form-group">
-              {{f.input
-                label="Username"
-                property="username"
-              }}
-            </div>
-    
-             <div class="form-group">
-              {{f.select
-                label="Time Zone"
-                options=timeZoneOptions
-                property="timeZone"
-              }}
-            </div>
-
-          <button data-test-sign-up-submit type="submit" class="full-width nano-button-large">
+        
+        <form {{action "onSubmit" on="submit"}}>
+        
+          <div class='form-group'>
+            <label for='email'>Email</label>
+            <input type='email' autocomplete='email' 
+              placeholder='username@domain.com' autofocus id='email' 
+              class='form-control ember-text-field {{if emailErrorMessage 'is-invalid' ''}}'
+              {{action "emailChanged" on="keyUp"}}
+              >
+            {{#if emailErrorMessage}}
+              <div class="invalid-feedback">{{emailErrorMessage}}</div>
+            {{/if}}
+          </div>
+          
+          <div class='form-group'>
+            {{input-password errorMessage=passwordErrorMessage}}
+          </div>
+          
+          <div class='form-group'>
+            <label for='username'>Username</label>
+            <input autocomplete='username' 
+              id='username' name='username'
+              class='form-control ember-text-field {{if nameErrorMessage 'is-invalid' ''}}'
+               {{action "nameChanged" on="keyUp"}}
+              >
+            {{#if nameErrorMessage}}
+              <div class="invalid-feedback">{{nameErrorMessage}}</div>
+            {{/if}}
+          </div>
+          
+          <div class="form-group">
+            <label for='timezone'>Time Zone</label>
+            <select name='timezone' id='timezone' class='form-control'>
+              {{#each timeZoneOptions as |o|}}
+                <option value={{o.value}}  selected={{if (eq o.value guessedZone) 'true'}} >{{o.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          
+          <button type="submit" class="full-width nano-button-large">
             {{#if isSubmitting}}
               Signing Up
               <img class='spinner' src="/images/spinner.svg">
@@ -78,8 +72,8 @@
               Sign Up
             {{/if}}
           </button>
-
-        {{/form-for}}
+          
+        </form>
   
 
         <div class="left-right-links">{{link-to "Forgot password" 'forgot-password' bubble=false}}{{link-to "I have an account" 'sign-in' bubble=false}}</div>
