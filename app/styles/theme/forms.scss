@@ -8,6 +8,12 @@ form {
     color: $nw-mediumgrey;
     margin-bottom: 3px;
   }
+  &.side-by-side {
+    justify-content: space-between;
+    > div {
+      flex: 0 0 48%;
+    }
+  }
   &.inline-checkbox {
     width: 100%;
     label {
