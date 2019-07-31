@@ -1,75 +1,61 @@
-{{#form-for
-  afterError=(action "afterError")
-  afterSubmit=(action "afterSubmit")
-  model=currentUser.user
-  as |f|
-}}
+<form id={{formID}} {{action "submit" on="submit"}}>
   <div class='nw-card'>
     <div class='nw-card-header'>
       <div class='nw-card-title'>Settings</div>
     </div>
     <div class='nw-card-content'>
-      <div class="form-group full-width">
-        {{f.input
-          label="Username"
-          property="name"
-        }}
-      </div>
-      <div class="form-group full-width">
-        {{f.input
-          autocomplete="email"
-          label="Email Address"
-          property="email"
-          type="email"
-          value=newEmail
-          change=(action (mut newEmail) value="target.value")
-        }}
-      </div>
-
-
-      {{#if hasPassword}}
-        <div class="form-group full-width">
-          {{f.password
-            label="New Password"
-            property="newPassword"
-            change=(action (mut newPassword) value="target.value")
-            valueChangedCallback=(action "newPasswordChanged")
-          }}
-        </div>
-        {{#if showPasswordConfirm}}
-          <div class="form-group full-width {{if confirmationPasswordError 'invalid' ''}}">
-            {{f.password
-              label="Enter Your Current Password to Confirm"
-              property="currentPassword"
-            }}
-            {{#if confirmationPasswordError}}
-              <div class='invalid-feedback'>the supplied current password is incorrect</div>
-            {{/if}}
-          </div>
+      <div class='form-group'>
+        <label for='username'>Username</label>
+        <input autocomplete='username' 
+          id='username' name='username'
+          class='form-control ember-text-field {{if nameErrorMessage 'is-invalid' ''}}'
+           {{action "nameChanged" value='target.value' on="keyUp" }}
+           value={{user.name}}
+          >
+        {{#if nameErrorMessage}}
+          <div class="invalid-feedback">{{nameErrorMessage}}</div>
         {{/if}}
-      {{else}}
-        <label class="full-width">Password</label>
-        <div class="form-instruction">Your password cannot be changed because you signed up via {{registrationPath}}.</div>
-      {{/if}} 
-
-
-      <div class="form-group full-width">
-        {{f.select
-          label="Time Zone"
-          options=timeZoneOptions
-          property="timeZone"
-      }}
       </div>
-
-
-
-
-      <div class="form-instruction" style="margin-left: 20px; margin-top: 10px; max-width: 70%;">{{form-for--response-message responseMessage=formResponseMessage}}</div>
-  
-    </div>
+      
+      <div class='form-group'>
+          <label for='email'>Email Address</label>
+        <input type='email' autocomplete='email' id='email' 
+          value={{user.email}}
+          class='form-control ember-text-field {{if emailErrorMessage 'is-invalid' ''}}'
+          {{action "emailChanged" value='target.value' on="keyUp"}}
+          >
+        {{#if emailErrorMessage}}
+          <div class="invalid-feedback">{{emailErrorMessage}}</div>
+        {{/if}}
+      </div>
+      
+      <div class='form-group'>
+        {{nw-form-input-password changeAction=(action "newPasswordChanged") 
+        errorMessage=passwordErrorMessage label='New Password' }}
+      </div>
+      {{#if showPasswordConfirm}}
+        <div class='form-group'>
+          {{nw-form-input-password changeAction=(action "currentPasswordChanged")
+          errorMessage=confirmPasswordErrorMessage 
+          label="Enter Your Current Password to Confirm" name="currentPassword"}}
+        </div>
+      {{/if}}
+      
+      <div class="form-group">
+        <label for='timezone'>Time Zone</label>
+        <select name='timezone' id='timezone' class='form-control'>
+          {{#each timeZoneOptions as |o|}}
+            <option value={{o.value}}  selected={{if (eq o.value user.timeZone) 'true'}} >{{o.name}}</option>
+          {{/each}}
+          {{action "timeZoneChanged" value='target.value' on="change"}}
+        </select>
+      </div>
+      
+    <div class="form-instruction" style="margin-left: 20px; margin-top: 10px; max-width: 70%;">{{form-for--response-message responseMessage=formResponseMessage}}</div>
+  </div>
   </div>
   {{errorString}}
   <div class='nw-panel-footer'>
-    {{f.save-cancel class="save-cancel"}}
+    {{nw-form-save-cancel resetCallback=(action 'reset') hasChanges=hasChangedValues}}
   </div>
-{{/form-for}}
+</form>
