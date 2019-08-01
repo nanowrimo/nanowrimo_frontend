@@ -10,7 +10,7 @@
           id='username' name='username'
           class='form-control ember-text-field {{if nameErrorMessage 'is-invalid' ''}}'
            {{action "nameChanged" value='target.value' on="keyUp" }}
-           value={{user.name}}
+           value={{currentName}}
           >
         {{#if nameErrorMessage}}
           <div class="invalid-feedback">{{nameErrorMessage}}</div>
@@ -20,7 +20,7 @@
       <div class='form-group'>
           <label for='email'>Email Address</label>
         <input type='email' autocomplete='email' id='email' 
-          value={{user.email}}
+          value={{currentEmail}}
           class='form-control ember-text-field {{if emailErrorMessage 'is-invalid' ''}}'
           {{action "emailChanged" value='target.value' on="keyUp"}}
           >
@@ -36,7 +36,7 @@
       {{#if showPasswordConfirm}}
         <div class='form-group'>
           {{nw-form-input-password changeAction=(action "currentPasswordChanged")
-          errorMessage=confirmPasswordErrorMessage 
+          errorMessage=confirmationPasswordErrorMessage 
           label="Enter Your Current Password to Confirm" name="currentPassword"}}
         </div>
       {{/if}}

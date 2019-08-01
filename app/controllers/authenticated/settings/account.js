@@ -10,18 +10,26 @@ export default Controller.extend({
   currentUser: service(),
   formID: null,
   formChangeCount: 0,
-  nameError: null,
-  emailError: null,
-  passwordError: null,
+  nameErrorMessage: null,
+  emailErrorMessage: null,
+  passwordErrorMessage: null,
   currentPasswordError: null,
   showPasswordConfirm: false,
-  confirmationPasswordError: false,
-  
+  confirmationPasswordErrorMessage: null,
+  currentName:null,
+  currentEmail:null,
+  currentTimeZone:null,
+  newEmail:null,
   
   init(){
     this._super(...arguments);
-    this.set('user', this.get("currentUser.user"));
+    let u = this.get("currentUser.user");
+    this.set('user', u );
     this.set('formID', "account-settings");
+    this.set('currentName', u.name);
+    this.set('currentEmail', u.email);
+    this.set('currentTimeZone', u.timeZone);
+
   },
   
   timeZoneOptions: computed(function() {
@@ -66,34 +74,33 @@ export default Controller.extend({
   }),
   
   actions: {
-    nameChanged() {
-      this.incrementProperty('formChangeCount');
+    nameChanged() { 
+      if (event.code!=="Enter") { // ignore the 'enter' key
+        this.set('nameErrorMessage', null);
+        this.changesHappened();
+      }
     },
     
     emailChanged() {
-      this.incrementProperty('formChangeCount');
+      this.set('emailErrorMessage', null);
+      this.changesHappened();
     },
     
     timeZoneChanged() {
-      this.incrementProperty('formChangeCount');
+      this.changesHappened();
     },
     
     newPasswordChanged(val) {
       this.set("showPasswordConfirm", val.length > 0);
-      this.incrementProperty('formChangeCount');
+      this.changesHappened();
     },
-    currentPasswordChanged(val) {
-      this.incrementProperty('formChangeCount');
-    },
-    
-    afterError(error) {
-      this.set('error', error);
-      if (error.errors[0].title=="BAD-AUTH") {
-        this.set('confirmationPasswordError', true);
-      }
+    currentPasswordChanged() {
+      this.set('confirmationPasswordErrorMessage', null);
+      this.changesHappened();
     },
     
     submit() {
+      let self = this;
       //get the form
       let id = this.get('formID')
       let form = $(`#${id}`)[0];
@@ -102,8 +109,9 @@ export default Controller.extend({
       let name = form.username.value;
       let email = form.email.value;
       let password = form.password.value;
+      let currentPassword='';
       if(password){
-        let currentPassword = form.currentPassword.value;
+        currentPassword = form.currentPassword.value;
       }
       let timezone = form.timezone.value;
       
@@ -112,7 +120,7 @@ export default Controller.extend({
       //simple validation
       if (name.length===0) {
         hasError = true;
-        this.set('nameError', "Username cannot be blank");
+        this.set('nameErrorMessage', "Username cannot be blank");
       }
       if (email.length===0) {
         hasError = true;
@@ -121,7 +129,7 @@ export default Controller.extend({
       if (password.length>0) {
         if (currentPassword.length==0) {
           hasError = true;
-          this.set("currentPasswordError", "Current Password is required");
+          this.set("currentPasswordErrorMessage", "Current Password is required");
         }
       }
       
@@ -130,29 +138,19 @@ export default Controller.extend({
         //update the user and submit
         user.set('name', name);
         user.set('email', email);
+        this.set('newEmail', email);
         if(password){
           user.set('newPassword', password);
           user.set('currentPassword', currentPassword);
         }
         user.set('timeZone', timezone);
         
-        user.save().then(()=>{
-          //success
-        }).catch((err)=>{
-          console.log(err);
+        return user.save().then(()=>{
+          self.afterSubmit();
+        }).catch((error)=>{
+          this.processErrors(error.errors);
         });
       }
-    },
-    
-    afterSubmit() {
-      this.set('confirmationPasswordError', false);
-      let u = this.get('user');
-      let ne = this.get('newEmail');
-      let r = "Your changes have been saved.";
-      if (u.email != ne && ne != null) {
-        r = r + " We've sent a confirmation email to " + ne + ". Please check your email to complete the change of email address.";
-      }
-      this.set('_formResponseMessage',r);
     },
     
     reset() {
@@ -160,14 +158,51 @@ export default Controller.extend({
       let id = this.get('formID')
       let form = $(`#${id}`)[0];
       //update values
-      form.username.value = this.get('user.name'); 
-      form.email.value = this.get('user.email'); 
+      form.username.value = this.get('currentName'); 
+      form.email.value = this.get('currentEmail'); 
       form.password.value = '';
-      form.timezone.value = this.get('user.timeZone');
+      form.timezone.value = this.get('currentTimeZone');
       //don't show the password confirm
       this.set("showPasswordConfirm", false);
       //consider a reset a form change 
-       this.incrementProperty('formChangeCount');
+      this.incrementProperty('formChangeCount');
+      //reset all of the error messages
+      this.set('confirmationPasswordErrorMessage', null);
+      this.set('nameErrorMessage', null);
+      this.set('emailErrorMessage', null);
+      this.changesHappened();
     }
+  },
+  
+  changesHappened() {
+    this.set("_formResponseMessage","");
+    this.incrementProperty('formChangeCount');
+  },
+  
+  afterSubmit() {
+    this.set('confirmationPasswordError', false);
+    let u = this.get('user');
+    let ne = this.get('newEmail');
+    let r = "Your changes have been saved.";
+    if (u.email != ne && ne != null) {
+      r = r + " We've sent a confirmation email to " + ne + ". Please check your email to complete the change of email address.";
+    }
+    this.set('_formResponseMessage',r);
+  },
+  processErrors(errors){    
+    errors.forEach((error)=>{
+      if (error.title=="BAD-AUTH") {
+        this.set('confirmationPasswordErrorMessage', error.detail);
+      }
+      if (error.title.includes("NAME") ){
+        this.set('nameErrorMessage', error.detail);
+        this.set('user.name', this.get('currentName'));
+      }
+      if (error.title.includes("EMAIL") ){
+        this.set('emailErrorMessage', error.detail);
+        this.set('user.email', this.get('currentEmail'));
+      }
+    });
   }
+  
 });
