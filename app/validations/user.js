@@ -3,20 +3,16 @@ import {
   validatePresence,
   validateLength
 } from 'ember-changeset-validations/validators';
-import and from 'nanowrimo/lib/ember-changeset-validations-and'
-import validateUniqueness from 'nanowrimo/validators/uniqueness';
 
 export default {
-  name: and(
-    validatePresence(true),
-    validateUniqueness('name')
-  ),
-  email: and(
-    validateFormat({ type: 'email' }),
-    validateUniqueness('email')
-  ),
+  name:
+    validatePresence(true)
+  ,
+  email: 
+    validateFormat({ type: 'email' })
+  ,
   newPassword: [
-    validateLength({ min: 8 }),
+    validateLength({ min: 6 }),
     validateLength({ max: 128 })
   ],
   

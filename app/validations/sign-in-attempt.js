@@ -4,7 +4,7 @@ import {
 
 export default {
   password: [
-    validateLength({ min: 6 }), // Devise default
+    //validateLength({ min: 6 }), // Devise default
     validateLength({ max: 128 }) // Devise default
   ]
 };
