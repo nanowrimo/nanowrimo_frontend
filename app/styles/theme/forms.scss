@@ -5,7 +5,7 @@ form {
   margin-bottom: 10px;
   label {
     text-align: left;
-    color: $nw-mediumgrey;
+    color: $nw-mediumdarkgrey;
     margin-bottom: 3px;
   }
   &.side-by-side {
@@ -82,7 +82,7 @@ form {
     }
   }
 
-  .is-invalid ~ .invalid-feedback {
+  .is-invalid ~ .invalid-feedback, .ext-invalid-feedback {
     display: block;
     text-align: right;
     font-family: 'SansItalic', sans-serif;
@@ -185,6 +185,96 @@ input:disabled, select:disabled, button:disabled {
   background-image: url('/images/global/calendar.svg');
   background-repeat: no-repeat;
   background-size: 16px 16px;
-  background-position: 180px center;
+  background-position: 160px center;
   max-width: 210px;
+}
+.nw-form-section {
+  display: flex;
+  margin-bottom: 10px;
+  .nw-form-section-icon {
+    flex: 0 0 33px;
+    text-align: center;
+    margin-right: 10px;
+    .fa {
+      font-size: 30px;
+      color: $nw-lightgreen;
+    }
+  }
+  .nw-form-section-content {
+    flex: 1 1 100%;
+  }
+}
+.nw-label-flex {
+  display: flex;
+  .nw-left-label {
+    flex: 0 0 70px;
+    text-align: right;
+    height: 36px;
+    line-height: 36px;
+    color: $nw-mediumdarkgrey;
+  }
+  .select-container {
+    margin-left: 10px;
+  }
+}
+
+
+/* Customize the label (the container) */
+.nw-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 21px;
+    height: 21px;
+    border-radius: 3px;
+    border: solid 1px #b8b8b8;
+    background-color: #FFF;
+  }
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  /* Style the checkmark/indicator */
+  .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 6px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+/* On mouse-over, add a grey background color */
+.nw-checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* Show the checkmark when checked */
+.nw-checkbox-container input:checked ~ .checkmark:after {
+  display: block;
 }

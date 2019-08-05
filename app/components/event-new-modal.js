@@ -1,69 +1,496 @@
 import Component from '@ember/component';
-//import { assert } from '@ember/debug';
-import { computed }  from '@ember/object';
+import { computed, set }  from '@ember/object';
+import { reads }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-import Group from 'nanowrimo/models/group';
 import moment from 'moment';
-import { later, next } from "@ember/runloop";
+import { later } from "@ember/runloop";
+import TimeZones from 'nanowrimo/lib/time-zones';
 
 export default Component.extend({
   store: service(),
+  currentUser: service(),
+  currentUserId: reads('currentUser.user.id'),
+  
   changeset: null,
   
   tagName: 'span',
-
+  groupId: null,
   tab: null,
   open: null,
-  group: null,
+  newGroup: null,
+  newlocation: null,
   user: null,
   startDate: null,
   startTime: null,
-  durationHours: 1,
-  durationMinutes: null,
-  formStepOverride: 0,
+  step: 0,
   recalculateEvents: 0,
+  
+  // These values are returned from Google Maps Timezones API
+  dstOffset: 0,
+  rawOffset: 0,
+  timeZoneId: null,
+  timeZoneName: null,
+  timeZone: null,
+  name: null,
+  nameError: null,
+  description: null,
+  durationHours: 2,
+  durationMinutes: 0,
+  durationErrorMessage: null,
+  venueName: null,
+  venueUrl: null,
+  venueNameError: null,
+  venueUrlError: null,
+  venueErrorMessage: null,
+  eventTypeErrorMessage: null,
+  locationSelected: false,
+  locationErrorMessage: null,
+  locationId: 0,
+  eventTypeInPerson: false,
+  eventTypeOnline: false,
   
   street1: null,
   street2: null,
+  neighborhood: null,
+  municipality: null,
   city: null,
+  county: null,
+  state: null,
+  postal_code: null,
+  country: null,
+  formatted_address: null,
+  longitude: null,
+  latitude: null,
+  utc_offset: null,
   
-  baseLocations:  computed(function() {
-    return this.get('store').findAll('location');
+  timezoneResponse: null,
+  
+  timeZoneOptions: computed(function() {
+    return TimeZones;
   }),
-  optionsForHours: computed(function() {
-    return Group.optionsForHours;
+  
+  // Gets all the affiliated locationGroups in the store
+  locationGroups: computed('groupId', function() {
+    let lgs = this.get('store').peekAll('location_group');
+    let id = this.get('groupId');
+    let s = [];
+    lgs.forEach((lg) => {
+      if ((id==lg.group_id)&&(lg.primary==0)&&(lg.id != null)) {
+        s.push(lg);
+      }
+    });
+    return s;
   }),
-  optionsForMinutes: computed(function() {
-    return Group.optionsForMinutes;
+  
+  acceptedLocations: computed('locationGroups.[]', function() {
+    let store = this.get('store');
+    let lgs = this.get('locationGroups');
+    let ls = [];
+    lgs.forEach((lg) => {
+      let l = store.peekRecord('location', lg.location_id);
+      if (l) {
+        ls.push(l);
+      }
+    });
+    return ls;
   }),
-  steps: computed(function() {
-    return [
-      ['name', 'date', 'time'],
-      []
-    ]
+  
+  hasLocations: computed('acceptedLocations.[]',function() {
+    let h = (this.get('acceptedLocations').length>0);
+    if (!h) {
+      this.set('locationId',-1);
+    }
+    return h;
+    //return true;
   }),
+  
+  addingLocation: computed('locationId',function() {
+    let id = this.get('locationId');
+    if (id == -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
   init() {
     this._super(...arguments);
-    //let user = this.get('user');
-    //assert('Must pass a user into {{event-new-modal}}', user);
     let now = moment();
-    let newGroup = this.get('store').createRecord('group');
-    newGroup.set('startDt',now);
     this.set('startDate', now.format("YYYY-MM-DD"));
     this.set('startTime', "19:00");
-    this.set('durationHours', "1");
-    this.set('group', newGroup);
+    this.set('durationHours', "2");
     this.setProperties({ googleAuto: null });
   },
 
-  _refreshPrettyResponse(blockProperty, placeDetails) {
-    this.set(blockProperty, null);
-    next(() => {
-      this.set(blockProperty, JSON.stringify(placeDetails, undefined, 2));
-    });
+  // Set local variables based on response from Google Maps Timezone API
+  timezoneRetrieved: computed('timezoneResponse', function() {
+    let l = this.get('timezoneResponse');
+    if (l) {
+      this.saveTimezoneData(l);
+    }
+    return true;
+  }),
+  
+  saveTimezoneData(response) {
+    let r = JSON.parse(response);
+    console.log(r.rawOffset);
+    this.set('dstOffset',r.dstOffset);
+    this.set('rawOffset',r.rawOffset);
+    this.set('timeZoneId',r.timeZoneId);
+    this.set('timeZoneName',r.timeZoneName);
+    this.saveData();
   },
   
+  transferFailed () {
+    alert("Something went wrong. Please try again");
+  },
+  
+  getTimeZone() {
+    let lid = this.get('locationId');
+    let datestr = this.get('datestr');
+    let timestamp = moment(datestr).unix();
+    let t = this;
+    let url = 'https://maps.googleapis.com/maps/api/timezone/json?location=';
+    // If new location
+    if (lid==-1) {
+      url += this.get('latitude') + ',' + this.get('longitude');
+    } else {
+      let l = this.get('store').peekRecord('location',lid);
+      url += l.latitude + ',' + l.longtitude;
+    }
+    url += '&timestamp=' + timestamp + '&key=AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4';
+    console.log(url);
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", function(){
+      t.set('timezoneResponse', this.responseText);
+    });
+    //oReq.addEventListener("load", this.timezoneRetrieved);
+    oReq.addEventListener("error", this.transferFailed);
+    oReq.open("GET", url);
+    oReq.send();
+  },
+  
+  // saveData saves the location, group, and location_group to the API
+  saveData() {
+    let inperson = this.get('eventTypeInPerson');
+    if (inperson) {
+      let lid = this.get('locationId');
+      // If new location
+      if (lid==-1) {
+        let l = this.get('store').createRecord('location');
+        let v = this.get('venueName');
+        l.set("name",v);
+        l.set("userId",this.get("currentUserId"));
+        l.set("street1",this.get("street1"));
+        l.set("street2",this.get("street2"));
+        l.set("neighborhood",this.get("neighborhood"));
+        l.set("municipality",this.get("municipality"));
+        l.set("city",this.get("city"));
+        l.set("county",this.get("county"));
+        l.set("state",this.get("state"));
+        l.set("postal_code",this.get("postal_code"));
+        l.set("country",this.get("country"));
+        l.set("formatted_address",this.get("formatted_address"));
+        l.set("longitude",this.get("longitude"));
+        l.set("latitude",this.get("latitude"));
+        l.set("utc_offset",this.get("utc_offset"));      
+        l.save().then(()=>{
+          let glg = this.get('store').createRecord('location-group');
+          glg.set("location_id",l.id);
+          glg.set("group_id",this.get('groupId'));
+          glg.set("primary",0);
+          glg.save().then(()=>{
+            let g = this.get('store').createRecord('group');
+            let n = this.get('name');
+            g.set("name",n);
+            g.set("groupType","event");
+            let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
+            let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
+            let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
+            let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
+            let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
+            g.set("startDt",startMoment.toDate());
+            g.set("endDt",endMoment.toDate());
+            g.set("userId",this.get("currentUserId"));
+            g.set("longitude",this.get("longitude"));
+            g.set("latitude",this.get("latitude"));
+            g.set("groupId",this.get("groupId"));
+            g.set("description",this.get("description"));
+            let tz = this.get("timeZone");
+            if (tz) {
+              g.set("timeZone",tz);
+            } else {
+              g.set("timeZone",this.get('currentUser.user.timeZone'));
+            }
+            g.save().then(()=>{
+              let lg = this.get('store').createRecord('location-group');
+              lg.set("location_id",l.id);
+              lg.set("group_id",g.id);
+              lg.set("primary",1);
+              lg.save().then(()=>{
+                // Last step
+                this.set('step',2);
+              });
+            });
+          });
+        });
+      } else { // If existing location
+        let l = this.get('store').peekRecord('location',lid);
+        let g = this.get('store').createRecord('group');
+        let n = this.get('name');
+        g.set("name",n);
+        g.set("groupType","event");
+        let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
+        let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
+        let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
+        let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
+        let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
+        g.set("startDt",startMoment.toDate());
+        g.set("endDt",endMoment.toDate());
+        g.set("userId",this.get("currentUserId"));
+        g.set("longitude",l.longitude);
+        g.set("latitude",l.latitude);
+        g.set("groupId",this.get("groupId"));
+        g.set("description",this.get("description"));
+        let tz = this.get("timeZone");
+        if (tz) {
+          g.set("timeZone",tz);
+        } else {
+          g.set("timeZone",this.get('currentUser.user.timeZone'));
+        }
+        g.save().then(()=>{
+          let lg = this.get('store').createRecord('location-group');
+          lg.set("location_id",lid);
+          lg.set("group_id",g.id);
+          lg.set("primary",1);
+          lg.save().then(()=>{
+            // Last step
+            this.set('step',2);
+          });
+        });
+      }
+    } else {
+      let g = this.get('store').createRecord('group');
+      let n = this.get('name');
+      g.set("name",n);
+      g.set("groupType","event");
+      let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
+      let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
+      let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
+      let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
+      let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
+      g.set("startDt",startMoment.toDate());
+      g.set("endDt",endMoment.toDate());
+      g.set("userId",this.get("currentUserId"));
+      g.set("longitude",this.get("longitude"));
+      g.set("latitude",this.get("latitude"));
+      g.set("groupId",this.get("groupId"));
+      g.set("description",this.get("description"));
+      let tz = this.get("timeZone");
+      if (tz) {
+        g.set("timeZone",tz);
+      } else {
+        g.set("timeZone",this.get('currentUser.user.timeZone'));
+      }
+      g.save().then(()=>{
+        this.set('step',2);
+      });
+    }
+  },
+  
+  showDurationError: computed('durationErrorMessage',function() {
+    return this.get('durationErrorMessage')!=null;
+  }),
+  
+  showVenueError: computed('venueErrorMessage',function() {
+    return this.get('venueErrorMessage')!=null;
+  }),
+  
+  showLocationError: computed('locationErrorMessage',function() {
+    return this.get('locationErrorMessage')!=null;
+  }),
+  
+  showEventTypeError: computed('eventTypeErrorMessage',function() {
+    return this.get('eventTypeErrorMessage')!=null;
+  }),
+  
+  // validateField holds all validation code for each field in the events and locations forms
+  validateInput(fieldName) {
+    let isValid = true;
+    switch (fieldName) {
+      case 'eventType':
+        if (!this.get("eventTypeInPerson")&&!this.get("eventTypeOnline")) {
+          this.set("eventTypeErrorMessage","Please select at least one type of venue.");
+          isValid = false;
+        } else {
+          this.set("eventTypeErrorMessage",null);
+        }
+        break;
+      case 'eventName':
+        if (!this.get("name")) {
+          this.set("nameError","The event name is required");
+          isValid = false;
+        } else {
+          this.set("nameError",null);
+        }
+        break;
+      case 'duration':
+        if (this.get("durationHours")+this.get("durationMinutes")==0) {
+          this.set("durationErrorMessage","Please choose a duration.");
+          isValid = false;
+        } else {
+          this.set("durationErrorMessage",null);
+        }
+        break;
+      case 'venueSelect':
+        if (this.get("locationId")==0) {
+          this.set("venueErrorMessage","Please select a venue option");
+          isValid = false;
+        } else {
+          this.set("venueErrorMessage",null);
+        }
+        break;
+      case 'venueName':
+        if (!this.get("venueName")) {
+          this.set("venueNameError","The venue name is required");
+          isValid = false;
+        } else {
+          this.set("venueNameError",null);
+        }
+        break;
+      case 'venueUrl':
+        if (!this.get("venueUrl")) {
+          this.set("venueUrlError","The venue url is required");
+          isValid = false;
+        } else {
+          this.set("venueUrlError",null);
+        }
+        break;
+      case 'location':
+        if (!this.get("locationSelected")) {
+          this.set("locationErrorMessage","Please select a location.");
+          isValid = false;
+        } else {
+          this.set("locationSelected",true);
+          this.set("locationErrorMessage",null);
+        }
+        break;
+    }
+    return isValid;
+  },
+
   actions: {
+    
+    // Called on switching from one tab to another, or on pressing submit
+    changeStep() {
+      let s = this.get("step");
+      switch (s) {
+        case 0: {
+          let e = this.validateInput('eventName');
+          let d = this.validateInput('duration');
+          if (e&&d) {
+            this.set("step", 1);
+          }
+          break;
+        }
+        case 1: {
+          let et = this.validateInput('eventType');
+          if (et) {
+            if (this.get("eventTypeInPerson")) {
+              if (this.get("locationId")==-1) {
+                let v = this.validateInput('venueName');
+                let l = this.validateInput('location');
+                if (v&l) {
+                  this.getTimeZone();
+                  this.set("step", 2);
+                }
+              } else {
+                let vs = this.validateInput('venueSelect');
+                if (vs) {
+                  this.getTimeZone();
+                  this.set("step", 2);
+                }
+              }
+            }
+            if (this.get("eventTypeOnline")) {
+              this.set("step", 2);
+            }
+          }
+          break;
+        }
+        case 2: {
+          this.set('open', null);
+          break;
+        }
+      }
+    },
+    
+    // Called when the event name value changes
+    nameValueChanged() {
+      this.validateInput('eventName');
+    },
+    
+    // Called when the venue name value changes
+    venueNameChanged() {
+      this.validateInput('venueName');
+    },
+    
+    // Called when the value of the startDate input changes
+    startDateChanged(v) {
+      this.set("startDate",v);
+    },
+    
+    // Called when the value of the startTime input changes
+    startTimeChanged(v) {
+      this.set("startTime",v);
+    },
+    
+    // Called when the value of the timeZone select changes
+    timeZoneChanged(v) {
+      this.set("timeZone",v);
+    },
+    
+    // Called when the value of the hours select changes
+    hoursChanged(v) {
+      this.set("durationHours",v);
+      this.validateInput('duration');
+    },
+    
+    // Called when the value of the minutes select changes
+    minutesChanged(v) {
+      this.set("durationMinutes",v);
+      this.validateInput('duration');
+    },
+    
+    // Called when the value of the minutes select changes
+    eventTypeInPersonChanged(v) {
+      this.set("eventTypeInPerson",v);
+      this.validateInput('eventType');
+    },
+    
+    // Called when the value of the minutes select changes
+    eventTypeOnlineChanged(v) {
+      this.set("eventTypeOnline",v);
+      this.validateInput('eventType');
+    },
+    
+    // Called when the value of the minutes select changes
+    venueUrlChanged(v) {
+      this.validateInput('venueUrl');
+    },
+    
+    // Called when the value of the minutes select changes
+    locationChanged(v) {
+      this.set("locationId",v);
+      this.validateInput('venueSelect');
+    },
+    
+    // Called when the value of the minutes select changes
+    descriptionChanged(v) {
+      this.set("description",v);
+    },
+    
+    // TODO
     done() {
       let messageElement = document.getElementById('message');
       messageElement.classList.add('fade-in-element');
@@ -71,13 +498,8 @@ export default Component.extend({
       this.set('message', 'blur blur blur');
     },
 
+    // Called when the user selects a place from google maps autocomplete
     placeChanged(place) {
-      this._refreshPrettyResponse('placeJSON', place);
-      this.set('googleAuto', 'done');
-      this.set('model.address', place.formatted_address);
-    },
-
-    placeChangedSecondInput(place) {
       let p = place;
       let t = this;
       p.address_components.forEach(function(ac) {
@@ -113,29 +535,41 @@ export default Component.extend({
       t.set("longitude",p.geometry.location.lng());
       t.set("latitude",p.geometry.location.lat());
       t.set("utc_offset",p.utc_offset);
-      this._refreshPrettyResponse('placeJSONSecondInput', place);
+      t.set("locationSelected",true);
+      t.set("locationErrorMessage",null);
     },
+    
     setStep(stepNum) {
-      this.set("formStepOverride", stepNum);
+      this.set("step", stepNum);
     },
+    
     onShow() {
       //assign the user to the project
-      this.set('group.user', this.get('user'));
+      //this.set('group.user', this.get('user'));
       
     },
     
+    // Called on hiding the modal
     onHidden() {
+      this.set("step", 0);
+      this.set("name",null);
+      this.set("venueName",null);
+      this.set("address2",null);
+      this.set("durationErrorMessage",null);
+      this.set("venueNameError",null);
+      this.set("locationSelected",false);
+      this.set("locationErrorMessage",null);
+      this.set("locationId",0);
+      this.set("eventTypeInPerson",false);
+      this.set("eventTypeOnline",false);
       let callback = this.get('onHidden');
-      this.set('formStepOverride',0);
-      let r = this.get('recalculateEvents')
-      this.set('recalculateEvents', r+1);
-      
       if (callback) {
         callback();
       } else {
         this.set('open', null);
       }
     },
+    
     afterSubmit() {
       //hide the modal
       this.set('open', null);

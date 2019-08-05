@@ -12,7 +12,7 @@ const Region = Model.extend({
   slug: attr('string'),
   longitude: attr('number'),
   latitude: attr('number'),
-  numberOfUsers: attr('number'),
+  memberCount: attr('number'),
   description: attr('string'),
   
   // Members

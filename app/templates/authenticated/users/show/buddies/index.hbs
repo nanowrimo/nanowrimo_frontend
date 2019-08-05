@@ -12,16 +12,27 @@
     </div>
   </div>
   <div class='buddy-listings'>
-    <div class='nano-card short-card no-gap header-card'>
-      <div class="nano-subcard">
-        <div class="nano-subcard-face face-front">
-        </div>
-      </div>
-    </div>
     <div>
       {{#each user.buddiesActive as |buddy|}}
         {{buddy-listing user=buddy buttons=true}}
       {{/each}}
+      <div class="nw-card nw-prompt-card">
+        <div class='nw-hflex'>
+          <div class="project-announce-quote">
+            <div class="quote-text">"One loyal friend is worth ten thousand relatives."<br />
+              <span class="quotee">Euripides</span>
+            </div>
+          </div>
+          <div class='action'>
+            {{#link-to "authenticated.search"}}
+              Find buddies!
+            {{/link-to}}
+          </div>
+          <div class='prompt-image'>
+            <img src="/images/cards/handsclapping.svg">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

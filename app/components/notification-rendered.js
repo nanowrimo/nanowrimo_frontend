@@ -11,6 +11,16 @@ export default Component.extend({
   notification: null,
   clickAction:null,
   
+  // Displays the class "nw-noti-new" if this notification is new
+  newNotiClass: computed('currentUser.user.notificationsViewedAt',function() {
+    let nva = this.get('currentUser.user.notificationsViewedAt');
+    let n = this.get('notification');
+    if (n>nva) {
+      return "nw-noti-new";
+    } else {
+      return '';
+    }
+  }),
   timeSince: computed('notification',function() {
     let n = this.get('notification');
     let t = moment(n.displayAt).fromNow();

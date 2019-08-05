@@ -8,6 +8,8 @@
   .nw-card-content.nw-card-horizontal {
     align-items: flex-start;
     .nw-title {
+      margin-top: 5px;
+      color: $nw-darkgreen;
       font-family: "SerifSemiBold", serif;
     }
     .nw-event-dates {

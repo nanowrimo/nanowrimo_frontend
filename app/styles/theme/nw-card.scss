@@ -145,6 +145,9 @@
     &.nw-card-horizontal {
       flex-direction: row;
       align-items: center;
+      .nw-flex-full {
+        flex: 1 1 100%;
+      }
       @media (max-width: $screen-xs-max) {
         flex-direction: column;
       }

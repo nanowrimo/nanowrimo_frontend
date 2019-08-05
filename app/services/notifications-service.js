@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 import moment from "moment"
 
 export default Service.extend({
+  session: service(),
   currentUser: service(),
   store: service(),
   badgesService: service(),
@@ -13,14 +14,14 @@ export default Service.extend({
 
   load() {
     if (this.get('session.isAuthenticated')) {
-      this.set('lastCheck',moment());
       debounce(this, this.checkForUpdates, 5000, false);
-      return this.get('store').query('notification',{});
     }
   },
   
   checkForUpdates() {
     let t = this;
+    let nva = this.get('currentUser.user.notificationsViewedAt');
+    this.set('lastCheck',nva);
     //let u = this.get('currentUser.user');
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();

@@ -121,7 +121,7 @@
       padding: 28px;
       padding-bottom: 4px;
       .form-group {
-        input {
+        input, textarea, .ember-power-select-multiple-trigger {
           height: 36px;
           border-radius: 6px;
           box-shadow: inset 0 1px 4px 0 $nw-grey50;
@@ -133,6 +133,9 @@
             padding-top: 0px;
             height: 20px;
           }
+        }
+        textarea {
+          height: 72px;
         }
         label.checkbox-label {
           font-size: 16px;

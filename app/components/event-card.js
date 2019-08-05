@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 
 export default Component.extend({
+  store: service(),
   currentUser: service(),
   statsParams: service(),
   router: service(),
@@ -33,7 +34,7 @@ export default Component.extend({
   
   // Returns the start date as a readable string
   startDateTime: computed(function() {
-    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("hh:mm a");
+    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("h:mm a");
   }),
   
   // Returns the start date as a readable string
@@ -45,7 +46,41 @@ export default Component.extend({
   startDate: computed(function() {
     return moment(this.get('event.startDt')).format("d");
   }),
-
+  
+  locationAddress: computed('event',function() {
+    let store = this.get('store');
+    let lgs = store.peekAll('location_group');
+    let e = this.get('event');
+    let id = e.id;
+    let s = null;
+    lgs.forEach((lg) => {
+      if ((id==lg.group_id)&&(lg.primary==1)&&(lg.id != null)) {
+        let l = store.peekRecord('location',lg.location_id);
+        if (l) {
+          s = l.formatted_address;
+        }
+      }
+    });
+    return s;
+  }),
+  
+  locationName: computed('event',function() {
+    let store = this.get('store');
+    let lgs = store.peekAll('location_group');
+    let e = this.get('event');
+    let id = e.id;
+    let s = null;
+    lgs.forEach((lg) => {
+      if ((id==lg.group_id)&&(lg.primary==1)&&(lg.id != null)) {
+        let l = store.peekRecord('location',lg.location_id);
+        if (l) {
+          s = l.name;
+        }
+      }
+    });
+    return s;
+  }),
+  
   actions: {
     editProjectChallenge(){
        this.set('editProjectChallenge', true);

@@ -4,6 +4,10 @@
   box-shadow: $nw-box-shadow;
   background: $nw-horiz-stripes;
   text-align: center;
+  .nw-sidebar-content {
+    padding: 14px;
+    padding-bottom: 20px;
+  }
   @media (min-width: $screen-sm) {
     flex: 0 0 299px;
     width: 299px;

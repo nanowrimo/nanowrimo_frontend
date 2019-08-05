@@ -7,34 +7,59 @@
   {{#modal.header closeButton=false}}
     Submit an Event
   {{/modal.header}}
-  {{#form-for
-    afterSubmit=(action 'afterSubmit')
-    currentStepIndex=formStepOverride
-    model=group
-    steps=steps
-    saveAfterSave=locationChangeset
-    as |f|
-  }}
     {{#modal.body}}
-
       <div class="steps">
-        {{#if (eq f.currentStepIndex 0)}}
+        {{#if (eq step 0)}}
           <div class="step step-current">
             <div>Details</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}
-          <div class="step step-completed" {{action "setStep" 0}}>
-            <div>Details</div>
-            <div>{{fa-icon "check-circle"}}</div>
-          </div>
+          {{#if (eq step 1)}}
+            <div class="step step-completed" {{action "setStep" 0}}>
+              <div>Details</div>
+              <div>{{fa-icon "check-circle"}}</div>
+            </div>
+          {{else}}
+            <div class="step step-completed">
+              <div>Details</div>
+              <div>{{fa-icon "check-circle"}}</div>
+            </div>
+          {{/if}}
         {{/if}}
-        {{#if (eq f.currentStepIndex 1)}}
+        {{#if (eq step 1)}}
           <div class="step-connector connector-blue">
             <hr />
           </div>
           <div class="step step-current">
-            <div>Location</div>
+            <div>Venue</div>
+            <div>{{fa-icon "circle-o"}}</div>
+          </div>
+        {{else}}
+          {{#if (eq step 0)}}
+            <div class="step-connector">
+              <hr />
+            </div>
+            <div class="step">
+              <div>Venue</div>
+              <div>{{fa-icon "circle-o"}}</div>
+            </div>
+          {{else}}
+            <div class="step-connector">
+              <hr />
+            </div>
+            <div class="step step-completed">
+              <div>Venue</div>
+              <div>{{fa-icon "check-circle"}}</div>
+            </div>
+          {{/if}}
+        {{/if}}
+        {{#if (eq step 2)}}
+          <div class="step-connector connector-blue">
+            <hr />
+          </div>
+          <div class="step step-current">
+            <div>Approval</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}
@@ -42,7 +67,7 @@
             <hr />
           </div>
           <div class="step">
-            <div>Location</div>
+            <div>Approval</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{/if}}
@@ -50,168 +75,248 @@
 
       <div class="tab-content">
 
-        {{#if (eq f.currentStepIndex 0)}}
+        {{#if (eq step 0)}}
 
-          <div class="form-group">
-            {{f.input
-              type="text"
-              label="What is the name of your event?"
-              property="name"
-            }}
-          </div>
-          <div class="form-group side-by-side">
-            <div>
-              <label for='date' class='form-group'>What day is the event?</label>
-              <input name='date' type='date' class='form-control'
-                value={{startDate}}
-                min='1999-07-01'
-              />
+          <div class="nw-form-section">
+            <div class="nw-form-section-icon">
+              <i class="fa fa-bullhorn" />
             </div>
-            <div>
-              {{time}}
-              <label for='time' class='form-group'>What time is the event?</label>
-              <input name='time' type='time' class='form-control'
-                value={{startTime}}
-              />
-            </div>
-          </div>
-          <div class="form-group side-by-side">
-            {{f.select
-              label="Duration: hours..."
-              options=optionsForHours
-              property="hours"
-            }}
-            {{f.select
-              label="...and minutes"
-              options=optionsForMinutes
-              property="minutes"
-            }}
-          </div>
-          <div class="form-group">
-            {{f.textarea
-              label="Event details:"
-              property="description"
-              rows="3"
-            }}
-          </div>
-        {{else if (eq f.currentStepIndex 1)}}
-          {{#if baseLocations}}
-            <div class="form-group">
-              <div class="select-container">
-                <select id='associateSelect' class='form-control'>
-                  {{#each baseLocations as |c|}}
-                    <option value="{{c.id}}">{{c.name}}</option>
-                  {{/each}}
-                </select>
+            <div class="nw-form-section-content">
+              <div class="form-group">
+                {{nw-form-input
+                  name='name'
+                  label='What is the name of your event?'
+                  type='text'
+                  value=name
+                  errorMessage=nameError
+                  submit=(action 'nameValueChanged')
+                  placeholder='My New Event...'
+                }}
+              </div>
+              <div class="form-group">
+                <label for='name' class='form-group'>Event details:</label>
+                <textarea name='description' class='form-control' onchange={{action 'descriptionChanged' value="target.value"}} rows=3 />
               </div>
             </div>
-        
-          {{/if}}          
-        
-          <div class="form-group">
-            {{f.input
-              type="text"
-              label="What is the location called?"
-              property="locationName"
-            }}
           </div>
-          <div class="form-group">
-            <label for='time' class='form-group'>Street Address</label>
-            {{place-autocomplete-field
-              value=address2
-              inputClass= 'place-autocomplete--input form-control ember-text-field'
-              placeChangedCallback=(action "placeChangedSecondInput")
-            }}
+          <div class="nw-form-section">
+            <div class="nw-form-section-icon">
+              <i class="fa fa-calendar" />
+            </div>
+            <div class="nw-form-section-content">
+              <div class="form-group side-by-side">
+                <div>
+                  <label for='date' class='form-group'>What day is the event?</label>
+                  <input name='date' type='date' class='form-control'
+                    onchange={{action 'startDateChanged' value="target.value"}}
+                    value={{startDate}}
+                    min='1999-07-01'
+                  />
+                </div>
+                <div>
+                  <label for='time' class='form-group'>What time is the event?</label>
+                  <input name='time' type='time' class='form-control'
+                    onchange={{action 'startTimeChanged' value="target.value"}}
+                    value={{startTime}}
+                  />
+                </div>
+              </div>
+              <div class="form-group nw-label-flex">
+                <div class="nw-left-label">
+                  Time zone:
+                </div>
+                <div class="select-container">
+                  <select id='timeZone' name='timeZone'
+                    class='form-control'
+                    onchange={{action 'timeZoneChanged' value="target.value"}}>
+                    {{#each timeZoneOptions as |tz|}}
+                      {{#if (eq tz.value currentUser.user.timeZone)}}
+                        <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                      {{else}}
+                        <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{/if}}
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group nw-label-flex">
+                <div class="nw-left-label">
+                  Duration:
+                </div>
+                <div class="select-container">
+                  <select id='hours' name='hours'
+                    class={{concat 'form-control' (if showDurationError ' is-invalid')}}
+                    onchange={{action 'hoursChanged' value="target.value"}}>
+                    <option value='0'>0 hours</option>
+                    <option value='1'>1 hour</option>
+                    <option value='2' selected>2 hours</option>
+                    <option value='3'>3 hours</option>
+                    <option value='4'>4 hours</option>
+                    <option value='5'>5 hours</option>
+                    <option value='6'>6 hours</option>
+                    <option value='7'>7 hours</option>
+                    <option value='8'>8 hours</option>
+                    <option value='9'>9 hours</option>
+                    <option value='10'>10 hours</option>
+                    <option value='11'>11 hours</option>
+                    <option value='12'>12 hours</option>
+                  </select>
+                </div>
+                <div class="select-container">
+                  <select id='minutes' name='minutes'
+                    class={{concat 'form-control' (if showDurationError ' is-invalid')}}
+                    onchange={{action 'minutesChanged' value="target.value"}}>
+                    <option value='0' selected>0 minutes</option>
+                    <option value='5'>5 minutes</option>
+                    <option value='10'>10 minutes</option>
+                    <option value='15'>15 minutes</option>
+                    <option value='20'>20 minutes</option>
+                    <option value='25'>25 minutes</option>
+                    <option value='30'>30 minutes</option>
+                    <option value='35'>35 minutes</option>
+                    <option value='40'>40 minutes</option>
+                    <option value='45'>45 minutes</option>
+                    <option value='50'>50 minutes</option>
+                    <option value='55'>55 minutes</option>
+                  </select>
+                </div>
+                {{#if showDurationError}}
+                  <div class="invalid-feedback">{{durationErrorMessage}}</div>
+                {{/if}}
+              </div>
+            </div>
           </div>
+        {{else if (eq step 1)}}
           <div class="form-group">
-            <label for='street1' class='form-group'>street1</label>
-            <input name='street1' type='text' class='form-control'
-              value={{street1}}
-            />
+            <p>Is this event in-person, online, or both?</p>
+            {{#if showEventTypeError}}
+              <div class="ext-invalid-feedback">{{eventTypeErrorMessage}}</div>
+            {{/if}}
           </div>
-          <div class="form-group">
-            <label for='street2' class='form-group'>street2</label>
-            <input name='street2' type='text' class='form-control'
-              value={{street2}}
-            />
+          <div class="nw-form-section">
+            <div class="nw-form-section-icon">
+              <i class="fa fa-map-marker" />
+            </div>
+            <div class="nw-form-section-content">
+              <div class="form-group">
+                <label class="nw-checkbox-container">In-person
+                  <input
+                    type="checkbox"
+                    name="eventTypeInPerson"
+                    id="eventTypeInPerson"
+                    class="form-control"
+                    checked={{eventTypeInPerson}}
+                    onchange={{action 'eventTypeInPersonChanged' value="target.checked"}}
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              {{#if eventTypeInPerson}}
+                {{#if hasLocations}}
+                  <div class="form-group select-container">
+                    <select name='venueSelect' id='venueSelect' class='form-control'
+                      onchange={{action 'locationChanged' value="target.value"}}
+                    >
+                      <option value="0">Select or add a venue...</option>
+                      {{#each acceptedLocations as |c|}}
+                        <option value="{{c.id}}">{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
+                      {{/each}}
+                      <option value="-1">+ Add a new venue</option>
+                    </select>
+                    {{#if showVenueError}}
+                      <div class="ext-invalid-feedback">{{venueErrorMessage}}</div>
+                    {{/if}}
+                  </div>
+                {{else}}
+                  <div class="form-group">
+                    <div class="select-container">
+                      <select id='associateSelect' class='form-control'
+                        onchange={{action 'locationChanged' value="target.value"}}
+                      >
+                        <option value="-1">+ Add a new venue</option>
+                      </select>
+                    </div>
+                    {{#if showVenueError}}
+                      <div class="ext-invalid-feedback">{{venueErrorMessage}}</div>
+                    {{/if}}
+                  </div>
+                {{/if}}          
+                {{#if addingLocation}}
+                  <div class="form-group">
+                    {{nw-form-input
+                      name='venueName'
+                      label='What is the venue called?'
+                      type='text'
+                      value=venueName
+                      errorMessage=venueNameError
+                      submit=(action 'venueNameChanged')
+                      placeholder='E.g. "Nanoville Library"'
+                    }}
+            
+                  </div>
+                  <div class="form-group">
+                    <label for='time' class='form-group'>Street Address (begin typing, then select the correct option)</label>
+                    {{place-autocomplete-field
+                      value=address2
+                      inputClass= 'place-autocomplete--input form-control ember-text-field'
+                      placeChangedCallback=(action "placeChanged")
+                    }}
+                    {{#if showLocationError}}
+                      <div class="ext-invalid-feedback">{{locationErrorMessage}}</div>
+                    {{/if}}
+                  </div>
+                {{/if}}
+              {{/if}}
+            </div>
           </div>
-          <div class="form-group">
-            <label for='neighborhood' class='form-group'>neighborhood</label>
-            <input name='neighborhoody' type='text' class='form-control'
-              value={{neighborhood}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='municipality' class='form-group'>municipality</label>
-            <input name='municipality' type='text' class='form-control'
-              value={{municipality}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='city' class='form-group'>city</label>
-            <input name='city' type='text' class='form-control'
-              value={{city}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='county' class='form-group'>county</label>
-            <input name='county' type='text' class='form-control'
-              value={{county}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='state' class='form-group'>state</label>
-            <input name='state' type='text' class='form-control'
-              value={{state}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='postal_code' class='form-group'>postal_code</label>
-            <input name='postal_code' type='text' class='form-control'
-              value={{postal_code}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='country' class='form-group'>country</label>
-            <input name='country' type='text' class='form-control'
-              value={{country}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='formatted_address' class='form-group'>formatted_address</label>
-            <input name='formatted_address' type='text' class='form-control'
-              value={{formatted_address}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='longitude' class='form-group'>longitude</label>
-            <input name='longitude' type='text' class='form-control'
-              value={{longitude}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='latitude' class='form-group'>latitude</label>
-            <input name='latitude' type='text' class='form-control'
-              value={{latitude}}
-            />
-          </div>
-          <div class="form-group">
-            <label for='utc_offset' class='form-group'>utc_offset</label>
-            <input name='utc_offset' type='text' class='form-control'
-              value={{utc_offset}}
-            />
+          <hr />
+          <div class="nw-form-section">
+            <div class="nw-form-section-icon">
+              <i class="fa fa-laptop" />
+            </div>
+            <div class="nw-form-section-content">
+              <div class="form-group">
+                <label class="nw-checkbox-container">Online
+                  <input
+                    type="checkbox"
+                    name="eventTypeOnline"
+                    id="eventTypeOnline"
+                    class="form-control"
+                    checked={{eventTypeOnline}}
+                    onchange={{action 'eventTypeOnlineChanged' value="target.checked"}}
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              {{#if eventTypeOnline}}
+                <div class="form-group">
+                  {{nw-form-input
+                    name='venueUrl'
+                    label='URL where people may participate in this event:'
+                    type='text'
+                    value=venueUrl
+                    errorMessage=venueUrlError
+                    submit=(action 'venueUrlChanged')
+                    placeholder='http://writing_event.com'
+                  }}
+                </div>
+              {{/if}}
+            </div>
           </div>
         {{else}}
+          <p><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
         {{/if}}
-
+        {{#if (eq timezoneRetrieved 0)}}
+          Jezra rocks!
+        {{/if}}
       </div>
 
     {{/modal.body}}
     {{#modal.footer}}
 
-      <input type="submit" class="nano-button" value={{if f.isLastStep "Submit Event for Approval" (if (eq f.currentStepIndex 0) "Next: Location")}} />
-      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
-
+      <input type="button" class="nano-button" {{action "changeStep"}} value={{if (eq step 1) "Submit Event for Approval" (if (eq step 0) "Next: Venue" (if (eq step 2) "Close"))}} />
+      {{#if (not-eq step 2)}}
+        <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
+      {{/if}}
     {{/modal.footer}}
-  {{/form-for}}
 {{/bs-modal}}

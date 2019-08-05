@@ -13,7 +13,7 @@ export default Component.extend({
   badgeForSplash: null,
   
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
-    return this.get('store').findAll('notification');
+    return this.get('store').peekAll('notification');
   }),
   newNotificationsCount: computed('notificationsService.newNotificationsCount', function() {
     var c = this.get('notificationsService.newNotificationsCount');
@@ -26,6 +26,16 @@ export default Component.extend({
   }),
   
   actions: {
+    
+    // Called when the notifications menu is opened
+    notificationsViewed() {
+      let u = this.get('currentUser.user');
+      let now = moment();
+      let dt = now.format("YYYY-MM-DD hh:mm:ss");
+      u.set('notificationsViewedAt',now.toDate());
+      u.save();
+    },
+    
     notificationClicked(notification){
       if(notification.actionType=='BADGE_AWARDED') {
         //get the badge

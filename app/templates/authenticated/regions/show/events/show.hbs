@@ -12,12 +12,11 @@
     </div>
     {{event-card event=event class="g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1"}}
     <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
-      <div class="nw-card-content">
-        <div style="width: 300px; height: 200px;">
+      <div class="nw-card-content" style="padding: 0px;">
+        <div style="width: 300px; height: 300px;">
           {{#g-map lat=event.latitude lng=event.longitude zoom=8 as |context|}}
             {{g-map-marker context lat=event.latitude lng=event.longitude}}
           {{/g-map}}
-          {{event.locationGroups.first}}
         </div>
       </div>
     </div>

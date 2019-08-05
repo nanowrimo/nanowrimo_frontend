@@ -32,7 +32,7 @@ export default Component.extend({
   },
   // Returns the start date as a readable string
   startDateTime: computed(function() {
-    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("hh:mm a") + " to " + moment(this.get('event.endDt')).format("hh:mm a");
+    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("h:mm a");
   }),
   
   actions: {

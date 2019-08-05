@@ -11,17 +11,21 @@
       {{startDate}}
     </div>
   </div>
-  <div>
+  <div class='nw-flex-full'>
     <div class='nw-title'>
-      {{#link-to 'authenticated.regions.show.events.show' group.slug event.slug}}
-        {{event.name}}
-      {{/link-to}}
+      {{event.name}}
     </div>
     <div>
       {{startDateTime}}
     </div>
     <div>
+      <b>{{locationName}}</b>, {{locationAddress}}
+    </div>
+    <div style="padding-top: 15px; padding-bottom: 15px;">
       {{event.description}}
     </div>
+    <button>
+      Count me in!
+    </button>
   </div>
 </div>

@@ -11,7 +11,7 @@
 
   {{#nav.dropdown as |dd|}}
     {{#dd.toggle}}
-      <button class="button-clear">
+      <button class="button-clear" onClick={{action 'notificationsViewed'}}>
         {{#if media.isDesktop}}
           <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
         {{/if}}

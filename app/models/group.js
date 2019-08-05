@@ -8,8 +8,6 @@ const Group = Model.extend({
   name: attr('string'),
   groupId: attr('number'),
   userId: attr('number'),
-  createdAt: attr('date'),
-  updatedAt: attr('date'),
   startDt: attr('date'),
   endDt: attr('date'),
   groupType: attr('string'),
@@ -17,9 +15,8 @@ const Group = Model.extend({
   longitude: attr('number'),
   latitude: attr('number'),
   timeZone: attr('string'),
-  numberOfUsers: attr('number'),
+  memberCount: attr('number'),
   description: attr('string'),
-  plate: attr('string'),
   
   
   // Members
