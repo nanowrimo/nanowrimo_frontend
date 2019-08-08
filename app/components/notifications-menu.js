@@ -29,11 +29,7 @@ export default Component.extend({
     
     // Called when the notifications menu is opened
     notificationsViewed() {
-      let u = this.get('currentUser.user');
-      let now = moment();
-      let dt = now.format("YYYY-MM-DD hh:mm:ss");
-      u.set('notificationsViewedAt',now.toDate());
-      u.save();
+      this.get('notificationsService').notificationsViewed();
     },
     
     notificationClicked(notification){
@@ -47,6 +43,9 @@ export default Component.extend({
       }
       if(notification.actionType=='BUDDIES_PAGE') {
         this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
+      }
+      if(notification.actionType=='NANOMESSAGES') {
+        this.get('router').transitionTo('authenticated.nanomessages');
       }
       if(notification.actionType=='PROJECTS_PAGE') {
         this.get('router').transitionTo('authenticated.users.show.projects', this.get('currentUser.user.slug'));

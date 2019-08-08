@@ -1,0 +1,27 @@
+<div class="nw-panel right-resize nw-with-tabs">
+  <ul class="nw-panel-tabs">
+    <li>{{link-to 'Overview' 'authenticated.regions.show.index'}}</li>
+    <li>{{link-to 'Events' 'authenticated.regions.show.events.upcoming'}}</li>
+  </ul>
+  <div class="nw-panel-primary-container">
+    <div class='nw-panel-actions'>
+      <button id="announce-new-event-button" class="nano-button-large" {{action "openNewEventModal"}}>
+        Submit an event
+      </button>
+      {{event-new-modal
+        open=addEvent
+        user=user
+        groupId=group.id
+      }}
+    </div>
+  </div>
+  <div class="nw-panel-secondary-container">
+    <div class="nw-panel-secondary nw-panel-flex">
+      {{outlet}}
+    </div>
+    <ul class="nw-panel-tabs">
+      <li>{{link-to 'Upcoming' 'authenticated.regions.show.events.upcoming'}}</li>
+      <li>{{link-to 'Past' 'authenticated.regions.show.events.past'}}</li>
+    </ul>
+  </div>
+</div>

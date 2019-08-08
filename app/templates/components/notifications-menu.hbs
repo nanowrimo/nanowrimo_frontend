@@ -9,9 +9,9 @@
     {{/dd.toggle}}
   {{/nav.dropdown}}
 
-  {{#nav.dropdown as |dd|}}
+  {{#nav.dropdown onHide=(action 'notificationsViewed') as |dd|}}
     {{#dd.toggle}}
-      <button class="button-clear" onClick={{action 'notificationsViewed'}}>
+      <button class="button-clear">
         {{#if media.isDesktop}}
           <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
         {{/if}}

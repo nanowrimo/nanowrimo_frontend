@@ -10,12 +10,16 @@ export default Component.extend({
   notificationsService: service(),
   notification: null,
   clickAction:null,
+  isNew: computed('notificationsService.lastCheck',function() {
+    let nva = this.get('notificationsService.lastCheck');
+    let n = this.get('notification.displayAt');
+    return (n>nva);
+  }),
   
   // Displays the class "nw-noti-new" if this notification is new
-  newNotiClass: computed('currentUser.user.notificationsViewedAt',function() {
-    let nva = this.get('currentUser.user.notificationsViewedAt');
-    let n = this.get('notification');
-    if (n>nva) {
+  newNotiClass: computed('isNew',function() {
+    let n = this.get('isNew');
+    if (n) {
       return "nw-noti-new";
     } else {
       return '';
@@ -39,10 +43,15 @@ export default Component.extend({
   }),
   renderImage: computed('notification',function() {
     let url = this.get('notification.imageUrl');
+    let at = this.get('notification.actionType');
+    let isNew = this.get('isNew');
     if (url) {
-      return url;
+      if ((at=='BADGE_AWARDED')&&(isNew)) {
+        return "/images/badges/riddler.svg";
+      } else {
+        return url;
+      }
     } else {
-      let at = this.get('notification.actionType');
       if (at=='BADGE_AWARDED') {
         return "/images/badges/riddler.svg";
       } else {

@@ -1,0 +1,13 @@
+<label for={{name}}>{{label}}</label>
+{{input
+  name=name
+  placeholder=placeholder
+  type=type
+  class=inputClasses
+  keyUp=(action "hasChanged")
+  value=value
+  errorMessage=errorMessage
+}}
+{{#if showErrorMessage}}
+  <div class="invalid-feedback">{{errorMessage}}</div>
+{{/if}}

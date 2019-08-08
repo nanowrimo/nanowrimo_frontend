@@ -12,4 +12,6 @@ export default Model.extend({
   actionId: attr('string'),
   imageUrl: attr('string'),
   user: belongsTo('user'),
+  dataCount: attr('number'),
+  lastViewedAt: attr('date'),
 });

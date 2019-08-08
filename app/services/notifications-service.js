@@ -14,7 +14,7 @@ export default Service.extend({
 
   load() {
     if (this.get('session.isAuthenticated')) {
-      debounce(this, this.checkForUpdates, 5000, false);
+      debounce(this, this.checkForUpdates, 3000, false);
     }
   },
   
@@ -22,11 +22,10 @@ export default Service.extend({
     let t = this;
     let nva = this.get('currentUser.user.notificationsViewedAt');
     this.set('lastCheck',nva);
-    //let u = this.get('currentUser.user');
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();
     });
-    debounce(this, this.checkForUpdates, 15000, false);
+    debounce(this, this.checkForUpdates, 10000, false);
   },
   
   incrementRecomputeNotifications() {
@@ -52,5 +51,16 @@ export default Service.extend({
     }
     return count;
   }),
+  
+  notificationsViewed() {
+    let u = this.get('currentUser.user');
+    let nva = this.get('currentUser.user.notificationsViewedAt');
+    let now = moment();
+    let dt = now.format("YYYY-MM-DD hh:mm:ss");
+    this.set('lastCheck',nva);
+    u.set('notificationsViewedAt',now.toDate());
+    u.save().then(function() {
+    });
+  },
   
 });

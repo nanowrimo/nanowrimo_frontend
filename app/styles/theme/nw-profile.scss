@@ -84,6 +84,32 @@
     }
   }
 }
+.nw-sidebar.nw-profile {
+  .buddy-buttons {
+    padding: 10px;
+    .buddy-status {
+      padding-bottom: 10px;
+    }
+    &.button-danger {
+      .buddy-status {
+        color: $nw-darkred;
+        font-family: 'SansBold', sans-serif;
+      }
+    }
+    button {
+      line-height: 17px;
+      i {
+        color: $nw-white-1;
+        line-height: 19px;
+      }
+      &.button-reversed {
+        i {
+          color: $nw-mediumgreen;
+        }
+      }
+    }
+  }
+}
 
 /*---   start getting profile specific stuff all within the profile view   ---*/
 .profile-view {
