@@ -43,7 +43,7 @@
       </div>
     </div>
     <ul class="nw-list {{processingHide}}" style="height: 700px; ">
-      {{#if sortedRegions }}
+      {{#if regions }}
         {{#each sortedRegions as |regionContainer index|}}
           {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
         {{/each}}
