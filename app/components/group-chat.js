@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { alias, sort }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { computed }  from '@ember/object';
 import { debounce } from '@ember/runloop';
@@ -16,7 +15,7 @@ export default Component.extend({
   selectedSortOption: null,
   showForm: true,
   recompute: 0,
-  messages: [],
+  messages: null,
   sortedMessages: computed('messages.[]','group.id',function() {
     //let s = this.get('store');
     //let ms = s.peekAll('nanomessage');

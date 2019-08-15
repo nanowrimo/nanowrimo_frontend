@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed, set }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { reads }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
@@ -97,11 +97,14 @@ export default Component.extend({
   
   hasLocations: computed('acceptedLocations.[]',function() {
     let h = (this.get('acceptedLocations').length>0);
+    return h;
+  }),
+  
+  hasLocationsChanged: observer('hasLocations', function(){
+    let h = this.get('hasLocations');
     if (!h) {
       this.set('locationId',-1);
     }
-    return h;
-    //return true;
   }),
   
   addingLocation: computed('locationId',function() {
@@ -133,7 +136,6 @@ export default Component.extend({
   
   saveTimezoneData(response) {
     let r = JSON.parse(response);
-    console.log(r.rawOffset);
     this.set('dstOffset',r.dstOffset);
     this.set('rawOffset',r.rawOffset);
     this.set('timeZoneId',r.timeZoneId);
@@ -159,7 +161,6 @@ export default Component.extend({
       url += l.latitude + ',' + l.longtitude;
     }
     url += '&timestamp=' + timestamp + '&key=AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4';
-    console.log(url);
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", function(){
       t.set('timezoneResponse', this.responseText);
@@ -173,7 +174,6 @@ export default Component.extend({
   // saveData saves the location, group, and location_group to the API
   saveData() {
     let inperson = this.get('eventTypeInPerson');
-    alert(inperson);
     if (inperson) {
       let lid = this.get('locationId');
       // If new location
@@ -209,7 +209,7 @@ export default Component.extend({
             let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
             let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
             let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
-            let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
+            //let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
             g.set("startDt",startMoment.toDate());
             g.set("endDt",endMoment.toDate());
             g.set("userId",this.get("currentUserId"));
@@ -245,7 +245,7 @@ export default Component.extend({
         let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
         let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
         let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
-        let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
+        //let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
         g.set("startDt",startMoment.toDate());
         g.set("endDt",endMoment.toDate());
         g.set("userId",this.get("currentUserId"));
@@ -271,7 +271,6 @@ export default Component.extend({
         });
       }
     } else {
-      alert("url");
       let g = this.get('store').createRecord('group');
       let n = this.get('name');
       g.set("name",n);
@@ -280,7 +279,7 @@ export default Component.extend({
       let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
       let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
       let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
-      let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
+      //let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
       g.set("startDt",startMoment.toDate());
       g.set("endDt",endMoment.toDate());
       g.set("userId",this.get("currentUserId"));
@@ -479,7 +478,7 @@ export default Component.extend({
     },
     
     // Called when the value of the minutes select changes
-    venueUrlChanged(v) {
+    venueUrlChanged() {
       this.validateInput('venueUrl');
     },
     

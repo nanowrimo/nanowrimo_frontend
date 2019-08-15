@@ -56,7 +56,7 @@ export default Service.extend({
     let u = this.get('currentUser.user');
     let nva = this.get('currentUser.user.notificationsViewedAt');
     let now = moment();
-    let dt = now.format("YYYY-MM-DD hh:mm:ss");
+    //let dt = now.format("YYYY-MM-DD hh:mm:ss");
     this.set('lastCheck',nva);
     u.set('notificationsViewedAt',now.toDate());
     u.save().then(function() {
