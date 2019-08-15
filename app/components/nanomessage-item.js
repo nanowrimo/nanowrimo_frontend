@@ -5,6 +5,7 @@ import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
+  store: service(),
   nanomessage: null,
   newMessage: 'message-new',
   
@@ -16,6 +17,13 @@ export default Component.extend({
     } else {
       return true;
     }
+  }),
+  sender: computed('nanomessage',function() {
+    let n = this.get('nanomessage');
+    let uid = n.user_id;
+    let s = this.get('store');
+    let u = s.peekRecord('user',uid);
+    return u;
   }),
   updateHeight() {
     this.set('newMessage','');

@@ -13,18 +13,19 @@ export default Component.extend({
   
   actions: {
     joinGroup() {
+      let t = this;
       let gu = this.get('store').createRecord('groupUser', {
         user: this.get('currentUser.user'),
         group: this.get('groupContainer.groupObject'),
         isAdmin: 0
       });
       gu.save().then(() => {
-        let cu = this.get('currentUser.user');
-        let g = this.get('groupContainer.groupObject');
+        let cu = t.get('currentUser.user');
+        let g = t.get('groupContainer.groupObject');
         cu.get('groupUsers').pushObject(gu);
-        g.get('groupUsers').pushObject(gu);
-        cu.get('groups').pushObject(g);
-        g.get('users').pushObject(cu);
+        //g.get('groupUsers').pushObject(gu);
+        //cu.get('groups').pushObject(g);
+        //g.get('users').pushObject(cu);
       });
     },
     makeHome() {

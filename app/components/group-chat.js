@@ -8,7 +8,7 @@ export default Component.extend({
   router: service(),
   store: service(),
   currentUser: service(),
-  classNames: ['nw-card'],
+  classNames: ['nw-card nanomessages-card'],
   group: null,
   sortOptions: null,
   //sortedMessages: sort('nanomessages', 'selectedSortOption'),
@@ -16,15 +16,17 @@ export default Component.extend({
   selectedSortOption: null,
   showForm: true,
   recompute: 0,
-  sortedMessages: computed('recompute','group.id',function() {
-    let s = this.get('store');
-    let ms = s.peekAll('nanomessage');
-    let gid = this.get('group.id');
+  messages: [],
+  sortedMessages: computed('messages.[]','group.id',function() {
+    //let s = this.get('store');
+    //let ms = s.peekAll('nanomessage');
+    //let gid = this.get('group.id');
+    let ms = this.get("messages");
     let newms = [];
     ms.forEach(function(m) {
-      if (m.group_id==gid) {
-        newms.push(m);
-      }
+      //if (m.group_id==gid) {
+      newms.push(m);
+      //}
     });
     return newms;
   }),
@@ -69,14 +71,13 @@ export default Component.extend({
   },
   checkForUpdates() {
     let g = this.get('group');
-    let r = this.get('recompute')
-    this.store.query('nanomessage', {
-      filter: {
-        group_id: g.get('id')
-      }
-    }).then(function() {
-      //this.incrementProperty('recompute');
-      console.log(r);
+    let gid = g.id;
+    let t = this;
+    
+    this.get('store').query('nanomessage', {
+      group_id: gid
+    }).then(function(ms) {
+      t.set("messages",ms);
     });
   },
   

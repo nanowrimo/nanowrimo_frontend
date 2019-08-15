@@ -173,6 +173,7 @@ export default Component.extend({
   // saveData saves the location, group, and location_group to the API
   saveData() {
     let inperson = this.get('eventTypeInPerson');
+    alert(inperson);
     if (inperson) {
       let lid = this.get('locationId');
       // If new location
@@ -270,6 +271,7 @@ export default Component.extend({
         });
       }
     } else {
+      alert("url");
       let g = this.get('store').createRecord('group');
       let n = this.get('name');
       g.set("name",n);
@@ -414,6 +416,8 @@ export default Component.extend({
             }
             if (this.get("eventTypeOnline")) {
               this.set("step", 2);
+              this.saveData();
+              
             }
           }
           break;

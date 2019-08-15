@@ -10,12 +10,10 @@
             {{conversations-list class="full-width"}}
           </div>
         </div>
-        <div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1">
-          {{#if hasGroup}}
-            {{nanochat-convo group=group}}
-          {{else}}
-          {{/if}}
-        </div>
+        {{#if hasGroup}}
+          {{group-chat group=group class="g3-col2 g3-row1 g3-hspan2 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1"}}
+        {{else}}
+        {{/if}}
       </div>
     </div>
   </div>
