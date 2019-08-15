@@ -3,6 +3,7 @@ import EmberObject from '@ember/object';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
@@ -283,7 +284,7 @@ export default Component.extend({
       this.set('sortOption', 'name');
     },*/
     searchStringChange: function() {
-      this.updateSearch();
+      debounce(this, this.updateSearch, 150, false);
     }
   },
   _setSortOption: function(value){
