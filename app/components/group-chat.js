@@ -16,19 +16,23 @@ export default Component.extend({
   showForm: true,
   recompute: 0,
   messages: null,
+  
   sortedMessages: computed('messages.[]','group.id',function() {
     //let s = this.get('store');
     //let ms = s.peekAll('nanomessage');
     //let gid = this.get('group.id');
     let ms = this.get("messages");
     let newms = [];
-    ms.forEach(function(m) {
-      //if (m.group_id==gid) {
-      newms.push(m);
-      //}
-    });
+    if (ms) {
+      ms.forEach(function(m) {
+        //if (m.group_id==gid) {
+        newms.push(m);
+        //}
+      });
+    }
     return newms;
   }),
+  
   groupName: computed('group', function() {
     let g = this.get('group');
     let gt = g.get('groupType');

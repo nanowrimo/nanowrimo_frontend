@@ -22,7 +22,7 @@ export default Component.extend({
     let n = this.get('nanomessage');
     let uid = n.user_id;
     let s = this.get('store');
-    let u = s.peekRecord('user',uid);
+    let u = s.findRecord('user',uid);
     return u;
   }),
   updateHeight() {
