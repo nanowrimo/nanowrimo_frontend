@@ -19,14 +19,20 @@ export default Component.extend({
         group: this.get('groupContainer.groupObject'),
         isAdmin: 0
       });
-      gu.save().then(() => {
-        let cu = t.get('currentUser.user');
-        let g = t.get('groupContainer.groupObject');
-        cu.get('groupUsers').pushObject(gu);
-        g.get('groupUsers').pushObject(gu);
-        cu.get('groups').pushObject(g);
-        g.get('users').pushObject(cu);
-      });
+      
+      //make some associations 
+      let cu = this.get('currentUser.user');
+      let g = this.get('groupContainer.groupObject');
+      if (g) {
+         g.groupUsers.pushObject(gu);
+         g.users.pushObject(cu);
+      }
+      cu.groupUsers.pushObject(gu);
+      cu.groups.pushObject(g);
+      
+      //save the user
+      cu.save();    
+
     },
     makeHome() {
       let cu = this.get('currentUser.user');
