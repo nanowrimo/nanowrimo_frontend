@@ -10,4 +10,7 @@ export default Model.extend({
   content: attr('string'),
   group: belongsTo('group'),
   user: belongsTo('user'),
+  sender_avatar_url: attr('string'),
+  sender_name: attr('string'),
+  sender_slug: attr('string'),
 });

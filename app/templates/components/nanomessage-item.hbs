@@ -1,9 +1,9 @@
 {{#if leftAlign}}
   <div class="nanomessage nanomessage-left {{newMessage}}">
     <div class='nw-avatar nw-avatar-medium'>
-      {{#link-to 'authenticated.users.show' sender.slug}}
-        <img src='{{sender.avatarUrl}}' />
-        {{sender.name}}
+      {{#link-to 'authenticated.users.show' nanomessage.sender_slug}}
+        <img src='{{senderAvatarUrl}}' />
+        {{nanomessage.sender_name}}
       {{/link-to}}
     </div>
     <div class="nanomessage-arrow-left"></div>
