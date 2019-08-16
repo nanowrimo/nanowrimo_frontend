@@ -43,9 +43,13 @@
       </div>
     </div>
     <ul class="nw-list {{processingHide}}" style="height: 700px; ">
-      {{#each sortedRegions as |regionContainer index|}}
-        {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
-      {{/each}}
+      {{#if regions }}
+        {{#each sortedRegions as |regionContainer index|}}
+          {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
+        {{/each}}
+      {{else}}
+        Loading ... <img class='spinner' src="/images/spinner.svg">
+      {{/if}}
     </ul>
   </div>
 </div>

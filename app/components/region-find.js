@@ -154,9 +154,12 @@ export default Component.extend({
   },
 
   sortedRegions: computed('currentUser.user.homeRegion','regions','joinedRegionIds','searchString','sortOption', function() {
-    //var date = new Date();
-    //var timestamp = date.getTime();
+    //get the regions 
     let r = this.get('regions');
+    //if there are no regions, return an empty array
+    if (!r) {
+      return [];
+    }
     let joinedRegionIds = this.get('joinedRegionIds');
     let s = this.get('sortOption');
     let listLength = 10;
@@ -281,7 +284,7 @@ export default Component.extend({
       this.set('sortOption', 'name');
     },*/
     searchStringChange: function() {
-      debounce(this, this.updateSearch, 1000, false);
+      debounce(this, this.updateSearch, 150, false);
     }
   },
   _setSortOption: function(value){
