@@ -13,7 +13,6 @@ export default Component.extend({
   
   actions: {
     joinGroup() {
-      let t = this;
       let gu = this.get('store').createRecord('groupUser', {
         user: this.get('currentUser.user'),
         group: this.get('groupContainer.groupObject'),
