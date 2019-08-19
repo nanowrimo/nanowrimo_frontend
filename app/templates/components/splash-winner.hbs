@@ -1,17 +1,55 @@
 {{#ember-wormhole to="ember-bootstrap-wormhole"}}
-  <div class='nw-splash nw-badge-splash '>
+  <div class='nw-splash nw-winner-splash'>
+    <object class="confetti" data="/images/splash/confetti.svg" type="image/svg+xml"></object>
     <div class="nw-vflex">
       {{svg-congratulations}}
-      <div class='unlocked'>You unlocked a badge</div>
-      <div class='badge-image'>
-        <img src='{{badge.awarded}}' title='{{badge.title}}'>
+      <div class='winner-message'>
+        You met your NaNo goal head on, never gave up, and completed your novel!
       </div>
-      <div class='badge-title'>
-        {{badge.title}}
+      <div class='winner-splash-content'>
+        {{#if (eq step 0)}}
+          <div class='nw-hflex'>
+            <div>
+              &nbsp;
+            </div>
+            <div>
+            [put something here]
+            </div>
+            
+            <div>
+              <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
+            </div>
+          </div>
+        
+        
+        {{else if (eq step 1) }}
+          <div class='nw-hflex'>
+            <div >
+              <a href="#" {{action "decrementStep"}}>{{fa-icon "arrow-circle-left" class='navigation-arrow'}}</a>
+            </div>
+            <div id="winner-splash-step-1-badge-information">
+            <div class='unlocked'>You unlocked a badge</div>
+          <div class='badge-image'>
+            <img src='{{badge.awarded}}' title='{{badge.title}}'>
+          </div>
+          <div class='badge-title'>
+            {{badge.title}}
+          </div>
+          <div class='badge-description'>
+            {{badge.awarded_description}}
+          </div>
+          <button {{action "goToStats"}}>View Goal Stats</button>
+            </div>
+            
+            <div>
+              <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
+            </div>
+          </div>
+
+        {{/if}}
+
       </div>
-      <div class='badge-description'>
-        {{badge.awarded_description}}
-      </div>
+     
       <button {{action "closeClicked"}}>close</button>
     </div>
   </div>
