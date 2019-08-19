@@ -13,7 +13,10 @@
               &nbsp;
             </div>
             <div>
-            [put something here]
+              <img src="/images/splash/certificate.png">
+              <div class='cert-download'>
+                <a download="winner-certificate-2019.pdf" href="/assets/winner-certificate-2019.pdf">{{fa-icon "download"}} Download certificate</a>
+              </div>
             </div>
             
             <div>
@@ -49,9 +52,18 @@
         {{/if}}
 
       </div>
-     
+      <div class='circle-indicators'>
+        {{#if (eq step 0)}}
+
+        {{else if (eq step 1) }}
+        
+        {{/if}}
+      </div>
       <button {{action "closeClicked"}}>close</button>
     </div>
+    
+    
+    
   </div>
 {{/ember-wormhole}}
 
