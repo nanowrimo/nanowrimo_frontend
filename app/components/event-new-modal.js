@@ -103,6 +103,7 @@ export default Component.extend({
   hasLocationsChanged: observer('hasLocations', function(){
     let h = this.get('hasLocations');
     if (!h) {
+      alert('nope');
       this.set('locationId',-1);
     }
   }),
@@ -403,20 +404,18 @@ export default Component.extend({
                 let l = this.validateInput('location');
                 if (v&l) {
                   this.getTimeZone();
-                  this.set("step", 2);
                 }
               } else {
                 let vs = this.validateInput('venueSelect');
                 if (vs) {
                   this.getTimeZone();
-                  this.set("step", 2);
                 }
               }
             }
-            if (this.get("eventTypeOnline")) {
-              this.set("step", 2);
+            //if (this.get("eventTypeOnline")) {
+            //}
+            if (this.get("step")==2) {
               this.saveData();
-              
             }
           }
           break;

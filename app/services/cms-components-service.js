@@ -10,7 +10,7 @@ export default Service.extend({
   pepTalks: null,
   
   getPepTalks() {
-    let endpoint =  `${ENV.APP.API_HOST}/pages/staff`;
+    let endpoint =  `${ENV.APP.API_HOST}/pages/pep-talks`;
     fetch(endpoint).then((data)=>{
       data.json().then((json)=>{
         this.set('pepTalks', json);
@@ -21,6 +21,22 @@ export default Service.extend({
   
   loadedPepTalks: computed('pepTalks',function() {
     return this.get('pepTalks');
+  }),
+  
+  sponsorOffers: null,
+  
+  getSponsorOffers() {
+    let endpoint =  `${ENV.APP.API_HOST}/pages/sponsor-offers`;
+    fetch(endpoint).then((data)=>{
+      data.json().then((json)=>{
+        this.set('sponsorOffers', json);
+        return 'done';
+      });
+    });
+  },
+  
+  loadedSponsorOffers: computed('sponsorOffers',function() {
+    return this.get('sponsorOffers');
   }),
   
 });

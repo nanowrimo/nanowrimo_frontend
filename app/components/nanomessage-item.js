@@ -18,13 +18,15 @@ export default Component.extend({
       return true;
     }
   }),
-  sender: computed('nanomessage',function() {
+  senderAvatarUrl: computed('nanomessage',function() {
     let n = this.get('nanomessage');
-    let uid = n.user_id;
-    let s = this.get('store');
-    let u = s.peekRecord('user',uid);
-    return u;
+    if (n.sender_avatar_url) {
+      return n.sender_avatar_url;
+    } else {
+      return "/images/users/unknown-avatar.png";
+    }
   }),
+  
   updateHeight() {
     this.set('newMessage','');
   },

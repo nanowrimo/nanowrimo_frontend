@@ -233,6 +233,7 @@
                       <select id='associateSelect' class='form-control'
                         onchange={{action 'locationChanged' value="target.value"}}
                       >
+                        <option value="0">Select...</option>
                         <option value="-1">+ Add a new venue</option>
                       </select>
                     </div>
@@ -305,9 +306,6 @@
           </div>
         {{else}}
           <p><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
-        {{/if}}
-        {{#if (eq timezoneRetrieved 0)}}
-          Jezra rocks!
         {{/if}}
       </div>
 
