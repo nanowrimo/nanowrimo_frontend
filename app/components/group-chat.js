@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed }  from '@ember/object';
-import { debounce } from '@ember/runloop';
+import { debounce, cancel } from '@ember/runloop';
 
 export default Component.extend({
   router: service(),
@@ -16,6 +16,21 @@ export default Component.extend({
   showForm: true,
   recompute: 0,
   messages: null,
+  tempDebounce: null,
+  
+  init() {
+    this._super(...arguments);
+    let options = ['createdAt:asc'];
+    this.set('sortOptions', options);
+    this.set('selectedSortOption', [options[0]]);
+    debounce(this, this.gotoBottom, 1000, false);
+    this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
+  },
+
+  willDestroyElement() {
+    let td = this.get('tempDebounce');
+    cancel(td);
+  },
   
   sortedMessages: computed('messages.[]','group.id',function() {
     //let s = this.get('store');
@@ -54,15 +69,7 @@ export default Component.extend({
     //debounce(this, this.doShowForm, 500, false);
     return gn;
   }),
-  init() {
-    this._super(...arguments);
-    let options = ['createdAt:asc'];
-    this.set('sortOptions', options);
-    this.set('selectedSortOption', [options[0]]);
-    debounce(this, this.gotoBottom, 1000, false);
-    debounce(this, this.checkForMessages, 1000, false);
-  },
-
+  
   doShowForm() {
     this.set('showForm',true);
   },
@@ -86,7 +93,8 @@ export default Component.extend({
   
   checkForMessages() {
     this.checkForUpdates();
-    debounce(this, this.checkForMessages, 5000, false);
+    this.set('tempDebounce',debounce(this, this.checkForMessages, 10000, false));
+    //debounce(this, this.checkForMessages, 5000, false);
     //debounce(this, this.gotoBottom, 500, false);
   },
   actions: {
