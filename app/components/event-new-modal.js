@@ -412,8 +412,8 @@ export default Component.extend({
                 }
               }
             }
-            if (this.get("eventTypeOnline")) {
-            }
+            //if (this.get("eventTypeOnline")) {
+            //}
             if (this.get("step")==2) {
               this.saveData();
             }
