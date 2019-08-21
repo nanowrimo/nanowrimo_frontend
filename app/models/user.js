@@ -392,6 +392,12 @@ const User = Model.extend({
     return years;
   }),
   
+  //how many times has the user won nano?
+  nanoWinCount: computed('yearsWon', function(){
+    let yw = this.get('yearsWon');
+    return yw.length;
+  }),
+  
   //get an array of nano years won
    yearsWon: computed('projectChallenge.@each.metGoal', function(){
     let ids = [];
@@ -404,7 +410,7 @@ const User = Model.extend({
         
         //did the project challenge win?
         if (pc.metGoal) {
-          years.push(pc.startsAt.getYear());
+          years.push(pc.startsAt.getFullYear());
         }
       }
     });

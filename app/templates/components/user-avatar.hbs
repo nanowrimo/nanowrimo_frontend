@@ -1,0 +1,15 @@
+<div class='nw-avatar-frame nw-avatar-frame-{{size}}'>
+  {{#if hasLaurels}}
+    <img src={{laurelImagePath}} class='laurel'>
+  {{/if}}
+  <div class="nw-avatar nw-avatar-{{size}}">
+    {{#if linkTo}}
+      {{#link-to 'authenticated.users.show' user.slug}}
+        <img src={{user.avatarUrl}} alt={{user.name}}>
+      {{/link-to}}
+    {{else}}
+      <img src={{user.avatarUrl}} alt={{user.name}}>
+    {{/if}}
+  </div>
+  
+</div>

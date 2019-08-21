@@ -57,3 +57,27 @@
   background-size: cover;
   backface-visibility: hidden;
 }
+
+
+.nw-avatar-frame{
+  position: relative;
+  .laurel {
+    position: absolute;
+    height: 100%;
+    bottom: -11%;
+    left: 0px;
+    z-index: 5;
+  }
+}
+
+.nw-avatar-frame-small {
+
+}
+
+.nw-avatar-frame-medium {
+
+}
+
+.nw-avatar-frame-large {
+  width: 140px;
+}
