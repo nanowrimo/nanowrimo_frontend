@@ -1,19 +1,93 @@
 {{#ember-wormhole to="ember-bootstrap-wormhole"}}
-  <div class='nw-splash nw-badge-splash '>
+  <div class='nw-splash nw-winner-splash'>
+    <object class="confetti" data="/images/splash/confetti.svg" type="image/svg+xml"></object>
     <div class="nw-vflex">
       {{svg-congratulations}}
-      <div class='unlocked'>You unlocked a badge</div>
-      <div class='badge-image'>
-        <img src='{{badge.awarded}}' title='{{badge.title}}'>
+      <div class='winner-message'>
+        You met your NaNo goal head on, never gave up, and completed your novel!
       </div>
-      <div class='badge-title'>
-        {{badge.title}}
+      <div class='winner-splash-content'>
+        {{#if (eq step 0)}}
+          <div class='nw-hflex'>
+            <div>
+              &nbsp;
+            </div>
+            <div>
+              <img src="/images/splash/certificate.png">
+              <div class='cert-download'>
+                <a download="winner-certificate-2019.pdf" href="/assets/winner-certificate-2019.pdf">{{fa-icon "download"}} Claim your certificate!</a>
+              </div>
+            </div>
+            
+            <div>
+              <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
+            </div>
+          </div>
+
+        {{else if (eq step 1) }}
+          <div class='nw-hflex'>
+            <div>
+              <a href="#" {{action "decrementStep"}}>{{fa-icon "arrow-circle-left" class='navigation-arrow'}}</a>
+            </div>
+            <div id="winner-splash-step-1-badge-information">
+              <div class='unlocked'>You unlocked a badge</div>
+              <div class='badge-image'>
+                <img src='{{badge.awarded}}' title='{{badge.title}}'>
+              </div>
+            <div class='badge-title'>
+              {{badge.title}}
+            </div>
+            <div class='badge-description'>
+              {{badge.awarded_description}}
+            </div>
+            <button {{action "goToStats"}}>View Goal Stats</button>
+            </div>
+            <div>
+              <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
+            </div>
+          </div>
+        {{else if (eq step 2) }}
+           <div class='nw-hflex'>
+            <div>
+              <a href="#" {{action "decrementStep"}}>{{fa-icon "arrow-circle-left" class='navigation-arrow'}}</a>
+            </div>
+            <div class='winner-splash-laurel'>
+              <div class='title'>Don't rest on your laurels.</div>
+              <div class='nw-hflex'>
+               {{user-avatar user=currentUser.user}}
+               {{user-avatar user=currentUser.user size='medium'}}
+
+              </div>
+              <div class='description'>
+                Way to go, this was your <b>{{ordinal-number-suffix currentUser.user.nanoWinCount}} time</b> 
+                completing a NaNo event! From now on, your avatar will 
+                look like this, so the whole world can know how awesome you are!
+              </div>
+            </div>
+            
+            <div>
+              &nbsp;
+            </div>
+          </div>
+        {{/if}}
+
       </div>
-      <div class='badge-description'>
-        {{badge.awarded_description}}
+      <div class='circle-indicators'>
+        {{#if (eq step 0)}}
+          {{fa-icon "circle"}} {{fa-icon "circle-o"}} {{fa-icon "circle-o"}}
+        {{else if (eq step 1) }}
+            {{fa-icon "circle-o"}} {{fa-icon "circle"}} {{fa-icon "circle-o"}}
+        {{else if (eq step 2) }}
+           {{fa-icon "circle-o"}} {{fa-icon "circle-o"}} {{fa-icon "circle"}} 
+        {{/if}}
       </div>
-      <button {{action "closeClicked"}}>close</button>
+      <div class='splash-footer'>
+        <button {{action "closeClicked"}}>close</button>
+      </div>
     </div>
+    
+    
+    
   </div>
 {{/ember-wormhole}}
 

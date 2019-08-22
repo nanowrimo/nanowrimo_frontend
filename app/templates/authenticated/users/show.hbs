@@ -19,10 +19,7 @@
   <div class="container-fluid align-top">
     <div class="nw-sidebar nw-profile">
       <div class="nw-sidebar-content">
-        <div class="nw-avatar-large {{if canEditUser "user-editable" ""}}" {{action "openEditModal" "avatarTab"}} style={{if canEditUser (html-safe "cursor:pointer")}} data-test-user-edit-avatar>
-          <img src={{user.avatarUrl}} alt={{user.name}} data-test-user-avatar>
-          <div class='avatar-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
-        </div>
+        {{user-avatar user=user canEdit=canEditUser editAction=(action "openEditModal" "avatarTab")}}
         <div class="nw-user-name" data-test-user-name>
           {{user.name}}
         </div>

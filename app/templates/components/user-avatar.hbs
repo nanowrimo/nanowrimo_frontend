@@ -1,0 +1,17 @@
+<div class='nw-avatar-frame nw-avatar-frame-{{size}} {{if if hasLaurels "has-laurels"}} {{if canEdit "user-editable" ""}}' {{action "edit"}}>
+  {{#if hasLaurels}}
+    <img src={{laurelImagePath}} class='laurel'>
+  {{/if}}
+  <div class="nw-avatar nw-avatar-{{size}} ">
+    {{#if linkTo}}
+      {{#link-to 'authenticated.users.show' user.slug}}
+        <img src={{user.avatarUrl}} alt={{user.name}}>
+      {{/link-to}}
+    {{else}}
+      <img src={{user.avatarUrl}} alt={{user.name}}>
+      {{#if canEdit}}
+        <div class='avatar-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

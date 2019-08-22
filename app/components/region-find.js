@@ -81,7 +81,7 @@ export default Component.extend({
     return this.get('sortOption')=='name';
   }),
   
-  userRegions: computed('currentUser.user.{homeRegion,regions}', function() {
+  userRegions: computed('currentUser.user.{homeRegion,regions.[]}', function() {
     let r = this.get('currentUser.user.regions');
     let homeRegion = this.get('currentUser.user.homeRegion');
     let newArray = [];
@@ -284,7 +284,7 @@ export default Component.extend({
       this.set('sortOption', 'name');
     },*/
     searchStringChange: function() {
-      debounce(this, this.updateSearch, 150, false);
+      debounce(this, this.updateSearch, 250, false);
     }
   },
   _setSortOption: function(value){
