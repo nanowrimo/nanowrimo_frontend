@@ -26,10 +26,11 @@ export default Service.extend({
   sponsorOffers: null,
   
   getSponsorOffers() {
-    let endpoint =  `${ENV.APP.API_HOST}/pages/sponsor-offers`;
+    let endpoint =  `${ENV.APP.API_HOST}/offers`;
     fetch(endpoint).then((data)=>{
       data.json().then((json)=>{
         this.set('sponsorOffers', json);
+        console.log(json);
         return 'done';
       });
     });
