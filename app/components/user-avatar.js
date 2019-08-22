@@ -27,7 +27,19 @@ export default Component.extend({
   
   hasLaurels: computed('user.nanoWinCount', function(){
     return this.get('user.nanoWinCount')>0;
-  })
+  }),
+  
+  actions: {
+    edit(){
+      //get the edit action
+      let ea = this.get('editAction');
+      //is there an edit action?
+      if (ea) {
+        //perform the action
+        ea();
+      }
+    }
+  }
   
 });
 

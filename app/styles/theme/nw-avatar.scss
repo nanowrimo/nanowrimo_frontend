@@ -40,11 +40,18 @@
     }
   }
 }
+
 .nw-sidebar {
-  .nw-avatar-large {
+  .nw-avatar-frame {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: -70px;
+    &.has-laurels {
+      margin-bottom: 10px;
+    }
   }
 }
+
 .nw-avatar-irregular {
   position: relative;
   text-align: center;
@@ -58,7 +65,6 @@
   backface-visibility: hidden;
 }
 
-
 .nw-avatar-frame{
   position: relative;
   .laurel {
@@ -67,6 +73,15 @@
     bottom: -11%;
     left: 0px;
     z-index: 5;
+  }
+  &.user-editable:hover{
+    cursor: pointer;
+    .avatar-editable-overlay {
+      display:flex;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
   }
 }
 

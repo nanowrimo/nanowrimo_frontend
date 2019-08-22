@@ -30,7 +30,6 @@ export default Service.extend({
     fetch(endpoint).then((data)=>{
       data.json().then((json)=>{
         this.set('sponsorOffers', json);
-        console.log(json);
         return 'done';
       });
     });
