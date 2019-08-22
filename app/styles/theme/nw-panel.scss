@@ -244,3 +244,33 @@
 .nw-panel-footer {
   margin-bottom: 28px;
 }
+.nw-spacer {
+  height: 30px;
+  width: 100%;
+}
+.nw-flex-6-cols {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 28px;
+  padding-bottom: 0px;
+  .nw-card {
+    height: 280px;
+    box-sizing: border-box;
+    margin-bottom: 28px;
+    width: 100%;
+    @media (min-width: $screen-lg) {
+      &.flex-medium {
+        width: calc(50% - 14px);
+      }
+      &.flex-small {
+        width: calc(33.333% - 18.666px);
+      }
+    }
+    @media (max-width: $screen-md-max) and (min-width: $screen-sm) {
+      &.flex-small {
+        width: calc(50% - 14px);
+      }
+    }
+  }
+}
