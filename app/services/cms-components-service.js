@@ -6,6 +6,7 @@ import ENV from 'nanowrimo/config/environment';
 
 export default Service.extend({
   currentUser: service(),
+  recomputeOffers: 0,
   
   pepTalks: null,
   
@@ -19,18 +20,22 @@ export default Service.extend({
     });
   },
   
+  incrementRecomputeOffers() {
+    let rb  = this.get('recomputeOffers')+1;
+    this.set('recomputeOffers',rb);
+  },
+  
   loadedPepTalks: computed('pepTalks',function() {
     return this.get('pepTalks');
   }),
   
-  sponsorOffers: null,
-  
-  getSponsorOffers() {
+  getSponsorOffers () {
     let endpoint =  `${ENV.APP.API_HOST}/offers`;
+    let t = this;
     fetch(endpoint).then((data)=>{
       data.json().then((json)=>{
-        this.set('sponsorOffers', json);
-        console.log(json);
+        t.set('sponsorOffers', json);
+        t.incrementRecomputeOffers();
         return 'done';
       });
     });

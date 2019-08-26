@@ -1,0 +1,43 @@
+{{#if (eq offer.order 1)}}
+  <div class='nw-card-content nw-card-horizontal'>
+    <div class="nw-one-third">
+      <img src="{{offer.card-image}}" />
+      <div class="nw-spacer"></div>
+      <a href="{{offer.external-link}}" target="_blank">
+        <button class="button-reversed">
+          Claim Offer
+        </button>
+      </a>
+    </div>
+    <div class="nw-two-thirds">
+      <div class="nw-card-headline">
+        {{{offer.headline}}}
+      </div>
+      {{{offer.body}}}
+    </div>
+  </div>
+{{else}}
+  <div class='nw-card-header nw-card-page-card nw-blue-back nw-card-horizontal'>
+    <div class="nw-two-fifths">
+      <img src="{{offer.card-image}}" />
+    </div>
+    <div class="nw-three-fifths">
+      <div class="nw-card-headline">
+        {{{offer.headline}}}
+      </div>
+    </div>
+  </div>
+  <div class='nw-card-content nw-white-back'>
+    {{{offer.body}}}
+    <a href="{{offer.external-link}}" target="_blank">
+      <button class="button-reversed">
+        Claim Offer
+      </button>
+    </a>
+  </div>
+{{/if}}
+{{#if hasCouponCode}}
+  <div class='nw-coupon-code {{copyClass}}' {{action 'copyCode'}}>
+    <i class="fa fa-link"></i> <span class="nw-underlined">{{copyText}}</span>
+  </div>
+{{/if}}

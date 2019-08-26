@@ -251,25 +251,27 @@
 .nw-flex-6-cols {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 28px;
+  padding-left: 0px;
   padding-bottom: 0px;
   .nw-card {
-    height: 280px;
+    height: 300px;
     box-sizing: border-box;
+    margin-left: 28px;
     margin-bottom: 28px;
     width: 100%;
     @media (min-width: $screen-lg) {
       &.flex-medium {
-        width: calc(50% - 14px);
+        width: calc(50% - 28px);
       }
       &.flex-small {
-        width: calc(33.333% - 18.666px);
+        width: calc(33.333% - 28px);
       }
     }
     @media (max-width: $screen-md-max) and (min-width: $screen-sm) {
       &.flex-small {
-        width: calc(50% - 14px);
+        width: calc(50% - 28px);
       }
     }
   }

@@ -33,6 +33,8 @@
   .nw-card-header {
     flex: 0 0 28px;
     display: flex;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
     justify-content: space-between;
     height: 28px;
     &.nw-card-header-no-height {
@@ -40,7 +42,40 @@
       height: 0px;
     }
     &.nw-card-page-card {
-      height: 144px;
+      flex: 0 0 144px;
+      &.nw-blue-back {
+        flex: 0 0 120px;
+        background-color: #f2f8fa;
+      }
+    }
+    &.nw-card-horizontal {
+      flex-direction: row;
+      align-items: center;
+      .nw-flex-full {
+        flex: 1 1 100%;
+      }
+      .nw-one-third {
+        flex: 0 0 33%;
+        text-align: center;
+        padding: 10px;
+        img {
+          width: 100%;
+        }
+      }
+      .nw-two-thirds {
+        flex: 0 0 67%;
+      }
+      .nw-two-fifths {
+        padding: 10px;
+        flex: 0 0 40%;
+        img {
+          width: 100%;
+        }
+      }
+      .nw-three-fifths {
+        padding: 5px;
+        flex: 0 0 60%;
+      }
     }
     .nw-card-title {
       flex: 0 0 auto;
@@ -55,6 +90,20 @@
       text-transform: uppercase;
       color: $nw-mediumgrey;
     }
+    .nw-card-headline {
+      font-family: 'SerifBold', serif;
+      font-size: 16px;
+      color: $nw-darkgrey;
+      line-height: 1.4;
+      padding: 10px;
+      a {
+        color: $nw-darkgrey;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    
     .nw-card-indicator {
       flex: 1 1 50%;
       text-align: right;
@@ -142,11 +191,26 @@
     flex: 1 1 100%;
     position: relative;
     padding: 20px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    &.nw-white-back {
+      background-color: #ffffff;
+    }
     &.nw-card-horizontal {
       flex-direction: row;
       align-items: center;
       .nw-flex-full {
         flex: 1 1 100%;
+      }
+      .nw-one-third {
+        flex: 0 0 33%;
+        text-align: center;
+        img {
+          width: 100%;
+        }
+      }
+      .nw-two-thirds {
+        flex: 0 0 64%;
       }
       @media (max-width: $screen-xs-max) {
         flex-direction: column;
@@ -213,7 +277,30 @@
       left: 120px;
     }
   }
-  
+  .nw-coupon-code {
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background-color: $nw-darkblue;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 5px;
+    color: $nw-white;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    padding-right: 12px;
+    padding-left: 9px;
+    &:hover {
+      background-color: $nw-mediumblue;
+    }
+    span.nw-underlined {
+      text-decoration: underline;
+    }
+    &.nw-code-copied {
+      background-color: $nw-purple;
+    }
+  }
   .nw-card-footer {
   
   }
@@ -327,4 +414,41 @@
 .nw-label {
   text-align: center;
   font-family: 'SansSemiBold', sans;
+}
+.nw-card.flex-large {
+  .nw-card-content {
+    a {
+      color: $nw-darkblue;
+    }
+    
+    font-size: 20px;
+    line-height: 24px;
+    .nw-card-headline {
+      font-size: 26px;
+      line-height: 30px;
+      margin-bottom: 15px;
+    }
+  }
+}
+.nw-card.flex-medium {
+  .nw-card-content {
+    a {
+      color: $nw-darkblue;
+    }
+    font-size: 16px;
+    line-height: 20px;
+    .nw-card-headline {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 10px;
+    }
+  }
+}
+.nw-card.flex-small {
+  .nw-card-content {
+    overflow: scroll;
+    a {
+      color: $nw-darkblue;
+    }
+  }
 }
