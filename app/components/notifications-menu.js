@@ -10,6 +10,7 @@ export default Component.extend({
   currentUser: service(),
   
   showBadgeSplash: false,
+  showWinnerSplash: false,
   badgeForSplash: null,
   
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
@@ -36,10 +37,17 @@ export default Component.extend({
       if(notification.actionType=='BADGE_AWARDED') {
         //get the badge
         let id = notification.actionId;
+        // get some badge data from the store
         let badge = this.get('store').peekRecord('badge', id);
         this.set("badgeForSplash", badge);
-        //display the splash
-        this.set('showBadgeSplash', true);
+        //is this a winner badge?
+        if (badge.title =="Wrote 50,000 Words During NaNoWriMo" ){
+          //NaNo Winner!
+          this.set('showWinnerSplash', true);
+        } else {
+          //display the splash
+          this.set('showBadgeSplash', true);
+        }
       }
       if(notification.actionType=='BUDDIES_PAGE') {
         this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
@@ -53,6 +61,9 @@ export default Component.extend({
     },
     hideBadgeSplash(){
       this.set('showBadgeSplash', false);
+    },
+    hideWinnerSplash(){
+      this.set('showWinnerSplash', false);
     }
   }
 });

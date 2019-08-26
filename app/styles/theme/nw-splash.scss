@@ -6,11 +6,10 @@
   bottom: 0px;
   z-index: 5000;
   text-align: center;
-}
-
-.nw-badge-splash {
-  /*background-color: rgba(52, 52, 52, 0.94);*/
   
+  .fa {
+    color: $nw-lightblue;
+  }
   .congratulations {
     text {
       font-family: "SourceSerifPro";
@@ -20,7 +19,8 @@
       text-transform: uppercase;
     }
   }
- .unlocked{
+  
+  .unlocked{
     font-family: SourceSerifPro;
     font-size: 26px;
     text-align: center;
@@ -49,4 +49,82 @@
     color: $nw-lightgreyblue;
     margin-bottom: 37px;
   }
+  
+}
+
+.nw-winner-splash {
+  background-color: rgba(47, 48, 97, 0.98);
+  
+  .confetti {
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -5;
+  }
+  .winner-message {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    color: $nw-yellow;
+    width: 626px;
+    font-family: SourceSerifPro;
+  }
+  
+  .winner-splash-content{
+    width: 650px;
+    
+    #winner-splash-step-1-badge-information{
+      width: 550px;
+    }
+    .cert-download {
+      padding-top: 20px;
+      a {
+        color: $nw-lightblue;
+      }
+    }
+  }
+  
+  .winner-splash-laurel {
+    text-align: center;
+    width: 550px;
+    color: $nw-lightblue;
+    .title{
+      font-family: SourceSerifPro;
+      font-size: 26px;
+      text-align: center;
+    }
+    .description {
+      color: $nw-lightgreyblue;
+      font-family: SourceSerifPro;
+      font-size: 16px;
+      line-height: 1.38;
+    }
+    .nw-avatar-frame {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .navigation-arrow{
+    font-size: 36px;
+  }
+  
+  .splash-footer {
+    padding-top: 20px;
+  }
+  .circle-indicators {
+    position: absolute;
+    bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+}
+
+.nw-badge-splash {
+  /*background-color: rgba(52, 52, 52, 0.94);*/
+
 }
