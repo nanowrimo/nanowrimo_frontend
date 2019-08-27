@@ -13,31 +13,34 @@ export default Component.extend({
   
   actions: {
     joinGroup() {
+      let cu = this.get('currentUser.user');
+      let g = this.get('groupContainer.groupObject');
       let gu = this.get('store').createRecord('groupUser', {
         user: this.get('currentUser.user'),
         group: this.get('groupContainer.groupObject'),
+        invitationAccepted: 1,
         isAdmin: 0
       });
-      
-      //make some associations 
-      let cu = this.get('currentUser.user');
-      let g = this.get('groupContainer.groupObject');
-      if (g) {
-         g.groupUsers.pushObject(gu);
-         g.users.pushObject(cu);
-      }
-      cu.groupUsers.pushObject(gu);
-      cu.groups.pushObject(g);
-      
-      //save the user
-      cu.save();    
-
+      gu.save().then(function() {
+        //make some associations 
+        if (g) {
+           g.groupUsers.pushObject(gu);
+           g.users.pushObject(cu);
+        }
+        cu.groupUsers.pushObject(gu);
+        cu.groups.pushObject(g);
+      });
     },
     makeHome() {
+      // Get the current user
       let cu = this.get('currentUser.user');
+      // Get the group
       let g = this.get('groupContainer.groupObject');
+      // Set the local group user to null
       let gu = null;
+      // Set a variable to track the primary group
       let maxPrimary = -1;
+      
       cu.groupUsers.forEach(function(obj) {
         if (obj.primary>maxPrimary) {
           maxPrimary = obj.primary;
@@ -49,7 +52,7 @@ export default Component.extend({
       let newMax = maxPrimary + 1;
       gu.set('primary', newMax);
       gu.save().then(() => {
-        let newInt = cu.set('recalculateHome') + 1;
+        let newInt = cu.get('recalculateHome') + 1;
         cu.set('recalculateHome', newInt);
       });
     },

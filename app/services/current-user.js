@@ -21,8 +21,8 @@ export default Service.extend({
           include: 'genres,challenges,project-challenges,project-sessions'
 
         }).then(() => {
-            //get the current user's buddies
-            user.loadGroupUsers('buddies,region');
+            //get the current user's buddies and regions
+            user.loadGroupUsers('buddies,regions');
           });
       });
     } else {

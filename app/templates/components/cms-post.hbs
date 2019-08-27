@@ -57,3 +57,18 @@
     </div>
   </section>
 {{/if}}
+{{#if isGeneralContent}}
+<div class="content-gutters nw-stripes">
+  <div class="container-fluid">
+    <section class="general-content">
+      <div class="nw-container">
+        <div class="nw-wrapper">
+          <div class="nw-wrapper-content" style="padding: 20px; padding-top: 40px; padding-bottom: 40px;">
+            <div class="nw-copy">{{{post.data.attributes.body}}}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{{/if}}

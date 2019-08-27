@@ -32,4 +32,8 @@ export default Component.extend({
     return this.get('post.data.attributes.content-type')=='Ember component';
   }),
   
+  // Returns true if this is a group of page cards
+  isGeneralContent: computed(function() {
+    return this.get('post.data.attributes.content-type')=='General content';
+  }),
 });
