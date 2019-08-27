@@ -4,6 +4,7 @@ import { hasMany } from 'ember-data/relationships';
 import { computed }  from '@ember/object';
 import { sort, filter, filterBy }  from '@ember/object/computed';
 import moment from 'moment';
+import { debounce } from '@ember/runloop';
 
 const User = Model.extend({
   avatar: attr('string'),
@@ -310,15 +311,25 @@ const User = Model.extend({
 
   loadGroupUsers(group_types) {
     let u = this;
-    this.get('store').query('group-user',
+    let store = this.get('store');
+    store.query('group-user',
     {
       filter: { user_id: u.id },
       group_types: group_types,
       include: 'user,group'
-
-    }).then(()=>{
-      this.set('groupUsersLoaded', true);
+    }).then(function() {
+      debounce(u, u.connectGroupUsers, 200, false);
     });
+  },
+
+  connectGroupUsers() {
+    let store = this.get('store');
+    let t = this;
+    let gus = store.peekAll('group-user');
+    gus.forEach((gu)=>{
+      gu.normalize();
+    });
+    t.set('groupUsersLoaded', true);
   },
 
   projectsSortingCreatedDesc: Object.freeze(['createdAt:desc']),

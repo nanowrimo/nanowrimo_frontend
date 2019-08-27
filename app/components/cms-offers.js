@@ -59,7 +59,6 @@ export default Component.extend({
         }
       }
       let sorted = rand1.concat(rand2);
-      //console.log(ccs.sponsorOffers[0].data.attributes);
       return sorted;
     } else {
       return [];
@@ -78,13 +77,9 @@ export default Component.extend({
         }
       });
       let sorted = shuffle(third);
-      //console.log(ccs.sponsorOffers[0].data.attributes);
       return sorted;
     } else {
       return [];
     }
   }),
-  //sorts: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
-  
-  
 });

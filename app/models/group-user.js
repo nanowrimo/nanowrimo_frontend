@@ -20,4 +20,24 @@ export default Model.extend({
   group: belongsTo('group'),
   user: belongsTo('user'),
   
+  normalize() {
+    let store = this.get('store');
+    let g = store.peekRecord('group', this.group_id);
+    let u = store.peekRecord('user', this.user_id);
+    if (g) {
+      this.set('group',g);
+      g.groupUsers.pushObject(this);
+      if (u) {
+        g.users.pushObject(u);
+      }
+    }
+    if (u) {
+      this.set('user',u);
+      u.groupUsers.pushObject(this);
+      if (g) {
+        u.groups.pushObject(g);
+      }
+    }
+  },
+  
 });

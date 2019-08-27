@@ -13,8 +13,6 @@ export default Component.extend({
   
   actions: {
     joinGroup() {
-      let cu = this.get('currentUser.user');
-      let g = this.get('groupContainer.groupObject');
       let gu = this.get('store').createRecord('groupUser', {
         user: this.get('currentUser.user'),
         group: this.get('groupContainer.groupObject'),
@@ -22,13 +20,7 @@ export default Component.extend({
         isAdmin: 0
       });
       gu.save().then(function() {
-        //make some associations 
-        if (g) {
-           g.groupUsers.pushObject(gu);
-           g.users.pushObject(cu);
-        }
-        cu.groupUsers.pushObject(gu);
-        cu.groups.pushObject(g);
+        gu.normalize();
       });
     },
     makeHome() {
@@ -40,7 +32,6 @@ export default Component.extend({
       let gu = null;
       // Set a variable to track the primary group
       let maxPrimary = -1;
-      
       cu.groupUsers.forEach(function(obj) {
         if (obj.primary>maxPrimary) {
           maxPrimary = obj.primary;
