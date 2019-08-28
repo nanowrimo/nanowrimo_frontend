@@ -9,7 +9,7 @@ export default Service.extend({
   session: service(),
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
-  currentUserObj: reads('currentUser.user'),
+  userSlug: reads('currentUser.user.slug'),
   sideMenuIsOpen: true,
   homeUrl: "authenticated",
   homeRegionItem: computed('currentUser.user.homeRegion', function() {
@@ -31,10 +31,10 @@ export default Service.extend({
       {
         toggleLabel: "My NaNoWriMo",
         submenuItems: [
-          {label: "Profile", route: "authenticated.users.show.index", segment: get(this,"currentUserObj"), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
+          {label: "Profile", route: "authenticated.users.show.index", segment: this.get('userSlug'), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
           {label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
-          {label: "Projects", route: "authenticated.users.show.projects", segment: get(this,"currentUserObj"), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
-          {label: "Buddies", route: "authenticated.users.show.buddies", segment: get(this,"currentUserObj"), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
+          {label: "Projects", route: "authenticated.users.show.projects", segment: this.get('userSlug'), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
+          {label: "Buddies", route: "authenticated.users.show.buddies", segment: this.get('userSlug'), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
         ]
       },
       {
