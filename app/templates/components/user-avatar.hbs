@@ -1,4 +1,7 @@
 <div class='nw-avatar-frame nw-avatar-frame-{{size}} {{if if hasLaurels "has-laurels"}} {{if canEdit "user-editable" ""}}' {{action "edit"}}>
+  {{#if user.halo}}
+    <img src={{haloPath}} class='halo'>
+  {{/if}}
   {{#if hasLaurels}}
     <img src={{laurelImagePath}} class='laurel'>
   {{/if}}
