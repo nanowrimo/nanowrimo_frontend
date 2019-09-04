@@ -23,6 +23,7 @@ const User = Model.extend({
   currentPassword: attr('string'),
   newPassword: attr('string'),
   halo: attr('boolean'),
+  laurels: attr('number'),
   
   statsStreakEnabled: attr('boolean'),
   statsStreak: attr('number'),
