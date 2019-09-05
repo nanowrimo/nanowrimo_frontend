@@ -6,12 +6,23 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   router: service(),
   currentUser: service(),
-  event: alias('model'),
+  group: alias('model'),
   dataLoaded: false,
   
   addEvent: false,
   canAddEvent: computed('currentUser.user.name', function() {
     return true;//(this.get('currentUser.user.name')=="Dave Beck");
+  }),
+  
+  // Returns true if the user can edit the region
+  canEditGroup: computed(function() {
+    let g = this.get('group');
+    return g.userCanEditGroup(this.get('currentUser.user'));
+  }),
+  
+  hasEventsFrame: computed('router.currentRouteName',function() {
+    let r = this.get('router').get('currentRouteName');
+    return (r!='authenticated.regions.show.events.show');
   }),
   
   actions: {

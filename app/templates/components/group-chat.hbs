@@ -1,7 +1,9 @@
 <div class="nw-card-content conversation">
-  <div class="conversation-header">
-    To: <span class='conversation-name'>{{groupName}}</span>
-  </div>
+  {{#if showToDiv}}
+    <div class="conversation-header">
+      To: <span class='conversation-name'>{{groupName}}</span>
+    </div>
+  {{/if}}
   <div class="conversation-content" id="convo-content">
     <div class="nanomessages-container">
       {{#each sortedMessages as |n|}}

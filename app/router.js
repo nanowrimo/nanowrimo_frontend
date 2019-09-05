@@ -54,6 +54,7 @@ Router.map(function() {
         this.route('events', function() {
           this.route('upcoming');
           this.route('past');
+          this.route('pending');
           this.route('show', { path: '/:event_slug' });
         });
         this.route('members');

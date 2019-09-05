@@ -8,6 +8,7 @@ import { debounce } from '@ember/runloop';
 
 const User = Model.extend({
   avatar: attr('string'),
+  adminLevel: attr('number'),
   bio: attr('string'),
   createdAt: attr('date'),
   confirmedAt: attr('date'),

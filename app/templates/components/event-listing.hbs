@@ -8,12 +8,31 @@
       {{event.name}}
     {{/link-to}}
     <div class="subtitle" style="font-size: 16px;">
-      {{startDateTime}}
+      <span>{{startDateTime}}</span> &bull;
+      <span>Duration: {{duration}}</span>
     </div>
   </div>
   <div>
-    <button>
-      Count me in!
-    </button>
+    {{#if (eq status 'upcoming')}}
+      {{#if groupUsersFound}}
+        {{#if isEnrolled}}
+          You're signed up!
+        {{else}}
+          <button {{action 'joinEvent'}}>
+            Count me in!
+          </button>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+    {{#if (eq status 'pending')}}
+      {{#if groupUsersFound}}
+        <button {{action 'approveEvent'}}>
+          Approve
+        </button>
+        <button {{action 'rejectEvent'}}>
+          Reject
+        </button>
+      {{/if}}
+    {{/if}}
   </div>
 </div>

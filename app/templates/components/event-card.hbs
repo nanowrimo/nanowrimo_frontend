@@ -16,16 +16,42 @@
       {{event.name}}
     </div>
     <div>
-      {{startDateTime}}
+      <b>When: </b> {{startDateTime}}
     </div>
     <div>
-      <b>{{locationName}}</b>, {{locationAddress}}
+      <b>Duration: </b> {{duration}}
     </div>
+    {{#if locationAddress}}
+      <div>
+        <b>Where:</b> {{locationName}}, {{locationAddress}}
+      </div>
+    {{/if}}
+    {{#if event.url}}
+      <div>
+        <b>URL:</b> <a href="{{event.url}}" target="_BLANK">{{event.url}} <i class="fa fa-external-link"></i></a>
+      </div>
+    {{/if}}
     <div style="padding-top: 15px; padding-bottom: 15px;">
       {{event.description}}
     </div>
-    <button>
-      Count me in!
-    </button>
+    {{#if (eq status 'upcoming')}}
+      {{#if groupUsersFound}}
+        {{#if isEnrolled}}
+          You're signed up!
+        {{else}}
+          <button {{action 'joinEvent'}}>
+            Count me in!
+          </button>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+    {{#if (eq status 'pending')}}
+      <button {{action 'approveEvent'}}>
+        Approve
+      </button>
+      <button {{action 'rejectEvent'}}>
+        Reject
+      </button>
+    {{/if}}
   </div>
 </div>

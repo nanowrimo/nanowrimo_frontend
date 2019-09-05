@@ -68,6 +68,7 @@ export default Controller.extend({
     let form = $(`#${id}`)[0];
     if (form.username.value != user.name) return true;
     if (form.email.value != user.email) return true;
+    if (this.get('formChangeCount')>0) return true;
     if(form.password.value) {
       if (form.currentPassword.value) return true;
     }

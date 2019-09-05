@@ -1,3 +1,5 @@
-{{#each activeGroups as |e|}}
-  {{event-listing event=e group=group}}
-{{/each}}
+{{#if hasEvents}}
+  {{#each activeEvents as |e|}}
+    {{event-listing event=e group=group status='upcoming'}}
+  {{/each}}
+{{/if}}

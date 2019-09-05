@@ -48,6 +48,16 @@ export default Component.extend({
     return newms;
   }),
   
+  showToDiv: computed('group.groupType', function() {
+    let g = this.get('group');
+    let gt = g.get('groupType');
+    if ((gt != 'region') && (gt != 'event')) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
   groupName: computed('group', function() {
     let g = this.get('group');
     let gt = g.get('groupType');

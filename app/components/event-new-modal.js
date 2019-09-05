@@ -63,6 +63,8 @@ export default Component.extend({
   latitude: null,
   utc_offset: null,
   
+  recomputeLocations: 0,
+  
   timezoneResponse: null,
   
   timeZoneOptions: computed(function() {
@@ -70,7 +72,7 @@ export default Component.extend({
   }),
   
   // Gets all the affiliated locationGroups in the store
-  locationGroups: computed('groupId', function() {
+  locationGroups: computed('groupId','recomputeLocations', function() {
     let lgs = this.get('store').peekAll('location_group');
     let id = this.get('groupId');
     let s = [];
@@ -82,7 +84,7 @@ export default Component.extend({
     return s;
   }),
   
-  acceptedLocations: computed('locationGroups.[]', function() {
+  acceptedLocations: computed('locationGroups.[]','recomputeLocations', function() {
     let store = this.get('store');
     let lgs = this.get('locationGroups');
     let ls = [];
@@ -103,7 +105,6 @@ export default Component.extend({
   hasLocationsChanged: observer('hasLocations', function(){
     let h = this.get('hasLocations');
     if (!h) {
-      alert('nope');
       this.set('locationId',-1);
     }
   }),
@@ -123,32 +124,33 @@ export default Component.extend({
     this.set('startDate', now.format("YYYY-MM-DD"));
     this.set('startTime', "19:00");
     this.set('durationHours', "2");
+    this.set('timeZone',this.get('currentUser.user.timeZone'));
     this.setProperties({ googleAuto: null });
   },
 
   // Set local variables based on response from Google Maps Timezone API
-  timezoneRetrieved: computed('timezoneResponse', function() {
+  /*timezoneRetrieved: computed('timezoneResponse', function() {
     let l = this.get('timezoneResponse');
     if (l) {
       this.saveTimezoneData(l);
     }
     return true;
-  }),
+  }),*/
   
-  saveTimezoneData(response) {
+  /*saveTimezoneData(response) {
     let r = JSON.parse(response);
     this.set('dstOffset',r.dstOffset);
     this.set('rawOffset',r.rawOffset);
     this.set('timeZoneId',r.timeZoneId);
     this.set('timeZoneName',r.timeZoneName);
     this.saveData();
-  },
+  },*/
   
-  transferFailed () {
+  /*transferFailed () {
     alert("Something went wrong. Please try again");
-  },
+  },*/
   
-  getTimeZone() {
+  /*getTimeZone() {
     let lid = this.get('locationId');
     let datestr = this.get('datestr');
     let timestamp = moment(datestr).unix();
@@ -170,11 +172,53 @@ export default Component.extend({
     oReq.addEventListener("error", this.transferFailed);
     oReq.open("GET", url);
     oReq.send();
+  },*/
+  
+  // Creates the group record in the store
+  defineGroup() {
+    let g = this.get('store').createRecord('group');
+    let n = this.get('name');
+    g.set("name",n);
+    g.set("groupType","event");
+    let tz = this.get("timeZone");
+    if (tz) {
+      g.set("timeZone",tz);
+    } else {
+      g.set("timeZone",this.get('currentUser.user.timeZone'));
+    }
+    let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
+    let startMoment = moment.tz(dstr,tz);
+    let endMoment = moment.tz(dstr,tz).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
+    g.set("startDt",startMoment.toDate());
+    g.set("endDt",endMoment.toDate());
+    g.set("userId",this.get("currentUserId"));
+    g.set("groupId",this.get("groupId"));
+    g.set("longitude",this.get("longitude"));
+    g.set("latitude",this.get("latitude"));
+    g.set("description",this.get("description"));
+    let online = this.get('eventTypeOnline');
+    if (online) {
+      g.set("url",this.get("venueUrl"));
+    }
+    return g;
+  },
+    
+  defineAdminMembership(g) {
+    let gu = this.get('store').createRecord('group_user');
+    gu.set("group_id",this.get("groupId"));
+    gu.set("group",g);
+    gu.set("user_id",this.get("currentUserId"));
+    gu.set("user",this.get("currentUser.user"));
+    gu.set("primary",0);
+    gu.set("isAdmin",true);
+    gu.set("entryMethod",'create');
+    return gu;
   },
   
   // saveData saves the location, group, and location_group to the API
   saveData() {
     let inperson = this.get('eventTypeInPerson');
+    // If this event has a physical location
     if (inperson) {
       let lid = this.get('locationId');
       // If new location
@@ -197,105 +241,63 @@ export default Component.extend({
         l.set("latitude",this.get("latitude"));
         l.set("utc_offset",this.get("utc_offset"));      
         l.save().then(()=>{
-          let glg = this.get('store').createRecord('location-group');
-          glg.set("location_id",l.id);
-          glg.set("group_id",this.get('groupId'));
-          glg.set("primary",0);
-          glg.save().then(()=>{
-            let g = this.get('store').createRecord('group');
-            let n = this.get('name');
-            g.set("name",n);
-            g.set("groupType","event");
-            let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
-            let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
-            let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
-            let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
-            //let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
-            g.set("startDt",startMoment.toDate());
-            g.set("endDt",endMoment.toDate());
-            g.set("userId",this.get("currentUserId"));
-            g.set("longitude",this.get("longitude"));
-            g.set("latitude",this.get("latitude"));
-            g.set("groupId",this.get("groupId"));
-            g.set("description",this.get("description"));
-            let tz = this.get("timeZone");
-            if (tz) {
-              g.set("timeZone",tz);
-            } else {
-              g.set("timeZone",this.get('currentUser.user.timeZone'));
-            }
-            g.save().then(()=>{
-              let lg = this.get('store').createRecord('location-group');
-              lg.set("location_id",l.id);
-              lg.set("group_id",g.id);
-              lg.set("primary",1);
-              lg.save().then(()=>{
-                // Last step
-                this.set('step',2);
+          let g = this.defineGroup();
+          g.save().then(()=>{
+            // Create the location-group record for the event
+            let lg = this.get('store').createRecord('location-group');
+            lg.set("location_id",l.id);
+            lg.set("group_id",g.id);
+            lg.set("primary",1);
+            lg.save().then(()=>{
+              // Create the location-group record for the region
+              let lg2 = this.get('store').createRecord('location-group');
+              lg2.set("location_id",l.id);
+              lg2.set("group_id",this.get("groupId"));
+              lg2.set("primary",0);
+              lg2.save().then(()=>{
+                // Save the user as admin
+                let gu = this.defineAdminMembership(g);
+                gu.save().then(()=>{
+                  // Increment recompute location
+                  let rl = this.get('recomputeLocations');
+                  this.set('recomputeLocations',rl+1);
+                  // Last step
+                  this.set('step',2);
+                });
               });
             });
           });
+          //});
         });
       } else { // If existing location
         let l = this.get('store').peekRecord('location',lid);
-        let g = this.get('store').createRecord('group');
-        let n = this.get('name');
-        g.set("name",n);
-        g.set("groupType","event");
-        let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
-        let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
-        let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
-        let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
-        //let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
-        g.set("startDt",startMoment.toDate());
-        g.set("endDt",endMoment.toDate());
-        g.set("userId",this.get("currentUserId"));
-        g.set("longitude",l.longitude);
-        g.set("latitude",l.latitude);
-        g.set("groupId",this.get("groupId"));
-        g.set("description",this.get("description"));
-        let tz = this.get("timeZone");
-        if (tz) {
-          g.set("timeZone",tz);
-        } else {
-          g.set("timeZone",this.get('currentUser.user.timeZone'));
-        }
+        this.set("longitude",l.longitude);
+        this.set("latitude",l.latitude);
+        
+        let g = this.defineGroup();
         g.save().then(()=>{
           let lg = this.get('store').createRecord('location-group');
           lg.set("location_id",lid);
           lg.set("group_id",g.id);
           lg.set("primary",1);
           lg.save().then(()=>{
-            // Last step
-            this.set('step',2);
+            // Save the user as admin
+            let gu = this.defineAdminMembership(g);
+            gu.save().then(()=>{
+              // Last step
+              this.set('step',2);
+            });
           });
         });
       }
     } else {
-      let g = this.get('store').createRecord('group');
-      let n = this.get('name');
-      g.set("name",n);
-      g.set("groupType","event");
-      let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
-      let startMoment = moment(dstr).add(this.get('rawOffset'), 'seconds');
-      let utcStart = moment(dstr).add(this.get('rawOffset'), 'seconds').format('YYYY-MM-DD HH:mm:00');
-      let endMoment = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
-      //let utcEnd = moment(utcStart).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes').format('YYYY-MM-DD HH:mm:00');
-      g.set("startDt",startMoment.toDate());
-      g.set("endDt",endMoment.toDate());
-      g.set("userId",this.get("currentUserId"));
-      g.set("longitude",this.get("longitude"));
-      g.set("latitude",this.get("latitude"));
-      g.set("groupId",this.get("groupId"));
-      g.set("description",this.get("description"));
-      let tz = this.get("timeZone");
-      if (tz) {
-        g.set("timeZone",tz);
-      } else {
-        g.set("timeZone",this.get('currentUser.user.timeZone'));
-      }
+      let g = this.defineGroup();
       g.save().then(()=>{
-        this.set('step',2);
+        // Save the user as admin
+        let gu = this.defineAdminMembership(g);
+        gu.save().then(()=>{
+          this.set('step',2);
+        });
       });
     }
   },
@@ -397,24 +399,32 @@ export default Component.extend({
         }
         case 1: {
           let et = this.validateInput('eventType');
+          let valid = false;
           if (et) {
             if (this.get("eventTypeInPerson")) {
               if (this.get("locationId")==-1) {
                 let v = this.validateInput('venueName');
                 let l = this.validateInput('location');
                 if (v&l) {
-                  this.getTimeZone();
+                  valid = true;
+                  //this.getTimeZone();
                 }
               } else {
                 let vs = this.validateInput('venueSelect');
                 if (vs) {
-                  this.getTimeZone();
+                  valid = true;
+                  //this.getTimeZone();
                 }
               }
             }
-            //if (this.get("eventTypeOnline")) {
-            //}
-            if (this.get("step")==2) {
+            if (this.get("eventTypeOnline")) {
+              valid = false;
+              let v = this.validateInput('venueUrl');
+              if (v) {
+                valid = true;
+              }
+            }
+            if (valid) {
               this.saveData();
             }
           }
@@ -464,13 +474,13 @@ export default Component.extend({
       this.validateInput('duration');
     },
     
-    // Called when the value of the minutes select changes
+    // Called when the value of the in-person checkbox changes
     eventTypeInPersonChanged(v) {
       this.set("eventTypeInPerson",v);
       this.validateInput('eventType');
     },
     
-    // Called when the value of the minutes select changes
+    // Called when the value of the online checkbox changes
     eventTypeOnlineChanged(v) {
       this.set("eventTypeOnline",v);
       this.validateInput('eventType');
@@ -556,9 +566,12 @@ export default Component.extend({
       this.set("step", 0);
       this.set("name",null);
       this.set("venueName",null);
+      this.set("venueUrl",null);
       this.set("address2",null);
       this.set("durationErrorMessage",null);
       this.set("venueNameError",null);
+      this.set("venueUrlError",null);
+      this.set("eventTypeErrorMessage",null);
       this.set("locationSelected",false);
       this.set("locationErrorMessage",null);
       this.set("locationId",0);
