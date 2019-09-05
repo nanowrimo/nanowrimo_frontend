@@ -17,6 +17,10 @@ export default Component.extend({
     }
   },
 
+  haloPath: computed(function(){
+    return "/images/users/halo.svg";
+  }),
+
   laurelImagePath: computed('user.nanoWinCount', function(){
     let count = this.get('user.nanoWinCount');
     if (count > 10) {

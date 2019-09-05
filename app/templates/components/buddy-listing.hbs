@@ -1,11 +1,7 @@
 <div class="nw-card short-card small-gap">
   <div class="nw-card-content">
     <div class='nw-user-listing'>
-      <div class="nw-avatar nw-avatar-medium">
-        {{#link-to 'authenticated.users.show' user.slug}}
-          <img src={{user.avatarUrl}} alt={{user.name}}>
-        {{/link-to}}
-      </div>
+      {{user-avatar user=user linkTo=true size='medium'}}
       <div class='nw-user-info'>
         <div class="nw-user-name">
           {{#link-to 'authenticated.users.show' user.slug}}
