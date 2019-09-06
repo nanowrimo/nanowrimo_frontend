@@ -25,6 +25,10 @@ export default Component.extend({
   }),
 
   actions: {
+    updateChangeset() {
+      alert('updating');
+    },
+    
     onHidden() {
       let callback = this.get('onHidden');
       if (callback) {

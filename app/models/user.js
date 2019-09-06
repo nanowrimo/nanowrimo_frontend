@@ -327,12 +327,17 @@ const User = Model.extend({
 
   connectGroupUsers() {
     let store = this.get('store');
-    let t = this;
     let gus = store.peekAll('group-user');
     gus.forEach((gu)=>{
       gu.normalize();
     });
-    t.set('groupUsersLoaded', true);
+    //t.set('groupUsersLoaded', true);
+    debounce(this, this.setGroupUsersLoaded, 200, false);
+  },
+  
+  setGroupUsersLoaded() {
+    this.set('groupUsersLoaded', true);
+    //alert(this.get('groupUsersLoaded'));
   },
 
   projectsSortingCreatedDesc: Object.freeze(['createdAt:desc']),

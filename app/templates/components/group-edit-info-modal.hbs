@@ -8,7 +8,9 @@
   {{/modal.header}}
   {{#form-for
     afterSubmit=modal.close
+    onSubmit=(action "updateChangeset")
     model=group
+    changeset=changeset
     as |f|
   }}
     {{#modal.body}}
