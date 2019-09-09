@@ -1,47 +1,63 @@
 import Component from '@ember/component';
-import { get,computed } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import ENV from 'nanowrimo/config/environment';
+import fetch from 'fetch';
 
 export default Component.extend({
-  store: service(),
-  fundometer: computed('store',function() {
-    let fundometer = this.get('store').peekRecord('fundometer', 1);
-    return fundometer;
-  }),
+
   stack_height: 139,
-  goal_number: computed('fundometer.goalNumber',function() {
-    return this.get('fundometer.goalNumber');
-  }),
-  raised_number: computed('fundometer.raisedNumber',function() {
-    return this.get('fundometer.raisedNumber');
-  }),
-  donor_number: computed('fundometer.donorNumber',function() {
-    return this.get('fundometer.donorNumber');
-  }),
-  goal_string: computed('goal_number', function() {
-    let goal_num = get(this,'goal_number');
-    if (goal_num>=1000000) {
-      return (goal_num/1000000).toFixed(1) + " million";
+  goal: null,
+  raised: null,
+  donorCount: null,
+  init(){
+    this._super(...arguments);
+    //start getting data
+    this.getFundometerData(this);
+    //refresh the fundometer data ever 15 minutes
+    let milliseconds = 15*60*1000;
+    setInterval(this.getFundometerData, milliseconds, this);
+  },
+
+  goal_string: computed('goal', function() {
+    let goal = this.get('goal');
+    if (goal>=1000000) {
+      return (goal/1000000).toFixed(1) + " million";
     } else {
-      return (goal_num/1000).toFixed(0) + "K";
+      return (goal/1000).toFixed(0) + "K";
     }
   }),
-  raised_string: computed('raised_number', function() {
-    let raised_num = Math.floor(get(this,'raised_number'));
-    return ('$' + raised_num.toLocaleString()).htmlSafe();
+  
+  raised_string: computed('raised', function() {
+    let raised = Math.floor(this.get('raised'));
+    return ('$' + raised.toLocaleString()).htmlSafe();
   }),
-  donor_string: computed('donor_number', function() {
-    let donor_num = get(this,'donor_number');
-    var s_string = "s";
-    if (donor_num==1) s_string="";
-    return (donor_num.toLocaleString() + " donor" + s_string).htmlSafe();
+  
+  donor_string: computed('donorCount', function() {
+    let donor  = this.get('donorCount');
+    if (donor) {
+      return (donor.toLocaleString() + " donors" ).htmlSafe();
+    }
   }),
-  stack_style: computed('raised_number', function() {
-    let raised_num = get(this,'raised_number');
-    let goal_num = get(this,'goal_number');
-    let stack_num = get(this,'stack_height');
-    var total = stack_num - Math.floor(stack_num*raised_num/goal_num);
+  
+  stack_style: computed('raised', function() {
+    let raised  = this.get('raised');
+    let goal  = this.get('goal');
+    let stack  = this.get('stack_height');
+    var total = stack  - Math.floor(stack *raised /goal );
     if (total < 0) total = 0;
     return ("clip: rect(" + total + "px,130px,139px,0px)").htmlSafe();
-  })
+  }),
+  
+  
+  getFundometerData: function(_this){
+    // "_this" is the "this" that represents this component
+    let endpoint = `${ENV.APP.API_HOST}/fundometer`;
+    return fetch(endpoint).then((response)=>{
+      return response.json().then((json)=>{
+         _this.set('goal', json.goal);
+         _this.set('raised', json.raised);
+         _this.set('donorCount', json.donorCount);
+      });
+    });
+  }
 });
