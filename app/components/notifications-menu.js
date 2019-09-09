@@ -58,6 +58,11 @@ export default Component.extend({
       if(notification.actionType=='PROJECTS_PAGE') {
         this.get('router').transitionTo('authenticated.users.show.projects', this.get('currentUser.user.slug'));
       }
+      if(notification.actionType=='EVENT_PAGE') {
+        let url = notification.redirectUrl;
+        window.location.replace(url);
+        //this.get('router').transitionTo('authenticated.users.show', this.get('currentUser.user.slug'));
+      }
     },
     hideBadgeSplash(){
       this.set('showBadgeSplash', false);

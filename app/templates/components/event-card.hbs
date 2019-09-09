@@ -34,8 +34,8 @@
     <div style="padding-top: 15px; padding-bottom: 15px;">
       {{event.description}}
     </div>
-    {{#if (eq status 'upcoming')}}
-      {{#if groupUsersFound}}
+    {{#if currentUser.user.groupUsersLoaded}}
+      {{#if (eq status 'upcoming')}}
         {{#if isEnrolled}}
           You're signed up!
         {{else}}
@@ -44,14 +44,14 @@
           </button>
         {{/if}}
       {{/if}}
-    {{/if}}
-    {{#if (eq status 'pending')}}
-      <button {{action 'approveEvent'}}>
-        Approve
-      </button>
-      <button {{action 'rejectEvent'}}>
-        Reject
-      </button>
+      {{#if (eq status 'pending')}}
+        <button {{action 'approveEvent'}}>
+          Approve
+        </button>
+        <button {{action 'rejectEvent'}}>
+          Reject
+        </button>
+      {{/if}}
     {{/if}}
   </div>
 </div>

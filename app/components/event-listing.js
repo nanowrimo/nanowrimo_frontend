@@ -103,7 +103,7 @@ export default Component.extend({
       this.doApprove();
     },
     rejectEvent() {
-      this.doApprove();
+      this.doReject();
     },
   }
 });
