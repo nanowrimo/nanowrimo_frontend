@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 
-const DEFAULT_TAB = 'plateTab';
+const DEFAULT_TAB = 'overview';
 
 export default Component.extend({
   tagName: '',
@@ -26,10 +26,12 @@ export default Component.extend({
 
   actions: {
     updateChangeset() {
-      alert('updating');
+      //alert('updating');
     },
+ 
     
     onHidden() {
+      this.get('group').rollbackGroupExternalLinks();
       let callback = this.get('onHidden');
       if (callback) {
         callback();

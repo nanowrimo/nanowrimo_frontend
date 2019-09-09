@@ -36,18 +36,11 @@
             <i {{action "openEditModal"}} class="fa fa-edit"></i>
           </div>
 
-          {{group-edit-info-modal
+          {{group-edit-modal
             onHidden=(action "afterEditModalClose")
             open=edit
             group=group
             tab=editTab
-          }}
-
-          {{group-edit-images-modal
-            onHidden=(action "afterImagesModalClose")
-            open=editImages
-            group=group
-            tab=editImagesTab
           }}
 
         {{/if}}
