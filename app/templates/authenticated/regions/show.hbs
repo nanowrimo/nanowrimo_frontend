@@ -1,21 +1,18 @@
-<div class="nano-user-plate full-width" {{action "openImagesModal" "headerTab"}} style={{plateStyle}}>
-  <div class="plate-cover">
+<div class='plate-wrapper {{if canEditGroup "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
+  <div class="nano-user-plate full-width" style={{plateStyle}}>
+    <div class="plate-cover">
 
-    <div class="container-fluid">
-      {{group-stats group=group}}
-    </div>
-
-    {{#if false}}
-      <div class="flip-corner-link" {{action "openImagesModal" "headerTab" bubbles=false}}>
-        <img src="/images/global/flip_corner.png" alt="Edit Group Images" />
+      <div class="container-fluid">
+        {{group-stats group=group}}
       </div>
-    {{/if}}
 
+    </div>
   </div>
+  <div class='plate-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
 </div>
 <div class="content-gutters">
   <div class="container-fluid align-top">
-    <div class="nw-sidebar nw-region-summary">
+    <div class="nw-sidebar nw-profile nw-region-summary">
       <div class="nw-sidebar-content">
         <div class="nw-region-name-prelim">
           {{namePrelim}}
@@ -29,30 +26,22 @@
         <div class="nw-region-description">
           {{group.description}}
         </div>
-      </div>
-      {{group-links links=group.groupExternalLinks}}
+        {{group-links links=group.groupExternalLinks}}
       
-      {{#if false}}
+        {{#if canEditGroup}}
+          <div>
+            <i {{action "openEditModal"}} class="fa fa-edit"></i>
+          </div>
 
-        <div class="flip-corner-link" {{action "openEditModal"}}>
-          <img src="/images/global/flip_corner.png" alt="Edit Region Info" />
-        </div>
+          {{group-edit-modal
+            onHidden=(action "afterEditModalClose")
+            open=edit
+            group=group
+            tab=editTab
+          }}
 
-        {{group-edit-info-modal
-          onHidden=(action "afterEditModalClose")
-          open=edit
-          group=group
-          tab=editTab
-        }}
-
-        {{group-edit-images-modal
-          onHidden=(action "afterImagesModalClose")
-          open=editImages
-          group=group
-          tab=editImagesTab
-        }}
-
-      {{/if}}
+        {{/if}}
+      </div>
       <div class="nw-sidebar-divot"></div>
     </div>
     {{outlet}}

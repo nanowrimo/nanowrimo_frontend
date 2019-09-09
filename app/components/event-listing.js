@@ -5,65 +5,105 @@ import moment from 'moment';
 
 export default Component.extend({
   currentUser: service(),
-  statsParams: service(),
+  store: service(),
   router: service(),
-  editProjectChallenge: false,
-  showConfirmDelete: false,
   group: null,
   event: null,
+  status: null,
+  recomputeEvents: 0,
   classNames: ['nw-card','nano-listing-mini-card','event-listing-card'],
-  canEdit: computed('project', function(){
-    let currentUser = this.get('currentUser.user');
-    let author = this.get('author');
-    return currentUser === author;
-  }),
-  
-  svg: computed('projectChallenge', function() {
-    let str = (this.get('projectChallenge.unitType') === 0) ? 'writing' : 'editing';
-    return `/images/goals/${str}.svg`
-  }),
   
   init() {
     this._super(...arguments);
-    this.set('deleteConfirmationYesText', 'Delete');
-    this.set('deleteConfirmationNoText', 'Cancel'); 
-    this.set('deleteConfirmationTitleText', 'Confirm Delete');
-    this.set('deleteConfirmationQuestion', `Do you really want to delete the "${name}" goal?`);
   },
-  // Returns the start date as a readable string
-  startDateTime: computed(function() {
-    return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("h:mm a");
+  groupUsersFound: computed(function() {
+    let store = this.get('store');
+    let gus = store.peekAll('group_user');
+    return (gus.length>0);
   }),
   
-  actions: {
-    editProjectChallenge(){
-       this.set('editProjectChallenge', true);
-    },
-
-    confirmDelete(){
-      //show the delete dialog
-      this.set('showConfirmDelete', true);
-    },
-    
-    deleteConfirmationYes(){
-      //TODO: delete this projectChallenge
-      //get the projectChallenge 
-      this.get('projectChallenge').destroyRecord();
-      //close the modal
-      this.set('showConfirmDelete', false);
-    },
-    deleteConfirmationNo(){
-      //close the modal
-      this.set('showConfirmDelete', false);
-    },
-    redirectToStats(){
-      //get the statsParams service
-      let sp = this.get('statsParams');
-      //set project and projectChallenge
-      sp.setProject(this.get('project'));
-      sp.setProjectChallenge(this.get('projectChallenge'));
-      //do the redirect
-      this.get('router').transitionTo('/stats');
+  isEnrolled: computed('event', 'groupUsersFound','recomputeEvents', function() {
+    let store = this.get('store');
+    let gus = store.peekAll('group_user');
+    let eid = this.get('event.id');
+    let uid = this.get('currentUser.user.id');
+    let found = false;
+    gus.forEach((gu) => {
+      if ((eid==gu.group_id)&&(gu.user_id == uid)) {
+        found = true;
+      }
+    });
+    return found;
+  }),
+  // Returns the start date as a readable string
+  startDateTime: computed(function() {
+    let etz = this.get('event.timeZone');
+    let utz = this.get('currentUser.user.timeZone');
+    if (etz==utz) {
+      return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("dddd, MMM D, YYYY") + ", at " + moment(this.get('event.startDt')).tz(etz).format("h:mm a z");
+    } else {
+      return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("dddd, MMM D, YYYY") + ", at " + moment(this.get('event.startDt')).tz(etz).format("h:mm a z") + " (" + moment(this.get('event.startDt')).tz(utz).format("h:mm a z") + ")";
     }
+  }),
+  
+  duration: computed(function() {
+    let start = moment(this.get('event.startDt'));
+    let end = moment(this.get('event.endDt'));
+    let diff = end.diff(start);
+    return moment.utc(diff).format("H:mm");
+  }),
+  
+  doJoin() {
+    let e = this.get('event');
+    let eid = this.get('event.id');
+    let u = this.get('currentUser.user');
+    let uid = this.get('currentUser.user.id');
+    let gu = this.get('store').createRecord('group_user');
+    gu.set("group_id",eid);
+    gu.set("group",e);
+    gu.set("user_id",uid);
+    gu.set("user",u);
+    gu.set("primary",0);
+    gu.set("isAdmin",false);
+    gu.set("entryMethod",'join');
+    gu.save().then(()=>{
+      // Increment recompute location
+      let re = this.get('recomputeEvents');
+      this.set('recomputeEvents',re+1);
+    });
+  },
+    
+  doApprove() {
+    let e = this.get('event');
+    let uid = this.get('currentUser.user.id');
+    e.set("approvedById",uid);
+    e.save().then(()=>{
+      // Increment recompute location
+      let re = this.get('recomputeEvents');
+      this.set('recomputeEvents',re+1);
+    });
+  },
+    
+  doReject() {
+    let e = this.get('event');
+    let uid = -1;
+    e.set("approvedById",uid);
+    e.save().then(()=>{
+      // Increment recompute location
+      let re = this.get('recomputeEvents');
+      this.set('recomputeEvents',re+1);
+    });
+  },
+    
+  actions: {
+    joinEvent() {
+      this.doJoin();
+    },
+    approveEvent() {
+      this.doApprove();
+    },
+    rejectEvent() {
+      this.doReject();
+    },
   }
 });

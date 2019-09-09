@@ -8,15 +8,18 @@ const Group = Model.extend({
   name: attr('string'),
   groupId: attr('number'),
   userId: attr('number'),
+  approvedById: attr('number'),
   startDt: attr('date'),
   endDt: attr('date'),
   groupType: attr('string'),
   slug: attr('string'),
+  plate: attr('string'),
   longitude: attr('number'),
   latitude: attr('number'),
   timeZone: attr('string'),
   memberCount: attr('number'),
   description: attr('string'),
+  url: attr('string'),
   
   
   // Members
@@ -43,6 +46,24 @@ const Group = Model.extend({
     }).then(()=>{
       this.set('groupsLoaded', true);
     });
+  },
+  
+  // Returns true if the user can edit the region
+  userCanEditGroup(user) {
+    if (user.adminLevel) {
+      return true;
+    } else {
+      let uid = user.id;
+      let gid = this.id;
+      let gus = this.get('store').peekAll('group-user');
+      let found = false;
+      gus.forEach((gu)=>{
+        if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.isAdmin)) {
+          found = true;
+        }
+      });
+      return found;
+    }
   },
   
   _plateUrl: null,

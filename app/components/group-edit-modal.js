@@ -25,6 +25,11 @@ export default Component.extend({
   }),
 
   actions: {
+    updateChangeset() {
+      //alert('updating');
+    },
+ 
+    
     onHidden() {
       this.get('group').rollbackGroupExternalLinks();
       let callback = this.get('onHidden');

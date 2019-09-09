@@ -43,11 +43,10 @@
       
       <div class="form-group">
         <label for='timezone'>Time Zone</label>
-        <select name='timezone' id='timezone' class='form-control'>
+        <select name='timezone' id='timezone' class='form-control' {{action "timeZoneChanged" value='target.value' on="change"}} >
           {{#each timeZoneOptions as |o|}}
             <option value={{o.value}}  selected={{if (eq o.value user.timeZone) 'true'}} >{{o.name}}</option>
           {{/each}}
-          {{action "timeZoneChanged" value='target.value' on="change"}}
         </select>
       </div>
       

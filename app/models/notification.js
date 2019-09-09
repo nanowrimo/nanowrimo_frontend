@@ -14,4 +14,5 @@ export default Model.extend({
   user: belongsTo('user'),
   dataCount: attr('number'),
   lastViewedAt: attr('date'),
+  redirectUrl: attr('string'),
 });

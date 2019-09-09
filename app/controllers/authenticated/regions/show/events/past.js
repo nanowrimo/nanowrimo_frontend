@@ -9,12 +9,19 @@ export default Controller.extend({
   currentUser: service(),
   groups: alias('model'),
   dataLoaded: false,
-  activeGroups: computed('groups.[]', function() {
+  
+  // Returns an array of past approved events
+  pastEvents: computed('groups.[]', function() {
     return this.get('groups');
   }),
+  
+  hasEvents: computed('groups.[]', function() {
+    return this.get('groups').length>0;
+  }),
+  
   addEvent: false,
   canAddEvent: computed('currentUser.user.name', function() {
-    return true;//(this.get('currentUser.user.name')=="Dave Beck");
+    return true;
   }),
   
   actions: {
