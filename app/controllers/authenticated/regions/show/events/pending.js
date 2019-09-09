@@ -11,8 +11,15 @@ export default Controller.extend({
   dataLoaded: false,
   
   // Returns an array of past approved events
-  pendingEvents: computed('groups.[]', function() {
-    return this.get('groups');
+  pendingEvents: computed('groups.[]', 'groups.@each.{approvedById}', function() {
+    let gs = this.get('groups');
+    let newgs = [];
+    gs.forEach(function(g) {
+      if (g.approvedById==0) {
+        newgs.push(g);
+      }
+    });
+    return newgs;
   }),
   
   hasEvents: computed('groups.[]', function() {
