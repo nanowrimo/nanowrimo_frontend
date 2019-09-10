@@ -136,6 +136,31 @@ export default Component.extend({
     });
   },
     
+  leaveGroup() {
+    let cu = this.get('currentUser.user');
+    //let g = this.get('groupContainer.groupObject');
+    let e = this.get('event');
+    let eid = this.get('event.id');
+    let gu = null;
+    cu.groupUsers.forEach(function(obj) {
+      if (obj.group_id==eid) {
+        gu = obj;
+      }
+    });
+    if (gu) {
+      gu.deleteRecord();
+      gu.save().then(() => {
+        cu.get('groupUsers').removeObject(gu);
+        e.get('groupUsers').removeObject(gu);
+        cu.get('groups').removeObject(e);
+        e.get('users').removeObject(cu);
+        // Increment recompute location
+        let re = this.get('recomputeEvents');
+        this.set('recomputeEvents',re+1);
+      });
+    }
+  },
+    
   doApprove() {
     let e = this.get('event');
     let uid = this.get('currentUser.user.id');
@@ -163,6 +188,9 @@ export default Component.extend({
   actions: {
     joinEvent() {
       this.doJoin();
+    },
+    leaveEvent() {
+      this.leaveGroup();
     },
     approveEvent() {
       this.doApprove();

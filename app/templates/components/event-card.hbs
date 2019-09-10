@@ -37,7 +37,10 @@
     {{#if currentUser.user.groupUsersLoaded}}
       {{#if (eq status 'upcoming')}}
         {{#if isEnrolled}}
-          You're signed up!
+          <b><i class="fa fa-check"></i> You're signed up!</b>
+          <div>
+            <a href="#" {{action 'leaveEvent'}}>(Remove yourself from this event)</a>
+          </div>
         {{else}}
           <button {{action 'joinEvent'}}>
             Count me in!

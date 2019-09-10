@@ -2,7 +2,7 @@
   <div class="nw-card-title">Attending</div>
 </div>
 <div class="nw-card-content">
-  {{#each getGroupUsers as |gu|}}
-    hello
+  {{#each groupUsersAttending as |gu|}}
+    {{user-listing userId=gu.user_id}}
   {{/each}}
 </div>

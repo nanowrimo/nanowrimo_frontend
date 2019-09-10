@@ -16,7 +16,7 @@
   {{#if currentUser.user.groupUsersLoaded}}
     {{#if (eq status 'upcoming')}}
       {{#if isEnrolled}}
-        You're signed up!
+        <b><i class="fa fa-check"></i> You're signed up!</b>
       {{else}}
         <button {{action 'joinEvent'}}>
           Count me in!

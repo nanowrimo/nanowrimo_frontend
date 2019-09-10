@@ -1,0 +1,13 @@
+<div class='nw-user-listing'>
+  {{user-avatar user=user linkTo=true size='small'}}
+  <div class='nw-user-info'>
+    <div class="nw-user-name">
+      {{#link-to 'authenticated.users.show' user.slug}}
+        {{user.name}}
+      {{/link-to}}
+    </div>
+    <div class="nw-user-location">
+      {{user.location}}
+    </div>
+  </div>
+</div>
