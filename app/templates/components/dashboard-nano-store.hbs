@@ -2,4 +2,14 @@
   <div class="nw-card-title">NaNo Store</div>
 </div>
 <div class="nw-card-content">
+  {{#if item}}
+    <div class='store-item'>
+      <a href="https://store.nanowrimo.org/products/{{item.handle}}">
+        <img src="{{item.image.src}}">
+        <div class='title'>
+          {{item.title}}
+        </div>
+      </a>
+    </div>
+  {{/if}}
 </div>
