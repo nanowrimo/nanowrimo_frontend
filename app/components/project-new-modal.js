@@ -26,7 +26,7 @@ export default Component.extend({
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  unassignedOptionsForChallenges: computed('user.projects.[]','recalculateEvents',function() {
+  unassignedOptionsForChallenges: computed('user.projects.[]','baseChallenges.[]','recalculateEvents',function() {
     let newArray = [];
     let acs = this.get('filteredOptionsForChallenges');
     let ucs = this.get('user.projects');
@@ -44,6 +44,7 @@ export default Component.extend({
         newArray.push(ac);
       }
     });
+    console.log(newArray);
     return newArray;
   }),
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
