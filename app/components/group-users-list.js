@@ -7,11 +7,13 @@ export default Component.extend({
   store: service(),
   group: null,
   groupUsers: null,
+  
   init() {
     this._super(...arguments);
     this.checkForUpdates();
   },
   
+  // Loads any necessary user data from the API
   checkForUpdates() {
     let g = this.get('group');
     this.get('store').query('groupUser', {
@@ -20,11 +22,12 @@ export default Component.extend({
     });
   },
   
+  // Returns a list of all groupUsers in the store
   allGroupUsers: computed(function() {
-    let gus = this.get('store').peekAll('groupUser');
-    return gus;
+    return this.get('store').peekAll('groupUser');
   }),
   
+  // Figures out which users are attending
   groupUsersAttending: computed('allGroupUsers.[]',function() {
     let g = this.get('group');
     let newgus = [];
