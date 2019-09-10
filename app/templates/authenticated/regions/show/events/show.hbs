@@ -7,7 +7,7 @@
   </div>
   {{event-card event=event class="g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1"}}
   {{#if event.latitude}}
-    <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
+    <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1">
       <div class="nw-card-content" style="padding: 0px;">
         <div style="width: 300px; height: 300px;">
           {{#g-map lat=event.latitude lng=event.longitude zoom=8 as |context|}}
@@ -17,7 +17,7 @@
       </div>
     </div>
   {{else}}
-    <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
+    <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1">
       <div class="nw-card-content" style="padding: 0px;">
         <div style="width: 300px; height: 300px; text-align: center; display: flex; justify-content: center;">
           <a href="{{event.url}}" target="_BLANK" style="font-size: 60px; color: #999; margin-top: 50px;"><i class="fa fa-external-link"></i></a>
@@ -26,13 +26,5 @@
     </div>
   {{/if}}
   {{group-chat group=event class="nw-card g3-col1 g3-row3 g3-hspan2 g3-vspan1 g2-col1 g2-row3 g2-hspan1 g2-vspan1"}}
-  {{#if false}}
-    <div class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
-      <div class="nw-card-header">
-        <div class="nw-card-title">Who's attending</div>
-      </div>
-      <div class="nw-card-content">
-      </div>
-    </div>
-  {{/if}}
+  {{group-users-list group=event class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1"}}
 </div>
