@@ -1,8 +1,8 @@
 <div class="nw-card-header">
-  <div class="nw-card-title">Attending</div>
+  <div class="nw-card-title">{{cardLabel}}</div>
 </div>
 <div class="nw-card-content">
   {{#each groupUsersAttending as |gu|}}
-    {{user-listing userId=gu.user_id}}
+    {{user-listing userId=gu.user_id organizer=gu.isAdmin itemSize=itemSize}}
   {{/each}}
 </div>

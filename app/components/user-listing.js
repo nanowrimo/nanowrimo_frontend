@@ -5,6 +5,8 @@ import {inject as service} from '@ember/service';
 export default Component.extend({
   store: service(),
   userId: null,
+  organizer: false,
+  itemSize: null,
   
   user: computed('user_id',function() {
     let uid = this.get('userId');

@@ -1,5 +1,5 @@
 <div class='nw-user-listing'>
-  {{user-avatar user=user linkTo=true size='small'}}
+  {{user-avatar user=user linkTo=true size=itemSize}}
   <div class='nw-user-info'>
     <div class="nw-user-name">
       {{#link-to 'authenticated.users.show' user.slug}}
@@ -7,7 +7,11 @@
       {{/link-to}}
     </div>
     <div class="nw-user-location">
-      {{user.location}}
+      {{#if organizer}}
+        {{#if (eq itemSize "small")}}
+          Organizer
+        {{/if}}
+      {{/if}}
     </div>
   </div>
 </div>
