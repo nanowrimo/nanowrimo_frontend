@@ -1,5 +1,4 @@
 import NanoSubcard from 'nanowrimo/components/nano-subcard';
-import ENV from 'nanowrimo/config/environment';
 import fetch from 'fetch'; 
 
 export default NanoSubcard.extend({
@@ -16,7 +15,7 @@ export default NanoSubcard.extend({
   
   fetchStoreItems: function(_this){
     //get the store items
-    let endpoint = `${ENV.APP.API_HOST}/store_items`;
+    let endpoint = "/json/store_items.json";
     return fetch(endpoint).then((response)=>{
       return response.json().then((json)=>{
         _this.set('items',json);
