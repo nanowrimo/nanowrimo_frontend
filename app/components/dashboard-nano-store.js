@@ -1,5 +1,4 @@
 import NanoSubcard from 'nanowrimo/components/nano-subcard';
-import ENV from 'nanowrimo/config/environment';
 import fetch from 'fetch'; 
 
 export default NanoSubcard.extend({
