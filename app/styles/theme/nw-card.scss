@@ -199,6 +199,14 @@
     &.nw-card-horizontal {
       flex-direction: row;
       align-items: center;
+      flex-wrap: wrap;
+      .nw-cms-third-tier-offer {
+        padding-bottom: 10px;
+        max-width: 200px;
+        img {
+          max-width: 200px;
+        }
+      }
       .nw-flex-full {
         flex: 1 1 100%;
       }

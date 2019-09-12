@@ -1,7 +1,7 @@
 {{#each cmsOfferPromos as |offer|}}
   {{cms-offer offer=offer}}
 {{/each}}
-<div class='nw-card flex-large'>
+<div class='nw-card flex-large no-height-limit'>
   <div class="nw-card-header">
     <div class='nw-card-title'>
       More of our sponsors
@@ -10,9 +10,11 @@
   <div class='nw-card-content nw-card-horizontal'>
   
     {{#each cmsThirdOfferPromos as |offer|}}
-      <a href="{{offer.external-link}}" target="_blank">
-        <img src="{{offer.card-image}}" />
-      </a>
+      <div class="nw-cms-third-tier-offer">
+        <a href="{{offer.external-link}}" target="_blank">
+          <img src="{{offer.card-image}}" />
+        </a>
+      </div>
     {{/each}}
   
   </div>
