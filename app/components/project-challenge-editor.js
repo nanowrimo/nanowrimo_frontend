@@ -131,7 +131,7 @@ export default Component.extend({
     let challenge = this.get('challenge');
     if (challenge) {
       newStartsAt = moment.utc(challenge.startsAt);
-      newWinAt = moment.utc(challenge.endsAt).subtract(1, 'days');
+      newEndsAt = moment.utc(challenge.endsAt);
       //clone the challenge data into the project challenge changeset
       this.set('changeset.name', challenge.name);
       this.set('changeset.goal', challenge.defaultGoal);

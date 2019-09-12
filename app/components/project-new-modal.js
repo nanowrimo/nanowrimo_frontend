@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
 import { filterBy, sort } from '@ember/object/computed';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
 import Changeset from 'ember-changeset';
@@ -13,6 +13,8 @@ export default Component.extend({
 
   associatedChallenge: null,
   associatedChallengeId: 0,
+  associateWithChallenge: false,
+  defaultAssociationTested: false,
   challenge: null,
   projectChallenge: null,
   tab: null,
@@ -49,16 +51,19 @@ export default Component.extend({
   }),
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
   
-  associateWithChallenge: computed(function() {
+  // auto associate with the latest challenge if the latest challenge hasn't ended
+  challengeCheck: observer('optionsForChallenges',function() {
     let challenges = this.get('optionsForChallenges');
     if (challenges.length > 0) {
       let latest = challenges[0];
       let d = new Date();
       if (latest.endsAt > d) {
-        return true;
+        if (!this.get('defaultAssociationTested')) {
+          this.set('defaultAssociationTested', true);
+          this.send('clickedAssociateCheckbox');
+        }
       }
     }
-    return false;
   }),
   
   hideClass: computed('associateWithChallenge',function() {
