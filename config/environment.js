@@ -139,5 +139,19 @@ module.exports = function(environment) {
     ENV.forumsUrl = "https://staging.forums.nanowrimo.org";
   }
   
+  //TODO: move the airbrake integration to production env only
+  if (environment !== 'test'){
+      ENV.airbrake = {
+      projectId: 243512,
+      projectKey: '151dc96cad5771144b49301ef01de350',
+      keysBlacklist: [
+      /password/, // regex match
+      /secret/, // regexp match
+      /pass/
+      ]
+    };
+  }
+  
+  
   return ENV;
 };

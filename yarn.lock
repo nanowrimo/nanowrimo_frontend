@@ -1159,6 +1159,11 @@ agentkeepalive@^3.3.0:
   dependencies:
     humanize-ms "^1.2.1"
 
+airbrake-js@^0.5.9:
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/airbrake-js/-/airbrake-js-0.5.9.tgz#f63aa98c412601694694ff003a4c571154cfb4e6"
+  integrity sha1-9jqpjEEmAWlGlP8AOkxXEVTPtOY=
+
 ajv-errors@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ajv-errors/-/ajv-errors-1.0.1.tgz#f35986aceb91afadec4102fbd85014950cefa64d"
@@ -4975,6 +4980,15 @@ ember-chrome-devtools@^0.2.0:
   integrity sha1-8yh932DQ6pEnyTKS3ob/8vHDbfg=
   dependencies:
     ember-cli-babel "^6.0.0"
+
+ember-cli-airbrake@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-airbrake/-/ember-cli-airbrake-0.2.1.tgz#8228ec29eca15d105cc67cade7024f73d3ac2883"
+  integrity sha512-/Zrl4ADDAalkN+JB3MYRL+mP0AZ2wxILLQafWpyasNvRxCqR3E8d/1FRO7GlpeJUlRczRLRdF8TgZe8gBRTigg==
+  dependencies:
+    airbrake-js "^0.5.9"
+    ember-cli-babel "^6.3.0"
+    ember-cli-version-checker "^2.0.0"
 
 ember-cli-app-version@^3.0.0:
   version "3.2.0"
