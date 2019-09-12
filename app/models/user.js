@@ -323,7 +323,7 @@ const User = Model.extend({
       group_types: group_types,
       include: 'user,group'
     }).then(function() {
-      //debounce(u, u.connectGroupUsers, 200, false);
+      debounce(u, u.connectGroupUsers, 200, false);
     });
   },
 
