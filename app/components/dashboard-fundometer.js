@@ -14,8 +14,8 @@ export default Component.extend({
     //start getting data
     this.getFundometerData(this);
     //refresh the fundometer data ever 15 minutes
-    let milliseconds = 15*60*1000;
-    setInterval(this.getFundometerData, milliseconds, this);
+    //let milliseconds = 15*60*1000;
+    //setInterval(this.getFundometerData, milliseconds, this);
   },
 
   goal_string: computed('goal', function() {

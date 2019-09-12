@@ -9,8 +9,8 @@ export default NanoSubcard.extend({
     this._super(...arguments);
     this.fetchStoreItems(this);
     //pick a random item ever 15 minutes
-    let milliseconds = 15*60*1000;
-    setInterval(this.setRandomItem, milliseconds, this);
+    //let milliseconds = 15*60*1000;
+    //setInterval(this.setRandomItem, milliseconds, this);
   },
   
   fetchStoreItems: function(_this){
