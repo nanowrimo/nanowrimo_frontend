@@ -1,13 +1,10 @@
-{{#form-for
-  model=newNanomessage
-  afterSubmit=(action "afterSubmit")
-  as |f|
-}}
+<form {{action "afterSubmit" this on='submit'}} class="full-width">
   <div class="form-group">
-    {{f.textarea
-      property="content"
-      onKeyPress=(action "keyPress")
+    {{textarea
+      class="editable"
+      value=content
     }}
   </div>
   <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" />
-{{/form-for}}
+</form>
+<script>var editor = new MediumEditor('.editable');</script>

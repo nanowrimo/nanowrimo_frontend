@@ -9,7 +9,7 @@
     <div class="nanomessage-arrow-left"></div>
     <div class="nanomessage-content-container">
       <div class="nanomessage-content">
-        {{nanomessage.content}}
+        {{{nanomessage.content}}}
       </div>
       <div class="nanomessage-timesince">
         {{moment-from-now nanomessage.createdAt interval=1000}}
@@ -20,7 +20,7 @@
   <div class="nanomessage nanomessage-right {{newMessage}}">
     <div class="nanomessage-content-container">
       <div class="nanomessage-content">
-        {{nanomessage.content}}
+        {{{nanomessage.content}}}
       </div>
       <div class="nanomessage-timesince">
         {{moment-from-now nanomessage.createdAt interval=1000}}
