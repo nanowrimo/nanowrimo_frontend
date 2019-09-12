@@ -100,6 +100,7 @@ const User = Model.extend({
   plateUnknownUrl: null,
   
   recalculateHome: 0,
+  
   homeRegion: computed('regions.[]','groupUsers.[]','recalculateHome', function(){
     let r = this.get('regions');
     let gu = this.get('groupUsers');
@@ -313,6 +314,7 @@ const User = Model.extend({
   },
 
   loadGroupUsers(group_types) {
+    //alert('loading');
     let u = this;
     let store = this.get('store');
     store.query('group-user',
@@ -321,17 +323,16 @@ const User = Model.extend({
       group_types: group_types,
       include: 'user,group'
     }).then(function() {
-      debounce(u, u.connectGroupUsers, 200, false);
+      //debounce(u, u.connectGroupUsers, 200, false);
     });
   },
 
   connectGroupUsers() {
-    let store = this.get('store');
-    let gus = store.peekAll('group-user');
-    gus.forEach((gu)=>{
-      gu.normalize();
-    });
-    //t.set('groupUsersLoaded', true);
+    //let store = this.get('store');
+    //let gus = store.peekAll('group-user');
+    //gus.forEach((gu)=>{
+      //gu.normalize();
+    //});
     debounce(this, this.setGroupUsersLoaded, 200, false);
   },
   
