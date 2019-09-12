@@ -68,6 +68,20 @@ form {
       background-color: $nw-pink30;
     }
   }
+  .ember-text-area {
+    border-radius: 3px;
+    box-shadow: inset 0 1px 4px 0 $nw-grey50;
+    background-color: $nw-white-1;
+    border: solid 1px #699c8d;
+    font-size: 16px;
+    line-height: 22px;
+    color: $nw-darkgrey;
+    text-align: left;
+    &.is-invalid {
+      border-color: $nw-darkred;
+      background-color: $nw-pink30;
+    }
+  }
   .ember-text-field::placeholder, .ember-text-field:-ms-input-placeholder, .ember-text-field::-ms-input-placeholder {
     font-family: 'SansItalic', sans-serif;
     font-size: 14px;
