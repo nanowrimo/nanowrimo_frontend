@@ -46,7 +46,6 @@ export default Component.extend({
         newArray.push(ac);
       }
     });
-    console.log(newArray);
     return newArray;
   }),
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
