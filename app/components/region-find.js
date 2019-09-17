@@ -100,7 +100,7 @@ export default Component.extend({
     return sorted;
   }),
   
-  joinedRegionIds: computed('userRegions', function() {
+  joinedRegionIds: computed('userRegions.[]', function() {
     let r = this.get('userRegions');
     let newArray = [];
     if (r) {
@@ -111,7 +111,7 @@ export default Component.extend({
     return newArray;
   }),
   
-  userHasNoRegions: computed('joinedRegionIds', function() {
+  userHasNoRegions: computed('joinedRegionIds.[]', function() {
     if (this.get('joinedRegionIds').length==0) {
       return '';
     } else {
@@ -153,7 +153,7 @@ export default Component.extend({
     return result;
   },
 
-  sortedRegions: computed('currentUser.user.homeRegion','regions','joinedRegionIds','searchString','sortOption', function() {
+  sortedRegions: computed('currentUser.user.homeRegion','userRegions.[]','regions','joinedRegionIds','searchString','sortOption', function() {
     //get the regions 
     let r = this.get('regions');
     //if there are no regions, return an empty array
