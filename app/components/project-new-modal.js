@@ -27,8 +27,17 @@ export default Component.extend({
   validChallengeDates: true,
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
+  
+  // Gets all challenges from the store
+  baseChallenges:  computed(function() {
+    return this.get('store').findAll('challenge');
+  }),
+  
+  // Filters baseChallenges for the nano events
   filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  unassignedOptionsForChallenges: computed('user.projects.[]','baseChallenges.[]','recalculateEvents',function() {
+  
+  // Shows the challenges the user hasn't yet joined
+  unassignedOptionsForChallenges: computed('filteredOptionsForChallenges.[]','user.projects.[]','baseChallenges.[]','recalculateEvents',function() {
     let newArray = [];
     let acs = this.get('filteredOptionsForChallenges');
     let ucs = this.get('user.projects');
@@ -77,9 +86,6 @@ export default Component.extend({
     return 'nano-hide';
   }),
   
-  baseChallenges:  computed(function() {
-    return this.get('store').findAll('challenge');
-  }),
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
