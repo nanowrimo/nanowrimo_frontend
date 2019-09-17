@@ -32,22 +32,26 @@ export default Component.extend({
     let newArray = [];
     let acs = this.get('filteredOptionsForChallenges');
     let ucs = this.get('user.projects');
-    acs.forEach(function(ac) {
-      let found = false;
-      ucs.forEach(function(uc) {
-        let pcs = uc.challenges;
-        pcs.forEach(function(pc) {
-          if (ac.id == pc.id) {
-            found = true;
-          }
+    let r = this.get('recalculateEvents');
+    if (r==r) {
+      acs.forEach(function(ac) {
+        let found = false;
+        ucs.forEach(function(uc) {
+          let pcs = uc.challenges;
+          pcs.forEach(function(pc) {
+            if (ac.id == pc.id) {
+              found = true;
+            }
+          });
         });
+        if (!found) {
+          newArray.push(ac);
+        }
       });
-      if (!found) {
-        newArray.push(ac);
-      }
-    });
+    }
     return newArray;
   }),
+  
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
   
   // auto associate with the latest challenge if the latest challenge hasn't ended
