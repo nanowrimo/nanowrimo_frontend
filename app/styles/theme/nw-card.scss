@@ -187,7 +187,6 @@
   .nw-card-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     flex: 1 1 100%;
     position: relative;
     padding: 20px;
@@ -198,6 +197,7 @@
     }
     &.nw-card-horizontal {
       flex-direction: row;
+      justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       .nw-cms-third-tier-offer {

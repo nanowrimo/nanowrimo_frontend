@@ -9,6 +9,7 @@ export default Component.extend({
   currentUser: service(),
   classNames: ['nw-card nanomessages-card'],
   group: null,
+  context: null,
   sortOptions: null,
   //sortedMessages: sort('nanomessages', 'selectedSortOption'),
   nanomessage: null,
@@ -17,6 +18,10 @@ export default Component.extend({
   recompute: 0,
   messages: null,
   tempDebounce: null,
+  adminIsChecked: computed('context',function() {
+    let c = this.get("context");
+    return (c=='nanomessages');
+  }),
   
   init() {
     this._super(...arguments);
@@ -32,18 +37,23 @@ export default Component.extend({
     cancel(td);
   },
   
-  sortedMessages: computed('messages.[]','group.id',function() {
-    //let s = this.get('store');
-    //let ms = s.peekAll('nanomessage');
-    //let gid = this.get('group.id');
+  sortedMessages: computed('messages.[]','group.id','context',function() {
     let ms = this.get("messages");
+    let c = this.get("context");
+    let t = this.get('group.groupType');
     let newms = [];
     if (ms) {
-      ms.forEach(function(m) {
-        //if (m.group_id==gid) {
-        newms.push(m);
-        //}
-      });
+      if ((c=='nanomessages')&&((t=='everyone')||(t=='region'))) {
+        ms.forEach(function(m) {
+          if (m.official) {
+            newms.push(m);
+          }
+        });
+      } else {
+        ms.forEach(function(m) {
+          newms.push(m);
+        });
+      }
     }
     return newms;
   }),

@@ -13,4 +13,5 @@ export default Model.extend({
   sender_avatar_url: attr('string'),
   sender_name: attr('string'),
   sender_slug: attr('string'),
+  official: attr('boolean'),
 });
