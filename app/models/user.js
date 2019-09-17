@@ -170,8 +170,8 @@ const User = Model.extend({
     });
     return blocked;
   }),
+  
   buddyGroupsActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
-
     if (this.get('groupUsersLoaded')) {
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddyGroups = [];
@@ -253,6 +253,21 @@ const User = Model.extend({
     }
   }),
 
+  everythingGroupsActive: computed('groupUsersLoaded','groupUsers.[]', function(){
+    if (this.get('groupUsersLoaded')) {
+      let gus = this.get('groupUsers');
+      let store = this.get('store');
+      let eGroups = [];
+      gus.forEach(function(gu) {
+        let g = store.peekRecord('group', gu.group_id);
+        if ((g.groupType=='everyone')||(g.groupType=='region')) {
+          eGroups.push(g);
+        }
+      });
+      return eGroups;
+    }
+  }),
+  
   usersBlocked: computed('buddyGroupUsersBlocked','buddyGroupUsersBlocked.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersBlocked');

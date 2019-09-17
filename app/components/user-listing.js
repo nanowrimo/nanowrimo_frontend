@@ -11,7 +11,7 @@ export default Component.extend({
   user: computed('user_id',function() {
     let uid = this.get('userId');
     let store = this.get('store');
-    let u = store.peekRecord('user',uid);
+    let u = store.findRecord('user',uid);
     return u;
   }),
   

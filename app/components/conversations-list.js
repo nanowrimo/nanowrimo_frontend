@@ -4,8 +4,16 @@ import { computed }  from '@ember/object';
 
 export default Component.extend({
   currentUser: service(),
-  conversations: computed('currentUser.user.buddyGroupsActive.[]',function() {
-    return this.get('currentUser.user.buddyGroupsActive');
+  officialOnly: null,
+  conversations: computed('currentUser.user.{everythingGroupsActive.[],buddyGroupsActive.[]}',function() {
+    let oo = this.get('officialOnly');
+    let es = null;
+    if (oo) {
+      es =  this.get('currentUser.user.everythingGroupsActive');
+    } else {
+      es = this.get('currentUser.user.buddyGroupsActive');
+    }
+    return es;
   }),
   actions: {
   }

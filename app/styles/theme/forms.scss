@@ -292,3 +292,8 @@ input:disabled, select:disabled, button:disabled {
 .nw-checkbox-container input:checked ~ .checkmark:after {
   display: block;
 }
+label.checkbox-label {
+  font-size: 16px;
+  line-height: 1.31;
+  color: $nw-darkgrey;
+}

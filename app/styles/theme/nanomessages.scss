@@ -10,6 +10,7 @@
   padding-right: 21px;
 }
 .nw-card.nanomessages-card {
+  max-height: 600px;
   min-height: 100px;
   .conversation {
     display: flex;
@@ -127,7 +128,6 @@
       padding-left: 14px;
       padding-right: 14px;
       label {
-        display: none;
       }
       textarea {
         height: 84px;

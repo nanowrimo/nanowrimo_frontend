@@ -1,10 +1,27 @@
-<form {{action "afterSubmit" this on='submit'}} class="full-width">
-  <div class="form-group">
-    {{textarea
-      class="editable"
-      value=content
-    }}
-  </div>
-  <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" />
-</form>
-<script>var editor = new MediumEditor('.editable');</script>
+{{#if showForm}}
+  <form {{action "afterSubmit" this on='submit'}} class="full-width">
+    <div class="form-group">
+      {{textarea
+        class="editable"
+        value=content
+      }}
+    </div>
+    {{#if userIsAdmin}}
+      {{#if contextNotNanomessages}}
+        <div class="form-group inline-checkbox">
+          <input
+            type="checkbox"
+            name="officialMessage"
+            id="officialMessage"
+            class="form-control ember-checkbox"
+            checked={{adminIsChecked}}
+            onchange={{action 'doingSomething' value="target.checked"}}
+          />
+          <label class="checkbox-label" for='officialMessage'>This is an official message</label>
+        </div>
+      {{/if}}
+    {{/if}}
+    <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" />
+  </form>
+  <script>var editor = new MediumEditor('.editable');</script>
+{{/if}}

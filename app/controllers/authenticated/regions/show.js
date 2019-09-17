@@ -13,22 +13,22 @@ export default Controller.extend({
   
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
+    let found = false;
     if (this.get('currentUser.user.groupUsersLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
-        return true;
+        found = true;
       } else {
         let uid = this.get('currentUser.user.id');
         let gid = this.get('group.id');
         let gus = this.get('store').peekAll('group-user');
-        let found = false;
         gus.forEach((gu)=>{
           if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.isAdmin)) {
             found = true;
           }
         });
-        return found;
       }
     }
+    return found;
   }),
   plateStyle: computed('group.plateUrl', 'canEditGroup', function() {
     let styles = [];
