@@ -20,7 +20,7 @@ export default Component.extend({
         isAdmin: 0
       });
       gu.save().then(function() {
-        //gu.normalize();
+        gu.normalize();
       });
     },
     makeHome() {
