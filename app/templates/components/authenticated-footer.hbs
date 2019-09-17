@@ -28,11 +28,11 @@
                     <a href="{{footerSubmenuItem.url}}">{{footerSubmenuItem.label}}</a>
                   {{else}}
                     {{#if footerSubmenuItem.segment}}
-                      {{#link-to footerSubmenuItem.url footerSubmenuItem.segment}}
+                      {{#link-to footerSubmenuItem.route footerSubmenuItem.segment}}
                         {{footerSubmenuItem.label}}
                       {{/link-to}}
                     {{else}}
-                      {{link-to footerSubmenuItem.label footerSubmenuItem.url}}
+                      {{link-to footerSubmenuItem.label footerSubmenuItem.route}}
                     {{/if}}
                   {{/if}}
                 </li>
