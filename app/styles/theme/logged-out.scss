@@ -1083,7 +1083,7 @@ box-shadow: 0rem 0.1875rem 0.875rem $nw-darkblue10; padding: 2.625rem 0; text-al
 }
 
 @media only screen and (max-width:1320px) {
-    .hero:before {background: url('/images/logged-out/HandsAndPhone-Birdeye.jpg') no-repeat center center;}
+    .hero:before {background: url('/images/logged-out/newhomeimage.png') no-repeat center center; background-size:cover;}
     .what-is-nanowrimo .hero:before {background-image:url('/images/logged-out/dylan-gillis-533818-unsplash.jpg')}
     .the-platform .hero:before {background-image:url('/images/logged-out/Product-Hero-Alternate.jpg')}
     .ywp .hero:before {background-image: url(/images/logged-out/ywp-bg.jpg);}
