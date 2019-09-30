@@ -46,6 +46,42 @@
             Count me in!
           </button>
         {{/if}}
+        <a href="#" {{action "confirmCancel"}}>
+          <div class='full-width-menu-item'>Cancel This Event</div>
+        </a>
+        {{confirmation-modal
+          yes=cancelConfirmationYesText 
+          no=cancelConfirmationNoText 
+          title=cancelConfirmationTitleText
+          question=cancelConfirmationQuestion 
+          open=showConfirmCancel
+          yesAction=(action "cancelConfirmationYes")
+          noAction=(action "cancelConfirmationNo")
+          }}
+        &bull;
+        <a href="#" {{action "confirmDelete"}}>
+          <div class='full-width-menu-item'>Delete This Event</div>
+        </a>
+        {{confirmation-modal
+          yes=deleteConfirmationYesText 
+          no=deleteConfirmationNoText 
+          title=deleteConfirmationTitleText
+          question=deleteConfirmationQuestion 
+          open=showConfirmDelete
+          yesAction=(action "deleteConfirmationYes")
+          noAction=(action "deleteConfirmationNo")
+          }}
+
+        
+        <button {{action 'openNewEventModal'}}>
+          Edit event
+        </button>
+        {{event-new-modal
+          open=editEvent
+          user=user
+          group=event
+          groupId=group.id
+        }}
       {{/if}}
       {{#if (eq status 'pending')}}
         <button {{action 'approveEvent'}}>
@@ -57,4 +93,9 @@
       {{/if}}
     {{/if}}
   </div>
+  {{#if isCancelled}}
+    <div class='nw-cancelled'>
+      Cancelled
+    </div>
+  {{/if}}
 </div>

@@ -9,6 +9,7 @@ const Group = Model.extend({
   groupId: attr('number'),
   userId: attr('number'),
   approvedById: attr('number'),
+  cancelledById: attr('number'),
   startDt: attr('date'),
   endDt: attr('date'),
   groupType: attr('string'),

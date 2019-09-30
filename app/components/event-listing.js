@@ -11,6 +11,7 @@ export default Component.extend({
   event: null,
   status: null,
   recomputeEvents: 0,
+  editEvent: false,
   classNames: ['nw-card','nano-listing-mini-card','event-listing-card'],
   
   init() {
