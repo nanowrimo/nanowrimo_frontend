@@ -1,5 +1,4 @@
-<main>
-
+<div id='brought-to-you-by'>
   <!-- Hero -->
   <section class="hero">
     <div class="container">
@@ -9,7 +8,7 @@
         <p class="copy">
           NaNoWriMo is the product of a superheroic, wondrous community. 
           So many people assembled to keep our nonprofit programs going, 
-          including incredible donors like you.
+          including incredible donors like you.<br>
           <b>Thank you!</b>
 
         </p>
@@ -22,19 +21,18 @@
   <section class="about">
     <div class="container">
       <div class="wrapper">
-        <h4>Monthly Donors</h4>
-        <div>{{monthlyDonorString}}</div>
+        <div class='donor-title'>Monthly Donors</div>
+        <div class='donor-list'>{{monthlyDonorString}}</div>
         
-        <h4>Major Donors</h4>
-        <div>{{majorDonorString}}</div>
+        <div class='donor-title'>Major Donors</div>
+        <div class='donor-list'>{{majorDonorString}}</div>
         
-        <h4>Supporting Donors</h4>
-        <div>{{supportingDonorString}}</div>
+        <div class='donor-title'>Supporting Donors</div>
+        <div class='donor-list'>{{supportingDonorString}}</div>
         
       </div>
     </div>
   </section>
-
+</div>
   
 
-</main>
