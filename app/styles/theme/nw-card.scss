@@ -459,3 +459,26 @@
     }
   }
 }
+.nw-cancelled {
+  color: rgba(200,0,0,0.8);
+  font-size: 30px;
+  font-weight: bold;
+  border: 2px solid rgba(222,0,0,0.5);
+  background-color: rgba(222,0,0,0.1);
+  border-radius: 6px;
+  text-align: center;
+  line-height: 70px;
+  width: 200px;
+  height: 80px;
+  position: absolute;
+  transform: rotate(-15deg);
+  left: 220px;
+  top: 70px;
+  &.nw-narrow-card {
+    line-height: 50px;
+    height: 60px;
+    transform: rotate(-5deg);
+    left: 200px;
+    top: 25px;
+  }
+}

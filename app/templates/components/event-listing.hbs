@@ -18,9 +18,11 @@
       {{#if isEnrolled}}
         <b><i class="fa fa-check"></i> You're signed up!</b>
       {{else}}
-        <button {{action 'joinEvent'}}>
-          Count me in!
-        </button>
+        {{#if (eq isCancelled false)}}
+          <button {{action 'joinEvent'}}>
+            Count me in!
+          </button>
+        {{/if}}
       {{/if}}
     {{/if}}
     {{#if (eq status 'pending')}}
@@ -35,4 +37,9 @@
     {{/if}}
   {{/if}}
   </div>
+  {{#if isCancelled}}
+    <div class='nw-cancelled nw-narrow-card'>
+      Cancelled
+    </div>
+  {{/if}}
 </div>

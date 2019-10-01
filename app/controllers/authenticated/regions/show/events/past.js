@@ -1,38 +1,36 @@
 import Controller from '@ember/controller';
 import { computed }  from '@ember/object';
-import { alias }  from '@ember/object/computed';
+import { alias, sort }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import moment from 'moment';
 
 export default Controller.extend({
-  queryParams: ['addEvent'],
-  router: service(),
-  currentUser: service(),
+  store: service(),
   groups: alias('model'),
-  dataLoaded: false,
+  group: null,
   
-  // Returns an array of past approved events
-  pastEvents: computed('groups.[]', function() {
-    return this.get('groups');
+  eventSortingDesc: Object.freeze(['startDt:desc']),
+  
+  allEvents: computed('groups.[]',function() {
+    let store = this.get('store');
+    let gs = store.peekAll('group');
+    return gs;
   }),
   
-  hasEvents: computed('groups.[]', function() {
-    return this.get('groups').length>0;
-  }),
-  
-  addEvent: false,
-  canAddEvent: computed('currentUser.user.name', function() {
-    return true;
-  }),
-  
-  actions: {
-    afterEventModalClose() {
-      this.set('addEvent', null);
-    },
-    openNewEventModal() {
-      if (this.get('canAddEvent')) {
-        this.set('addEvent', true);
+  // Returns an array of future approved events
+  pastEvents: computed('allEvents.{[],@each.approvedById}', function() {
+    let gs = this.get('allEvents');
+    let gid = this.get('group.id');
+    let pe = [];
+    let now = moment();
+    gs.forEach(function(g) {
+      if ((g.groupId==gid) && (g.endDt<now) && (g.approvedById>0)) {
+        pe.push(g);
       }
-    },
-  }
+    });
+    return pe;
+  }),
+  
+  sortedPastEvents: sort('pastEvents','eventSortingDesc'),
   
 });

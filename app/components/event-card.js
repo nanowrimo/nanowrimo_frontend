@@ -12,10 +12,55 @@ export default Component.extend({
   event: null,
   status: null,
   recomputeEvents: 0,
+  showConfirmDelete: false,
+  
   classNames: ['nw-card','event-card'],
+  
+  // Returns true if the current user has editing rights on this event
+  canEditEvent: computed('currentUser.user', function() {
+    // Set variable "found" to false
+    let found = false;
+    // Set a local variable for the user
+    let u = this.get('currentUser.user');
+    // If they are an admin, return true
+    if (u.adminLevel>0) {
+      found = true;
+    } else { // Otherwise determine if they are an ML for this event
+      // Set the event as a local variable
+      let e = this.get('event');
+      // Set the parent group id to a local variable
+      let pid = e.groupId;
+      // Set store to local variable
+      let store = this.get('store');
+      // Get all group_users from the store
+      let gus = store.peekAll('group_user');
+      // Loop through all group users
+      gus.forEach((gu) => {
+        // If the current user is an admin, return true
+        if ((gu.group_id==pid)&&(gu.user_id==u.id)&&(gu.isAdmin)) {
+          found = true;
+        }
+      });
+    }
+    return found;
+  }),
   
   init() {
     this._super(...arguments);
+    let name = this.get('event.name');
+    this.set('cancelConfirmationYesText', 'Yes, cancel it');
+    this.set('cancelConfirmationNoText', 'No, thanks'); 
+    this.set('cancelConfirmationTitleText', 'Confirm Event Cancellation');
+    this.set('cancelConfirmationQuestion', `Do you really want to cancel "${name}"? It will continue to be displayed, but stamped with the word "Cancelled". Users who signed up will be notified of the event cancellation.`);
+    this.set('restoreConfirmationYesText', 'Yes, restore it');
+    this.set('restoreConfirmationNoText', 'No, thanks'); 
+    this.set('restoreConfirmationTitleText', 'Confirm Event Restoration');
+    this.set('restoreConfirmationQuestion', `Do you really want to restore "${name}"? The "cancelled" stamp will be removed, and users who signed up will be notified of the event restoration.`);
+    this.set('deleteConfirmationYesText', 'Yes, delete it');
+    this.set('deleteConfirmationNoText', 'No, thanks'); 
+    this.set('deleteConfirmationTitleText', 'Confirm Event Deletion');
+    this.set('deleteConfirmationQuestion', `Do you really want to delete "${name}"? This will delete both the event and any record of which users signed up. Users who signed up will NOT be notified of the event deletion.`);
+    
     let e = this.get('event.approvedById');
     if ((e==0)||(e==null)) {
       this.set('status','pending');
@@ -51,6 +96,12 @@ export default Component.extend({
     let end = moment(this.get('event.endDt'));
     let diff = end.diff(start);
     return moment.utc(diff).format("H:mm");
+  }),
+  
+  // Returns true if the event has been cancelled
+  isCancelled: computed('event.cancelledById',function() {
+    let c = this.get('event.cancelledById');
+    return (c>0);
   }),
   
   // Returns the start date as a readable string
@@ -185,7 +236,99 @@ export default Component.extend({
     });
   },
   
+  doCancel() {
+    let e = this.get('event');
+    let uid = this.get('currentUser.user.id');
+    e.set("cancelledById",uid);
+    e.save().then(()=>{
+      // Increment recompute location
+      let re = this.get('recomputeEvents');
+      this.set('recomputeEvents',re+1);
+      this.set('status','upcoming');
+    });
+  },
+  
+  doRestore() {
+    let e = this.get('event');
+    e.set("cancelledById",0);
+    e.save().then(()=>{
+      // Increment recompute location
+      let re = this.get('recomputeEvents');
+      this.set('recomputeEvents',re+1);
+      this.set('status','upcoming');
+    });
+  },
+  
+  doDelete() {
+    // Get the event
+    let e = this.get('event');
+    // Get the parent groupId from the event
+    let gid = e.get('groupId');
+    // Get the store for local use
+    let s = this.get('store');
+    // Find the parent groupId in the store
+    let p = s.peekRecord('group',gid);
+    // Define the url var
+    let url = "/";
+    // If the record is found
+    if (p.slug) {
+      // Set the url to the region's upcoming events
+      url = "/regions/" + p.slug + "/events/upcoming";
+    }
+    //alert(url);
+    // Destroy the record
+    this.get('event').destroyRecord().then(()=>{
+      // Then redirect to a page with content
+      window.location.replace(url);
+    });
+  },
+  
+  
   actions: {
+    openNewEventModal() {
+      if (this.get('canEditEvent')) {
+        this.set('editEvent', true);
+      }
+    },
+    confirmCancel(){
+      //show the delete dialog
+      this.set('showConfirmCancel', true);
+    },
+    cancelConfirmationYes(){
+      this.doCancel();
+      //close the modal
+      this.set('showConfirmCancel', false);
+    },
+    cancelConfirmationNo(){
+      //close the modal
+      this.set('showConfirmCancel', false);
+    },
+    confirmRestore(){
+      //show the delete dialog
+      this.set('showConfirmRestore', true);
+    },
+    restoreConfirmationYes(){
+      this.doRestore();
+      //close the modal
+      this.set('showConfirmRestore', false);
+    },
+    restoreConfirmationNo(){
+      //close the modal
+      this.set('showConfirmRestore', false);
+    },
+    confirmDelete(){
+      //show the delete dialog
+      this.set('showConfirmDelete', true);
+    },
+    deleteConfirmationYes(){
+      this.doDelete();
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    deleteConfirmationNo(){
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
     joinEvent() {
       this.doJoin();
     },

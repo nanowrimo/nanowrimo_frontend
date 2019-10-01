@@ -6,10 +6,10 @@
   {{#if hasEventsFrame}}
     <div class="nw-panel-primary-container">
       <div class='nw-panel-actions'>
-        <button id="announce-new-event-button" class="nano-button-large" {{action "openNewEventModal"}}>
+        <button id="announce-new-event-button" class="nano-button-large" {{action "openEventModal"}}>
           Submit an event
         </button>
-        {{event-new-modal
+        {{event-modal
           open=addEvent
           user=user
           groupId=group.id
@@ -22,7 +22,7 @@
         <div class="nw-card nw-prompt-card">
           <div class='nw-hflex'>
             <div class='action'>
-              <a href="#" {{action "openNewEventModal"}}>Create a new event!</a>
+              <a href="#" {{action "openEventModal"}}>Create a new event!</a>
             </div>
             <div class='prompt-image'>
               <img src="/images/users/projects/megaphone.svg">

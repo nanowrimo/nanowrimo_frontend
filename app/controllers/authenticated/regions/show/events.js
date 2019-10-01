@@ -44,7 +44,7 @@ export default Controller.extend({
     afterEventModalClose() {
       this.set('addEvent', null);
     },
-    openNewEventModal() {
+    openEventModal() {
       if (this.get('canAddEvent')) {
         this.set('addEvent', true);
       }

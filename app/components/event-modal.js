@@ -17,7 +17,7 @@ export default Component.extend({
   groupId: null,
   tab: null,
   open: null,
-  newGroup: null,
+  group: null,
   newlocation: null,
   user: null,
   startDate: null,
@@ -121,10 +121,20 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     let now = moment();
-    this.set('startDate', now.format("YYYY-MM-DD"));
-    this.set('startTime', "19:00");
-    this.set('durationHours', "2");
-    this.set('timeZone',this.get('currentUser.user.timeZone'));
+    let g = this.get('group');
+    if (g) {
+      //alert('old event');
+      this.set('name', g.get('name'));
+      //this.set('startDate', g.get('startDt').format("YYYY-MM-DD"));
+      this.set('durationHours', g.get('durationHours'));
+      this.set('timeZone',g.get('timeZone'));
+    } else {
+      //alert('new event');
+      this.set('startDate', now.format("YYYY-MM-DD"));
+      this.set('startTime', "19:00");
+      this.set('durationHours', "2");
+      this.set('timeZone',this.get('currentUser.user.timeZone'));
+    }
     this.setProperties({ googleAuto: null });
   },
 
