@@ -141,7 +141,7 @@ module.exports = function(environment) {
   
   //TODO: move the airbrake integration to production env only
   if (environment !== 'test') {
-      ENV.airbrake = {
+    ENV.airbrake = {
       projectId: 243512,
       projectKey: '151dc96cad5771144b49301ef01de350',
       keysBlacklist: [
@@ -150,6 +150,9 @@ module.exports = function(environment) {
       /pass/
       ]
     };
+    // list of strings that if found in an error, message will prohibit
+    // the message from being sent to airbrake
+    ENV.airbrake.ignoreMessageStrings=['Ember Data Request','The adapter operation','More context objects'];
   }
   
   
