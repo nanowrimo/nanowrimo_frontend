@@ -9,7 +9,7 @@ export default Controller.extend({
     let md = m.monthly;
     let names = [];
     md.forEach((d)=>{ 
-      names.push(d.name); 
+      names.push(d); 
     });
     return names.join(", ");
   }),
@@ -19,7 +19,7 @@ export default Controller.extend({
     let md = m.major;
     let names = [];
     md.forEach((d)=>{ 
-      names.push(d.name); 
+      names.push(d); 
     });
     return names.join(", ");
   }),
@@ -29,7 +29,7 @@ export default Controller.extend({
     let md = m.supporting;
     let names = [];
     md.forEach((d)=>{ 
-      names.push(d.name); 
+      names.push(d); 
     });
     return names.join(", ");
   })
