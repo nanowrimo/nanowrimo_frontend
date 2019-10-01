@@ -22,16 +22,12 @@ export default Component.extend({
     let found = false;
     // Set a local variable for the user
     let u = this.get('currentUser.user');
-    // Set a local variable for the user id
-    let uid = u.id;
     // If they are an admin, return true
     if (u.adminLevel>0) {
       found = true;
     } else { // Otherwise determine if they are an ML for this event
       // Set the event as a local variable
       let e = this.get('event');
-      // Set the event id as a lcoal variable
-      let eid = e.id;
       // Set the parent group id to a local variable
       let pid = e.groupId;
       // Set store to local variable
@@ -254,7 +250,7 @@ export default Component.extend({
   
   doRestore() {
     let e = this.get('event');
-    e.set("cancelledById",null);
+    e.set("cancelledById",0);
     e.save().then(()=>{
       // Increment recompute location
       let re = this.get('recomputeEvents');
