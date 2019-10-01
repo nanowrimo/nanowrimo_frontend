@@ -1,4 +1,3 @@
-import Route from '@ember/routing/route';
 import ENV from 'nanowrimo/config/environment';
 import ScrollRoute from 'nanowrimo/routes/scroll-route'
 
