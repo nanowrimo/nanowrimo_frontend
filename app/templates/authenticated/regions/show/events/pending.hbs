@@ -1,5 +1,3 @@
-{{#if hasEvents}}
-  {{#each pendingEvents as |e|}}
-    {{event-listing event=e group=group status='pending'}}
-  {{/each}}
-{{/if}}
+{{#each sortedPendingEvents as |e|}}
+  {{event-listing event=e group=group status='pending'}}
+{{/each}}

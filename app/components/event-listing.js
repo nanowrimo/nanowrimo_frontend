@@ -36,6 +36,13 @@ export default Component.extend({
     });
     return found;
   }),
+  
+  // Returns true if the event has been cancelled
+  isCancelled: computed('event.cancelledById',function() {
+    let c = this.get('event.cancelledById');
+    return (c>0);
+  }),
+  
   // Returns the start date as a readable string
   startDateTime: computed(function() {
     let etz = this.get('event.timeZone');

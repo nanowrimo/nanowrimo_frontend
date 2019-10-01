@@ -5,9 +5,6 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 
 export default Controller.extend({
-  //queryParams: ['addEvent'],
-  //router: service(),
-  //currentUser: service(),
   store: service(),
   groups: alias('model'),
   group: null,
@@ -35,21 +32,5 @@ export default Controller.extend({
   }),
   
   sortedActiveEvents: sort('activeEvents','eventSortingDesc'),
-  
-  //addEvent: false,
-  //canAddEvent: computed('currentUser.user.name', function() {
-    //return true;
-  //}),
-  
-  actions: {
-    //afterEventModalClose() {
-      //this.set('addEvent', null);
-    //},
-    //openNewEventModal() {
-      //if (this.get('canAddEvent')) {
-        //this.set('addEvent', true);
-      //}
-    //},
-  }
   
 });

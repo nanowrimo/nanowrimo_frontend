@@ -474,4 +474,11 @@
   transform: rotate(-15deg);
   left: 220px;
   top: 70px;
+  &.nw-narrow-card {
+    line-height: 50px;
+    height: 60px;
+    transform: rotate(-5deg);
+    left: 200px;
+    top: 25px;
+  }
 }

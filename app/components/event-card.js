@@ -15,8 +15,38 @@ export default Component.extend({
   showConfirmDelete: false,
   
   classNames: ['nw-card','event-card'],
-  canEditEvent: computed('currentUser.user.name', function() {
-    return true;
+  
+  // Returns true if the current user has editing rights on this event
+  canEditEvent: computed('currentUser.user', function() {
+    // Set variable "found" to false
+    let found = false;
+    // Set a local variable for the user
+    let u = this.get('currentUser.user');
+    // Set a local variable for the user id
+    let uid = u.id;
+    // If they are an admin, return true
+    if (u.adminLevel>0) {
+      found = true;
+    } else { // Otherwise determine if they are an ML for this event
+      // Set the event as a local variable
+      let e = this.get('event');
+      // Set the event id as a lcoal variable
+      let eid = e.id;
+      // Set the parent group id to a local variable
+      let pid = e.groupId;
+      // Set store to local variable
+      let store = this.get('store');
+      // Get all group_users from the store
+      let gus = store.peekAll('group_user');
+      // Loop through all group users
+      gus.forEach((gu) => {
+        // If the current user is an admin, return true
+        if ((gu.group_id==pid)&&(gu.user_id==u.id)&&(gu.isAdmin)) {
+          found = true;
+        }
+      });
+    }
+    return found;
   }),
   
   init() {
@@ -26,6 +56,10 @@ export default Component.extend({
     this.set('cancelConfirmationNoText', 'No, thanks'); 
     this.set('cancelConfirmationTitleText', 'Confirm Event Cancellation');
     this.set('cancelConfirmationQuestion', `Do you really want to cancel "${name}"? It will continue to be displayed, but stamped with the word "Cancelled". Users who signed up will be notified of the event cancellation.`);
+    this.set('restoreConfirmationYesText', 'Yes, restore it');
+    this.set('restoreConfirmationNoText', 'No, thanks'); 
+    this.set('restoreConfirmationTitleText', 'Confirm Event Restoration');
+    this.set('restoreConfirmationQuestion', `Do you really want to restore "${name}"? The "cancelled" stamp will be removed, and users who signed up will be notified of the event restoration.`);
     this.set('deleteConfirmationYesText', 'Yes, delete it');
     this.set('deleteConfirmationNoText', 'No, thanks'); 
     this.set('deleteConfirmationTitleText', 'Confirm Event Deletion');
@@ -218,6 +252,17 @@ export default Component.extend({
     });
   },
   
+  doRestore() {
+    let e = this.get('event');
+    e.set("cancelledById",null);
+    e.save().then(()=>{
+      // Increment recompute location
+      let re = this.get('recomputeEvents');
+      this.set('recomputeEvents',re+1);
+      this.set('status','upcoming');
+    });
+  },
+  
   doDelete() {
     // Get the event
     let e = this.get('event');
@@ -261,6 +306,19 @@ export default Component.extend({
     cancelConfirmationNo(){
       //close the modal
       this.set('showConfirmCancel', false);
+    },
+    confirmRestore(){
+      //show the delete dialog
+      this.set('showConfirmRestore', true);
+    },
+    restoreConfirmationYes(){
+      this.doRestore();
+      //close the modal
+      this.set('showConfirmRestore', false);
+    },
+    restoreConfirmationNo(){
+      //close the modal
+      this.set('showConfirmRestore', false);
     },
     confirmDelete(){
       //show the delete dialog
