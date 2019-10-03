@@ -140,7 +140,7 @@ module.exports = function(environment) {
   }
   
   //TODO: move the airbrake integration to production env only
-  if (environment !== 'test') {
+  if (environment == 'production' || process.env.TARGET=='staging') {
     ENV.airbrake = {
       projectId: 243512,
       projectKey: '151dc96cad5771144b49301ef01de350',
