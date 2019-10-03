@@ -1,14 +1,44 @@
 import Route from '@ember/routing/route';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { inject as service } from '@ember/service';
+import ENV from 'nanowrimo/config/environment';
 
 export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
   badgesService: service(),
   notificationsService: service(),
   session: service(),
+  //include the airbrake service 
+  airbrake: service(),
   
   routeAfterAuthentication: 'authenticated',
+
+  init(){
+    this._super(...arguments);
+    //access the airbrake service
+    let airbrake = this.get('airbrake');
+    //add a filter to parse notices
+    airbrake.addFilter(function(notice){
+      //default to sending the notice 
+      let sendNotice = true;
+      //loop through the notice errors
+      notice.errors.forEach(err=>{
+        //loop through the ignoreMessageStrings
+        ENV.airbrake.ignoreMessageStrings.forEach(ims=>{
+          if (err.message.includes(ims)) {
+            //there was a match, do not send 
+            sendNotice = false;
+          }
+        });
+      });
+      //should the notice be sent?
+      if (sendNotice) {
+        return notice;
+      }else{
+        return null;
+      }
+    });
+  },
 
   beforeModel() {
     this._loadBadgesService();
