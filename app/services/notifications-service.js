@@ -28,6 +28,43 @@ export default Service.extend({
     debounce(this, this.checkForUpdates, 10000, false);
   },
   
+  notificationClicked(notification){
+    // Set a variable to be returned
+    let r = [];
+    if(notification.actionType=='BADGE_AWARDED') {
+      //get the badge
+      let id = notification.actionId;
+      // get some badge data from the store
+      let badge = this.get('store').peekRecord('badge', id);
+      r.push(badge);
+      //this.set("badgeForSplash", badge);
+      //is this a winner badge?
+      if (badge.title =="Wrote 50,000 Words During NaNoWriMo" ){
+        //NaNo Winner!
+        r.push('showWinnerSplash');
+        //this.set('showWinnerSplash', true);
+      } else {
+        //display the splash
+        r.push('showBadgeSplash');
+        //this.set('showBadgeSplash', true);
+      }
+    }
+    if(notification.actionType=='BUDDIES_PAGE') {
+      this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
+    }
+    if(notification.actionType=='NANOMESSAGES') {
+      this.get('router').transitionTo('authenticated.nanomessages');
+    }
+    if(notification.actionType=='PROJECTS_PAGE') {
+      this.get('router').transitionTo('authenticated.users.show.projects', this.get('currentUser.user.slug'));
+    }
+    if(notification.actionType=='EVENT_PAGE') {
+      let url = notification.redirectUrl;
+      window.location.replace(url);
+    }
+    return r;
+  },
+  
   incrementRecomputeNotifications() {
     let rb  = this.get('recomputeNotifications')+1;
     this.set('recomputeNotifications',rb);

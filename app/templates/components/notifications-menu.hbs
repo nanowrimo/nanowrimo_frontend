@@ -23,7 +23,7 @@
       </button>
     {{/dd.toggle}}
     {{#dd.menu align="right" as |ddm|}}
-      {{notifications-menu-dropdown allNotifications=allNotifications clickAction=(action 'notificationClicked')}}
+      {{notifications-menu-dropdown allNotifications=sortedNotifications clickAction=(action 'notificationClicked')}}
     {{/dd.menu}}
   {{/nav.dropdown}}
 {{/bs-nav}}
