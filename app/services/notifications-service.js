@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { computed }  from '@ember/object';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
+import { getOwner } from '@ember/application';
 import moment from "moment"
 
 export default Service.extend({
@@ -12,6 +13,12 @@ export default Service.extend({
   recomputeNotifications: 0,
   lastCheck: null,
 
+  init() {
+    this._super(...arguments);
+    // Setting the router so transitionTo is available to service
+    this.set('router', getOwner(this).lookup('router:main'));
+  },
+  
   load() {
     if (this.get('session.isAuthenticated')) {
       debounce(this, this.checkForUpdates, 3000, false);
