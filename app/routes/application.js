@@ -15,29 +15,31 @@ export default Route.extend(ApplicationRouteMixin, {
 
   init(){
     this._super(...arguments);
-    //access the airbrake service
-    let airbrake = this.get('airbrake');
-    //add a filter to parse notices
-    airbrake.addFilter(function(notice){
-      //default to sending the notice 
-      let sendNotice = true;
-      //loop through the notice errors
-      notice.errors.forEach(err=>{
-        //loop through the ignoreMessageStrings
-        ENV.airbrake.ignoreMessageStrings.forEach(ims=>{
-          if (err.message.includes(ims)) {
-            //there was a match, do not send 
-            sendNotice = false;
-          }
+    //access the airbrake service... if it exists in the ENV
+    if (ENV.airbrake) {
+      let airbrake = this.get('airbrake');
+      //add a filter to parse notices
+      airbrake.addFilter(function(notice){
+        //default to sending the notice 
+        let sendNotice = true;
+        //loop through the notice errors
+        notice.errors.forEach(err=>{
+          //loop through the ignoreMessageStrings
+          ENV.airbrake.ignoreMessageStrings.forEach(ims=>{
+            if (err.message.includes(ims)) {
+              //there was a match, do not send 
+              sendNotice = false;
+            }
+          });
         });
+        //should the notice be sent?
+        if (sendNotice) {
+          return notice;
+        }else{
+          return null;
+        }
       });
-      //should the notice be sent?
-      if (sendNotice) {
-        return notice;
-      }else{
-        return null;
-      }
-    });
+    }
   },
 
   beforeModel() {
