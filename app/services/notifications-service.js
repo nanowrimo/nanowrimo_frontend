@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { computed }  from '@ember/object';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
+import { getOwner } from '@ember/application';
 import moment from "moment"
 
 export default Service.extend({
@@ -12,6 +13,12 @@ export default Service.extend({
   recomputeNotifications: 0,
   lastCheck: null,
 
+  init() {
+    this._super(...arguments);
+    // Setting the router so transitionTo is available to service
+    this.set('router', getOwner(this).lookup('router:main'));
+  },
+  
   load() {
     if (this.get('session.isAuthenticated')) {
       debounce(this, this.checkForUpdates, 3000, false);
@@ -26,6 +33,43 @@ export default Service.extend({
       t.incrementRecomputeNotifications();
     });
     debounce(this, this.checkForUpdates, 10000, false);
+  },
+  
+  notificationClicked(notification){
+    // Set a variable to be returned
+    let r = [];
+    if(notification.actionType=='BADGE_AWARDED') {
+      //get the badge
+      let id = notification.actionId;
+      // get some badge data from the store
+      let badge = this.get('store').peekRecord('badge', id);
+      r.push(badge);
+      //this.set("badgeForSplash", badge);
+      //is this a winner badge?
+      if (badge.title =="Wrote 50,000 Words During NaNoWriMo" ){
+        //NaNo Winner!
+        r.push('showWinnerSplash');
+        //this.set('showWinnerSplash', true);
+      } else {
+        //display the splash
+        r.push('showBadgeSplash');
+        //this.set('showBadgeSplash', true);
+      }
+    }
+    if(notification.actionType=='BUDDIES_PAGE') {
+      this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
+    }
+    if(notification.actionType=='NANOMESSAGES') {
+      this.get('router').transitionTo('authenticated.nanomessages');
+    }
+    if(notification.actionType=='PROJECTS_PAGE') {
+      this.get('router').transitionTo('authenticated.users.show.projects', this.get('currentUser.user.slug'));
+    }
+    if(notification.actionType=='EVENT_PAGE') {
+      let url = notification.redirectUrl;
+      window.location.replace(url);
+    }
+    return r;
   },
   
   incrementRecomputeNotifications() {

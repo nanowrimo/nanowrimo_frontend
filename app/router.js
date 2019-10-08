@@ -45,6 +45,8 @@ Router.map(function() {
     
     this.route('stats', function() {
     });
+    this.route('notifications', function() {
+    });
     this.route('locations', { path: 'locations'}, function() {
     });
     this.route('regions', function() {

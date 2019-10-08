@@ -4,6 +4,9 @@
     <div class="nw-noti-header-left">
       {{link-to 'Notification Preferences' 'authenticated.settings.preferences'}}
     </div>
+    <div class="nw-noti-header-right">
+      {{link-to 'All Notifications' 'authenticated.notifications'}}
+    </div>
   </div>
   <div class="modal-body nw-noti-modal-body">
     {{#each allNotifications as |notification|}}
