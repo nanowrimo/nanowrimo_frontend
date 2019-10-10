@@ -49,7 +49,7 @@ export default Component.extend({
     return g.get('slug');
   }),
   
-  newNanomessagesCount: computed('notificationsService.newNanomessagesCount', 'notificationsService.recomputeNotifications', function() {
+  newNanomessagesCount: computed('notificationsService.{newNanomessagesCount,recomputeNotifications}', function() {
     let nnc = this.get('notificationsService.newNanomessagesCount');
     let ns = this.store.peekAll('notification');
     let g = this.get('group');
@@ -66,7 +66,7 @@ export default Component.extend({
     return count;
   }),
   
-  nanomessagesDisplayStyle: computed('notificationsService.newNanomessagesCount', 'notificationsService.recomputeNotifications', 'newNanomessagesCount', function() {
+  nanomessagesDisplayStyle: computed('notificationsService.{newNanomessagesCount,recomputeNotifications}', 'newNanomessagesCount', function() {
     var c = this.get('newNanomessagesCount');
     if (c==0) return "nw-hidden";
     else return "";
