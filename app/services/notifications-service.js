@@ -32,7 +32,7 @@ export default Service.extend({
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();
     });
-    debounce(this, this.checkForUpdates, 10000, false);
+    debounce(this, this.checkForUpdates, 15000, false);
   },
   
   notificationClicked(notification){
@@ -44,16 +44,13 @@ export default Service.extend({
       // get some badge data from the store
       let badge = this.get('store').peekRecord('badge', id);
       r.push(badge);
-      //this.set("badgeForSplash", badge);
       //is this a winner badge?
       if (badge.title =="Wrote 50,000 Words During NaNoWriMo" ){
         //NaNo Winner!
         r.push('showWinnerSplash');
-        //this.set('showWinnerSplash', true);
       } else {
         //display the splash
         r.push('showBadgeSplash');
-        //this.set('showBadgeSplash', true);
       }
     }
     if(notification.actionType=='BUDDIES_PAGE') {
@@ -83,7 +80,7 @@ export default Service.extend({
     var new_badge = false;
     var lc = this.get('lastCheck');
     ns.forEach(function(obj) {
-      if (obj.displayAt>lc) {
+      if ((obj.displayAt>lc)&&(obj.displayStatus==1)) {
         count += 1;
         if (obj.actionType=="BADGE_AWARDED") {
           new_badge = true;
@@ -93,6 +90,19 @@ export default Service.extend({
     if (new_badge) {
       this.get('badgesService').checkForUpdates();
     }
+    return count;
+  }),
+  
+  newNanomessagesCount: computed('recomputeNotifications', function() {
+    var ns = this.store.peekAll('notification');
+    var count = 0;
+    ns.forEach(function(obj) {
+      // If this notification is about nanomessages
+      if (obj.actionType=='NANOMESSAGES') {
+        // Add the data count to the total
+        count += obj.dataCount;
+      }
+    });
     return count;
   }),
   

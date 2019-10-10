@@ -64,6 +64,7 @@
     flex: 1 1 100%;
     padding-left: 10px;
     .nw-user-name {
+      display: flex;
       font-family: 'SansBold', sans-serif;
       font-size: 20px;
       color: $nw-darkgrey;

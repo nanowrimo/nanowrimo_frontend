@@ -15,7 +15,14 @@ export default Component.extend({
   badgeForSplash: null,
   
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
-    return this.get('store').peekAll('notification');
+    let ns = this.get('store').peekAll('notification');
+    let newns = [];
+    ns.forEach(function(n) {
+      if (n.displayStatus==1) {
+        newns.push(n);
+      }
+    });
+    return newns;
   }),
   notificationSortingDesc: Object.freeze(['displayAt:desc']),
   sortedNotifications: sort('allNotifications','notificationSortingDesc'),
@@ -23,8 +30,16 @@ export default Component.extend({
   newNotificationsCount: computed('notificationsService.newNotificationsCount', function() {
     return this.get('notificationsService.newNotificationsCount');
   }),
+  newNanomessagesCount: computed('notificationsService.newNanomessagesCount', function() {
+    return this.get('notificationsService.newNanomessagesCount');
+  }),
   displayStyle: computed('newNotificationsCount', function() {
     var c = this.get('newNotificationsCount');
+    if (c==0) return "nw-hidden";
+    else return "";
+  }),
+  nanomessagesDisplayStyle: computed('newNanomessagesCount', function() {
+    var c = this.get('newNanomessagesCount');
     if (c==0) return "nw-hidden";
     else return "";
   }),
