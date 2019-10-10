@@ -9,9 +9,7 @@
       {{/each}}
     </div>
   </div>
-  <div class="new-message-form">
-    {{#if showForm}}
-      {{nanomessage-form group=group context=context adminIsChecked=adminIsChecked refreshMessages=(action 'afterNanomessageSubmit')}}
-    {{/if}}
-  </div>
+  {{#if showForm}}
+    {{nanomessage-form group=group context=context adminIsChecked=adminIsChecked refreshMessages=(action 'afterNanomessageSubmit')}}
+  {{/if}}
 </div>

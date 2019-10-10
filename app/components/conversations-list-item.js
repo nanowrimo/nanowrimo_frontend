@@ -4,6 +4,7 @@ import { computed }  from '@ember/object';
 
 export default Component.extend({
   store: service(),
+  notificationsService: service(),
   currentUser: service(),
   group: null,
   conversationLabel: computed('group',function() {
@@ -46,6 +47,29 @@ export default Component.extend({
   conversationSlug: computed('group', function() {
     let g = this.get('group');
     return g.get('slug');
+  }),
+  
+  newNanomessagesCount: computed('notificationsService.{newNanomessagesCount,recomputeNotifications}', function() {
+    let nnc = this.get('notificationsService.newNanomessagesCount');
+    let ns = this.store.peekAll('notification');
+    let g = this.get('group');
+    var count = 0;
+    if (nnc==nnc) {
+      ns.forEach(function(obj) {
+        // If this notification is about nanomessages
+        if ((obj.actionType=='NANOMESSAGES')&&(obj.actionId==g.id)) {
+          // Add the data count to the total
+          count += obj.dataCount;
+        }
+      });
+    }
+    return count;
+  }),
+  
+  nanomessagesDisplayStyle: computed('notificationsService.{newNanomessagesCount,recomputeNotifications}', 'newNanomessagesCount', function() {
+    var c = this.get('newNanomessagesCount');
+    if (c==0) return "nw-hidden";
+    else return "";
   }),
   
   actions: {

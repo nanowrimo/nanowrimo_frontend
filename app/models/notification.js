@@ -13,6 +13,7 @@ export default Model.extend({
   imageUrl: attr('string'),
   user: belongsTo('user'),
   dataCount: attr('number'),
+  displayStatus: attr('number'),
   lastViewedAt: attr('date'),
   redirectUrl: attr('string'),
 });

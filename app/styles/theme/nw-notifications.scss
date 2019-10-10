@@ -122,6 +122,7 @@
 // ----------------------------------
 
 .nw-unread-circle {
+  text-align: center;
   width: 16px;
   height: 16px;
   background-color: $nw-mediumred;
@@ -136,4 +137,8 @@
     display: none;
   }
 }
-
+.conversation-list-item {
+  .nw-unread-circle {
+    position: relative;
+  }
+}
