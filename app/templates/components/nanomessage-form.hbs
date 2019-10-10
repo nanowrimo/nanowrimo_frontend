@@ -22,7 +22,7 @@
           </div>
         {{/if}}
       {{/if}}
-      <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" />
+      <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
     </form>
     <script>var editor = new MediumEditor('.editable');</script>
   </div>

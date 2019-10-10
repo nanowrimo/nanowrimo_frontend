@@ -11,6 +11,7 @@ export default Component.extend({
   content: null,
   context: null,
   adminIsChecked: null,
+  isDisabled: false,
   _callAfterSubmit() {
     let callback = this.get('afterSubmit');
     if (callback) { callback(); }
@@ -68,6 +69,7 @@ export default Component.extend({
       this.set('adminIsChecked',isChecked);
     },
     afterSubmit() {
+      this.set('isDisabled',true);
       let i = document.querySelector('.medium-editor-element').innerHTML;
       let tx = document.querySelector('.medium-editor-element').textContent;
       let nm = this.get('newNanomessage');
@@ -76,6 +78,7 @@ export default Component.extend({
       nm.set('official',c);
       if (tx) {
         nm.save().then(() => {
+          this.set('isDisabled',false);
           let rm = this.get('refreshMessages');
           rm();
         });
