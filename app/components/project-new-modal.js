@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { filterBy, sort } from '@ember/object/computed';
+import { sort } from '@ember/object/computed';
 import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
@@ -10,7 +10,7 @@ export default Component.extend({
   store: service(),
 
   tagName: 'span',
-
+  getChallengeOptions: false,
   associatedChallenge: null,
   associatedChallengeId: 0,
   associateWithChallenge: false,
@@ -23,57 +23,32 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
   projectChallengeChangeset: null,
-  recalculateEvents: 0,
   validChallengeDates: true,
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
   // Gets all challenges from the store
-  baseChallenges:  computed(function() {
-    return this.get('store').findAll('challenge');
+  unassignedOptionsForChallenges:  computed('getChallengeOptions', function() {
+    return this.get('store').query('challenge',{ available: true});
   }),
-  
-  // Filters baseChallenges for the nano events
-  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  
-  // Shows the challenges the user hasn't yet joined
-  unassignedOptionsForChallenges: computed('filteredOptionsForChallenges.[]','user.projects.[]','baseChallenges.[]','recalculateEvents',function() {
-    let newArray = [];
-    let acs = this.get('filteredOptionsForChallenges');
-    let ucs = this.get('user.projects');
-    let r = this.get('recalculateEvents');
-    if (r==r) {
-      acs.forEach(function(ac) {
-        let found = false;
-        ucs.forEach(function(uc) {
-          let pcs = uc.challenges;
-          pcs.forEach(function(pc) {
-            if (ac.id == pc.id) {
-              found = true;
-            }
-          });
-        });
-        if (!found) {
-          newArray.push(ac);
-        }
-      });
-    }
-    return newArray;
-  }),
-  
+ 
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
   
   // auto associate with the latest challenge if the latest challenge hasn't ended
-  challengeCheck: observer('optionsForChallenges',function() {
+  challengeCheck: observer('optionsForChallenges.[]',function() {
     let challenges = this.get('optionsForChallenges');
     if (challenges.length > 0) {
       let latest = challenges[0];
       let d = new Date();
       if (latest.endsAt > d) {
-        if (!this.get('defaultAssociationTested')) {
-          this.set('defaultAssociationTested', true);
-          this.send('clickedAssociateCheckbox');
-        }
+
+
+        this.send('clickedAssociateCheckbox');
+        
+      } else {
+
+        this.set('associateWithChallenge',false);
+        this.set('Challenge',null);
       }
     }
   }),
@@ -113,6 +88,10 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('user');
     assert('Must pass a user into {{project-new-modal}}', user);
+  },
+  
+  didReceiveAttrs(){
+    //create a new project
     let newProject = this.get('store').createRecord('project');
     this.set('project', newProject);
     //by default, we want this new project to be 'primary'
@@ -152,16 +131,18 @@ export default Component.extend({
       this.set("formStepOverride", stepNum);
     },
     onShow() {
+      this.toggleProperty('getChallengeOptions');
+      //show the form (this should init the form-for)
+      this.set('showForm', true);
       //assign the user to the project
-      this.set('project.user', this.get('user'));
+      this.get('user').projects.pushObject(this.get('project'))
       
     },
     onHidden() {
       let callback = this.get('onHidden');
       this.set('formStepOverride',0);
-      let r = this.get('recalculateEvents')
-      this.set('recalculateEvents', r+1);
-      
+      this.set('showForm', false);
+      this.set('challenge', null);
       if (callback) {
         callback();
       } else {

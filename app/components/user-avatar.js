@@ -21,16 +21,16 @@ export default Component.extend({
     return "/images/users/halo.svg";
   }),
 
-  laurelImagePath: computed('user.nanoWinCount', function(){
-    let count = this.get('user.nanoWinCount');
+  laurelImagePath: computed('user.laurels', function(){
+    let count = this.get('user.laurels');
     if (count > 10) {
       count = 10;
     }
     return `/images/users/laurels/${count}.svg`;
   }),
   
-  hasLaurels: computed('user.nanoWinCount', function(){
-    return this.get('user.nanoWinCount')>0;
+  hasLaurels: computed('user.laurels', function(){
+    return this.get('user.laurels')>0;
   }),
   
   actions: {
