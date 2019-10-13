@@ -62,7 +62,7 @@
     "ember-moment": "^7.7.0",
     "ember-place-autocomplete": "^2.0.0",
     "ember-power-select": "^2.0.3",
-    "ember-power-select-with-create": "^0.6.0",
+    "ember-power-select-with-create": "^0.7.0",
     "ember-resolver": "^5.0.1",
     "ember-responsive": "^3.0.0-beta.3",
     "ember-simple-auth": "^1.5.1",
