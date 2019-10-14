@@ -53,11 +53,12 @@ export default Component.extend({
     let nnc = this.get('notificationsService.newNanomessagesCount');
     let ns = this.store.peekAll('notification');
     let g = this.get('group');
+    let gid = g.get('id');
     var count = 0;
     if (nnc==nnc) {
       ns.forEach(function(obj) {
         // If this notification is about nanomessages
-        if ((obj.actionType=='NANOMESSAGES')&&(obj.actionId==g.id)) {
+        if ((obj.actionType=='NANOMESSAGES')&&(obj.actionId==gid)) {
           // Add the data count to the total
           count += obj.dataCount;
         }
