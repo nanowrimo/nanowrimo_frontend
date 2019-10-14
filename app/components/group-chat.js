@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed }  from '@ember/object';
 import { debounce, cancel } from '@ember/runloop';
+import { sort }  from '@ember/object/computed';
 
 export default Component.extend({
   router: service(),
@@ -28,7 +29,7 @@ export default Component.extend({
     let options = ['createdAt:asc'];
     this.set('sortOptions', options);
     this.set('selectedSortOption', [options[0]]);
-    debounce(this, this.gotoBottom, 1000, false);
+    //debounce(this, this.gotoBottom, 1000, false);
     this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
   },
 
@@ -37,7 +38,7 @@ export default Component.extend({
     cancel(td);
   },
   
-  sortedMessages: computed('messages.[]','group.id','context',function() {
+  filteredMessages: computed('messages.[]','group.id','context',function() {
     let ms = this.get("messages");
     let c = this.get("context");
     let t = this.get('group.groupType');
@@ -45,18 +46,22 @@ export default Component.extend({
     if (ms) {
       if ((c=='nanomessages')&&((t=='everyone')||(t=='region'))) {
         ms.forEach(function(m) {
-          if (m.official) {
+          if ((m.official)&&(m.id>0)) {
             newms.push(m);
           }
         });
       } else {
         ms.forEach(function(m) {
-          newms.push(m);
+          if (m.id>0) {
+            newms.push(m);
+          }
         });
       }
     }
     return newms;
   }),
+  messageSortingDesc: Object.freeze(['createdAt:desc']),
+  sortedMessages: sort('filteredMessages','messageSortingDesc'),
   
   showToDiv: computed('group.groupType', function() {
     let g = this.get('group');
@@ -85,20 +90,18 @@ export default Component.extend({
         }
       });
     }
-    //this.set('showForm',false);
-    //debounce(this, this.doShowForm, 500, false);
     return gn;
   }),
   
   doShowForm() {
     this.set('showForm',true);
   },
-  gotoBottom(){
+  /*gotoBottom(){
     var objDiv = document.getElementById("convo-content");
     if (objDiv) {
       objDiv.scrollTop = objDiv.scrollHeight;
     }
-  },
+  },*/
   checkForUpdates() {
     let g = this.get('group');
     let gid = g.id;
@@ -114,15 +117,13 @@ export default Component.extend({
   checkForMessages() {
     this.checkForUpdates();
     this.set('tempDebounce',debounce(this, this.checkForMessages, 10000, false));
-    //debounce(this, this.checkForMessages, 5000, false);
-    //debounce(this, this.gotoBottom, 500, false);
   },
   actions: {
     afterNanomessageSubmit() {
       this.checkForUpdates();
       this.set('showForm',false);
       debounce(this, this.doShowForm, 0, false);
-      debounce(this, this.gotoBottom, 500, false);
+      //debounce(this, this.gotoBottom, 500, false);
     },
   }
   

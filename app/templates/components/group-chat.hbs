@@ -1,6 +1,9 @@
 <div class="nw-card-content conversation">
   <div class="conversation-header">
     To: <span class='conversation-name'>{{groupName}}</span>
+    {{#if showForm}}
+      {{nanomessage-form group=group context=context adminIsChecked=adminIsChecked refreshMessages=(action 'afterNanomessageSubmit')}}
+    {{/if}}
   </div>
   <div class="conversation-content" id="convo-content">
     <div class="nanomessages-container">
@@ -9,7 +12,4 @@
       {{/each}}
     </div>
   </div>
-  {{#if showForm}}
-    {{nanomessage-form group=group context=context adminIsChecked=adminIsChecked refreshMessages=(action 'afterNanomessageSubmit')}}
-  {{/if}}
 </div>
