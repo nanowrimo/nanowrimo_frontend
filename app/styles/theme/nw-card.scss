@@ -89,6 +89,11 @@
       font-size: 14px;
       text-transform: uppercase;
       color: $nw-mediumgrey;
+      &.nw-floating {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
     }
     .nw-card-headline {
       font-family: 'SerifBold', serif;

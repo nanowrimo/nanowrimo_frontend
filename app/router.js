@@ -108,7 +108,7 @@ Router.map(function() {
   this.route('confirm-email-change');
   this.route('revert-email-change');
   this.route('widgets');
-  this.route('brought-to-you-by')
+  //this.route('brought-to-you-by')
 });
 
 export default Router;

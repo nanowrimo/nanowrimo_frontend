@@ -1,0 +1,18 @@
+<section class="about">
+  <div class="container">
+    <div class="wrapper">
+      {{#if majorDonorString}}
+        <h3>Major Donors</h3>
+        <div>{{majorDonorString}}</div>
+      {{/if}}
+      {{#if monthlyDonorString}}
+        <h3>Monthly Donors</h3>
+        <div class='donor-list'>{{monthlyDonorString}}</div>
+      {{/if}}
+      {{#if supportingDonorString}}
+        <h3>Supporting Donors</h3>
+        <div>{{supportingDonorString}}</div>
+      {{/if}}
+    </div>
+  </div>
+</section>

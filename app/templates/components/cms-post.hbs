@@ -51,7 +51,12 @@
     <div class="nw-container">
       <div class="nw-wrapper">
         <div class="nw-flex">
-          {{cms-pep-talks}}
+          {{#if (eq post.data.attributes.api-code "all_pep_talks")}}
+            {{cms-pep-talks}}
+          {{/if}}
+          {{#if (eq post.data.attributes.api-code "all_donors")}}
+            {{all-donors}}
+          {{/if}}
         </div>
       </div>
     </div>

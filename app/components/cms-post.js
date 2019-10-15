@@ -27,9 +27,9 @@ export default Component.extend({
     return this.get('post.data.attributes.content-type')=='Group of page cards';
   }),
   
-  // Returns true if this is a group of page cards
+  // Returns true if this is an Ember component
   isComponent: computed(function() {
-    return this.get('post.data.attributes.content-type')=='Ember component';
+    return this.get('post.data.attributes.content-type')=='API code';
   }),
   
   // Returns true if this is a group of page cards

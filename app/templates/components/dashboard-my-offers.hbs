@@ -1,13 +1,31 @@
-<div class="nw-card-header">
-  <div class="nw-card-title">My Offers</div>
+<div class='nw-card-header nw-card-page-card nw-blue-back nw-card-horizontal'>
+  <div class="nw-card-title nw-floating">My Offers</div>
+  {{#if offerLoaded}}
+    <div class="nw-two-fifths">
+      <img src="{{offer.card-image}}" />
+    </div>
+    <div class="nw-three-fifths">
+      <div class="nw-card-headline">
+        {{{offer.headline}}}
+      </div>
+    </div>
+  {{/if}}
 </div>
-<div class="nw-card-content nw-center-horiz">
+<div class='nw-card-content nw-white-back'>
+  {{#if offerLoaded}}
+    {{{offer.body}}}
+    <a href="{{offer.external-link}}" target="_blank">
+      <button class="button-reversed">
+        Claim Offer
+      </button>
+    </a>
+  {{/if}}
   <div>
-    <div class="nw-promo-text">
-      Our terrific sponsors can help you through every step of the writing process, and many have special offers for Wrimos.
-    </div>
-    <div >
-      <a href="/offers"><button>Show me!</button></a>
-    </div>
+    {{link-to "-> See All Offers <-" "offers" class="nw-grey-link"}}
   </div>
 </div>
+{{#if hasCouponCode}}
+  <div class='nw-coupon-code {{copyClass}}' {{action 'copyCode'}}>
+    <i class="fa fa-link"></i> <span class="nw-underlined">{{copyText}}</span>
+  </div>
+{{/if}}
