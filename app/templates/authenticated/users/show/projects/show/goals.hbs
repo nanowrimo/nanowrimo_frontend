@@ -1,6 +1,8 @@
 <div class='nw-panel-actions'>
   <div>
-    <button {{action 'newProjectChallenge'}}>create new goal</button>
+    {{#if canAddProjectChallenge}}
+      <button {{action 'newProjectChallenge'}}>create new goal</button>
+    {{/if}}
   </div>
   <div class='nw-panel-actions-select' >
     <span id='project-summary-sort-by-select'>
