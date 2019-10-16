@@ -38,6 +38,13 @@ export default Controller.extend({
       }
   }),
   
+  canAddProjectChallenge: computed("project", function(){
+    //get the project and the user
+    let p = this.get('project');
+    let u = this.get('currentUser.user');
+    return (p.user_id == u.id);
+  }),
+  
   projectChallenges: computed('project', 'project.projectChallenges.[]', function(){
     return this.get('project.projectChallenges');
   }),
