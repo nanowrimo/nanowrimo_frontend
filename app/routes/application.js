@@ -5,8 +5,6 @@ import ENV from 'nanowrimo/config/environment';
 
 export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
-  badgesService: service(),
-  notificationsService: service(),
   session: service(),
   //include the airbrake service 
   airbrake: service(),
@@ -42,27 +40,13 @@ export default Route.extend(ApplicationRouteMixin, {
     }
   },
 
-  beforeModel() {
-    this._loadBadgesService();
-    this._loadNotificationsService();
+  afterModel() {
     return this._loadCurrentUser();
   },
 
-  sessionAuthenticated() {
-    this._super(...arguments);
-    this._loadBadgesService();
-    this._loadNotificationsService();
-    this._loadCurrentUser();
-  },
 
   _loadCurrentUser() {
     return this.get('currentUser').load().catch(() => this.get('session').invalidate());
-  },
-  _loadBadgesService() {
-    return this.get('badgesService').load();
-  },
-  _loadNotificationsService() {
-    return this.get('notificationsService').load();
   },
 
   actions: {
