@@ -5,7 +5,9 @@ import { computed } from '@ember/object';
 export default Controller.extend({
   currentUser: service(),
   router: service(),
-
+  badgesService: service(),
+  notificationsService: service(),
+  
   currentUserName: reads('currentUser.user.name'),
   currentUserEmail: reads('currentUser.user.email'),
   currentUserIsNotConfirmed: reads('currentUser.user.isNotConfirmed'),
@@ -23,6 +25,21 @@ export default Controller.extend({
   queryParams: ['addProject'],
   
   addProject: false,
+  
+  init() {
+    this._super(...arguments);
+    this._loadBadgesService();
+    this._loadNotificationsService();
+  },
+
+  _loadBadgesService() {
+    return this.get('badgesService').load();
+  },
+  _loadNotificationsService() {
+    return this.get('notificationsService').load();
+  },
+
+  
   
   actions: {
     afterProjectModalClose() {
