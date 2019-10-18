@@ -9,12 +9,17 @@ export default Service.extend({
   recomputeBadges: -1,
 
   load() {
-    debounce(this, this.checkForUpdates, 1000, false);
-    return this.get('store').query('badge',{});
+    debounce(this, this.getBaseBadgeData, 2000, false);
+  },
+  
+  getBaseBadgeData() {
+    let t = this;
+    this.get('store').query('badge',{}).then(function() {
+      debounce(t, t.checkForUpdates, 1000, false);
+    });
   },
   
   checkForUpdates() {
-    debounce(this, this.checkForUpdates, 15000, false);
     let t = this;
     let u = this.get('currentUser.user');
     if (u) {

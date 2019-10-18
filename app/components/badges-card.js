@@ -1,6 +1,7 @@
 //import NanoSubcard from 'nanowrimo/components/nano-subcard';
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
+import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 export default Component.extend({
   store: service(),
@@ -12,8 +13,12 @@ export default Component.extend({
   parentRecomputeBadges: 0,
   init() {
     this._super(...arguments);
+    //let bs = this.get('badgesService');
+    //debounce(this, bs.checkForUpdates, 3000, false);
+    
+    //bs.checkForUpdates();
   },
-  checkForUpdates() {
+  /*checkForUpdates() {
     let u = this.get('user');
     let nprb = this.get('parentRecomputeBadges');
     let recompute = false;
@@ -27,16 +32,19 @@ export default Component.extend({
     if (recompute) {
       this.set('parentRecomputeBadges',nprb+1);
     }
-  },
+  },*/
   badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges','user.userBadges.{[]}', function() {
-    let bt = this.get('badgeType');
-    let bs = this.get('store').peekAll('badge');
+    let rb = this.get('badgesService.recomputeBadges');
     let newbs = [];
-    bs.forEach(function(badge) {
-      if (badge.badge_type==bt) {
-        newbs.push(badge);
-      }
-    });
+    if (rb>=0) {
+      let bt = this.get('badgeType');
+      let bs = this.get('store').peekAll('badge');
+      bs.forEach(function(badge) {
+        if (badge.badge_type==bt) {
+          newbs.push(badge);
+        }
+      });
+    }
     return newbs;
   }),
   firstBadge: computed('badgesService.recomputeBadges','badges','parentRecomputeBadges','user.projects.{[],@each.primary}', function() {
