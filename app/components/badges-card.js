@@ -1,7 +1,7 @@
 //import NanoSubcard from 'nanowrimo/components/nano-subcard';
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
-import { debounce } from '@ember/runloop';
+//import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 export default Component.extend({
   store: service(),
