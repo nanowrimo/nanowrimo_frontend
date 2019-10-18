@@ -1,5 +1,6 @@
 import ENV from 'nanowrimo/config/environment';
 import ScrollRoute from 'nanowrimo/routes/scroll-route'
+import fetch from 'fetch';
 
 export default ScrollRoute.extend({
   model(){
