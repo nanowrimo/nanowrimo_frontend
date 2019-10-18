@@ -66,6 +66,7 @@ export default Service.extend({
   }),
   helpLinks: computed(function() {
     let links = [
+      {label: "Brought to You By", url: "/brought-to-you-by", segment: null},
       {label: "Help Desk", url: "https://nanowrimo.uservoice.com/"}
 
     ];
