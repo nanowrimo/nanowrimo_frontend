@@ -8,7 +8,7 @@ import { debounce } from '@ember/runloop';
 export default Component.extend({
   currentUser: service(),
   store: service(),
-  pageLoaded: false,
+  pageLoaded: false,  
   regions: alias('model'),
   primaryDisplay: true,
   
@@ -152,7 +152,10 @@ export default Component.extend({
     result = result.concat(left, right);
     return result;
   },
-
+  hasSortedRegions: computed('sortedRegions', function(){
+    let r = this.get('sortedRegions');
+    return r.length > 0;
+  }),
   sortedRegions: computed('currentUser.user.homeRegion','userRegions.[]','regions','joinedRegionIds','searchString','sortOption', function() {
     //get the regions 
     let r = this.get('regions');
