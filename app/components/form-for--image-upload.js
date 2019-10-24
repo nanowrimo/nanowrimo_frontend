@@ -4,7 +4,7 @@ import { reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
 
-const ACCEPTED_MIME_TYPES = 'image/*';
+const ACCEPTED_MIME_TYPES = "image/jpg,image/png,image/gif"
 const DIRECT_UPLOAD_URL = '/rails/active_storage/direct_uploads';
 
 export default Component.extend({
@@ -18,13 +18,13 @@ export default Component.extend({
   progress: 0,
   property: '',
   type: 'text',
-
+  validFile: false,
   name: reads('property'),
 
   actions: {
     uploadImage(file) {
       let uploadFile;
-
+      let validTypes = ACCEPTED_MIME_TYPES.split(',');
       if (file.dataTransfer && file.dataTransfer.files) {
         // Get File if it has come from the dropzone
         uploadFile = file.dataTransfer.files.item(0);
@@ -34,6 +34,13 @@ export default Component.extend({
       }
 
       if (uploadFile) {
+        //check that the file type is acceptable 
+        if (!validTypes.includes(uploadFile.type ) ){
+          this.set('validFile', false);
+          return;
+        } else {
+          this.set('validFile', true);
+        }
         let uploadUrl = `${ENV.APP.API_HOST}${DIRECT_UPLOAD_URL}`;
         this.get('activeStorage').upload(uploadFile, uploadUrl, {
           onProgress: progress => {
