@@ -4,7 +4,7 @@ import { reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
 
-const ACCEPTED_MIME_TYPES = "image/jpg,image/png,image/gif"
+const ACCEPTED_MIME_TYPES = "image/jpeg,image/png,image/gif"
 const DIRECT_UPLOAD_URL = '/rails/active_storage/direct_uploads';
 
 /* the image upload is using ember-file-upload 
