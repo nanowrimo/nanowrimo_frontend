@@ -37,7 +37,8 @@
         {{else}}
           File is invalid (Note: Drag and drop currently doesn't work on Chromebooks)
         {{/if}}
-      {{else if queue.files.length}}
+      {{else if validFile }}
+        
         Uploading file: {{progress}}%
       {{else}}
         {{#if dropzone.supported}}
@@ -48,8 +49,10 @@
           name=property
           onfileadd=(action "uploadImage")
         }}
-          <a style="cursor:pointer">Select an image</a>
+          <a style="cursor:pointer">Select an image</a><br>
+          
         {{/file-upload}}
+        image must be a .jpg, .png, or .gif
       {{/if}}
     {{/if}}
   {{/file-dropzone}}
