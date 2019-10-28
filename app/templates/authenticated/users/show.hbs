@@ -43,6 +43,11 @@
             tab=editTab
           }}
         {{/if}}
+        {{#if canSpoofUser}}
+          <div>
+            <i {{action "doSpoofUser"}} class="fa fa-user-secret"></i>
+          </div>
+        {{/if}}
       </div>
       <div class="nw-sidebar-divot"></div>
     </div>

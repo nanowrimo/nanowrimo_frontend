@@ -9,7 +9,6 @@
   {{/modal.header}}
   {{#if showForm }}
     {{#form-for
-      data-test-project-form=true
       afterSubmit=(action 'afterSubmit')
       currentStepIndex=formStepOverride
       model=project
