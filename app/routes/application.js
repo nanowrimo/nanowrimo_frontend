@@ -50,9 +50,9 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
+    this._loadCurrentUser();
     this._loadBadgesService();
     this._loadNotificationsService();
-    this._loadCurrentUser();
   },
 
   _loadCurrentUser() {

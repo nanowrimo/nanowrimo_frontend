@@ -329,7 +329,6 @@ const User = Model.extend({
   },
 
   loadGroupUsers(group_types) {
-    //alert('loading');
     let u = this;
     let store = this.get('store');
     store.query('group-user',

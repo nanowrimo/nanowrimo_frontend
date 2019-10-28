@@ -6,6 +6,11 @@
     <div class="full-width">
       {{#if firstBadge}}
         {{badge-rendered badge=firstBadge user=user projectChallenge=projectChallenge renderSize='large'}}
+      {{else}}
+        <div class="nw-list-loading">
+          <i class="fa fa-spinner fa-spin"></i>
+          Loading...
+        </div>
       {{/if}}
     </div>
   </div>
@@ -17,6 +22,11 @@
         {{#each badges as |badge|}}
           {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
         {{/each}}
+      {{else}}
+        <div class="nw-list-loading">
+          <i class="fa fa-spinner fa-spin"></i>
+          Loading...
+        </div>
       {{/if}}
     </div>
   </div>

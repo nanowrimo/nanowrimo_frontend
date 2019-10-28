@@ -137,7 +137,8 @@ export default Component.extend({
         
       } else {
         //reset the project Challenge
-        this._resetProjectChallenge();
+        // The following line threw the error 'this._resetProjectChallenge is not a function'. What is it suppposed to do?
+        //this._resetProjectChallenge();
       }
     },
     
