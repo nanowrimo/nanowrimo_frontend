@@ -38,11 +38,11 @@ export default Controller.extend({
       }
   }),
   
-  canAddProjectChallenge: computed("project", function(){
+  canAddProjectChallenge: computed("author",'currentUser.user', function(){
     //get the project and the user
-    let p = this.get('project');
+    let a = this.get('author');
     let u = this.get('currentUser.user');
-    return (p.user_id == u.id);
+    return (a == u);
   }),
   
   projectChallenges: computed('project', 'project.projectChallenges.[]', function(){

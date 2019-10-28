@@ -1,10 +1,14 @@
 <div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan3 g2-col2 g2-row1 g2-hspan1 g2-vspan3">
   <div class="nw-card-content no-padding">
-    {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
-      {{#each sortedRegions as |region index|}}
-        {{g-map-marker context lat=region.groupObject.latitude lng=region.groupObject.longitude}}
-      {{/each}}
-    {{/g-map}}
+    {{#if hasSortedRegions }}
+      {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
+        {{#each sortedRegions as |region index|}}
+          {{g-map-marker context lat=region.groupObject.latitude lng=region.groupObject.longitude}}
+        {{/each}}
+      {{/g-map}}
+    {{else}}
+      <NwLoading />
+    {{/if}}
   </div>
 </div>
 <div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan1">
@@ -48,7 +52,7 @@
           {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
         {{/each}}
       {{else}}
-        Loading ... <img class='spinner' src="/images/spinner.svg">
+        <NwLoading />
       {{/if}}
     </ul>
   </div>

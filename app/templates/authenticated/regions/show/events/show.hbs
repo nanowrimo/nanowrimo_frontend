@@ -10,9 +10,7 @@
     <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1">
       <div class="nw-card-content" style="padding: 0px;">
         <div style="width: 300px; height: 300px;">
-          {{#g-map lat=event.latitude lng=event.longitude zoom=8 as |context|}}
-            {{g-map-marker context lat=event.latitude lng=event.longitude}}
-          {{/g-map}}
+          <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{event.latitude}},{{event.longitude}}&zoom=14&size=300x300&key={{mapsKey}}">
         </div>
       </div>
     </div>
