@@ -7,23 +7,25 @@ import { inject as service } from '@ember/service';
 
 export default BaseAuthenticator.extend({
   session: service(),
-  serverTokenEndpoint: `${ENV.APP.API_HOST}/users/sign_in`,
-  serverSpoofEndpoint: `${ENV.APP.API_HOST}/users/spoof`,
-  serverLogoutEndpoint: `${ENV.APP.API_HOST}/users/logout`,
+  serverSpoofEndpoint: `${ENV.APP.API_HOST}/users/`,
   tokenAttributeName: "auth_token",
   
-  authenticate(identifier, password) {
+  // For spoofing another user
+  authenticate(user_id) {
+    //alert('spoofing3');
+    let { auth_token }  = this.get('session.data.authenticated');
+    
     return new Promise((resolve, reject) => {
-      return fetch(this.get('serverTokenEndpoint'), {
+      return fetch(this.get('serverSpoofEndpoint')+user_id+'/spoof', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier, password })
+        headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
       })
       .then((response) => {
         return response.json()
         .then((json)=>{
           if (this._validate(json)) {
             resolve(json);
+            location.reload();
           } else {
             reject(json);
           }
@@ -34,31 +36,6 @@ export default BaseAuthenticator.extend({
       });
     });
   },
-
-  // For spoofing another user
-  /*spoof(user_id) {
-    alert('spoofing');
-    return new Promise((resolve, reject) => {
-      return fetch(this.get('serverSpoofEndpoint'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id })
-      })
-      .then((response) => {
-        return response.json()
-        .then((json)=>{
-          if (this._validate(json)) {
-            resolve(json);
-          } else {
-            reject(json);
-          }
-        })
-      })
-      .catch((error) => {
-        reject(error);
-      });
-    });
-  },*/
 
   restore(data){
     return new Promise((resolve, reject) => {

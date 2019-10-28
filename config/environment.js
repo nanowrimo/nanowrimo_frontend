@@ -36,13 +36,21 @@ module.exports = function(environment) {
       includeTimezone: 'all'
     },
     'place-autocomplete': {
-      //exclude: true,
+      exclude: true,
       key: 'AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4',
       //client: 'gme-myclientid',
       //version: 3.27, // Optional - if client is set version must be above 3.24
       language: 'en', // Optional - be default will be based on your browser language
       region: 'US' // Optional
     },
+    'g-map': {
+      libraries: ['places'],
+      key: 'AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4' //place-autocomplete key
+      //key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss' //the original g-map key
+    },
+  
+    
+    
     torii: {
       allowUnsafeRedirect: true,
       providers: {
@@ -128,10 +136,7 @@ module.exports = function(environment) {
     //the url of the forums
     ENV.forumsUrl = "https://forums.nanowrimo.org";
   }
-  ENV['g-map'] = {
-    key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss'
-  }
-  
+
   //is this a staging target?
   if (process.env.TARGET=='staging') {
     ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';

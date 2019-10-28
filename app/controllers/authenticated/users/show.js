@@ -7,6 +7,7 @@ import { htmlSafe }  from '@ember/string';
 export default Controller.extend({
   currentUser: service(),
   router: service(),
+  session: service(),
   queryParams: ['edit', 'editImages', 'editImagesTab', 'editTab'],
   edit: null,
   editTab: null,
@@ -25,6 +26,11 @@ export default Controller.extend({
     return this.get('currentUser.user.id') === this.get('user.id');
   }),
 
+  canSpoofUser: computed('currentUser.user.id', 'user.id', function() {
+    // If the user is admin and not the current user
+    return ((this.get('currentUser.user.adminLevel')>0) && (this.get('currentUser.user.id') !== this.get('user.id')));
+  }),
+
   plateStyle: computed('user.plateUrl', 'canEditUser', function() {
     let styles = [];
     let plateUrl = this.get('user.plateUrl');
@@ -39,6 +45,13 @@ export default Controller.extend({
 
   _needsURLUpdate() {
     return this.get('user.slug') !== this.get('userParam');
+  },
+
+  spoofUser(uid) {
+    //alert('spoofing1');
+    let _self = this;
+    
+    return _self.get('session').authenticate('authenticator:spoof', uid);
   },
 
   actions: {
@@ -59,6 +72,11 @@ export default Controller.extend({
         this.set('edit', true);
         if (tab) { this.set('editTab', tab); }
       }
+    },
+    
+    // Logs the current user in as the selected user
+    doSpoofUser() {
+      this.spoofUser(this.get('user.id'));
     }
     
   }

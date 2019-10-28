@@ -91,19 +91,21 @@ export default Component.extend({
   },
   
   didReceiveAttrs(){
-    //create a new project
-    let newProject = this.get('store').createRecord('project');
-    this.set('project', newProject);
-    //by default, we want this new project to be 'primary'
-    newProject.set('primary', true);
-    newProject.set('wordCount', 0);
-    //create the newProjectChallenge for the newProject
-    let newProjectChallenge = this.get('store').createRecord('projectChallenge');
-    //push the projectChallenge onto the project
-    newProject.projectChallenges.pushObject(newProjectChallenge);
+    if (this.get('open')){
+      //create a new project
+      let newProject = this.get('store').createRecord('project');
+      this.set('project', newProject);
+      //by default, we want this new project to be 'primary'
+      newProject.set('primary', true);
+      newProject.set('wordCount', 0);
+      //create the newProjectChallenge for the newProject
+      let newProjectChallenge = this.get('store').createRecord('projectChallenge');
+      //push the projectChallenge onto the project
+      newProject.projectChallenges.pushObject(newProjectChallenge);
     
-    this.set('projectChallenge', newProject);
-    this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
+      this.set('projectChallenge', newProjectChallenge);
+      this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
+    }
   },
 
   actions: {
