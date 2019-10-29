@@ -51,12 +51,12 @@
                 </div>
               </div>
             </div>
-            {{project-new-modal
-              onHidden=(action "afterProjectModalClose")
-              open=addProject
-              user=currentUser.user
-            }}
           {{/unless}}
+          {{project-new-modal
+            onHidden=(action "afterProjectModalClose")
+            open=addProject
+            user=currentUser.user
+          }}
         {{/if}} 
         {{#if currentUserHasProject}}
           {{project-summary project=primaryProject author=currentUser.user class="nw-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1"}}
