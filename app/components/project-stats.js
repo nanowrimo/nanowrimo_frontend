@@ -79,7 +79,8 @@ export default Component.extend({
       //countToday
       let todayCount = this.get('projectChallenge.todayCount');
       //countPerDayToFinishOnTime = countRemaining+countToday/daysRemaining
-      let countPerDay = parseInt((countRemaining+todayCount) / daysRemaining);
+      //let countPerDay = parseInt((countRemaining+todayCount) / daysRemaining);
+      let countPerDay = Math.round((countRemaining+todayCount) / daysRemaining);
       //needed = countPerDayToFinishOnTime - countToday
       let needed = countPerDay - todayCount;
       //percent = needed*100/countPerDayToFinishOnTime
