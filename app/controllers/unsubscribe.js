@@ -7,18 +7,15 @@ export default Controller.extend({
   emailError: false,
   successMessage: false,
   errorMessage: null,
+  confirmed: false,
+  init(){
+    this._super(...arguments);
+    //add an observer to the token
+    this.addObserver('token', this, 'tokenDidChange');
+  },
   
-  displayForm: computed('ptoken','successMessage', function(){
-    return !this.get('successMessage');
-  }),
-  
-  cardInstruction: computed('successMessage', 'errorMessage', function(){
-    let sm = this.get('successMessage');
-    if (sm) {
-      return "You have been unsubscribed from NaNoWriMo emails.";
-    } else { 
-      return "Are you sure you wish to unsubscribe?";
-    }
+  displayForm: computed('confirmed', function(){
+    return !this.get('confirmed');
   }),
   
   actions: {
@@ -42,7 +39,7 @@ export default Controller.extend({
           response.json().then(data=>{
               if (data.code==200) {
                 // success!
-                this.set('successMessage', "You have been unsubscribed from emails");
+                this.set('confirmed', true);
               }
           });
       });
@@ -50,6 +47,27 @@ export default Controller.extend({
     confirmNoUnsubscribe: function(){
       // redirect to /
       this.transitionToRoute("/");
+    }
+  },
+  tokenDidChange() {
+    let t = this.get('token');
+    if(t) {
+      //define the endpoint 
+      let endpoint  = `${ENV.APP.API_HOST}/unsubscribe/email-for-token`;
+      fetch(endpoint, 
+          {
+            body: JSON.stringify({token: t}),
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }
+      ).then(response=>{
+          response.json().then(data=>{
+            this.set('userEmail', data.email);
+          });
+      });
     }
   }
 
