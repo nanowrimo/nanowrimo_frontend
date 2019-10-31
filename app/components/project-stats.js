@@ -300,7 +300,7 @@ export default Component.extend({
       var start = m.clone().startOf('day').utc();
       cStart = start;
       let newEnd = cEnd.utc().format("YYYY-MM-DD");
-      var m = moment.tz(newEnd, "YYYY-MM-DD", tz);
+      m = moment.tz(newEnd, "YYYY-MM-DD", tz);
       var end = m.clone().startOf('day').utc();
       cEnd = end;
       //alert(start);
