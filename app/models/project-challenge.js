@@ -122,7 +122,8 @@ const ProjectChallenge = Model.extend({
   daysRemaining: function() {
      // return the difference between start and now in number of days
     let now = moment();
-    let e = moment(this.get('endsAt')).add(1,'d');
+    //let e = moment(this.get('endsAt')).add(1,'d');
+    let e = moment(this.get('endsAt'));
     let duration = 0;
     if (now.isSameOrBefore(e,'d')) {
       let roundedDays = Math.round(e.diff(now,'hours')/24);
