@@ -48,24 +48,33 @@
     </div>
     <div class="nw-card-content">
       <div class='form-instruction'>Select the type of emails you would like to receive.</div>
+      
       <div class="form-group inline-checkbox">
-        {{f.checkbox label="NaNoWriMo newsletter" property="emailNewsletter"}}
+        {{f.checkbox label="NaNoWriMo updates, sent regularly" property="emailNanowrimoUpdates"}}
+      </div>
+      
+      <div class="form-group inline-checkbox">
+        {{f.checkbox label="NaNoWriMo newsletter, sent once a month" property="emailNewsletter"}}
+      </div>
+      
+      <div class="form-group inline-checkbox">
+        {{f.checkbox label="NaNoMessages (important reminders) from NaNoWriMo" property="emailNanomessagesHq"}}
+      </div>
+      
+      <div class="form-group inline-checkbox">
+        {{f.checkbox label="NaNoMessages (news and events) from MLs" property="emailNanomessagesMls"}}
       </div>
       <div class="form-group inline-checkbox">
-        {{f.checkbox label="NaNoMessages from MLs" property="emailNanomessagesMls"}}
-      </div>
-      <!--<div class="form-group inline-checkbox">
         {{f.checkbox label="New blog posts" property="emailBlogPosts"}}
-      </div>-->
+      </div>
+      
       <!--<div class="form-group inline-checkbox">
         {{f.checkbox label="New buddy requests" property="emailBuddyRequests"}}
       </div>-->
       <!--<div class="form-group inline-checkbox">
         {{f.checkbox label="NaNoMessages from your buddies" property="emailNanomessagesBuddies"}}
       </div>-->
-      <!--<div class="form-group inline-checkbox">
-        {{f.checkbox label="NaNoMessages from NaNo HQ" property="emailNanomessagesHq"}}
-      </div>-->
+   
       <!--<div class="form-group inline-checkbox">
         {{f.checkbox label="Writing reminders" property="emailWritingReminders"}}
       </div>-->
