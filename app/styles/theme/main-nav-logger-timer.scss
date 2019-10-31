@@ -43,16 +43,23 @@
     border-radius: 6px;
     box-shadow: 0 0 14px 3px $nw-darkblue10;
     top: 44px;
+    font-family: 'SourceSansSerif-Regular', sans-serif;
 
     .modal-content {
-      border: solid 1px $nw-lightgreyblue;
+      background-color: $nw-white;
+      background-image: none;
+      border: solid 0px $nw-lightgreyblue;
+      label {
+        padding-top: 10px;
+        font-size: 12px;
+      }
     }
 
     .primary-project-display {
       margin-top: 14px;
       height: 90px;
       position: relative;
-      border-bottom: solid 1px $nw-lightgreyblue;
+      border-bottom: solid 0px $nw-lightgreyblue;
       .project-cover {
         width: 300px;
         float: left;
@@ -94,6 +101,7 @@
     #timer-form-modes {
       width: 300px;
       .timer-sub-menu {
+        background-color: $nw-verylightaqua;
         padding: 14px;
         .timer-sub-menu-item {
           font-weight: 600;
@@ -109,6 +117,7 @@
         }
       }
       .timer-content {
+        background-color: $nw-verylightaqua;
         padding: 14px;
         padding-top: 0px;
         display: flex;
@@ -121,6 +130,7 @@
         .timer-duration {
           flex: 0 0 37%;
           input {
+            background-color: $nw-white;
             height: 36px;
           }
         }
@@ -135,16 +145,21 @@
 
   #session-logger-display{
     right: 24px;
-
+    .modal-content {
+      background-color: #fff;
+      background-image: none;
+    }
     #menu-progress-update-project-display {
 
 
       #progress-update-form {
         .more-info-toggle {
+          background-color: $nw-verylightaqua;
           color: $nw-darkgrey;
           padding-left: 15px;
           padding-right: 15px;
           padding-bottom: 10px;
+          font-size: 13px;
           cursor: pointer;
           i {
             padding-left: 5px;
@@ -164,6 +179,7 @@
         .project-additional-info {
           padding: 15px;
           padding-top: 0px;
+          background-color: $nw-verylightaqua;
           .ember-power-select-selected-item, .ember-power-select-option, .ember-power-select-search {
             font-family: 'SourceSansSerif-Regular', sans-serif;
             color: $nw-mediumgrey;
@@ -173,6 +189,9 @@
             display: flex;
             width: 100%;
             justify-content: space-between;
+            label {
+              padding-top: 0px;
+            }
             .project-emoji {
               width: 40px;
               height: 40px;
@@ -219,7 +238,7 @@
             font-size: 16px;
             border-radius: 6px;
             box-shadow: inset 0 1px 4px 0 $nw-grey50;
-            background-color: $nw-white-1;
+            background-color: $nw-white;
             border: solid 1px $nw-mediumgrey;
           }
         }
@@ -229,7 +248,8 @@
         justify-content: space-between;
         flex-wrap: nowrap;
         padding: 14px;
-        background-color: $nw-lightgreyblue;
+        margin-bottom: 0px;
+        background-color: $nw-verylightaqua;
         .progress-update-input::-webkit-inner-spin-button,
         .progress-update-input::-webkit-outer-spin-button {
            -webkit-appearance: textfield;
@@ -267,7 +287,7 @@
           height: 28px;
           border-radius: 6px;
           box-shadow: inset 0 1px 4px 0 $nw-grey50;
-          background-color: $nw-white-1;
+          background-color: $nw-white;
           border: solid 1px $nw-mediumgrey;
           font-size: 20px;
           line-height: 1.0;

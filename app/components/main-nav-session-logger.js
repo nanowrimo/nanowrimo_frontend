@@ -17,6 +17,7 @@ export default Component.extend({
   selectedWhere: null,
   whenStart: null,
   whenEnd: null,
+  dateStart: null,
   writingLocations: null,
   writingMethods: null,
   referenceTimer: null,
@@ -177,24 +178,30 @@ export default Component.extend({
         let re = this.get('referenceEnd');
         let hhmmStart;
         let hhmmEnd;
+        let yyyymmddStart;
         if (rs) {
           let ms = moment(rs);
           hhmmStart = ms.format("HH:mm");
           let me = moment(re);
           hhmmEnd = me.format("HH:mm");
+          yyyymmddStart = me.format("YYYY-MM-DD");
         } else {
           let m = moment();
           hhmmEnd = m.format("HH:mm");
           m.subtract(1, 'h');
           hhmmStart = m.format("HH:mm");
+          yyyymmddStart = m.format("YYYY-MM-DD");
         }
 
         //get the time in HH:MM format and set that as the whenend
         this.set("whenEnd", hhmmEnd);
-        //subtract 1 hour from the moment
 
         //get the time in HH:MM format and set that as the whenStart
          this.set("whenStart", hhmmStart);
+
+        //get the time in HH:MM format and set that as the whenStart
+         this.set("dateStart", yyyymmddStart);
+         
       } else {
         //nullify the whenEnd and whenStart
          this.set("whenEnd", null);
@@ -265,15 +272,21 @@ export default Component.extend({
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
+      let dateStart = this.get('dateStart');
+      //alert(dateStart);
       // have start and end been set?
-      if (start && end) {
+      if (start && end && dateStart) {
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
+        //let today = moment();
+        //let ymd = today.format('YYYY-MM-DD');
+        let ymd = dateStart;
         let endDate = moment(ymd+" "+end).toDate();
         if( start > end ) {
           //start was yesterday
-          let yesterday = today.subtract(1, 'd');
+          //let yesterday = today.subtract(1, 'd');
+          //ymd = yesterday.format('YYYY-MM-DD');
+          let mDate = moment(dateStart);
+          let yesterday = mDate.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
         }
         let startDate = moment(ymd+" "+start).toDate();

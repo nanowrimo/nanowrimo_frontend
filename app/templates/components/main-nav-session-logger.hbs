@@ -34,7 +34,7 @@
                    {{!--
                       <option value='-1' selected={{countTypeTotalSelected}}>project total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
                    --}}
-                    <option value='0' selected={{countTypeGoalTotalSelected}}>goal total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
+                    <option value='0' selected={{countTypeGoalTotalSelected}}>total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
                     <option value='1' selected={{countTypeSessionSelected}}>{{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>
                   </select>
                 </div>
@@ -107,22 +107,42 @@
                 <div class="side-by-side" style="justify-content: space-between">
                   <div style="flex: 0 0 130px; width: 130px;">
                     <label>When did you start?</label>
-                    {{input type='time' name='when_start' class='form-control progress-update-input time-input' value=whenStart}}
+                    {{input
+                      type='time'
+                      name='when_start'
+                      class='form-control progress-update-input time-input'
+                      value=whenStart
+                    }}
                   </div>
                   <div style="flex: 0 0 130px; width: 130px;">
                     <label>When did you end?</label>
-                    {{input type='time' name='when_end' class='form-control progress-update-input time-input' value=whenEnd}}
+                    {{input
+                      type='time'
+                      name='when_end'
+                      class='form-control progress-update-input time-input'
+                      value=whenEnd
+                    }}
+                  </div>
+                </div>
+                <div class='side-by-side'>
+                  <div>
+                    <label for='date' class='form-group'>Date</label>
+                    {{input
+                      type='date'
+                      name='date'
+                      class='form-control'
+                      value=dateStart
+                    }}
                   </div>
                 </div>
               </div>
-              <div id="progress-update-form-buttons" class='form-group'> 
+              <div id="progress-update-form-buttons"> 
                 <input class='form-control nano-button' type='submit' value='Update progress' {{action "formSubmit" }}>
-                <a href="#" {{action 'cancel'}}>Cancel</a>
+                <input class='nano-button btn-underlined' {{action 'cancel'}} value='Cancel'>
               </div>
             </div>
           </form>
-   
-      </div>
+        </div>
       </div>
     </div>
   </div>

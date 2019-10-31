@@ -9,10 +9,11 @@ button, input.nano-button {
   
   /* Button text */
   font-family: 'SansBold', sans-serif;
+  font-size: 14px;
   color: $nw-lightblue;
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  line-height: 14px;
+  line-height: 12px;
   text-align: center;
   
   /* Background and border */
@@ -100,7 +101,27 @@ button, input.nano-button {
     
   }
 }
-
+.modal-content {
+  .modal-body {
+    .form-group {
+      input.nano-button {
+        height: 28px;
+      }
+      input.btn-underlined {
+        background: transparent;
+        border: 0px;
+        text-decoration: underline;
+        font-size: 16px;
+        letter-spacing: 0.3px;
+        color: $nw-mediumgrey;
+        text-transform: none;
+        box-shadow: none;
+        text-align: right;
+      }
+    }
+  }
+}
+    
 button:focus, input.nano-button:focus {
   outline: 0;
 }

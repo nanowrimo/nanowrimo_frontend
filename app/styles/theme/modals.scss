@@ -120,59 +120,59 @@
     .tab-content {
       padding: 28px;
       padding-bottom: 4px;
-      .form-group {
-        input, textarea, .ember-power-select-multiple-trigger {
-          height: 36px;
-          border-radius: 6px;
-          box-shadow: inset 0 1px 4px 0 $nw-grey50;
-          background-color: $nw-white-1;
-          border: solid 1px $nw-mediumgrey;
-          &.ember-checkbox {
-            box-shadow: none;
+    }
+    .form-group {
+      input, textarea, .ember-power-select-multiple-trigger {
+        height: 36px;
+        border-radius: 6px;
+        box-shadow: inset 0 1px 4px 0 $nw-grey50;
+        background-color: $nw-white-1;
+        border: solid 1px $nw-mediumgrey;
+        &.ember-checkbox {
+          box-shadow: none;
+          background-color: transparent;
+          padding-top: 0px;
+          height: 20px;
+        }
+      }
+      textarea {
+        height: 72px;
+      }
+      label.checkbox-label {
+        font-size: 16px;
+        line-height: 1.31;
+        color: $nw-darkgrey;
+      }
+      .input-group {
+        margin-bottom: 14px;
+        .input-group-prepend {
+          .input-group-text {
+            justify-content: center;
+            width: 36px;
+            border-color: $nw-mediumgrey;
+            box-shadow: inset 1px 1px 2px 0 $nw-darkgrey20;
+            background-color: $nw-lightgreyblue;
+            .fa {
+              font-size: 20px;
+              color: $nw-lightgrey;
+            }
+          }
+        }
+        .input-group-append {
+          .input-group-text {
+            border: 0px;
             background-color: transparent;
-            padding-top: 0px;
-            height: 20px;
-          }
-        }
-        textarea {
-          height: 72px;
-        }
-        label.checkbox-label {
-          font-size: 16px;
-          line-height: 1.31;
-          color: $nw-darkgrey;
-        }
-        .input-group {
-          margin-bottom: 14px;
-          .input-group-prepend {
-            .input-group-text {
-              justify-content: center;
-              width: 36px;
-              border-color: $nw-mediumgrey;
-              box-shadow: inset 1px 1px 2px 0 $nw-darkgrey20;
-              background-color: $nw-lightgreyblue;
-              .fa {
-                font-size: 20px;
-                color: $nw-lightgrey;
-              }
+            padding-right: 0px;
+            .fa {
+              font-family: FontAwesome;
+              font-size: 20px;
+              color: $nw-darkred;
             }
           }
-          .input-group-append {
-            .input-group-text {
-              border: 0px;
-              background-color: transparent;
-              padding-right: 0px;
-              .fa {
-                font-family: FontAwesome;
-                font-size: 20px;
-                color: $nw-darkred;
-              }
-            }
-          }
-          input.no-left-radius {
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;
-          }
+        }
+        input.no-left-radius {
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
         }
       }
     }
