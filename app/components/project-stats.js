@@ -289,14 +289,35 @@ export default Component.extend({
   challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
     let cStart = moment( this.get('projectChallenge.startsAt') );
     let cEnd = moment( this.get('projectChallenge.endsAt') ).add(1,'d');
+    let pc = this.get('projectChallenge.nanoEvent');
+    // Get the currentUser's timezone
+    let tz = this.get('currentUser.user.timeZone');
+    // If this is a nano event, calculate from the beginning of the day
+    if (pc) {
+      // Figure out when the event should start in the user's timezone
+      let newStart = cStart.utc().format("YYYY-MM-DD");
+      var m = moment.tz(newStart, "YYYY-MM-DD", tz);
+      var start = m.clone().startOf('day').utc();
+      cStart = start;
+      let newEnd = cEnd.utc().format("YYYY-MM-DD");
+      var m = moment.tz(newEnd, "YYYY-MM-DD", tz);
+      var end = m.clone().startOf('day').utc();
+      cEnd = end;
+      //alert(start);
+    }
     let p = this.get('project');
     if (p) {
       //get the projectSessions created during the projectChallenge
       let sessions = this.get('project.projectSessions');
       let newSessions = [];
       sessions.forEach((s)=>{
-        var sCreated = moment(s.createdAt);
+        let sCreated = moment(s.createdAt).utc();
+        if (s.end) {
+          sCreated = moment(s.end).utc();
+        }
+        //alert(sCreated);
         if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
+          //alert('included');
           newSessions.push(s);
         }
       });

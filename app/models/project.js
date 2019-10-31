@@ -94,10 +94,20 @@ const Project = Model.extend({
     let active = null;
     //get the time now in user's timezone 
     let now = moment().tz(this.get('user.timeZone'));
+    let tz = this.get('user.timeZone');
+    //console.log(now);
     //loop through this project's projectChallenges
     this.get('projectChallenges').forEach((pc)=>{
       //get the start and end as moments
       let startsAt = moment(pc.startsAt).tz(this.get('user.timeZone'));
+      let isEvent = pc.nanoEvent;
+      if (isEvent) {
+        let cStart = moment(pc.startsAt);
+        let newStart = cStart.utc().format("YYYY-MM-DD");
+        var m = moment.tz(newStart, "YYYY-MM-DD", tz);
+        startsAt = m.clone().startOf('day').utc();
+      }
+      //console.log(startsAt);
       //is this pc active?
       if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded() ) {
         active = pc;
