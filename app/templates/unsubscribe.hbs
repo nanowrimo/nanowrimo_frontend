@@ -5,12 +5,21 @@
       <div class="nw-card-content">
         <h2 class="nw-card-title">Email Unsubscribe</h2>
         <div class='nw-card-instruction'>
-          {{cardInstruction}}
+          {{#if confirmed}}
+            You have been unsubscribed from NaNoWriMo emails.
+          {{else}}
+            Are you sure you want to unsubscribe {{userEmail}} from all NaNoWriMo emails?
+          {{/if}}
           {{#if displayForm}}
-          <div>
-            <button {{action 'confirmUnsubscribe'}}>Yes, unsubscribe me</button><button {{action 'confirmNoUnsubscribe'}}>No thank you</button>
+          <div style="text-align:center; margin-bottom:10px;">
+            <button {{action 'confirmUnsubscribe'}}>Yes, unsubscribe me</button> <br>
+            
+            <a href="#" {{action 'confirmNoUnsubscribe'}}>NaNoWriMo Home</a>
           </div>
           {{/if}}
+          <p>
+            If you'd like to modify what emails you receive, you may also update your {{#link-to "authenticated.settings.preferences"}}email preferences{{/link-to}}.
+          </p>
         </div>
       </div>
     </div>
