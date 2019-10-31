@@ -79,6 +79,8 @@ Router.map(function() {
 
   //email confirmations
   this.route('confirm-email');
+  // unsubscribe 
+  this.route('unsubscribe', {path: '/unsubscribe/:token'});
 
   this.route('index', { path: '/' });
   this.route('sign-up');

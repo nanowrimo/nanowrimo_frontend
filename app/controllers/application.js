@@ -6,8 +6,9 @@ export default Controller.extend({
   session: service(),
   media: service(),
   
+  // which routes should display navigation? 
   show_navigation: computed('routeName', function() {
-    let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset"];
+    let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset",'unsubscribe'];
     let rn = this.get('routeName');
     return !no_nav_routes.includes(rn);
   }),
