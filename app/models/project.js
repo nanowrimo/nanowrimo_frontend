@@ -7,6 +7,7 @@ import moment from 'moment';
 // import { isEmpty } from '@ember/utils';
 
 const Project = Model.extend({
+  user_id: attr('number'),
   cover: attr('string'),
   createdAt: attr('date'),
   excerpt: attr('string'),

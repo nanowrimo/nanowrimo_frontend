@@ -65,7 +65,7 @@ export default Component.extend({
       return aggs;
     }
   }),
-  countNeededTodayData: computed('count', function() {
+  countNeededTodayData: computed('count','projectChallenge.{countRemaining,daysRemaining,todayCount}', function() {
     let pc = this.get('projectChallenge');
     if (pc) {
       if (pc.hasEnded()) {
