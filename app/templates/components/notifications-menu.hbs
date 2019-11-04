@@ -2,7 +2,7 @@
   {{#nav.dropdown as |dd|}}
     {{#dd.toggle}}
       {{#link-to  "authenticated.nanomessages"}}
-        <button class="button-clear">
+        <button class="button-clear" aria-label="Go to your NanoMessages.">
           <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
           <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
         </button>
@@ -12,7 +12,7 @@
 
   {{#nav.dropdown onHide=(action 'notificationsViewed') as |dd|}}
     {{#dd.toggle}}
-      <button class="button-clear">
+      <button class="button-clear" aria-label="Display your notifications.">
         {{#if media.isDesktop}}
           <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
         {{/if}}
