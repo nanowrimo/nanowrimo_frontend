@@ -7,7 +7,9 @@
       {{#if canEdit}}
         <span class='nw-listing-action-dropdown'>
         {{#bs-dropdown class='project-summary-dropdown' as |dd|}}
-          {{#dd.toggle}}<span class="caret"></span>{{/dd.toggle}}
+          {{#dd.toggle}}
+            <span aria-hidden='false' class='hidden'>Display project options.</span>
+          {{/dd.toggle}}
           {{#dd.menu align='right' as |menu|}}
             {{#menu.item}}
               <a href="#" {{action "editProject"}}>
