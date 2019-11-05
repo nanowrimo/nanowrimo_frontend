@@ -161,11 +161,14 @@ const User = Model.extend({
   convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
-    gus.forEach(function(gu) {
-      if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
-        bgus.push(gu.group);
-      }
-    });
+    //are there group users?
+    if (gus) {
+      gus.forEach(function(gu) {
+        if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
+          bgus.push(gu.group);
+        }
+      });
+    }
     return bgus;
   }),
   
@@ -173,41 +176,53 @@ const User = Model.extend({
   buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
-    gus.forEach(function(gu) {
-      if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
-        bgus.push(gu);
-      }
-    });
+    //are there group users?
+    if (gus) {
+      gus.forEach(function(gu) {
+        if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
+          bgus.push(gu);
+        }
+      });
+    }
     return bgus;
   }),
   buddyGroupUsersAccepted: computed('buddyGroupUsers.[]','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let accepted = [];
-    bgus.forEach(function(bgu) {
-      if (bgu.invitationAccepted=='1') {
-        accepted.push(bgu);
-      }
-    });
+    //are there buddy group users?
+    if (bgus) {
+      bgus.forEach(function(bgu) {
+        if (bgu.invitationAccepted=='1') {
+          accepted.push(bgu);
+        }
+      });
+    }
     return accepted;
   }),
   buddyGroupUsersPending: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let pending = [];
-    bgus.forEach(function(bgu) {
-      if (bgu.invitationAccepted=='0') {
-        pending.push(bgu);
-      }
-    });
+    //are there buddy group users?
+    if (bgus) {
+      bgus.forEach(function(bgu) {
+        if (bgu.invitationAccepted=='0') {
+          pending.push(bgu);
+        }
+      });
+    }
     return pending;
   }),
   buddyGroupUsersBlocked: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let blocked = [];
-    bgus.forEach(function(bgu) {
-      if (bgu.invitationAccepted=='-2') {
-        blocked.push(bgu);
-      }
-    });
+    //are there buddy group users?
+    if (bgus) {
+      bgus.forEach(function(bgu) {
+        if (bgu.invitationAccepted=='-2') {
+          blocked.push(bgu);
+        }
+      });
+    }
     return blocked;
   }),
   
@@ -217,17 +232,21 @@ const User = Model.extend({
       let buddyGroups = [];
       let store = this.get('store');
       let email = this.get('email');
-      bgus.forEach(function(bgu) {
-        let gus = bgu.group.get('groupUsers');
-        gus.forEach(function(gu) {
-          if (gu.user_id) {
-            let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
-              buddyGroups.push(bgu.group);
+      // are there any acceptd buddy group users?
+      if (bgus) {
+        bgus.forEach(function(bgu) {
+          //get the groupusers for the buddy group
+          let gus = bgu.group.get('groupUsers');
+          gus.forEach(function(gu) {
+            if (gu.user_id) {
+              let u = store.peekRecord('user', gu.user_id);
+              if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+                buddyGroups.push(bgu.group);
+              }
             }
-          }
+          });
         });
-      });
+      }
       return buddyGroups;
     }
   }),
@@ -238,17 +257,20 @@ const User = Model.extend({
       let buddies = [];
       let store = this.get('store');
       let email = this.get('email');
-      bgus.forEach(function(bgu) {
-        let gus = bgu.group.get('groupUsers');
-        gus.forEach(function(gu) {
-          if (gu.user_id) {
-            let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
-              buddies.push(u);
+      // are there buddyGroupUsersAccepted?
+      if (bgus) {
+        bgus.forEach(function(bgu) {
+          let gus = bgu.group.get('groupUsers');
+          gus.forEach(function(gu) {
+            if (gu.user_id) {
+              let u = store.peekRecord('user', gu.user_id);
+              if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+                buddies.push(u);
+              }
             }
-          }
+          });
         });
-      });
+      }
       return buddies;
     }
   }),
@@ -258,17 +280,20 @@ const User = Model.extend({
       let buddies = [];
       let store = this.get('store');
       let email = this.get('email');
-      bgus.forEach(function(bgu) {
-        let gus = bgu.group.get('groupUsers');
-        gus.forEach(function(gu) {
-          if (gu.user_id) {
-            let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.email!=email) && (gu.invitationAccepted=='0')) {
-              buddies.push(u);
+      // is the bgus null?
+      if (bgus) {
+        bgus.forEach(function(bgu) {
+          let gus = bgu.group.get('groupUsers');
+          gus.forEach(function(gu) {
+            if (gu.user_id) {
+              let u = store.peekRecord('user', gu.user_id);
+              if ((u) && (u.email!=email) && (gu.invitationAccepted=='0')) {
+                buddies.push(u);
+              }
             }
-          }
+          });
         });
-      });
+      }
       return buddies;
     }
   }),
@@ -278,17 +303,20 @@ const User = Model.extend({
       let buddies = [];
       let store = this.get('store');
       let email = this.get('email');
-      bgus.forEach(function(bgu) {
-        let gus = bgu.group.get('groupUsers');
-        gus.forEach(function(gu) {
-          if (gu.user_id) {
-            let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
-              buddies.push(u);
+      // does the bgus have value?
+      if (bgus) {
+        bgus.forEach(function(bgu) {
+          let gus = bgu.group.get('groupUsers');
+          gus.forEach(function(gu) {
+            if (gu.user_id) {
+              let u = store.peekRecord('user', gu.user_id);
+              if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
+                buddies.push(u);
+              }
             }
-          }
+          });
         });
-      });
+      }
       return buddies;
     }
   }),
