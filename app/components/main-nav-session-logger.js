@@ -272,10 +272,28 @@ export default Component.extend({
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
+      // have start and end been set?
+      if (start && end) {
+        //get "today"
+        let today = moment();
+        let ymd = today.format('YYYY-MM-DD');
+        let endDate = moment(ymd+" "+end).toDate();
+        if( start > end ) {
+          //start was yesterday
+          let yesterday = today.subtract(1, 'd');
+          ymd = yesterday.format('YYYY-MM-DD');
+        }
+        let startDate = moment(ymd+" "+start).toDate();
+        session.set('end', endDate);
+        session.set('start', startDate);
+      }
+      
+      /*let end = this.get('whenEnd');
+      let start = this.get('whenStart');
       let dateStart = this.get('dateStart');
       //alert(dateStart);
       // have start and end been set?
-      if (start && end && dateStart) {
+      if (start && end) {
         //get "today"
         //let today = moment();
         //let ymd = today.format('YYYY-MM-DD');
@@ -292,7 +310,7 @@ export default Component.extend({
         let startDate = moment(ymd+" "+start).toDate();
         session.set('end', endDate);
         session.set('start', startDate);
-      }
+      }*/
 
       session.set('count', count);
       session.save();

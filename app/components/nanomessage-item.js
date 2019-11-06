@@ -35,4 +35,20 @@ export default Component.extend({
     debounce(this, this.updateHeight, 100, false);
   },
   
+  actions: {
+    // For deleting nanomessages
+    deleteMessage() {
+      // Get userIsAdmin of group
+      let userIsAdmin = this.get('userIsAdmin');
+      // If user is admin
+      if (userIsAdmin) {
+        // get the message
+        let n = this.get('nanomessage');
+        // Delete it
+        n.deleteRecord();
+        n.save();
+      }
+    },
+  }
+  
 });

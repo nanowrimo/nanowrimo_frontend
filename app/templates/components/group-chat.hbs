@@ -8,7 +8,7 @@
   <div class="conversation-content" id="convo-content">
     <div class="nanomessages-container">
       {{#each sortedMessages as |n|}}
-        {{nanomessage-item nanomessage=n}}
+        {{nanomessage-item nanomessage=n userIsAdmin=userIsAdmin}}
       {{/each}}
     </div>
   </div>

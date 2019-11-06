@@ -33,6 +33,21 @@ export default Component.extend({
     this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
   },
 
+  userIsAdmin: computed('currentUser.user.isLoaded',function() {
+    let found = false;
+    if (this.get('currentUser.user.isLoaded')) {
+      let gus = this.get('store').peekAll('groupUser');
+      let g = this.get('group');
+      let cu = this.get('currentUser.user');
+      gus.forEach(function(gu) {
+        if ((gu.group_id==g.id)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
+          found = true;
+        }
+      });
+    }
+    return found;
+  }),
+  
   willDestroyElement() {
     let td = this.get('tempDebounce');
     cancel(td);

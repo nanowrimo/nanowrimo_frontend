@@ -13,6 +13,9 @@
       </div>
       <div class="nanomessage-timesince">
         {{moment-from-now nanomessage.createdAt interval=1000}}
+        {{#if userIsAdmin}}
+          <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
+        {{/if}}
       </div>
     </div>
   </div>
@@ -24,6 +27,9 @@
       </div>
       <div class="nanomessage-timesince">
         {{moment-from-now nanomessage.createdAt interval=1000}}
+        {{#if userIsAdmin}}
+          <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
+        {{/if}}
       </div>
     </div>
     <div class="nanomessage-arrow-right"></div>
