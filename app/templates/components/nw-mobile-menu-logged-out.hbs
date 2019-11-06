@@ -1,0 +1,38 @@
+<div class='menu-trigger'>
+  <a href="#" {{action 'showMenu'}}>
+    <span aria-hidden="false"><i class="fa fa-bars" aria-hidden="true"></i></span>
+  </a>
+</div>
+
+<div class="menu-content nano-side-menu {{if displayMenu 'display' ''}}">
+  <div class='menu-close-trigger'>
+    <a href="#" class="menu-close-trigger" {{action "hideMenu"}}>
+      <span aria-hidden="false">{{fa-icon "times"}}</span>
+    </a>
+  </div>
+  <div class='menu-items'>
+    <div class="menu-item">
+      {{#link-to "sign-up"}}Sign Up{{/link-to}}
+    </div>
+    <div class="menu-item">
+      {{#link-to "sign-in"}}Sign In{{/link-to}}
+    </div>
+    <div class="menu-item">
+      <a href="https://store.nanowrimo.org/collections/shop" target='_blank'>
+          Shop
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="https://store.nanowrimo.org/collections/donate" target='_blank'>
+          Donate
+      </a>
+    </div>
+    <div class="menu-item">
+      {{#link-to "what-is-nanowrimo"}}
+        <span {{action "hideMenu"}}>
+        What is NaNoWriMo?
+        </span>
+      {{/link-to}}
+    </div>
+  </div>
+</div>

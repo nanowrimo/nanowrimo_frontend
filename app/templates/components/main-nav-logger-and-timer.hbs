@@ -14,16 +14,16 @@
 
     <div class="btn-group" role="group" id="logger-and-timer-triggers">
       {{#if displaySessionButton}}
-        <button class="button-log btn btn-primary" {{action 'toggleSessionForm'}}>
+        <button class="button-log btn btn-primary" {{action 'toggleSessionForm'}} aria-label="Update your word count.">
           <span class="non-mobile" aria-hidden="false">{{fa-icon "plus"}}</span>
         </button>
       {{/if}}
       {{#if displayTimeOnButton}}
-        <button class="button-log btn btn-primary wide-button" {{action 'toggleTimerForm'}}>
+        <button class="button-log btn btn-primary wide-button" {{action 'toggleTimerForm'}} aria-label="Start a writing timer or stopwatch.">
           {{fa-icon "stop-circle-o"}} {{timeProgress}}
         </button>
       {{else}}
-        <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}}>
+        <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}} aria-label="Start a writing timer or stopwatch.">
           <span class="non-mobile" aria-hidden="false">{{fa-icon "clock-o"}}</span>
         </button>
       {{/if}}
