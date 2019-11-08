@@ -1,10 +1,11 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import moment from "moment"
+//import moment from "moment"
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
   store: service(),
+  currentUser: service(),
   
   // Get the project challenge as a variable
   projectSession: null,
@@ -12,14 +13,16 @@ export default Component.extend({
   // Get the end date
   formattedEnd: computed("projectSession.end", function(){
     let e = this.get('projectSession.end');
+    let cu = this.get('currentUser.user');
     if (e) {
-      let time = moment(e);
-      if (time.month()===4) {
+      return cu.shortDateStringInTimeZone(e);
+      //let time = moment(e);
+      //if (time.month()===4) {
         //may does not need to be formatted with a period
-        return time.format("MMM DD, YYYY");
-      } else {
-        return time.format("MMM. DD, YYYY");
-      }
+        //return time.format("MMM DD, YYYY");
+      //} else {
+        //return time.format("MMM. DD, YYYY");
+      //}
     }
   }),
   

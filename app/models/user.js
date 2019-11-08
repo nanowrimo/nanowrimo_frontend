@@ -126,6 +126,18 @@ const User = Model.extend({
     return userDate;
   },
   
+  // Returns a date string of the provided time in the user's time zone
+  shortDateStringInTimeZone (d) {
+    // First get the current time from the user's device
+    let utcTime = moment(d);
+    // Then convert that time to the user's time zone
+    let userTime = utcTime.tz(this.get('timeZone'));
+    // Then create a date string from it
+    let userDate = userTime.format('MMM D, YYYY');
+    // Return the date string
+    return userDate;
+  },
+  
   // ---------------------------
   // END OF DATETIME FUNCTIONS
   // ---------------------------
