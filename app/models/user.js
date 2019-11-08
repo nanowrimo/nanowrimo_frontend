@@ -5,8 +5,11 @@ import { computed }  from '@ember/object';
 import { sort, filter, filterBy }  from '@ember/object/computed';
 import moment from 'moment';
 import { debounce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 
 const User = Model.extend({
+  store: service(),
+  
   avatar: attr('string'),
   adminLevel: attr('number'),
   bio: attr('string'),
@@ -128,9 +131,26 @@ const User = Model.extend({
   // ---------------------------
   
   
+  // ---------------------------
+  // BEGINNING OF PROJECT FUNCTIONS
+  // ---------------------------
   
+  computedProjects: computed('projects.[]',function() {
+    let store = this.get('store');
+    let allProjects = store.peekAll('project');
+    let id = this.get('id');
+    let ps = [];
+    allProjects.forEach(function(p) {
+      if (p.user_id==id) {
+        ps.push(p);
+      }
+    });
+    return ps;
+  }),
   
-  
+  // ---------------------------
+  // END OF PROJECT FUNCTIONS
+  // ---------------------------
   
   
   //groupUsersLoaded is false by default, is updated when groupUsers are loaded 
@@ -467,7 +487,7 @@ const User = Model.extend({
     }
   }),
 
-  persistedProjects: filter('projects.@each.id', function(project) {
+  persistedProjects: filter('computedProjects.@each.id', function(project) {
     return project.id > 0;
   }),
   /* stats */

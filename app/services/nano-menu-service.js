@@ -21,18 +21,28 @@ export default Service.extend({
       return null;
     }
   }),
+  statsItem: computed('currentUser.user.primaryProject', function() {
+    let project = this.get('currentUser.user.primaryProject');
+    if (project) {
+      let v = {label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"};
+      return v;
+    } else {
+      return null;
+    }
+  }),
   
   /* add/edit/change menu items */
   // menu items that reference a local route will have a "route" attribute
   // menu items that reference a remote url will have a 'url' attribute
   
-  submenus: computed('currentUser.user.homeRegion',function() {
+  submenus: computed('currentUser.user.{homeRegion,primaryProject}',function() {
     let links = [
       {
         toggleLabel: "My NaNoWriMo",
         submenuItems: [
           {label: "Profile", route: "authenticated.users.show.index", segment: this.get('userSlug'), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg"},
-          {label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
+          this.get('statsItem'),
+          //{label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
           {label: "Projects", route: "authenticated.users.show.projects", segment: this.get('userSlug'), teaser: "Organize all your projects", src: "/images/nav/open_book.svg"},
           {label: "Buddies", route: "authenticated.users.show.buddies", segment: this.get('userSlug'), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg"}
         ]

@@ -11,7 +11,7 @@ export default Model.extend({
   feeling: attr('number'),
   createdAt: attr('date'),
   unitType: attr('number'),
-  
+  project_challenge_id: attr('number'),
   project: belongsTo('project'),
   projectChallenge: belongsTo('projectChallenge'),
   user: belongsTo('user')
