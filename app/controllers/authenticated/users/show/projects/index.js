@@ -9,6 +9,7 @@ export default Controller.extend({
 
   addProject: false,
   projects: alias('user.persistedProjects'),
+  //projects: alias('user.computedProjects'),
   sortOptions: null,
   selectedSortOption: null,
   user: null,

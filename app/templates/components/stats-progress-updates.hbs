@@ -1,0 +1,27 @@
+<div class="nw-card-header">
+  <div class="nw-card-title">Progress Updates</div>
+  <div class="nw-card-actions nw-card-actions-right">
+  </div>
+</div>
+<div class="nw-card-content nw-card-list">
+  <div class="nw-card-list-header">
+    <div class="nw-card-list-item">
+      <div class="nw-card-list-item-left">
+        DATE
+      </div>
+      <div class="nw-card-list-item-center">
+        ADDED WORDS
+      </div>
+      <div class="nw-card-list-item-right">
+      </div>
+    </div>
+  </div>
+  <div class="nw-card-list-content">
+    {{#each progressUpdates as |ps|}}
+      <ProgressUpdate
+        @projectSession={{ps}}
+        @onDelete={{action "userDidChangeProjectSession"}}
+      />
+    {{/each}}
+  </div>
+</div>
