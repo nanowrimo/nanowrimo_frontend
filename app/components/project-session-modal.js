@@ -1,10 +1,8 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
-import { filterBy, sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import {isNull} from "lodash";
-import Challenge from 'nanowrimo/models/challenge';
 
 export default Component.extend({
   currentUser: service(),
