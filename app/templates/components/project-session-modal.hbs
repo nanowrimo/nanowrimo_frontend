@@ -1,0 +1,127 @@
+{{#bs-modal
+  open=open
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    {{#if editing }}
+      Edit Progress
+    {{else}}
+      New Progress Update
+    {{/if}}
+  {{/modal.header}}
+  {{#modal.body}}
+    <div class="nw-no-blue" id="progress-update-form">
+      <div class='tab-content'>
+        <div class='form-group' style="display: flex; justify-content: center; align-items: center;">
+          <div style="flex: 0 0 80px; margin-right: 10px;">
+            {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
+          </div>
+          <div>
+            added words
+          </div>
+        </div>
+        <fieldset>
+          
+          <div class="project-emoji-list" style="justify-content: center; align-items: center;">
+            <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}}/>
+            <label for='feeling5' >
+              <div class="project-emoji emoji-5 {{if feeling5Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling4' type='radio' value='Felt pretty good' name='feeling' {{action "changeFeeling" 4 }}/>
+            <label for='feeling4' >
+              <div class="project-emoji emoji-4 {{if feeling4Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling3' type='radio' value='Felt just OK' name='feeling' {{action "changeFeeling" 3 }}/>
+            <label for='feeling3' >
+              <div class="project-emoji emoji-3 {{if feeling3Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling2' type='radio' value='Felt stressed' name='feeling' {{action "changeFeeling" 2 }}/>
+            <label for='feeling2' >
+              <div class="project-emoji emoji-2 {{if feeling2Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling1' type='radio' value='Felt upset' name='feeling' {{action "changeFeeling" 1 }}/>
+            <label for='feeling1' >
+              <div class="project-emoji emoji-1 {{if feeling1Selected 'selected' ''}}"></div>
+            </label>
+          </div>
+        </fieldset>
+ 
+        <div class="form-group side-by-side">
+          <div>
+            <label>Where were you writing?</label>
+            {{#power-select-with-create
+              options=writingLocations
+              selected=selectedWhere
+              searchField='name'
+              searchEnabled='true'
+              showCreatePosition="bottom"
+              showCreateWhen=(action "showCreateWhen")
+              dropdownClass="in-modal-dropdown"
+              renderInPlace=true
+              onchange=(action (mut selectedWhere))
+              oncreate=(action "createWhere")
+              as |opt|
+            }}
+              {{opt.name}}
+            {{/power-select-with-create}}
+          </div>
+          <div>
+            <label>How were you writing?</label>
+            {{#power-select-with-create
+              options=writingMethods
+              selected=selectedHow
+              searchField='name'
+              searchEnabled='true'
+              showCreatePosition="bottom"
+              showCreateWhen=(action "showCreateWhen")
+              dropdownClass="in-modal-dropdown"
+              renderInPlace=true
+              onchange=(action (mut selectedHow))
+              oncreate=(action "createHow")
+              as |opt|
+            }}
+              {{opt.name}}
+            {{/power-select-with-create}}
+          </div>
+        </div>
+        <div class="form-group side-by-side" style="justify-content: space-between">
+          <div style="flex: 1 1 160px; padding-right: 10px;">
+            <label for='date' class='form-group'>Date</label>
+            {{input
+              type='date'
+              name='date'
+              class='form-control'
+              value=dateStart
+            }}
+          </div>
+          <div style="flex: 0 0 80px; padding-right: 10px;">
+            <label>Start Time</label>
+            {{input
+              type='time'
+              name='when_start'
+              class='form-control progress-update-input time-input'
+              value=whenStart
+            }}
+          </div>
+          <div style="flex: 0 0 80px;">
+            <label>End Time</label>
+            {{input
+              type='time'
+              name='when_end'
+              class='form-control progress-update-input time-input'
+              value=whenEnd
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/modal.body}}
+
+    {{#modal.footer}}
+
+    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Progress' {{action "formSubmit"}}/>
+    <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
+
+  {{/modal.footer}}
+
+{{/bs-modal}}
