@@ -1,0 +1,29 @@
+
+<div class='nw-card'>
+  <div class='nw-card-header'>
+    <div class='nw-card-title'>Delete Account</div>
+    
+  </div>
+  <div class="nw-card-content">
+    <div class='form-instruction'>
+    <p>
+      We're sorry to see you go! If you’d just like to hear from us less, please update your 
+      {{#link-to "authenticated.settings.preferences"}}email preferences{{/link-to}}.
+    </p>
+    <p>
+      But if you’re certain, click the button below to completely delete your account - including profile information, projects, forum posts, and email subscriptions.
+    </p>
+    </div>
+    
+  </div>
+</div>
+
+<div class='nw-panel-footer'>
+  <button class="nano-button-red" {{action "requestDelete"}} disabled={{deleteButtonDisabled}} >Delete My Account</button>
+  {{#if deleteButtonDisabled}}
+    <p>
+      Instructions for deleting your account have been sent to your email address.
+    </p>
+  {{/if}}
+</div>
+

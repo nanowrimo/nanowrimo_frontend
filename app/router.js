@@ -33,6 +33,7 @@ Router.map(function() {
     });
     this.route('settings', function() {
       this.route('account');
+      this.route('delete-account');
       this.route('privacy', function() {
       });
       this.route('preferences', function() {
@@ -110,7 +111,9 @@ Router.map(function() {
   this.route('confirm-email-change');
   this.route('revert-email-change');
   this.route('widgets');
-  //this.route('brought-to-you-by')
+
+  //delete request
+  this.route('delete-request', {path: '/delete-request/:token'});
 });
 
 export default Router;
