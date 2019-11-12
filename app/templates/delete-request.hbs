@@ -3,23 +3,21 @@
     <div class="nw-login-image"><img src="/images/other/login_image.svg" alt="" /></div>
     <div class="nw-card">
       <div class="nw-card-content">
-        <h2 class="nw-card-title">Email Unsubscribe</h2>
+        <h2 class="nw-card-title">Account Deletion Confirmation</h2>
         <div class='nw-card-instruction'>
           {{#if confirmed}}
-            You have been unsubscribed from NaNoWriMo emails.
+            You're account has been deleted.
           {{else}}
-            Are you sure you want to unsubscribe {{userEmail}} from all NaNoWriMo emails?
+            Are you sure you want to delete your NaNoWriMo account? This can not be undone.
           {{/if}}
           {{#if displayForm}}
           <div style="text-align:center; margin-bottom:10px;">
-            <button {{action 'confirmUnsubscribe'}}>Yes, unsubscribe me</button> <br>
+            <button {{action 'confirmDelete'}}>Yes, delete account</button> <br>
             
             <a href="#" {{action 'confirmNoUnsubscribe'}}>NaNoWriMo Home</a>
           </div>
           {{/if}}
-          <p>
-            If you'd like to modify what emails you receive, you may also update your {{#link-to "authenticated.settings.preferences"}}email preferences{{/link-to}}.
-          </p>
+
         </div>
       </div>
     </div>
