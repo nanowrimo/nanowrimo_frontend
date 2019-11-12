@@ -140,7 +140,7 @@ module.exports = function(environment) {
   //is this a staging target?
   if (process.env.TARGET=='staging') {
     ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
-    ENV.torii.providers['custom-google'].redirectUri = 'https://staging.preview.nanowrimo.org/oauth2callback';
+    ENV.torii.providers['custom-google'].redirectUri = 'https://staging.nanowrimo.org/oauth2callback';
     ENV.forumsUrl = "https://staging.forums.nanowrimo.org";
   }
   
