@@ -18,7 +18,7 @@ export default ChartBaseComponent.extend({
           //get the session
           let sess = sessions.objectAt(i);
           //was this session created on the target day?
-          if (moment(sess.createdAt).isSame(targetDay, 'day')) {
+          if (moment(sess.end).isSame(targetDay, 'day')) {
             //yes, we found the day
             foundDay = true;
             //incrementthe dayCount
