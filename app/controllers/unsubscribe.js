@@ -37,7 +37,7 @@ export default Controller.extend({
         }
       ).then(response=>{
           response.json().then(data=>{
-              if (data.code==200) {
+              if (data.codes.cm==200) {
                 // success!
                 this.set('confirmed', true);
               }
