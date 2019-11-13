@@ -85,8 +85,9 @@ export default Component.extend({
     
       case 0: {
         let c = this.get("activeProjectChallenge.count");
-        let cc = this.get("activeProjectChallenge.currentCount");
-        this.set('countValue', (c > cc) ? c:cc);
+        //let cc = this.get("activeProjectChallenge.currentCount");
+        this.set('countValue', c);
+        //this.set('countValue', (c > cc) ? c:cc);
         break;
       }
       case 1: 
