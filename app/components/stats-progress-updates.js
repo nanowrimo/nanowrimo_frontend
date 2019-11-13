@@ -8,29 +8,16 @@ export default Component.extend({
   recalculate: 0,
   // Get the project challenge as a variable
   projectChallenge: null,
+  newProjectSession: false,
+  
   sessions: null,
   
   progressUpdates: computed('sessions', function() {
-    //let r = this.get('recalculate');
-    //let pcid = this.get('projectChallenge.id');
-    //let store = this.get('store');
-    //let pss = store.peekAll('projectSession');
     let pss = this.get('sessions');
-    //let newpss = [];
-    //if (r==r) {
-      //if (pss) {
-        //pss.forEach((ps)=>{
-          //if (ps.project_challenge_id==pcid) {
-            //newpss.pushObject(ps);
-          //}
-        //});
-      //}
-    //}
-    //return newpss;
     return pss;
   }),
   
-  updateSortingAsc: Object.freeze(['end:asc']),
+  updateSortingAsc: Object.freeze(['end:desc']),
   sortedUpdates: sort('progressUpdates','updateSortingAsc'),
   
   doRecalculate() {
@@ -42,7 +29,11 @@ export default Component.extend({
   actions: {
     userDidChangeProjectSession() {
       this.doRecalculate();
+    },
+    newProjectSession(){
+      this.set('newProjectSession', true);
     }
+    
   }
   
 });
