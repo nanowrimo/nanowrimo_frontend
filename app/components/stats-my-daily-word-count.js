@@ -3,7 +3,7 @@ import { get,computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
 
-  countData: computed('myChartType',function() {
+  countData: computed('myChartType','userDailyAggregates.[]',function() {
     let cData = [
       {
         name: 'My count',

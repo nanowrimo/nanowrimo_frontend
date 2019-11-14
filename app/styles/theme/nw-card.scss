@@ -231,8 +231,10 @@
       }
       .nw-card-list-content {
         height: 100%;
-        width: 100%;
+        width: 104%;
         max-height: 280px;
+        padding-right: 15px;
+        margin-right: -15px;
         overflow: scroll;
         border-bottom: 1px solid #666;
         

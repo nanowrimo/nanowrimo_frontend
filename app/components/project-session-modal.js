@@ -1,12 +1,16 @@
 import Component from '@ember/component';
+import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-import { computed } from "@ember/object";
-import moment from "moment"
-import {isNull} from "lodash"
+import moment from 'moment';
+import {isNull} from "lodash";
+
 export default Component.extend({
   currentUser: service(),
   store: service(),
-
+  
+  project: null,
+  projectChallenge: null,
+  // Session vars
   closeFormAction: null,
   countType: 0,
   showForm: false,
@@ -23,21 +27,27 @@ export default Component.extend({
   referenceTimer: null,
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
+  // End session vars
   
+  // Session methods begin
   countTypeTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
-    let setting = this.get('currentUser.user.settingSessionCountBySession');
-    return setting===-1;  
+    //let setting = this.get('currentUser.user.settingSessionCountBySession');
+    //return setting===-1;
+    return false;
   }),
   
   countTypeGoalTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
-    let setting = this.get('currentUser.user.settingSessionCountBySession');
-    return setting===0;  
+    //let setting = this.get('currentUser.user.settingSessionCountBySession');
+    //return setting===0;
+    return false;
   }),
   
   countTypeSessionSelected: computed('currentUser.user.settingSessionCountBySession', function(){
-    let setting = this.get('currentUser.user.settingSessionCountBySession');
-    return (setting===1);  
+    //let setting = this.get('currentUser.user.settingSessionCountBySession');
+    //return (setting===1);
+    return true;
   }),
+  
   
   activeProjectChallenge: computed('primaryProject', function(){
     return this.get('primaryProject.activeProjectChallenge');
@@ -76,8 +86,9 @@ export default Component.extend({
     let user = this.get('currentUser.user');
     this.set('user',  user);
     // count by session?
-    let cbs = user.settingSessionCountBySession;
-     this.set('countType', cbs);  
+    //let cbs = user.settingSessionCountBySession;
+    let cbs = 1;
+    this.set('countType', cbs);  
     switch(cbs) {
       case -1:
       this.set('countValue', this.get("primaryProject.unitCount"));
@@ -85,15 +96,14 @@ export default Component.extend({
     
       case 0: {
         let c = this.get("activeProjectChallenge.count");
-        //let cc = this.get("activeProjectChallenge.currentCount");
-        this.set('countValue', c);
-        //this.set('countValue', (c > cc) ? c:cc);
+        let cc = this.get("activeProjectChallenge.currentCount");
+        this.set('countValue', (c > cc) ? c:cc);
         break;
       }
       case 1: 
       this.set('countValue', 0);
     }
-
+    this.set('countValue', 0);
     let t = this.get('referenceEnd');
     let s = this.get('referenceStart');
     //did the user previously select 'show more'?
@@ -108,9 +118,14 @@ export default Component.extend({
     // load up the activeProjectChallenge
   },
 
-
+  // Session methods end
 
   actions: {
+    // Session actions
+    closeModal() {
+       this.set('open', false);
+    },
+    
     changeFeeling(val){
       this.set("selectedFeeling", val);
     },
@@ -238,6 +253,9 @@ export default Component.extend({
       }
     },
     formSubmit() {
+      // Get the current user's time zone
+      let tz = this.get('currentUser.user.timeZone');
+      
       //determine what 'count' we need to send to the API
       let count = parseInt( this.get('countValue'));
       //do we need to determine the session count based on the total count?
@@ -255,11 +273,14 @@ export default Component.extend({
       }
       
       //what project are we actually dealing with?
-      let project = this.get('store').peekRecord('project', this.get('primaryProject.id') );
+      let project = this.get('project');
+      let projectChallenge = this.get('projectChallenge');
+      //let project = this.get('store').peekRecord('project', this.get('primaryProject.id') );
       //create a session for the primary project
       let session = this.get('store').createRecord('projectSession');
       session.set('project', project);
-      session.set('projectChallenge', this.get('activeProjectChallenge'));
+      session.set('projectChallenge', projectChallenge);
+      //session.set('projectChallenge', this.get('activeProjectChallenge'));
       session.set('unitType', 0);
       
       //check for other metrics
@@ -270,48 +291,23 @@ export default Component.extend({
       if (this.get('selectedHow') ) {
         session.set('how', this.get('selectedHow').value);
       }
-      //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
+      let dateStart = this.get('dateStart');
       // have start and end been set?
       if (start && end) {
-        //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
-        let endDate = moment(ymd+" "+end).toDate();
-        if( start > end ) {
-          //start was yesterday
-          let yesterday = today.subtract(1, 'd');
-          ymd = yesterday.format('YYYY-MM-DD');
+        let ymd = dateStart;
+        let startstr = ymd+" "+start + ":00";
+        let endstr = ymd+" "+end + ":00";
+        let startDate = moment.tz(startstr,tz).toDate();
+        let endDate = moment.tz(endstr,tz).toDate();
+        if( startDate > endDate ) {
+          // Set the start date to one day earlier
+          startDate = moment.tz(startstr,tz).subtract(1, 'd').toDate();
         }
-        let startDate = moment(ymd+" "+start).toDate();
         session.set('end', endDate);
         session.set('start', startDate);
       }
-      
-      /*let end = this.get('whenEnd');
-      let start = this.get('whenStart');
-      let dateStart = this.get('dateStart');
-      //alert(dateStart);
-      // have start and end been set?
-      if (start && end) {
-        //get "today"
-        //let today = moment();
-        //let ymd = today.format('YYYY-MM-DD');
-        let ymd = dateStart;
-        let endDate = moment(ymd+" "+end).toDate();
-        if( start > end ) {
-          //start was yesterday
-          //let yesterday = today.subtract(1, 'd');
-          //ymd = yesterday.format('YYYY-MM-DD');
-          let mDate = moment(dateStart);
-          let yesterday = mDate.subtract(1, 'd');
-          ymd = yesterday.format('YYYY-MM-DD');
-        }
-        let startDate = moment(ymd+" "+start).toDate();
-        session.set('end', endDate);
-        session.set('start', startDate);
-      }*/
 
       session.set('count', count);
       session.save();
@@ -327,10 +323,15 @@ export default Component.extend({
         user.save();
       }
       
-      let cfa = this.get('closeFormAction');
-      cfa();
-
+      //let cfa = this.get('closeFormAction');
+      //cfa();
+      this.set('open', false);
       return true;
-    }
+    },
+    hideForms: function() {
+      this.set('open', false);
+    },
+    
+    // End Session actions
   }
 });

@@ -59,7 +59,7 @@ export default Component.extend({
       
       //loop the sessions
       css.forEach((cs)=>{
-        var k = moment(cs.createdAt).format("YYYY-MM-DD");
+        var k = moment(cs.end).format("YYYY-MM-DD");
         aggs[k]+=cs.count;
       });
       return aggs;

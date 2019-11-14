@@ -1,6 +1,7 @@
 <div class="nw-card-header">
   <div class="nw-card-title">Progress Updates</div>
   <div class="nw-card-actions nw-card-actions-right">
+    <div class="nw-card-action-link" {{action 'newProjectSession'}}>+ Add a new update</div>
   </div>
 </div>
 <div class="nw-card-content nw-card-list">
@@ -17,7 +18,7 @@
     </div>
   </div>
   <div class="nw-card-list-content">
-    {{#each progressUpdates as |ps|}}
+    {{#each sortedUpdates as |ps|}}
       <ProgressUpdate
         @projectSession={{ps}}
         @onDelete={{action "userDidChangeProjectSession"}}
@@ -25,3 +26,4 @@
     {{/each}}
   </div>
 </div>
+{{project-session-modal project=project projectChallenge=projectChallenge open=newProjectSession}}
