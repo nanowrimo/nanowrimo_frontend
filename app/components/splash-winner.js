@@ -7,7 +7,9 @@ export default Component.extend({
   step: 0,
   closeAction: null,
   badge: null,
-  
+  /* TODO: get the year in YYYY format if it will be necessary to 
+    link to /nano-winner-YYYY
+  */
   actions: {
     closeClicked(){
       let ca = this.get('closeAction');
