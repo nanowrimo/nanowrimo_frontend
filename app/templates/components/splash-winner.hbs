@@ -15,10 +15,16 @@
             <div>
               <img src="/images/splash/certificate.png">
               <div class='cert-download'>
-                <a download="winner-certificate-2019.pdf" href="/assets/winner-certificate-2019.pdf">{{fa-icon "download"}} Claim your certificate!</a>
+                <a href="/nano-winner-2019">Claim all your winner goodies and certificate!</a> <br>
+                <a href="/nano-winner-2019">{{fa-icon "star"}} Winner Goodies {{fa-icon "star"}}</a><br>
+                <a href="/nano-winner-2019">claim your winner goodies!</a><br>
+                <button href="/nano-winner-2019">Claim all your winner goodies and certificate!</button><br>
+                <button href="/nano-winner-2019">{{fa-icon "star"}} winner goodies {{fa-icon "star"}}</button><br> 
+                <button href="/nano-winner-2019">claim your winner goodies!</button><br>
+                
               </div>
             </div>
-            
+
             <div>
               <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
             </div>
@@ -59,12 +65,12 @@
 
               </div>
               <div class='description'>
-                Way to go, this was your <b>{{ordinal-number-suffix currentUser.user.nanoWinCount}} time</b> 
-                completing a NaNo event! From now on, your avatar will 
+                Way to go, this was your <b>{{ordinal-number-suffix currentUser.user.nanoWinCount}} time</b>
+                completing a NaNo event! From now on, your avatar will
                 look like this, so the whole world can know how awesome you are!
               </div>
             </div>
-            
+
             <div>
               &nbsp;
             </div>
@@ -78,17 +84,15 @@
         {{else if (eq step 1) }}
             {{fa-icon "circle-o"}} {{fa-icon "circle"}} {{fa-icon "circle-o"}}
         {{else if (eq step 2) }}
-           {{fa-icon "circle-o"}} {{fa-icon "circle-o"}} {{fa-icon "circle"}} 
+           {{fa-icon "circle-o"}} {{fa-icon "circle-o"}} {{fa-icon "circle"}}
         {{/if}}
       </div>
       <div class='splash-footer'>
         <button {{action "closeClicked"}}>close</button>
       </div>
     </div>
-    
-    
-    
+
+
+
   </div>
 {{/ember-wormhole}}
-
-
