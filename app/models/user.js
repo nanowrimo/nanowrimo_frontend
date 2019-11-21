@@ -263,7 +263,7 @@ const User = Model.extend({
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddyGroups = [];
       let store = this.get('store');
-      let email = this.get('email');
+      let id = this.get('id');
       // are there any acceptd buddy group users?
       if (bgus) {
         bgus.forEach(function(bgu) {
@@ -272,7 +272,7 @@ const User = Model.extend({
           gus.forEach(function(gu) {
             if (gu.user_id) {
               let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
                 buddyGroups.push(bgu.group);
               }
             }

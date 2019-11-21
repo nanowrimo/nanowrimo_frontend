@@ -94,12 +94,12 @@ export default Component.extend({
     let gn = g.get('name');
     if (gt=='buddies') {
       let store = this.get('store');
-      let email = this.get('currentUser.user.email');
+      let id = this.get('currentUser.user.id');
       let gus = g.get('groupUsers');
       gus.forEach(function(gu) {
         if (gu.user_id) {
           let u = store.peekRecord('user', gu.user_id);
-          if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
+          if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
             gn = u.name;
           }
         }
