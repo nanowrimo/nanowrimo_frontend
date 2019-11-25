@@ -8,7 +8,7 @@ export default Controller.extend({
   selectedSortOption: null,
   sortOptions: null,
   user: null,
-  buddiesActive: computed('user.buddiesActive',function() {
+  buddiesActive: computed('user.buddiesActive.[]',function() {
     let u = this.get('user');
     return u.buddiesActive;
   }),

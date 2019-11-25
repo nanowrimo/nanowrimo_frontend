@@ -288,7 +288,7 @@ const User = Model.extend({
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
       let store = this.get('store');
-      let email = this.get('email');
+      let id = this.get('id');
       // are there buddyGroupUsersAccepted?
       if (bgus) {
         bgus.forEach(function(bgu) {
@@ -296,7 +296,7 @@ const User = Model.extend({
           gus.forEach(function(gu) {
             if (gu.user_id) {
               let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.email!=email) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
                 buddies.push(u);
               }
             }
@@ -311,7 +311,7 @@ const User = Model.extend({
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
       let store = this.get('store');
-      let email = this.get('email');
+      let id = this.get('id');
       // is the bgus null?
       if (bgus) {
         bgus.forEach(function(bgu) {
@@ -319,7 +319,7 @@ const User = Model.extend({
           gus.forEach(function(gu) {
             if (gu.user_id) {
               let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.email!=email) && (gu.invitationAccepted=='0')) {
+              if ((u) && (u.id!=id) && (gu.invitationAccepted=='0')) {
                 buddies.push(u);
               }
             }
@@ -334,7 +334,7 @@ const User = Model.extend({
       let bgus = this.get('buddyGroupUsersPending');
       let buddies = [];
       let store = this.get('store');
-      let email = this.get('email');
+      let id = this.get('id');
       // does the bgus have value?
       if (bgus) {
         bgus.forEach(function(bgu) {
@@ -342,7 +342,7 @@ const User = Model.extend({
           gus.forEach(function(gu) {
             if (gu.user_id) {
               let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.email!=email) && (gu.invitationAccepted=='1')) {
+              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
                 buddies.push(u);
               }
             }

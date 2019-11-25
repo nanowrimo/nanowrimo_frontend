@@ -24,21 +24,21 @@ export default Component.extend({
     }
     return false;
   }),
-  buddyActive: computed('currentUser.user.buddiesActive',function() {
+  buddyActive: computed('currentUser.user.buddiesActive.[]',function() {
     let buddiesActive = this.get('currentUser.user.buddiesActive');
     if (buddiesActive.includes(this.get('user'))) {
       return true;
     }
     return false;
   }),
-  buddyInvited: computed('currentUser.user.buddiesInvited',function() {
+  buddyInvited: computed('currentUser.user.buddiesInvited.[]',function() {
     let buddiesInvited = this.get('currentUser.user.buddiesInvited');
     if (buddiesInvited.includes(this.get('user'))) {
       return true;
     }
     return false;
   }),
-  buddyInvitedBy: computed('currentUser.user.buddiesInvitedBy',function() {
+  buddyInvitedBy: computed('currentUser.user.buddiesInvitedBy.[]',function() {
     let buddiesInvitedBy = this.get('currentUser.user.buddiesInvitedBy');
     if (buddiesInvitedBy.includes(this.get('user'))) {
       return true;
@@ -66,6 +66,7 @@ export default Component.extend({
   actions: {
     sendInvitation() {
       let user = this.get('user');
+      let cu = this.get('currentUser.user');
       return new Promise(() => {
         let newBuddyEndpoint = this.get('newBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
@@ -78,7 +79,7 @@ export default Component.extend({
         }) 
         .then((response) => {
           if (response.ok) {
-            user.loadGroupUsers('buddies');
+            cu.loadGroupUsers('buddies');
           } else {
             alert('There was a problem sending this invitation. Please reload the page and try again.');
           }
@@ -91,6 +92,7 @@ export default Component.extend({
     
     approveInvitation() {
       let user = this.get('user');
+      let cu = this.get('currentUser.user');
       return new Promise(() => {
         let approveBuddyEndpoint = this.get('approveBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
@@ -102,7 +104,7 @@ export default Component.extend({
         }) 
         .then((response) => {
           if (response.ok) {
-            user.loadGroupUsers('buddies');
+            cu.loadGroupUsers('buddies');
           } else {
             alert('There was a problem approving this invitation. Please reload the page and try again.');
           }
@@ -116,6 +118,7 @@ export default Component.extend({
     rejectInvitation() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
+      let store = this.get('store');
       return new Promise(() => {
         let rejectBuddyEndpoint = this.get('rejectBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
@@ -127,6 +130,31 @@ export default Component.extend({
         }) 
         .then((response) => {
           if (response.ok) {
+            let found = false;
+            let gus = store.peekAll('group-user');
+            gus.forEach(function(gu) {
+              // If this group_user belongs to the buddy group
+              if (gu.user_id==user.id) {
+                // Check for a buddyship
+                let g = store.peekRecord('group',gu.group_id);
+                if (g && g.groupType=='buddies') {
+                  // Check that this is a buddyship for the current user
+                  let gu2s = store.peekAll('group-user');
+                  gu2s.forEach(function(gu2) {
+                    if ((gu2.group_id==g.id)&&(gu2.user_id==cu.id)) {
+                      found = true;
+                      gu2.unloadRecord();
+                    }
+                  });
+                  if (found) {
+                    g.unloadRecord();
+                  }
+                }
+                if (found) {
+                  gu.unloadRecord();
+                }
+              }
+            });
             cu.loadGroupUsers('buddies');
           } else {
             alert('There was a problem rejecting this invitation. Please reload the page and try again.');
@@ -141,6 +169,7 @@ export default Component.extend({
     removeBuddy() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
+      let store = this.get('store');
       return new Promise(() => {
         let removeBuddyEndpoint = this.get('removeBuddyEndpoint')+user.id;
         let { auth_token }  = this.get('session.data.authenticated');
@@ -152,6 +181,31 @@ export default Component.extend({
         }) 
         .then((response) => {
           if (response.ok) {
+            let found = false;
+            let gus = store.peekAll('group-user');
+            gus.forEach(function(gu) {
+              // If this group_user belongs to the buddy group
+              if (gu.user_id==user.id) {
+                // Check for a buddyship
+                let g = store.peekRecord('group',gu.group_id);
+                if (g && g.groupType=='buddies') {
+                  // Check that this is a buddyship for the current user
+                  let gu2s = store.peekAll('group-user');
+                  gu2s.forEach(function(gu2) {
+                    if ((gu2.group_id==g.id)&&(gu2.user_id==cu.id)) {
+                      found = true;
+                      gu2.unloadRecord();
+                    }
+                  });
+                  if (found) {
+                    g.unloadRecord();
+                  }
+                }
+                if (found) {
+                  gu.unloadRecord();
+                }
+              }
+            });
             cu.loadGroupUsers('buddies');
           } else {
             alert('There was a problem removing this buddy. Please reload the page and try again.');
