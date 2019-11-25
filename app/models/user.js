@@ -164,6 +164,60 @@ const User = Model.extend({
   // END OF PROJECT FUNCTIONS
   // ---------------------------
   
+  // Returns true if user has won latest event, false if not
+  currentEventWon: computed('projectChallenges.@each.currentCount',function() {
+    let pcs = this.get('projectChallenges');
+    // Set a variable to return
+    let winner = false;
+    // Set a local variable for the store
+    let store = this.get('store');
+    // Set a local variable for all challenges in the store
+    let cs = store.peekAll('challenge');
+    // Set a local variable for the correct challenge
+    let newc = null;
+    // Loop through the challenges to find the latest event
+    cs.forEach(function(c) {
+      // If this is a November event
+      if (c.eventType==0) {
+        // If the challenge is newer than ones already found
+        if ((newc===null)||(newc.endsAt<c.endsAt)) {
+          // Set the challenge variable to this challenge
+          newc = c;
+        }
+      }
+    });
+    // If the challenge has been found...
+    if (newc) {
+      // Get the current user id
+      let cuid = this.get('id');
+      // If the current user id exists...
+      if (cuid) {
+        // Get all project_challenges
+        let pcs = store.peekAll('project-challenge');
+        // Loop through them
+        pcs.forEach(function(pc) {
+          // If this project challenge is for the latest event...
+          if (newc.id==pc.challenge_id) {
+            // Find the associated project
+            let p = store.peekRecord('project',pc.project_id);
+            // If the project is found
+            if (p) {
+              // If the current user is the author
+              if (p.user_id==cuid) {
+                // if the goal has been met
+                if (pc.currentCount>=pc.goal) {
+                  // The user won
+                  winner = true;
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+    // Return if they won or not
+    return winner;
+  }),
   
   //groupUsersLoaded is false by default, is updated when groupUsers are loaded 
   groupUsersLoaded: false,
