@@ -166,7 +166,7 @@ const User = Model.extend({
   
   // Returns true if user has won latest event, false if not
   currentEventWon: computed('projectChallenges.@each.currentCount',function() {
-    let pcs = this.get('projectChallenges');
+    //let pcs = this.get('projectChallenges');
     // Set a variable to return
     let winner = false;
     // Set a local variable for the store
