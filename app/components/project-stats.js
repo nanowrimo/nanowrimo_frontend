@@ -357,7 +357,7 @@ export default Component.extend({
 
   actions: {
     projectSelectChanged: function(v) {
-      let projects = this.get('currentUser.user.projects'); 
+      let projects = this.get('currentUser.user.persistedProjects'); 
       let len = projects.length;
       //loop through the current user's projects and find the matching ID
       for(var i=0; i<len; i++){
