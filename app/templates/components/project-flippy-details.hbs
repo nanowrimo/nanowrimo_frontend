@@ -58,6 +58,15 @@
     </div>
   </div>
   <div class='nw-card nw-card-white nw-card-face-front'>
+    <div class='nw-card-header' style="height: 0px; position: absolute; right: 0; top: 5px;">
+      <div class='nw-card-actions'>
+        <div class='nw-card-model-actions'>
+          <div class="nw-flippy-card-toggle" style="background-color: rgba(0,0,0,0.5); border-radius: 6px; width: 40px;" {{action "toggleSubcard"}}>
+            {{fa-icon "repeat"}}
+          </div>
+        </div>
+      </div>
+    </div>
     <div class='nw-card-content nw-centered no-padding'>
       <div class='nw-project-cover-large' {{action "toggleSubcard"}}>
         <img src={{project.coverUrl}}>
