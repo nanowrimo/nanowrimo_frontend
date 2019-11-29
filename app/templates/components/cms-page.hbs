@@ -26,6 +26,9 @@
   {{/each}}
 {{/if}}
 {{#if isPlainText}}
+  {{#each page.before_posts as |post|}}
+    {{cms-post post=post currentUrl=page.data.attributes.url}}
+  {{/each}}
   <section class="nw-cms-content">
     <div class="nw-container">
       <div class="nw-wrapper nw-plain-text">
@@ -36,6 +39,9 @@
       </div>
     </div>
   </section>
+  {{#each page.after_posts as |post|}}
+    {{cms-post post=post currentUrl=page.data.attributes.url}}
+  {{/each}}
 {{/if}}
 {{#if isStackedContent}}
   {{#each page.before_posts as |post|}}

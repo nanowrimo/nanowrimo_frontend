@@ -9,15 +9,7 @@ export default Route.extend({
   templateName: '404',
   model(params) {
     if (params.path) {
-      let cu = this.get('currentUser');
-      let id = 0;
-      if (cu) {
-        id = cu.get('user.id');
-      }
       let endpoint =  `${ENV.APP.API_HOST}/pages/${params.path}`;
-      if (id) {
-        endpoint += '?user_id='+id;
-      }
       return fetch(endpoint).then((data)=>{
         return data.json().then((json)=>{
           return json;

@@ -9,7 +9,7 @@ export default Route.extend({
   model() {
     let cu = this.get('currentUser.user');
     const winner = cu.currentEventWon;
-    let endpoint =  `${ENV.APP.API_HOST}/pages/nano-winner-2019`;
+    let endpoint =  `${ENV.APP.API_HOST}/pages/nano-winner-2019?user_id=`+cu.get('id');
     if (!winner) {
       endpoint =  `${ENV.APP.API_HOST}/pages/how-to-win-nanowrimo`;
     }
