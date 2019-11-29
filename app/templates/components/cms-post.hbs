@@ -62,6 +62,15 @@
     </div>
   </section>
 {{/if}}
+{{#if isDynamicSponsorOffer}}
+  <div class="container-fluid">
+    <div class="nw-panel">
+      <div class="nw-flex-6-cols">
+        {{cms-offer offer=post.data.attributes}}
+      </div>
+    </div>
+  </div>
+{{/if}}
 {{#if isGeneralContent}}
 <div class="content-gutters nw-stripes">
   <div class="container-fluid">
