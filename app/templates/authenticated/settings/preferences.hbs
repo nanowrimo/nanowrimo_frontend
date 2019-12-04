@@ -76,6 +76,11 @@
       <!--<div class="form-group inline-checkbox">
         {{f.checkbox label="Writing reminders" property="emailWritingReminders"}}
       </div>-->
+      {{#if forumsEmailPreferencesUrl}}
+        <div class='form-group'>
+          <a href="{{forumsEmailPreferencesUrl}}">Forums Email Preferences</a>
+        </div>
+      {{/if}}
     </div>
   </div>
 
