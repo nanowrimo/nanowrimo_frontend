@@ -19,6 +19,7 @@ const User = Model.extend({
   email: attr('string'),
   location: attr('string'),
   name: attr('string'),
+  discourseUsername: attr('string'),
   slug: attr('string'),
   timeZone: attr('string'),
   plate: attr('string'),
