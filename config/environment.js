@@ -144,6 +144,7 @@ module.exports = function(environment) {
     ENV.forumsUrl = "https://staging.forums.nanowrimo.org";
   }
   
+  /*
   // airbrake in development environments only 
   if (environment.includes('development')) {
     ENV.airbrake = {
@@ -159,7 +160,7 @@ module.exports = function(environment) {
     // the message from being sent to airbrake
     ENV.airbrake.ignoreMessageStrings=['Ember Data Request','The adapter operation','More context objects'];
   }
-  
+  */
   
   return ENV;
 };
