@@ -33,7 +33,7 @@ const Challenge = Model.extend({
   // Used here but not on API side
   name: attr('string'),
   
-  isNaNoEvent: computed('eventType', function(){
+  isNaNoOrCampEvent: computed('eventType', function(){
     let type = this.get('eventType');
     return (type === 0 || type === 1 );
   }),
@@ -44,6 +44,16 @@ const Challenge = Model.extend({
     let e = moment(this.get('endsAt')).add(1,'d');
     let duration = moment.duration(e.diff(s));
     return duration.asDays();
+  }),
+  unitTypeAsString: computed('unitType', function(){
+    let ut = this.get('unitType');
+    if (ut) {
+      return ut.toString();
+    }
+  }),
+  writingTypeAsString: computed('writingType', function(){
+    let wt = this.get('writingType');
+    return wt.toString();
   }),
   
 });
