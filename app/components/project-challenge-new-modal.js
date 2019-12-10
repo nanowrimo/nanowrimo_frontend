@@ -8,12 +8,13 @@ import Challenge from 'nanowrimo/models/challenge';
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  
   newDuration:null,
   displayName: null,
   displayStartsAt: null,
   displayEndsAt: null,
   validationErrors: null,
-  editing: false,
+  isEditingModal: false,
   newStartsAt: null,
   newEndsAt:null,
   //challenge stuff
@@ -21,8 +22,13 @@ export default Component.extend({
   associatedChallenge: null,
   hasValidationError: false,
   
-  canEditName: computed('projectChallenge', function(){
-    if (this.get('editing') ){
+  canEditName: computed('projectChallenge', 'associateWithChallenge', function(){
+    if (this.get('isEditingModal') ){
+      //if the goal is no longer associated with a challenge, user can edit name
+      let associate = this.get('associateWithChallenge');
+      if (!associate) {
+        return true;
+      }
       let cuid = this.get('projectChallenge.challenge.userId');
       let uid = this.get('currentUser.user.id');
       return cuid == uid;
@@ -34,7 +40,14 @@ export default Component.extend({
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
   disableName: computed('canEditName','associateWithChallenge', function(){
-    return !this.get('canEditName') || this.get('associateWithChallenge');
+    //can the user edit the original challenge?
+    let canEdit = this.get('canEditName');
+    if (!canEdit) {
+      return true;
+    }
+    // is there an associated challenge?
+    let associated = this.get('associateWithChallenge');
+    return associated;
   }),
   
   disableWritingType: computed('associateWithChallenge', function(){
@@ -44,9 +57,9 @@ export default Component.extend({
       if (this.get('associatedChallenge.eventType')==0) {
         retval=true;
       }
-    }
-    if (this.get('projectChallenge.challenge.eventType')==0) {
-      retval=true;
+      if (this.get('projectChallenge.challenge.eventType')==0) {
+        retval=true;
+      }
     }
     return retval;
   }),
@@ -59,9 +72,9 @@ export default Component.extend({
       if (et==0 || et==1) {
         retval=true;
       }
-    }
-    if (this.get('projectChallenge.challenge.isNaNoEvent')){
-      retval=true;
+      if (this.get('projectChallenge.challenge.isNaNoOrCampEvent')){
+        retval=true;
+      }
     }
     return retval;
   }),
@@ -72,11 +85,12 @@ export default Component.extend({
     if (this.get('associateWithChallenge')) {
       if (this.get('associatedChallenge.eventType')==0) {
         retval=true;
+      } 
+      if (this.get('projectChallenge.challenge.eventType')===0){
+        retval=true;
       }
     }
-    if (this.get('projectChallenge.challenge.eventType')===0){
-      retval=true;
-    }
+
     return retval;
   }),
   
@@ -90,40 +104,60 @@ export default Component.extend({
     }
   }),
   
-  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoEvent", true),
-  unassignedOptionsForChallenges: computed('project.projectChallenges.[]', 'filteredOptionsForChallenges', function() {
-    let newArray = [];
-    let fofcs = this.get('filteredOptionsForChallenges');
-    let pcs = this.get('project.projectChallenges');
-    fofcs.forEach(function(fofc) {
+  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoOrCampEvent", true),
+  
+  // get the challenges that the user has not associated with a project 
+  unassignedOptionsForChallenges: computed('project.projectChallenges.[]', 'filteredOptionsForChallenges','isEditingModal', function() {
+    // create an array to hold the unassigned challenges
+    let availableChallenges = [];
+    // an array of the OLL challenges 
+    let challenges = this.get('filteredOptionsForChallenges');
+    
+        /* when editing, it is necessary to NOT filter out the currently assigned challenge */
+    if (this.get("isEditingModal") ){
+      return challenges;
+    }
+    // an array of the goal associations of the current project
+    let goals = this.get('project.projectChallenges');
+    // loop through the filtered challenges
+    challenges.forEach(function(challenge) {
+      // for each challenge, assume there was no associated challenge
       let found = false;
-      pcs.forEach(function(pc) {
-        let id = pc.get('challenge.id');
-        if (id === fofc.id) {
+      // loop the projects challenge associations
+      goals.forEach(function(goal) {
+        // is the goal associated with the challenge?
+        if (goal.challenge_id === parseInt(challenge.id)) {
+          // a match has been found
           found = true;
         }
       });
+      
       if (!found) {
-        newArray.push(fofc);
+        availableChallenges.pushObject(challenge);
       }
     });
-    return newArray;
+    return availableChallenges;
   }),
+  
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
   
   baseChallenges:  computed(function() {
     return this.get('store').findAll('challenge');
   }),
-  optionsForWritingType: computed(function() {
+  optionsForWritingType: computed('associateWithChallenge', function() {
     return Challenge.optionsForWritingType;
   }),
-  optionsForUnitType: computed(function() {
+  optionsForUnitType: computed('associateWithChallenge', function() {
     return Challenge.optionsForUnitType;
   }),
 
   actions: {
      associateChallengeSelect(challengeID) {
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
+      // is associate already checked?
+      if (this.get('associateWithChallenge') ) {
+        this._setProjectChallengeFromChallenge();
+      }
     },
     clickedAssociateCheckbox() {
       this.toggleProperty("associateWithChallenge");
@@ -136,9 +170,7 @@ export default Component.extend({
         this._setProjectChallengeFromChallenge();
         
       } else {
-        //reset the project Challenge
-        // The following line threw the error 'this._resetProjectChallenge is not a function'. What is it suppposed to do?
-        //this._resetProjectChallenge();
+        this.set('associatedChallenge', null);
       }
     },
     
@@ -149,13 +181,20 @@ export default Component.extend({
       let pc = this.get('projectChallenge');
       //we are editing if the projectChallenge has been persisted and has an id
       if (pc && pc.id ){ 
-        this.set('editing', true);
+        this.set('isEditingModal', true);
         this.set('newDuration', pc.duration);  
         this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
         this.set('displayEndsAt', moment.utc(pc.endsAt).format("YYYY-MM-DD"));
         this.set('displayName', pc.name);
         this.set('newStartsAt', pc.startsAt);
         this.set('newEndsAt', pc.endsAt);
+        // is the project challenge associated with an event? 
+        if(pc.computedChallenge.isNaNoOrCampEvent){
+          //set the challenge association properties
+          this.set('associateWithChallenge', true);
+          this.set('associatedChallenge', pc.computedChallenge);
+        }
+        
       } else {
         this._newProjectChallenge();
       }
@@ -167,8 +206,6 @@ export default Component.extend({
     saveProjectChallenge() {
       this._validate();
       if (this.get('projectChallengeIsValid') ){
-        //hide the modal
-        this.set('open', false);
         //assign the project to the project challenge
         let pc = this.get('projectChallenge');
         pc.set('project', this.get('project'));
@@ -179,13 +216,17 @@ export default Component.extend({
         if (this.get('associateWithChallenge') ) {
           pc.set('challenge', this.get('associatedChallenge'));
         } else {
+          pc.set('challenge', null);
           pc.set('name', this.get('displayName'));
         }
         pc.save();
+        //hide the modal
+        this.set('open', false);
       }
     },
     closeModal() {
        this.set('open', false);
+       
     },
     writingTypeChanged(val) {
       this.set('projectChallenge.writingType', val);
@@ -233,7 +274,8 @@ export default Component.extend({
     let projectChallenge = this.get('projectChallenge');
     let challenge = this.get('associatedChallenge');
     projectChallenge.set('name',challenge.name);
-    projectChallenge.set('unitType',"0");
+    this.set('displayName', challenge.name);
+    projectChallenge.set('unitType',challenge.unitType);
     projectChallenge.set('goal',challenge.defaultGoal);
     let start = moment.utc(challenge.startsAt);
     let end = moment.utc(challenge.endsAt);

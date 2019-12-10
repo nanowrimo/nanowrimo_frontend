@@ -5,7 +5,7 @@
   as |modal|
 }}
   {{#modal.header closeButton=false}}
-    {{#if editing }}
+    {{#if isEditingModal }}
       Edit Goal
     {{else}}
       New Goal
@@ -28,7 +28,7 @@
         <div class="select-container">
           <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
             {{#each optionsForChallenges as |c|}}
-              <option value="{{c.id}}" selected={{if (eq c.id associatedChallengeId) 'true'}}>{{c.name}}</option>
+              <option value="{{c.id}}" selected={{if (eq c.id associatedChallenge.id) 'true'}}>{{c.name}}</option>
             {{/each}}
           </select>
         </div>
@@ -51,7 +51,7 @@
             class='form-control' 
             onchange={{action 'writingTypeChanged' value="target.value"}}>
             {{#each optionsForWritingType as |opt|}}
-              <option value={{opt.value}}>
+              <option value={{opt.value}} selected={{if (eq opt.value associatedChallenge.unitTypeAsString) 'true'}} >
                 {{opt.name}}
               </option>
             {{/each}}

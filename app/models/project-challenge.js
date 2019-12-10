@@ -49,6 +49,20 @@ const ProjectChallenge = Model.extend({
     return user;
   }),
   
+   // get the challenge without an api call with a relationship
+  computedChallenge: computed('challenge_id', function(){
+    // get the store 
+    let s = this.get('store');
+    // get the id of the associated challenge 
+    let cid = this.get('challenge_id');
+    //is there an id to check?
+    if (cid) {
+      // get the challenge record with challenge id
+      let challenge = s.peekRecord('challenge', cid);
+      return challenge;  
+    }
+  }),
+  
   // ---------------------------
   // END OF RELATIONSHIP FUNCTIONS
   // ---------------------------
