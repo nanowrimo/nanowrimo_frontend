@@ -70,7 +70,7 @@
     "ember-test-selectors": "^1.0.0",
     "ember-truth-helpers": "^2.0.0",
     "eslint-plugin-ember": "^5.2.0",
-    "highcharts": "^7.0.0",
+    "highcharts": "^8.0.0",
     "jquery-datetimepicker": "^2.5.21",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
