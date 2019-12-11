@@ -37,6 +37,7 @@ export default Component.extend({
     if (donor) {
       return (donor.toLocaleString() + " donors" ).htmlSafe();
     }
+    return null;
   }),
   
   stack_style: computed('raised', function() {

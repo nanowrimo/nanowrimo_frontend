@@ -66,6 +66,7 @@ export default Component.extend({
     if (badge) {
       return ((badge.badge_type=='self-awarded')&&(this.get('ownsBadge')));// {
     }
+    return null;
   }),
   
   // Changes the cursor on self-awardable badges
@@ -87,6 +88,7 @@ export default Component.extend({
       }
       return imageUrl;
     }
+    return null;
   }),
   badgeDescription: computed('badgesService.recomputeBadges',function() {
     let b = this.get('badge');
