@@ -13,8 +13,8 @@
     searchEnabled=searchEnabled
     showCreatePosition="bottom"
     showCreateWhen=(action "showCreateWhen")
-    onchange=(action (mut (get model property)))
-    oncreate=(action "createOption")
+    onChange=(action (mut (get model property)))
+    onCreate=(action "createOption")
     dropdownClass="in-modal-dropdown"
     renderInPlace=true
     as |opt|
