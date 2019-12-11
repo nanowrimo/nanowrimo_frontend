@@ -18,7 +18,9 @@ module.exports = {
     browser: true
   },
   rules: {
-    //"ember/no-side-effects":1
+    "ember/no-observers":1,
+    "ember/no-new-mixins":1,
+    "ember/require-return-from-computed":1
   },
   overrides: [
     // node files
