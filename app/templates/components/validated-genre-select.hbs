@@ -7,8 +7,8 @@
   searchField="name"
   showCreatePosition="bottom"
   showCreateWhen=(action "showCreateWhen")
-  onchange=(action (mut value))
-  oncreate=(action "createGenre")
+  onChange=(action (mut value))
+  onCreate=(action "createGenre")
   as |genre|
 }}
   {{genre.name}}

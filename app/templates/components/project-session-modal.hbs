@@ -59,8 +59,8 @@
               showCreateWhen=(action "showCreateWhen")
               dropdownClass="in-modal-dropdown"
               renderInPlace=true
-              onchange=(action (mut selectedWhere))
-              oncreate=(action "createWhere")
+              onChange=(action (mut selectedWhere))
+              onCreate=(action "createWhere")
               as |opt|
             }}
               {{opt.name}}
@@ -77,8 +77,8 @@
               showCreateWhen=(action "showCreateWhen")
               dropdownClass="in-modal-dropdown"
               renderInPlace=true
-              onchange=(action (mut selectedHow))
-              oncreate=(action "createHow")
+              onChange=(action (mut selectedHow))
+              onCreate=(action "createHow")
               as |opt|
             }}
               {{opt.name}}
