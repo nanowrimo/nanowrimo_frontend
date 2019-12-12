@@ -72,7 +72,7 @@
           {{/dd.menu}}
         {{/bs-dropdown}}
         {{notifications-menu}}
-        {{#if media.isMobile}}
+        {{#if (media "isMobile")}}
           {{#nano-side-menu-toggle}}
             <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
           {{/nano-side-menu-toggle}}
