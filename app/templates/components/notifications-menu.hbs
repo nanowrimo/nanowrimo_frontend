@@ -13,10 +13,10 @@
   {{#nav.dropdown onHide=(action 'notificationsViewed') as |dd|}}
     {{#dd.toggle}}
       <button class="button-clear" aria-label="Display your notifications.">
-        {{#if media.isDesktop}}
+        {{#if (media "isDesktop")}}
           <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
         {{/if}}
-        {{#if media.isMobile}}
+        {{#if (media "isMobile")}}
           <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
         {{/if}}
         <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>

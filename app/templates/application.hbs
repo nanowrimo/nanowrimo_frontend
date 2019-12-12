@@ -1,10 +1,10 @@
 {{#if is_authenticated}}
   <div class="page-background">
     <header>
-      {{#if media.isMobile}}
+      {{#if (media "isMobile")}}
         {{nano-side-menu}}
       {{/if}}
-      {{#if media.isDesktop}}
+      {{#if (media "isDesktop")}}
         {{micro-nav}} 
       {{/if}} 
       {{main-nav}}
