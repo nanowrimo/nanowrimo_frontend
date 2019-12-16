@@ -148,7 +148,7 @@ const User = Model.extend({
   // BEGINNING OF PROJECT FUNCTIONS
   // ---------------------------
   
-  computedProjects: computed('projects.[]',function() {
+  computedProjects: computed('projects.@each.createdAt',function() {
     let store = this.get('store');
     let allProjects = store.peekAll('project');
     let id = this.get('id');
@@ -554,7 +554,7 @@ const User = Model.extend({
     }
   }),
 
-  persistedProjects: filter('computedProjects.@each.id', function(project) {
+  persistedProjects: filter('computedProjects', function(project) {
     return project.id > 0;
   }),
   /* stats */

@@ -9,16 +9,11 @@ export default Controller.extend({
 
   addProject: false,
   projects: alias('user.persistedProjects'),
-  //projects: alias('user.computedProjects'),
   sortOptions: null,
   selectedSortOption: null,
   user: null,
 
-  sortedProjects: sort('displayProjects', 'selectedSortOption'),
-  
-  displayProjects: computed('projects.{[],@each.primary}', function(){
-    return this.get('projects');
-  }),
+  sortedProjects: sort('projects', 'selectedSortOption'),
   
   canAddProject: computed('currentUser.user.id', 'user.id', function() {
     return this.get('currentUser.user.id') === this.get('user.id');
