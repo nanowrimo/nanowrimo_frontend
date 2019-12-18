@@ -314,7 +314,10 @@ export default Component.extend({
       }*/
 
       session.set('count', count);
-      session.save();
+      session.save().then(()=>{
+        // refresh the user stats  
+        user.refreshStats();
+      });
       
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
