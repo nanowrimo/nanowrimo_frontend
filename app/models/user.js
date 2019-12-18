@@ -6,10 +6,12 @@ import { sort, filter, filterBy }  from '@ember/object/computed';
 import moment from 'moment';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
+import ENV from 'nanowrimo/config/environment';
 
 const User = Model.extend({
   store: service(),
-  
+  session: service(),
+
   avatar: attr('string'),
   adminLevel: attr('number'),
   bio: attr('string'),
@@ -98,6 +100,7 @@ const User = Model.extend({
   groupUsers: hasMany('group-user'),
   regions: filterBy('groups', 'groupType', 'region'),
   
+  stats: null,
   
   // ---------------------------
   // BEGINNING OF DATETIME FUNCTIONS
@@ -699,6 +702,20 @@ const User = Model.extend({
       this.get('favoriteBooks').forEach(book => book.persistChanges());
     });
   },
+  
+  refreshStats: function() {
+    let { auth_token } = this.get('session.data.authenticated');
+    //fetch the stats from the API
+    let endpoint = `${ENV.APP.API_HOST}/users/${this.get('id')}/stats`;
+    fetch(endpoint, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+    }).then(resp=>{
+      resp.json().then(json=>{
+        this.set('stats', json);
+      });
+    });
+  }
+  
 });
 
 User.reopenClass({

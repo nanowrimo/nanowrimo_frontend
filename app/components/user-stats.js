@@ -6,11 +6,13 @@ export default Component.extend({
   tagName: '',
   user: alias('author'),
   
-  yearsWon: computed('user.yearsWon.[]', function(){
-    return this.get('user.yearsWon');
-  }),
+  didReceiveAttrs() {
+    //refresh the user stats
+    let u = this.get('user');
+    u.refreshStats();
+  },
   
-  yearsDoneCount: computed('user.yearsDone.[]', function() {
+  yearsDoneCount: computed('user.stats.yearsDone.[]', function() {
     return this.get('user.yearsDone').length;
   })
 });
