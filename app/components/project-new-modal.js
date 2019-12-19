@@ -156,6 +156,9 @@ export default Component.extend({
       this.set('open', null);
       let as = this.get('afterSubmit');
       if (as) { as() }
+      
+      //refresh the user stats
+      this.get('user').refreshStats();
     }
   }
 });
