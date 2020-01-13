@@ -52,7 +52,8 @@ export default Service.extend({
         submenuItems: [
           {label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg"},
           this.get('homeRegionItem'),
-          {label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"}
+          {label: "My Groups", route: "authenticated.users.show.groups", segment: this.get('userSlug'), teaser: "Regions and writing groups", src: "/images/nav/groups.svg"},
+          {label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg"},
           //{label: "Word Sprints", route: "wordSprints", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
         ]
       },

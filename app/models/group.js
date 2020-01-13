@@ -14,6 +14,7 @@ const Group = Model.extend({
   endDt: attr('date'),
   groupType: attr('string'),
   slug: attr('string'),
+  avatar: attr('string'),
   plate: attr('string'),
   longitude: attr('number'),
   latitude: attr('number'),
@@ -67,6 +68,15 @@ const Group = Model.extend({
     }
   },
   
+  avatarUrl: computed('avatar', function() {
+    let avatar = this.get('avatar');
+    if (avatar && avatar.includes(':')) {
+      return avatar; 
+    } else {
+      return false;
+    }
+  }),
+  
   _plateUrl: null,
   plateUrl: computed('plate', {
     get() {
@@ -76,6 +86,29 @@ const Group = Model.extend({
       }
       return null;
     }
+  }),
+  
+  // The string after the last ::
+  nameFinal: computed('group', function() {
+    let gt = this.get('groupType');
+    let name = this.get('name');
+    if (gt == 'region') {
+      let a = name.split(' :: ');
+      return a.pop();
+    }
+    return g.name;
+  }),
+  
+  // The string before the last ::
+  namePrelim: computed('name', function() {
+    let gt = this.get('groupType');
+    let name = this.get('name');
+    if (gt == 'region') {
+      let a = name.split(' :: ');
+      a.pop();
+      return a.join(' :: ');
+    }
+    return '';
   }),
 
   rollbackGroupExternalLinks() {

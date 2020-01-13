@@ -28,6 +28,8 @@ Router.map(function() {
         });
         this.route('buddies', function() {
         });
+        this.route('groups', function() {
+        });
       });
       this.route('edit');
     });

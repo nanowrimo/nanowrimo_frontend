@@ -1,57 +1,3 @@
-.nw-sidebar.nw-profile {
-  font-family: 'SansBold', sans-serif;
-  .nw-user-name {
-    width: 100%;
-    text-align: center;
-    color: $nw-darkblue;
-    font-size: 26px;
-  }
-  .nw-user-location {
-    width: 100%;
-    text-align: center;
-    color: $nw-black;
-    font-style: italic;
-  }
-  .nw-member-since {
-    width: 100%;
-    text-align: center;
-    color: $nw-mediumgrey;
-    font-style: italic;
-  }
-  .nw-user-social {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .social-button {
-      width: 26px;
-      height: 26px;
-      margin: 7px;
-      background-color: $nw-lightblue;
-      border-radius: 13px;
-      color: $nw-mediumgreyblue;
-      font-size: 12px;
-      line-height: 26px;
-    }
-  }
-  .nw-user-link {
-    width: 100%;
-    text-align: center;
-    a {
-      color: $nw-darkaqua;
-    }
-  }
-  i {
-    cursor: pointer;
-    min-width: 32px;
-    line-height: 28px;
-    color: $nw-lightgrey;
-    font-size: 18px;
-    &:hover {
-      color: $nw-darkblue;
-    }
-  }
-}
-
 .nw-user-listing {
   padding: 15px;
   display: flex;
@@ -82,32 +28,6 @@
     flex: 1 1 100%;
     .buddy-buttons {
       padding: 0px;
-    }
-  }
-}
-.nw-sidebar.nw-profile {
-  .buddy-buttons {
-    padding: 10px;
-    .buddy-status {
-      padding-bottom: 10px;
-    }
-    &.button-danger {
-      .buddy-status {
-        color: $nw-darkred;
-        font-family: 'SansBold', sans-serif;
-      }
-    }
-    button {
-      line-height: 17px;
-      i {
-        color: $nw-white-1;
-        line-height: 19px;
-      }
-      &.button-reversed {
-        i {
-          color: $nw-mediumgreen;
-        }
-      }
     }
   }
 }

@@ -247,6 +247,21 @@ const User = Model.extend({
     return maxRegion;
   }),
 
+  myGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+    let gus = this.get('groupUsers');
+    let bgus = [];
+    //are there group users?
+    if (gus) {
+      gus.forEach(function(gu) {
+        if (((gu.groupType=='region')||(gu.groupType=='writing group'))&&(gu.exitAt==null)) {
+          bgus.push(gu.group);
+        }
+      });
+    }
+    return bgus;
+  }),
+  
+
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');

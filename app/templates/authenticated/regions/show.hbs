@@ -12,18 +12,19 @@
 </div>
 <div class="content-gutters">
   <div class="container-fluid align-top">
-    <div class="nw-sidebar nw-profile nw-region-summary">
+    <div class="nw-sidebar">
       <div class="nw-sidebar-content">
-        <div class="nw-region-name-prelim">
-          {{namePrelim}}
+        {{group-avatar group=group canEdit=canEditGroup editAction=(action "openEditModal" "avatarTab")}}
+        <div class="nw-item-name-prelim">
+          {{group.namePrelim}}
         </div>
-        <div class="nw-region-name">
-          {{nameFinal}}
+        <div class="nw-item-name">
+          {{group.nameFinal}}
         </div>
-        <div class="nw-region-description-label">
+        <div class="nw-item-description-label">
           DESCRIPTION
         </div>
-        <div class="nw-region-description">
+        <div class="nw-item-description">
           {{group.description}}
         </div>
         {{group-links links=group.groupExternalLinks}}

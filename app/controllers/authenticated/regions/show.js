@@ -41,25 +41,6 @@ export default Controller.extend({
     }
     return htmlSafe(styles.join(';'));
   }),
-
-  
-  nameFinal: computed('group', function() {
-    let g = this.get('group');
-    if (g.groupType == 'region') {
-      let a = g.name.split(' :: ');
-      return a.pop();
-    }
-    return g.name;
-  }),
-  namePrelim: computed('group', function() {
-    let g = this.get('group');
-    if (g.groupType == 'region') {
-      let a = g.name.split(' :: ');
-      a.pop();
-      return a.join(' :: ');
-    }
-    return '';
-  }),
   
   _needsURLUpdate() {
     return this.get('group.slug') !== this.get('groupParam');

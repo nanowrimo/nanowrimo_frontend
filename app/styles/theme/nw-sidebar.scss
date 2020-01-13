@@ -4,6 +4,7 @@
   box-shadow: $nw-box-shadow;
   background: $nw-horiz-stripes;
   text-align: center;
+  font-family: 'SansBold', sans-serif;
   .nw-sidebar-content {
     padding: 14px;
     padding-bottom: 20px;
@@ -27,5 +28,110 @@
       background-size: 299px 7px;
     }
   }
-  
+  .nw-avatar-frame {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -70px;
+    &.has-laurels {
+      margin-bottom: 10px;
+    }
+  }
+  .nw-item-name-prelim {
+    width: 100%;
+    text-align: center;
+    color: $nw-mediumgrey;
+    line-height: 16px;
+    margin-top: 10px;
+  }
+  .nw-item-name {
+    width: 100%;
+    text-align: center;
+    color: $nw-darkblue;
+    font-size: 26px;
+    line-height: 28px;
+    margin-bottom: 20px;
+  }
+  .nw-item-description-label {
+    width: 100%;
+    text-align: center;
+    color: $nw-mediumgrey;
+    margin-bottom: 10px;
+  }
+  .nw-item-description {
+    border-top: solid 2px $nw-lightgreyblue;
+    padding-top: 14px;
+    font-family: 'SansRegular', sans-serif;
+    font-size: 14px;
+    line-height: 1.38;
+    text-align: left;
+    color: $nw-darkgrey;
+  }
+  .nw-item-location {
+    width: 100%;
+    text-align: center;
+    color: $nw-black;
+    font-style: italic;
+  }
+  .nw-member-since {
+    width: 100%;
+    text-align: center;
+    color: $nw-mediumgrey;
+    font-style: italic;
+  }
+  .nw-item-social {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .social-button {
+      width: 26px;
+      height: 26px;
+      margin: 7px;
+      background-color: $nw-lightblue;
+      border-radius: 13px;
+      color: $nw-mediumgreyblue;
+      font-size: 12px;
+      line-height: 26px;
+    }
+  }
+  .nw-item-link {
+    width: 100%;
+    text-align: center;
+    a {
+      color: $nw-darkaqua;
+    }
+  }
+  i {
+    cursor: pointer;
+    min-width: 32px;
+    line-height: 28px;
+    color: $nw-lightgrey;
+    font-size: 18px;
+    &:hover {
+      color: $nw-darkblue;
+    }
+  }
+  .buddy-buttons {
+    padding: 10px;
+    .buddy-status {
+      padding-bottom: 10px;
+    }
+    &.button-danger {
+      .buddy-status {
+        color: $nw-darkred;
+        font-family: 'SansBold', sans-serif;
+      }
+    }
+    button {
+      line-height: 17px;
+      i {
+        color: $nw-white-1;
+        line-height: 19px;
+      }
+      &.button-reversed {
+        i {
+          color: $nw-mediumgreen;
+        }
+      }
+    }
+  }
 }

@@ -1,0 +1,39 @@
+<div class='nw-avatar-frame nw-avatar-frame-{{size}} {{if canEdit "user-editable" ""}}' {{action "edit"}}>
+  <div class="nw-avatar nw-avatar-{{size}} ">
+    {{#if linkTo}}
+      {{#if isRegion}}
+        {{#link-to 'authenticated.regions.show' group.slug}}
+          {{#if group.avatarUrl}}
+            <img src={{group.avatarUrl}} alt={{group.name}}>
+          {{else}}
+            <div class='nw-avatar-missing'>
+              <div class='nw-avatar-text'>{{group.nameFinal}}</div>
+            </div>
+          {{/if}}
+        {{/link-to}}
+      {{/if}}
+      {{#if isWritingGroup}}
+        {{#link-to 'authenticated.groups.show' group.slug}}
+          {{#if group.avatarUrl}}
+            <img src={{group.avatarUrl}} alt={{group.name}}>
+          {{else}}
+            <div class='nw-avatar-missing'>
+              <div class='nw-avatar-text'>{{group.nameFinal}}</div>
+            </div>
+          {{/if}}
+        {{/link-to}}
+      {{/if}}
+    {{else}}
+      {{#if group.avatarUrl}}
+        <img src={{group.avatarUrl}} alt={{group.name}}>
+      {{else}}
+        <div class='nw-avatar-missing'>
+          <div class='nw-avatar-text'>{{group.nameFinal}}</div>
+        </div>
+      {{/if}}
+      {{#if canEdit}}
+        <div class='avatar-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

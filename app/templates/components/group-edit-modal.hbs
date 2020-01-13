@@ -31,7 +31,16 @@
         {{/tab.pane}}
 
 
-         {{#tab.pane title="Header" id="headerTab"}}
+        {{#tab.pane title="Avatar" id="avatarTab"}}
+          <div class="form-group">
+            {{f.imageUpload
+              label="Update your avatar image"
+              property="avatar"
+            }}
+          </div>
+        {{/tab.pane}}
+
+        {{#tab.pane title="Header" id="headerTab"}}
           <div class="form-group">
             {{f.imageUpload
               label="Update your header image"
