@@ -21,13 +21,19 @@ export default Component.extend({
   _socialLinks: computed('_existingLinks.@each.service', function() {
     let links = this.get('_existingLinks');
 
-    return ENV.APP.SOCIAL_SERVICES.reduce((acc, service) => {
+    let socialLinks = ENV.APP.SOCIAL_SERVICES.reduce((acc, service) => {
       let link = links.findBy('service', service);
-      if (!link) { link = this._newGroupExternalLink({ service }); }
-      return acc.concat(link);
+      if (!link || link.url == null) { 
+        //link = this._newExternalLink({ service }); 
+      } else {
+        if (acc) {
+          return acc.concat(link);
+        }
+      }
     }, []);
+    return socialLinks;
   }),
-
+  
   canAddAnotherLink: computed('_otherSavedLinks.[]', '_newLinks.[]', function() {
     return this.get('_otherSavedLinks').length + this.get('_newLinks').length < 5;
   }),

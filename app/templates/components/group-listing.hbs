@@ -1,28 +1,31 @@
-<div class="nw-card short-card small-gap">
-  <div class="nw-card-content">
-    <div class='nw-user-listing'>
-      {{group-avatar group=group linkTo=true size='large'}}
-      <div class='nw-user-info'>
-        <div class="nw-user-name">
-          {{#if isRegion}}
-            {{#link-to 'authenticated.regions.show' group.slug}}
-              {{group.name}}
-            {{/link-to}}
-          {{/if}}
-          {{#if isWritingGroup}}
-            {{#link-to 'authenticated.groups.show' group.slug}}
-              {{group.name}}
-            {{/link-to}}
-          {{/if}}
+<div class="nw-card short-card small-gap nw-full-link">
+  {{#link-to group.linkPath group.slug}}
+    <div class="nw-card-content">
+      <div class='nw-group-listing'>
+        {{group-avatar group=group linkTo=true size='large'}}
+        <div class='nw-group-info'>
+          <div class="nw-group-name">
+            {{group.name}}
+          </div>
+          {{group.description}}
         </div>
-        {{group.description}}
-        
+        <div class='nw-group-latest'>
+          <div class='nw-icon'>
+            {{#link-to  "authenticated.nanomessages"}}
+              <button class="button-clear" aria-label="Go to your NanoMessages.">
+                <span aria-hidden="false">{{fa-icon "comments"}}</span>
+                {{#if numUnreadMessages}}
+                  <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{numUnreadMessages}}</div>
+                {{/if}}
+              </button>
+            {{/link-to}}
+            
+          </div>
+          <div class='nw-icon-text'>
+            {{{latestMessage}}}
+          </div>
+        </div>
       </div>
-      {{#if buttons}}
-        <div class='user-buttons'>
-          {{buddy-buttons user=user}}
-        </div>
-      {{/if}}
     </div>
-  </div>
+  {{/link-to}}
 </div>

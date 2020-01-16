@@ -8,12 +8,11 @@
         </div>
       </div>
       {{input
-        data-test-external-link-url=(concat "" link.id)
         class="form-control no-left-radius"
         placeholder=(if link.service (concat "https://" link.service ".com/username") "https://example.com")
         value=link.changeset.url
       }}
-      <div {{action "clearLink" link}} class="input-group-append" style="cursor:pointer" data-test-external-link-delete={{concat "" link.id}}>
+      <div {{action "clearLink" link}} class="input-group-append" style="cursor:pointer">
         <div class="input-group-text">
           {{fa-icon "minus-circle" fixedWidth=true}}
         </div>

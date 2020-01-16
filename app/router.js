@@ -65,6 +65,10 @@ Router.map(function() {
         this.route('members');
       });
     });
+    this.route('writing-groups', function() {
+      this.route('show', { path: '/:slug'}, function() {
+      });
+    });
     this.route('nanomessages', function() {
       this.route('show', { path: '/:slug'}, function() {
       });

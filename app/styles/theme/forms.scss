@@ -3,6 +3,10 @@ form {
 }
 .form-group {
   margin-bottom: 10px;
+  .radio-group-title {
+    font-weight: bold;
+    color: $nw-mediumdarkgrey;
+  }
   label {
     text-align: left;
     color: $nw-mediumdarkgrey;
@@ -27,8 +31,16 @@ form {
     }
   }
   &.radio-group {
+    .nw-radio-item {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+    }
     label {
       color: $nw-darkgrey;
+      max-width: 90%;
+      margin-left: 10px;
+      line-height: 18px;
       &.disabled {
         color: $nw-mediumgrey;
       }

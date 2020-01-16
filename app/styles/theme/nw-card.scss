@@ -550,3 +550,13 @@
     top: 25px;
   }
 }
+.nw-card.nw-full-link {
+  a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+  }
+  a:hover {
+    .nw-card-content {
+      background-color: rgba(200,255,255,0.2);
+    }
+  }
+}

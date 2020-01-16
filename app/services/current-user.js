@@ -22,7 +22,7 @@ export default Service.extend({
 
         }).then(() => {
             //get the current user's buddies and regions
-            user.loadGroupUsers('buddies');
+            user.loadGroupUsers('buddies,regions');
           });
       });
     } else {

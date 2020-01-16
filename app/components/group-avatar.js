@@ -17,24 +17,6 @@ export default Component.extend({
     }
   },
 
-  isRegion: computed('group.groupType', function() {
-    let gt = this.get('group.groupType');
-    if (gt=='region') {
-      return true;
-    } else {
-      return false;
-    }
-  }),
-  
-  isWritingGroup: computed('group.groupType', function() {
-    let gt = this.get('group.groupType');
-    if (gt=='writing group') {
-      return true;
-    } else {
-      return false;
-    }
-  }),
-
   actions: {
     edit(){
       //get the edit action

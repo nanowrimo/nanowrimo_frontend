@@ -1,12 +1,12 @@
 <div class="nw-panel-primary-container">
-  <div class='buddy-listings'>
+  <div class='group-listings'>
     <div>
       {{#each user.buddiesInvited as |buddy|}}
         {{buddy-listing user=buddy buttons=true}}
       {{/each}}
     </div>
   </div>
-  <div class='buddy-listings'>
+  <div class='group-listings'>
     <div>
       {{#if hasRegions}}
         {{#each user.myGroups as |group|}}

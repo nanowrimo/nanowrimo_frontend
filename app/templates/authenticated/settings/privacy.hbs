@@ -8,7 +8,7 @@
     <div class='nw-card-content'>
       <div class="form-group radio-group">
         <div class="radio-group-title">Account Privacy</div>
-        <div>
+        <div class='nw-radio-item'>
           <input  id="privacyViewProfile1" name="privacyViewProfile" 
             type="radio" value="1" 
             checked="{{privacyViewProfile1Checked}}" 
@@ -17,12 +17,12 @@
           <label for="privacyViewProfile1">
             public | 
             <span class="option-description">
-              Anyone with an account will be able to search for and view my profile
+              Anyone with an account will be able to search for and view my profile, invite me to be buddies, and invite me to writing groups
             </span>
           </label> 
         </div>
 
-        <div>
+        <div class='nw-radio-item'>
           <input  id="privacyViewProfile0" name="privacyViewProfile" type="radio" value="0"
           onClick={{action 'clickedProfile' value='target.value'}}
           checked="{{privacyViewProfile0Checked}}" 
@@ -30,7 +30,7 @@
           <label for="privacyViewProfile0">
             private | 
             <span class="option-description">
-              Only my buddies can view my profile
+              Only my buddies can view my profile and invite me to writing groups
             </span>
           </label> 
         </div>
@@ -38,7 +38,7 @@
 
       <div class="form-group radio-group">
         <div class="radio-group-title">Who can view your projects?</div>
-        <div>
+        <div class='nw-radio-item'>
           <input  id="privacyViewProjects2" name="privacyViewProjects" type="radio" value="2"
           checked="{{privacyViewProjects2Checked}}" 
           onClick={{action 'clickedProjects' value='target.value'}}
@@ -49,7 +49,7 @@
           </label> 
         </div>
 
-        <div>
+        <div class='nw-radio-item'>
           <input  id="privacyViewProjects1" name="privacyViewProjects" type="radio" value="1"
           checked="{{privacyViewProjects1Checked}}" 
           onClick={{action 'clickedProjects' value='target.value'}}
@@ -60,7 +60,7 @@
           </label> 
         </div>
 
-        <div>
+        <div class='nw-radio-item'>
           <input  id="privacyViewProjects0" name="privacyViewProjects" type="radio" value="0"
           checked="{{privacyViewProjects0Checked}}" 
           onClick={{action 'clickedProjects' value='target.value'}}
@@ -74,7 +74,7 @@
 
       <div class="form-group radio-group">
         <div class="radio-group-title">Who can view your buddies?</div>
-        <div>
+        <div class='nw-radio-item'>
           <input  id="privacyViewBuddies2" name="privacyViewBuddies" type="radio" value="2"
           checked="{{privacyViewBuddies2Checked}}" 
           onClick={{action 'clickedBuddies' value='target.value'}}
@@ -85,7 +85,7 @@
           </label> 
         </div>
 
-        <div>
+        <div class='nw-radio-item'>
         <input id="privacyViewBuddies1" name="privacyViewBuddies" type="radio" value="1"
         checked="{{privacyViewBuddies1Checked}}" 
           onClick={{action 'clickedBuddies' value='target.value'}}
@@ -96,12 +96,12 @@
           </label> 
         </div>
 
-        <div>
-        <input id="privacyViewBuddies0" name="privacyViewBuddies" type="radio" value="0"
-        checked="{{privacyViewBuddies0Checked}}" 
-          onClick={{action 'clickedBuddies' value='target.value'}}
-          disabled={{privacyViewBuddies0Disabled}}
-        > 
+        <div class='nw-radio-item'>
+          <input id="privacyViewBuddies0" name="privacyViewBuddies" type="radio" value="0"
+          checked="{{privacyViewBuddies0Checked}}" 
+            onClick={{action 'clickedBuddies' value='target.value'}}
+            disabled={{privacyViewBuddies0Disabled}}
+          > 
           <label for="privacyViewBuddies0">
             Only me 
           </label> 

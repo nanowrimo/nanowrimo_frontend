@@ -87,16 +87,63 @@ const Group = Model.extend({
       return null;
     }
   }),
-  
-  // The string after the last ::
-  nameFinal: computed('group', function() {
+    
+  // Returns the text for when there's a missing avatar
+  avatarText: computed('group', function() {
     let gt = this.get('groupType');
     let name = this.get('name');
+    // If this is a region
     if (gt == 'region') {
       let a = name.split(' :: ');
       return a.pop();
     }
+    // If this is a writing group
+    if (gt == 'writing group') {
+      let words = name.split(' ');
+      let str = '';
+      // Iterate through the words
+      words.forEach(function(word) {
+        // If the split portion isn't empty, get the initial
+        if (word!='') {
+          str += word.charAt(0);
+        }
+      });
+      return str;
+    }
+    // Otherwise, return the name
     return g.name;
+  }),
+  
+  // Returns the link path for this group
+  linkPath: computed('groupType',function() {
+    // Get the groupType
+    let gt = this.get('groupType');
+    // If it's a writing group return true; otherwise return false
+    if (gt=='region') {
+     return 'authenticated.regions.show';
+    }
+    if (gt=='writing group') {
+     return 'authenticated.writing-groups.show';
+    }
+    return '';
+  }),
+  
+  // Returns true if the group is a region
+  isRegion: computed('groupType',function() {
+    let gt = this.get('groupType');
+    if (gt == 'region') {
+      return true;
+    }
+    return false;
+  }),
+  
+  // Returns true if the group is a writing group
+  isWritingGroup: computed('groupType',function() {
+    let gt = this.get('groupType');
+    if (gt == 'writing group') {
+      return true;
+    }
+    return false;
   }),
   
   // The string before the last ::
@@ -109,6 +156,16 @@ const Group = Model.extend({
       return a.join(' :: ');
     }
     return '';
+  }),
+  
+  nameFinal: computed('groupType', function() {
+    let gt = this.get('groupType');
+    let n = this.get('name');
+    if (gt == 'region') {
+      let a = n.split(' :: ');
+      return a.pop();
+    }
+    return n;
   }),
 
   rollbackGroupExternalLinks() {

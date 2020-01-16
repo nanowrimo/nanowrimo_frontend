@@ -21,6 +21,14 @@
       }}
 
         {{#tab.pane title="Description and Links" id="overview"}}
+          {{#if group.isWritingGroup}}
+            <div class="form-group">
+              {{f.input
+                label="Name"
+                property="name"
+              }}
+            </div>
+          {{/if}}
           <div class="form-group">
             {{f.textarea
               label="Description"
