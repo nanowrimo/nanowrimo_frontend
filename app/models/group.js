@@ -111,7 +111,7 @@ const Group = Model.extend({
       return str;
     }
     // Otherwise, return the name
-    return g.name;
+    return name;
   }),
   
   // Returns the link path for this group
