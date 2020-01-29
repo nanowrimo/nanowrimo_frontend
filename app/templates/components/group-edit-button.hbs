@@ -1,0 +1,18 @@
+{{#if canEditGroup}}
+  <div style="width: 100%; text-align: center;">
+    {{#if (eq buttonType "icon")}}
+      <i {{action "openEditModal"}} class="fa fa-edit"></i>
+    {{/if}}
+    {{#if (eq buttonType "button")}}
+      <button {{action "openEditModal"}}>Edit Settings</button>
+    {{/if}}
+  </div>
+
+  {{group-edit-modal
+    onHidden=(action "afterEditModalClose")
+    open=edit
+    group=group
+    tab=editTab
+  }}
+
+{{/if}}

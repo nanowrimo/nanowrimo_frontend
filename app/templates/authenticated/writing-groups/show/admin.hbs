@@ -1,0 +1,43 @@
+<div class="nw-panel right-resize nw-with-tabs">
+  <ul class="nw-panel-tabs">
+    <li>{{link-to 'Chat' 'authenticated.writing-groups.show.index'}}</li>
+    {{#if isAdmin}}
+      <li>{{link-to 'Admin' 'authenticated.writing-groups.show.admin'}}</li>
+    {{/if}}
+  </ul>
+  <div class="grid-wrapper">
+    <div class="nw-card g3-col3 g3-row1 g3-hspan1 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1">
+      <div class="nw-card-header">
+        <div class="nw-card-title">Edit Group Settings</div>
+      </div>
+      <div class="nw-card-content">
+        <div style="margin-bottom: 20px;">
+          Your writing group name, avatar, and background image help make your writing group a unique and special place. Click below to customize your group!
+        </div>
+        {{group-edit-button group=group buttonType="button"}}
+      </div>
+    </div>
+    <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1">
+      <div class="nw-card-header">
+        <div class="nw-card-title">Archive Group</div>
+      </div>
+      <div class="nw-card-content">
+        <div style="margin-bottom: 20px;">
+          Archiving a writing group means members may no longer chat or invite new members. Archived groups may be re-activated from your "My Groups" page.
+        </div>
+        {{group-edit-button group=group buttonType="button"}}
+      </div>
+    </div>
+    <div class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
+      <div class="nw-card-header">
+        <div class="nw-card-title">Questions?</div>
+      </div>
+      <div class="nw-card-content">
+        <div style="margin-bottom: 20px;">
+          Our <a href="https://nanowrimo.uservoice.com/" target="_blank">Help Desk</a> has answers!
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

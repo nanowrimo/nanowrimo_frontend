@@ -1,13 +1,23 @@
 <div class="nw-panel right-resize nw-with-tabs">
   <ul class="nw-panel-tabs">
-    <li>{{link-to 'Overview' 'authenticated.regions.show.index'}}</li>
-    {{#if canAddEvent}}
-      <li>{{link-to 'Events' 'authenticated.regions.show.events.upcoming'}}</li>
+    <li>{{link-to 'Chat' 'authenticated.writing-groups.show.index'}}</li>
+    {{#if isAdmin}}
+      <li>{{link-to 'Admin' 'authenticated.writing-groups.show.admin'}}</li>
     {{/if}}
   </ul>
   <div class="grid-wrapper">
-    {{group-chat context='region' group=group class="g3-col1 g3-row1 g3-hspan2 g2-col1 g2-row1 g2-hspan1"}}
+    {{group-chat context='region' group=group class="g3-col1 g3-row1 g3-hspan2 g3-vspan3 g2-col1 g2-row1 g2-hspan1 g2-vspan3"}}
     {{group-users-list group=group listType='MLs' class="nw-card g3-col3 g3-row1 g3-hspan1 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1"}}
+    <div class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
+      <div class="nw-card-header">
+        <div class="nw-card-title">Complaints?</div>
+      </div>
+      <div class="nw-card-content">
+        <div style="margin-bottom: 20px;">
+          Need to report spam or abuse? Please <a href="mailto:moderators@nanowrimo.org?subject=NaNoWriMo%20Abuse%20Report&body=Regarding%20{{{currentUrl}}}%20I%20would%20like%20to%20report%20the%20following%20issue:" target="_blank">contact us</a>.
+        </div>
+      </div>
+    </div>
   </div>
   
 </div>

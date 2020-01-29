@@ -9,6 +9,8 @@ export default Component.extend({
   tab: null,
   open: null,
   group: null,
+  hasValidationError: false,
+  
 
   activeTab: computed('tab', {
     get() {
@@ -29,7 +31,12 @@ export default Component.extend({
       //alert('updating');
     },
  
-    
+    validateName(str) {
+      alert('validating');
+      if ((str == "")||(str==null)) {
+        alert('error');
+      }
+    },
     onHidden() {
       this.get('group').rollbackGroupExternalLinks();
       let callback = this.get('onHidden');

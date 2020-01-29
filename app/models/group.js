@@ -20,6 +20,7 @@ const Group = Model.extend({
   latitude: attr('number'),
   timeZone: attr('string'),
   memberCount: attr('number'),
+  maxMemberCount: attr('number'),
   description: attr('string'),
   url: attr('string'),
   
@@ -147,7 +148,7 @@ const Group = Model.extend({
   }),
   
   // The string before the last ::
-  namePrelim: computed('name', function() {
+  namePrelim: computed('groupType','name', function() {
     let gt = this.get('groupType');
     let name = this.get('name');
     if (gt == 'region') {
@@ -158,7 +159,7 @@ const Group = Model.extend({
     return '';
   }),
   
-  nameFinal: computed('groupType', function() {
+  nameFinal: computed('groupType','name', function() {
     let gt = this.get('groupType');
     let n = this.get('name');
     if (gt == 'region') {
