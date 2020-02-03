@@ -51,7 +51,7 @@ export default Component.extend({
     },
 
     openEditModal(tab) {
-      if (true) {
+      if (this.get('canEditGroup')) {
         this.set('edit', true);
         if (tab) { this.set('editTab', tab); }
       }
