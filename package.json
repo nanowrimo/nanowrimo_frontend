@@ -22,7 +22,7 @@
     "ember-active-storage": "^1.0.0",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^2.0",
-    "ember-changeset-validations": "^2.1.0",
+    "ember-changeset-validations": "^3.0.0",
     "ember-chrome-devtools": "^0.2.0",
     "ember-cli": "~3.8",
     "ember-cli-airbrake": "^0.2.1",
