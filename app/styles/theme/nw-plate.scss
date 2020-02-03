@@ -1,5 +1,8 @@
 .plate-wrapper {
   height: 320px;
+  &.nw-short-plate {
+    height: 170px;
+  }
   .plate-editable-overlay {
     display: none;
   }
@@ -10,6 +13,12 @@
       height: 320px;
       margin-top: -320px;
       display:flex;
+    }
+    &.nw-short-plate {
+      .plate-editable-overlay {
+        height: 170px;
+        margin-top: -170px;
+      }
     }
   }
 }
@@ -73,5 +82,13 @@
       }
     }
     
+  }
+}
+.nw-short-plate {
+  .nano-user-plate {
+    height: 170px;
+    .plate-cover {
+      height: 170px;
+    }
   }
 }

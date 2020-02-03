@@ -1,9 +1,17 @@
 <div class="nw-panel-primary-container">
+  <div class='nw-panel-actions'>
+    <button {{action "openNewWritingGroupModal"}}>
+      Create a writing group
+    </button>
+
+    {{group-create-modal
+      onHidden=(action "afterWritingGroupModalClose")
+      open=addWritingGroup
+      user=user
+    }}
+  </div>
   <div class='group-listings'>
     <div>
-      {{#each user.buddiesInvited as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
-      {{/each}}
     </div>
   </div>
   <div class='group-listings'>

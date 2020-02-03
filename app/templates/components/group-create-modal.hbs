@@ -1,0 +1,49 @@
+{{#bs-modal
+  open=open
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    Create A Writing Group
+  {{/modal.header}}
+  {{#form-for
+    afterSubmit=modal.close
+    model=group
+    as |f|
+  }}
+    {{#modal.body}}
+      <div class="project-challenge-new-form">
+    
+        {{#if inProcess}}
+          <div class="form-group">
+            {{f.input
+              label="Name"
+              property="name"
+              input=(action 'nameChanged' value="target.value")
+            }}
+          </div>
+        {{/if}}
+        {{#if groupCreated}}
+          <div style="display: flex; align-items: center;">
+            <div style="font-size: 30px; color: #EDBB82; margin-right: 10px;">
+              {{fa-icon "users"}}
+            </div>
+            <div style="font-size: 20px; color: #333;">
+              Huzzah! Your new writing group awaits!
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    {{/modal.body}}
+    {{#modal.footer}}
+      {{#if inProcess}}
+        <input type="submit" disabled={{hasValidationError}} class="nano-button" value="Create My Writing Group" {{action "saveGroup"}} />
+        <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
+      {{/if}}
+      {{#if groupCreated}}
+        <input type="button" class="nano-button" value="Take me there!" {{action "goToGroup"}} />
+        <input type="button" class="nano-button btn-underlined" value="Maybe later" {{action modal.close}} />
+      {{/if}}
+    {{/modal.footer}}
+  {{/form-for}}
+{{/bs-modal}}

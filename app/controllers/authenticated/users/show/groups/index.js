@@ -7,6 +7,7 @@ export default Controller.extend({
   selectedSortOption: null,
   sortOptions: null,
   user: null,
+  addWritingGroup: false,
   
   init() {
     this._super(...arguments);
@@ -20,5 +21,13 @@ export default Controller.extend({
       return false;
     }
   }),
+  actions: {
+    afterWritingGroupModalClose() {
+      this.set('addWritingGroup', null);
+    },
+    openNewWritingGroupModal() {
+      this.set('addWritingGroup', true);
+    },
+  }
   
 });
