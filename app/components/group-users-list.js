@@ -128,7 +128,6 @@ export default Component.extend({
       return fetch(endpoint, {
         headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
       }).then((resp)=>{
-        let sr2 = t
         return resp.json().then((json)=>{
           t.set('searchResults',json);
         });
