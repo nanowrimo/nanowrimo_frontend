@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  router: service(),
   group: null,
   buttonType: null,
   
@@ -27,6 +28,10 @@ export default Component.extend({
     }
     return found;
   }),
+  
+  _needsURLUpdate() {
+    return this.get('group.slug') !== this.get('groupParam');
+  },
   
   init() {
     this._super(...arguments);

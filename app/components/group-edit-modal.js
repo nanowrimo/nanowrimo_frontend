@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
+import Group from 'nanowrimo/models/group';
 
 const DEFAULT_TAB = 'overview';
 
@@ -11,6 +12,9 @@ export default Component.extend({
   group: null,
   hasValidationError: false,
   
+  optionsForJoiningRule: computed(function() {
+    return Group.optionsForJoiningRule;
+  }),
 
   activeTab: computed('tab', {
     get() {

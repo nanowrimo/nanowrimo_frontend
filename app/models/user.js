@@ -261,6 +261,19 @@ const User = Model.extend({
     return bgus;
   }),
   
+  myWritingGroupUsers: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+    let gus = this.get('groupUsers');
+    let bgus = [];
+    //are there group users?
+    if (gus) {
+      gus.forEach(function(gu) {
+        if ((gu.groupType=='writing group')&&(gu.exitAt==null)) {
+          bgus.push(gu.group);
+        }
+      });
+    }
+    return bgus;
+  }),
 
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {

@@ -37,6 +37,14 @@
                 max=20
               }}
             </div>
+            <div class="form-group">
+              {{f.select
+                label="How may people join the group?"
+                options=optionsForJoiningRule
+                property="joiningRule"
+              }}
+            </div>
+            
           {{/if}}
           <div class="form-group">
             {{f.textarea

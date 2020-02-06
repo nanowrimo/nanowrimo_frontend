@@ -21,6 +21,7 @@ const Group = Model.extend({
   timeZone: attr('string'),
   memberCount: attr('number'),
   maxMemberCount: attr('number'),
+  joiningRule: attr('number'),
   description: attr('string'),
   url: attr('string'),
   
@@ -187,6 +188,14 @@ Group.reopenClass({
   /* Some options are enumerated in the Rails API
    *  before editing these options, check that they match the API
    *  */
+  optionsForJoiningRule:
+  [
+    {value:'0', name:'Only group admins may invite people'},
+    {value:'1', name:'Any group member may invite people'}
+    //{value:'2', name:'Anyone may request to join'},
+    //{value:'3', name:'Anyone may automatically join'}
+  ],
+  
   optionsForHours:
   [
     {value:'0', name:'0 hours'},

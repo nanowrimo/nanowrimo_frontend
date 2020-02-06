@@ -21,6 +21,14 @@ export default Controller.extend({
       return false;
     }
   }),
+  
+  isCurrentUser: computed('currentUser.user','user',function() {
+    if (this.get('currentUser.user') == this.get('user')) {
+      return true;
+    }
+    return false;
+  }),
+  
   actions: {
     afterWritingGroupModalClose() {
       this.set('addWritingGroup', null);

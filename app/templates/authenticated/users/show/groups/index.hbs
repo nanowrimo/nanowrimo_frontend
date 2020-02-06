@@ -1,15 +1,16 @@
 <div class="nw-panel-primary-container">
-  <div class='nw-panel-actions'>
-    <button {{action "openNewWritingGroupModal"}}>
-      Create a writing group
-    </button>
-
-    {{group-create-modal
-      onHidden=(action "afterWritingGroupModalClose")
-      open=addWritingGroup
-      user=user
-    }}
-  </div>
+  {{#if isCurrentUser}}
+    <div class='nw-panel-actions'>
+      <button {{action "openNewWritingGroupModal"}}>
+        Create a writing group
+      </button>
+      {{group-create-modal
+        onHidden=(action "afterWritingGroupModalClose")
+        open=addWritingGroup
+        user=user
+      }}
+    </div>
+  {{/if}}
   <div class='group-listings'>
     <div>
     </div>

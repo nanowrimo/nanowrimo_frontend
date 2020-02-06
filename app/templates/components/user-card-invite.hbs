@@ -1,0 +1,24 @@
+<div class='nw-user-listing'>
+  <div class="nw-avatar-small">
+    {{#link-to 'authenticated.users.show' user.slug}}
+      <img src={{avatarUrl}} alt={{user.name}}>
+    {{/link-to}}
+  </div>
+  <div class='nw-user-info'>
+    <div class="nw-user-name">
+      {{#link-to 'authenticated.users.show' user.slug}}
+        {{user.name}}
+      {{/link-to}}
+    </div>
+    <div class="nw-user-location">
+      {{user.location}}
+    </div>
+  </div>
+  <div class="nw-user-invite">
+    {{#if inGroup}}
+      {{fa-icon "check"}}
+    {{else}}
+      <button {{action "inviteUser"}}>Invite</button>
+    {{/if}}
+  </div>
+</div>
