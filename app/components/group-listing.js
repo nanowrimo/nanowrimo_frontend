@@ -8,6 +8,12 @@ export default Component.extend({
   group: null,
 
   // Returns the group users in the store
+  invitationAccepted: computed('groupUser',function() {
+    let gu = this.get('groupUser');
+    return gu.invitationAccepted;
+  }),
+  
+  // Returns the group users in the store
   groupUsers: computed(function() {
     // Peek all group-user records in the store
     return this.get('store').peekAll('group-user');
@@ -57,5 +63,21 @@ export default Component.extend({
       }
     }
   }),
+  
+  actions: {
+    
+    approveInvitation() {
+      let gu = this.get('groupUser');
+      gu.set('invitationAccepted',1);
+      gu.save();
+    },
+    
+    rejectInvitation() {
+      let gu = this.get('groupUser');
+      gu.deleteRecord();
+      gu.save();
+    },
+    
+  }
   
 });

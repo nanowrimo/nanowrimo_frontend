@@ -10,7 +10,7 @@ export default Component.extend({
   group: null,
   groupUsers: null,
   listType: null,
-  primaryDisplay: false,
+  primaryDisplay: true,
   searchString: '',
   searchResults: null,
   
@@ -49,9 +49,9 @@ export default Component.extend({
     }
     if (lt == 'all') {
       if (pd) {
-        return 'Members';
+        return 'Members (5 of 12)';
       } else {
-        return 'Send Invitations';
+        return 'Invitations (7 remaining)';
       }
     }
     return "Members";

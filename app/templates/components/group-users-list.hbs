@@ -10,12 +10,12 @@
 <div class="nw-card-content" style="padding: 0px;">
   {{#if primaryDisplay}}
     <div class="nw-card-scroll" style="padding: 15px;">
+      <div style="width: 100%; color: #fff; background-color: #bbb; padding-left: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">ACTIVE MEMBERS</div>
       {{#each groupUsersAttending as |gu|}}
         {{user-listing userId=gu.user_id organizer=gu.isAdmin itemSize=itemSize}}
       {{/each}}
       {{#if groupUsersInvited}}
-        <hr />
-        <div>Invited to join:</div>
+        <div style="width: 100%; color: #fff; background-color: #bbb; padding-left: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 5px; margin-bottom: 5px;">AWAITING RESPONSE</div>
         {{#each groupUsersInvited as |gu|}}
           {{user-listing userId=gu.user_id organizer=gu.isAdmin itemSize=itemSize}}
         {{/each}}

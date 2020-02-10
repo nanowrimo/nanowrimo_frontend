@@ -13,6 +13,9 @@
   {{/if}}
   <div class='group-listings'>
     <div>
+      {{#each user.myInvitations as |group|}}
+        {{group-listing group=group buttons=true}}
+      {{/each}}
     </div>
   </div>
   <div class='group-listings'>

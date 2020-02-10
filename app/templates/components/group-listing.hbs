@@ -1,5 +1,34 @@
 <div class="nw-card short-card small-gap nw-full-link">
-  {{#link-to group.linkPath group.slug}}
+  {{#if invitationAccepted}}
+    {{#link-to group.linkPath group.slug}}
+      <div class="nw-card-content">
+        <div class='nw-group-listing'>
+          {{group-avatar group=group linkTo=true size='large'}}
+          <div class='nw-group-info'>
+            <div class="nw-group-name">
+              {{group.name}}
+            </div>
+            {{group.description}}
+          </div>
+          <div class='nw-group-latest'>
+            <div class='nw-icon'>
+              {{#link-to  "authenticated.nanomessages"}}
+                <button class="button-clear" aria-label="Go to your NanoMessages.">
+                  <span aria-hidden="false">{{fa-icon "comments"}}</span>
+                  {{#if numUnreadMessages}}
+                    <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{numUnreadMessages}}</div>
+                  {{/if}}
+                </button>
+              {{/link-to}}
+            </div>
+            <div class='nw-icon-text'>
+              {{{latestMessage}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/link-to}}
+  {{else}}
     <div class="nw-card-content">
       <div class='nw-group-listing'>
         {{group-avatar group=group linkTo=true size='large'}}
@@ -9,23 +38,16 @@
           </div>
           {{group.description}}
         </div>
-        <div class='nw-group-latest'>
-          <div class='nw-icon'>
-            {{#link-to  "authenticated.nanomessages"}}
-              <button class="button-clear" aria-label="Go to your NanoMessages.">
-                <span aria-hidden="false">{{fa-icon "comments"}}</span>
-                {{#if numUnreadMessages}}
-                  <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{numUnreadMessages}}</div>
-                {{/if}}
-              </button>
-            {{/link-to}}
-            
+        <div class='nw-group-invite' style="display: flex; flex-wrap: wrap;">
+          <div>
+            <i>You've been invited to join the {{group.groupType}} {{group.name}}.</i>
           </div>
-          <div class='nw-icon-text'>
-            {{{latestMessage}}}
+          <div>
+            <button {{action "approveInvitation"}}>Join Group</button>
+            <button {{action "rejectInvitation"}} class="button-reversed" style="margin-left: 10px;">No Thanks</button>
           </div>
         </div>
       </div>
     </div>
-  {{/link-to}}
+  {{/if}}
 </div>
