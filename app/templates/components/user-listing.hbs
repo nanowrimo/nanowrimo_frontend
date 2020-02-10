@@ -14,4 +14,16 @@
       {{/if}}
     </div>
   </div>
+  {{#if isEditable}}
+    {{#if isNotCurrentUser}}
+      <button {{action 'removeUser'}} class="button-reversed">Remove</button>
+      {{#if userIsApproved}}
+        {{#if userIsAdmin}}
+          <button {{action 'userRemoveAdmin'}} style="margin-left: 10px;" class="button-reversed">-admin</button>
+        {{else}}
+          <button {{action 'userToAdmin'}} style="margin-left: 10px;">+admin</button>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
 </div>

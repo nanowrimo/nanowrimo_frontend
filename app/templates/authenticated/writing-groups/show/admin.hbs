@@ -6,6 +6,7 @@
     {{/if}}
   </ul>
   <div class="grid-wrapper">
+    {{group-users-list-admin group=group listType='all' class="nw-card g3-col1 g3-row1 g3-hspan2 g3-vspan3 g2-col1 g2-row1 g2-hspan1 g2-vspan3"}}
     <div class="nw-card g3-col3 g3-row1 g3-hspan1 g3-vspan1 g2-col2 g2-row1 g2-hspan1 g2-vspan1">
       <div class="nw-card-header">
         <div class="nw-card-title">Edit Group Settings</div>
@@ -19,13 +20,15 @@
     </div>
     <div class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1">
       <div class="nw-card-header">
-        <div class="nw-card-title">Archive Group</div>
+        <div class="nw-card-title">Delete Group</div>
       </div>
       <div class="nw-card-content">
         <div style="margin-bottom: 20px;">
-          Archiving a writing group means members may no longer chat or invite new members. Archived groups may be re-activated from your "My Groups" page.
+          You may only delete groups if you are the only member.
         </div>
-        {{group-edit-button group=group buttonType="button"}}
+        {{#if canDelete}}
+          <button {{action "deleteGroup"}}>Delete Group</button>
+        {{/if}}
       </div>
     </div>
     <div class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1">
