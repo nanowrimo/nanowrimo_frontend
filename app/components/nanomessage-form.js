@@ -31,9 +31,10 @@ export default Component.extend({
     }
     return found;
   }),
-  contextNotNanomessages: computed('context',function() {
+  contextNotNanomessages: computed('context','group.groupType',function() {
     let c = this.get('context');
-    return (c!='nanomessages');
+    let gt = this.get('group.groupType');
+    return ((c!='nanomessages')&&(gt!='writing group'));
   }),
   showForm: computed('context',function() {
     let c = this.get("context");

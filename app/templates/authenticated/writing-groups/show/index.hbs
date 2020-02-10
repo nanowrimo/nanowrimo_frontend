@@ -24,10 +24,16 @@
       </div>
       <div class="nw-card-content">
         <div style="margin-bottom: 20px;">
-          <div style="margin-bottom: 10px;">
-            Only non-admins may leave a group.
-          </div>
-          <button {{action "leaveGroup"}}>Leave Group</button>
+          {{#if isAdmin}}
+            <div style="margin-bottom: 10px;">
+              Only non-admins may leave a group.
+            </div>
+          {{else}}
+            <div style="margin-bottom: 10px;">
+              Click the button below to leave this group.
+            </div>
+            <button {{action "removeUser"}}>Leave Group</button>
+          {{/if}}
         </div>
       </div>
     </div>

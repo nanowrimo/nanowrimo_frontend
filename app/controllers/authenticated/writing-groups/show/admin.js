@@ -47,15 +47,16 @@ export default Controller.extend({
     deleteGroup() {
       let gus = this.get('myGroupUsers');
       let g = this.get('group');
+      let r = this.get('router');
+      let cu = this.get('currentUser.user');
       gus.forEach(function(gu) {
         gu.deleteRecord();
         gu.save();
       });
       g.deleteRecord();
-      g.save();
-      let r = this.get('router');
-      let cu = this.get('currentUser.user');
-      r.transitionTo('authenticated.users.show.groups',cu);
+      g.save().then(function() {
+        r.transitionTo('authenticated.users.show.groups',cu);
+      });
     },    
   },
   
