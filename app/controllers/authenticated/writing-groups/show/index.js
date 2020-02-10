@@ -36,14 +36,19 @@ export default Controller.extend({
   
   isAdmin: computed('groupUsers.[]','currentUser.user.id','group.id',function() {
     let gus = this.get('groupUsers');
+    let cuAdminLevel = this.get('currentUser.user.adminLevel');
     let cuid = this.get('currentUser.user.id');
     let gid = this.get('group.id');
     let found = false;
-    gus.forEach((gu) => {
-      if ((gu.group_id==gid)&&(gu.user_id==cuid)&&(gu.isAdmin)) {
-        found = true;
-      }
-    });
+    if (cuAdminLevel>0) {
+      found = true;
+    } else {
+      gus.forEach((gu) => {
+        if ((gu.group_id==gid)&&(gu.user_id==cuid)&&(gu.isAdmin)) {
+          found = true;
+        }
+      });
+    }
     return found;
   }),
   
