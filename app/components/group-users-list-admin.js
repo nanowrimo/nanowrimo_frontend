@@ -138,6 +138,23 @@ export default Component.extend({
     return (guAllowed - guCount);
   }),
   
+  isAdmin: computed('allGroupUsers.[]','currentUser.user.id','group.id',function() {
+    let gus = this.get('allGroupUsers');
+    let cuid = this.get('currentUser.user.id');
+    let gid = this.get('group.id');
+    let found = false;
+    gus.forEach((gu) => {
+      if ((gu.group_id==gid)&&(gu.user_id==cuid)&&(gu.isAdmin)) {
+        found = true;
+      }
+    });
+    return found;
+  }),
+  canInviteUsers: computed('isAdmin','group.joiningRule',function() {
+    let isAdmin = this.get('isAdmin');
+    let joiningRule = this.get('group.joiningRule');
+    return (isAdmin || (joiningRule>0));
+  }),
   
   
   actions: {

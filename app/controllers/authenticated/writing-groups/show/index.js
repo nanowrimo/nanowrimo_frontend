@@ -10,7 +10,21 @@ export default Controller.extend({
   currentUrl: computed(function() {
     return window.location.href;
   }),
-  isAdmin: computed('currentUser.user.name', function() {
-    return true;//((this.get('currentUser.user.name')=="Dave Beck")||(this.get('currentUser.user.name')=="Jezra"));
+  // Returns a list of all groupUsers in the store
+  groupUsers: computed(function() {
+    return this.get('store').peekAll('groupUser');
+  }),
+  
+  isAdmin: computed('currentUser.user.id','group.id',function() {
+    let gus = this.get('groupUsers');
+    let cuid = this.get('currentUser.user.id');
+    let gid = this.get('group.id');
+    let found = false;
+    gus.forEach((gu) => {
+      if ((gu.group_id==gid)&&(gu.user_id==cuid)&&(gu.isAdmin)) {
+        found = true;
+      }
+    });
+    return found;
   }),
 });

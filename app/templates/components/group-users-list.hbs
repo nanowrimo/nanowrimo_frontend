@@ -3,7 +3,9 @@
   <div class="nw-card-actions nw-card-actions-right">
     {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
       {{#bg.button type="default" value=true}}{{fa-icon "users"}}{{/bg.button}}
-      {{#bg.button type="default" value=false}}{{fa-icon "user-plus"}}{{/bg.button}}
+      {{#if canInviteUsers}}
+        {{#bg.button type="default" value=false}}{{fa-icon "user-plus"}}{{/bg.button}}
+      {{/if}}
     {{/bs-button-group}}
   </div>
 </div>
