@@ -38,9 +38,12 @@ export default Component.extend({
   },
   
   // Returns the title label for the card
-  cardLabel: computed('listType','primaryDisplay',function() {
+  cardLabel: computed('listType','primaryDisplay','guCount','guAllowed','guRemaining',function() {
     let lt = this.get('listType');
     let pd = this.get('primaryDisplay');
+    let guCount = this.get('guCount');
+    let guRemaining = this.get('guRemaining');
+    let guAllowed = this.get('guAllowed');
     if (lt == 'eventAll') {
       return 'Attending';
     }
@@ -49,9 +52,9 @@ export default Component.extend({
     }
     if (lt == 'all') {
       if (pd) {
-        return 'Members (5 of 12)';
+        return 'Members (' + guCount + ' of ' + guAllowed + ')';
       } else {
-        return 'Invitations (7 remaining)';
+        return 'Invitations (' + guRemaining + ' remaining)';
       }
     }
     return "Members";
@@ -118,6 +121,22 @@ export default Component.extend({
     return newgus;
   }),
   
+  guAllowed: computed('group',function() {
+    let g = this.get('group');
+    return g.maxMemberCount;
+  }),
+  
+  guCount: computed('groupUsersAttending.[]','groupUsersInvited.[]',function() {
+    let gua = this.get('groupUsersAttending');
+    let gui = this.get('groupUsersInvited');
+    return (gua.length + gui.length);
+  }),
+  
+  guRemaining: computed('guCount','guAllowed',function() {
+    let guCount = this.get('guCount');
+    let guAllowed = this.get('guAllowed');
+    return (guAllowed - guCount);
+  }),
   
   actions: {
     getSearchResults() {

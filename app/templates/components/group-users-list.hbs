@@ -22,35 +22,40 @@
       {{/if}}
     </div>
   {{else}}
-    <div class="nw-search" style="width: 100%; padding: 15px; flex: 0 0 50px; border-bottom: 1px solid #ccc;">
-      <div class="form-group nw-search-field nw-search-small">
-        <form {{action "getSearchResults" this on='submit'}}>
-          {{input
-            autofocus=true
-            placeholder="Search by username..."
-            label="Search"
-            name="q"
-            type="text"
-            value=searchString
-          }}
-          <button class="nw-search-button" aria-label="search" style="top: 0px;"><span aria-hidden="true">{{fa-icon "search"}}</span></button>
-        </form>
+    {{#if guRemaining}}
+      <div class="nw-search" style="width: 100%; padding: 15px; flex: 0 0 50px; border-bottom: 1px solid #ccc;">
+        <div class="form-group nw-search-field nw-search-small">
+          <form {{action "getSearchResults" this on='submit'}}>
+            {{input
+              autofocus=true
+              placeholder="Search by username..."
+              label="Search"
+              name="q"
+              type="text"
+              value=searchString
+            }}
+            <button class="nw-search-button" aria-label="search" style="top: 0px;"><span aria-hidden="true">{{fa-icon "search"}}</span></button>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="nw-card-scroll" style="padding: 15px;">
-      {{#if searchResults}}
-        {{#if searchResults.data}}
-          {{#each searchResults.data as |u|}}
-            {{user-card-invite user=u.attributes uid=u.id group=group}}
-          {{/each}}
+      <div class="nw-card-scroll" style="padding: 15px;">
+        {{#if searchResults}}
+          {{#if searchResults.data}}
+            {{#each searchResults.data as |u|}}
+              {{user-card-invite user=u.attributes uid=u.id group=group}}
+            {{/each}}
+          {{else}}
+            No results found!
+          {{/if}}
         {{else}}
-          No results found!
+          A group needs members! Search for friends by their usernames.
         {{/if}}
-      {{else}}
-        A group needs members! Search for friends by their usernames.
-      {{/if}}
       
-    </div>
-    
+      </div>
+    {{else}}
+      <div style="padding: 15px;">
+        All membership slots have been taken! If you'd like to increase the maximum number of members allowed, edit your group settings.
+      </div>
+    {{/if}}
   {{/if}}
 </div>
