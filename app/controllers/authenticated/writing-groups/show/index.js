@@ -7,9 +7,17 @@ export default Controller.extend({
   router: service(),
   group: alias('model'),
   currentUser: service(),
+  
   currentUrl: computed(function() {
     return window.location.href;
   }),
+  
+  // Returns the username of the current user
+  currentUserName: computed('currentUser.user.name',function() {
+    let n = this.get('currentUser.user.name');
+    return n;
+  }),
+  
   // Returns a list of all groupUsers in the store
   groupUsers: computed(function() {
     return this.get('store').peekAll('groupUser');
