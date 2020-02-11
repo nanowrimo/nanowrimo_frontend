@@ -140,3 +140,12 @@
     }
   }
 }
+.nw-no-speech-bubble {
+  display: flex;
+  .nw-system-message-image {
+    img {
+      width: 36px;
+    }
+    margin-right: 10px;
+  }
+}

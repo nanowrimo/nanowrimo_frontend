@@ -4,7 +4,12 @@
       </div>
       <div class="nanomessage-content-container">
         <div class="nanomessage-content nw-no-speech-bubble">
-          {{{nanomessage.content}}}
+          <div class="nw-system-message-image">
+            <img src='{{senderAvatarUrl}}' />
+          </div>
+          <div>
+            {{{nanomessage.content}}}
+          </div>
         </div>
         <div class="nanomessage-timesince">
           {{moment-from-now nanomessage.createdAt interval=1000}}
