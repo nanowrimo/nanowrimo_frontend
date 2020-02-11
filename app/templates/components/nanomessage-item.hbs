@@ -1,37 +1,55 @@
-{{#if leftAlign}}
-  <div class="nanomessage nanomessage-left {{newMessage}}">
-    <div class='nw-avatar nw-avatar-medium'>
-      {{#link-to 'authenticated.users.show' nanomessage.sender_slug}}
-        <img src='{{senderAvatarUrl}}' />
-        {{nanomessage.sender_name}}
-      {{/link-to}}
-    </div>
-    <div class="nanomessage-arrow-left"></div>
-    <div class="nanomessage-content-container">
-      <div class="nanomessage-content">
-        {{{nanomessage.content}}}
+{{#if systemMessage}}
+    <div class="nanomessage nanomessage-center {{newMessage}}">
+      <div class='nw-avatar nw-avatar-medium'>
       </div>
-      <div class="nanomessage-timesince">
-        {{moment-from-now nanomessage.createdAt interval=1000}}
-        {{#if userIsAdmin}}
-          <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
-        {{/if}}
+      <div class="nanomessage-content-container">
+        <div class="nanomessage-content nw-no-speech-bubble">
+          {{{nanomessage.content}}}
+        </div>
+        <div class="nanomessage-timesince">
+          {{moment-from-now nanomessage.createdAt interval=1000}}
+          {{#if userIsAdmin}}
+            <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
+          {{/if}}
+        </div>
       </div>
     </div>
-  </div>
 {{else}}
-  <div class="nanomessage nanomessage-right {{newMessage}}">
-    <div class="nanomessage-content-container">
-      <div class="nanomessage-content">
-        {{{nanomessage.content}}}
+  {{#if leftAlign}}
+    <div class="nanomessage nanomessage-left {{newMessage}}">
+      <div class='nw-avatar nw-avatar-medium'>
+        {{#link-to 'authenticated.users.show' nanomessage.sender_slug}}
+          <img src='{{senderAvatarUrl}}' />
+          {{nanomessage.sender_name}}
+        {{/link-to}}
       </div>
-      <div class="nanomessage-timesince">
-        {{moment-from-now nanomessage.createdAt interval=1000}}
-        {{#if userIsAdmin}}
-          <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
-        {{/if}}
+      <div class="nanomessage-arrow-left"></div>
+      <div class="nanomessage-content-container">
+        <div class="nanomessage-content">
+          {{{nanomessage.content}}}
+        </div>
+        <div class="nanomessage-timesince">
+          {{moment-from-now nanomessage.createdAt interval=1000}}
+          {{#if userIsAdmin}}
+            <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
+          {{/if}}
+        </div>
       </div>
     </div>
-    <div class="nanomessage-arrow-right"></div>
-  </div>
+  {{else}}
+    <div class="nanomessage nanomessage-right {{newMessage}}">
+      <div class="nanomessage-content-container">
+        <div class="nanomessage-content">
+          {{{nanomessage.content}}}
+        </div>
+        <div class="nanomessage-timesince">
+          {{moment-from-now nanomessage.createdAt interval=1000}}
+          {{#if userIsAdmin}}
+            <i class='fa fa-trash' {{action 'deleteMessage'}}></i>
+          {{/if}}
+        </div>
+      </div>
+      <div class="nanomessage-arrow-right"></div>
+    </div>
+  {{/if}}
 {{/if}}

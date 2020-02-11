@@ -9,6 +9,15 @@ export default Component.extend({
   nanomessage: null,
   newMessage: 'message-new',
   
+  systemMessage: computed('nanomessage', function() {
+    let n = this.get('nanomessage');
+    if (n.user_id==0) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
   leftAlign: computed('nanomessage',function() {
     let n = this.get('nanomessage');
     let u = this.get('currentUser.user');

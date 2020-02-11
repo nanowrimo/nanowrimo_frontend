@@ -88,6 +88,11 @@
               line-height: 1.25;
               text-align: left;
               color: $nw-darkgrey;
+              &.nw-no-speech-bubble {
+                padding: 0px;
+                font-size: 14px;
+                background-color: transparent;
+              }
             }
             .nanomessage-timesince {
               line-height: 1.57;
