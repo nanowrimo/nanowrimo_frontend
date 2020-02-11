@@ -28,7 +28,19 @@
           {{group.description}}
         </div>
         {{group-links links=group.groupExternalLinks}}
-        {{group-edit-button group=group buttonType="icon"}}
+        {{#if canEditGroup}}
+          <div style="width: 100%; text-align: center;">
+            <i {{action "openEditModal"}} class="fa fa-edit"></i>
+          </div>
+
+          {{group-edit-modal
+            onHidden=(action "afterEditModalClose")
+            open=edit
+            group=group
+            tab=editTab
+          }}
+
+        {{/if}}
       </div>
       <div class="nw-sidebar-divot"></div>
     </div>

@@ -11,7 +11,7 @@ export default Controller.extend({
   group: alias('model'),
   dataLoaded: false,
   
-  // Returns true if the user can edit the region
+  // Returns true if the user can edit the group
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
     let found = false;
     if (this.get('currentUser.user.groupUsersLoaded')) {
