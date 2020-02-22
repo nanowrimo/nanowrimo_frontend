@@ -56,6 +56,9 @@ export default Service.extend({
     if(notification.actionType=='BUDDIES_PAGE') {
       this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
     }
+    if(notification.actionType=='GROUPS_PAGE') {
+      this.get('router').transitionTo('authenticated.users.show.groups', this.get('currentUser.user.slug'));
+    }
     if(notification.actionType=='NANOMESSAGES') {
       this.get('router').transitionTo('authenticated.nanomessages');
     }
