@@ -2,8 +2,8 @@
     <div class="nanomessage nanomessage-center {{newMessage}}">
       <div class='nw-avatar nw-avatar-medium'>
       </div>
-      <div class="nanomessage-content-container">
-        <div class="nanomessage-content nw-no-speech-bubble">
+      <div class="nanomessage-content-container nw-no-speech-bubble">
+        <div class="nanomessage-content">
           <div class="nw-system-message-image">
             <img src='{{senderAvatarUrl}}' />
           </div>
@@ -25,8 +25,10 @@
       <div class='nw-avatar nw-avatar-medium'>
         {{#link-to 'authenticated.users.show' nanomessage.sender_slug}}
           <img src='{{senderAvatarUrl}}' />
-          {{nanomessage.sender_name}}
         {{/link-to}}
+        {{#bs-tooltip class="nw-tooltip" delayHide="0"}}
+          <div class="nw-tooltip-content">{{nanomessage.sender_name}}</div>
+        {{/bs-tooltip}}
       </div>
       <div class="nanomessage-arrow-left"></div>
       <div class="nanomessage-content-container">

@@ -24,7 +24,7 @@
       color: $nw-mediumgrey;
       .conversation-name {
         font-family: 'SansBold', sans-serif;
-        color: $nw-darkaqua;
+        color: #3C2109;
       }
     }
     .conversation-content {
@@ -88,16 +88,23 @@
               line-height: 1.25;
               text-align: left;
               color: $nw-darkgrey;
-              &.nw-no-speech-bubble {
-                padding: 0px;
-                font-size: 14px;
-                background-color: transparent;
-              }
             }
             .nanomessage-timesince {
               line-height: 1.57;
               letter-spacing: 0.3px;
-              color: $nw-mediumgrey;
+              color: #767676;
+            }
+            &.nw-no-speech-bubble {
+              flex-wrap: wrap;
+              .nanomessage-content {
+                padding: 0px;
+                font-size: 14px;
+                background-color: transparent;
+                display: flex;
+              }
+              .nanomessage-timesince {
+                padding-left: 45px;
+              }
             }
           }
           &.nanomessage-left {
@@ -105,7 +112,7 @@
               .nanomessage-content {
               }
               .nanomessage-timesince {
-                margin-left: 24px;
+                margin-left: 30px;
                 text-align: left;
         
               }

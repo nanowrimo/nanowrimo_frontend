@@ -79,13 +79,13 @@
       line-height: 36px;
       cursor: pointer;
       border-radius: 4px;
-      color: $nw-lightgrey;
+      color: #555555;
       padding-bottom: 10px;
       height: 36px;
       &.active, &:hover {
         text-decoration: none;
-        color: $nw-darkaqua;
-        background: linear-gradient(to top, $nw-darkaqua 0px,$nw-darkaqua 7px,transparent 7px,transparent 500px);
+        color: #005555;
+        background: linear-gradient(to top, #005555 0px,#005555 7px,transparent 7px,transparent 500px);
       }
     }
   }
