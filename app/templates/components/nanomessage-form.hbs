@@ -2,10 +2,11 @@
   <div class="new-message-form">
     <form {{action "afterSubmit" this on='submit'}} class="full-width">
       <div class="form-group">
-        {{textarea
+        <div
+          id='nw-message-form'
           class="editable"
-          value=content
-        }}
+          data-placeholder="What's going on, writer? Type here."
+        ></div>
       </div>
       {{#if userIsAdmin}}
         {{#if contextNotNanomessages}}
@@ -24,6 +25,14 @@
       {{/if}}
       <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
     </form>
-    <script>var editor = new MediumEditor('.editable');</script>
+    <script>var editor = new MediumEditor('.editable', {
+      paste: {
+        forcePlainText: false,
+        cleanPastedHTML: true,
+        cleanAttrs: ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'autosave', 'bgcolor', 'border', 'buffered', 'challenge', 'charset', 'checked', 'cite', 'class', 'code', 'codebase', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'contextmenu', 'controls', 'coords', 'data', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'dropzone', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'hreflang', 'http-equiv', 'icon', 'id', 'ismap', 'itemprop', 'keytype', 'kind', 'label', 'lang', 'language', 'list', 'loop', 'low', 'manifest', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'ping', 'placeholder', 'poster', 'preload', 'radiogroup', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'scoped', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellcheck', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'summary', 'tabindex', 'target', 'type', 'usemap', 'value', 'width', 'wrap'],
+        cleanTags: ['label', 'meta', 'head', 'header', 'applet', 'embed', 'area', 'audio', 'base', 'basefont', 'button', 'canvas', 'col', 'colgroup', 'datalist', 'del', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'map', 'menu', 'menuitem', 'nav', 'noframes', 'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'script', 'select', 'source', 'style', 'var', 'video', 'wbr'],
+        unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
+      }
+    });</script>
   </div>
 {{/if}}
