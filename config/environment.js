@@ -27,7 +27,12 @@ module.exports = function(environment) {
       MODAL_BACKGROUND_TRANSITION_MS: 150,
       MODAL_TRANSITION_MS: 300
     },
-
+    emberTracker: {
+        analyticsSettings: {
+            trackingId: 'UA-635901-1',
+        },
+    },
+    
     'ember-cli-uuid': {
       defaultUUID: false
     },

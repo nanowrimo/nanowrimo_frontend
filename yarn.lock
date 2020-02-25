@@ -5948,6 +5948,14 @@ ember-text-measurer@^0.5.0:
   dependencies:
     ember-cli-babel "^7.1.0"
 
+ember-tracker@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-tracker/-/ember-tracker-1.0.0.tgz#c43c02f10bc060aeb8b7210d5aea03e2715c7eea"
+  integrity sha512-HWoqg4tdKPUPMLzQB59ZbJ4nAGHiGUKN6/hvNePSWszvVWocWlT40PDP4P5vtAi7u+LzpRPEctfIgX+EcN9gbQ==
+  dependencies:
+    ember-cli-babel "^7.1.2"
+    ember-cli-shims "^1.2.0"
+
 ember-truth-helpers@2.1.0, ember-truth-helpers@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-2.1.0.tgz#d4dab4eee7945aa2388126485977baeb33ca0798"
