@@ -629,7 +629,8 @@ const User = Model.extend({
       p.challenges.forEach((c)=>{
         if(c.eventType===0 && !ids.includes(c.id)) { // counting words
           ids.push(c.id);
-          years.push(c.startsAt.getYear());
+          //years.push(c.startsAt.getYear());
+          years.push(c.startsAt.substring(0,4));
         }
       });
     });
@@ -654,7 +655,8 @@ const User = Model.extend({
         
         //did the project challenge win?
         if (pc.metGoal) {
-          years.push(pc.startsAt.getFullYear());
+          //years.push(pc.startsAt.getFullYear());
+          years.push(pc.startsAt.substring(0,4));
         }
       }
     });
@@ -669,7 +671,8 @@ const User = Model.extend({
       p.challenges.forEach((c)=>{
         if(c.eventType===0 && !ids.includes(c.id)) { // nano event
           ids.push(c.id);
-          years.push( c.startsAt.getYear() );
+          //years.push( c.startsAt.getYear() );
+          years.push( c.startsAt.substring(0,4) );
         }
       });
     });
