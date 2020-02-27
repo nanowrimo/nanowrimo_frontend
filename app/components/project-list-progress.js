@@ -16,6 +16,7 @@ export default Component.extend({
         return time.format("MMM. YYYY");
       }
     }
+    return '';
   }),
   
   goalMet: computed("percentCompleted", function(){
@@ -35,5 +36,21 @@ export default Component.extend({
     } else {
       return 0;
     }
-  })
+  }),
+  
+  goalIcon: computed("project.currentProjectChallenge",function(){
+    let str = '';
+    let proj = this.get('project');
+    if (proj) {
+      let c = proj.currentProjectChallenge.computedChallenge;
+      if (c.eventType==0) {
+        str = "<img src='/images/global/helmet.svg' style='' />";
+      }
+      if (c.eventType==1) {
+        str = "<img src='/images/global/tent.svg' style='' />";
+      }
+    }
+    return str;
+  }),
+  
 });
