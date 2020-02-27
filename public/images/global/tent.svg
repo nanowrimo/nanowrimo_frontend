@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Page-1">
+            <polygon id="Fill-1" fill="#A5D9E4" points="0.4995 15.8265 9.3905 15.8265 8.4995 13.6265 4.9505 2.8265"></polygon>
+            <polygon id="Stroke-2" stroke="#2F3061" stroke-linejoin="round" points="9.3904 15.8269 0.4994 15.8269 4.9504 2.8269 8.4994 13.6269"></polygon>
+            <polygon id="Fill-4" fill="#A5D9E4" points="4.95 2.8269 8.5 13.6269 9.391 15.8269 16.5 15.8269 12.05 2.8269"></polygon>
+            <polygon id="Stroke-5" stroke="#2F3061" stroke-linejoin="round" points="16.4998 15.8269 9.3908 15.8269 8.4998 13.6269 4.9498 2.8269 12.0508 2.8269"></polygon>
+            <path d="M4.95,2.8269 L4.185,0.4999 L4.95,2.8269 Z" id="Fill-7" fill="#A5D9E4"></path>
+            <path d="M4.1853,0.4998 L4.9503,2.8268" id="Stroke-8" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4.9455,2.8269 L5.7095,0.4999 L4.9455,2.8269 Z" id="Fill-10" fill="#A5D9E4"></path>
+            <path d="M5.7097,0.4998 L4.9447,2.8268" id="Stroke-11" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12.0537,2.8269 L11.2887,0.4999 L12.0537,2.8269 Z" id="Fill-13" fill="#A5D9E4"></path>
+            <path d="M11.2888,0.4998 L12.0538,2.8268" id="Stroke-14" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12.0483,2.8269 L12.8133,0.4999 L12.0483,2.8269 Z" id="Fill-16" fill="#A5D9E4"></path>
+            <path d="M12.8132,0.4998 L12.0482,2.8268" id="Stroke-17" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <polygon id="Fill-19" fill="#2F3061" points="2.7765 15.8265 7.1135 15.8265 6.6795 14.7535 4.9475 9.4835"></polygon>
+        </g>
+    </g>
+</svg>

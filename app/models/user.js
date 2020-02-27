@@ -139,9 +139,9 @@ const User = Model.extend({
   },
   
   // Takes start and end dates as formatted strings. Returns true if date is in range, otherwise false
-  currentDateInDateRange(s,e) {
+  currentDateInDateRange(start,end) {
     let c = this.get('currentDateStringInTimeZone');
-    if ((c>=s)&&(c<=e)) {
+    if ((c>=start)&&(c<=end)) {
       return true;
     } else {
       return false;

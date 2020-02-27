@@ -24,9 +24,8 @@ export default Controller.extend({
   }),
   
   // Returns the current event name if it's happening, false if not
-  currentEventName: computed('currentUser.user.projects.[]','primaryProject.currentProjectChallenge.count',function() {
-    // Set a variable to return the event name, false if no event
-    let eventName = false;
+  currentEventWelcome: computed('currentUser.user.projects.[]','primaryProject.currentProjectChallenge.count',function() {
+    let str = "Welcome";
     // Set a local variable for the store
     let store = this.get('store');
     // Set a local variable for all challenges in the store
@@ -46,35 +45,18 @@ export default Controller.extend({
     });
     // If the challenge has been found...
     if (newc) {
-      // Get the current user id
-      let cuid = this.get('currentUser.user.id');
-      // If the current user id exists...
-      if (cuid) {
-        // Get all project_challenges
-        let pcs = store.peekAll('project-challenge');
-        // Loop through them
-        pcs.forEach(function(pc) {
-          // If this project challenge is for the latest event...
-          if (newc.id==pc.challenge_id) {
-            // Find the associated project
-            let p = store.peekRecord('project',pc.project_id);
-            // If the project is found
-            if (p) {
-              // If the current user is the author
-              if (p.user_id==cuid) {
-                // if the goal has been met
-                if (pc.count>=pc.goal) {
-                  // The user won
-                  winner = true;
-                }
-              }
-            }
-          }
-        });
+      // Get the current user
+      let cu = this.get('currentUser.user');
+      if (cu.currentDateInDateRange(newc.prepStartsAt,newc.endsAt)) {
+        if (newc.eventType==1) {
+          str = "<img src='/images/global/tent.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to Camp";
+        } else {
+          str = "<img src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to November";
+        }
       }
     }
     // Return if they won or not
-    return winner;
+    return str;
   }),
   
   // Returns true if user has won latest event, false if not

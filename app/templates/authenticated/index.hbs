@@ -20,31 +20,34 @@
         <div class="banner-right">
         </div>
       </div>
+    {{else}}
+      {{#if campIsActive}}
+        <div class="flash-banner">
+          <div class="banner-left">
+          </div>
+          <div class="banner-content">
+            <div class="flash-image image-unframed">
+              <img style="width:100px; margin: 10px;" src="/images/banners/bird.svg" />
+            </div>
+            <div class="flash-content">
+              <div class="flash-text">
+                Are you ready for your next great writing adventure? Join Camp NaNoWriMo this April and set a word-count goal of your own, for any writing project.
+              </div>
+              <div class="flash-button">
+                <a href="/?addProject=true"><button>Join Camp!</button></a>
+              </div>
+            </div>
+          </div>
+          <div class="banner-right">
+          </div>
+        </div>
+      {{/if}}
     {{/if}}
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image image-unframed">
-          <img style="width:100px; margin: 10px;" src="/images/banners/bird.svg" />
-        </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Are you ready for your next great writing adventure? Join Camp NaNoWriMo this April and set a word-count goal of your own, for any writing project.
-          </div>
-          <div class="flash-button">
-            <a href="/?addProject=true"><button>Join Camp!</button></a>
-          </div>
-        </div>
-      </div>
-      <div class="banner-right">
-      </div>
-    </div>
     
     {{donation-day-banner}}
     <div class="nw-panel-intro">
       <div class="welcome-content left-side">
-        <h1>Welcome, {{currentUserName}}</h1>
+        <h1>{{{currentEventWelcome}}}, {{currentUserName}}!</h1>
         <div class="nano-subtext">Hope your writing is going great!</div>
       </div>
       <div class="right-side">

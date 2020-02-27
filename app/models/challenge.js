@@ -6,8 +6,9 @@ import moment from 'moment';
 
 const Challenge = Model.extend({
   defaultGoal: attr('number'),
-  endsAt: attr('date'),
-  startsAt: attr('date'),
+  prepStartsAt: attr('string'),
+  startsAt: attr('string'),
+  endsAt: attr('string'),
   winAllowedAt: attr('date'),
   eventType: attr('number'),
   userId: attr('number'),
