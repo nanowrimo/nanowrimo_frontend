@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="53px" height="46px" viewBox="0 0 53 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Custom Preset</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Custom-Preset" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Page-1" transform="translate(18.000000, 7.000000)">
+            <polygon id="Fill-1" fill="#A5D9E4" points="0 32 18 32 16.1961534 27.4307692 9.01113486 5"></polygon>
+            <polygon id="Stroke-2" stroke="#2F3061" stroke-linejoin="round" points="18 32 0 32 9.01113486 5 16.1961534 27.4307692"></polygon>
+            <polygon id="Fill-4" fill="#A5D9E4" points="10 5 17.0692641 27.4307692 18.8435498 32 33 32 24.1385281 5"></polygon>
+            <polygon id="Stroke-5" stroke="#2F3061" stroke-linejoin="round" points="33 32 18.8435498 32 17.0692641 27.4307692 10 5 24.1405195 5"></polygon>
+            <path d="M9.53,4 L8,0 L9.53,4 Z" id="Fill-7" fill="#A5D9E4"></path>
+            <path d="M8,0 L9.53,4" id="Stroke-8" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9,4 L10.528,0 L9,4 Z" id="Fill-10" fill="#A5D9E4"></path>
+            <path d="M10.53,0 L9,4" id="Stroke-11" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M23.53,4 L22,0 L23.53,4 Z" id="Fill-13" fill="#A5D9E4"></path>
+            <path d="M22,0 L23.53,4" id="Stroke-14" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M24,4 L25.53,0 L24,4 Z" id="Fill-16" fill="#A5D9E4"></path>
+            <path d="M25.53,0 L24,4" id="Stroke-17" stroke="#2F3061" stroke-linecap="round" stroke-linejoin="round"></path>
+            <polygon id="Fill-19" fill="#2F3061" points="5 32 14 32 13.0993774 29.8008829 9.50518792 19"></polygon>
+        </g>
+    </g>
+</svg>
