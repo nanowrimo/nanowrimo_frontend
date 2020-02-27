@@ -23,6 +23,58 @@ export default Controller.extend({
     return p;
   }),
   
+  // Returns true is it's camp and the user hasn't created a project
+  displayCampBanner: computed('currentUser.user.projects.[]','primaryProject.currentProjectChallenge.count',function() {
+    let d = false;
+    // Set a local variable for the store
+    let store = this.get('store');
+    // Set a local variable for all challenges in the store
+    let cs = store.peekAll('challenge');
+    // Set a local variable for the correct challenge
+    let newc = null;
+    // Loop through the challenges to find the latest event
+    cs.forEach(function(c) {
+      // If this is an event
+      if ((c.eventType==0)||(c.eventType==1)) {
+        // If the challenge is newer than ones already found
+        if ((newc===null)||(newc.endsAt<c.endsAt)) {
+          // Set the challenge variable to this challenge
+          newc = c;
+        }
+      }
+    });
+    // If the challenge has been found...
+    if (newc) {
+      // Get the current user
+      let cu = this.get('currentUser.user');
+      if (cu.currentDateInDateRange(newc.prepStartsAt,newc.endsAt)) {
+        if (newc.eventType==1) {
+          d = true;
+          // Get all project_challenges
+          let pcs = store.peekAll('project-challenge');
+          // Loop through them
+          pcs.forEach(function(pc) {
+            // If this project challenge is for the latest event...
+            if (newc.id==pc.challenge_id) {
+              // Find the associated project
+              let p = store.peekRecord('project',pc.project_id);
+              // If the project is found
+              if (p) {
+                // If the current user is the author
+                if (p.user_id==cu.id) {
+                  d = false;
+                }
+              }
+            }
+          });
+          
+        }
+      }
+    }
+    // Return if they won or not
+    return d;
+  }),
+    
   // Returns the current event name if it's happening, false if not
   currentEventWelcome: computed('currentUser.user.projects.[]','primaryProject.currentProjectChallenge.count',function() {
     let str = "Welcome";
@@ -51,7 +103,7 @@ export default Controller.extend({
         if (newc.eventType==1) {
           str = "<img src='/images/global/tent.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to Camp";
         } else {
-          str = "<img src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to November";
+          str = "<img src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to " + newc.name;
         }
       }
     }

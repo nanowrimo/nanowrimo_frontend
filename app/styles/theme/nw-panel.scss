@@ -156,6 +156,7 @@
     justify-content: flex-start;
   }
   .right-side {
+    padding-top: 25px;
     flex: 1 1 100%;
     display: flex;
     justify-content: flex-end;
@@ -170,7 +171,7 @@
       font-size: 40px;
       font-style: normal;
       font-stretch: normal;
-      line-height: 1.25;
+      line-height: 1.0;
       letter-spacing: -0.1px;
       text-align: left;
       color: $nw-brick;
