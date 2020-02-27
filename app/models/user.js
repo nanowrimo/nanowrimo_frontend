@@ -106,40 +106,46 @@ const User = Model.extend({
   // BEGINNING OF DATETIME FUNCTIONS
   // ---------------------------
   
+  // Returns the provided datetime d in the user's time zone
+  dateTimeInTimeZone(d) {
+    // First get the current time from the user's device
+    let utcTime = moment(d);
+    // Return the time to the user's time zone
+    return utcTime.tz(this.get('timeZone'));
+  },
+  
   // Returns a date string of the current time in the user's time zone
   currentDateStringInTimeZone: computed('timeZone',function() {
     // First get the current time from the user's device
     let utcTime = moment();
-    // Then convert that time to the user's time zone
-    let userTime = utcTime.tz(this.get('timeZone'));
-    // Then create a date string from it
-    let userDate = userTime.format('YYYY-MM-DD');
-    // Return the date string
-    return userDate;
+    // Return date string in user's time zone
+    return this.dateStringInTimeZone(utcTime);
   }),
   
   // Returns a date string of the provided time in the user's time zone
   dateStringInTimeZone (d) {
-    // First get the current time from the user's device
-    let utcTime = moment(d);
-    // Then convert that time to the user's time zone
-    let userTime = utcTime.tz(this.get('timeZone'));
-    // Then create a date string from it
-    let userDate = userTime.format('YYYY-MM-DD');
-    // Return the date string
-    return userDate;
+    // Get datetime in user's time zone
+    let dt = this.dateTimeInTimeZone(d);
+    // Return date string from it
+    return dt.format('YYYY-MM-DD');
   },
   
   // Returns a date string of the provided time in the user's time zone
   shortDateStringInTimeZone (d) {
-    // First get the current time from the user's device
-    let utcTime = moment(d);
-    // Then convert that time to the user's time zone
-    let userTime = utcTime.tz(this.get('timeZone'));
-    // Then create a date string from it
-    let userDate = userTime.format('MMM D, YYYY');
-    // Return the date string
-    return userDate;
+    // Get datetime in user's time zone
+    let dt = this.dateTimeInTimeZone(d);
+    // Return date string from it
+    return dt.format('MMM D, YYYY');
+  },
+  
+  // Takes start and end dates as formatted strings. Returns true if date is in range, otherwise false
+  currentDateInDateRange(s,e) {
+    let c = this.get('currentDateStringInTimeZone');
+    if ((c>=s)&&(c<=e)) {
+      return true;
+    } else {
+      return false;
+    }
   },
   
   // ---------------------------
