@@ -19,9 +19,9 @@
       <button {{action 'removeUser'}} class="button-reversed">Remove</button>
       {{#if userIsApproved}}
         {{#if userIsAdmin}}
-          <button {{action 'userRemoveAdmin'}} style="margin-left: 10px;" class="button-reversed">-admin</button>
+          <button {{action 'userRemoveAdmin'}} style="width: 120px; margin-left: 10px;" class="button-reversed">-admin</button>
         {{else}}
-          <button {{action 'userToAdmin'}} style="margin-left: 10px;">+admin</button>
+          <button {{action 'userToAdmin'}} style="width: 120px; margin-left: 10px;">+admin</button>
         {{/if}}
       {{/if}}
     {{/if}}
