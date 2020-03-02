@@ -784,7 +784,7 @@ User.reopenClass({
   optionsForPrivacyProjects:
   [
     {value:'2', name:'Anyone with an account'},
-    {value:'1', name:'Only my buddies'},
+    {value:'1', name:'Only my buddies and writing groups'},
     {value:'0', name:'Only me'},
   ],
   optionsForPrivacyBuddies:
