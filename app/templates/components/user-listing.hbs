@@ -9,7 +9,12 @@
     <div class="nw-user-location">
       {{#if organizer}}
         {{#if (eq itemSize "small")}}
-          Organizer
+          {{#if (eq group.groupType "event")}}
+            Organizer
+          {{/if}}
+          {{#if (eq group.groupType "writing group")}}
+            Group Admin
+          {{/if}}
         {{/if}}
       {{/if}}
     </div>
