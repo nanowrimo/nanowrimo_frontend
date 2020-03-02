@@ -9,7 +9,7 @@ const Challenge = Model.extend({
   prepStartsAt: attr('string'),
   startsAt: attr('string'),
   endsAt: attr('string'),
-  winAllowedAt: attr('date'),
+  winAllowedAt: attr('string'),
   eventType: attr('number'),
   userId: attr('number'),
   //eventType is defined in the api as:

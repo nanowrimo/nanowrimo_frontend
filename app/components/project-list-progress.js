@@ -23,31 +23,36 @@ export default Component.extend({
     return this.get('percentCompleted') === 100;
   }),
 
-  percentCompleted: computed("project.currentProjectChallenge.{goal,count}",function(){
+  percentCompleted: computed("project.currentProjectChallenge.{goal,count}",'project.computedProjectChallenges.[]',function(){
     let proj = this.get('project');
     if (proj) {
-      let wc = proj.currentProjectChallenge.count;
-      let g = proj.currentProjectChallenge.goal;
-      let percent = wc*100/g;
-      if (percent > 100) {
-        percent = 100;
+      let pc = proj.currentProjectChallenge;
+      if (pc) {
+        let wc = proj.currentProjectChallenge.count;
+        let g = proj.currentProjectChallenge.goal;
+        let percent = wc*100/g;
+        if (percent > 100) {
+          percent = 100;
+        }
+        return percent;
       }
-      return percent;
-    } else {
-      return 0;
     }
+    return 0;
   }),
   
-  goalIcon: computed("project.currentProjectChallenge",function(){
+  goalIcon: computed("project.currentProjectChallenge.computedChallenge",function(){
     let str = '';
     let proj = this.get('project');
     if (proj) {
-      let c = proj.currentProjectChallenge.computedChallenge;
-      if (c.eventType==0) {
-        str = "<img src='/images/global/helmet.svg' style='' />";
-      }
-      if (c.eventType==1) {
-        str = "<img src='/images/global/tent.svg' style='' />";
+      let pc = proj.currentProjectChallenge;
+      if (pc) {
+        let c = proj.currentProjectChallenge.computedChallenge;
+        if (c.eventType==0) {
+          str = "<img src='/images/global/helmet.svg' style='' />";
+        }
+        if (c.eventType==1) {
+          str = "<img src='/images/global/tent.svg' style='' />";
+        }
       }
     }
     return str;

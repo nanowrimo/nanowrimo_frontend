@@ -30,6 +30,24 @@ const Project = Model.extend({
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
+  // Returns all projectChallenges in store
+  allProjectChallenges: computed(function() {
+    return this.get('store').peekAll('projectChallenge');
+  }),
+  
+  // Finding projectChallenges without needing relationships
+  computedProjectChallenges: computed('allProjectChallenges.@each.id',function() {
+    let pid = this.get('id');
+    let pcs = this.get('allProjectChallenges');
+    let newpcs = [];
+    pcs.forEach((pc)=> {
+      if (pc.project_id==pid) {
+        newpcs.push(pc);
+      }
+    });
+    return newpcs;
+  }),
+  
   defaultCoverUrl: computed('genres.[]', function(){
     let cover = "/images/projects/default-cover.svg";
     this.get('genres').forEach((g)=>{
@@ -184,14 +202,14 @@ const Project = Model.extend({
     }
   }),
   
-  currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}', function() {
+  currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}','computedProjectChallenges.[]','allProjectChallenges.[]', function() {
     let active = null;
     let latest = null;
     let pending = null;
     //get the time now in user's timezone 
     let now = moment().tz(this.get('user.timeZone'));
     //loop through this project's projectChallenges
-    this.get('projectChallenges').forEach((pc)=>{
+    this.get('computedProjectChallenges').forEach((pc)=>{
       //get the start and end as moments
       let endsAt = moment(pc.endsAt);
       let startsAt = moment(pc.startsAt);
