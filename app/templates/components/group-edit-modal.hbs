@@ -26,6 +26,7 @@
               {{f.input
                 label="Writing group name"
                 property="name"
+                input=(action 'nameChanged' value="target.value")
               }}
             </div>
             <div class="form-group">
@@ -35,6 +36,7 @@
                 type='number'
                 min=3
                 max=20
+                input=(action 'maxMemberCountChanged' value="target.value")
               }}
             </div>
             <div class="form-group">

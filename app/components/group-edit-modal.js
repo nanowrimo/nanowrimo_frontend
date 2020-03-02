@@ -10,7 +10,6 @@ export default Component.extend({
   tab: null,
   open: null,
   group: null,
-  hasValidationError: false,
   
   optionsForJoiningRule: computed(function() {
     return Group.optionsForJoiningRule;
@@ -29,18 +28,42 @@ export default Component.extend({
       return value;
     }
   }),
+  
+  validateInput() {
+    // Set the group name to the input string
+    let n = this.get('group.name');
+    let i = this.get('group.maxMemberCount');
+    let hasError = false;
+    if ((n == "")||(n==null)) {
+      hasError = true;
+    }
+    if (!(i>2 && i<21)) {
+      hasError = true;
+    }
+    this.set('hasValidationError',hasError);
+  },
 
   actions: {
     updateChangeset() {
       //alert('updating');
     },
  
-    validateName(str) {
-      alert('validating');
-      if ((str == "")||(str==null)) {
-        alert('error');
-      }
+    nameChanged(val) {
+      // Set the group name to the input string
+      this.set('group.name', val);
+      // Validate all relevant input
+      this.validateInput();
     },
+    
+    maxMemberCountChanged(val) {
+      // Get the integer value of the field
+      let i = parseInt(val);
+      // Set the group name to the input string
+      this.set('group.maxMemberCount', i);
+      // Validate all relevant input
+      this.validateInput();
+    },
+    
     onHidden() {
       this.get('group').rollbackGroupExternalLinks();
       let callback = this.get('onHidden');
