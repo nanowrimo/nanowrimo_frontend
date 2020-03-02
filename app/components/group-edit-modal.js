@@ -10,6 +10,15 @@ export default Component.extend({
   tab: null,
   open: null,
   group: null,
+  tempName: null,
+  tempMaxMemberCount: null,
+  
+  init(){
+    this._super(...arguments);
+    this.set('tempName',this.get('group.name'));
+    this.set('tempMaxMemberCount',this.get('group.maxMemberCount'));
+  },
+  
   
   optionsForJoiningRule: computed(function() {
     return Group.optionsForJoiningRule;
@@ -31,8 +40,8 @@ export default Component.extend({
   
   validateInput() {
     // Set the group name to the input string
-    let n = this.get('group.name');
-    let i = this.get('group.maxMemberCount');
+    let n = this.get('tempName');
+    let i = this.get('tempMaxMemberCount');
     let hasError = false;
     if ((n == "")||(n==null)) {
       hasError = true;
@@ -50,7 +59,7 @@ export default Component.extend({
  
     nameChanged(val) {
       // Set the group name to the input string
-      this.set('group.name', val);
+      this.set('tempName', val);
       // Validate all relevant input
       this.validateInput();
     },
@@ -59,7 +68,7 @@ export default Component.extend({
       // Get the integer value of the field
       let i = parseInt(val);
       // Set the group name to the input string
-      this.set('group.maxMemberCount', i);
+      this.set('tempMaxMemberCount', i);
       // Validate all relevant input
       this.validateInput();
     },
