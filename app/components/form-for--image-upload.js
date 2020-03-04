@@ -56,7 +56,8 @@ export default Component.extend({
           set(this.get('changeset'), this.get('property'), get(blob, 'signedId'));
           this.set('hasUploaded', true);
         }).catch(error => {
-          alert(error);
+          alert("Files must be less than 10mb in size.");
+          //alert(error);
         });
       }
     }
