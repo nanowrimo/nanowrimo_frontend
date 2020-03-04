@@ -19,7 +19,6 @@
   </style>
 
   <label>{{label}}</label>
-  <div><i>Uploaded images must be less than 10mb in size.</i></div>
   {{#file-dropzone
     class=(concat
       "nano-image-upload form-control"
@@ -53,7 +52,7 @@
           <a style="cursor:pointer">Select an image</a><br>
           
         {{/file-upload}}
-        image must be a .jpg, .png, or .gif
+        Images must be less than 10 MB, and .jpg, .png, or .gif file types.
       {{/if}}
     {{/if}}
   {{/file-dropzone}}
