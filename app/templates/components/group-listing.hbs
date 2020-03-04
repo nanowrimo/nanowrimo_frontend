@@ -12,7 +12,9 @@
             <div class="nw-group-name">
               {{group.name}}
             </div>
-            {{group.description}}
+            {{#if message}}
+              {{group.description}}
+            {{/if}}
           </div>
           <div class='nw-group-latest'>
             <div class='nw-icon'>
