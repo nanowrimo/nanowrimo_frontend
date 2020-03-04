@@ -13,10 +13,12 @@ export default Component.extend({
   hasWritingGroup: computed('currentUser.user.myWritingGroupUsers.[]', function() {
     let gus = this.get('currentUser.user.myWritingGroupUsers');
     //let gus = cu.myWritingGroupUsers;
-    if (gus.length>0) {
-      return true;
-    } else {
-      return false;
+    if (gus) {
+      if (gus.length>0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }),
   
