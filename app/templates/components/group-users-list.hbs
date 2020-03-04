@@ -41,18 +41,21 @@
         </div>
       </div>
       <div class="nw-card-scroll" style="padding: 15px;">
-        {{#if searchResults}}
-          {{#if searchResults.data}}
-            {{#each searchResults.data as |u|}}
-              {{user-card-invite user=u.attributes uid=u.id group=group}}
-            {{/each}}
-          {{else}}
-            No results found!
-          {{/if}}
+        {{#if searching}}
+          Searching...
         {{else}}
-          A group needs members! Search for friends by their usernames.
+          {{#if searchResults}}
+            {{#if searchResults.data}}
+              {{#each searchResults.data as |u|}}
+                {{user-card-invite user=u.attributes uid=u.id group=group}}
+              {{/each}}
+            {{else}}
+              No results found!
+            {{/if}}
+          {{else}}
+            A group needs members! Search for friends by their usernames.
+          {{/if}}
         {{/if}}
-      
       </div>
     {{else}}
       <div style="padding: 15px;">

@@ -13,6 +13,7 @@ export default Component.extend({
   primaryDisplay: true,
   searchString: '',
   searchResults: null,
+  searching: false,
   
   init() {
     this._super(...arguments);
@@ -158,6 +159,7 @@ export default Component.extend({
   
   actions: {
     getSearchResults() {
+      this.set('searching',true);
       let str = this.get('searchString');
       let endpoint =  `${ENV.APP.API_HOST}/search?q=` + str;
       let t = this;
@@ -165,6 +167,7 @@ export default Component.extend({
       return fetch(endpoint, {
         headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
       }).then((resp)=>{
+        this.set('searching',false);
         return resp.json().then((json)=>{
           t.set('searchResults',json);
         });
