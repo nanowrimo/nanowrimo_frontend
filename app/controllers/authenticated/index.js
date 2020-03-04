@@ -100,11 +100,13 @@ export default Controller.extend({
     if (newc) {
       // Get the current user
       let cu = this.get('currentUser.user');
-      if (cu.currentDateInDateRange(newc.prepStartsAt,newc.endsAt)) {
-        if (newc.eventType==1) {
-          str = "<img src='/images/global/tent.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to Camp";
-        } else {
-          str = "<img src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to " + newc.name;
+      if (cu) {
+        if (cu.currentDateInDateRange(newc.prepStartsAt,newc.endsAt)) {
+          if (newc.eventType==1) {
+            str = "<img src='/images/global/tent.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to Camp";
+          } else {
+            str = "<img src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to " + newc.name;
+          }
         }
       }
     }
