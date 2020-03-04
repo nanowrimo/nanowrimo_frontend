@@ -42,7 +42,7 @@
       </div>
       <div class="nw-card-scroll" style="padding: 15px;">
         {{#if searching}}
-          Searching...
+          <NwLoading />
         {{else}}
           {{#if searchResults}}
             {{#if searchResults.data}}
