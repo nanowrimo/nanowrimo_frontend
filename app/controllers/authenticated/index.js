@@ -47,27 +47,28 @@ export default Controller.extend({
     if (newc) {
       // Get the current user
       let cu = this.get('currentUser.user');
-      if (cu.currentDateInDateRange(newc.prepStartsAt,newc.endsAt)) {
-        if (newc.eventType==1) {
-          d = true;
-          // Get all project_challenges
-          let pcs = store.peekAll('project-challenge');
-          // Loop through them
-          pcs.forEach(function(pc) {
-            // If this project challenge is for the latest event...
-            if (newc.id==pc.challenge_id) {
-              // Find the associated project
-              let p = store.peekRecord('project',pc.project_id);
-              // If the project is found
-              if (p) {
-                // If the current user is the author
-                if (p.user_id==cu.id) {
-                  d = false;
+      if (cu) {
+        if (cu.currentDateInDateRange(newc.prepStartsAt,newc.endsAt)) {
+          if (newc.eventType==1) {
+            d = true;
+            // Get all project_challenges
+            let pcs = store.peekAll('project-challenge');
+            // Loop through them
+            pcs.forEach(function(pc) {
+              // If this project challenge is for the latest event...
+              if (newc.id==pc.challenge_id) {
+                // Find the associated project
+                let p = store.peekRecord('project',pc.project_id);
+                // If the project is found
+                if (p) {
+                  // If the current user is the author
+                  if (p.user_id==cu.id) {
+                    d = false;
+                  }
                 }
               }
-            }
-          });
-          
+            });
+          }
         }
       }
     }

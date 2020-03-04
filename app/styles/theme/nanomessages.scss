@@ -88,6 +88,9 @@
               line-height: 1.25;
               text-align: left;
               color: $nw-darkgrey;
+              img {
+                max-width: 100%;
+              }
             }
             .nanomessage-timesince {
               line-height: 1.57;
