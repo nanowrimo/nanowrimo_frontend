@@ -23,11 +23,14 @@
         {{#tab.pane title="Description and Links" id="overview"}}
           {{#if group.isWritingGroup}}
             <div class="form-group">
-              {{f.input
-                label="Writing group name"
-                property="name"
-                input=(action 'nameChanged' value="target.value")
-              }}
+              <Input
+                @label="Writing group name"
+                @property="name"
+                @value={{group.name}}
+                @maxlength="60"
+                style="width: 100%; padding-left: 10px;"
+                @input={{action 'nameChanged' value="target.value"}}
+              />
             </div>
             <div class="form-group">
               {{f.input
@@ -49,10 +52,13 @@
             
           {{/if}}
           <div class="form-group">
-            {{f.textarea
-              label="Description"
-              property="description"
-            }}
+            <Textarea
+              @label="Description"
+              @property="description"
+              @value={{group.description}}
+              @maxlength="800"
+              style="width: 100%; padding-left: 10px;"
+            />
           </div>
           {{group-edit-links group=group}}
         {{/tab.pane}}

@@ -16,11 +16,13 @@
     
         {{#if inProcess}}
           <div class="form-group">
-            {{f.input
-              label="Name"
-              property="name"
-              input=(action 'nameChanged' value="target.value")
-            }}
+            <Input
+              @label="Name"
+              @property="name"
+              @maxlength="60"
+              style="width: 100%; padding-left: 10px;"
+              @input={{action 'nameChanged' value="target.value"}}
+            />
           </div>
         {{/if}}
         {{#if groupCreated}}

@@ -51,6 +51,7 @@
     font-size: 26px;
     line-height: 28px;
     margin-bottom: 20px;
+    overflow-wrap: break-word;
   }
   .nw-item-description-label {
     width: 100%;
@@ -66,6 +67,7 @@
     line-height: 1.38;
     text-align: left;
     color: $nw-darkgrey;
+    overflow-wrap: break-word;
   }
   .nw-item-location {
     width: 100%;

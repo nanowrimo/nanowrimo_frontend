@@ -18,6 +18,11 @@ export default Component.extend({
     this._super(...arguments);
   },
   
+  //attributeBindings: ["maxlength"],
+  //maxlength: computed(function () {
+    //return "80";
+  //}),
+  
   didReceiveAttrs(){
     if (this.get('open')){
       this.set('inProcess',true);
