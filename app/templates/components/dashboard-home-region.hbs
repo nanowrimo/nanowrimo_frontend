@@ -7,9 +7,9 @@
       There are lots of fun things going on around you, but we don't know your home region yet.
     </div>
     <div>
-      {{#link-to "authenticated.regions.find" tagName="button"}}
+      <LinkTo @route="authenticated.regions.find" @tagName="button" @query={{hash ps="false"}} >
         Find Home Region
-      {{/link-to}}
+      </LinkTo>
     </div>
   </div>
   <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>

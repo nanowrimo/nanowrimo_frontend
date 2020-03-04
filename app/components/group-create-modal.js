@@ -83,7 +83,7 @@ export default Component.extend({
       let r = this.get('router');
       //hide the modal
       this.set('open',false);
-      r.transitionTo('authenticated.writing-groups.show.index', g.slug);
+      r.transitionTo('authenticated.writing-groups.show.index', g.slug, { queryParams: { ps: "false" }});
     },
     
     onHidden() {

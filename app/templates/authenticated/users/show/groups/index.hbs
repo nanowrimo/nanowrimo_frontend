@@ -15,7 +15,7 @@
   <div class='group-listings'>
     <div>
       {{#each user.myInvitations as |group|}}
-        {{group-listing group=group buttons=true}}
+        {{group-listing group=group buttons=true message=true}}
       {{/each}}
     </div>
   </div>
@@ -23,7 +23,7 @@
     <div>
       {{#if hasRegions}}
         {{#each user.myGroups as |group|}}
-          {{group-listing group=group buttons=true}}
+          {{group-listing group=group buttons=true message=true}}
         {{/each}}
       {{else}}
         <div class="nw-card nw-prompt-card">

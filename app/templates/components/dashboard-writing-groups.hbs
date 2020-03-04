@@ -1,0 +1,31 @@
+<div class="nw-card-header">
+  <div class="nw-card-title">Writing Groups</div>
+</div>
+<div class="nw-card-content nw-center-horiz">
+  {{#if hasWritingGroup}}
+    <div style="max-height: 350px; overflow-y: scroll;">
+      {{#each writingGroups as |group|}}
+        {{group-listing group=group buttons=true message=false}}
+        <br />
+      {{/each}}
+    </div>
+  {{else}}
+    <div>
+      <div class="nw-promo-text">
+        Camp has started! Create a writing group to navigate the challenge with friends!
+      </div>
+      <div>
+        <button {{action "openNewWritingGroupModal"}}>
+          Create a writing group
+        </button>
+      </div>
+    </div>
+    <div class="nw-card-bottom-image"><img src="/images/global/tent.svg" style="width: 70px; margin-top: 10px;" /></div>
+  {{/if}}
+  {{group-create-modal
+    onHidden=(action "afterWritingGroupModalClose")
+    open=addWritingGroup
+    user=user
+  }}
+  
+</div>

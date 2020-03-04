@@ -7,6 +7,7 @@ export default Controller.extend({
   router: service(),
   group: alias('model'),
   currentUser: service(),
+  queryParams: ['ps'],
   
   currentUrl: computed(function() {
     return window.location.href;
