@@ -267,9 +267,11 @@ const User = Model.extend({
     return bgus;
   }),
   
-
-  myGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
-    let gus = this.get('groupUsers');
+  groupUsersSortingDesc: Object.freeze(['entryAt:desc']),
+  sortedGroupUsers: sort('groupUsers','groupUsersSortingDesc'),
+  
+  myGroups: computed('sortedGroupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+    let gus = this.get('sortedGroupUsers');
     let bgus = [];
     //are there group users?
     if (gus) {
