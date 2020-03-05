@@ -12,6 +12,21 @@ export default Controller.extend({
   dataLoaded: false,
   
   
+  // Returns true if the user can view the group
+  canViewGroup: computed('currentUser.user.{groupUsersLoaded,id}','group.id',function() {
+    let found = false;
+    if (this.get('currentUser.user.groupUsersLoaded')) {
+      let uid = this.get('currentUser.user.id');
+      let gid = this.get('group.id');
+      let gus = this.get('store').peekAll('group-user');
+      gus.forEach((gu)=>{
+        if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.invitationAccepted==1)) {
+          found = true;
+        }
+      });
+    }
+    return found;
+  }),
   // Returns true if the user can edit the group
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
     let found = false;

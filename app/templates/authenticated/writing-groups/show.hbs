@@ -1,49 +1,59 @@
-<div class='plate-wrapper nw-short-plate {{if canEditGroup "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
-  <div class="nano-user-plate full-width" style={{plateStyle}}>
-    <div class="plate-cover">
+{{#if canViewGroup}}
+  <div class='plate-wrapper nw-short-plate {{if canEditGroup "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
+    <div class="nano-user-plate full-width" style={{plateStyle}}>
+      <div class="plate-cover">
 
-      <div class="container-fluid">
-        {{group-stats group=group}}
+        <div class="container-fluid">
+          {{group-stats group=group}}
+        </div>
+
       </div>
-
     </div>
+    <div class='plate-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
   </div>
-  <div class='plate-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
-</div>
-<div class="content-gutters">
-  <div class="container-fluid align-top">
-    <div class="nw-sidebar">
-      <div class="nw-sidebar-content">
-        {{group-avatar group=group canEdit=canEditGroup editAction=(action "openEditModal" "avatarTab")}}
-        <div class="nw-item-name-prelim">
-          {{group.namePrelim}}
-        </div>
-        <div class="nw-item-name">
-          {{group.nameFinal}}
-        </div>
-        <div class="nw-item-description-label">
-          DESCRIPTION
-        </div>
-        <div class="nw-item-description">
-          {{group.description}}
-        </div>
-        {{group-links links=group.groupExternalLinks}}
-        {{#if canEditGroup}}
-          <div style="width: 100%; text-align: center;">
-            <i {{action "openEditModal"}} class="fa fa-edit"></i>
+  <div class="content-gutters">
+    <div class="container-fluid align-top">
+      <div class="nw-sidebar">
+        <div class="nw-sidebar-content">
+          {{group-avatar group=group canEdit=canEditGroup editAction=(action "openEditModal" "avatarTab")}}
+          <div class="nw-item-name-prelim">
+            {{group.namePrelim}}
           </div>
+          <div class="nw-item-name">
+            {{group.nameFinal}}
+          </div>
+          <div class="nw-item-description-label">
+            DESCRIPTION
+          </div>
+          <div class="nw-item-description">
+            {{group.description}}
+          </div>
+          {{group-links links=group.groupExternalLinks}}
+          {{#if canEditGroup}}
+            <div style="width: 100%; text-align: center;">
+              <i {{action "openEditModal"}} class="fa fa-edit"></i>
+            </div>
 
-          {{group-edit-modal
-            onHidden=(action "afterEditModalClose")
-            open=edit
-            group=group
-            tab=editTab
-          }}
+            {{group-edit-modal
+              onHidden=(action "afterEditModalClose")
+              open=edit
+              group=group
+              tab=editTab
+            }}
 
-        {{/if}}
+          {{/if}}
+        </div>
+        <div class="nw-sidebar-divot"></div>
       </div>
-      <div class="nw-sidebar-divot"></div>
+      {{outlet}}
     </div>
-    {{outlet}}
   </div>
-</div>
+{{else}}
+  <div class="content-gutters">
+    <div class="container-fluid align-top">
+      <div class="nw-panel right-resize nw-with-tabs">
+        <div style="padding: 50px; font-size: 24px;">Whoops! Something went wrong.</div>
+      </div>
+    </div>
+  </div>
+{{/if}}
