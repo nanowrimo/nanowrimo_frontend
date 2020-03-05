@@ -14,6 +14,7 @@
       height: 232px;
       padding: 15px;
       display: flex;
+      min-height: 0;
       .nw-card-scroll {
         overflow-y: scroll;
       }
