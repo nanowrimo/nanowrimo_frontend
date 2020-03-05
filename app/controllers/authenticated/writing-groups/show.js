@@ -16,14 +16,18 @@ export default Controller.extend({
   canViewGroup: computed('currentUser.user.{groupUsersLoaded,id}','group.id',function() {
     let found = false;
     if (this.get('currentUser.user.groupUsersLoaded')) {
-      let uid = this.get('currentUser.user.id');
-      let gid = this.get('group.id');
-      let gus = this.get('store').peekAll('group-user');
-      gus.forEach((gu)=>{
-        if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.invitationAccepted==1)) {
-          found = true;
-        }
-      });
+      if (this.get('currentUser.user.adminLevel')) {
+        found = true;
+      } else {
+        let uid = this.get('currentUser.user.id');
+        let gid = this.get('group.id');
+        let gus = this.get('store').peekAll('group-user');
+        gus.forEach((gu)=>{
+          if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.invitationAccepted==1)) {
+            found = true;
+          }
+        });
+      }
     }
     return found;
   }),
