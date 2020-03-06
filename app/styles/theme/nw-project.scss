@@ -135,6 +135,9 @@
   text-align: left;
   color: $nw-mediumgrey;
 }
+.nw-project-details {
+  min-height: 0;
+}
 .nw-project-details > div {
   flex: 0 0 37%;
   overflow: scroll;
