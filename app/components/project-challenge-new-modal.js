@@ -183,8 +183,10 @@ export default Component.extend({
       if (pc && pc.id ){ 
         this.set('isEditingModal', true);
         this.set('newDuration', pc.duration);  
-        this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
-        this.set('displayEndsAt', moment.utc(pc.endsAt).format("YYYY-MM-DD"));
+        //this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
+        //this.set('displayEndsAt', moment.utc(pc.endsAt).format("YYYY-MM-DD"));
+        this.set('displayStartsAt', pc.startsAt);
+        this.set('displayEndsAt', pc.endsAt);
         this.set('displayName', pc.name);
         this.set('newStartsAt', pc.startsAt);
         this.set('newEndsAt', pc.endsAt);
@@ -210,8 +212,10 @@ export default Component.extend({
         let pc = this.get('projectChallenge');
         pc.set('project', this.get('project'));
         //set the project-challenge starts at
-        pc.set('startsAt', moment.utc(this.get('newStartsAt')).toDate() );
-        pc.set('endsAt', moment.utc(this.get('newEndsAt')).toDate() );
+        //pc.set('startsAt', moment.utc(this.get('newStartsAt')).toDate() );
+        //pc.set('endsAt', moment.utc(this.get('newEndsAt')).toDate() );
+        pc.set('startsAt', this.get('newStartsAt') );
+        pc.set('endsAt', this.get('newEndsAt') );
         //are we associating with an event?
         if (this.get('associateWithChallenge') ) {
           pc.set('challenge', this.get('associatedChallenge'));
@@ -237,15 +241,17 @@ export default Component.extend({
     
     startsAtChanged(val) {
       //set the new StartsAt
-      let m = moment.utc(val);
-      this.set('newStartsAt', m);
+      //let m = moment.utc(val);
+      //this.set('newStartsAt', m);
+      this.set('newStartsAt', val);
       this._validate();
     },
     
     endsAtChanged(val) {
       //set the new StartsAt
-      let m = moment.utc(val);
-      this.set('newEndsAt', m);
+      //let m = moment.utc(val);
+      //this.set('newEndsAt', m);
+      this.set('newEndsAt', val);
       this._validate();
     }
   },
@@ -277,15 +283,18 @@ export default Component.extend({
     this.set('displayName', challenge.name);
     projectChallenge.set('unitType',challenge.unitType);
     projectChallenge.set('goal',challenge.defaultGoal);
-    let start = moment.utc(challenge.startsAt);
-    let end = moment.utc(challenge.endsAt);
-    this.set('displayStartsAt', start.format("YYYY-MM-DD"));
-    this.set('displayEndsAt', end.format("YYYY-MM-DD"));
+    //let start = moment.utc(challenge.startsAt);
+    //let end = moment.utc(challenge.endsAt);
+    //this.set('displayStartsAt', start.format("YYYY-MM-DD"));
+    //this.set('displayEndsAt', end.format("YYYY-MM-DD"));
+    this.set('displayStartsAt', challenge.startsAt);
+    this.set('displayEndsAt', challenge.endsAt);
     projectChallenge.set('startsAt', challenge.startsAt); 
-    
     projectChallenge.set('endsAt', challenge.endsAt); 
-    this.set('newEndsAt', moment.utc(challenge.endsAt).toDate());
-    this.set('newStartsAt', moment.utc(challenge.startsAt).toDate());
+    //this.set('newStartsAt', moment.utc(challenge.startsAt).toDate());
+    //this.set('newEndsAt', moment.utc(challenge.endsAt).toDate());
+    this.set('newStartsAt', challenge.startsAt);
+    this.set('newEndsAt', challenge.endsAt);
     this.set('newDuration', challenge.duration);
   },
   
@@ -301,29 +310,35 @@ export default Component.extend({
     let currentpc = this.get('projectChallenge');
     let errors = {"endsBeforeStart": false, "startOverlap":false, "endOverlap": false, "fullOverlap":false, "badEnd":false, "badStart":false };
     //get the proposed start and end as moments
-    let startTime = moment.utc(this.get('newStartsAt'));
-    let endTime = moment.utc(this.get('newEndsAt'));
-    errors.endsBeforeStart = endTime.isBefore(startTime);
+    //let startTime = moment.utc(this.get('newStartsAt'));
+    //let endTime = moment.utc(this.get('newEndsAt'));
+    let startTime = this.get('newStartsAt');
+    let endTime = this.get('newEndsAt');
+    //errors.endsBeforeStart = endTime.isBefore(startTime);
+    errors.endsBeforeStart = endTime<startTime;
     //loop through this project's projectChallenges
     let pcs = this.get('project.projectChallenges');
     
     pcs.forEach((pc)=>{
       //don't validate against self
       if (pc !== currentpc) {
-        let pcStart = moment(pc.startsAt);
-        let pcEnd = moment(pc.endsAt);
+        //let pcStart = moment(pc.startsAt);
+        //let pcEnd = moment(pc.endsAt);
         //check for a start overlap
-        if (startTime.isBefore(pcEnd) && startTime.isAfter(pcStart) ) {
+        //if (startTime.isBefore(pcEnd) && startTime.isAfter(pcStart) ) {
+        if (startTime<pc.endsAt && startTime>pc.startsAt ) {
           errors.startOverlap = true;
           errors.badStart=true;
         }
         //check for an end overlap
-        if (endTime.isBefore(pcEnd) && endTime.isAfter(pcStart) ) {
+        //if (endTime.isBefore(pcEnd) && endTime.isAfter(pcStart) ) {
+        if (endTime<pc.endsAt && endTime>pc.startsAt ) {
           errors.endOverlap = true;
           errors.badEnd=true;
         }
         //check for the full overlap
-        if (startTime.isBefore(pcStart) && endTime.isAfter(pcEnd) ) {
+        //if (startTime.isBefore(pcStart) && endTime.isAfter(pcEnd) ) {
+        if (startTime<pc.startsAt && endTime>pc.endsAt ) {
           errors.fullOverlap = true;
           errors.badStart=true;
           errors.badEnd=true;
