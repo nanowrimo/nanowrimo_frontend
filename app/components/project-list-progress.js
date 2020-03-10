@@ -47,11 +47,14 @@ export default Component.extend({
       let pc = proj.currentProjectChallenge;
       if (pc) {
         let c = proj.currentProjectChallenge.computedChallenge;
-        if (c.eventType==0) {
-          str = "<img src='/images/global/helmet.svg' style='' />";
-        }
-        if (c.eventType==1) {
-          str = "<img src='/images/global/tent.svg' style='' />";
+        // check if there is a computedChallenge
+        if(c) {
+          if (c.eventType==0) {
+            str = "<img src='/images/global/helmet.svg' style='' />";
+          }
+          if (c.eventType==1) {
+            str = "<img src='/images/global/tent.svg' style='' />";
+          }
         }
       }
     }
