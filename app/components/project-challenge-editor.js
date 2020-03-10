@@ -175,9 +175,12 @@ export default Component.extend({
   },
   
   endsBeforeStarts: computed('newEndsAt', 'newStartsAt', function(){
-    let e = moment(this.get('newEndsAt'));
-    let s = moment(this.get('newStartsAt'));
-    return e.isBefore(s, 'd');
+    let e = this.get('newEndsAt');
+    let s = this.get('newStartsAt');
+    //let e = moment(this.get('newEndsAt'));
+    //let s = moment(this.get('newStartsAt'));
+    //return e.isBefore(s, 'd');
+    return (e<s);
   }),
   
   actions: {
