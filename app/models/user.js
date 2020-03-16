@@ -563,7 +563,7 @@ const User = Model.extend({
       group_types: group_types,
       include: 'user,group'
     }).then(function() {
-      debounce(u, u.connectGroupUsers, 200, false);
+      debounce(u, u.connectGroupUsers, 1000, false);
     });
   },
 
@@ -573,7 +573,7 @@ const User = Model.extend({
     //gus.forEach((gu)=>{
       //gu.normalize();
     //});
-    debounce(this, this.setGroupUsersLoaded, 200, false);
+    debounce(this, this.setGroupUsersLoaded, 1000, false);
   },
   
   setGroupUsersLoaded() {
