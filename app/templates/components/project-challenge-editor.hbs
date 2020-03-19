@@ -13,13 +13,18 @@
     }}
   </div>
   <div class="form-group">
-    {{c.select
-      changeset=changeset
-      label=goalTypeLabel
-      options=optionsForWritingType
-      property="WritingType"
-      isDisabled=disableWritingType
-    }}
+    <label for='writingType'>What type of goal is this?</label>
+    <div class="select-container">
+      <select id='writingType' name='writingType' disabled={{if disableWritingType 'disabled' ''}}
+        class='form-control' 
+        onchange={{action 'writingTypeChanged' value="target.value"}}>
+        {{#each optionsForWritingType as |opt|}}
+          <option value={{opt.value}} selected={{if (eq opt.value associatedChallenge.unitTypeAsString) 'true'}} >
+            {{opt.name}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
   </div>
   <div class="side-by-side">
     <div class="form-group side-by-side-even">

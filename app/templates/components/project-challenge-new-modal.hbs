@@ -47,7 +47,7 @@
       <div class="form-group">
         <label for='writingType'>What type of goal is this?</label>
         <div class="select-container">
-          <select id='qritingType' name='writingType' disabled={{if disableWritingType 'disabled' ''}}
+          <select id='writingType' name='writingType' disabled={{if disableWritingType 'disabled' ''}}
             class='form-control' 
             onchange={{action 'writingTypeChanged' value="target.value"}}>
             {{#each optionsForWritingType as |opt|}}

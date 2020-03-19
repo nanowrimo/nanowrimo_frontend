@@ -153,6 +153,7 @@ export default Component.extend({
        this.set('changeset.goal', 50000);
        //set the unitType to 0 (words type)
        this.set('changeset.unitType', 0);
+       this.set('changeset.writingType', 0);
        this.set('changeset.startsAt', newStartsAt.toDate());
        this.set('changeset.endsAt', newEndsAt.toDate());
     }
@@ -207,7 +208,17 @@ export default Component.extend({
       //this.set('changeset.startsAt', m.toDate());
       this.set('changeset.startsAt', val);
       this.recomputeValidChallengeDates();
-    }
+    },
+    
+    writingTypeChanged(val) {
+      this.set('changeset.writingType', val);
+      //this.set('projectChallenge.writingType', val);
+    },
+    
+    unitTypeChanged(val) {
+      this.set('projectChallenge.unitType', val);
+    },
+    
   }
   
 });
