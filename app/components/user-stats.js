@@ -13,6 +13,9 @@ export default Component.extend({
   },
   
   yearsDoneCount: computed('user.stats.yearsDone.[]', function() {
-    return this.get('user.yearsDone').length;
+    let stats = this.get('user.stats');
+    if (stats) {
+      return this.get('user.stats.yearsDone').length;
+    }
   })
 });
