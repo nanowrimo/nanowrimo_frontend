@@ -11,23 +11,26 @@ export default Component.extend({
   content: null,
   context: null,
   adminIsChecked: null,
+  emailIsChecked: null,
   isDisabled: false,
   _callAfterSubmit() {
     let callback = this.get('afterSubmit');
     if (callback) { callback(); }
   },
   
-  userIsAdmin: computed('currentUser.user.isLoaded',function() {
+  userIsAdmin: computed('currentUser.user.{isLoaded,groupUsersLoaded}',function() {
     let found = false;
     if (this.get('currentUser.user.isLoaded')) {
-      let gus = this.get('store').peekAll('groupUser');
-      let g = this.get('group');
-      let cu = this.get('currentUser.user');
-      gus.forEach(function(gu) {
-        if ((gu.group_id==g.id)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
-          found = true;
-        }
-      });
+      if (this.get('currentUser.user.groupUsersLoaded')) {
+        let gus = this.get('store').peekAll('groupUser');
+        let g = this.get('group');
+        let cu = this.get('currentUser.user');
+        gus.forEach(function(gu) {
+          if ((gu.group_id==g.id)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
+            found = true;
+          }
+        });
+      }
     }
     return found;
   }),
@@ -69,14 +72,19 @@ export default Component.extend({
     doingSomething(isChecked) {
       this.set('adminIsChecked',isChecked);
     },
+    doEmailChecked(isChecked) {
+      this.set('emailIsChecked',isChecked);
+    },
     afterSubmit() {
       this.set('isDisabled',true);
       let i = document.querySelector('.medium-editor-element').innerHTML;
       let tx = document.querySelector('.medium-editor-element').textContent;
       let nm = this.get('newNanomessage');
       let c = this.get('adminIsChecked');
+      let e = this.get('emailIsChecked');
       nm.set('content',i);
       nm.set('official',c);
+      nm.set('send_email',e);
       if (tx) {
         nm.save().then(() => {
           this.set('isDisabled',false);

@@ -21,6 +21,31 @@
             />
             <label class="checkbox-label" for='officialMessage'>This is an official message</label>
           </div>
+          {{#if adminIsChecked}}
+            <div class="form-group inline-checkbox">
+              <input
+                type="checkbox"
+                name="sendEmail"
+                id="sendEmail"
+                class="form-control ember-checkbox"
+                checked={{sendEmailIsChecked}}
+                onchange={{action 'doEmailChecked' value="target.checked"}}
+              />
+              <label class="checkbox-label" for='officialMessage'>Also send message by email</label>
+            </div>
+          {{/if}}
+        {{else}}
+          <div class="form-group inline-checkbox">
+            <input
+              type="checkbox"
+              name="sendEmail"
+              id="sendEmail"
+              class="form-control ember-checkbox"
+              checked={{sendEmailIsChecked}}
+              onchange={{action 'doEmailChecked' value="target.checked"}}
+            />
+            <label class="checkbox-label" for='officialMessage'>Also send message by email</label>
+          </div>
         {{/if}}
       {{/if}}
       <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
