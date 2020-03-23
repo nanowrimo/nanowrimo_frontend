@@ -245,11 +245,13 @@ export default Component.extend({
    return this.get('projectChallenge.unitTypeSingular'); 
   }),
   
-  count: computed('challengeSessions.[]','project.projectSessions.[]', function() {
-    let sessions = this.get('challengeSessions');
+  count: computed('challengeSessions.[]', function() {
+    // get the sessions
+    let css = this.get('challengeSessions');
     let sum = 0;
-    if (sessions) {
-      sessions.forEach((s)=>{ sum+= s.count});
+    // are there sessions to process?
+    if (css) {
+      css.forEach((cs)=>{ sum+=cs.count});
     }
     return sum;
   }),
