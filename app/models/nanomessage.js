@@ -14,4 +14,5 @@ export default Model.extend({
   sender_name: attr('string'),
   sender_slug: attr('string'),
   official: attr('boolean'),
+  send_email: attr('boolean'),
 });
