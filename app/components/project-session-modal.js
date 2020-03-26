@@ -80,6 +80,22 @@ export default Component.extend({
     let p = this.get('user.primaryProject');
     return p;
   }),
+  
+  dateMax: computed("projectChallenge", function(){
+    //get the projectChallenge
+    let pc = this.get('projectChallenge');
+    // has the challenge ended?
+    if (pc.hasEnded()) {
+      //return the last day of the challenge
+      return pc.endsAt;
+    } else {
+      //challenge is still ongoing, return today's date in user's tz
+      let tz = this.get('currentUser.user.timeZone');
+      let now = moment().tz(tz);
+      return now.format("YYYY-MM-DD");
+      
+    }
+  }),
 
   init() {
     this._super(...arguments);
