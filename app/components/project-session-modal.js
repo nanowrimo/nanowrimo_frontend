@@ -121,6 +121,29 @@ export default Component.extend({
   // Session methods end
 
   actions: {
+    onShow() {
+      // the modal is being shown
+      //determine what should be displayed for date and times
+      // is the projectChallenge still active?
+      let pc = this.get('projectChallenge');
+      if (pc.hasEnded()) {
+        //set the session date to the last day of the event
+        this.set('dateStart',pc.endsAt);
+      } else {
+        //set the session date to the current date for the user
+        let tz = this.get('currentUser.user.timeZone');
+        let now = moment().tz(tz);
+        let formatted = now.format("YYYY-MM-DD");
+        this.set('dateStart',formatted);
+      }
+      //set defaults for the times
+      this.set('whenStart', "12:00");
+      this.set('whenEnd', "13:00");
+      
+      //set the 'count' to zero
+      this.set('countValue', 0);
+    },
+    
     // Session actions
     closeModal() {
        this.set('open', false);
