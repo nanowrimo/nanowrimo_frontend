@@ -1,3 +1,5 @@
+
+
 {{#if isPepTalk}}
   <section class="nw-cms-hero nw-no-plate">
     <div class="nw-container">
@@ -51,3 +53,19 @@
     {{cms-post post=post currentUrl=page.data.attributes.url}}
   {{/each}}
 {{/if}}
+
+
+<script type='text/javascript'>
+  //get the window location as a string
+  let winLoc = window.location.toString();
+  //split the string at the #
+  let winLocParts = winLoc.split("#");
+  //the second part will be an anchor
+  let anc = winLocParts[1];
+  // if there is an anchor, scroll to it
+  if (anc) {
+    //scroll to anc
+    document.getElementById(anc).scrollIntoView(true);
+  }
+
+</script>
