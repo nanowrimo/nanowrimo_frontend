@@ -129,6 +129,10 @@
     .nw-card-actions {
       flex: 1 1 50%;
       text-align: right;
+      .nw-card-actions-adjacent {
+        display: flex;
+        justify-content: space-around;
+      }
       .nw-card-action-link {
         padding-top: 6px;
         height: 24px;
