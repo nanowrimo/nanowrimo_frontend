@@ -50,7 +50,7 @@
     "ember-data": "~3.12.0",
     "ember-datetimepicker": "^5.0.1",
     "ember-export-application-global": "^2.0.0",
-    "ember-fetch": "^6.7.0",
+    "ember-fetch": "^7.1.0",
     "ember-file-upload": "^2.7.1",
     "ember-font-awesome": "^4.0.0-rc.4",
     "ember-g-map": "^0.0.25",
