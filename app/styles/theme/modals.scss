@@ -192,6 +192,13 @@
     .confirmation-question {
       font-weight: bold;
     }
+    .confirmation-doublecheck{
+      margin-top: 10px;
+      border: 1px solid $nw-darkred;
+      background: $nw-lightred;
+      padding: 4px;
+      border-radius: 5px;
+    }
   }
 }
 .pac-container {
