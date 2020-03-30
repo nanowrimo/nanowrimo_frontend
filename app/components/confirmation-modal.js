@@ -19,7 +19,8 @@ export default Component.extend({
  
   actions: {
     onShow() {
-      // do nothing
+      // ensure double check is false
+      this.set('doubleCheckIsChecked', false);
     },
     
     onHidden() {
