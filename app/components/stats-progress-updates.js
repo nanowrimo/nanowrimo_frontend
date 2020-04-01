@@ -23,9 +23,9 @@ export default Component.extend({
   
   init(){
     this._super(...arguments);
-    this.set('reimportConfirmationTitleText', "Confirm Re-import");
-    this.set('reimportConfirmationQuestion', `Re-import historical data?`);
-    this.set('reimportConfirmationQuestionAddendum', "Re-importing your history will check our historical database for all previous progress-update data associated with this project goal and add those progress updates to the selected goal. Note that this won't rewrite or remove any of your existing updates—it will only add historical data for you to edit or manage as you'd like!");
+    this.set('reimportConfirmationTitleText', "Confirm Import");
+    this.set('reimportConfirmationQuestion', `Import past data?`);
+    this.set('reimportConfirmationQuestionAddendum', "<p>Importing your history will check our database for all previous progress updates associated with this goal. Any existing data will then be added to your progress updates here.</p><p>Note that this won't rewrite or remove any of your existing updates—it will add historical data. You may end up with duplicate updates for you to delete as needed.</p>");
     this.set('reimportConfirmationYesText','Add My Past Updates'); 
     this.set('reimportConfirmationNoText','Cancel'); 
   },
@@ -80,6 +80,7 @@ export default Component.extend({
       return fetch(endpoint, {
         headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
       }).then(()=>{
+        alert('Your data has been imported!');
         location.reload();
       });
     },
