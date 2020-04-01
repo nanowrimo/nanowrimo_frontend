@@ -8,7 +8,8 @@ export default ChartBaseComponent.extend({
     let sessions = this.get('sessions');
     //are there sessions?
     if (sessions) {
-
+      
+      //vars needed for computations
       let dayCount = 0;
       let today = moment();
       let targetDay = moment().subtract(1, 'd');
