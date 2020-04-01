@@ -84,7 +84,6 @@ export default Component.extend({
         alert('Your data has been imported!');
         let cu = this.get('currentUser');
         cu.load();
-        //location.reload();
       });
     },
     
