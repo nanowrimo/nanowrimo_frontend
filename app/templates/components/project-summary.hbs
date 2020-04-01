@@ -78,11 +78,12 @@
     </div>
     {{project-edit-modal project=project open=editProject}}
     {{confirmation-modal
+      doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
       yes=deleteConfirmationYesText 
       no=deleteConfirmationNoText 
       title=deleteConfirmationTitleText
       question=deleteConfirmationQuestion
-      questionAddendum = deleteConfirmationQuestionAddendum
+      questionAddendum = "Deleting this writing project will also delete all associated goals and writing progress. A warning: project deletion can't be undone. NaNoWriMo has no way of retrieving deleted projects."
       open=showConfirmDelete
       yesAction=(action "deleteConfirmationYes")
       noAction=(action "deleteConfirmationNo")
