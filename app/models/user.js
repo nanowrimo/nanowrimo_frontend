@@ -11,7 +11,8 @@ import ENV from 'nanowrimo/config/environment';
 const User = Model.extend({
   store: service(),
   session: service(),
-
+  stats: null,
+  
   avatar: attr('string'),
   adminLevel: attr('number'),
   bio: attr('string'),
