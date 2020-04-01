@@ -104,6 +104,24 @@ export default Component.extend({
     }
   }),
   
+  writingType: computed('isEditingModal','associatedChallenge','projectChallenge.writingType',function() {
+    let isEditing = this.get('isEditingModal');
+    if (isEditing) {
+      let pc = this.get('projectChallenge.writingType');
+      if (pc==1) {
+        return '1';
+      } else {
+        return '0';
+      }
+    } else {
+      let ac = this.get('associatedChallenge');
+      if (ac) {
+        return ac.unitTypeAsString;
+      }
+    }
+    return '0';
+  }),
+  
   filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoOrCampEvent", true),
   
   // get the challenges that the user has not associated with a project 

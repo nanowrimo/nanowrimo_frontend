@@ -5,6 +5,15 @@ import moment from 'moment';
 export default Component.extend({
   project: null,
   
+  writingTypeString: computed('project.currentProjectChallenge.writingType',function() {
+    let t = this.get('project.currentProjectChallenge.writingType');
+    if (t==1) {
+      return "Edit";
+    } else {
+      return "Write";
+    }
+  }),
+  
   formattedStart: computed("project.challenges.[]", function(){
     let pc = this.get('project.currentProjectChallenge');
     if (pc) {
