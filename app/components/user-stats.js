@@ -12,6 +12,10 @@ export default Component.extend({
     u.refreshStats();
   },
   
+  hasStats: computed('user.stats', function(){
+    return (this.get('user.stats')) ? true : false; 
+  }),
+  
   yearsDoneCount: computed('user.stats.yearsDone.[]', function() {
     let stats = this.get('user.stats');
     if (stats) {
