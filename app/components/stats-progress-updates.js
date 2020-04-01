@@ -7,6 +7,7 @@ import ENV from 'nanowrimo/config/environment';
 export default Component.extend({
   store: service(),
   session: service(),
+  currentUser: service(),
   recalculate: 0,
   // Get the project challenge as a variable
   projectChallenge: null,
@@ -81,7 +82,9 @@ export default Component.extend({
         headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
       }).then(()=>{
         alert('Your data has been imported!');
-        location.reload();
+        let cu = this.get('currentUser');
+        cu.load();
+        //location.reload();
       });
     },
     
