@@ -37,7 +37,7 @@ export default ChartBaseComponent.extend({
       }
       
       //was a session created "today"?
-      for (var i =0 ; i < sessions.length ; i++) {
+      for (i = 0 ; i < sessions.length ; i++) {
         //get the session
         let sess = sessions.objectAt(i);
         //was this session created today?
