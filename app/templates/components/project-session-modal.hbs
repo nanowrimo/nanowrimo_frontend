@@ -87,18 +87,20 @@
           </div>
         </div>
         <div class="form-group side-by-side" style="justify-content: space-between">
-          <div style="flex: 1 1 160px; padding-right: 10px;">
+          <div style="flex: 1 1 160px; padding-right: 5px;">
             <label for='date' class='form-group'>Date</label>
             {{input
               type='date'
               name='date'
+              id='project-session-modal-date'
               class='form-control'
               value=dateStart
               min=projectChallenge.startsAt
               max=dateMax
+              change=(action "dateChange")
             }}
           </div>
-          <div style="flex: 0 0 80px; padding-right: 10px;">
+          <div style="flex: 0 0 80px; padding-right: 5px;">
             <label>Start Time</label>
             {{input
               type='time'

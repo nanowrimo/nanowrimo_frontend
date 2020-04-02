@@ -371,6 +371,15 @@ export default Component.extend({
       this.set('open', false);
     },
     
-    // End Session actions
+    dateChange: function(event) {
+      let val = event.target.value;
+      let min = event.target.min;
+      let max = event.target.max;
+      if (val > max) {
+        event.target.value = max;
+      } else if (val < min) {
+        event.target.value = min;
+      }
+    }
   }
 });
