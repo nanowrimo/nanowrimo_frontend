@@ -8,32 +8,48 @@ export default ChartBaseComponent.extend({
     let sessions = this.get('sessions');
     //are there sessions?
     if (sessions) {
-      let hasDay = true;
+      
+      //vars needed for computations
       let dayCount = 0;
-      let targetDay = moment();
-      while(hasDay) {
-         let foundDay = false;
+      let today = moment();
+      let targetDay = moment().subtract(1, 'd');
+      
+      // attempt to find the days in a row, starting yesterday
+      let foundDay = true;
+      while (foundDay) {
+        //assume a day was not found
+        foundDay = false;
         //loop through the sessions
-        for (var i = 0 ; i < sessions.length ; i++) {
+        for (var i =0 ; i < sessions.length ; i++) {
           //get the session
           let sess = sessions.objectAt(i);
           //was this session created on the target day?
           if (moment(sess.end).isSame(targetDay, 'day')) {
-            //yes, we found the day
-            foundDay = true;
             //incrementthe dayCount
             dayCount++;
+            // a target day was found
+            foundDay = true;
             //decrement the target day
             targetDay.subtract(1, 'd');
-            //break the loop for efficient
+            //exit the for loop
             break;
           }
         } 
-        //was a day found?
-        if (!foundDay) {
-          hasDay = false;
-        }
       }
+      
+      //was a session created "today"?
+      for (i = 0 ; i < sessions.length ; i++) {
+        //get the session
+        let sess = sessions.objectAt(i);
+        //was this session created today?
+        if (moment(sess.end).isSame(today, 'day')) {
+          //incrementthe dayCount
+          dayCount++;
+          //exit the for loop
+          break;
+        }
+      } 
+
       return dayCount;
     }
   })

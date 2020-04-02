@@ -51,7 +51,7 @@
             class='form-control' 
             onchange={{action 'writingTypeChanged' value="target.value"}}>
             {{#each optionsForWritingType as |opt|}}
-              <option value={{opt.value}} selected={{if (eq opt.value associatedChallenge.unitTypeAsString) 'true'}} >
+              <option value={{opt.value}} selected={{if (eq opt.value writingType) 'true'}} >
                 {{opt.name}}
               </option>
             {{/each}}

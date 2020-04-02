@@ -14,12 +14,25 @@
     </div>
     {{#if questionAddendum}}
       <div class='confirmation-question-addendum'>
-        {{questionAddendum}}
+        {{{questionAddendum}}}
       </div>
     {{/if}}
+    
+    {{#if doubleCheck}}
+      <div class='confirmation-doublecheck form-group inline-checkbox'>
+       
+        <input type='checkbox' id='doubleCheck' class='form-control ember-checkbox'
+          name='doubleCheck' onClick={{action "clickedDoubleCheck" value="target.checked"}}>
+        <label for='doubleCheck' class='checkbox-label'>
+          {{doubleCheck}}
+        </label> 
+      </div>
+
+    {{/if}}
+    
   {{/modal.body}}
   {{#modal.footer}}
-    <button class="nano-button-green" {{action 'yes'}}>{{yes}}</button>
+    <button class="nano-button-green" disabled={{disableYes}} {{action 'yes'}}>{{yes}}</button>
     <a href='#' class='nano-link' {{action 'no'}}>{{no}}</a>
   {{/modal.footer}}
 {{/bs-modal}}
