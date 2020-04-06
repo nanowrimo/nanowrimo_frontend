@@ -333,27 +333,26 @@ export default Component.extend({
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
       let dateStart = this.get('dateStart');
-      
       // have start and end been set?
-      if (!start || !end) {
-        //override with some defaults
-        end = "13:00";
-        start = "12:00";
-      }
-      
-      let ymd = dateStart;
-      let startstr = ymd+" "+start + ":00";
-      let endstr = ymd+" "+end + ":00";
-      let startDate = moment.tz(startstr,tz).toDate();
-      let endDate = moment.tz(endstr,tz).toDate();
-      if( startDate > endDate ) {
-        // Set the start date to one day earlier
-        startDate = moment.tz(startstr,tz).subtract(1, 'd').toDate();
+      let endDate, startDate = null;
+      if (start && end) {
+        let ymd = dateStart;
+        let startstr = ymd+" "+start + ":00";
+        let endstr = ymd+" "+end + ":00";
+        startDate = moment.tz(startstr,tz).toDate();
+        endDate = moment.tz(endstr,tz).toDate();
+        if( startDate > endDate ) {
+          // Set the start date to one day earlier
+          startDate = moment.tz(startstr,tz).subtract(1, 'd').toDate();
+        }
+      } else {
+        //just make the end
+        let end = "13:00";
+        let endstr = dateStart+" "+end + ":00";
+        endDate = moment.tz(endstr,tz).toDate();
       }
       session.set('end', endDate);
       session.set('start', startDate);
-      
-
       session.set('count', count);
       session.save();
       
