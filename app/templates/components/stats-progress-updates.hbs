@@ -15,7 +15,9 @@
           noAction=(action "reimportConfirmationNo")
           }}
       {{/if}}
+      {{#if projectChallenge.hasStarted}}
       <div class="nw-card-action-link" {{action 'newProjectSession'}}>+ Add new update</div>
+      {{/if}}
     </div>
   </div>
 </div>
