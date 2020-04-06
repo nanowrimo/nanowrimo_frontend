@@ -337,8 +337,8 @@ export default Component.extend({
       // have start and end been set?
       if (!start || !end) {
         //override with some defaults
-        let end = "13:00";
-        let start = "12:00";
+        end = "13:00";
+        start = "12:00";
       }
       
       let ymd = dateStart;
