@@ -21,6 +21,9 @@
     </div>
   </div>
 </div>
+
+{{#if projectChallenge.hasStarted}}
+
 <div class="nw-card-content nw-card-list">
   <div class="nw-card-list-header">
     <div class="nw-card-list-item">
@@ -43,5 +46,10 @@
     {{/each}}
   </div>
 </div>
+{{else}}  
+  <div class='nw-card-content'>
+    Your progress updates will be shown here when you start working on this writing project! When your goal starts on {{goalStartMonthDay}}, you'll be able to add back-dated progress updates and delete progress updates here.
+  </div>
+{{/if}}
 {{project-session-modal project=project projectChallenge=projectChallenge open=newProjectSession}}
 
