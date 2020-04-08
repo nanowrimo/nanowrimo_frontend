@@ -55,6 +55,27 @@ export default Component.extend({
     this.set('recalculate',newr);
   },
   
+  goalStartMonthDay: computed("projectChallenge", function(){
+    var monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+    //get the project challenge start
+    let start = this.get('projectChallenge.startsAt');
+    //split the date into YYYY MM DD
+    let splitStart = start.split("-");
+    //determine the month index, it is splitStart[1]-1
+    let index = splitStart[1]-1;
+    let monthName = monthNames[index];
+    let day = parseInt(splitStart[2])
+    
+    return `${monthName} ${day}`;
+    
+    
+  }),
+  
   actions: {
     userDidChangeProjectSession() {
       this.doRecalculate();
