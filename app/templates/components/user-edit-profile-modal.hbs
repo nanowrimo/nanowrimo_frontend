@@ -58,7 +58,7 @@
           <div class='form-group'>
             <label for='statsSelect2'>Stat 2: </label>
               <div class="select-container">
-                <select class='form-control' id='statsSelect1' onChange={{action "statsSelect2Changed" value="target.value"}}>
+                <select class='form-control' id='statsSelect2' onChange={{action "statsSelect2Changed" value="target.value"}}>
                   <option value="">None</option>
                   {{#each statsObject as |stat|}} 
                     <option disabled={{ if (eq stat1 stat.property) 'true' (if (eq stat3 stat.property ) "true" )}} selected={{eq stat2 stat.property}} value={{stat.property}}>{{stat.label}}</option>
@@ -69,7 +69,7 @@
           <div class='form-group'>
             <label for='statsSelect3'>Stat 3: </label>
               <div class="select-container">
-                <select class='form-control' id='statsSelect1' onChange={{action "statsSelect3Changed" value="target.value"}}>
+                <select class='form-control' id='statsSelect3' onChange={{action "statsSelect3Changed" value="target.value"}}>
                    <option value="">None</option>
                   {{#each statsObject as |stat|}} 
                     <option disabled={{ if (eq stat2 stat.property) 'true' (if (eq stat1 stat.property ) "true" )}} selected={{eq stat3 stat.property}} value={{stat.property}}>{{stat.label}}</option>
