@@ -48,9 +48,11 @@
             </div>
             <button {{action "goToStats"}}>View Goal Stats</button>
             </div>
+            {{#if isNaNo}}
             <div>
               <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
             </div>
+            {{/if}}
           </div>
         {{else if (eq step 2) }}
            <div class='nw-hflex'>
@@ -80,9 +82,9 @@
       </div>
       <div class='circle-indicators'>
         {{#if (eq step 0)}}
-          {{fa-icon "circle"}} {{fa-icon "circle-o"}} {{fa-icon "circle-o"}}
+          {{fa-icon "circle"}} {{fa-icon "circle-o"}} {{#if isNaNo}}{{fa-icon "circle-o"}}{{/if}}
         {{else if (eq step 1) }}
-            {{fa-icon "circle-o"}} {{fa-icon "circle"}} {{fa-icon "circle-o"}}
+            {{fa-icon "circle-o"}} {{fa-icon "circle"}} {{#if isNaNo}}{{fa-icon "circle-o"}}{{/if}}
         {{else if (eq step 2) }}
            {{fa-icon "circle-o"}} {{fa-icon "circle-o"}} {{fa-icon "circle"}}
         {{/if}}
