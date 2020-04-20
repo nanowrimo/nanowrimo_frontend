@@ -8,7 +8,7 @@ import { inject as service } from '@ember/service';
 const ProjectChallenge = Model.extend({
   currentUser: service(),
   store: service(),
-  
+  user_id: attr('number'),
   project_id: attr('number'),
   challenge_id: attr('number'),
   startCount: attr('number'),

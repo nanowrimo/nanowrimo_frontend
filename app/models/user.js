@@ -782,6 +782,35 @@ const User = Model.extend({
         this.set('stats', json);
       });
     });
+  },
+  
+  // determine if a user has won an event based on event name
+  wonEventByName: function(eventName) {
+    /* find the event */
+    // get the store
+    let store = this.get('store');
+    // get all challenges
+    let challenges = store.peekAll('challenge');
+    let targetChallenge = challenges.findBy('name', eventName);
+
+    if (targetChallenge) {
+      // does the user have a projectChallenge for the targetChallenge
+      let pcs = store.peekAll('project-challenge');
+      //filter for this user's project-challenges
+      pcs = pcs.filterBy("user_id", parseInt(this.id));
+      //find the project challenge associated with the target challenge
+      let targetPC = pcs.findBy("challenge_id", parseInt(targetChallenge.id));
+      // is there a target project challenge?
+      if (targetPC) {
+        // has the project challenge met the goal?
+        return targetPC.latestCount>=targetPC.goal;
+      } else {
+        return false;
+      }
+      
+    } else {
+      return false;
+    }
   }
   
 });
