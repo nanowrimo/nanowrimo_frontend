@@ -4,7 +4,11 @@
     <div class="nw-vflex">
       {{svg-congratulations}}
       <div class='winner-message'>
-        You met your NaNo goal head on, never gave up, and completed your novel!
+        {{#if isNaNo}}
+          You met your NaNo goal head on, never gave up, and completed your novel!
+        {{else}}
+          You met your writing project head on, never gave up, and achieved your goal!
+        {{/if}}
       </div>
       <div class='winner-splash-content'>
         {{#if (eq step 0)}}
@@ -13,9 +17,9 @@
               &nbsp;
             </div>
             <div>
-              <img src="/images/splash/certificate.png">
+              <img src="{{winnerImage}}">
               <div class='cert-download'>
-                <form action="/nano-winner-2019">
+                <form action="{{winnerURL}}">
                   <button href="">claim your winner goodies!</button>
                 </form>
               </div>
