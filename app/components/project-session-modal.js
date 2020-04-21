@@ -334,36 +334,29 @@ export default Component.extend({
       let start = this.get('whenStart');
       let dateStart = this.get('dateStart');
       // have start and end been set?
+      let endDate, startDate = null;
       if (start && end) {
         let ymd = dateStart;
         let startstr = ymd+" "+start + ":00";
         let endstr = ymd+" "+end + ":00";
-        let startDate = moment.tz(startstr,tz).toDate();
-        let endDate = moment.tz(endstr,tz).toDate();
+        startDate = moment.tz(startstr,tz).toDate();
+        endDate = moment.tz(endstr,tz).toDate();
         if( startDate > endDate ) {
           // Set the start date to one day earlier
           startDate = moment.tz(startstr,tz).subtract(1, 'd').toDate();
         }
-        session.set('end', endDate);
-        session.set('start', startDate);
+      } else {
+        //just make the end
+        let end = "13:00";
+        let endstr = dateStart+" "+end + ":00";
+        endDate = moment.tz(endstr,tz).toDate();
       }
-
+      session.set('end', endDate);
+      session.set('start', startDate);
       session.set('count', count);
       session.save();
       
-      let user = this.get('currentUser.user');
-      // check if the user has changed the counting type
-      user.set("settingSessionCountBySession", this.get('countType'));
-      // check if the user is entering more data
-      user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
-      let isDirty = user.get('hasDirtyAttributes');
-      if (isDirty) {
-        //save the user
-        user.save();
-      }
-      
-      //let cfa = this.get('closeFormAction');
-      //cfa();
+     
       this.set('open', false);
       return true;
     },
@@ -371,6 +364,15 @@ export default Component.extend({
       this.set('open', false);
     },
     
-    // End Session actions
+    dateChange: function(event) {
+      let val = event.target.value;
+      let min = event.target.min;
+      let max = event.target.max;
+      if (val > max) {
+        event.target.value = max;
+      } else if (val < min) {
+        event.target.value = min;
+      }
+    }
   }
 });

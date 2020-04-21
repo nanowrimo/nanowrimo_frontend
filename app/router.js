@@ -86,6 +86,10 @@ Router.map(function() {
     
     //dummy route to redirect to the forums
     this.route('forums');
+    
+    //temporary route to camp-nanowrimo-april-2020-winner TODO: refactor to a generic winner route
+    this.route('camp-nanowrimo-april-2020-winner');
+    
   });
 
   //email confirmations
@@ -125,6 +129,7 @@ Router.map(function() {
 
   //delete request
   this.route('delete-request', {path: '/delete-request/:token'});
+  
 });
 
 

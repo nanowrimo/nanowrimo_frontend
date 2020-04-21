@@ -8,7 +8,7 @@ import { inject as service } from '@ember/service';
 const ProjectChallenge = Model.extend({
   currentUser: service(),
   store: service(),
-  
+  user_id: attr('number'),
   project_id: attr('number'),
   challenge_id: attr('number'),
   startCount: attr('number'),
@@ -263,6 +263,24 @@ const ProjectChallenge = Model.extend({
     let now = moment();
     return now.isAfter(e,'d');
   },  
+  
+  hasStarted: computed( function() {
+    // get the user 
+    let u = this.get('currentUser.user');
+    //when is now in the user's tz?
+    let now = moment().tz(u.timeZone);
+    //get just the Date  of now in the user's tz
+    let nowString = now.format("YYYY-MM-DD");
+    // get the 'start' of the challenge
+    let start = this.get('startsAt');
+    // is now after or equal to the start?
+    if (nowString >= start) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
 });
 
 export default ProjectChallenge;

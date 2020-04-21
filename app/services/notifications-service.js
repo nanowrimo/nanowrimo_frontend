@@ -45,7 +45,7 @@ export default Service.extend({
       let badge = this.get('store').peekRecord('badge', id);
       r.push(badge);
       //is this a winner badge?
-      if (badge.title =="Wrote 50,000 Words During NaNoWriMo" ){
+      if (badge.winner){
         //NaNo Winner!
         r.push('showWinnerSplash');
       } else {

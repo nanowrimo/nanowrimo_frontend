@@ -211,11 +211,14 @@ input:disabled, select:disabled, button:disabled {
   
 }
 .form-group {
-  input[type=date], input[type=time] {
+  input[type=date] {
     background-image: url('/images/global/calendar.svg');
     background-repeat: no-repeat;
     background-size: 16px 16px;
     background-position: 160px center;
+  }
+  
+  input[type=date], input[type=time] {
     max-width: 210px;
     font-size: 16px;
   }
@@ -314,4 +317,9 @@ label.checkbox-label {
   font-size: 16px;
   line-height: 1.31;
   color: $nw-darkgrey;
+}
+
+/* one off for the project session modal 'date' */
+#project-session-modal-date {
+  background-position: 135px center;
 }
