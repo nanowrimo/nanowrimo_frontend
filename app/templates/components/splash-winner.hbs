@@ -48,11 +48,15 @@
             </div>
             <button {{action "goToStats"}}>View Goal Stats</button>
             </div>
-            {{#if isNaNo}}
+            
             <div>
-              <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
+              {{#if isNaNo}}
+                <a href="#" {{action "incrementStep"}}>{{fa-icon "arrow-circle-right" class='navigation-arrow'}}</a>
+              {{else}}
+                {{fa-icon "arrow-circle-right" class='navigation-arrow' style="visibility:hidden;"}}
+              {{/if}}
             </div>
-            {{/if}}
+            
           </div>
         {{else if (eq step 2) }}
            <div class='nw-hflex'>
