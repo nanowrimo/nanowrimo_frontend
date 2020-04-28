@@ -24,10 +24,10 @@ export default Component.extend({
     return path;
   }),
   
-  winnerURL: computed('isNaNo', function(){
+  winnerRoute: computed('isNaNo', function(){
     let i = this.get('isNaNo');
-    let path = (i) ? "/nano-winner-2019" : "/camp-nanowrimo-april-2020-winner";
-    return path;
+    let route = (i) ? "nano-winner-2019" : "authenticated.camp-nanowrimo-april-2020-winner";
+    return route;
   }),
   
   actions: {
@@ -44,6 +44,11 @@ export default Component.extend({
     },
     decrementStep(){
       this.decrementProperty("step");
+    },
+    goToWinnerRoute(){
+      let route = this.get("winnerRoute");
+      this.send('closeClicked');
+      this.get('router').transitionTo(route);
     }
   }
 });

@@ -798,12 +798,21 @@ const User = Model.extend({
       let pcs = store.peekAll('project-challenge');
       //filter for this user's project-challenges
       pcs = pcs.filterBy("user_id", parseInt(this.id));
-      //find the project challenge associated with the target challenge
-      let targetPC = pcs.findBy("challenge_id", parseInt(targetChallenge.id));
+      
+      //filter for project challenges associated with the target challenge
+      let targetPCs = pcs.filterBy("challenge_id", parseInt(targetChallenge.id));
       // is there a target project challenge?
-      if (targetPC) {
-        // has the project challenge met the goal?
-        return targetPC.latestCount>=targetPC.goal;
+      if (targetPCs) {
+        // loop through the project challenges
+        for (var i =0; i<targetPCs.length; i++) {
+          //get the pcs
+          var pc = targetPCs[i];
+          if (pc.latestCount>=pc.goal) {
+            return true;
+          }
+        }
+        // no win was found
+        return false
       } else {
         return false;
       }
