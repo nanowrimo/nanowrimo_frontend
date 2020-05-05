@@ -87,8 +87,10 @@ Router.map(function() {
     //dummy route to redirect to the forums
     this.route('forums');
     
-    //temporary route to camp-nanowrimo-april-2020-winner TODO: refactor to a generic winner route
+    /* TODO: refactor to a generic winner route */
+    //temporary route to camp-nanowrimo-april-2020-winner 
     this.route('camp-nanowrimo-april-2020-winner');
+    this.route('nano-winner-2019');
     
   });
 
@@ -117,7 +119,6 @@ Router.map(function() {
   
   
   this.route('404');
-  this.route('nano-winner-2019');
   this.route('not-found', { path: '/*path' });
   this.route('error');
   this.route('forgot-password');

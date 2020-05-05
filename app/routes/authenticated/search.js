@@ -5,7 +5,11 @@ import ScrollRoute from 'nanowrimo/routes/scroll-route'
 
 export default ScrollRoute.extend({
   session: service(),
-  
+  queryParams: {
+    q : {
+      refreshModel: true
+    }
+  },
   model(params) {
     // Define the search URL
     if (params.q) {
