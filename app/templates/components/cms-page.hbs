@@ -57,11 +57,11 @@
 
 <script type='text/javascript'>
   //get the window location as a string
-  let winLoc = window.location.toString();
+  var winLoc = window.location.toString();
   //split the string at the #
-  let winLocParts = winLoc.split("#");
+  var winLocParts = winLoc.split("#");
   //the second part will be an anchor
-  let anc = winLocParts[1];
+  var anc = winLocParts[1];
   // if there is an anchor, scroll to it
   if (anc) {
     //scroll to anc
