@@ -140,6 +140,7 @@ module.exports = function(environment) {
     ENV.torii.providers['custom-google'].redirectUri = 'https://nanowrimo.org/oauth2callback';
     //the url of the forums
     ENV.forumsUrl = "https://forums.nanowrimo.org";
+    ENV.APP.UI_HOST = 'https://nanowrimo.org';
   }
 
   //is this a staging target?
@@ -147,6 +148,7 @@ module.exports = function(environment) {
     ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
     ENV.torii.providers['custom-google'].redirectUri = 'https://staging.nanowrimo.org/oauth2callback';
     ENV.forumsUrl = "https://staging.forums.nanowrimo.org";
+    ENV.APP.UI_HOST = 'https://staging.nanowrimo.org';
   }
   
   /*
