@@ -77,7 +77,7 @@ export default Component.extend({
     //get the projectChallenge
     let pc = this.get('projectChallenge');
     // has the challenge ended?
-    if (pc.hasEnded()) {
+    if (pc.hasEnded) {
       //return the last day of the challenge
       return pc.endsAt;
     } else {
@@ -140,7 +140,7 @@ export default Component.extend({
       //determine what should be displayed for date and times
       // is the projectChallenge still active?
       let pc = this.get('projectChallenge');
-      if (pc.hasEnded()) {
+      if (pc.hasEnded) {
         //set the session date to the last day of the event
         this.set('dateStart',pc.endsAt);
       } else {

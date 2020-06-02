@@ -128,7 +128,7 @@ const Project = Model.extend({
       }
       //console.log(startsAt);
       //is this pc active?
-      if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded() ) {
+      if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded ) {
         active = pc;
       }
     });

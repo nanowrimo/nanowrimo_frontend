@@ -68,7 +68,7 @@ export default Component.extend({
   countNeededTodayData: computed('count','projectChallenge.{countRemaining,daysRemaining,todayCount}', function() {
     let pc = this.get('projectChallenge');
     if (pc) {
-      if (pc.hasEnded()) {
+      if (pc.hasEnded) {
         return {'needed':0,"percent":0};
       }
       

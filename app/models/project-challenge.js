@@ -258,17 +258,28 @@ const ProjectChallenge = Model.extend({
     return Math.round(duration.asDays());
   },
   
-  hasEnded: function() {
-    let e = moment(this.get('endsAt')).add(1,'d');
-    let now = moment();
-    return now.isAfter(e,'d');
-  },  
-  
-  hasStarted: computed( function() {
-    // get the user 
-    let u = this.get('currentUser.user');
+  hasEnded: computed('currentUser.user.timeZone', function() {
+     // get the user 
+    let tz = this.get('currentUser.user.timeZone');
     //when is now in the user's tz?
-    let now = moment().tz(u.timeZone);
+    let now = moment().tz(tz);
+    //get just the Date  of now in the user's tz
+    let nowString = now.format("YYYY-MM-DD");
+    // get the 'end' of the challenge
+    let end = this.get('endsAt');
+    // is now after or equal to the end?
+    if (nowString >= end) {
+      return true;
+    } else {
+      return false;
+    }
+  }),  
+  
+  hasStarted: computed('currentUser.user.timeZone', function() {
+    // get the user 
+    let tz = this.get('currentUser.user.timeZone');
+    //when is now in the user's tz?
+    let now = moment().tz(tz);
     //get just the Date  of now in the user's tz
     let nowString = now.format("YYYY-MM-DD");
     // get the 'start' of the challenge
