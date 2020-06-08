@@ -258,7 +258,7 @@ const ProjectChallenge = Model.extend({
     return Math.round(duration.asDays());
   },
   
-  hasEnded: computed('currentUser.user.timeZone', function() {
+  hasEnded: computed('endsAt', function() {
      // get the user 
     let tz = this.get('currentUser.user.timeZone');
     //when is now in the user's tz?
@@ -268,14 +268,14 @@ const ProjectChallenge = Model.extend({
     // get the 'end' of the challenge
     let end = this.get('endsAt');
     // is now after or equal to the end?
-    if (nowString >= end) {
+    if (nowString >= end || end==null) {
       return true;
     } else {
       return false;
     }
   }),  
   
-  hasStarted: computed('currentUser.user.timeZone', function() {
+  hasStarted: computed('startsAt', function() {
     // get the user 
     let tz = this.get('currentUser.user.timeZone');
     //when is now in the user's tz?
