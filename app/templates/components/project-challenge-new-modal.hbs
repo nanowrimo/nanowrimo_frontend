@@ -1,164 +1,180 @@
-{{#bs-modal
-  open=open
-  onShow=(action "onShow")
-  onHidden=(action "onHidden")
-  as |modal|
-}}
-  {{#modal.header closeButton=false}}
-    {{#if isEditingModal }}
-      Edit Goal
-    {{else}}
-      New Goal
-    {{/if}}
-  {{/modal.header}}
-  {{#modal.body}}
-    <div class="project-challenge-new-form">
-    {{#if optionsForChallenges}}
-      <div class="form-group">
-        {{input class= 'form-control' 
-          id='associateCheckbox'
-          name='associateCheckbox'
-          type="checkbox"
-          checked=associateWithChallenge
-          change=(action "clickedAssociateCheckbox")
-        }}
-        <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
-      </div>
-      <div class="form-group {{hideClass}}">
-        <div class="select-container">
-          <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
-            {{#each optionsForChallenges as |c|}}
-              <option value="{{c.id}}" selected={{if (eq c.id associatedChallenge.id) 'true'}}>{{c.name}}</option>
-            {{/each}}
-          </select>
+{{#if (eq showConfirmDelete false)}}
+  {{#bs-modal
+    open=open
+    onShow=(action "onShow")
+    onHidden=(action "onHidden")
+    as |modal|
+  }}
+    {{#modal.header closeButton=false}}
+      {{#if isEditingModal }}
+        Edit Goal
+      {{else}}
+        New Goal
+      {{/if}}
+    {{/modal.header}}
+    {{#modal.body}}
+      <div class="project-challenge-new-form">
+      {{#if optionsForChallenges}}
+        <div class="form-group">
+          {{input class= 'form-control' 
+            id='associateCheckbox'
+            name='associateCheckbox'
+            type="checkbox"
+            checked=associateWithChallenge
+            change=(action "clickedAssociateCheckbox")
+          }}
+          <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
         </div>
-      </div>
-    
-    {{/if}}          
-    <div class="form-group">
-      <label for='name'>Goal name</label>
-        {{input
-          name="name"
-          disabled=disableName
-          value=displayName
-          class='form-control'
-        }}
-      </div>
-      <div class="form-group">
-        <label for='writingType'>What type of goal is this?</label>
-        <div class="select-container">
-          <select id='writingType' name='writingType' disabled={{if disableWritingType 'disabled' ''}}
-            class='form-control' 
-            onchange={{action 'writingTypeChanged' value="target.value"}}>
-            {{#each optionsForWritingType as |opt|}}
-              <option value={{opt.value}} selected={{if (eq opt.value writingType) 'true'}} >
-                {{opt.name}}
-              </option>
-            {{/each}}
-          </select>
-        </div>
-      </div>
-      <div class="side-by-side">
-        <div class="form-group side-by-side-even">
-          <label for='goal'>What is your goal?</label>
-          <input class='form-control' id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
-         
-        </div>
-        <div class="form-group side-by-side-even"> 
-          <label for='unitType'></label>
+        <div class="form-group {{hideClass}}">
           <div class="select-container">
-            <select id='unitType' name='unitType' disabled={{if disableWritingType 'disabled' ''}}
+            <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+              {{#each optionsForChallenges as |c|}}
+                <option value="{{c.id}}" selected={{if (eq c.id associatedChallenge.id) 'true'}}>{{c.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+    
+      {{/if}}          
+      <div class="form-group">
+        <label for='name'>Goal name</label>
+          {{input
+            name="name"
+            disabled=disableName
+            value=displayName
+            class='form-control'
+          }}
+        </div>
+        <div class="form-group">
+          <label for='writingType'>What type of goal is this?</label>
+          <div class="select-container">
+            <select id='writingType' name='writingType' disabled={{if disableWritingType 'disabled' ''}}
               class='form-control' 
-              onchange={{action 'unitTypeChanged' value="target.value"}}>
-              {{#each optionsForUnitType as |opt|}}
-                <option value={{opt.value}}>
+              onchange={{action 'writingTypeChanged' value="target.value"}}>
+              {{#each optionsForWritingType as |opt|}}
+                <option value={{opt.value}} selected={{if (eq opt.value writingType) 'true'}} >
                   {{opt.name}}
                 </option>
               {{/each}}
             </select>
           </div>
         </div>
-      </div>
-      <div class="side-by-side">
-        <div class="form-group side-by-side-even">
-
-          <label for='start-date' class='form-group'>What's your start date?</label>
-          <input name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
-            oninput={{action "startsAtChanged" value="target.value"}} 
-            value={{displayStartsAt}}
-            disabled={{disableStartEnd}}
-            min='1999-07-01'>
-          {{#if validationErrors.startOverlap}}
-            <span class='invalid-feedback'>a goal can't start before another goal ends</span>
-          {{/if}}
+        <div class="side-by-side">
+          <div class="form-group side-by-side-even">
+            <label for='goal'>What is your goal?</label>
+            <input class='form-control' id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
+         
+          </div>
+          <div class="form-group side-by-side-even"> 
+            <label for='unitType'></label>
+            <div class="select-container">
+              <select id='unitType' name='unitType' disabled={{if disableWritingType 'disabled' ''}}
+                class='form-control' 
+                onchange={{action 'unitTypeChanged' value="target.value"}}>
+                {{#each optionsForUnitType as |opt|}}
+                  <option value={{opt.value}}>
+                    {{opt.name}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="form-group side-by-side-even">
+        <div class="side-by-side">
+          <div class="form-group side-by-side-even">
+
+            <label for='start-date' class='form-group'>What's your start date?</label>
+            <input name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
+              oninput={{action "startsAtChanged" value="target.value"}} 
+              value={{displayStartsAt}}
+              disabled={{disableStartEnd}}
+              min='1999-07-01'>
+            {{#if validationErrors.startOverlap}}
+              <span class='invalid-feedback'>a goal can't start before another goal ends</span>
+            {{/if}}
+          </div>
+          <div class="form-group side-by-side-even">
         
-          <label for='challenge-last-day'>When is the last day of writing?</label>
-          <input name='challenge-last-day' type='date' class='form-control'
-            oninput={{action "endsAtChanged" value="target.value"}} 
-            value={{displayEndsAt}}
-            disabled={{disableStartEnd}}
-            min='1999-07-01'>
+            <label for='challenge-last-day'>When is the last day of writing?</label>
+            <input name='challenge-last-day' type='date' class='form-control'
+              oninput={{action "endsAtChanged" value="target.value"}} 
+              value={{displayEndsAt}}
+              disabled={{disableStartEnd}}
+              min='1999-07-01'>
      
             
-             {{#if validationErrors.endOverlap}}
-            <span class='invalid-feedback'>a goal can't end after another goal has started</span>
+               {{#if validationErrors.endOverlap}}
+              <span class='invalid-feedback'>a goal can't end after another goal has started</span>
+            {{/if}}
+          </div>
+          {{#if validationErrors.fullOverlap}}
+            <span class='text-danger'>a goal can not take place within another goal</span>
+          {{/if}}
+          {{#if validationErrors.endsBeforeStart}}
+            <span class='text-danger'>a goal can not end before it starts</span>
           {{/if}}
         </div>
-        {{#if validationErrors.fullOverlap}}
-          <span class='text-danger'>a goal can not take place within another goal</span>
-        {{/if}}
-        {{#if validationErrors.endsBeforeStart}}
-          <span class='text-danger'>a goal can not end before it starts</span>
-        {{/if}}
-      </div>
       
-      {{!--
-      <div class="side-by-side">
-        <div class="form-group side-by-side-even">
-          {{input
-            label="Count at start"
-            property="startCount"
-            type='number'
-            min=0
-          }}
-        </div>
-        {{#if pastTense}}
+        {{!--
+        <div class="side-by-side">
           <div class="form-group side-by-side-even">
             {{input
-              label="Count at end"
-              property="currentCount"
+              label="Count at start"
+              property="startCount"
               type='number'
               min=0
             }}
           </div>
-        {{/if}}
-      </div>
-      --}}
+          {{#if pastTense}}
+            <div class="form-group side-by-side-even">
+              {{input
+                label="Count at end"
+                property="currentCount"
+                type='number'
+                min=0
+              }}
+            </div>
+          {{/if}}
+        </div>
+        --}}
       
-      {{#if (and pastTense metGoal)}}
-        <div class="side-by-side {{winDateClass}}">
-          <div class="form-group side-by-side-even">
+        {{#if (and pastTense metGoal)}}
+          <div class="side-by-side {{winDateClass}}">
+            <div class="form-group side-by-side-even">
 
-            <label for='win-date' class='form-group'>When did you win?</label>
-            <input name='win-date' type='date' class='form-control'
-              value={{displayWinAt}}>
+              <label for='win-date' class='form-group'>When did you win?</label>
+              <input name='win-date' type='date' class='form-control'
+                value={{displayWinAt}}>
             
+            </div>
+            <div class="form-group side-by-side-even">
+            </div>
           </div>
-          <div class="form-group side-by-side-even">
-          </div>
+        {{/if}}
+
+    </div>
+    {{/modal.body}}
+
+    {{#modal.footer}}
+      <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
+      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
+      {{#if isEditingModal }}
+        <div style="flex: 0 0 100%; margin-top: 10px;">
+          <a href="#" {{action "confirmDelete"}}>
+            <div class='full-width-menu-item'><i class="fa fa-trash"></i> Delete This Goal</div>
+          </a>
         </div>
       {{/if}}
-
-  </div>
-  {{/modal.body}}
-
-  {{#modal.footer}}
-
-    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
-    <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
-
-  {{/modal.footer}}
-
-{{/bs-modal}}
+    {{/modal.footer}}
+  {{/bs-modal}}
+{{else}}
+  {{confirmation-modal
+    yes=deleteConfirmationYesText 
+    no=deleteConfirmationNoText 
+    title=deleteConfirmationTitleText
+    question=deleteConfirmationQuestion 
+    open=showConfirmDelete
+    yesAction=(action "deleteConfirmationYes")
+    noAction=(action "deleteConfirmationNo")
+    }}
+{{/if}}

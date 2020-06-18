@@ -21,6 +21,16 @@ export default Component.extend({
   associateWithChallenge:false,
   associatedChallenge: null,
   hasValidationError: false,
+  showConfirmDelete: false,
+  
+  
+  init() {
+    this._super(...arguments);
+    this.set('deleteConfirmationYesText', 'Delete');
+    this.set('deleteConfirmationNoText', 'Cancel'); 
+    this.set('deleteConfirmationTitleText', 'Confirm Delete');
+    this.set('deleteConfirmationQuestion', `Do you really want to delete this goal?`);
+  },
   
   canEditName: computed('projectChallenge', 'associateWithChallenge', function(){
     if (this.get('isEditingModal') ){
@@ -170,6 +180,24 @@ export default Component.extend({
   }),
 
   actions: {
+    
+    confirmDelete(){
+      //show the delete dialog
+      this.set('showConfirmDelete', true);
+    },
+    
+    deleteConfirmationYes(){
+      //TODO: delete this projectChallenge
+      //get the projectChallenge 
+      this.get('projectChallenge').destroyRecord();
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    deleteConfirmationNo(){
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    
      associateChallengeSelect(challengeID) {
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
       // is associate already checked?
