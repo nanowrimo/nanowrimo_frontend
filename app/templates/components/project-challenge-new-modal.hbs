@@ -14,27 +14,38 @@
     {{/modal.header}}
     {{#modal.body}}
       <div class="project-challenge-new-form">
-      {{#if optionsForChallenges}}
+      {{#if isEditingModal }}
         <div class="form-group">
-          {{input class= 'form-control' 
-            id='associateCheckbox'
-            name='associateCheckbox'
-            type="checkbox"
-            checked=associateWithChallenge
-            change=(action "clickedAssociateCheckbox")
-          }}
-          <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
+          {{#if associateWithChallenge}}
+            <i>The name of this goal may not be changed because it is associated with an official NaNoWriMo event.</i>
+          {{else}}
+            <i>This is a personal writing goal that is not associated with an official NaNoWriMo event.</i>
+          {{/if}}
         </div>
-        <div class="form-group {{hideClass}}">
-          <div class="select-container">
-            <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
-              {{#each optionsForChallenges as |c|}}
-                <option value="{{c.id}}" selected={{if (eq c.id associatedChallenge.id) 'true'}}>{{c.name}}</option>
-              {{/each}}
-            </select>
+      
+      {{else}}
+        {{#if optionsForChallenges}}
+          <div class="form-group">
+            {{input class= 'form-control' 
+              id='associateCheckbox'
+              name='associateCheckbox'
+              type="checkbox"
+              checked=associateWithChallenge
+              change=(action "clickedAssociateCheckbox")
+            }}
+            <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
           </div>
-        </div>
+          <div class="form-group {{hideClass}}">
+            <div class="select-container">
+              <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+                {{#each optionsForChallenges as |c|}}
+                  <option value="{{c.id}}" selected={{if (eq c.id associatedChallenge.id) 'true'}}>{{c.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
     
+        {{/if}}          
       {{/if}}          
       <div class="form-group">
         <label for='name'>Goal name</label>
