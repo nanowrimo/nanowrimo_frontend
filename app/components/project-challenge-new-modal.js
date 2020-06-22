@@ -95,7 +95,6 @@ export default Component.extend({
   // The end date can't be before now when editing
   endDateMin: computed('associateWithChallenge', function(){
     let min = '1999-07-01';
-    let retval = false;
     if (this.get('projectChallenge.challenge.hasStarted')){
       min = moment().format("YYYY-MM-DD");
     }
