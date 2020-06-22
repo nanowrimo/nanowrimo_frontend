@@ -74,6 +74,34 @@ export default Component.extend({
     return retval;
   }),
   
+  disableStart: computed('associateWithChallenge', function(){
+    let retval = false;
+    //only disable if the associating with a NaNo event AKA eventType: 0
+    if (this.get('associateWithChallenge')) {
+      let et = this.get('associatedChallenge.eventType');
+      if (et==0 || et==1) {
+        retval=true;
+      }
+      if (this.get('projectChallenge.challenge.isNaNoOrCampEvent')){
+        retval=true;
+      }
+    }
+    if (this.get('projectChallenge.challenge.hasStarted')){
+      retval=true;
+    }
+    return retval;
+  }),
+  
+  // The end date can't be before now when editing
+  endDateMin: computed('associateWithChallenge', function(){
+    let min = '1999-07-01';
+    let retval = false;
+    if (this.get('projectChallenge.challenge.hasStarted')){
+      min = moment().format("YYYY-MM-DD");
+    }
+    return min;
+  }),
+  
   disableStartEnd: computed('associateWithChallenge', function(){
     let retval = false;
     //only disable if the associating with a NaNo event AKA eventType: 0

@@ -87,7 +87,7 @@
             <input name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
               oninput={{action "startsAtChanged" value="target.value"}} 
               value={{displayStartsAt}}
-              disabled={{disableStartEnd}}
+              disabled={{disableStart}}
               min='1999-07-01'>
             {{#if validationErrors.startOverlap}}
               <span class='invalid-feedback'>a goal can't start before another goal ends</span>
@@ -100,7 +100,7 @@
               oninput={{action "endsAtChanged" value="target.value"}} 
               value={{displayEndsAt}}
               disabled={{disableStartEnd}}
-              min='1999-07-01'>
+              min={{endDateMin}}>
      
             
                {{#if validationErrors.endOverlap}}

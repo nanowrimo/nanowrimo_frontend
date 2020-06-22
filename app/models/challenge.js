@@ -57,6 +57,18 @@ const Challenge = Model.extend({
     return wt.toString();
   }),
   
+  // Returns true if the challenge has already started
+  hasStarted: computed("startsAt", function() {
+    let s = moment(this.get('startsAt')).format("YYYY-MM-DD");
+    let now = moment().format("YYYY-MM-DD");
+    // If the challenge has started
+    if (now>=s) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
 });
 
 Challenge.reopenClass({
