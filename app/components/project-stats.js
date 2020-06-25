@@ -89,7 +89,6 @@ export default Component.extend({
         var k = da.day;
         aggs[k]+=da.count;
       });
-      console.log(aggs);
       return aggs;
     }
   }),
