@@ -29,6 +29,11 @@ const ProjectChallenge = Model.extend({
   projectSessions: hasMany('projectSession'),
   // Awarded badges
   userBadges: hasMany('user-badge'),
+  how: attr('number'),
+  feeling: attr('number'),
+  where: attr('number'),
+  speed: attr('number'),
+  when: attr('number'),
   
   // ---------------------------
   // BEGINNING OF RELATIONSHIP FUNCTIONS

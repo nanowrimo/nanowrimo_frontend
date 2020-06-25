@@ -40,10 +40,10 @@
       {{#if projectChallenge}}
         {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit class="nw-card g3-col1 g3-row1 g2-col1 g2-row1 short-card"}}
         {{stats-words-needed-today countNeededTodayData=countNeededTodayData userUnitsToday=userUnitsToday comparisonUnitsTodayData=comparisonUnitsTodayData goalUnit=goalUnit class="nw-card g3-col2 g3-row1 g2-col2 g2-row1 short-card" }}
-        {{stats-days-straight sessions=challengeSessions class="nw-card g3-col3 g3-row1 g2-col1 g2-row2 short-card"}}
+        {{stats-days-straight dailyAggregates=challengeDailyAggregates class="nw-card g3-col3 g3-row1 g2-col1 g2-row2 short-card"}}
         {{stats-progress-updates sessions=challengeSessions project=project projectChallenge=projectChallenge class="nw-card g3-col1 g3-row2 g2-col2 g2-row2 flippable"}}
         {{stats-my-overall-progress userDailyTotals=userDailyTotals projectChallenge=projectChallenge class="nw-card g3-col2 g3-row2 g3-hspan2 g2-col1 g2-row3 g2-hspan2"}}
-        {{stats-when-i-write hourAggregates=userHourAggregates class="nw-card g3-col1 g3-row3 g2-col1 g2-row5 flippable"}}
+        {{stats-when-i-write projectChallenge=projectChallenge class="nw-card g3-col1 g3-row3 g2-col1 g2-row5 flippable"}}
         {{stats-my-daily-word-count userDailyAggregates=userDailyAggregates class="nw-card g3-col2 g3-row3 g3-hspan2 g2-col1 g2-row4 g2-hspan2"}}
         {{stats-where-i-write whereIWrite=whereIWrite user=currentUser.user class="nw-card g3-col1 g3-row4 g2-col2 g2-row5"}}
         {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular class="nw-card g3-col2 g3-row4 g2-col1 g2-row6 flippable"}}

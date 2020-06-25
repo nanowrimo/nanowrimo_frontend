@@ -333,9 +333,12 @@ export default Component.extend({
       }*/
 
       session.set('count', count);
+      let pcid = this.get('activeProjectChallenge.id')
       session.save().then(()=>{
-        // refresh the user stats  
-        user.refreshStats();
+        this.get('store').findRecord('projectChallenge', pcid, { reload: true } ).then(()=>{
+          // refresh the user stats  
+          user.refreshStats();
+        });
       });
       
       let user = this.get('currentUser.user');
@@ -352,7 +355,6 @@ export default Component.extend({
       
       let cfa = this.get('closeFormAction');
       cfa();
-
       return true;
     }
   }

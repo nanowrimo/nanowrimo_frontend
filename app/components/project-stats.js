@@ -16,7 +16,6 @@ export default Component.extend({
   projectChallenge: null,
   projectChallenges: null,
   
-  
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     //now is a good time to update the whereIwrite
     this._updateWhereIWrite();
@@ -37,7 +36,7 @@ export default Component.extend({
     }
   }),
   
-  userDailyAggregates: computed('challengeSessions.[]', function() {
+  /*userDailyAggregates: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
     let dates = this.get('projectChallenge.dates');
     if(dates) {
@@ -62,6 +61,35 @@ export default Component.extend({
         var k = moment(cs.end).format("YYYY-MM-DD");
         aggs[k]+=cs.count;
       });
+      return aggs;
+    }
+  }),*/
+  userDailyAggregates: computed('challengeDailyAggregates.[]', function() {
+    let das = this.get('challengeDailyAggregates');
+    let dates = this.get('projectChallenge.dates');
+    if(dates) {
+      let today = moment().format("YYYY-MM-DD");
+      let todayFound = false;
+      //create an aggregates array
+      let aggs = {};
+      for (var i = 0; i < dates.length; i++) {
+        let key = dates[i];
+        if (todayFound) {
+          aggs[key] = null;
+        } else {
+          aggs[key] = 0;
+        }
+        if (key == today) {
+          todayFound = true;
+        }
+      }
+      
+      //loop the sessions
+      das.forEach((da)=>{
+        var k = da.day;
+        aggs[k]+=da.count;
+      });
+      console.log(aggs);
       return aggs;
     }
   }),
@@ -93,7 +121,7 @@ export default Component.extend({
       }
     }
   }),
-  writingSpeed: computed('challengeSessions.[]',function() {
+ /* writingSpeed: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
     if (sessions) {
       let minutes = 0;
@@ -116,9 +144,17 @@ export default Component.extend({
         return 0;
       }
     }
+  }),*/
+  
+  writingSpeed: computed('projectChallenge.speed',function() {
+    let s = this.get('projectChallenge.speed');
+    if (s===null) {
+      s = 0;
+    }
+    return s;
   }),
   
-  averageFeeling: computed('challengeSessions.[]',function() {
+  /*averageFeeling: computed('challengeSessions.[]',function() {
     let sessions = this.get('challengeSessions');
     if (sessions) {
       let feelings = {};
@@ -137,7 +173,12 @@ export default Component.extend({
       let key = this._objectKeyWithHighestValue(feelings);
       return parseInt(key);
     }
+  }),*/
+  averageFeeling: computed('projectChallenge.feeling',function() {
+    let f = this.get('projectChallenge.feeling');
+    return f;
   }),
+
   // determine which hours of the day the user is writing during 
   userHourAggregates: computed('challengeSessions.[]',function() {
     //get the sessions
@@ -222,7 +263,17 @@ export default Component.extend({
       return average;
     }
   }),
-  userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
+  /*userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
+    //create the data thingy for the current user 
+    let percent = parseInt(this.get('count')*100/this.get('goal'));
+    var data = {
+      name: this.get('currentUser.user.name'),
+      percent: percent
+    };
+    return data;
+  }),*/
+  
+  userPercentData: computed('projectChallenge','project.computedDailyAggregates.[]', function() {
     //create the data thingy for the current user 
     let percent = parseInt(this.get('count')*100/this.get('goal'));
     var data = {
@@ -245,9 +296,19 @@ export default Component.extend({
    return this.get('projectChallenge.unitTypeSingular'); 
   }),
   
-  count: computed('challengeSessions.[]', function() {
+  /*count: computed('challengeSessions.[]', function() {
     // get the sessions
     let css = this.get('challengeSessions');
+    let sum = 0;
+    // are there sessions to process?
+    if (css) {
+      css.forEach((cs)=>{ sum+=cs.count});
+    }
+    return sum;
+  }),*/
+  count: computed('challengeDailyAggregates.[]', function() {
+    // get the sessions
+    let css = this.get('challengeDailyAggregates');
     let sum = 0;
     // are there sessions to process?
     if (css) {
@@ -278,7 +339,7 @@ export default Component.extend({
     }
   }),
   
-  todaysCount: computed('todaysSessions.[]', function() {
+  /*todaysCount: computed('todaysSessions.[]', function() {
     let sum = 0;
     let ts = this.get('todaysSessions');
     if (ts) {
@@ -287,9 +348,38 @@ export default Component.extend({
       });
       return sum;
     }
+  }),*/
+  
+  todaysCount: computed('challengeDailyAggregates.[]', function() {
+    let count = 0;
+    let das = this.get('challengeDailyAggregates');
+    let now = moment();
+    das.forEach((da)=>{
+      if (moment(da.day).isSame(now, 'day') ) {
+        count = da.count;
+      }
+    });
+    return count;
   }),
   
-  challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
+  challengeDailyAggregates: computed('project','projectChallenge','project.computedDailyAggregates.[]', function() {
+    let cStart = this.get('projectChallenge.startsAt');
+    let cEnd = this.get('projectChallenge.endsAt');
+    let p = this.get('project');
+    if (p) {
+      //get the dailyAggregates created during the projectChallenge
+      let das = this.get('project.computedDailyAggregates');
+      let newdas = [];
+      das.forEach((da)=>{
+        if(cStart<=da.day && cEnd>=da.day ){
+          newdas.push(da);
+        }
+      });
+      return newdas;
+    }
+  }),
+
+  /*challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
     let cStart = moment( this.get('projectChallenge.startsAt') );
     let cEnd = moment( this.get('projectChallenge.endsAt') ).add(1,'d');
     let pc = this.get('projectChallenge.nanoEvent');
@@ -326,7 +416,7 @@ export default Component.extend({
       });
       return newSessions;
     }
-  }),
+  }),*/
 
   init(){
     this._super(...arguments);
@@ -410,7 +500,7 @@ export default Component.extend({
   _updateWhereIWrite: function(){
     //default to null
     this.set('whereIWrite', null);
-    let sessions = this.get('challengeSessions');
+    /*let sessions = this.get('challengeSessions');
     let whereObj = {0:0};
     if(sessions) {
       //loop through the sessions
@@ -425,13 +515,13 @@ export default Component.extend({
         }
       });
       //determine the key with the max value 
-      let max = this._objectKeyWithHighestValue(whereObj);
-      if (max > 0) {
-        //there is a max that is not 0, find the dang location name
-        this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
-          this.set('whereIWrite', loc.name);
-        });   
-      }
+      let max = this._objectKeyWithHighestValue(whereObj);*/
+    let max = this.get('projectChallenge.where');
+    if (max != null) {
+      //there is a max that is not 0, find the dang location name
+      this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
+        this.set('whereIWrite', loc.name);
+      });   
     }
   },
   
