@@ -48,6 +48,24 @@ const Project = Model.extend({
     return newpcs;
   }),
   
+  // Returns all projectChallenges in store
+  allDailyAggregates: computed(function() {
+    return this.get('store').peekAll('dailyAggregate');
+  }),
+  
+  // Finding projectChallenges without needing relationships
+  computedDailyAggregates: computed('allDailyAggregates.@each.id',function() {
+    let pid = this.get('id');
+    let das = this.get('allDailyAggregates');
+    let newdas = [];
+    das.forEach((da)=> {
+      if (da.project_id==pid) {
+        newdas.push(da);
+      }
+    });
+    return newdas;
+  }),
+  
   defaultCoverUrl: computed('genres.[]', function(){
     let cover = "/images/projects/default-cover.svg";
     this.get('genres').forEach((g)=>{

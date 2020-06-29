@@ -34,6 +34,7 @@ export default Component.extend({
   // To determine whether to show the re-import link
   importable: computed('projectChallenge.challenge_id',function() {
     let i = this.get('projectChallenge.challenge_id');
+    // if this is from any of the events prior to the new website
     if ((i>100 && i<121) || (i>200 && i<220)) {
       return true;
     } else {

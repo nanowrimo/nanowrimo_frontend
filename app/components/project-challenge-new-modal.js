@@ -21,6 +21,16 @@ export default Component.extend({
   associateWithChallenge:false,
   associatedChallenge: null,
   hasValidationError: false,
+  showConfirmDelete: false,
+  
+  
+  init() {
+    this._super(...arguments);
+    this.set('deleteConfirmationYesText', 'Delete');
+    this.set('deleteConfirmationNoText', 'Cancel'); 
+    this.set('deleteConfirmationTitleText', 'Confirm Delete');
+    this.set('deleteConfirmationQuestion', `Do you really want to delete this goal?`);
+  },
   
   canEditName: computed('projectChallenge', 'associateWithChallenge', function(){
     if (this.get('isEditingModal') ){
@@ -62,6 +72,33 @@ export default Component.extend({
       }
     }
     return retval;
+  }),
+  
+  disableStart: computed('associateWithChallenge', function(){
+    let retval = false;
+    //only disable if the associating with a NaNo event AKA eventType: 0
+    if (this.get('associateWithChallenge')) {
+      let et = this.get('associatedChallenge.eventType');
+      if (et==0 || et==1) {
+        retval=true;
+      }
+      if (this.get('projectChallenge.challenge.isNaNoOrCampEvent')){
+        retval=true;
+      }
+    }
+    if (this.get('projectChallenge.challenge.hasStarted')){
+      retval=true;
+    }
+    return retval;
+  }),
+  
+  // The end date can't be before now when editing
+  endDateMin: computed('associateWithChallenge', function(){
+    let min = '1999-07-01';
+    if (this.get('projectChallenge.challenge.hasStarted')){
+      min = moment().format("YYYY-MM-DD");
+    }
+    return min;
   }),
   
   disableStartEnd: computed('associateWithChallenge', function(){
@@ -170,6 +207,24 @@ export default Component.extend({
   }),
 
   actions: {
+    
+    confirmDelete(){
+      //show the delete dialog
+      this.set('showConfirmDelete', true);
+    },
+    
+    deleteConfirmationYes(){
+      //TODO: delete this projectChallenge
+      //get the projectChallenge 
+      this.get('projectChallenge').destroyRecord();
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    deleteConfirmationNo(){
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    
      associateChallengeSelect(challengeID) {
       this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
       // is associate already checked?

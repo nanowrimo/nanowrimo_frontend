@@ -14,6 +14,18 @@ export default Component.extend({
     }
   }),
   
+  formattedLabel: computed("project.challenges.[]", function(){
+    let pc = this.get('project.currentProjectChallenge');
+    if (pc) {
+      if (moment(pc.startsAt)>moment()) {
+        return "Starts";
+      } else {
+        return "Started";
+      }
+    }
+    return '';
+  }),
+  
   formattedStart: computed("project.challenges.[]", function(){
     let pc = this.get('project.currentProjectChallenge');
     if (pc) {

@@ -7,7 +7,6 @@ export default Component.extend({
   statsParams: service(),
   router: service(),
   editProjectChallenge: false,
-  showConfirmDelete: false,
   
   canEdit: computed('project', function(){
     let currentUser = this.get('currentUser.user');
@@ -20,35 +19,11 @@ export default Component.extend({
     return `/images/goals/${str}.svg`
   }),
   
-  init() {
-    this._super(...arguments);
-    this.set('deleteConfirmationYesText', 'Delete');
-    this.set('deleteConfirmationNoText', 'Cancel'); 
-    this.set('deleteConfirmationTitleText', 'Confirm Delete');
-    this.set('deleteConfirmationQuestion', `Do you really want to delete the "${name}" goal?`);
-  },
-  
   actions: {
     editProjectChallenge(){
        this.set('editProjectChallenge', true);
     },
 
-    confirmDelete(){
-      //show the delete dialog
-      this.set('showConfirmDelete', true);
-    },
-    
-    deleteConfirmationYes(){
-      //TODO: delete this projectChallenge
-      //get the projectChallenge 
-      this.get('projectChallenge').destroyRecord();
-      //close the modal
-      this.set('showConfirmDelete', false);
-    },
-    deleteConfirmationNo(){
-      //close the modal
-      this.set('showConfirmDelete', false);
-    },
     redirectToStats(){
       //get the statsParams service
       let sp = this.get('statsParams');

@@ -9,7 +9,7 @@
     <span class="count {{if goalMet 'goal-met' ''}}">{{format-number project.currentProjectChallenge.count}}</span><span class='goal'> / {{format-number project.currentProjectChallenge.goal}} WORDS</span>
   </div>
   <div class='challenge-start'>
-    <span class="started">Started</span>
+    <span class="started">{{formattedLabel}}</span>
     <span class="date">{{formattedStart}}</span>
   </div>
 </div>

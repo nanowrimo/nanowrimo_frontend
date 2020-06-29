@@ -177,28 +177,28 @@ export default Component.extend({
         // set the whenEnd and whenStart
         let rs = this.get('referenceStart');
         let re = this.get('referenceEnd');
-        let hhmmStart;
-        let hhmmEnd;
+        //let hhmmStart;
+        //let hhmmEnd;
         let yyyymmddStart;
         if (rs) {
-          let ms = moment(rs);
-          hhmmStart = ms.format("HH:mm");
+          //let ms = moment(rs);
+          //hhmmStart = ms.format("HH:mm");
           let me = moment(re);
-          hhmmEnd = me.format("HH:mm");
+          //hhmmEnd = me.format("HH:mm");
           yyyymmddStart = me.format("YYYY-MM-DD");
         } else {
           let m = moment();
-          hhmmEnd = m.format("HH:mm");
+          //hhmmEnd = m.format("HH:mm");
           m.subtract(1, 'h');
-          hhmmStart = m.format("HH:mm");
+          //hhmmStart = m.format("HH:mm");
           yyyymmddStart = m.format("YYYY-MM-DD");
         }
 
         //get the time in HH:MM format and set that as the whenend
-        this.set("whenEnd", hhmmEnd);
+        //this.set("whenEnd", hhmmEnd);
 
         //get the time in HH:MM format and set that as the whenStart
-         this.set("whenStart", hhmmStart);
+         //this.set("whenStart", hhmmStart);
 
         //get the time in HH:MM format and set that as the whenStart
          this.set("dateStart", yyyymmddStart);
@@ -238,6 +238,8 @@ export default Component.extend({
       }
     },
     formSubmit() {
+      // Variable for tracking whether more info should default to open
+      let moreInfo = 0;
       //determine what 'count' we need to send to the API
       let count = parseInt( this.get('countValue'));
       //do we need to determine the session count based on the total count?
@@ -266,26 +268,43 @@ export default Component.extend({
       session.set('feeling', this.get('selectedFeeling'));
       if (this.get('selectedWhere') ) {
         session.set('where', this.get('selectedWhere').value);
+        moreInfo = 1;
       }
       if (this.get('selectedHow') ) {
         session.set('how', this.get('selectedHow').value);
+        moreInfo = 1;
       }
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
       // have start and end been set?
-      if (start && end) {
+      if (end) {
+        moreInfo = 1;
         //get "today"
         let today = moment();
         let ymd = today.format('YYYY-MM-DD');
         let endDate = moment(ymd+" "+end).toDate();
-        if( start > end ) {
+        session.set('end', endDate);
+      }
+      if (start) {
+        moreInfo = 1;
+        //get "today"
+        let today = moment();
+        let ymd = today.format('YYYY-MM-DD');
+        let endTime = null;
+        if (end) {
+          endTime = moment(end).format("HH:mm");
+        } else {
+          let m = moment();
+          endTime = m.format("HH:mm");
+        }
+        let startTime = moment(start).format("HH:mm");
+        if (startTime > endTime) {
           //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
         }
         let startDate = moment(ymd+" "+start).toDate();
-        session.set('end', endDate);
         session.set('start', startDate);
       }
       
@@ -314,16 +333,20 @@ export default Component.extend({
       }*/
 
       session.set('count', count);
+      let pcid = this.get('activeProjectChallenge.id')
       session.save().then(()=>{
-        // refresh the user stats  
-        user.refreshStats();
+        this.get('store').findRecord('projectChallenge', pcid, { reload: true } ).then(()=>{
+          // refresh the user stats  
+          user.refreshStats();
+        });
       });
       
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
       user.set("settingSessionCountBySession", this.get('countType'));
       // check if the user is entering more data
-      user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
+      user.set("settingSessionMoreInfo", moreInfo);
+      //user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
       let isDirty = user.get('hasDirtyAttributes');
       if (isDirty) {
         //save the user
@@ -332,7 +355,6 @@ export default Component.extend({
       
       let cfa = this.get('closeFormAction');
       cfa();
-
       return true;
     }
   }
