@@ -29,6 +29,12 @@ const ProjectChallenge = Model.extend({
   projectSessions: hasMany('projectSession'),
   // Awarded badges
   userBadges: hasMany('user-badge'),
+  // stats!
+  where: attr('number'), //where the user is writing
+  how: attr('number'), //how the user was writing
+  feeling: attr('number'), //how the user was feeling while writing
+  speed: attr('number'), // the user's writing speed in words per minute
+  streak: attr('number'), // how many days in a row the user updated for this goal
   
   // ---------------------------
   // BEGINNING OF RELATIONSHIP FUNCTIONS
