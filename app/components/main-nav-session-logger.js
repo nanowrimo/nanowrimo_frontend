@@ -70,6 +70,11 @@ export default Component.extend({
     let p = this.get('user.primaryProject');
     return p;
   }),
+  activeProjects: computed("user.activeProjects", function(){
+    let aps = this.get('user.activeProjects');
+    return aps;
+  }),
+  
 
   init() {
     this._super(...arguments);

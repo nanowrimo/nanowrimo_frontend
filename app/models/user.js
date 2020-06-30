@@ -170,6 +170,17 @@ const User = Model.extend({
     return ps;
   }),
   
+  activeProjects: computed('computedProjects',function() {
+    let allProjects = this.get('computedProjects');
+    let aps = [];
+    allProjects.forEach(function(p) {
+      if (p.activeProjectChallenge) {
+        aps.push(p);
+      }
+    });
+    return aps;
+  }),
+  
   // ---------------------------
   // END OF PROJECT FUNCTIONS
   // ---------------------------

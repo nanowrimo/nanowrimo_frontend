@@ -1,9 +1,11 @@
 <div class="nw-card nano-listing-mini-card project-summary-card">
   <div class='nw-card-header nw-card-header-no-height'>
     <div class='nw-card-actions'>
-      {{#if project.isPrimary}}
-        <i class='fa fa-thumb-tack primary-thumb-tack indicator'></i>
-      {{/if}}
+      {{!--
+        {{#if project.isPrimary}}
+          <i class='fa fa-thumb-tack primary-thumb-tack indicator'></i>
+        {{/if}}
+      --}}
       {{#if canEdit}}
         <span class='nw-listing-action-dropdown'>
         {{#bs-dropdown class='project-summary-dropdown' as |dd|}}

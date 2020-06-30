@@ -144,7 +144,6 @@ const Project = Model.extend({
         var m = moment.tz(newStart, "YYYY-MM-DD", tz);
         startsAt = m.clone().startOf('day').utc();
       }
-      //console.log(startsAt);
       //is this pc active?
       if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded ) {
         active = pc;

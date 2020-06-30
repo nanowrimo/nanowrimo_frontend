@@ -273,7 +273,7 @@ const ProjectChallenge = Model.extend({
     // get the 'end' of the challenge
     let end = this.get('endsAt');
     // is now after or equal to the end?
-    if (nowString >= end) {
+    if (nowString > end) {
       return true;
     } else {
       return false;
