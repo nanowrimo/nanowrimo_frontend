@@ -37,14 +37,14 @@
       </div>
     </div>
   </div>
-  <div class="nw-card-list-content">
+  <InfiniScroll class="nw-card-list-content" @scrolledToBottom={{action "fetchSessions"}}>
     {{#each sortedUpdates as |ps|}}
       <ProgressUpdate
         @projectSession={{ps}}
         @onDelete={{action "userDidChangeProjectSession"}}
       />
     {{/each}}
-  </div>
+  </InfiniScroll>
 </div>
 {{else}}  
   <div class='nw-card-content'>

@@ -29,11 +29,13 @@ const ProjectChallenge = Model.extend({
   projectSessions: hasMany('projectSession'),
   // Awarded badges
   userBadges: hasMany('user-badge'),
+
   how: attr('number'),
   feeling: attr('number'),
   where: attr('number'),
   speed: attr('number'),
   when: attr('number'),
+
   
   // ---------------------------
   // BEGINNING OF RELATIONSHIP FUNCTIONS
@@ -166,20 +168,7 @@ const ProjectChallenge = Model.extend({
     }
   }),
   
-  // The total count, computed from the project sessions
-  /*count: computed('projectSessions.@each.count', function(){
-    // Get project sessions for this project_challenge
-    let pss = this.get('projectSessions');
-    // Set the sum of the project sessions to zero
-    let sum = 0;
-    // For each project_session add to the sum
-    pss.forEach((ps)=> {sum+=ps.count });
-    //get the latest count according to the API server
-    //let lc = this.get('latestCount');
-    //return (sum>lc) ? sum : lc ;
-    return sum;
-  }),*/
-  // The total count, computed from the project sessions
+  // The total count, computed by adding the project challenges startCount and currentCount
   count: computed('startCount', 'currentCount', function(){
     // Get project sessions for this project_challenge
     let sc = this.get('startCount');
@@ -188,9 +177,9 @@ const ProjectChallenge = Model.extend({
   }),
   
   // Returns the total number of words needed to win
-  countRemaining: computed('count', function(){
+  countRemaining: computed('currentCount', function(){
     // Compute remaining words
-    let remaining = this.get('goal') - this.get('count');
+    let remaining = this.get('goal') - this.get('currentCount');
     // If less than zero, set to zero
     if (remaining < 0) {
       remaining = 0;
@@ -199,28 +188,9 @@ const ProjectChallenge = Model.extend({
     return remaining;
   }),
   
-  // Returns the number of words written today, as defined by the user's time zone
+  // Returns the number of words written today, as defined by daily aggregates
   todayCount: computed('projectSessions.[]', function(){
-    // Get the project user
-    let user = this.get('computedUser');
-    // Get the current date string in the user's time zone
-    let userDate = user.currentDateStringInTimeZone;
-    // Get project sessions for this project_challenge
-    let pss = this.get('projectSessions');
-    // Set the sum of today's project sessions to zero
-    let sum = 0;
-    // For each project_session...
-    pss.forEach((ps)=> {
-      // Get the date it belongs to
-      let psDate = user.dateStringInTimeZone(ps.createdAt);
-      // If the ps date is today...
-      if (userDate==psDate) {
-        // ...add to the sum
-        sum+=ps.count; 
-      }
-    });
-    // Return the sum
-    return sum;
+    
   }),
   
   metGoal: computed('goal', 'count', function(){

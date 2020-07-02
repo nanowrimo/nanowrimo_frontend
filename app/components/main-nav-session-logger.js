@@ -356,7 +356,6 @@ export default Component.extend({
       
       //what project are we actually dealing with?
       let project = this.get('store').peekRecord('project', this.get('primaryProject.id') );
-      let pid = project.id;
       //create a session for the primary project
       let session = this.get('store').createRecord('projectSession');
       session.set('project', project);
@@ -407,39 +406,8 @@ export default Component.extend({
         session.set('start', startDate);
       }
       
-      /*let end = this.get('whenEnd');
-      let start = this.get('whenStart');
-      let dateStart = this.get('dateStart');
-      //alert(dateStart);
-      // have start and end been set?
-      if (start && end) {
-        //get "today"
-        //let today = moment();
-        //let ymd = today.format('YYYY-MM-DD');
-        let ymd = dateStart;
-        let endDate = moment(ymd+" "+end).toDate();
-        if( start > end ) {
-          //start was yesterday
-          //let yesterday = today.subtract(1, 'd');
-          //ymd = yesterday.format('YYYY-MM-DD');
-          let mDate = moment(dateStart);
-          let yesterday = mDate.subtract(1, 'd');
-          ymd = yesterday.format('YYYY-MM-DD');
-        }
-        let startDate = moment(ymd+" "+start).toDate();
-        session.set('end', endDate);
-        session.set('start', startDate);
-      }*/
       session.set('count', count);
-      let pcid = this.get('activeProjectChallenge.id')
-      session.save().then(()=>{
-        this.get('store').findRecord('projectChallenge', pcid, { reload: true } ).then(()=>{
-          this.get('store').findRecord('project', pid, { reload: true } ).then(()=>{
-            // refresh the user stats  
-            user.refreshStats();
-          });
-        });
-      });
+      session.save();
       
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
