@@ -29,6 +29,7 @@ export default Component.extend({
     this.set('reimportConfirmationQuestionAddendum', "<p>Importing your history will check our database for all previous progress updates associated with this goal. Any existing data will then be added to your progress updates here.</p><p>Note that this won't rewrite or remove any of your existing updates—it will add historical data. You may end up with duplicate updates for you to delete as needed.</p>");
     this.set('reimportConfirmationYesText','Add My Past Updates'); 
     this.set('reimportConfirmationNoText','Cancel'); 
+    this.fetchSessions(true);
   },
   
   // To determine whether to show the re-import link
@@ -42,7 +43,7 @@ export default Component.extend({
     }
   }),
   
-  progressUpdates: computed('sessions', function() {
+  progressUpdates: computed('sessions.[]', function() {
     let pss = this.get('sessions');
     return pss;
   }),
@@ -77,9 +78,33 @@ export default Component.extend({
     
   }),
   
+  fetchSessions: function(initial) {
+    let store = this.get('store');
+    let pc = this.get('projectChallenge');
+    let options = {projectChallengeId: pc.id, limit:50};
+    if (!initial) {
+      // what is the oldest end?
+      let sessions = this.get('sortedUpdates');
+      let last = sessions.lastObject;
+      // add the oldest end to the options as a unix timestamp... in UTC
+      options.oldestEnd = last.end.getTime()/1000 + (last.end.getTimezoneOffset() * 60);
+    }
+    // from the api, request 50 project sessions
+    return store.query('project-session', options);
+  },
+  
   actions: {
+    fetchSessions() {
+      this.fetchSessions();
+    },
+    
     userDidChangeProjectSession() {
       this.doRecalculate();
+      /*/reload the projectChallenge
+      let store = this.get('store');
+      let pc = this.get('projectChallenge');
+      return store.findRecord('projectChallenge', pc.id); 
+      */
     },
     
     newProjectSession(){
@@ -112,7 +137,5 @@ export default Component.extend({
     reimportConfirmationNo() {
        this.set('showConfirmReimport', false);
     },
-    
   }
-  
 });
