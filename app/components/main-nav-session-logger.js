@@ -162,7 +162,7 @@ export default Component.extend({
   },
   
   resetCount() {
-    let user = this.get('user');
+    //let user = this.get('user');
     // count by session?
     let cbs = this.get('countType');
     switch(cbs) {
