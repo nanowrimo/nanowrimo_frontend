@@ -19,15 +19,12 @@ export default Component.extend({
   }),
   
   actions: {
-    // For deleting nanomessages
+    // 
     deleteProjectSession() {
-      // get the message
+      // get the session
       let ps = this.get('projectSession');
-      // Delete it
-      ps.deleteRecord();
-      ps.save().then(()=>{
-        this.onDelete();
-      });
+      // Destroy it
+      ps.destroyRecord();
     }
   }
 
