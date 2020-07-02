@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from "@ember/object";
+import { htmlSafe } from "@ember/string";
 import moment from "moment"
 import {isNull} from "lodash"
 export default Component.extend({
@@ -23,6 +24,14 @@ export default Component.extend({
   referenceTimer: null,
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
+  projectSelected: 0,
+  
+  // Returns the distance the project list should scroll to show the selected project
+  scrollDistance: computed('projectSelected', function() {
+    let ps = this.get('projectSelected');
+    let dist = -ps*104;
+    return htmlSafe('margin-top: '+dist+'px');
+  }),
   
   countTypeTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
     let setting = this.get('currentUser.user.settingSessionCountBySession');
@@ -42,18 +51,23 @@ export default Component.extend({
   activeProjectChallenge: computed('primaryProject', function(){
     return this.get('primaryProject.activeProjectChallenge');
   }),
+  
   feeling1Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 1;
   }),
+  
   feeling2Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 2;
   }),
+  
   feeling3Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 3;
   }),
+  
   feeling4Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 4;
   }),
+  
   feeling5Selected: computed('selectedFeeling', function() {
     return this.get('selectedFeeling') == 5;
   }),
@@ -66,23 +80,43 @@ export default Component.extend({
       return "info-hidden";
     }
   }),
-  primaryProject: computed("user.primaryProject", function(){
-    let p = this.get('user.primaryProject');
-    return p;
-  }),
-  activeProjects: computed("user.activeProjects", function(){
-    let aps = this.get('user.activeProjects');
+
+  activeProjects: computed("user.activeProjects.{[]}", function(){
+    let allProjects = this.get('user.activeProjects');
+    let aps = [];
+    allProjects.forEach(function(p) {
+      if (p.activeProjectChallenge) {
+        aps.push(p);
+      }
+    });
     return aps;
   }),
   
-
+  hasMultipleProjects: computed("activeProjects.[]", function() {
+    let aps = this.get('activeProjects');
+    if (aps.length>1) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
+  primaryProject: computed('activeProjects', 'projectSelected', function(){
+    let aps = this.get('activeProjects');
+    let ps = this.get('projectSelected');
+    return aps[ps];
+  }),
+  
   init() {
     this._super(...arguments);
     let user = this.get('currentUser.user');
     this.set('user',  user);
-    // count by session?
     let cbs = user.settingSessionCountBySession;
-     this.set('countType', cbs);  
+    this.set('countType', cbs);
+    
+    // count by session?
+    /*let cbs = user.settingSessionCountBySession;
+    this.set('countType', cbs);  
     switch(cbs) {
       case -1:
       this.set('countValue', this.get("primaryProject.unitCount"));
@@ -97,7 +131,9 @@ export default Component.extend({
       }
       case 1: 
       this.set('countValue', 0);
-    }
+    }*/
+    //this.resetCount();
+    
 
     let t = this.get('referenceEnd');
     let s = this.get('referenceStart');
@@ -110,15 +146,67 @@ export default Component.extend({
       this.set('_projectAdditionalInfoShow',false);
       this.send('toggleAdditionalInfo');
     }
-    // load up the activeProjectChallenge
+    // Set the default primary project
+    let aps = this.get('activeProjects');
+    let highestCount = -1;
+    let pSelected = 0;
+    for (let i=0; i<aps.length; i++) {
+      if (aps[i].primary>highestCount) {
+        highestCount = aps[i].primary
+        pSelected = i;
+      }
+    }
+    this.set('projectSelected', pSelected);
+    this.resetCount();
+    
+  },
+  
+  resetCount() {
+    let user = this.get('user');
+    // count by session?
+    let cbs = this.get('countType');
+    switch(cbs) {
+      case -1:
+      this.set('countValue', this.get("primaryProject.unitCount"));
+      break;
+  
+      case 0: {
+        let c = this.get("activeProjectChallenge.count");
+        //let cc = this.get("activeProjectChallenge.currentCount");
+        this.set('countValue', c);
+        //this.set('countValue', (c > cc) ? c:cc);
+        break;
+      }
+      case 1: 
+      this.set('countValue', 0);
+    }
+    
   },
 
-
-
   actions: {
+    
+    projectPrevious() {
+      let ps = this.get('projectSelected');
+      let ap = this.get('activeProjects');
+      let newps = ps - 1;
+      if (newps<0) { newps=ap.length-1; }
+      this.set('projectSelected',newps);
+      this.resetCount();
+    },
+    
+    projectNext() {
+      let ps = this.get('projectSelected');
+      let ap = this.get('activeProjects');
+      let newps = ps + 1;
+      if (newps>=ap.length) { newps=0; }
+      this.set('projectSelected',newps);
+      this.resetCount();
+    },
+    
     changeFeeling(val){
       this.set("selectedFeeling", val);
     },
+    
     createWhere(value) {
       //add this location to the DB
       let wl = this.get('store').createRecord('writingLocation', {name: value} );
@@ -129,6 +217,7 @@ export default Component.extend({
         this.set('selectedWhere', obj);
       });
     },
+    
     createHow(value) {
       //add this location to the DB
       let record = this.get('store').createRecord('writingMethod', {name: value} );
@@ -140,6 +229,7 @@ export default Component.extend({
         this.set('selectedHow', obj);
       });
     },
+    
     toggleAdditionalInfo() {
       let show = !this.get('_projectAdditionalInfoShow');
       this.set('_projectAdditionalInfoShow',show);
@@ -215,6 +305,7 @@ export default Component.extend({
       }
 
     },
+    
     showCreateWhen() {
       return true;
     },
@@ -223,6 +314,7 @@ export default Component.extend({
       let cfa = this.get('closeFormAction');
       cfa();
     },
+    
     selectChanged(v) {
       //convert the string to integer
       v = parseInt(v);
@@ -242,6 +334,7 @@ export default Component.extend({
         }
       }
     },
+    
     formSubmit() {
       // Variable for tracking whether more info should default to open
       let moreInfo = 0;
@@ -263,6 +356,7 @@ export default Component.extend({
       
       //what project are we actually dealing with?
       let project = this.get('store').peekRecord('project', this.get('primaryProject.id') );
+      let pid = project.id;
       //create a session for the primary project
       let session = this.get('store').createRecord('projectSession');
       session.set('project', project);
@@ -336,13 +430,14 @@ export default Component.extend({
         session.set('end', endDate);
         session.set('start', startDate);
       }*/
-
       session.set('count', count);
       let pcid = this.get('activeProjectChallenge.id')
       session.save().then(()=>{
         this.get('store').findRecord('projectChallenge', pcid, { reload: true } ).then(()=>{
-          // refresh the user stats  
-          user.refreshStats();
+          this.get('store').findRecord('project', pid, { reload: true } ).then(()=>{
+            // refresh the user stats  
+            user.refreshStats();
+          });
         });
       });
       
@@ -362,5 +457,6 @@ export default Component.extend({
       cfa();
       return true;
     }
+    
   }
 });

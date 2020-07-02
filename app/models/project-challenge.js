@@ -167,7 +167,7 @@ const ProjectChallenge = Model.extend({
   }),
   
   // The total count, computed from the project sessions
-  count: computed('projectSessions.@each.count', function(){
+  /*count: computed('projectSessions.@each.count', function(){
     // Get project sessions for this project_challenge
     let pss = this.get('projectSessions');
     // Set the sum of the project sessions to zero
@@ -178,6 +178,13 @@ const ProjectChallenge = Model.extend({
     //let lc = this.get('latestCount');
     //return (sum>lc) ? sum : lc ;
     return sum;
+  }),*/
+  // The total count, computed from the project sessions
+  count: computed('startCount', 'currentCount', function(){
+    // Get project sessions for this project_challenge
+    let sc = this.get('startCount');
+    let cc = this.get('currentCount');
+    return (cc-sc);
   }),
   
   // Returns the total number of words needed to win

@@ -346,3 +346,27 @@
     background-color: transparent;
   }
 }
+.primary-project-scrolling-tools {
+  display: flex;
+  justify-content: space-between;
+  .primary-project-container {
+    height: 104px;
+    overflow-x: visible;
+    overflow-y: hidden;
+    .primary-project-scrollbox {
+      transition: margin-top 0.3s;
+    }
+  }
+  .primary-project-scrolling-buttons {
+    padding: 15px;
+    padding-right: 0px;
+    font-size: 30px;
+    color: #ddd;
+    i {
+      cursor: pointer;
+    }
+    i:hover {
+      color: #000;
+    }
+  }
+}
