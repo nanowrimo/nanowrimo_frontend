@@ -157,9 +157,14 @@ const User = Model.extend({
   // BEGINNING OF PROJECT FUNCTIONS
   // ---------------------------
   
-  computedProjects: computed('projects.@each.createdAt',function() {
+  storeProjects: computed('projects.@each.createdAt',function() {
     let store = this.get('store');
-    let allProjects = store.peekAll('project');
+    return store.peekAll('project');
+  }),
+  
+  computedProjects: computed('storeProjects.@each.activeProjectChallenge',function() {
+    //let store = this.get('store');
+    let allProjects = this.get('storeProjects');
     let id = this.get('id');
     let ps = [];
     allProjects.forEach(function(p) {
@@ -168,6 +173,17 @@ const User = Model.extend({
       }
     });
     return ps;
+  }),
+  
+  activeProjects: computed('computedProjects.[]',function() {
+    let allProjects = this.get('computedProjects');
+    let aps = [];
+    allProjects.forEach(function(p) {
+      if (p.activeProjectChallenge) {
+        aps.push(p);
+      }
+    });
+    return aps;
   }),
   
   // ---------------------------
@@ -718,7 +734,8 @@ const User = Model.extend({
     let highestCount=0;
     this.get('projects').forEach( (p)=>{
       
-      if (p.totalWordCount > highestCount ){
+      //if (p.totalWordCount > highestCount ){
+      if (p.unitCount > highestCount ){
         highest = p;
         highestCount = p.totalWordcount;
       }

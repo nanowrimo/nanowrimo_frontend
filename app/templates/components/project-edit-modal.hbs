@@ -79,14 +79,16 @@
             property="playlistUrl"
           }}
         </div>
-        {{#if project.isNotPrimary}}
-          <div class="form-group">
-            {{f.checkbox
-              label="Make this my primary project"
-              property="primary"
-            }}
-          </div>
-        {{/if}}
+        {{!--
+          {{#if project.isNotPrimary}}
+            <div class="form-group">
+              {{f.checkbox
+                label="Make this my primary project"
+                property="primary"
+              }}
+            </div>
+          {{/if}}
+        --}}
       </div>
     {{/modal.body}}
 

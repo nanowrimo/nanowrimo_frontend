@@ -14,6 +14,7 @@ const Project = Model.extend({
   pinterestUrl: attr('string'),
   playlistUrl: attr('string'),
   primary: attr('number'),
+  unitCount: attr('number'),
   privacy: attr('number', { defaultValue: '2' }),
   slug: attr('string'),
   summary: attr('string'),
@@ -95,7 +96,7 @@ const Project = Model.extend({
   isNotPrimary: computed('isPrimary',function(){
     return !this.get('isPrimary');
   }),
-  unitCount: computed('projectSessions.[]',{
+  /*unitCount: computed('projectSessions.[]',{
     get() {
       // sum of the project.sessions counts where unit-type === 0 (words)
       let count=0;
@@ -106,7 +107,7 @@ const Project = Model.extend({
       });
       return count;
     }
-  }),
+  }),*/
   
   completed: computed('status', function() {
     return this.get('status') === "Completed";
@@ -144,12 +145,12 @@ const Project = Model.extend({
         var m = moment.tz(newStart, "YYYY-MM-DD", tz);
         startsAt = m.clone().startOf('day').utc();
       }
-      //console.log(startsAt);
       //is this pc active?
       if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded ) {
         active = pc;
       }
     });
+    //alert(active);
     return active;
   }),
 
@@ -174,7 +175,7 @@ const Project = Model.extend({
     return  DS.PromiseObject.create({promise});
   }),
   // compute total word count for this a project
-  totalWordCount: computed('projectSessions.[]', function(){
+  /*totalWordCount: computed('projectSessions.[]', function(){
     let count=0;
     //get the project challenges 
     this.get('projectChallenges').forEach((pc)=>{
@@ -183,7 +184,7 @@ const Project = Model.extend({
       }
     });
     return count;
-  }),
+  }),*/
   
   save() {
     let promiseArray = [];

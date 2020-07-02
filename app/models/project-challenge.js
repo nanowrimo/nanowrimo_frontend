@@ -168,6 +168,13 @@ const ProjectChallenge = Model.extend({
     }
   }),
   
+  // The total count, computed by adding the project challenges startCount and currentCount
+  count: computed('startCount', 'currentCount', function(){
+    // Get project sessions for this project_challenge
+    let sc = this.get('startCount');
+    let cc = this.get('currentCount');
+    return (cc-sc);
+  }),
   
   // Returns the total number of words needed to win
   countRemaining: computed('currentCount', function(){
@@ -243,7 +250,7 @@ const ProjectChallenge = Model.extend({
     // get the 'end' of the challenge
     let end = this.get('endsAt');
     // is now after or equal to the end?
-    if (nowString >= end || end==null) {
+    if (nowString > end) {
       return true;
     } else {
       return false;

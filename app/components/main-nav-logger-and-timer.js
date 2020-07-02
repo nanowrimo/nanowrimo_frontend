@@ -15,8 +15,13 @@ export default Component.extend({
   referenceStart: null,
   referenceEnd: null,
   
-  activeProjectChallenge: computed('primaryProject.activeProjectChallenge',function(){
+  /*activeProjectChallenge: computed('primaryProject.activeProjectChallenge',function(){
     return this.get('primaryProject.activeProjectChallenge');
+  }),*/
+  
+  hasActiveProjects: computed('currentUser.user.activeProjects',function(){
+    let aps = this.get('currentUser.user.activeProjects');
+    return (aps.length>0);
   }),
     
   displaySessionButton: computed('displayTimeOnButton', function(){

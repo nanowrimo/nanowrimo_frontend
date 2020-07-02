@@ -7,24 +7,36 @@
     </div>
     <div class="modal-body">
       <div id='menu-progress-update-project-display'>
-        <div class='primary-project-display'>
-          <div class='project-cover' >
-            <div class='project-cover-clip'>
-              <img src="{{primaryProject.coverUrl}}">
+        <div class='primary-project-scrolling-tools'>
+          <div class='primary-project-container'>
+            <div class='primary-project-scrollbox' style={{scrollDistance}}>
+              {{#each activeProjects as |project|}}
+                <div class='primary-project-display'>
+                  <div class='project-cover' >
+                    <div class='project-cover-clip'>
+                      <img src="{{project.coverUrl}}">
+                    </div>
+                  </div>
+                  <div id='project-text'>
+                    <div class='project-title'>
+                      {{project.title}}
+                    </div>
+                    <div class='project-goal-title'>
+                      {{project.activeProjectChallenge.name}}
+                    </div>
+                  </div>
+                </div>
+              {{/each}}
             </div>
           </div>
-          <div id='project-text'>
-            <div class='project-title'>
-              {{primaryProject.title}}
-            </div>
-            <div class='project-goal-title'>
-              {{primaryProject.activeProjectChallenge.name}}
-            </div>
+          <div class='primary-project-scrolling-buttons'>
+            {{#if hasMultipleProjects}}
+              <i class="fa fa-arrow-circle-up" {{action "projectPrevious" }}></i>
+              <i class="fa fa-arrow-circle-down" {{action "projectNext" }}></i>
+            {{/if}}
           </div>
         </div>
-     
-      <div id='progress-update-form'>
-
+        <div id='progress-update-form'>
           <form>
             <div class="form-group">
               <div id="progress-update-form-inputs" class='form-group'>
