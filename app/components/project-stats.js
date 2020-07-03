@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
@@ -15,6 +15,13 @@ export default Component.extend({
   project: null,
   projectChallenge: null,
   projectChallenges: null,
+  
+  
+  // observe the projectChallenge
+  projectChallengeObserver: observer('projectChallenge', function(){
+    let pc = this.get('projectChallenge');
+    pc.loadAggregates();
+  }),
   
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     //now is a good time to update the whereIwrite
@@ -336,10 +343,11 @@ export default Component.extend({
         //the user has no projects :/
       }
     }
-    // if there is no projectChallenge, there are no stats to display
-    if (this.get('projectChallenge') ) {
-      //fetch the aggregates
-      this.fetchAggregates();
+    // is there a project challenge?
+    let pc = this.get('projectChallenge')
+    if (pc){
+      // it should load it's aggregates
+      pc.loadAggregates();
     }
   },
 

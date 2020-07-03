@@ -1,13 +1,16 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany, belongsTo } from 'ember-data/relationships';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import moment from 'moment';
 import { inject as service } from '@ember/service';
+import ENV from 'nanowrimo/config/environment';
 
 const ProjectChallenge = Model.extend({
   currentUser: service(),
   store: service(),
+  session: service(),
+  
   user_id: attr('number'),
   project_id: attr('number'),
   challenge_id: attr('number'),
@@ -34,8 +37,9 @@ const ProjectChallenge = Model.extend({
   feeling: attr('number'),
   where: attr('number'),
   speed: attr('number'),
-  when: attr('number'),
 
+  // the daily aggregates will be updated when the projectChallenge's currentCount changes
+  dailyAggregates: null,
   
   // ---------------------------
   // BEGINNING OF RELATIONSHIP FUNCTIONS
@@ -106,6 +110,11 @@ const ProjectChallenge = Model.extend({
   // ---------------------------
   // END OF DATETIME FUNCTIONS
   // ---------------------------
+  
+  
+  countObserver: observer('currentCount', function(){
+    this.loadAggregates();
+  }),
   
   countPerDay: computed('goal', 'duration', function(){
     let g = this.get('goal');
@@ -273,6 +282,25 @@ const ProjectChallenge = Model.extend({
       return false;
     }
   }),
+  
+  loadAggregates: function() {
+     // fetch the daily aggregates that reference this project challenge
+    let endpoint =  `${ENV.APP.API_HOST}/project-challenges/${this.get('id')}/daily-aggregates`;
+    let { auth_token } = this.get('session.data.authenticated');
+    //fetch the stats from the API
+    fetch(endpoint, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+    }).then(resp=>{
+      resp.json().then(json=>{
+        // convert the JSON-API response to something more sane
+        let aggs = [];
+        json.data.forEach((agg)=>{
+          aggs.pushObject(agg.attributes);
+        });
+        this.set('dailyAggregates', aggs);
+      });
+    });
+  }
   
 });
 
