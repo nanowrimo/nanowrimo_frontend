@@ -36,6 +36,7 @@ const ProjectChallenge = Model.extend({
   how: attr('number'),
   feeling: attr('number'),
   where: attr('number'),
+  when: attr('number'),
   speed: attr('number'),
   streak: attr('number'),
 
