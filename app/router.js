@@ -89,6 +89,7 @@ Router.map(function() {
     
     /* TODO: refactor to a generic winner route */
     //temporary route to camp-nanowrimo-april-2020-winner 
+    this.route('camp-nanowrimo-july-2020-winner');
     this.route('camp-nanowrimo-april-2020-winner');
     this.route('nano-winner-2019');
     

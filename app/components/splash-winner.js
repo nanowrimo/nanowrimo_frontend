@@ -23,10 +23,10 @@ export default Component.extend({
     let path = (i) ? "/images/splash/certificate.png" : "/images/splash/camp-2020-certificate.png";
     return path;
   }),
-  
+
   winnerRoute: computed('isNaNo', function(){
     let i = this.get('isNaNo');
-    let route = (i) ? "authenticated.nano-winner-2019" : "authenticated.camp-nanowrimo-april-2020-winner";
+    let route = (i) ? "authenticated.nano-winner-2019" : "authenticated.camp-nanowrimo-july-2020-winner";
     return route;
   }),
   
