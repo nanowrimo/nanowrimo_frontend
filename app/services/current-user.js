@@ -18,7 +18,7 @@ export default Service.extend({
         return this.get('store').query('project',
         {
           filter: { user_id: user.id },
-          include: 'genres,challenges,project-challenges,daily-aggregates'
+          include: 'genres,challenges,project-challenges'
 
         }).then(() => {
             //get the current user's buddies and regions
