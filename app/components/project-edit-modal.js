@@ -3,6 +3,8 @@ import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
 
+const DEFAULT_TAB = 'overview';
+
 export default Component.extend({
   store: service(),
   tagName: '',
@@ -11,6 +13,8 @@ export default Component.extend({
   user: null,
   project: null,
   newPrimaryValue: false,
+  showConfirmDelete: false,
+  
   
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
@@ -25,7 +29,47 @@ export default Component.extend({
     return Project.optionsForWritingType;
   }),
 
+  activeTab: computed('tab', {
+    get() {
+      return this.get('tab') || DEFAULT_TAB;
+    },
+    set(key, value) {
+      if (value === DEFAULT_TAB) {
+        this.set('tab', null);
+      } else {
+        this.set('tab', value);
+      }
+      return value;
+    }
+  }),
+  
+  init(){
+    this._super(...arguments);
+    this.set('deleteConfirmationTitleText', "Confirm Delete");
+    let title = this.get('project.title');
+    this.set('deleteConfirmationQuestion', `Delete "${title}"?`);
+    this.set('deleteConfirmationQuestionAddendum', "Deleting your project will also delete all associated goals and writing progress.");
+    this.set('deleteConfirmationYesText','Delete'); 
+    this.set('deleteConfirmationNoText','Cancel'); 
+  },
+
   actions: {
+    
+    confirmDelete(){
+      //show the delete dialog
+      this.set('showConfirmDelete', true);
+    },
+    
+    deleteConfirmationYes(){
+      this.get('project').destroyRecord();
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    deleteConfirmationNo(){
+      //close the modal
+      this.set('showConfirmDelete', false);
+    },
+    
 
     onShow() {
       this.set('open', true);

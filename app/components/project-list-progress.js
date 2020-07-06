@@ -4,7 +4,9 @@ import moment from 'moment';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  currentUser: service(),
   progressUpdaterService: service(),
+  router: service(),
   
   project: null,
   
@@ -92,6 +94,10 @@ export default Component.extend({
       let p = this.get('project');
       pus.toggleSessionForm(p.id);
     },
+    
+    viewGoals() {
+      this.get('router').transitionTo('authenticated.users.show.projects.show.goals', this.get('currentUser.user.slug'), this.get('project.slug') );
+    }
     
   }
   

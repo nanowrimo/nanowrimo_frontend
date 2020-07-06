@@ -1,6 +1,8 @@
 <div class='goal-text'>
-  <span class='goal'>Goal: </span>
-  <span class=''>{{writingTypeString}} {{format-number project.currentProjectChallenge.goal}} words {{{goalIcon}}}</span>
+  <a href="#" {{action "viewGoals"}}>
+    <span class='goal'>Goal: </span>
+    <span class=''>{{writingTypeString}} {{format-number project.currentProjectChallenge.goal}} words {{{goalIcon}}}</span>
+  </a>
 </div>
 
 {{nano-progress-bar percent=percentCompleted}}

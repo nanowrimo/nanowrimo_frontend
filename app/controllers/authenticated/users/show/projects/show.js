@@ -12,6 +12,8 @@ export default Controller.extend({
   displayCoverEditModal: false,
   author: null,
   projectSlug: null,
+  editTab: null,
+  
   
 
   canEdit: computed('author','currentUser.user', function(){
@@ -28,6 +30,8 @@ export default Controller.extend({
     editProject() {
       if(this.get('canEdit')){
         this.set('displayEditModal', true);
+        this.set('editTab', 'overview');
+        
       }
     },
     afterCoverModalClose() {
@@ -43,10 +47,11 @@ export default Controller.extend({
       }
     },
     editCover() {
-      if(this.get('canEdit')){
-        this.set('displayCoverEditModal', true);
+      if(this.get('canEdit')) {
+        this.set('displayEditModal', true);
+        this.set('editTab', 'coverTab');
       }
-    }
+    },
   },
 
    _needsURLUpdate() {

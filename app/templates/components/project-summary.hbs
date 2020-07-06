@@ -7,38 +7,9 @@
         {{/if}}
       --}}
       {{#if canEdit}}
-        <span class='nw-listing-action-dropdown'>
-        {{#bs-dropdown class='project-summary-dropdown' as |dd|}}
-          {{#dd.toggle}}
-            <span aria-hidden='false' class='hidden'>Display project options.</span>
-          {{/dd.toggle}}
-          {{#dd.menu align='right' as |menu|}}
-            {{#menu.item}}
-              <a href="#" {{action "editProject"}}>
-                <div class='full-width-menu-item'>Edit Project</div>
-              </a>
-            {{/menu.item}}
-             {{menu.divider}}
-            {{#menu.item}}
-              <a href="#" {{action "updateCover"}}>
-                <div class='full-width-menu-item'>Update Cover</div>
-              </a>
-            {{/menu.item}}
-             {{menu.divider}}
-            {{#menu.item}}
-              <a href="#" {{action "viewGoals"}}>
-                <div class='full-width-menu-item'>View Project Goals</div>
-              </a>
-            {{/menu.item}}
-             {{menu.divider}}
-            {{#menu.item}}
-              <a href="#" {{action "confirmDelete"}}>
-                <div class='full-width-menu-item'>Delete</div>
-              </a>
-            {{/menu.item}}
-          {{/dd.menu}}
-        {{/bs-dropdown}}
-        </span>
+        <a href="#" {{action "editProject"}}>
+          <i class="fa fa-gear"></i>
+        </a>
       {{/if}}
     </div>
   </div>
