@@ -1,8 +1,4 @@
-import { set, get, computed } from '@ember/object';
-import { reads }  from '@ember/object/computed';
 import Service from '@ember/service';
-
-import ENV from 'nanowrimo/config/environment';
 
 export default Service.extend({
   
