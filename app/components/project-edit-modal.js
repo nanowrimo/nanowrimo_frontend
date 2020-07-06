@@ -64,10 +64,12 @@ export default Component.extend({
       this.get('project').destroyRecord();
       //close the modal
       this.set('showConfirmDelete', false);
+      this.set('open',false);
     },
     deleteConfirmationNo(){
       //close the modal
       this.set('showConfirmDelete', false);
+      this.set('open',false);
     },
     
 
