@@ -6,7 +6,11 @@
 {{nano-progress-bar percent=percentCompleted}}
 <div class="left-right-links">
   <div class='progress-text'>
-    <span class="count {{if goalMet 'goal-met' ''}}">{{format-number project.currentProjectChallenge.count}}</span><span class='goal'> / {{format-number project.currentProjectChallenge.goal}} WORDS</span>
+    <span class="count {{if goalMet 'goal-met' ''}}">{{format-number project.currentProjectChallenge.count}}</span>
+    <span class='goal'> / {{format-number project.currentProjectChallenge.goal}} WORDS </span>
+    {{#if project.currentProjectChallenge.isActive}}
+      <button class='nano-button-small' {{action 'toggleProgressUpdater'}}>Update</button>
+    {{/if}}
   </div>
   <div class='challenge-start'>
     <span class="started">{{formattedLabel}}</span>

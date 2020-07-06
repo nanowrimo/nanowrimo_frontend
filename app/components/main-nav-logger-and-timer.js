@@ -6,14 +6,23 @@ import moment from 'moment';
 
 export default Component.extend({
   currentUser: service(),
+  progressUpdaterService: service(),
 
-  displaySessionForm: false,
-  displayTimerForm: false,
+  //displaySessionForm: false,
+  //displayTimerForm: false,
   timerIsRunning: false,
   stopwatchRunning: false,
   timeProgress: null,
   referenceStart: null,
   referenceEnd: null,
+  
+  displaySessionForm: computed('progressUpdaterService.displaySessionForm', function() {
+    return this.get('progressUpdaterService.displaySessionForm');
+  }),
+  
+  displayTimerForm: computed('progressUpdaterService.displayTimerForm', function() {
+    return this.get('progressUpdaterService.displayTimerForm');
+  }),
   
   /*activeProjectChallenge: computed('primaryProject.activeProjectChallenge',function(){
     return this.get('primaryProject.activeProjectChallenge');
@@ -50,12 +59,14 @@ export default Component.extend({
 
   actions: {
     toggleSessionForm: function() {
-      if (this.get('displaySessionForm')) {
+      let pus = this.get('progressUpdaterService');
+      pus.toggleSessionForm();
+      /*if (this.get('displaySessionForm')) {
         this.set('displaySessionForm', false);
       } else {
         this.set('displaySessionForm', true);
         this.set('displayTimerForm', false);
-      }
+      }*/
     },
     toggleTimerForm: function() {
       //is there a stopwatch running?
@@ -101,8 +112,10 @@ export default Component.extend({
       }
     },
     hideForms: function() {
-      this.set('displaySessionForm', false);
-      this.set('displayTimerForm', false);
+      let pus = this.get('progressUpdaterService');
+      pus.hideForms();
+      //this.set('displaySessionForm', false);
+      //this.set('displayTimerForm', false);
     },
     checkTimer: function(){
       this._checkTimer();

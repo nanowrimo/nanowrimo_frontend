@@ -270,6 +270,25 @@ const ProjectChallenge = Model.extend({
     return Math.round(duration.asDays());
   },
   
+  // Returns true if the challenge has started, otherwise false
+  hasStarted: computed('startsAt', function() {
+    // get the user 
+    let tz = this.get('currentUser.user.timeZone');
+    //when is now in the user's tz?
+    let now = moment().tz(tz);
+    //get just the Date  of now in the user's tz
+    let nowString = now.format("YYYY-MM-DD");
+    // get the 'start' of the challenge
+    let start = this.get('startsAt');
+    // is now after or equal to the start?
+    if (nowString >= start) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
+  // Returns true if the challenge has ended, otherwise false
   hasEnded: computed('endsAt', function() {
      // get the user 
     let tz = this.get('currentUser.user.timeZone');
@@ -287,22 +306,16 @@ const ProjectChallenge = Model.extend({
     }
   }),  
   
-  hasStarted: computed('startsAt', function() {
-    // get the user 
-    let tz = this.get('currentUser.user.timeZone');
-    //when is now in the user's tz?
-    let now = moment().tz(tz);
-    //get just the Date  of now in the user's tz
-    let nowString = now.format("YYYY-MM-DD");
-    // get the 'start' of the challenge
-    let start = this.get('startsAt');
-    // is now after or equal to the start?
-    if (nowString >= start) {
-      return true;
-    } else {
-      return false;
-    }
+  // Returns true if the challenge is on-going, otherwise false
+  isActive: computed('hasStarted', 'hasEnded', function() {
+    // Find out if the challenge has started
+    let hs = this.get('hasStarted');
+    // Find out if the challenge has ended
+    let he = this.get('hasEnded');
+    // Return true is started but not ended, otherwise false
+    return (hs && !he);
   }),
+  
   
 });
 

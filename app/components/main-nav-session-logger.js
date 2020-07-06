@@ -7,6 +7,7 @@ import {isNull} from "lodash"
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  progressUpdaterService: service(),
 
   closeFormAction: null,
   countType: 0,
@@ -146,24 +147,32 @@ export default Component.extend({
       this.set('_projectAdditionalInfoShow',false);
       this.send('toggleAdditionalInfo');
     }
-    // Set the default primary project
+    // If a specific project has been pre-specified
     let aps = this.get('activeProjects');
-    let highestCount = -1;
+    let pus = this.get('progressUpdaterService');
+    let dpid = pus.defaultProjectId;
     let pSelected = 0;
-    for (let i=0; i<aps.length; i++) {
-      if (aps[i].primary>highestCount) {
-        highestCount = aps[i].primary
-        pSelected = i;
+    if (dpid) {
+      for (let i=0; i<aps.length; i++) {
+        if (aps[i].id===dpid) {
+          pSelected = i;
+        }
+      }
+    } else {
+      // Set the default primary project
+      let highestCount = -1;
+      for (let i=0; i<aps.length; i++) {
+        if (aps[i].primary>highestCount) {
+          highestCount = aps[i].primary
+          pSelected = i;
+        }
       }
     }
     this.set('projectSelected', pSelected);
     this.resetCount();
-    
   },
   
   resetCount() {
-    //let user = this.get('user');
-    // count by session?
     let cbs = this.get('countType');
     switch(cbs) {
       case -1:

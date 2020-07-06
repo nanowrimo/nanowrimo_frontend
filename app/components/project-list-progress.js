@@ -1,8 +1,11 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import moment from 'moment';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  progressUpdaterService: service(),
+  
   project: null,
   
   writingTypeString: computed('project.currentProjectChallenge.writingType',function() {
@@ -81,5 +84,15 @@ export default Component.extend({
     }
     return str;
   }),
+  
+  actions: {
+    
+    toggleProgressUpdater() {
+      let pus = this.get('progressUpdaterService');
+      let p = this.get('project');
+      pus.toggleSessionForm(p.id);
+    },
+    
+  }
   
 });
