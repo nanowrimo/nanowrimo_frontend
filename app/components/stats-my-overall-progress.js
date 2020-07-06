@@ -138,6 +138,7 @@ export default ChartBaseComponent.extend({
     return cData;
   }),
   
+  // determine the user's daily totals based on the days in the challenge and the dailyAggregates
   userDailyTotals: computed('projectChallenge.dailyAggregates.[]', function() {
     let dailyAggs = this.get('projectChallenge.dailyAggregates');
     let dates = this.get('projectChallenge.dates');
