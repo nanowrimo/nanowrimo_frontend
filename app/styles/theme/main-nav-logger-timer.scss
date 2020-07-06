@@ -359,9 +359,12 @@
   }
   .primary-project-scrolling-buttons {
     padding: 15px;
-    padding-right: 0px;
+    padding-right: 15px;
     font-size: 30px;
     color: #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     i {
       cursor: pointer;
     }
