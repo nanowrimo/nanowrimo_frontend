@@ -2,24 +2,7 @@ import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { computed } from '@ember/object';
 
 export default ChartBaseComponent.extend({
-  // The data must be an array of 24 numbers, one for each hour of the day, beginning at midnight
-  /*countData: computed('hourAggregates.[]', function() {
-    return this.get('hourAggregates');
-  }),*/
-  
-  // Finds the hour with the maximum count
-  /*maxHour: computed('countData.[]', function() {
-    var cData = this.get('countData');
-    var mVal = 0;
-    var mHour = 0;
-    for (var i = 0; i < cData.length; i++) { 
-      if (cData[i]>mVal) {
-        mVal = cData[i];
-        mHour = i;
-      }
-    }
-    return mHour;
-  }),*/
+
   // Finds the hour with the maximum count
   maxHour: computed('projectChallenge.when', function() {
     var pcwhen = this.get('projectChallenge.when');
@@ -29,20 +12,7 @@ export default ChartBaseComponent.extend({
     var pcwhen = this.get('projectChallenge.when');
     return (pcwhen!==null);
   }),
-  /*hasData: computed('hourAggregates.[]', function(){
-    let aggs = this.get('hourAggregates');
-    let retval = false;
-    //loop!
-    if (aggs) {
-      for (var i=0; i < aggs.length; i++) {
-        if(aggs[i] > 0) {
-          retval = true;
-          break;
-        }
-      }
-    }
-    return retval;
-  }),*/
+
   // Gets the animal type from time period with the most writing
   animalType: computed('maxHour',function() {
     var mHour = this.get('maxHour');
