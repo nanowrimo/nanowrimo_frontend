@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
@@ -15,6 +15,13 @@ export default Component.extend({
   project: null,
   projectChallenge: null,
   projectChallenges: null,
+  
+  
+  // observe the projectChallenge
+  projectChallengeObserver: observer('projectChallenge', function(){
+    let pc = this.get('projectChallenge');
+    pc.loadAggregates();
+  }),
   
   userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
     //now is a good time to update the whereIwrite
@@ -36,34 +43,6 @@ export default Component.extend({
     }
   }),
   
-  /*userDailyAggregates: computed('challengeSessions.[]', function() {
-    let css = this.get('challengeSessions');
-    let dates = this.get('projectChallenge.dates');
-    if(dates) {
-      let today = moment().format("YYYY-MM-DD");
-      let todayFound = false;
-      //create an aggregates array
-      let aggs = {};
-      for (var i = 0; i < dates.length; i++) {
-        let key = dates[i];
-        if (todayFound) {
-          aggs[key] = null;
-        } else {
-          aggs[key] = 0;
-        }
-        if (key == today) {
-          todayFound = true;
-        }
-      }
-      
-      //loop the sessions
-      css.forEach((cs)=>{
-        var k = moment(cs.end).format("YYYY-MM-DD");
-        aggs[k]+=cs.count;
-      });
-      return aggs;
-    }
-  }),*/
   userDailyAggregates: computed('challengeDailyAggregates.[]', function() {
     let das = this.get('challengeDailyAggregates');
     let dates = this.get('projectChallenge.dates');
@@ -120,30 +99,7 @@ export default Component.extend({
       }
     }
   }),
- /* writingSpeed: computed('challengeSessions.[]',function() {
-    let sessions = this.get('challengeSessions');
-    if (sessions) {
-      let minutes = 0;
-      let count = 0;
-      
-      //loop through the sessions
-      sessions.forEach((s)=>{
-        //is there a start and end?
-        if(s.start && s.end) {
-          let start = moment(s.start);
-          let end = moment(s.end);
-          //get the difference in minutes
-          minutes += end.diff(start,'minutes');
-          count+= s.count;
-        }
-      });
-      if (minutes && count) {
-        return parseInt(count/minutes);
-      } else {
-        return 0;
-      }
-    }
-  }),*/
+
   
   writingSpeed: computed('projectChallenge.speed',function() {
     let s = this.get('projectChallenge.speed');
@@ -153,26 +109,7 @@ export default Component.extend({
     return s;
   }),
   
-  /*averageFeeling: computed('challengeSessions.[]',function() {
-    let sessions = this.get('challengeSessions');
-    if (sessions) {
-      let feelings = {};
-      //loop through the sessions
-      sessions.forEach((s)=>{
-        if (s.feeling) {
-          
-          if ( feelings[s.feeling])
-          {
-            feelings[s.feeling]+=1;
-          } else {
-            feelings[s.feeling]=1;
-          }
-        }
-      });
-      let key = this._objectKeyWithHighestValue(feelings);
-      return parseInt(key);
-    }
-  }),*/
+
   averageFeeling: computed('projectChallenge.feeling',function() {
     let f = this.get('projectChallenge.feeling');
     return f;
@@ -262,15 +199,6 @@ export default Component.extend({
       return average;
     }
   }),
-  /*userPercentData: computed('projectChallenge','project.projectSessions.[]', function() {
-    //create the data thingy for the current user 
-    let percent = parseInt(this.get('count')*100/this.get('goal'));
-    var data = {
-      name: this.get('currentUser.user.name'),
-      percent: percent
-    };
-    return data;
-  }),*/
   
   userPercentData: computed('projectChallenge','project.computedDailyAggregates.[]', function() {
     //create the data thingy for the current user 
@@ -378,44 +306,20 @@ export default Component.extend({
     }
   }),
 
-  /*challengeSessions: computed('project','projectChallenge','project.projectSessions.[]', function() {
-    let cStart = moment( this.get('projectChallenge.startsAt') );
-    let cEnd = moment( this.get('projectChallenge.endsAt') ).add(1,'d');
-    let pc = this.get('projectChallenge.nanoEvent');
-    // Get the currentUser's timezone
-    let tz = this.get('currentUser.user.timeZone');
-    // If this is a nano event, calculate from the beginning of the day
-    if (pc) {
-      // Figure out when the event should start in the user's timezone
-      let newStart = cStart.utc().format("YYYY-MM-DD");
-      var m = moment.tz(newStart, "YYYY-MM-DD", tz);
-      var start = m.clone().startOf('day').utc();
-      cStart = start;
-      let newEnd = cEnd.utc().format("YYYY-MM-DD");
-      m = moment.tz(newEnd, "YYYY-MM-DD", tz);
-      var end = m.clone().startOf('day').utc();
-      cEnd = end;
-      //alert(start);
-    }
-    let p = this.get('project');
-    if (p) {
-      //get the projectSessions created during the projectChallenge
-      let sessions = this.get('project.projectSessions');
-      let newSessions = [];
-      sessions.forEach((s)=>{
-        let sCreated = moment(s.createdAt).utc();
-        if (s.end) {
-          sCreated = moment(s.end).utc();
-        }
-        //alert(sCreated);
-        if(cStart.isBefore(sCreated) && sCreated.isBefore(cEnd) ){
-          //alert('included');
-          newSessions.push(s);
-        }
-      });
-      return newSessions;
-    }
-  }),*/
+  // get all sessions in the store when this projectChallenges sessions array changes
+  sessions: computed('projectChallenge.projectSessions.[]', function() {
+    let s = this.get('store');
+    let sessions = s.peekAll('projectSession');
+    return sessions;
+  }),
+  
+  // filter the sessions that are specific to this project Challenge
+  projectChallengeSessions: computed('sessions.[]', function() {
+    let pc = this.get('projectChallenge');
+    //peek the sessions associated with the projectChallenge
+    let sessions = this.get('sessions').filterBy('project_challenge_id', parseInt(pc.id));
+    return sessions;
+  }),
 
   init(){
     this._super(...arguments);
@@ -439,10 +343,11 @@ export default Component.extend({
         //the user has no projects :/
       }
     }
-    // if there is no projectChallenge, there are no stats to display
-    if (this.get('projectChallenge') ) {
-      //fetch the aggregates
-      this.fetchAggregates();
+    // is there a project challenge?
+    let pc = this.get('projectChallenge')
+    if (pc){
+      // it should load it's aggregates
+      pc.loadAggregates();
     }
   },
 
@@ -494,8 +399,8 @@ export default Component.extend({
     }).catch(() => {
       alert('Failed to get aggregates');
     });
-     
   },
+  
   _updateWhereIWrite: function(){
     //default to null
     this.set('whereIWrite', null);
