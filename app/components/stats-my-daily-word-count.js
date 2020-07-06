@@ -1,9 +1,10 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { get,computed } from '@ember/object';
+import moment from 'moment';
 
 export default ChartBaseComponent.extend({
-
-  countData: computed('myChartType','userDailyAggregates.[]',function() {
+  
+  countData: computed('myChartType','userDailyCounts.[]',function() {
     let cData = [
       {
         name: 'My count',
@@ -25,7 +26,7 @@ export default ChartBaseComponent.extend({
       return 'column';
     }
   }),
-  chartOptions: computed(function() {
+  chartOptions: computed('xAxisRange', function() {
     // Set _this equal to component for later reference
     // let _this = this;
     let cOptions = {
@@ -97,16 +98,53 @@ export default ChartBaseComponent.extend({
     return cData;
   }),
   
-  userData: computed('userDailyAggregates.[]', function(){
-    let aggs = this.get('userDailyAggregates');
-    if(aggs) {
-      return Object.values(aggs);
+  userData: computed('userDailyCounts.[]', function(){
+    let counts = this.get('userDailyCounts');
+    if(counts) {
+      return Object.values(counts);
+    } else {
+      return [];
     }
   }),
-  xAxisRange: computed('userDailyAggregates.[]', function(){
-    let aggs = this.get('userDailyAggregates');
-    if(aggs) {
-      return Object.keys(aggs);
+  xAxisRange: computed('projectChallenge', function(){
+    return this.get('projectChallenge.dates');
+  }),
+  
+  userDailyCounts: computed('projectChallenge.dailyAggregates.[]', function() {
+    let das = this.get('projectChallenge.dailyAggregates');
+    let dates = this.get('projectChallenge.dates');
+    // were dates found?
+    if(dates && das) {
+      let today = moment().format("YYYY-MM-DD");
+      let todayFound = false;
+      //create an counts array
+      let counts = {};
+      //loop through the dates
+      for (var i = 0; i < dates.length; i++) {
+        // use the date as a key
+        let key = dates[i];
+        if (todayFound) {
+          counts[key] = null;
+        } else {
+          counts[key] = 0;
+        }
+        if (key == today) {
+          todayFound = true;
+        }
+      }
+      
+      //loop the dailyAggregates
+      das.forEach((da)=>{
+        var k = da.day;
+        counts[k]+=da.count;
+      });
+      return counts;
+      
+    } else {
+      return [];
     }
-  })
+    
+  }),
+  
+  
 });

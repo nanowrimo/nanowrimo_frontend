@@ -60,13 +60,14 @@ export default ChartBaseComponent.extend({
     }
     return data;
   }),
-  percentNeededToday: computed("countNeededTodayData", function(){
+  
+  percentNeededToday: computed("countNeededTodayData.percent", function(){
     let cntd = this.get('countNeededTodayData');
     if(cntd) {
       return cntd.percent;
     }
   }),
-  countNeededToday: computed("countNeededTodayData", function(){
+  countNeededToday: computed("countNeededTodayData.needed", function(){
     let cntd = this.get('countNeededTodayData');
     if(cntd) {
       return cntd.needed;
@@ -83,7 +84,7 @@ export default ChartBaseComponent.extend({
   }),
 
 
-  chartData: computed('unitsTodayData', function() {
+  chartData: computed('countNeededToday','percentNeededToday', function() {
     let ud = this.get('unitsTodayData');
     let car = this.get('colorsAndRadius');
     let cFormat = [];

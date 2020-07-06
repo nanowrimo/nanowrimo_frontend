@@ -36,7 +36,9 @@ const ProjectChallenge = Model.extend({
   how: attr('number'),
   feeling: attr('number'),
   where: attr('number'),
+  when: attr('number'),
   speed: attr('number'),
+  streak: attr('number'),
 
   // the daily aggregates will be updated when the projectChallenge's currentCount changes
   dailyAggregates: null,
@@ -186,7 +188,7 @@ const ProjectChallenge = Model.extend({
   }),
   
   // Returns the total number of words needed to win
-  countRemaining: computed('currentCount', function(){
+  countRemaining: computed('currentCount','goal', function(){
     // Compute remaining words
     let remaining = this.get('goal') - this.get('currentCount');
     // If less than zero, set to zero
@@ -198,8 +200,24 @@ const ProjectChallenge = Model.extend({
   }),
   
   // Returns the number of words written today, as defined by daily aggregates
-  todayCount: computed('projectSessions.[]', function(){
-    
+  todayCount: computed('dailyAggregates.[]', function(){
+    let count = 0;
+    //get the daily aggregates
+    let aggs = this.get('dailyAggregates');
+    if (aggs) {
+      let user = this.get('store').peekRecord('user', this.get('user_id'));
+      let date = user.currentDateStringInTimeZone;
+      //loop the aggs
+      for (var i = 0; i< aggs.length; i++) {
+        //get the indexed aggregate
+        let todayAgg = aggs[i];
+        if (todayAgg.day == date) {
+          count = todayAgg.count;
+          break;
+        }
+      }
+    }
+    return count;
   }),
   
   metGoal: computed('goal', 'count', function(){

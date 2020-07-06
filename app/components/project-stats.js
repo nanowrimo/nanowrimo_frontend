@@ -71,27 +71,24 @@ export default Component.extend({
       return aggs;
     }
   }),
+  
   countNeededTodayData: computed('count','projectChallenge.{countRemaining,daysRemaining,todayCount}', function() {
     let pc = this.get('projectChallenge');
     if (pc) {
       if (pc.hasEnded) {
         return {'needed':0,"percent":0};
       }
-      
       //countRemaining
       let countRemaining = this.get('projectChallenge.countRemaining');
       //daysRemaining
       let daysRemaining = this.get('projectChallenge').daysRemaining();
       //countToday
       let todayCount = this.get('projectChallenge.todayCount');
-      //countPerDayToFinishOnTime = countRemaining+countToday/daysRemaining
-      //let countPerDay = parseInt((countRemaining+todayCount) / daysRemaining);
       let countPerDay = Math.round((countRemaining+todayCount) / daysRemaining);
       //needed = countPerDayToFinishOnTime - countToday
       let needed = countPerDay - todayCount;
       //percent = needed*100/countPerDayToFinishOnTime
       let percent = Math.round(todayCount*100/countPerDay);
-
       if (needed>0){
         return {'needed':needed,"percent":percent};
       }else{
@@ -100,7 +97,6 @@ export default Component.extend({
     }
   }),
 
-  
   writingSpeed: computed('projectChallenge.speed',function() {
     let s = this.get('projectChallenge.speed');
     if (s===null) {
@@ -161,28 +157,7 @@ export default Component.extend({
     }
     return retval;
   }),
-  userDailyTotals: computed('userDailyAggregates.[]', function() {
-    let udas = this.get('userDailyAggregates');
-    let dates = this.get('projectChallenge.dates');
-    if(udas) {
-      let totals = [];
-      //loop through the dates 
-      for(var i=0; i < dates.length; i++) {
-        var date = dates[i];
-        //if the date is in the future...
-        if(moment(date).isAfter()) {
-          break;
-        }
-        var val = udas[date];
-        var tval = val;
-        if(i > 0) {
-          tval +=totals[i-1];
-        }
-        totals[i] = tval; 
-      }
-      return totals;
-    }
-  }),
+
   dailyAverage: computed('userDailyAggregates.[]', function(){
     let aggs = this.get('userDailyAggregates');
     if (aggs) {
@@ -200,9 +175,11 @@ export default Component.extend({
     }
   }),
   
-  userPercentData: computed('projectChallenge','project.computedDailyAggregates.[]', function() {
+  userPercentData: computed('projectChallenge.currentCount', function() {
     //create the data thingy for the current user 
-    let percent = parseInt(this.get('count')*100/this.get('goal'));
+    let currentCount = this.get('projectChallenge.currentCount');
+    let goal = this.get('goal');
+    let percent = (currentCount*100/goal);
     var data = {
       name: this.get('currentUser.user.name'),
       percent: percent
@@ -223,26 +200,11 @@ export default Component.extend({
    return this.get('projectChallenge.unitTypeSingular'); 
   }),
   
-  /*count: computed('challengeSessions.[]', function() {
-    // get the sessions
-    let css = this.get('challengeSessions');
-    let sum = 0;
-    // are there sessions to process?
-    if (css) {
-      css.forEach((cs)=>{ sum+=cs.count});
-    }
-    return sum;
-  }),*/
-  count: computed('challengeDailyAggregates.[]', function() {
-    // get the sessions
-    let css = this.get('challengeDailyAggregates');
-    let sum = 0;
-    // are there sessions to process?
-    if (css) {
-      css.forEach((cs)=>{ sum+=cs.count});
-    }
-    return sum;
+
+  count: computed('projectChallenge.currentCount', function() {
+    return this.get('projectChallenge.currentCount');
   }),
+  
   projectedFinishDate: computed('challengeSessions.[]', function() {
     //  today's date + (goal remaining / average per day) days  
     let date = moment();
@@ -265,17 +227,6 @@ export default Component.extend({
       return todays;
     }
   }),
-  
-  /*todaysCount: computed('todaysSessions.[]', function() {
-    let sum = 0;
-    let ts = this.get('todaysSessions');
-    if (ts) {
-      ts.forEach((s)=>{
-        sum+=s.count;
-      });
-      return sum;
-    }
-  }),*/
   
   todaysCount: computed('challengeDailyAggregates.[]', function() {
     let count = 0;

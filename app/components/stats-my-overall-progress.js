@@ -1,5 +1,6 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import { get,computed } from '@ember/object';
+import moment from 'moment';
 
 export default ChartBaseComponent.extend({
   
@@ -16,7 +17,7 @@ export default ChartBaseComponent.extend({
     }
     return data;
   }),
-  countData: computed('myChartType','userDailyTotals.[]',function() {
+  countData: computed('myChartType','projectChallenge.dailyAggregates.[]',function() {
     let cData = [
       {
         name: 'My count',
@@ -131,8 +132,41 @@ export default ChartBaseComponent.extend({
     };
     return cOptions;
   }),
+  
   chartData: computed('countData',function() {
     let cData = get(this,'countData');
     return cData;
-  })
+  }),
+  
+  // determine the user's daily totals based on the days in the challenge and the dailyAggregates
+  userDailyTotals: computed('projectChallenge.dailyAggregates.[]', function() {
+    let dailyAggs = this.get('projectChallenge.dailyAggregates');
+    let dates = this.get('projectChallenge.dates');
+    if(dailyAggs) {
+      let totals = [];
+      //loop through the dates that the project will be active
+      for(var i=0; i < dates.length; i++) {
+        var date = dates[i];
+        //if the date is in the future...
+        if(moment(date).isAfter()) {
+          break;
+        }
+        // find the daily aggregate for the date
+        var agg = dailyAggs.filterBy('day', date)[0];
+        var val = 0;
+        if (agg) {
+          val = agg.count;
+        }
+        
+        var tval = val;
+        if(i > 0) {
+          tval +=totals[i-1];
+        }
+        totals[i] = tval; 
+      }
+      return totals;
+    } else {
+      return [];
+    }
+  }),
 });
