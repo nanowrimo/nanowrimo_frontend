@@ -81,7 +81,7 @@ export default Component.extend({
   fetchSessions: function(initial) {
     let store = this.get('store');
     let pc = this.get('projectChallenge');
-    let options = {projectChallengeId: pc.id, limit:50};
+    let options = {projectChallengeId: pc.id, limit: 5};
     if (!initial) {
       // what is the oldest end?
       let sessions = this.get('sortedUpdates');
