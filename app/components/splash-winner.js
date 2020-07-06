@@ -24,6 +24,7 @@ export default Component.extend({
     return path;
   }),
   
+  
   winnerRoute: computed('isNaNo', function(){
     let i = this.get('isNaNo');
     let route = (i) ? "authenticated.nano-winner-2019" : "authenticated.camp-nanowrimo-july-2020-winner";
