@@ -23,9 +23,7 @@ export default Component.extend({
     pc.loadAggregates();
   }),
   
-  userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
-    //now is a good time to update the whereIwrite
-    this._updateWhereIWrite();
+  userUnitsToday: computed('projectChallenge', function() {
     var data = {
       name: this.get('currentUser.user.name'),
       countToday: this.get('todaysCount'),
@@ -34,43 +32,7 @@ export default Component.extend({
     return data;
   }),
   
-  hasDailyAggregates: computed('userDailyAggregates.[]', function(){
-    let das = this.get('userDailyAggregates');
-    if (das) {
-      return true;
-    }else{
-      return false;
-    }
-  }),
-  
-  userDailyAggregates: computed('challengeDailyAggregates.[]', function() {
-    let das = this.get('challengeDailyAggregates');
-    let dates = this.get('projectChallenge.dates');
-    if(dates) {
-      let today = moment().format("YYYY-MM-DD");
-      let todayFound = false;
-      //create an aggregates array
-      let aggs = {};
-      for (var i = 0; i < dates.length; i++) {
-        let key = dates[i];
-        if (todayFound) {
-          aggs[key] = null;
-        } else {
-          aggs[key] = 0;
-        }
-        if (key == today) {
-          todayFound = true;
-        }
-      }
-      
-      //loop the sessions
-      das.forEach((da)=>{
-        var k = da.day;
-        aggs[k]+=da.count;
-      });
-      return aggs;
-    }
-  }),
+
   
   countNeededTodayData: computed('count','projectChallenge.{countRemaining,daysRemaining,todayCount}', function() {
     let pc = this.get('projectChallenge');
@@ -158,10 +120,10 @@ export default Component.extend({
     return retval;
   }),
 
-  dailyAverage: computed('userDailyAggregates.[]', function(){
-    let aggs = this.get('userDailyAggregates');
+  dailyAverage: computed('projectChallenge.dailyAggregates.[]', function(){
+    let aggs = this.get('projectChallenge.dailyAggregates');
     if (aggs) {
-      let values = Object.values(aggs);
+      let values = aggs.mapBy('count');
       let sum = 0;
       for (var i=0 ; i < values.length ; i++) {
         let val = values[i];
@@ -350,34 +312,6 @@ export default Component.extend({
     }).catch(() => {
       alert('Failed to get aggregates');
     });
-  },
-  
-  _updateWhereIWrite: function(){
-    //default to null
-    this.set('whereIWrite', null);
-    /*let sessions = this.get('challengeSessions');
-    let whereObj = {0:0};
-    if(sessions) {
-      //loop through the sessions
-      sessions.forEach((s)=>{
-        //is there a where?
-        if(s.where) {
-          if (whereObj[s.where]>0) {
-            whereObj[s.where]+=s.count;
-          }else{
-            whereObj[s.where]=s.count;
-          }
-        }
-      });
-      //determine the key with the max value 
-      let max = this._objectKeyWithHighestValue(whereObj);*/
-    let max = this.get('projectChallenge.where');
-    if (max != null) {
-      //there is a max that is not 0, find the dang location name
-      this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
-        this.set('whereIWrite', loc.name);
-      });   
-    }
   },
   
   _objectKeyWithHighestValue: function(object) {

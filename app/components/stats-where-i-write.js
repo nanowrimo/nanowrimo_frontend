@@ -1,10 +1,17 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
 import {computed} from '@ember/object';
+import { inject as service} from '@ember/service';
 
 export default ChartBaseComponent.extend({
-  svgPath: computed('whereIWrite', function(){
+  store: service(),
+  
+  writingLocation: computed('projectChallenge.writingLocation', function(){
+    return this.get('projectChallenge.writingLocation');
+  }),
+  
+  svgPath: computed('writingLocation', function(){
     let retval = null;
-    let where = this.get('whereIWrite');
+    let where = this.get('writingLocation');
     if(where) {
       switch (where.toLowerCase()) {
         case 'at home':
