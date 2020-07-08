@@ -41,7 +41,6 @@
     {{#each sortedUpdates as |ps|}}
       <ProgressUpdate
         @projectSession={{ps}}
-        @onDelete={{action "userDidChangeProjectSession"}}
       />
     {{/each}}
   </InfiniScroll>
