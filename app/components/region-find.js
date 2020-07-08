@@ -56,16 +56,22 @@ export default Component.extend({
   proximityHide: computed('primaryDisplay', function() {
     if (this.get('primaryDisplay')==true) {
       return 'nano-hide';
+    } else {
+      return 'nano-show';
     }
   }),
   processingShow: computed('_processing', function() {
     if (this.get('_processing')==false) {
       return 'nano-hide';
+    } else {
+      return 'nano-show';
     }
   }),
   processingHide: computed('_processing', function() {
     if (this.get('_processing')) {
       return 'nano-hide';
+    } else {
+      return 'nano-show';
     }
   }),
   geoObject: null,

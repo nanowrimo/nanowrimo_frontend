@@ -72,6 +72,7 @@ export default Controller.extend({
     if(form.password.value) {
       if (form.currentPassword.value) return true;
     }
+    return false;
   }),
   
   actions: {

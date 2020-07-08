@@ -74,6 +74,8 @@ const ProjectChallenge = Model.extend({
       // get the challenge record with challenge id
       let challenge = s.peekRecord('challenge', cid);
       return challenge;  
+    } else {
+      return null;
     }
   }),
   
@@ -168,6 +170,8 @@ const ProjectChallenge = Model.extend({
       return "words";
     } else if (type===1) {
       return 'hours';
+    } else {
+      return "words";
     }
   }),
   unitTypeSingular: computed("unitType", function(){
@@ -176,6 +180,8 @@ const ProjectChallenge = Model.extend({
       return "word";
     } else if (type===1) {
       return 'hour';
+    } else {
+      return "word";
     }
   }),
   

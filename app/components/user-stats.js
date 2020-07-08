@@ -20,6 +20,8 @@ export default Component.extend({
     let stats = this.get('user.stats');
     if (stats) {
       return this.get('user.stats.yearsDone').length;
+    } else {
+      return 0;
     }
   })
 });

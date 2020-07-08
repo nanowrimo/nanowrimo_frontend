@@ -32,6 +32,8 @@ export default Controller.extend({
         });
         return found;
       }
+    } else {
+      return false;
     }
   }),
   

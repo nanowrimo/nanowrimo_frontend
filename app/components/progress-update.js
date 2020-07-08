@@ -15,6 +15,8 @@ export default Component.extend({
     let cu = this.get('currentUser.user');
     if (e) {
       return cu.shortDateStringInTimeZone(e);
+    } else {
+      return null;
     }
   }),
   

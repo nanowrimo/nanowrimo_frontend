@@ -37,8 +37,8 @@ export default Model.extend({
       if ( !ll.startsWith('https://') && !ll.startsWith('http://') ) {
         link = `https://${link}`;
       } 
-      return link;
     }
+    return link;
   }),
   
   determineService() {

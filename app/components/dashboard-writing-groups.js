@@ -19,6 +19,8 @@ export default Component.extend({
       } else {
         return false;
       }
+    } else {
+      return false;
     }
   }),
   

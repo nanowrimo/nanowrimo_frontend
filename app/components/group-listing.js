@@ -61,6 +61,8 @@ export default Component.extend({
       } else {
         return "<p>There are no messages yet. Why not start the discussion?</p>";
       }
+    } else {
+      return "<p>There are no messages yet. Why not start the discussion?</p>";
     }
   }),
   

@@ -15,6 +15,8 @@ export default Controller.extend({
     let du = this.get('user.discourseUsername');
     if (du) {
       return `${ENV.forumsUrl}/u/${du}/preferences/emails`;
+    } else {
+      return 0;
     }
   })
   

@@ -16,6 +16,8 @@ export default Controller.extend({
     let cu = this.get('currentUser.user');
     if (cu) {
       return cu.persistedProjects.length > 0;
+    } else {
+      return false;
     }
   }),
   primaryProject: computed("currentUser.user.primaryProject", function(){

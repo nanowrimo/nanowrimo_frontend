@@ -398,9 +398,9 @@ const User = Model.extend({
   }),
   
   buddyGroupsActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
+    let buddyGroups = [];
     if (this.get('groupUsersLoaded')) {
       let bgus = this.get('buddyGroupUsersAccepted');
-      let buddyGroups = [];
       let store = this.get('store');
       let id = this.get('id');
       // are there any acceptd buddy group users?
@@ -418,8 +418,8 @@ const User = Model.extend({
           });
         });
       }
-      return buddyGroups;
     }
+    return buddyGroups;
   }),
   
   buddiesActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
@@ -493,18 +493,18 @@ const User = Model.extend({
   }),
 
   everythingGroupsActive: computed('groupUsersLoaded','groupUsers.[]', function(){
+    let eGroups = [];
     if (this.get('groupUsersLoaded')) {
       let gus = this.get('groupUsers');
       let store = this.get('store');
-      let eGroups = [];
       gus.forEach(function(gu) {
         let g = store.peekRecord('group', gu.group_id);
         if ((g.groupType=='everyone')||(g.groupType=='region')) {
           eGroups.push(g);
         }
       });
-      return eGroups;
     }
+    return eGroups;
   }),
   
   usersBlocked: computed('buddyGroupUsersBlocked','buddyGroupUsersBlocked.@each.{invitationAccepted,entryAt}', {

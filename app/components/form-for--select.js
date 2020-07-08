@@ -52,6 +52,8 @@ export default Component.extend({
     let value = this.get('value');
     if (value) {
       return value.toString();
+    } else {
+      return '';
     }
   }),
   

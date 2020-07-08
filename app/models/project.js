@@ -219,6 +219,7 @@ const Project = Model.extend({
       case "Published":
         return `/images/users/projects/flippy-doodle-published.png`;
     }
+    return null;
   }),
   
   currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}','computedProjectChallenges.[]','allProjectChallenges.[]', function() {

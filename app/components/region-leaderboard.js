@@ -50,16 +50,22 @@ export default Component.extend({
   proximityHide: computed('sortOption', function() {
     if (this.get('sortOption')=='proximity') {
       return 'nano-hide';
+    } else {
+      return 'nano-show';
     }
   }),
   processingShow: computed('_processing', function() {
     if (this.get('_processing')==false) {
       return 'nano-hide';
+    } else {
+      return 'nano-show';
     }
   }),
   processingHide: computed('_processing', function() {
     if (this.get('_processing')) {
       return 'nano-hide';
+    } else {
+      return 'nano-show';
     }
   }),
   geoObject: null,
@@ -104,6 +110,8 @@ export default Component.extend({
       var sortedArray = newArray.sortBy('proximity');
       
       return sortedArray;
+    } else {
+      return newArray;
     }
   }),
   _user_longitude: null,

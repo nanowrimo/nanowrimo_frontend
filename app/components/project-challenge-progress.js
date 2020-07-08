@@ -31,8 +31,9 @@ export default Component.extend({
       } else {
         return time.format("MMM. YYYY");
       }
+    } else {
+      return '';
     }
-    
   }),
   
   _updateGoalMet: function(c,g){

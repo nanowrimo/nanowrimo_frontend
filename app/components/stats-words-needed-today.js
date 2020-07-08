@@ -65,12 +65,16 @@ export default ChartBaseComponent.extend({
     let cntd = this.get('countNeededTodayData');
     if(cntd) {
       return cntd.percent;
+    } else {
+      return 0;
     }
   }),
   countNeededToday: computed("countNeededTodayData.needed", function(){
     let cntd = this.get('countNeededTodayData');
     if(cntd) {
       return cntd.needed;
+    } else {
+      return 0;
     }
   }), 
   paneBackground: computed('unitsTodayData', function(){

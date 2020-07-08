@@ -45,6 +45,8 @@ export default Component.extend({
     let p = this.get('currentUser.user.primaryProject');
     if (p) {
       return p;
+    } else {
+      return null;
     }
   }),
 

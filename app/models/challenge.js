@@ -50,6 +50,8 @@ const Challenge = Model.extend({
     let ut = this.get('unitType');
     if (ut) {
       return ut.toString();
+    } else {
+      return 0;
     }
   }),
   writingTypeAsString: computed('writingType', function(){
