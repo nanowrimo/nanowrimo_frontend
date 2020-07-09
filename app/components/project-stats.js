@@ -20,7 +20,9 @@ export default Component.extend({
   // observe the projectChallenge
   projectChallengeObserver: observer('projectChallenge', function(){
     let pc = this.get('projectChallenge');
-    pc.loadAggregates();
+    if (pc) {
+      pc.loadAggregates();
+    }
   }),
   
   userUnitsToday: computed('projectChallenge', function() {
@@ -227,11 +229,15 @@ export default Component.extend({
   }),
   
   // filter the sessions that are specific to this project Challenge
-  projectChallengeSessions: computed('sessions.[]', function() {
+  projectChallengeSessions: computed('projectChallenge', 'sessions.[]', function() {
     let pc = this.get('projectChallenge');
-    //peek the sessions associated with the projectChallenge
-    let sessions = this.get('sessions').filterBy('project_challenge_id', parseInt(pc.id));
-    return sessions;
+    if (pc) {
+      //peek the sessions associated with the projectChallenge
+      let sessions = this.get('sessions').filterBy('project_challenge_id', parseInt(pc.id));
+      return sessions;
+    } else {
+      return [];
+    }
   }),
 
   init(){
@@ -321,6 +327,7 @@ export default Component.extend({
       return null;
     }
   },
+  
   //change the projectChallenge with a slight delay
   _changeProjectChallenge: function(newPC) {
     //set the pc to null -- this will hide charts that depends upon projectChallenge
