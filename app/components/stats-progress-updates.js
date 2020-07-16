@@ -8,7 +8,7 @@ export default Component.extend({
   store: service(),
   session: service(),
   currentUser: service(),
-  recalculate: 0,
+
   // Get the project challenge as a variable
   projectChallenge: null,
   newProjectSession: false,
@@ -51,12 +51,6 @@ export default Component.extend({
   updateSortingAsc: Object.freeze(['end:desc']),
   sortedUpdates: sort('progressUpdates','updateSortingAsc'),
   
-  doRecalculate() {
-    let r = this.get('recalculate');
-    let newr = r + 1;
-    this.set('recalculate',newr);
-  },
-  
   goalStartMonthDay: computed("projectChallenge", function(){
     var monthNames = [
       "January", "February", "March",
@@ -81,7 +75,7 @@ export default Component.extend({
   fetchSessions: function(initial) {
     let store = this.get('store');
     let pc = this.get('projectChallenge');
-    let options = {projectChallengeId: pc.id, limit: 10};
+    let options = {projectChallengeId: pc.id, limit: 50};
     if (!initial) {
       // what is the oldest end?
       let sessions = this.get('sortedUpdates');
@@ -96,15 +90,6 @@ export default Component.extend({
   actions: {
     fetchSessions() {
       this.fetchSessions();
-    },
-    
-    userDidChangeProjectSession() {
-      this.doRecalculate();
-      /*/reload the projectChallenge
-      let store = this.get('store');
-      let pc = this.get('projectChallenge');
-      return store.findRecord('projectChallenge', pc.id); 
-      */
     },
     
     newProjectSession(){

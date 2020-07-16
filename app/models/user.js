@@ -824,7 +824,7 @@ const User = Model.extend({
         for (var i =0; i<targetPCs.length; i++) {
           //get the pcs
           var pc = targetPCs[i];
-          if (pc.latestCount>=pc.goal) {
+          if (pc.currentCount>=pc.goal) {
             return true;
           }
         }

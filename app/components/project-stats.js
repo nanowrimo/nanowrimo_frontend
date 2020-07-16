@@ -20,12 +20,12 @@ export default Component.extend({
   // observe the projectChallenge
   projectChallengeObserver: observer('projectChallenge', function(){
     let pc = this.get('projectChallenge');
-    pc.loadAggregates();
+    if (pc) {
+      pc.loadAggregates();
+    }
   }),
   
-  userUnitsToday: computed('projectChallenge','project.projectSessions.[]', function() {
-    //now is a good time to update the whereIwrite
-    this._updateWhereIWrite();
+  userUnitsToday: computed('projectChallenge', function() {
     var data = {
       name: this.get('currentUser.user.name'),
       countToday: this.get('todaysCount'),
@@ -160,11 +160,16 @@ export default Component.extend({
     return retval;
   }),
 
+<<<<<<< HEAD
   dailyAverage: computed('userDailyAggregates.[]', function(){
     let aggs = this.get('userDailyAggregates');
     let average = 0;
+=======
+  dailyAverage: computed('projectChallenge.dailyAggregates.[]', function(){
+    let aggs = this.get('projectChallenge.dailyAggregates');
+>>>>>>> a963ec674d3bc7bfcbd6af6c7fdcbc03d117b720
     if (aggs) {
-      let values = Object.values(aggs);
+      let values = aggs.mapBy('count');
       let sum = 0;
       for (var i=0 ; i < values.length ; i++) {
         let val = values[i];
@@ -268,11 +273,15 @@ export default Component.extend({
   }),
   
   // filter the sessions that are specific to this project Challenge
-  projectChallengeSessions: computed('sessions.[]', function() {
+  projectChallengeSessions: computed('projectChallenge', 'sessions.[]', function() {
     let pc = this.get('projectChallenge');
-    //peek the sessions associated with the projectChallenge
-    let sessions = this.get('sessions').filterBy('project_challenge_id', parseInt(pc.id));
-    return sessions;
+    if (pc) {
+      //peek the sessions associated with the projectChallenge
+      let sessions = this.get('sessions').filterBy('project_challenge_id', parseInt(pc.id));
+      return sessions;
+    } else {
+      return [];
+    }
   }),
 
   init(){
@@ -355,34 +364,6 @@ export default Component.extend({
     });
   },
   
-  _updateWhereIWrite: function(){
-    //default to null
-    this.set('whereIWrite', null);
-    /*let sessions = this.get('challengeSessions');
-    let whereObj = {0:0};
-    if(sessions) {
-      //loop through the sessions
-      sessions.forEach((s)=>{
-        //is there a where?
-        if(s.where) {
-          if (whereObj[s.where]>0) {
-            whereObj[s.where]+=s.count;
-          }else{
-            whereObj[s.where]=s.count;
-          }
-        }
-      });
-      //determine the key with the max value 
-      let max = this._objectKeyWithHighestValue(whereObj);*/
-    let max = this.get('projectChallenge.where');
-    if (max != null) {
-      //there is a max that is not 0, find the dang location name
-      this.get('store').findRecord('writing-location', parseInt(max) ).then((loc)=>{
-        this.set('whereIWrite', loc.name);
-      });   
-    }
-  },
-  
   _objectKeyWithHighestValue: function(object) {
     if (Object.keys(object).length > 0) {
       return Object.keys(object).reduce((a, b) => object[a] > object[b] ? a : b);
@@ -390,6 +371,7 @@ export default Component.extend({
       return null;
     }
   },
+  
   //change the projectChallenge with a slight delay
   _changeProjectChallenge: function(newPC) {
     //set the pc to null -- this will hide charts that depends upon projectChallenge

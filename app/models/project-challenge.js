@@ -24,7 +24,7 @@ const ProjectChallenge = Model.extend({
   //importable: attr('number'),
   name: attr('string'),
   //nanoEvent: attr('boolean'),
-  latestCount: attr('number'), // the lastest count according to the API server 
+
   //relationships
   challenge: belongsTo('challenge'),
   project: belongsTo('project'),
@@ -35,7 +35,7 @@ const ProjectChallenge = Model.extend({
 
   how: attr('number'),
   feeling: attr('number'),
-  where: attr('number'),
+  writingLocation: attr('string'),
   when: attr('number'),
   speed: attr('number'),
   streak: attr('number'),
