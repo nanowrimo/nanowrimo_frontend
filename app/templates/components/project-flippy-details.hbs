@@ -14,9 +14,7 @@
         <div class='nw-promo-text'>{{project.title}}</div>
         <div class='nw-noscroll'>
           <div class='nw-project-genres nw-horiz-flex'>
-            {{#each project.genres as |genre|}}
-              <div class='genre'>{{genre.name}}</div>
-            {{/each}}
+            {{project.concatGenres}}
           </div>
           <div class='nw-horiz-flex'>
             <hr />
