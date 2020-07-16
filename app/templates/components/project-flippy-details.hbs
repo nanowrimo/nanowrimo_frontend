@@ -10,9 +10,9 @@
       </div>
     </div>
     <div class='nw-card-content nw-project-details'>
-      <div class='nw-project-flippy-title nw-noscroll'>
+      <div class='nw-project-flippy-title'>
         <div class='nw-promo-text'>{{project.title}}</div>
-        <div>
+        <div class='nw-noscroll'>
           <div class='nw-project-genres nw-horiz-flex'>
             {{#each project.genres as |genre|}}
               <div class='genre'>{{genre.name}}</div>
@@ -41,7 +41,7 @@
       </div>
       <div class='nw-noscroll'>
         <div class='nw-label'>Summary</div>
-        <div class='nw-scrollable'>
+        <div class='nw-noscroll'>
           {{#if project.summary}}
             {{{newline-to-br project.summary}}}
           {{/if}}
@@ -49,7 +49,7 @@
       </div>
       <div class='nw-noscroll'>
         <div  class='nw-label'>Excerpt</div>
-        <div class='nw-scrollable'>
+        <div class='nw-noscroll'>
           {{#if project.excerpt}}
             {{{newline-to-br project.excerpt}}}
           {{/if}}
