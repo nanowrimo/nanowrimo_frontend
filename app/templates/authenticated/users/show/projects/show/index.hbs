@@ -1,26 +1,7 @@
-{{#if hasDetails}}
-  <div class='nw-panel-actions nw-horiz-flex'>
-    <div>
-      <button {{action 'editProject'}}>Edit Details</button>
-      <button {{action 'editCover'}}>Edit Cover</button>
-    </div>
-  </div>  
-  {{project-flippy-details project=project class='nw-flippy-project-cover' }}
-{{else}}
-  <div id="projects-new-project-card" class="nw-card nw-prompt-card">
-    <div class='nw-hflex'>
-      <div class="project-announce-quote">
-        <div class="quote-text">
-          You haven't told us much about your new project.
-        </div>
-      </div>
-      <div class='action'>
-        <a href="#" {{action "editProject"}}>Fill out your project details!</a>
-      </div>
-      <div class='prompt-image'>
-        <img src='/images/projects/pencilandpen.svg'>
-      </div>
-    </div>
+<div class='nw-panel-actions nw-horiz-flex'>
+  <div>
+    <button {{action 'editProject'}}>Edit Details</button>
+    <button {{action 'editCover'}}>Edit Cover</button>
   </div>
-{{/if}}
-
+</div>  
+{{project-flippy-details project=project class='nw-flippy-project-cover' }}

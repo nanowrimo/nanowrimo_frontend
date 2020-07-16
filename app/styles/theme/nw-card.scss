@@ -502,6 +502,10 @@
 .nw-scrollable {
   overflow: scroll;
 }
+.nw-noscroll {
+  overflow: hidden;
+}
+
 .nw-label {
   text-align: center;
   font-family: 'SansSemiBold', sans;
