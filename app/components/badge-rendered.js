@@ -15,6 +15,7 @@ export default Component.extend({
   projectChallenge: null,
   user: null,
   renderSize: null,
+  classNames: ['badge-cell'],
   
   init(){
     this._super(...arguments);

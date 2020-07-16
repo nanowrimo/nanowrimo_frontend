@@ -10,8 +10,10 @@
   <div class='progress-text'>
     <span class="count {{if goalMet 'goal-met' ''}}">{{format-number project.currentProjectChallenge.count}}</span>
     <span class='goal'> / {{format-number project.currentProjectChallenge.goal}} WORDS </span>
-    {{#if project.currentProjectChallenge.isActive}}
-      <button class='nano-button-small' {{action 'toggleProgressUpdater'}}>Update</button>
+    {{#if (eq project.user.id currentUser.user.id)}}
+      {{#if project.currentProjectChallenge.isActive}}
+        <button class='nano-button-small' {{action 'toggleProgressUpdater'}}>Update</button>
+      {{/if}}
     {{/if}}
   </div>
   <div class='challenge-start'>

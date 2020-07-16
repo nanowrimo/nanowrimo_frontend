@@ -1,3 +1,76 @@
+.side-by-side-even.with-badges {
+  display: flex;
+  justify-content: center;
+}
+.nw-badges-new {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-column-gap: 5px;
+  /*margin-top: 100px;
+  margin-bottom: 100px;*/
+  /*margin-left: 50px;*/
+  /*width: 100%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;*/
+  .badge-cell:nth-child(9n+1){ grid-column-start: 1;}
+  .badge-cell:nth-child(9n+2){ grid-column-start: 3;}
+  .badge-cell:nth-child(9n+3){ grid-column-start: 5;}
+  .badge-cell:nth-child(9n+4){ grid-column-start: 7;}
+  .badge-cell:nth-child(9n+5){ grid-column-start: 9;}
+  .badge-cell:nth-child(9n+6){ grid-column-start: 2;}
+  .badge-cell:nth-child(9n+7){ grid-column-start: 4;}
+  .badge-cell:nth-child(9n+8){ grid-column-start: 6;}
+  .badge-cell:nth-child(9n){ grid-column-start: 8;}
+  
+  div {
+    display: inline-block;
+    height: 93px;
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 12px;
+    overflow: visible;
+    img {
+      width: 82px;
+      height: auto;
+      margin-top: -2px;
+    }
+  }
+}
+@media(max-width: 1400px){
+  .nw-badges-new {
+    grid-template-columns: repeat(8, 50px);
+    /*width: 830px*/
+    .badge-cell:nth-child(7n+1){ grid-column-start: 1;}
+    .badge-cell:nth-child(7n+2){ grid-column-start: 3;}
+    .badge-cell:nth-child(7n+3){ grid-column-start: 5;}
+    .badge-cell:nth-child(7n+4){ grid-column-start: 7;}
+    .badge-cell:nth-child(7n+5){ grid-column-start: 2;}
+    .badge-cell:nth-child(7n+6){ grid-column-start: 4;}
+    .badge-cell:nth-child(7n){ grid-column-start: 6;}
+  }
+}
+@media(max-width: 1100px){
+  .nw-badges-new {
+    grid-template-columns: repeat(6, 50px);
+    /*width: 620px*/
+    .badge-cell:nth-child(5n+1){ grid-column-start: 1;}
+    .badge-cell:nth-child(5n+2){ grid-column-start: 3;}
+    .badge-cell:nth-child(5n+3){ grid-column-start: 5;}
+    .badge-cell:nth-child(5n+4){ grid-column-start: 2;}
+    .badge-cell:nth-child(5n){ grid-column-start: 4;}
+  }
+}
+
+@media(max-width: 400px){
+  .nw-badges-new {
+  grid-template-columns: repeat(4, 50px);
+    /*width: 410px;*/
+    .badge-cell:nth-child(3n+1){ grid-column-start: 1;}
+    .badge-cell:nth-child(3n+2){ grid-column-start: 3;}
+    .badge-cell:nth-child(3n){ grid-column-start: 2;}
+  }
+}
 .nw-badges {
   .nw-honeycomb {
     content: '';
