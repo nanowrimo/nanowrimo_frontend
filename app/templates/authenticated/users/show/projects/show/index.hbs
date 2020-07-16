@@ -1,7 +1,9 @@
-<div class='nw-panel-actions nw-horiz-flex'>
-  <div>
-    <button {{action 'editProject'}}>Edit Details</button>
-    <button {{action 'editCover'}}>Edit Cover</button>
-  </div>
-</div>  
+{{#if (eq project.user.id currentUser.user.id)}}
+  <div class='nw-panel-actions nw-horiz-flex'>
+    <div>
+      <button {{action 'editProject'}}>Edit Details</button>
+      <button {{action 'editCover'}}>Edit Cover</button>
+    </div>
+  </div> 
+{{/if}} 
 {{project-flippy-details project=project class='nw-flippy-project-cover' }}
