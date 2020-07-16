@@ -34,43 +34,7 @@ export default Component.extend({
     return data;
   }),
   
-  hasDailyAggregates: computed('userDailyAggregates.[]', function(){
-    let das = this.get('userDailyAggregates');
-    if (das) {
-      return true;
-    }else{
-      return false;
-    }
-  }),
-  
-  userDailyAggregates: computed('challengeDailyAggregates.[]', function() {
-    let das = this.get('challengeDailyAggregates');
-    let dates = this.get('projectChallenge.dates');
-    let aggs = {};
-    if(dates) {
-      let today = moment().format("YYYY-MM-DD");
-      let todayFound = false;
-      //create an aggregates array
-      for (var i = 0; i < dates.length; i++) {
-        let key = dates[i];
-        if (todayFound) {
-          aggs[key] = null;
-        } else {
-          aggs[key] = 0;
-        }
-        if (key == today) {
-          todayFound = true;
-        }
-      }
-      
-      //loop the sessions
-      das.forEach((da)=>{
-        var k = da.day;
-        aggs[k]+=da.count;
-      });
-    }
-    return aggs;
-  }),
+
   
   countNeededTodayData: computed('count','projectChallenge.{countRemaining,daysRemaining,todayCount}', function() {
     let pc = this.get('projectChallenge');
@@ -94,8 +58,6 @@ export default Component.extend({
       }else{
         return {'needed':0,"percent":100};
       }
-    } else {
-      return {'needed':0,"percent":0};
     }
   }),
 
@@ -140,8 +102,8 @@ export default Component.extend({
           
         }
       });
+      return hoursObject;
     }
-    return hoursObject;
   }),
   
   // determine if there is data in the userHourAggregates
@@ -160,9 +122,8 @@ export default Component.extend({
     return retval;
   }),
 
-  dailyAverage: computed('userDailyAggregates.[]', function(){
-    let aggs = this.get('userDailyAggregates');
-    let average = 0;
+  dailyAverage: computed('projectChallenge.dailyAggregates.[]', function(){
+    let aggs = this.get('projectChallenge.dailyAggregates');
     if (aggs) {
       let values = aggs.mapBy('count');
       let sum = 0;
@@ -173,9 +134,9 @@ export default Component.extend({
         }
         sum+=val;
       }
-      average = parseInt(sum/i)
+      let average = parseInt(sum/i)
+      return average;
     }
-    return average;
   }),
   
   userPercentData: computed('projectChallenge.currentCount', function() {
@@ -219,16 +180,16 @@ export default Component.extend({
   //
   todaysSessions: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
-    let todays = [];
     if (css) {
+      let todays = [];
       let now = moment();
       css.forEach((cs)=>{
         if (moment(cs.createdAt).isSame(now, 'day') ) {
           todays.push(cs);
         }
       });
+      return todays;
     }
-    return todays;
   }),
   
   todaysCount: computed('challengeDailyAggregates.[]', function() {
@@ -247,17 +208,17 @@ export default Component.extend({
     let cStart = this.get('projectChallenge.startsAt');
     let cEnd = this.get('projectChallenge.endsAt');
     let p = this.get('project');
-    let newdas = [];
     if (p) {
       //get the dailyAggregates created during the projectChallenge
       let das = this.get('project.computedDailyAggregates');
+      let newdas = [];
       das.forEach((da)=>{
         if(cStart<=da.day && cEnd>=da.day ){
           newdas.push(da);
         }
       });
+      return newdas;
     }
-    return newdas;
   }),
 
   // get all sessions in the store when this projectChallenges sessions array changes
