@@ -8,7 +8,7 @@ export default Service.extend({
   
   // Opens the progress updater
   // If projectId is specified, make that the default
-  toggleSessionForm() {
+  toggleSessionForm(projectId) {
     if (this.get('displaySessionForm')) {
       this.set('displaySessionForm', false);
       this.set('defaultProjectId', null);

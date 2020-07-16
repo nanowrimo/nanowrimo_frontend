@@ -160,14 +160,9 @@ export default Component.extend({
     return retval;
   }),
 
-<<<<<<< HEAD
   dailyAverage: computed('userDailyAggregates.[]', function(){
     let aggs = this.get('userDailyAggregates');
     let average = 0;
-=======
-  dailyAverage: computed('projectChallenge.dailyAggregates.[]', function(){
-    let aggs = this.get('projectChallenge.dailyAggregates');
->>>>>>> a963ec674d3bc7bfcbd6af6c7fdcbc03d117b720
     if (aggs) {
       let values = aggs.mapBy('count');
       let sum = 0;
