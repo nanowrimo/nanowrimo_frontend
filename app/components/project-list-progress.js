@@ -91,8 +91,8 @@ export default Component.extend({
     
     toggleProgressUpdater() {
       let pus = this.get('progressUpdaterService');
-      let p = this.get('project');
-      pus.toggleSessionForm(p.id);
+      //let p = this.get('project');
+      pus.toggleSessionForm();
     },
     
     viewGoals() {

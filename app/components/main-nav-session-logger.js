@@ -26,6 +26,7 @@ export default Component.extend({
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
   projectSelected: 0,
+  open: true,
   
   // Returns the distance the project list should scroll to show the selected project
   scrollDistance: computed('projectSelected', function() {
@@ -193,6 +194,12 @@ export default Component.extend({
   },
 
   actions: {
+    
+    onShow() {
+    },
+    
+    onHidden() {
+    },
     
     projectPrevious() {
       let ps = this.get('projectSelected');

@@ -8,7 +8,7 @@ export default Service.extend({
   
   // Opens the progress updater
   // If projectId is specified, make that the default
-  toggleSessionForm(projectId) {
+  toggleSessionForm() {
     if (this.get('displaySessionForm')) {
       this.set('displaySessionForm', false);
       this.set('defaultProjectId', null);
@@ -16,6 +16,15 @@ export default Service.extend({
       this.set('defaultProjectId', projectId);
       this.set('displaySessionForm', true);
       this.set('displayTimerForm', false);
+    }
+  },
+
+  toggleTimerForm() {
+    if (this.get('displayTimerForm')) {
+      this.set('displayTimerForm', false);
+    } else {
+      this.set('displaySessionForm', false);
+      this.set('displayTimerForm', true);
     }
   },
   

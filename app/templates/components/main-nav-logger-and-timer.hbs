@@ -29,16 +29,22 @@
       {{/if}}
     </div>
     {{#if displaySessionForm}}
-      {{main-nav-session-logger closeFormAction=(action "hideForms") referenceStart=referenceStart referenceEnd=referenceEnd}}
+      {{main-nav-session-logger
+        closeFormAction=(action "hideForms")
+        referenceStart=referenceStart
+        referenceEnd=referenceEnd
+      }}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
 
     {{#if displayTimerForm}}
-      {{main-nav-timer-form cancelTimerAction=(action "cancelTimer")
+      {{main-nav-timer-form
+        cancelTimerAction=(action "cancelTimer")
         afterNewTimer=(action "checkTimer")
         afterNewStopwatch=(action "checkStopwatch")
         closeFormAction=(action "hideForms")
-        countdownRemaining=countdownRemaining}}
+        countdownRemaining=countdownRemaining
+      }}
       <div id='logger-and-timer-overlay' {{action 'hideForms'}}></div>
     {{/if}}
   </div>

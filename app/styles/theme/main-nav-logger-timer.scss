@@ -36,163 +36,118 @@
     top: -6px;
     right: 12px;
   }
-  .logger-timer-modal {
-    all: initial;
-    z-index: 1000;
-    position:absolute;
-    border-radius: 6px;
-    box-shadow: 0 0 14px 3px $nw-darkblue10;
-    top: 44px;
-    font-family: 'SourceSansSerif-Regular', sans-serif;
+}
+.logger-timer-modal {
+  /*all: initial;
+  z-index: 1000;
+  position:absolute;
+  border-radius: 6px;
+  box-shadow: 0 0 14px 3px $nw-darkblue10;
+  top: 44px;*/
+  font-family: 'SourceSansSerif-Regular', sans-serif;
 
-    .modal-content {
-      background-color: $nw-white;
-      background-image: none;
-      border: solid 0px $nw-lightgreyblue;
-      label {
-        padding-top: 10px;
+  /*.modal-content {
+    background-color: $nw-white;
+    background-image: none;
+    border: solid 0px $nw-lightgreyblue;
+    label {
+      padding-top: 10px;
+      font-size: 12px;
+    }
+  }*/
+
+  .primary-project-display {
+    margin-top: 14px;
+    height: 90px;
+    position: relative;
+    border-bottom: solid 0px $nw-lightgreyblue;
+    .project-cover {
+      width: 300px;
+      float: left;
+      .project-cover-clip {
+        position: absolute;
+        bottom: 0px;
+        width: 67px;
+        height: 94px;
+        left: 10px;
+        clip-path: inset(0px 0px 0px -50px);
+        img {
+          transform: rotate(-15deg);
+          transform-origin: bottom right;
+          width: 67px;
+          height: 94px;
+          border-radius: 3px;
+        }
+      }
+    }
+    #project-text {
+      position: absolute;
+      top: 0px;
+      left: 80px;
+      color: $nw-darkgrey;
+      .project-title {
+        font-size: 16px;
+        line-height: 1.38;
+      }
+      .project-goal-title {
         font-size: 12px;
       }
     }
-
-    .primary-project-display {
-      margin-top: 14px;
-      height: 90px;
-      position: relative;
-      border-bottom: solid 0px $nw-lightgreyblue;
-      .project-cover {
-        width: 300px;
-        float: left;
-        .project-cover-clip {
-          position: absolute;
-          bottom: 0px;
-          width: 67px;
-          height: 94px;
-          left: 10px;
-          clip-path: inset(0px 0px 0px -50px);
-          img {
-            transform: rotate(-15deg);
-            transform-origin: bottom right;
-            width: 67px;
-            height: 94px;
-            border-radius: 3px;
-          }
-        }
-      }
-      #project-text {
-        position: absolute;
-        top: 0px;
-        left: 80px;
-        color: $nw-darkgrey;
-        .project-title {
-          font-size: 16px;
-          line-height: 1.38;
-        }
-        .project-goal-title {
-          font-size: 12px;
-        }
-      }
-    }
   }
-
-  #main-nav-timer-form-display {
-    right: 0px;
-
-    #timer-form-modes {
-      width: 300px;
-      .timer-sub-menu {
-        background-color: $nw-verylightaqua;
-        padding: 14px;
-        .timer-sub-menu-item {
-          font-weight: 600;
-          text-align: left;
-          color: $nw-mediumblue;
-          margin-right: 14px;
-          a {
-            color: $nw-lightgrey;
-          }
-        }
-        .selected {
-          color: $nw-mediumblue;
-        }
-      }
-      .timer-content {
-        background-color: $nw-verylightaqua;
-        padding: 14px;
-        padding-top: 0px;
-        display: flex;
-        justify-content: space-between;
-        .timer-instruction {
-          flex: 0 0 57%;
-          text-align: left;
-          color: $nw-mediumgrey;
-        }
-        .timer-duration {
-          flex: 0 0 37%;
-          input {
-            background-color: $nw-white;
-            height: 36px;
-          }
-        }
-      }
-      .footer-actions {
-        clear: both;
-        border-top: solid 1px $nw-lightgreyblue;
-        padding: 14px;
-      }
-    }
-  }
-
-  #session-logger-display{
-    right: 24px;
-    .modal-content {
-      background-color: #fff;
-      background-image: none;
-    }
-    #menu-progress-update-project-display {
-
-
-
-    }
-  }
-  #progress-update-form-buttons, .footer-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    flex-wrap: nowrap;
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-top: 10px;
-    border-top: 1px $nw-lightgrey solid;
-
-    a {
-      font-size: 16px;
-      text-align: right;
-      color: $nw-mediumgrey;
-      vertical-align: text-bottom;
-      margin-top: 8px;
-      line-height: 20px;
-      letter-spacing: 0.3px;
-      text-align: right;
-      text-decoration: underline;
-    }
-  }
-  
-  #logger-and-timer-overlay {
-    z-index: 500;
-    background-color:transparent;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    display:block;
-  }
-
 }
+
+#main-nav-timer-form-display {
+  right: 0px;
+
+  #timer-form-modes {
+    width: 300px;
+    .timer-sub-menu {
+      background-color: $nw-verylightaqua;
+      padding: 14px;
+      .timer-sub-menu-item {
+        font-weight: 600;
+        text-align: left;
+        color: $nw-mediumblue;
+        margin-right: 14px;
+        a {
+          color: $nw-lightgrey;
+        }
+      }
+      .selected {
+        color: $nw-mediumblue;
+      }
+    }
+    .timer-content {
+      background-color: $nw-verylightaqua;
+      padding: 14px;
+      padding-top: 0px;
+      display: flex;
+      justify-content: space-between;
+      .timer-instruction {
+        flex: 0 0 57%;
+        text-align: left;
+        color: $nw-mediumgrey;
+      }
+      .timer-duration {
+        flex: 0 0 37%;
+        input {
+          background-color: $nw-white;
+          height: 36px;
+        }
+      }
+    }
+    .footer-actions {
+      clear: both;
+      border-top: solid 1px $nw-lightgreyblue;
+      padding: 14px;
+    }
+  }
+}
+
+
 #progress-update-form {
   .more-info-toggle {
-    background-color: $nw-verylightaqua;
+    /*background-color: $nw-verylightaqua;*/
     color: $nw-darkgrey;
     padding-left: 15px;
     padding-right: 15px;
@@ -217,7 +172,7 @@
   .project-additional-info {
     padding: 15px;
     padding-top: 0px;
-    background-color: $nw-verylightaqua;
+    /*background-color: $nw-verylightaqua;*/
     .ember-power-select-selected-item, .ember-power-select-option, .ember-power-select-search {
       font-family: 'SourceSansSerif-Regular', sans-serif;
       color: $nw-mediumgrey;
@@ -239,7 +194,7 @@
     flex-wrap: nowrap;
     padding: 14px;
     margin-bottom: 0px;
-    background-color: $nw-verylightaqua;
+    /*background-color: $nw-verylightaqua;*/
     .progress-update-input::-webkit-inner-spin-button,
     .progress-update-input::-webkit-outer-spin-button {
        -webkit-appearance: textfield;
@@ -274,22 +229,13 @@
   }
 }
 .progress-update-input {
-  flex: 0 0 120px;
-  -moz-appearance: textfield;
-  height: 28px;
-  border-radius: 6px;
-  box-shadow: inset 0 1px 4px 0 $nw-grey50;
-  background-color: $nw-white;
-  border: solid 1px $nw-mediumgrey;
-  font-size: 20px;
-  line-height: 1.0;
-  color: $nw-darkgrey;
+  flex: 0 0 200px;
 }
 
 .project-emoji-list {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   label {
     padding-top: 0px;
   }

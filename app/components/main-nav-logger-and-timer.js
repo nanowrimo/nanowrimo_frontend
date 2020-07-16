@@ -105,13 +105,15 @@ export default Component.extend({
         
         return;
       }
+      let pus = this.get('progressUpdaterService');
+      pus.toggleTimerForm();
       
-      if (this.get('displayTimerForm')) {
+      /*if (this.get('displayTimerForm')) {
         this.set('displayTimerForm', false);
       } else {
         this.set('displayTimerForm', true);
         this.set('displaySessionForm', false);
-      }
+      }*/
     },
     hideForms: function() {
       let pus = this.get('progressUpdaterService');

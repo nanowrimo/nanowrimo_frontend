@@ -5,7 +5,9 @@ import moment from 'moment';
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  progressUpdaterService: service(),
 
+  closeFormAction: null,
   user: null,
   primaryProject: null,
   showStopwatch: false, //default to showing the stopwatch
@@ -14,6 +16,7 @@ export default Component.extend({
   countdownRemaining: null,
   validDurationInput: true,
   timerDuration: null,
+  open: true,
 
   init(){
     this._super(...arguments);
@@ -24,6 +27,13 @@ export default Component.extend({
 
 
   actions: {
+    
+    onShow() {
+    },
+    
+    onHidden() {
+    },
+    
     cancel: function() {
       //stop what needs stopping
 
