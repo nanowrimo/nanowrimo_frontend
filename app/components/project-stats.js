@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
+import { mapBy } from '@ember/object/computed';
 import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
@@ -164,10 +165,12 @@ export default Component.extend({
     let aggs = this.get('userDailyAggregates');
     let average = 0;
     if (aggs) {
-      let values = aggs.mapBy('count');
+      //let values = aggs.mapBy('count');
       let sum = 0;
-      for (var i=0 ; i < values.length ; i++) {
-        let val = values[i];
+      //for (var i=0 ; i < values.length ; i++) {
+        //let val = values[i];
+      for (var i=0 ; i < aggs.length ; i++) {
+        let val = aggs[i].count;
         if(val==null) {
           break;
         }
