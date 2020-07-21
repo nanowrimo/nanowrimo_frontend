@@ -15,7 +15,7 @@
       <div class='switcher-select'>
       <select class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'}}>
         {{#each currentUser.user.persistedProjects as |p|}}
-          <option value='{{p.id}}' selected ={{eq p project}}>{{p.title}}</option>
+          <option value='{{p.id}}' selected ={{eq p project}}>{{p.truncatedTitle}}</option>
         {{/each}}
       </select>
       </div>

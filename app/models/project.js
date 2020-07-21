@@ -118,6 +118,15 @@ const Project = Model.extend({
     return genreNames.join(", ");
   }),
 
+  // Truncates the project title to 25 characters
+  truncatedTitle: computed('title', function() {
+    let str = this.get('title');
+    if (str.length <= 35) {
+      return str;
+    }
+    return str.slice(0, 35) + '...'
+  }),
+  
   hasProjectChallenges: computed('projectChallenges.[]', function(){
     let pc = this.get('projectChallenges');
     if (pc) {
