@@ -502,6 +502,12 @@
 .nw-scrollable {
   overflow: scroll;
 }
+
+.nw-scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .nw-noscroll {
   overflow: hidden;
 }

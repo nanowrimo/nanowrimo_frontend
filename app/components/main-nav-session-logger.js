@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed } from "@ember/object";
 import { htmlSafe } from "@ember/string";
 import moment from "moment"
-import {isNull} from "lodash"
+
 export default Component.extend({
   currentUser: service(),
   store: service(),
@@ -257,7 +257,7 @@ export default Component.extend({
           //set the whereList
           this.set('writingLocations', names);
           // if the selectedWhere is null, set it to 'laptop'
-          if ( isNull(this.get('selectedWhere')) ) {
+          if ( this.get('selectedWhere')==null ) {
             for (var i = 0; i < names.length; i++ ){
               let w = names[i];
               if (w.name === "home" ) {
@@ -275,7 +275,7 @@ export default Component.extend({
           //set the whereList
           this.set('writingMethods', names);
           // if the selectedHow is null, set it to 'laptop'
-          if ( isNull(this.get('selectedHow')) ) {
+          if ( this.get('selectedHow')==null ) {
             for (var i = 0; i < names.length; i++ ){
               let w = names[i];
               if (w.name === "laptop" ) {
