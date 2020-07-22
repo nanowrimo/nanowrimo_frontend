@@ -11,31 +11,34 @@
     </div>
     <div class='nw-card-content nw-project-details'>
       <div class='nw-project-flippy-title nw-scroll-y'>
-        <div class='nw-promo-text'>{{project.title}}</div>
-        <div >
+        <div class='nw-promo-text nw-break-words'>{{project.title}}</div>
+        
           <div class='nw-project-genres nw-horiz-flex'>
             {{project.concatGenres}}
           </div>
-          <div class='nw-horiz-flex'>
-            <hr />
-            {{#if project.playlistUrl}}
-              <div>
-                <a href='{{project.playlistUrl}}' target='_blank'>
-                  <i class="fa fa-music" aria-hidden="true"></i>
-                  Soundtrack
-                </a>
-              </div>
-            {{/if}}
-            {{#if project.pinterestUrl}}
-              <div>
-                <a href='{{project.pinterestUrl}}' target='_blank'>
-                  <i class="fa fa-pinterest" aria-hidden="true"></i>
-                  Inspiration
-                </a>
-              </div>
-            {{/if}}
-          </div>
-        </div>
+          
+          {{#if hasPlaylistOrPinterest}}
+            <div class='nw-horiz-flex'>
+              <hr />
+              {{#if project.playlistUrl}}
+                <div>
+                  <a href='{{project.playlistUrl}}' target='_blank'>
+                    <i class="fa fa-music" aria-hidden="true"></i>
+                    Soundtrack
+                  </a>
+                </div>
+              {{/if}}
+              {{#if project.pinterestUrl}}
+                <div>
+                  <a href='{{project.pinterestUrl}}' target='_blank'>
+                    <i class="fa fa-pinterest" aria-hidden="true"></i>
+                    Inspiration
+                  </a>
+                </div>
+              {{/if}}
+            </div>
+          {{/if}}
+        
       </div>
       <div class='nw-scroll-y'>
         <div class='nw-label'>Summary</div>
