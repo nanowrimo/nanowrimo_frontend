@@ -1,11 +1,20 @@
 import NwFlippyCard from 'nanowrimo/components/nw-flippy-card';
-//import { computed } from '@ember/object';
-//import { htmlSafe } from '@ember/template';
+import { computed } from '@ember/object';
+
 
 export default NwFlippyCard.extend({
   project: null,
-  /*safeSrc: computed('post.attributes.card-image', function() {
-    return new htmlSafe( "background-image: url(" + this.get('post.attributes.card-image') + ")" );
-  })*/
+
+  hasPlaylistOrPinterest: computed('project.[playlistUrl,pinterestUrl]', function(){
+    // get the project
+    let p = this.get('project');
+    // is there a project?
+    if (p) {
+      // is the playlistUrl or pinterestUrl not null?
+      return (p.playlistUrl!=null || p.pinterestUrl != null);
+    } else {
+      return false;
+    }
+  })
     
 });
