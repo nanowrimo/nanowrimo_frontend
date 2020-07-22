@@ -39,6 +39,8 @@ const ProjectChallenge = Model.extend({
   when: attr('number'),
   speed: attr('number'),
   streak: attr('number'),
+  
+  lastRecompute: attr('date'),
 
   // the daily aggregates will be updated when the projectChallenge's currentCount changes
   dailyAggregates: null,
