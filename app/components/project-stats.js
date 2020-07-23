@@ -268,6 +268,11 @@ export default Component.extend({
     if (pc){
       // it should load it's aggregates
       pc.loadAggregates();
+      
+      // is the projectChallenge data fresh?
+      if (pc.lastRecompute == null) {
+        this._reloadProjectChallengeById(pc.id);
+      }
     }
   },
 
@@ -336,6 +341,17 @@ export default Component.extend({
     //wait a bit and set the pc to the proper value
     next(()=>{
       this.set('projectChallenge', newPC);
+      // if the new pc doesn't have a lastRecompute
+      if (newPC.lastRecompute==null) {
+        //reload!
+        this._reloadProjectChallengeById(newPC.id);
+      }
     });
+  },
+  
+  _reloadProjectChallengeById: function(id) {
+    /* the project challenge needs to recompute stats */
+    let s = this.get('store');
+    s.findRecord('projectChallenge',id, {reload:true, adapterOptions:{query:{recompute:true}}});
   }
 });
