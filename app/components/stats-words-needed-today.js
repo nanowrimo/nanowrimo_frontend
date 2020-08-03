@@ -48,7 +48,10 @@ export default ChartBaseComponent.extend({
     ]);
   },
 
-
+  projectChallengeHasNotStarted: computed('projectChallenge.hasStarted', function(){
+    return !this.get('projectChallenge.hasStarted');
+  }),
+  
   percentNeededToday: computed('projectChallenge.{daysRemaining,todayCount}', function(){
     let pc = this.get('projectChallenge');
     if (pc) {
