@@ -16,8 +16,7 @@ export default Component.extend({
   projectChallenge: null,
   projectChallenges: null,
   
-  
-  // observe the projectChallenge
+  // observe the projectChallenge, when it changes, load its aggregates
   projectChallengeObserver: observer('projectChallenge', function(){
     let pc = this.get('projectChallenge');
     if (pc) {
@@ -25,42 +24,6 @@ export default Component.extend({
     }
   }),
   
-  userUnitsToday: computed('projectChallenge', function() {
-    var data = {
-      name: this.get('currentUser.user.name'),
-      countToday: this.get('todaysCount'),
-      countPerDay: this.get('projectChallenge.countPerDay')
-    };
-    return data;
-  }),
-  
-
-  
-  countNeededTodayData: computed('count','projectChallenge.{countRemaining,daysRemaining,todayCount}', function() {
-    let pc = this.get('projectChallenge');
-    if (pc) {
-      if (pc.hasEnded) {
-        return {'needed':0,"percent":0};
-      }
-      //countRemaining
-      let countRemaining = this.get('projectChallenge.countRemaining');
-      //daysRemaining
-      let daysRemaining = this.get('projectChallenge').daysRemaining();
-      //countToday
-      let todayCount = this.get('projectChallenge.todayCount');
-      let countPerDay = Math.round((countRemaining+todayCount) / daysRemaining);
-      //needed = countPerDayToFinishOnTime - countToday
-      //let needed = countPerDay - todayCount;
-      let needed = countPerDay;
-      //percent = needed*100/countPerDayToFinishOnTime
-      let percent = Math.round(todayCount*100/countPerDay);
-      if (needed>0){
-        return {'needed':needed,"percent":percent};
-      }else{
-        return {'needed':0,"percent":100};
-      }
-    }
-  }),
 
   writingSpeed: computed('projectChallenge.speed',function() {
     let s = this.get('projectChallenge.speed');
@@ -193,35 +156,6 @@ export default Component.extend({
     }
   }),
   
-  todaysCount: computed('challengeDailyAggregates.[]', function() {
-    let count = 0;
-    let das = this.get('challengeDailyAggregates');
-    let now = moment();
-    das.forEach((da)=>{
-      if (moment(da.day).isSame(now, 'day') ) {
-        count = da.count;
-      }
-    });
-    return count;
-  }),
-  
-  challengeDailyAggregates: computed('project','projectChallenge','project.computedDailyAggregates.[]', function() {
-    let cStart = this.get('projectChallenge.startsAt');
-    let cEnd = this.get('projectChallenge.endsAt');
-    let p = this.get('project');
-    if (p) {
-      //get the dailyAggregates created during the projectChallenge
-      let das = this.get('project.computedDailyAggregates');
-      let newdas = [];
-      das.forEach((da)=>{
-        if(cStart<=da.day && cEnd>=da.day ){
-          newdas.push(da);
-        }
-      });
-      return newdas;
-    }
-  }),
-
   // get all sessions in the store when this projectChallenges sessions array changes
   sessions: computed('projectChallenge.projectSessions.[]', function() {
     let s = this.get('store');
@@ -264,7 +198,7 @@ export default Component.extend({
       }
     }
     // is there a project challenge?
-    let pc = this.get('projectChallenge')
+    let pc = this.get('projectChallenge');
     if (pc){
       // it should load it's aggregates
       pc.loadAggregates();
