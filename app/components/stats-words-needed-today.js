@@ -55,10 +55,6 @@ export default ChartBaseComponent.extend({
       if (pc.hasEnded) {
         return 0;
       }
-      //countRemaining
-      let countRemaining = this.get('projectChallenge.countRemaining');
-      //daysRemaining
-      let daysRemaining = this.get('projectChallenge').daysRemaining();
       //countToday
       let todayCount = this.get('projectChallenge.todayCount');
       let countPerDay = this.get('countNeededToday')
@@ -110,7 +106,6 @@ export default ChartBaseComponent.extend({
 
 
   chartData: computed('countNeededToday','percentNeededToday', function() {
-    let ud = this.get('unitsTodayData');
     let car = this.get('colorsAndRadius');
     let cFormat = [];
     for (var i =0; i < 1 ; i++) {
