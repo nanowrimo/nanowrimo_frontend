@@ -39,7 +39,7 @@
     <div class="grid-wrapper">
       {{#if projectChallenge}}
         {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit class="nw-card g3-col1 g3-row1 g2-col1 g2-row1 short-card"}}
-        {{stats-words-needed-today countNeededTodayData=countNeededTodayData userUnitsToday=userUnitsToday comparisonUnitsTodayData=comparisonUnitsTodayData goalUnit=goalUnit class="nw-card g3-col2 g3-row1 g2-col2 g2-row1 short-card" }}
+        {{stats-words-needed-today projectChallenge=projectChallenge class="nw-card g3-col2 g3-row1 g2-col2 g2-row1 short-card" }}
         {{stats-days-straight streak=projectChallenge.streak class="nw-card g3-col3 g3-row1 g2-col1 g2-row2 short-card"}}
         {{stats-progress-updates sessions=projectChallengeSessions project=project projectChallenge=projectChallenge class="nw-card g3-col1 g3-row2 g2-col2 g2-row2 flippable"}}
         {{stats-my-overall-progress projectChallenge=projectChallenge class="nw-card g3-col2 g3-row2 g3-hspan2 g2-col1 g2-row3 g2-hspan2"}}

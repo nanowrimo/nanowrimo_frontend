@@ -48,37 +48,54 @@ export default ChartBaseComponent.extend({
     ]);
   },
 
-  unitsTodayData: computed('userUnitsToday', 'comparisonUnitsTodayData', function(){
-    let data = [];
-    data.pushObject(this.get('userUnitsToday') );
-    //append the comparisonPercentData
-    let cut = this.get('comparisonUnitsTodayData');
-    if (cut) {
-      cut.forEach((d)=>{
-        data.pushObject(d);
-      });
+
+  percentNeededToday: computed('projectChallenge.{daysRemaining,todayCount}', function(){
+    let pc = this.get('projectChallenge');
+    if (pc) {
+      if (pc.hasEnded) {
+        return 0;
+      }
+      //countToday
+      let todayCount = this.get('projectChallenge.todayCount');
+      let countPerDay = this.get('countNeededToday')
+      let percent = Math.round(todayCount*100/countPerDay);
+      return percent;
     }
-    return data;
   }),
   
-  percentNeededToday: computed("countNeededTodayData.percent", function(){
-    let cntd = this.get('countNeededTodayData');
-    if(cntd) {
-      return cntd.percent;
-    } else {
-      return 0;
+  countNeededToday: computed("projectChallenge.{daysRemaining,todayCount}", function(){
+    let pc = this.get('projectChallenge');
+    if (pc) {
+      if (pc.hasEnded) {
+        return 0
+      }
+      //countRemaining
+      let countRemaining = this.get('projectChallenge.countRemaining');
+      //daysRemaining
+      let daysRemaining = this.get('projectChallenge').daysRemaining();
+      //countToday
+      let todayCount = this.get('projectChallenge.todayCount');
+      let needed = Math.round((countRemaining+todayCount) / daysRemaining);
+      if (needed) {
+        return needed;
+      } else {
+        return 0;
+      }
     }
   }),
-  countNeededToday: computed("countNeededTodayData.needed", function(){
-    let cntd = this.get('countNeededTodayData');
-    if(cntd) {
-      return cntd.needed;
+ 
+  // does the passed in projectChallenge has aggregates loaded?
+  hasAggregates: computed("projectChallenge.dailyAggregates.[]", function(){
+    let pc = this.get('projectChallenge');
+    if (pc) {
+      return pc.dailyAggregates !== null;
     } else {
-      return 0;
+      return false;
     }
-  }), 
+  }),
+  
   paneBackground: computed('unitsTodayData', function(){
-    let l = this.get('unitsTodayData.length');
+    let l = 1;//= this.get('unitsTodayData.length');
     let pbgs = this.get('paneBackgrounds');
     var bg = [];
     for (var i = 0 ; i < l ; i++) {
@@ -89,12 +106,11 @@ export default ChartBaseComponent.extend({
 
 
   chartData: computed('countNeededToday','percentNeededToday', function() {
-    let ud = this.get('unitsTodayData');
     let car = this.get('colorsAndRadius');
     let cFormat = [];
-    for (var i =0; i < ud.length ; i++) {
+    for (var i =0; i < 1 ; i++) {
       // get the count data for user i
-      var c = ud[i];
+      //var c = ud[i];
       //create the percent complete based on count and goal
       var percent = this.get('percentNeededToday');
       
@@ -113,7 +129,7 @@ export default ChartBaseComponent.extend({
       } 
       */
       var fThingy = {
-        name: c.name,
+        name: null,//c.name,
         data: [{
           color: cr.color,
           radius: cr.radius,
