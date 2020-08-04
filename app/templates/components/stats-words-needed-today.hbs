@@ -2,7 +2,7 @@
   {{#if hasAggregates}}
     <div>{{high-charts content=chartData chartOptions=chartOptions theme=theme}}</div>
     <div>
-      <div class="nw-promo-text">
+      <div class="nw-promo-text {{if disabled "disabled"}}">
         <div class="nw-highlight"> {{projectChallenge.todayCount}}
         <span class="nw-dehighlight"> / {{ countNeededToday }}</span>
         </div>
