@@ -19,7 +19,7 @@ export default Component.extend({
     }
   }),
   
-  formattedLabel: computed("project.challenges.[]", function(){
+  formattedLabel: computed("project.currentProjectChallenge.id", function(){
     let pc = this.get('project.currentProjectChallenge');
     if (pc) {
       if (moment(pc.startsAt)>moment()) {
@@ -31,7 +31,7 @@ export default Component.extend({
     return '';
   }),
   
-  formattedStart: computed("project.challenges.[]", function(){
+  formattedStart: computed("project.currentProjectChallenge.id", function(){
     let pc = this.get('project.currentProjectChallenge');
     if (pc) {
       let time = moment(pc.startsAt);

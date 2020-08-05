@@ -1,6 +1,8 @@
 <div class='goal-text'>
   <a href="#" {{action "viewGoals"}}>
-    <span class='goal'>Goal: </span>
+    <span class='goal'>
+      {{project.currentProjectChallenge.name}}: 
+    </span>
     <span class=''>{{writingTypeString}} {{format-number project.currentProjectChallenge.goal}} words {{{goalIcon}}}</span>
   </a>
 </div>

@@ -60,7 +60,7 @@
     </div>
   </div>
   {{#if user.primaryProject.latestProjectChallenge}}
-    {{project-summary project=user.primaryProject author=user class="nw-card g3-col1 g3-row2 g3-hspan3 g3-vspan1 g2-col1 g2-row2 g2-hspan2 g2-vspan1"}}
+    {{project-summary project=user.primaryProject class="nw-card g3-col1 g3-row2 g3-hspan3 g3-vspan1 g2-col1 g2-row2 g2-hspan2 g2-vspan1"}}
     {{badges-card class="nw-card g3-col1 g3-row3 g3-hspan3 g2-col1 g2-row3 g2-hspan2" cardTitle='Writing badges' badgeType='word count' user=user projectChallenge=user.primaryProject.latestProjectChallenge}}
     {{badges-card class="nw-card g3-col1 g3-row4 g3-hspan3 g2-col1 g2-row4 g2-hspan2" cardTitle='Personal achievement badges' badgeType='self-awarded' user=user projectChallenge=user.primaryProject.latestProjectChallenge}}
   {{/if}}
