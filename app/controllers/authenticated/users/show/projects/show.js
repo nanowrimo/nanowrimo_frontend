@@ -10,6 +10,8 @@ export default Controller.extend({
   project: alias('model'),
   displayEditModal: false,
   displayCoverEditModal: false,
+  user: null,
+  
   author: null,
   projectSlug: null,
   editTab: null,

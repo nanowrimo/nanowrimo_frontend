@@ -31,6 +31,25 @@ const Project = Model.extend({
   // Awarded badges
   userBadges: hasMany('user-badge'),
   
+  // Returns all users in store
+  allUsers: computed(function() {
+    return this.get('store').peekAll('user');
+  }),
+  
+  
+  // Finds the author without established relationship
+  computedAuthor: computed('allUsers.@each.id', function() {
+    let uid = this.get('user_id');
+    let us = this.get('allUsers');
+    let author = null;
+    us.forEach((u)=> {
+      if (u.id==uid) {
+        author = u;
+      }
+    });
+    return author;
+  }),
+  
   // Returns all projectChallenges in store
   allProjectChallenges: computed(function() {
     return this.get('store').peekAll('projectChallenge');
@@ -133,8 +152,8 @@ const Project = Model.extend({
     return str.slice(0, 35) + '...'
   }),
   
-  hasProjectChallenges: computed('projectChallenges.[]', function(){
-    let pc = this.get('projectChallenges');
+  hasProjectChallenges: computed('computedProjectChallenges.[]', function(){
+    let pc = this.get('computedProjectChallenges');
     if (pc) {
       return (pc.length>0) ? true : false; 
     } else {

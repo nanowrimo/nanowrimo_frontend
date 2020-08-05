@@ -24,7 +24,7 @@
 
   <div>
     {{#each sortedProjects as |project|}}
-      {{project-summary project=project author=user}}
+      {{project-summary project=project}}
     {{/each}}
     {{#if canAddProject}}
       <div class="nw-card nw-prompt-card">

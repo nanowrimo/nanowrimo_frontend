@@ -4,10 +4,18 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 export default Controller.extend({
   currentUser: service(),
+  queryParams: ['addGoal'],
+  addGoal: false,
   
-  newProjectChallenge: false,
+  user: null,
+  
+  //newProjectChallenge: false,
   
   filterType: 0,
+  
+  canAddProject: computed('currentUser.user.id', 'user.id', function() {
+    return this.get('currentUser.user.id') === this.get('user.id');
+  }),
   
   filteredProjectChallenges: computed('project', 'filterType', function(){
       let ft = this.get('filterType');
@@ -38,9 +46,9 @@ export default Controller.extend({
       }
   }),
   
-  canAddProjectChallenge: computed("author",'currentUser.user', function(){
+  canAddProjectChallenge: computed('project.computedAuthor','currentUser.user', function(){
     //get the project and the user
-    let a = this.get('author');
+    let a = this.get('project.computedAuthor');
     let u = this.get('currentUser.user');
     return (a == u);
   }),
@@ -58,7 +66,7 @@ export default Controller.extend({
 
   actions: {
     newProjectChallenge(){
-      this.set('newProjectChallenge', true);
+      this.set('addGoal', true);
     },
     filterChanged(v){
       this.set('filterType', parseInt(v));

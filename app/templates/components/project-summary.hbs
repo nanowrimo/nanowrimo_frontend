@@ -1,11 +1,6 @@
 <div class="nw-card nano-listing-mini-card project-summary-card">
   <div class='nw-card-header nw-card-header-no-height'>
     <div class='nw-card-actions'>
-      {{!--
-        {{#if project.isPrimary}}
-          <i class='fa fa-thumb-tack primary-thumb-tack indicator'></i>
-        {{/if}}
-      --}}
       {{#if canEdit}}
         <a href="#" {{action "editProject"}}>
           <i class="fa fa-gear"></i>
@@ -31,7 +26,7 @@
         </div>
         <div class='nw-project-name-genres'>
           <div class='nw-title'>
-          {{#link-to 'authenticated.users.show.projects.show' author.slug project.slug}}
+          {{#link-to 'authenticated.users.show.projects.show' project.computedAuthor.slug project.slug}}
             {{project.title}}
           {{/link-to}}
           </div>
@@ -40,11 +35,20 @@
           </div>
         </div>
       </div>
-      {{#if project.hasProjectChallenges}} 
-        {{project-list-progress project=project class="nw-project-progress"}}
-      {{else}}
-        <!-- [create challenge] -->
-      {{/if}}  
+      <div class="nw-project-progress">
+        {{#if project.activeProjectChallenge }}
+        {{else}}
+          {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params addGoal="true") }}
+            <button class='nano-button-small'>Create a New Goal</button>
+          {{/link-to}}
+          {{#if project.hasProjectChallenges}}
+            <hr />
+          {{/if}}
+        {{/if}}
+        {{#if project.hasProjectChallenges}} 
+          {{project-list-progress project=project}}
+        {{/if}}
+      </div>
     </div>
     <div class='nw-card-flippy-doodle'>
       <img src="{{project.flippyDoodlePath}}">

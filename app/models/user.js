@@ -186,6 +186,21 @@ const User = Model.extend({
     return aps;
   }),
   
+  persistedProjects: filter('computedProjects', function(project) {
+    return project.id > 0;
+  }),
+  
+  persistedProjectsWithGoals: computed('persistedProjects.[]', function() {
+    let pps = this.get('persistedProjects');
+    let aps = [];
+    pps.forEach(function(p) {
+      if (p.hasProjectChallenges) {
+        aps.push(p);
+      }
+    });
+    return aps;
+  }),
+  
   // ---------------------------
   // END OF PROJECT FUNCTIONS
   // ---------------------------
@@ -638,9 +653,6 @@ const User = Model.extend({
     }
   }),
 
-  persistedProjects: filter('computedProjects', function(project) {
-    return project.id > 0;
-  }),
   /* stats */
   //total word count
   totalWordCount: computed('projectChallenges.@each.count', function(){

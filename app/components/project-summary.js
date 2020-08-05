@@ -18,8 +18,8 @@ export default Component.extend({
   deleteConfirmationQuestion: null,
   deleteConfirmationQuestionAddendum: null,
   
-  canEdit: computed('project', function(){
-    return this.get('currentUser.user') === this.get('author');
+  canEdit: computed('project.computedAuthor', function(){
+    return this.get('currentUser.user') === this.get('project.computedAuthor');
   }),
 
   init(){
