@@ -146,8 +146,8 @@ const Project = Model.extend({
     return str.slice(0, 35) + '...'
   }),
   
-  hasProjectChallenges: computed('projectChallenges.[]', function(){
-    let pc = this.get('projectChallenges');
+  hasProjectChallenges: computed('computedProjectChallenges.[]', function(){
+    let pc = this.get('computedProjectChallenges');
     if (pc) {
       return (pc.length>0) ? true : false; 
     } else {
