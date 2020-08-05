@@ -2,13 +2,26 @@
   {{#if hasAggregates}}
     <div>{{high-charts content=chartData chartOptions=chartOptions theme=theme}}</div>
     <div>
-      <div class="nw-promo-text">
+      <div class="nw-promo-text {{if disabled "disabled"}}">
         <div class="nw-highlight"> {{projectChallenge.todayCount}}
         <span class="nw-dehighlight"> / {{ countNeededToday }}</span>
         </div>
         {{projectChallenge.unitTypePlural}} needed today
       </div>
+      {{#if projectChallenge.hasEnded}}
+        <div class="nw-promo-text">
+          Writing has ended
+        </div>
+      {{/if}}
+      {{#if projectChallengeHasNotStarted}}
+        <div class="nw-promo-text">
+          Writing has not started
+        </div>
+      {{/if}}
     </div> 
+    
+    
+    
   {{else}}
     <i class="fa fa-spinner fa-spin"></i>
   {{/if}}

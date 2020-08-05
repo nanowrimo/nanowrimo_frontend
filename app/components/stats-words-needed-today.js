@@ -48,11 +48,23 @@ export default ChartBaseComponent.extend({
     ]);
   },
 
+  disabled: computed('projectChallenge.{hasStarted,hasEnded}', function(){
+    let pc = this.get('projectChallenge');
+    if (pc.hasStarted && !pc.hasEnded) {
+      return false;
+    } else {
+      return true;
+    }
+  }),
 
+  projectChallengeHasNotStarted: computed('projectChallenge.hasStarted', function(){
+    return !this.get('projectChallenge.hasStarted');
+  }),
+  
   percentNeededToday: computed('projectChallenge.{daysRemaining,todayCount}', function(){
     let pc = this.get('projectChallenge');
     if (pc) {
-      if (pc.hasEnded) {
+      if (!pc.hasStarted || pc.hasEnded) {
         return 0;
       }
       //countToday
@@ -66,8 +78,8 @@ export default ChartBaseComponent.extend({
   countNeededToday: computed("projectChallenge.{daysRemaining,todayCount}", function(){
     let pc = this.get('projectChallenge');
     if (pc) {
-      if (pc.hasEnded) {
-        return 0
+      if (!pc.hasStarted || pc.hasEnded) {
+        return 0;
       }
       //countRemaining
       let countRemaining = this.get('projectChallenge.countRemaining');
@@ -105,7 +117,7 @@ export default ChartBaseComponent.extend({
   }),
 
 
-  chartData: computed('countNeededToday','percentNeededToday', function() {
+  chartData: computed('countNeededToday','percentNeededToday','disabled', function() {
     let car = this.get('colorsAndRadius');
     let cFormat = [];
     for (var i =0; i < 1 ; i++) {
@@ -128,10 +140,14 @@ export default ChartBaseComponent.extend({
         }]
       } 
       */
+      // color will depend upon if the ui should look disabled
+      let d = this.get('disabled');
+      let col = (d) ? "#e8e8e8" : cr.color;
+      
       var fThingy = {
         name: null,//c.name,
         data: [{
-          color: cr.color,
+          color: col,
           radius: cr.radius,
           innerRadius: cr.innerRadius,
           y: percent

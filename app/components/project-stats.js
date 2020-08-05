@@ -88,7 +88,7 @@ export default Component.extend({
 
   dailyAverage: computed('projectChallenge.dailyAggregates.[]', function(){
     let aggs = this.get('projectChallenge.dailyAggregates');
-    if (aggs) {
+    if (aggs && aggs.length>0) {
       let values = aggs.mapBy('count');
       let sum = 0;
       for (var i=0 ; i < values.length ; i++) {
@@ -98,8 +98,10 @@ export default Component.extend({
         }
         sum+=val;
       }
-      let average = parseInt(sum/i)
+      let average = parseInt(sum/i);
       return average;
+    } else {
+      return 0;
     }
   }),
   

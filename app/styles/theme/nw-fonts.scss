@@ -61,4 +61,10 @@
       color: $nw-mediumgrey;
     }
   }
+  &.disabled {
+    color: #aaa;
+    .nw-highlight, .nw-dehighlight {
+      color: #a8a8a8;
+    }
+  }
 }
