@@ -67,6 +67,12 @@ const Project = Model.extend({
     return newdas;
   }),
   
+  // get the user from the store based on this.user_id
+  computedUser: computed('user_id', function(){
+    let user = this.get('store').peekRecord('user', this.get('user_id'));
+    return user;
+  }),
+  
   defaultCoverUrl: computed('genres.[]', function(){
     let cover = "/images/projects/default-cover.svg";
     this.get('genres').forEach((g)=>{
@@ -139,14 +145,17 @@ const Project = Model.extend({
 
   activeProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;
+    // get the user from the store using user_id
+    let user = this.get('computedUser');    
     //get the time now in user's timezone 
-    let now = moment().tz(this.get('user.timeZone'));
-    let tz = this.get('user.timeZone');
-    //console.log(now);
+    let tz = user.timeZone;
+    
+    let now = moment().tz(tz);
+    
     //loop through this project's projectChallenges
     this.get('projectChallenges').forEach((pc)=>{
       //get the start and end as moments
-      let startsAt = moment(pc.startsAt).tz(this.get('user.timeZone'));
+      let startsAt = moment(pc.startsAt).tz(tz);
       let isEvent = pc.nanoEvent;
       if (isEvent) {
         let cStart = moment(pc.startsAt);
@@ -236,7 +245,7 @@ const Project = Model.extend({
     let latest = null;
     let pending = null;
     //get the time now in user's timezone 
-    let now = moment().tz(this.get('user.timeZone'));
+    let now = moment().tz(this.get('computedUser.timeZone'));
     //loop through this project's projectChallenges
     this.get('computedProjectChallenges').forEach((pc)=>{
       //get the start and end as moments
