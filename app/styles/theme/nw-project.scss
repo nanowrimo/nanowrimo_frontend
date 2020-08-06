@@ -49,6 +49,7 @@
     }
     .nw-project-name-genres {
       flex: 1 1 100%;
+      max-width: 250px;
     }
     @media(max-width: $screen-md) {
     }

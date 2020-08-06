@@ -96,53 +96,47 @@
   }
 }
 
-#main-nav-timer-form-display {
-  right: 0px;
-
-  #timer-form-modes {
-    width: 300px;
-    .timer-sub-menu {
-      background-color: $nw-verylightaqua;
-      padding: 14px;
-      .timer-sub-menu-item {
-        font-weight: 600;
-        text-align: left;
-        color: $nw-mediumblue;
-        margin-right: 14px;
-        a {
-          color: $nw-lightgrey;
-        }
-      }
-      .selected {
-        color: $nw-mediumblue;
+#timer-form-modes {
+  .timer-sub-menu {
+    .timer-sub-menu-item {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      color: $nw-mediumblue;
+      margin-right: 14px;
+      a {
+        color: $nw-lightgrey;
       }
     }
-    .timer-content {
-      background-color: $nw-verylightaqua;
-      padding: 14px;
-      padding-top: 0px;
-      display: flex;
-      justify-content: space-between;
-      .timer-instruction {
-        flex: 0 0 57%;
-        text-align: left;
-        color: $nw-mediumgrey;
-      }
-      .timer-duration {
-        flex: 0 0 37%;
-        input {
-          background-color: $nw-white;
-          height: 36px;
-        }
-      }
-    }
-    .footer-actions {
-      clear: both;
-      border-top: solid 1px $nw-lightgreyblue;
-      padding: 14px;
+    .selected {
+      color: $nw-mediumblue;
     }
   }
+  .timer-content {
+    padding: 0px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    .timer-instruction {
+      flex: 0 0 57%;
+      text-align: left;
+      color: $nw-mediumgrey;
+    }
+    .timer-duration {
+      flex: 0 0 37%;
+      input {
+        background-color: $nw-white;
+        height: 36px;
+      }
+    }
+  }
+  .footer-actions {
+    clear: both;
+    border-top: solid 1px $nw-lightgreyblue;
+    padding: 14px;
+  }
 }
+
 
 
 #progress-update-form {
