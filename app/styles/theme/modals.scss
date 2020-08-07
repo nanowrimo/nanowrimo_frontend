@@ -184,6 +184,9 @@
     padding-bottom: 14px;
     justify-content: space-between;
   }
+  .modal-footer > * {
+    margin: 0px;
+  }
 }
 
 .modal-confirmation {

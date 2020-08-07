@@ -13,9 +13,6 @@ form {
     margin-bottom: 3px;
   }
   &.side-by-side {
-    input {
-      width: 90%
-      }
     justify-content: space-between;
     > div {
       flex: 0 0 48%;

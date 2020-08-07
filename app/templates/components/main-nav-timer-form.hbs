@@ -62,7 +62,7 @@
         <input class='form-control nano-button' type='submit' value='Cancel Timer' {{action "cancelTimer" }}>
       {{else}}
         <input class='form-control nano-button' type='submit' value='Start Timer' {{action "startTimer" }}>
-        <a href="#" {{action "cancel"}} >Cancel</a>
+        <input class='nano-button btn-underlined' {{action 'cancel'}} type='button' value='Cancel'>
       {{/if}}
     {{/if}}
   {{/modal.footer}}

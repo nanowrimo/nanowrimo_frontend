@@ -43,8 +43,8 @@
   position:absolute;
   border-radius: 6px;
   box-shadow: 0 0 14px 3px $nw-darkblue10;
-  top: 44px;*/
-  font-family: 'SourceSansSerif-Regular', sans-serif;
+  top: 44px;
+  font-family: 'SourceSansSerif-Regular', sans-serif;*/
 
   /*.modal-content {
     background-color: $nw-white;
@@ -55,37 +55,51 @@
       font-size: 12px;
     }
   }*/
+  #menu-progress-update-project-display {
+    padding: 20px;
+    padding-bottom: 4px;
+  }
 
   .primary-project-display {
-    margin-top: 14px;
+    display: flex;
+    min-width: 400px;
+    height: 100px;
+    /*margin-top: 14px;
     height: 90px;
     position: relative;
-    border-bottom: solid 0px $nw-lightgreyblue;
+    border-bottom: solid 0px $nw-lightgreyblue;*/
     .project-cover {
-      width: 300px;
-      float: left;
+      /*width: 300px;
+      float: left;*/
+      flex: 0 0 95px;
       .project-cover-clip {
-        position: absolute;
+        /*position: absolute;
         bottom: 0px;
         width: 67px;
         height: 94px;
         left: 10px;
-        clip-path: inset(0px 0px 0px -50px);
+        clip-path: inset(0px 0px 0px -50px);*/
         img {
           transform: rotate(-15deg);
-          transform-origin: bottom right;
-          width: 67px;
+          transform-origin: center center;
+          width: 87px;
           height: 94px;
           border-radius: 3px;
+          padding: 10px;
         }
       }
     }
     #project-text {
-      position: absolute;
+      /*position: absolute;
       top: 0px;
-      left: 80px;
+      left: 80px;*/
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1 1 100%;
       color: $nw-darkgrey;
       .project-title {
+        overflow-wrap: break-word;
         font-size: 16px;
         line-height: 1.38;
       }
@@ -143,9 +157,6 @@
   .more-info-toggle {
     /*background-color: $nw-verylightaqua;*/
     color: $nw-darkgrey;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
     font-size: 13px;
     cursor: pointer;
     i {
@@ -164,8 +175,6 @@
     }
   }
   .project-additional-info {
-    padding: 15px;
-    padding-top: 0px;
     /*background-color: $nw-verylightaqua;*/
     .ember-power-select-selected-item, .ember-power-select-option, .ember-power-select-search {
       font-family: 'SourceSansSerif-Regular', sans-serif;
@@ -186,7 +195,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-    padding: 14px;
+    padding: 0px;
     margin-bottom: 0px;
     /*background-color: $nw-verylightaqua;*/
     .progress-update-input::-webkit-inner-spin-button,
@@ -222,13 +231,14 @@
     }
   }
 }
-.progress-update-input {
+/*.progress-update-input {
   flex: 0 0 200px;
-}
+}*/
 
 .project-emoji-list {
   display: flex;
   width: 100%;
+  margin-bottom: 10px;
   justify-content: center;
   label {
     padding-top: 0px;
@@ -290,7 +300,7 @@
   display: flex;
   justify-content: space-between;
   .primary-project-container {
-    height: 104px;
+    height: 90px;
     overflow-x: visible;
     overflow-y: hidden;
     .primary-project-scrollbox {
@@ -298,11 +308,11 @@
     }
   }
   .primary-project-scrolling-buttons {
-    padding: 15px;
-    padding-right: 15px;
+    padding: 10px;
     font-size: 30px;
     color: #ddd;
     display: flex;
+    max-height: 90px;
     flex-direction: column;
     justify-content: space-between;
     i {

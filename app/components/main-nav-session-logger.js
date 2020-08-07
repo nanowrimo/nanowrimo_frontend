@@ -24,7 +24,7 @@ export default Component.extend({
   writingMethods: null,
   referenceTimer: null,
   referenceStopwatch: null,
-  _projectAdditionalInfoShow: false,
+  _projectAdditionalInfoShow: true,
   projectSelected: 0,
   open: true,
   
