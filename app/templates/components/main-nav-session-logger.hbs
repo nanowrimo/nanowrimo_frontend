@@ -45,7 +45,7 @@
             <div style="flex: 0 0 120px; margin-right: 10px;">
               {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
             </div>
-            <div>
+            <div class="select-container" style="max-width: 140px;">
               <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
                 <option value='0' selected={{countTypeGoalTotalSelected}}>total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
                 <option value='1' selected={{countTypeSessionSelected}}>{{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>

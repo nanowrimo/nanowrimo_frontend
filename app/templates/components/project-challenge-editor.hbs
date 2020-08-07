@@ -26,8 +26,8 @@
       </select>
     </div>
   </div>
-  <div class="side-by-side">
-    <div class="form-group side-by-side-even">
+  <div class="form-group side-by-side">
+    <div>
       {{c.input
         changeset=changeset
         label=goalCountLabel
@@ -37,7 +37,7 @@
         min=1
       }}
     </div>
-    <div class="form-group side-by-side-even">
+    <div>
       {{c.select
         changeset=changeset
         label=""
@@ -47,8 +47,8 @@
       }}
     </div>
   </div>
-  <div class="side-by-side">
-    <div class="form-group side-by-side-even">
+  <div class="form-group side-by-side">
+    <div>
 
       <label for='start-date' class='form-group'>{{startLabel}}</label>
       <input name='start-date' type='date' class='form-control'
@@ -62,7 +62,7 @@
       }}
       
     </div>
-    <div class="form-group side-by-side-even">
+    <div>
       <label for='challenge-last-day'>{{durationLabel}}</label>
       <input name='challenge-last-day' type='date' class='form-control'
         oninput={{action "endsAtChanged" value="target.value"}} 

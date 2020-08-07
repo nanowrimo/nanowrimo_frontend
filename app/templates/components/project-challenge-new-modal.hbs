@@ -70,13 +70,13 @@
             </select>
           </div>
         </div>
-        <div class="side-by-side">
-          <div class="form-group side-by-side-even">
+        <div class="form-group side-by-side">
+          <div>
             <label for='goal'>What is your goal?</label>
             <input class='form-control' id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
          
           </div>
-          <div class="form-group side-by-side-even"> 
+          <div style='padding-left: 10px'> 
             <label for='unitType'></label>
             <div class="select-container">
               <select id='unitType' name='unitType' disabled={{if disableWritingType 'disabled' ''}}
