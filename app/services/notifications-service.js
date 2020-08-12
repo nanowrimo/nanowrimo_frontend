@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
@@ -107,6 +107,11 @@ export default Service.extend({
       }
     });
     return count;
+  }),
+  
+  checkForPrimaryProjectChange: observer('currentUser.user.primaryProject', function(){
+    // user's primary project has changed, refresh badge data 
+    this.get('badgesService').checkForUpdates();
   }),
   
   notificationsViewed() {
