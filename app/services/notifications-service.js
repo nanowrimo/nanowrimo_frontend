@@ -12,6 +12,7 @@ export default Service.extend({
   badgesService: service(),
   recomputeNotifications: 0,
   lastCheck: null,
+  notifiedBadgeIds: [],
 
   init() {
     this._super(...arguments);
@@ -78,19 +79,34 @@ export default Service.extend({
   },
   
   newNotificationsCount: computed('recomputeNotifications', function() {
-    var ns = this.store.peekAll('notification')
+    var ns = this.store.peekAll('notification');
     var count = 0;
     var new_badge = false;
     var lc = this.get('lastCheck');
+    // self will need to be referenced later
+    let _this=this;
+    // get the array of badge ids
+    let notifiedBadgeIds = this.get('notifiedBadgeIds');
     ns.forEach(function(obj) {
       if ((obj.displayAt>lc)&&(obj.displayStatus==1)) {
         count += 1;
         if (obj.actionType=="BADGE_AWARDED") {
-          new_badge = true;
+          
+          // is the badges id NOT in the notifiedBadgeIds array?
+          if (!notifiedBadgeIds.includes(obj.id)){
+            // the badge is new
+            new_badge = true;
+            // add the badge's id to the array
+            notifiedBadgeIds.push(obj.id);
+            _this.set('notifiedBadgeIds', notifiedBadgeIds);
+          }
         }
       }
     });
+
+    
     if (new_badge) {
+      console.log(this.get('notifiedBadgeIds'));
       this.get('badgesService').checkForUpdates();
     }
     return count;
@@ -109,9 +125,9 @@ export default Service.extend({
     return count;
   }),
   
-  checkForPrimaryProjectChange: observer('currentUser.user.primaryProject', function(){
-    // user's primary project has changed, refresh badge data 
-    this.get('badgesService').checkForUpdates();
+  observePrimaryProject: observer('currentUser.user.primaryProject', function(){
+    // clear the notifiedBadgeIds array
+    this.set('notifiedBadgeIds',[]);
   }),
   
   notificationsViewed() {
