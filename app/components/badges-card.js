@@ -13,26 +13,81 @@ export default Component.extend({
   parentRecomputeBadges: 0,
   init() {
     this._super(...arguments);
-    //let bs = this.get('badgesService');
-    //debounce(this, bs.checkForUpdates, 3000, false);
-    
-    //bs.checkForUpdates();
   },
-  /*checkForUpdates() {
-    let u = this.get('user');
-    let nprb = this.get('parentRecomputeBadges');
-    let recompute = false;
-    this.store.query('user-badge', {
-      filter: {
-        user_id: u.get('id')
-      }
-    }).then(function() {
-      recompute = true;
-    });
-    if (recompute) {
-      this.set('parentRecomputeBadges',nprb+1);
+  
+  filteredBadges: computed('badges.[]','projectChallenge', function(){
+    let filteredBadges = [];
+    // get the badges
+    let badges = this.get('badges');
+    
+    // get the type
+    let bt = this.get('badgeType');
+    if (bt =="word count") {
+      //do some filtering based on project challenge
+      let pc = this.get('projectChallenge');
+      if (!pc) {return}
+      let duration = pc.get('duration');
+      let goal = pc.get('goal');
+      let eventType = pc.get('eventType');
+      badges.forEach((badge)=>{
+        switch(badge.title) { 
+          case "Wrote 50,000 Words During NaNoWriMo":
+          if (eventType==0) {filteredBadges.pushObject(badge);} 
+          break;  
+                 
+          case "Achieved Your Camp NaNoWriMo Goal":
+          if (eventType==1) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Write 40,000 Words":
+          if (goal>=40000) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Write 25,000 Words":
+          if (goal>=25000) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Write 10,000 Words":
+          if (goal>=10000) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Write 5,000 Words":
+          if (goal>=5000) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Write 1,667 Words":
+          if (goal>=1667) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Start a Streak":
+          if (duration>=2) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Update Word Count 3 Days in a Row":
+          if (duration>=3) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Update Word Count 7 Days in a Row":
+          if (duration>=7) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Update Word Count 14 Days in a Row":
+          if (duration>=14) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+          case "Update Word Count 21 Days in a Row":
+          if (duration>=21) {filteredBadges.pushObject(badge);} 
+          break;    
+               
+        }
+      });
+    } else {
+      filteredBadges = badges;
     }
-  },*/
+    return filteredBadges;
+  }),
+  
+
   badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges','user.userBadges.{[]}', function() {
     let rb = this.get('badgesService.recomputeBadges');
     let newbs = [];
@@ -47,8 +102,9 @@ export default Component.extend({
     }
     return newbs;
   }),
-  firstBadge: computed('badgesService.recomputeBadges','badges','parentRecomputeBadges','user.projects.{[],@each.primary}', function() {
-    let bs = this.get('badges');
+  
+  firstBadge: computed('filteredBadges.[]', function() {
+    let bs = this.get('filteredBadges');
     return bs[0];
   }),
   

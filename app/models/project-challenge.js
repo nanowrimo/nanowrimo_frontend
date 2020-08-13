@@ -21,6 +21,7 @@ const ProjectChallenge = Model.extend({
   endsAt: attr('string'),
   writingType: attr('number'),
   unitType: attr('number'),
+  eventType: attr('number'),
   //importable: attr('number'),
   name: attr('string'),
   //nanoEvent: attr('boolean'),

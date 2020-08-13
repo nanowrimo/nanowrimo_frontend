@@ -17,7 +17,7 @@
   <div class="side-by-side-even with-badges">
     <div class="nw-badges-new">
       {{#if firstBadge}}
-        {{#each badges as |badge|}}
+        {{#each filteredBadges as |badge|}}
           {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
         {{/each}}
       {{else}}
