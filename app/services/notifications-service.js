@@ -16,6 +16,8 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
+    // set the notifiedBadgeIds to an empty array
+    this.set('notifiedBadgeIds', []);
     // Setting the router so transitionTo is available to service
     this.set('router', getOwner(this).lookup('router:main'));
   },
