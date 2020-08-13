@@ -12,7 +12,7 @@ export default Service.extend({
   badgesService: service(),
   recomputeNotifications: 0,
   lastCheck: null,
-  notifiedBadgeIds: [],
+  notifiedBadgeIds: null,
 
   init() {
     this._super(...arguments);
@@ -106,7 +106,6 @@ export default Service.extend({
 
     
     if (new_badge) {
-      console.log(this.get('notifiedBadgeIds'));
       this.get('badgesService').checkForUpdates();
     }
     return count;
