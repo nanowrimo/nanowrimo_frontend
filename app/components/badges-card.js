@@ -78,7 +78,9 @@ export default Component.extend({
           case "Update Word Count 21 Days in a Row":
           if (duration>=21) {filteredBadges.pushObject(badge);} 
           break;    
-               
+            
+          default:
+          filteredBadges.pushObject(badge);
         }
       });
     } else {
