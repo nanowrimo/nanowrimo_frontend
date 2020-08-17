@@ -82,6 +82,10 @@ export default Component.extend({
           case "Achieved Your Goal for Your Writing Project":
           if (eventType==2) {filteredBadges.pushObject(badge);} 
           break;    
+          
+          case "Reached the Halfway Mark":
+          if (eventType==2) {filteredBadges.pushObject(badge);} 
+          break;    
             
           default:
           filteredBadges.pushObject(badge);
