@@ -86,6 +86,10 @@ export default Component.extend({
           case "Reached the Halfway Mark":
           if (eventType==2) {filteredBadges.pushObject(badge);} 
           break;    
+          
+          case "Achieved Par Every Day":
+          if (eventType==2) {filteredBadges.pushObject(badge);} 
+          break;    
             
           default:
           filteredBadges.pushObject(badge);
