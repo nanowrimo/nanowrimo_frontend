@@ -25,6 +25,7 @@ export default Component.extend({
   stat2: null,
   stat3: null,
   changeset: null,
+  currentName: null,
   
   //* init *//
   init(){
@@ -57,6 +58,7 @@ export default Component.extend({
     // create the changeset 
     let cs = new Changeset(this.get('user'), lookupValidator(UserValidations), UserValidations);
     this.set('changeset', cs);
+    this.set('currentName', this.get('user.name'));
   },
   
   /* computed properties */
@@ -139,6 +141,7 @@ export default Component.extend({
         this.set('open', null);
       }
     },
+
     statsSelect1Changed(val) {
       this.set('stat1', val);
     },
@@ -191,6 +194,17 @@ export default Component.extend({
 
     deleteBook(book) {
       book.deleteRecord();
+    },
+    
+    responseError(errors) {
+
+      errors.errors.forEach(error=>{
+        if (error.title.includes("NAME") ){
+          this.set('user.name', this.get('currentName'));
+          let cs = this.get('changeset');
+          cs.pushErrors('name', error.detail);
+        }
+      });
     }
   },
   /* component methods */
