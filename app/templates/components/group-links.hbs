@@ -5,6 +5,10 @@
 </div>
 {{#each otherLinks as |link|}}
   <div class="nw-item-link">
-    <a href={{link.url}}>{{link.url}}</a>
+    {{#if link.label}}
+      <a href={{link.url}}><i class="fa fa-link" style="font-size: 14px;"></i>{{link.label}}</a>
+    {{else}}
+      <a href={{link.url}}>{{link.url}}</a>
+    {{/if}}
   </div>
 {{/each}}

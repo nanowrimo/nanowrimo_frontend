@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
+import { observer } from '@ember/object';
 
 export default Service.extend({
   currentUser: service(),
@@ -46,4 +47,9 @@ export default Service.extend({
     let rb  = this.get('recomputeBadges')+1;
     this.set('recomputeBadges',rb);
   },
+  
+  checkForPrimaryProjectChange: observer('currentUser.user.primaryProject', function(){
+    // user's primary project has changed, refresh badge data 
+    this.checkForUpdates();
+  }),
 });
