@@ -31,7 +31,7 @@ export default Component.extend({
       let eventType = pc.get('eventType');
       badges.forEach((badge)=>{
         switch(badge.title) { 
-          case "Wrote 50,000 Words In NaNoWriMo":
+          case "Wrote 50,000 Words In November":
           if (eventType==0) {filteredBadges.pushObject(badge);} 
           break;  
                  
