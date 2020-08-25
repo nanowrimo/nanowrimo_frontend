@@ -42,6 +42,7 @@ export default Controller.extend({
     }
   }),
   
+  
   groupMembers: computed('model.listResults',function() {
     const lr = this.get('model.listResults');
     let a = [];
