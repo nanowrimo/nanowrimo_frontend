@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
-import { computed, observer }  from '@ember/object';
+import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
-import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -32,108 +31,16 @@ export default Controller.extend({
       return false;
     }
   }),
-  
-  /*endpoint: computed('group',function() {
-    let gid = this.get('group.id');
-    let url = `${ENV.APP.API_HOST}/groups/` + gid + `/`;
-    return url;
-  }),*/
-  
-  /*membersEndpoint: computed('endpoint',function() {
-    return this.get('endpoint') + `/admin_get_users`;
-  }),*/
-  
-  /*membersClass: computed('activeTab', function() {
-    let t = this.get('activeTab');
-    if (t==='members') {
-      return 'active-tab';
-    }
-    return '';
-  }),
-  
-  writingClass: computed('activeTab', function() {
-    let t = this.get('activeTab');
-    if (t==='writing') {
-      return 'active-tab';
-    }
-    return '';
-  }),
-  
-  locationsClass: computed('activeTab', function() {
-    let t = this.get('activeTab');
-    if (t==='locations') {
-      return 'active-tab';
-    }
-    return '';
-  }),
-  
-  overlapClass: computed('activeTab', function() {
-    let t = this.get('activeTab');
-    if (t==='overlap') {
-      return 'active-tab';
-    }
-    return '';
-  }),
-  
-  membersObserver: observer('activeTab', function(){
-    let t = this.get('activeTab');
-    if (t==='members') {
-      this.loadMembersList();
-    }
-  }),*/
-  
-  
-  /*loadMembersList: function() {
-    let t = this.get('activeTab');
-    if (t==='members') {
-      alert('looking');
-      let url = this.get('membersEndpoint');
-      //get the session auth token so we can add it to the request header
-      let { auth_token }  = this.get('session.data.authenticated');
-      return fetch(url, {
-        headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
-      }).then((resp)=>{
-        alert('p');
-        console.log(resp);
-        this.set('membersList', resp.json());
-      });
-    }
-  },*/
-  
-  /*membersListOld: computed('membersEndpoint','activeTab',function() {
-    let t = this.get('activeTab');
-    if (t==='members') {
-      alert('looking');
-      let url = this.get('membersEndpoint');
-      //get the session auth token so we can add it to the request header
-      let { auth_token }  = this.get('session.data.authenticated');
-      return fetch(url, {
-        headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
-      }).then((resp)=>{
-        return resp.json().then((json)=>{
-          return json;
-        });
-      });
-    }
-  }),*/
-  
+    
   groupMembers: computed('model.listResults',function() {
     const lr = this.get('model.listResults');
-    console.log(lr);
     let a = [];
+    let b = [];
     for (const [key, value] of Object.entries(lr)) {
-      //console.log(`${key}: ${value}`);
       a.push(value[0]);
+      b.push(key);
     }
-    console.log(a);
     return a;
   }),
-  
-  actions: {
-    switchTabs(value) {
-      //alert(value);
-      //this.set('activeTab',value);
-    },
-  }
   
 });
