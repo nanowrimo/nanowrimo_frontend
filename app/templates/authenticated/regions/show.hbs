@@ -32,6 +32,12 @@
       </div>
       <div class="nw-sidebar-divot"></div>
     </div>
-    {{outlet}}
+    <div class="nw-panel right-resize nw-with-tabs">
+      <ul class="nw-panel-tabs">
+        <li>{{link-to 'Overview' 'authenticated.regions.show.index'}}</li>
+        <li>{{link-to 'Events' 'authenticated.regions.show.events.upcoming'}}</li>
+      </ul>
+      {{outlet}}
+    </div>
   </div>
 </div>

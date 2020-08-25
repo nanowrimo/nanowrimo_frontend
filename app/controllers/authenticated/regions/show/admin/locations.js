@@ -1,16 +1,14 @@
 import Controller from '@ember/controller';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
+import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  session: service(),
+  currentUser: service(),
   router: service(),
   group: alias('model'),
-  currentUser: service(),
-  
-  canAddEvent: computed('currentUser.user.name', function() {
-    return true;//((this.get('currentUser.user.name')=="Dave Beck")||(this.get('currentUser.user.name')=="Jezra"));
-  }),
   
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
@@ -34,5 +32,17 @@ export default Controller.extend({
     }
   }),
   
+  groupMembers: computed('model.listResults',function() {
+    const lr = this.get('model.listResults');
+    console.log(lr);
+    let a = [];
+    for (const [key, value] of Object.entries(lr)) {
+      //console.log(`${key}: ${value}`);
+      a.push(value[0]);
+    }
+    console.log('LOCATION');
+    console.log(a);
+    return a;
+  }),
   
 });

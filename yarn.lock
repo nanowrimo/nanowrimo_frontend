@@ -6351,6 +6351,14 @@ ember-simple-auth@^2.1.0:
     ember-getowner-polyfill "^1.1.0 || ^2.0.0"
     silent-error "^1.0.0"
 
+ember-sortable-table@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ember-sortable-table/-/ember-sortable-table-0.3.0.tgz#39971386cbfcb7d2446cde1ea0eb936c3dbce3c5"
+  integrity sha512-XW2b6A1IVTJjN95pnChRqLt1skXEeMD6CoXJTL36PJbi1yr3RO8NvfOVZA2ViJ8lCtQl1fBXr/IiedKRwMAqnw==
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.2"
+
 ember-source-channel-url@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ember-source-channel-url/-/ember-source-channel-url-1.2.0.tgz#77eb9d0889e5f5370e6c70fcb2696c63ff4a34a1"
