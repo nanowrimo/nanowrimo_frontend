@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   session: service(),
-  model(params) {
+  model() {
     let group = this.modelFor('authenticated.regions.show');
     let url = `${ENV.APP.API_HOST}/groups/${group.id}/admin_get_locations`;
     //get the session auth token so we can add it to the request header

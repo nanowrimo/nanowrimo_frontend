@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
-import { computed, observer }  from '@ember/object';
+import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
-import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';
 import { sort } from '@ember/object/computed';
 
@@ -43,12 +42,14 @@ export default Controller.extend({
     }
   }),
   
+  
   groupMembers: computed('model.listResults',function() {
     const lr = this.get('model.listResults');
-    console.log(lr);
     let a = [];
+    let b = [];
     for (const [key, value] of Object.entries(lr)) {
       a.push(value[0]);
+      b.push(key);
     }
     return a;
   }),
