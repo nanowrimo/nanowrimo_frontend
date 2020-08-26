@@ -6861,6 +6861,14 @@ ember-source@~3.12.0:
     jquery "^3.4.1"
     resolve "^1.11.1"
 
+ember-table-data@^0.0.0-beta.29:
+  version "0.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/ember-table-data/-/ember-table-data-0.0.0-beta.29.tgz#27f13656c45364fc078268fb317b0131ed1f87ac"
+  integrity sha512-d7jgidiYtvAdsVN10I1XD/weWvoHNiIoj6DwAsMeC+ZTmUUsVp47+1+DdCalePjUcojsWBBgAp8Cv9jKhiQJHg==
+  dependencies:
+    ember-cli-babel "^6.16.0"
+    ember-cli-htmlbars "^3.0.0"
+
 ember-table@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/ember-table/-/ember-table-2.2.3.tgz#26f5759c0f32d4f3b5cb9f8f603f4f9ecf310215"
