@@ -1,34 +1,30 @@
-{{#if groupMembers}}
-  Note: All dates are in Greenwich Mean Time
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Signed up</th>
-        <th>Joined region</th>
-        <th>Signed in</th>
-        <th>Homed?</th>
-        <th>Last Update</th>
-      </tr>
-    </thead>
+Note: All dates are in Greenwich Mean Time
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Signed up</th>
+      <th>Joined region</th>
+      <th>Signed in</th>
+      <th>Homed?</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
 
-    <tbody>
-      {{#each groupMembers as |u|}}
-        <tr>
-          <td>
-            {{#link-to 'authenticated.users.show' u.slug}}
-              {{u.name}}
-            {{/link-to}}
-          </td>
-          <td>{{u.joined_site}}</td>
-          <td>{{u.joined_region}}</td>
-          <td>{{u.sign_in}}</td>
-          <td>{{u.homed}}</td>
-          <td>{{u.last_update}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-{{else}}
-  <NwLoading />
-{{/if}}
+  <tbody>
+    {{#each groupMembers as |u|}}
+      <tr>
+        <td>
+          {{#link-to 'authenticated.users.show' u.slug}}
+            {{u.name}}
+          {{/link-to}}
+        </td>
+        <td>{{u.joined_site}}</td>
+        <td>{{u.joined_region}}</td>
+        <td>{{u.sign_in}}</td>
+        <td>{{u.homed}}</td>
+        <td>{{u.last_update}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

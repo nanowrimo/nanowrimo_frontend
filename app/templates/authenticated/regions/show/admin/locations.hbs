@@ -1,24 +1,20 @@
-{{#if groupMembers}}
-  Note: All dates are in Greenwich Mean Time
-  <table>
-    <thead>
-      <tr>
-        <th>Homed?</th>
-        <th>Location</th>
-        <th>Last Event RSVP</th>
-      </tr>
-    </thead>
+Note: All dates are in Greenwich Mean Time
+<table>
+  <thead>
+    <tr>
+      <th>Homed?</th>
+      <th>Location</th>
+      <th>Last Event RSVP</th>
+    </tr>
+  </thead>
 
-    <tbody>
-      {{#each groupMembers as |u|}}
-        <tr>
-          <td>{{u.homed}}</td>
-          <td>{{u.location}}</td>
-          <td>{{u.rsvp}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-{{else}}
-  <NwLoading />
-{{/if}}
+  <tbody>
+    {{#each groupMembers as |u|}}
+      <tr>
+        <td>{{u.homed}}</td>
+        <td>{{u.location}}</td>
+        <td>{{u.rsvp}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

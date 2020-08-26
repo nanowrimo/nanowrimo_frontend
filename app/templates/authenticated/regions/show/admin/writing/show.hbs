@@ -1,45 +1,32 @@
-{{#if groupMembers}}
-  <div style="display: flex; align-items: center; margin-bottom: 40px;">
-    <label style="font-weight: bold; font-size: 16px; margin-top: 6px; margin-right: 10px;">Select a challenge:</label>
-    <select id='associateSelect' class='form-control' style="max-width: 250px;" onchange={{action "associateChallengeSelect" value="target.value"}}>
-      {{#each optionsForChallenges as |c|}}
-        <option value="{{c.id}}" selected={{if (eq c.id associatedChallengeId) 'true'}}>{{c.name}}</option>
-      {{/each}}
-    </select>
-  </div>
+Note: All dates are in Greenwich Mean Time
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Homed?</th>
+      <th>Participant?</th>
+      <th>Win?</th>
+      <th>Word Count</th>
+      <th>Goal</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
 
-  Note: All dates are in Greenwich Mean Time
-  <table>
-    <thead>
+  <tbody>
+    {{#each groupMembers as |u|}}
       <tr>
-        <th>Name</th>
-        <th>Homed?</th>
-        <th>Participant?</th>
-        <th>Win?</th>
-        <th>Word Count</th>
-        <th>Goal</th>
-        <th>Last Update</th>
+        <td>
+          {{#link-to 'authenticated.users.show' u.slug}}
+            {{u.name}}
+          {{/link-to}}
+        </td>
+        <td>{{u.homed}}</td>
+        <td>{{u.participant}}</td>
+        <td>{{u.win}}</td>
+        <td>{{u.wordcount}}</td>
+        <td>{{u.goal}}</td>
+        <td>{{u.update}}</td>
       </tr>
-    </thead>
-
-    <tbody>
-      {{#each groupMembers as |u|}}
-        <tr>
-          <td>
-            {{#link-to 'authenticated.users.show' u.slug}}
-              {{u.name}}
-            {{/link-to}}
-          </td>
-          <td>{{u.homed}}</td>
-          <td>{{u.participant}}</td>
-          <td>{{u.win}}</td>
-          <td>{{u.wordcount}}</td>
-          <td>{{u.goal}}</td>
-          <td>{{u.update}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-{{else}}
-  <NwLoading />
-{{/if}}
+    {{/each}}
+  </tbody>
+</table>
