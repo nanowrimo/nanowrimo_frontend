@@ -1,6 +1,6 @@
 {{#if groupMembers}}
   Note: All dates are in Greenwich Mean Time
-  {{#ember-sortable-table class="table table-condensed"}}
+  <table>
     <thead>
       <tr>
         <th>Name</th>
@@ -28,7 +28,7 @@
         </tr>
       {{/each}}
     </tbody>
-  {{/ember-sortable-table}}
+  </table>
 {{else}}
   <NwLoading />
 {{/if}}
