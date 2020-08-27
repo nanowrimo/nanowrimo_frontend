@@ -24,7 +24,6 @@ module.exports = {
   },
   rules: {},
   overrides: [
-    // node files
     {
       files: [
         '.template-lintrc.js',
@@ -42,7 +41,6 @@ module.exports = {
         node: true
       },
       plugins: ['node'],
-      extends: ['plugin:node/recommended'],
       rules: {
         // this can be removed once the following is fixed
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
