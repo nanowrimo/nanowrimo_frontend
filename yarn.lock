@@ -1159,6 +1159,7 @@
   dependencies:
     "@ember-data/-build-infra" "3.12.6"
     ember-cli-babel "^7.8.0"
+<<<<<<< HEAD
     ember-cli-test-info "^1.0.0"
     ember-cli-typescript "^2.0.2"
 
@@ -1180,6 +1181,29 @@
     ember-cli-string-utils "^1.1.0"
     ember-cli-test-info "^1.0.0"
     ember-cli-typescript "^2.0.2"
+=======
+    ember-cli-test-info "^1.0.0"
+    ember-cli-typescript "^2.0.2"
+
+"@ember-data/canary-features@3.12.6":
+  version "3.12.6"
+  resolved "https://registry.yarnpkg.com/@ember-data/canary-features/-/canary-features-3.12.6.tgz#610d00e066b3d63e85722eeb8b61edfeca5f582e"
+  integrity sha512-Cs8NQxsOaVBp+8CoMw09U0kf/21+0ygqbMSEGvHAWYPkCJFF9bCTj8XWLVWUhRIDh5TFb5CyYiM638PJq8B9hg==
+  dependencies:
+    ember-cli-babel "^7.8.0"
+
+"@ember-data/model@3.12.6":
+  version "3.12.6"
+  resolved "https://registry.yarnpkg.com/@ember-data/model/-/model-3.12.6.tgz#5145e8077aa53fc088f6bfde1df774d98fcffc3b"
+  integrity sha512-Q26CkiZgvA5KgpUyjIz8dIspJoDQezLz0cWp/95OnyD3b/+6DNBMxJcXJJRCYZxi9SsaCUGOxDMHP00viAhu5Q==
+  dependencies:
+    "@ember-data/-build-infra" "3.12.6"
+    "@ember-data/store" "3.12.6"
+    ember-cli-babel "^7.8.0"
+    ember-cli-string-utils "^1.1.0"
+    ember-cli-test-info "^1.0.0"
+    ember-cli-typescript "^2.0.2"
+>>>>>>> parent of 3e2e9ea... Merge pull request #613 from nanowrimo/jezra/3.20
     inflection "1.12.0"
 
 "@ember-data/rfc395-data@^0.0.4":
@@ -3566,6 +3590,7 @@ broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.1.0:
     symlink-or-copy "^1.0.0"
     walk-sync "^0.3.1"
 
+<<<<<<< HEAD
 broccoli-funnel@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/broccoli-funnel/-/broccoli-funnel-3.0.3.tgz#26fd42632471f67a91f4770d1987118087219937"
@@ -3582,6 +3607,8 @@ broccoli-funnel@^3.0.0:
     path-posix "^1.0.0"
     walk-sync "^2.0.2"
 
+=======
+>>>>>>> parent of 3e2e9ea... Merge pull request #613 from nanowrimo/jezra/3.20
 broccoli-kitchen-sink-helpers@^0.2.5:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/broccoli-kitchen-sink-helpers/-/broccoli-kitchen-sink-helpers-0.2.9.tgz#a5e0986ed8d76fb5984b68c3f0450d3a96e36ecc"
@@ -3641,6 +3668,7 @@ broccoli-merge-trees@^2.0.0:
     broccoli-plugin "^1.3.0"
     merge-trees "^2.0.0"
 
+<<<<<<< HEAD
 broccoli-merge-trees@^4.0.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/broccoli-merge-trees/-/broccoli-merge-trees-4.2.0.tgz#692d3c163ecea08c5714a9434d664e628919f47c"
@@ -3649,6 +3677,8 @@ broccoli-merge-trees@^4.0.0:
     broccoli-plugin "^4.0.2"
     merge-trees "^2.0.0"
 
+=======
+>>>>>>> parent of 3e2e9ea... Merge pull request #613 from nanowrimo/jezra/3.20
 broccoli-middleware@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/broccoli-middleware/-/broccoli-middleware-2.1.1.tgz#183635bbef4dc1241533ee001a162f013d776cb9"
@@ -3809,7 +3839,7 @@ broccoli-plugin@^3.1.0:
     rimraf "^2.3.4"
     symlink-or-copy "^1.1.8"
 
-broccoli-plugin@^4.0.1, broccoli-plugin@^4.0.2, broccoli-plugin@^4.0.3:
+broccoli-plugin@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/broccoli-plugin/-/broccoli-plugin-4.0.3.tgz#9dcfbfb6a1b27a37cc22e65c071719ce9f92bc1e"
   integrity sha512-CtAIEYq5K+4yQv8c/BHymOteuyjDAJfvy/asu4LudIWcMSS7dTn3yGI5gNBkwHG+qlRangYkHJNVAcDZMQbSVQ==
@@ -11199,6 +11229,7 @@ postcss@^6.0.14:
     source-map "^0.6.1"
     supports-color "^5.4.0"
 
+<<<<<<< HEAD
 postcss@^7.0.0, postcss@^7.0.5:
   version "7.0.32"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.32.tgz#4310d6ee347053da3433db2be492883d62cec59d"
@@ -11208,6 +11239,8 @@ postcss@^7.0.0, postcss@^7.0.5:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+=======
+>>>>>>> parent of 3e2e9ea... Merge pull request #613 from nanowrimo/jezra/3.20
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -12951,6 +12984,7 @@ supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
+<<<<<<< HEAD
 supports-color@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-6.1.0.tgz#0764abc69c63d5ac842dd4867e8d025e880df8f3"
@@ -12958,6 +12992,8 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
+=======
+>>>>>>> parent of 3e2e9ea... Merge pull request #613 from nanowrimo/jezra/3.20
 symbol-tree@^3.2.2:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
