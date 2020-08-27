@@ -84,11 +84,5 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
     to preserve scroll position when linking to a route, include "ps=true" query params in the link  
     {{link-to "SomeRoute" 'some.route' ((query-params ps="true"))}}
 
-<<<<<<< HEAD
-=======
 ### Wellness  
 Wellness while developing is not something most people care about until there is a problem. 
-<<<<<<< HEAD
->>>>>>> parent of e60cf5b... Merge pull request #616 from nanowrimo/jezra/dev
-=======
->>>>>>> parent of e60cf5b... Merge pull request #616 from nanowrimo/jezra/dev
