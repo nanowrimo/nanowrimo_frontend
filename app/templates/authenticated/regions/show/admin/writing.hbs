@@ -1,0 +1,12 @@
+<div style="display: flex; align-items: center; margin-bottom: 40px;">
+  <label style="font-weight: bold; font-size: 16px; margin-top: 6px; margin-right: 10px;">Select a challenge:</label>
+  <div class='select-container'style="max-width: 250px;">
+    <select id='associateSelect' class='form-control' style="max-width: 250px;" onchange={{action "associateChallengeSelect" value="target.value"}}>
+      <option value="0">Choose one</option>
+      {{#each optionsForChallenges as |c|}}
+        <option value="{{c.id}}" selected={{if (eq c.id associatedChallengeId) 'true'}}>{{c.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+</div>
+{{outlet}}

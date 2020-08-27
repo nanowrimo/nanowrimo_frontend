@@ -16,5 +16,11 @@
       </r.cell>
     </h.row>
   </t.head>
-  <t.body @rows={{groupMembers}} />
+  <t.body @rows={{groupMembers}} as |b|>
+    <b.row as |r|>
+      <r.cell as |cellValue|>
+        {{{cellValue}}}
+      </r.cell>
+    </b.row>
+  </t.body>
 </EmberTable>

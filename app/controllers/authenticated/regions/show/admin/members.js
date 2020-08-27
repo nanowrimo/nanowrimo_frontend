@@ -8,36 +8,62 @@ export default Controller.extend({
   currentUser: service(),
   router: service(),
   group: alias('model'),
+  activeTab: 'members',
   reorder: false,
   resize: true,
   columns: [
+      {
+        name: `User`,
+        valuePath: `name`
+      },
+      {
+        name: `Signed up`,
+        valuePath: `joined_site`
+      },
+      {
+        name: `Joined region`,
+        valuePath: `joined_region`
+      },
+      {
+        name: `Last login`,
+        valuePath: `sign_in`
+      },
       {
         name: `Homed?`,
         valuePath: `homed`
       },
       {
-        name: `Location`,
-        valuePath: `location`
-      },
-      {
-        name: `Last event RSVP`,
-        valuePath: `rsvp`
+        name: `Last update`,
+        valuePath: `last_update`
       },
     ],
   sorts: [
+      {
+        valuePath: 'name',
+        isAscending: false,
+      },
+      {
+        valuePath: 'joined_site',
+        isAscending: false,
+      },
+      {
+        valuePath: 'joined_region',
+        isAscending: false,
+      },
+      {
+        valuePath: 'sign_in',
+        isAscending: false,
+      },
       {
         valuePath: 'homed',
         isAscending: false,
       },
       {
-        valuePath: 'location',
-        isAscending: false,
-      },
-      {
-        valuePath: 'rsvp',
+        valuePath: 'last_update',
         isAscending: false,
       },
     ],
+  
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
     if (this.get('currentUser.user.groupUsersLoaded')) {
@@ -59,7 +85,7 @@ export default Controller.extend({
       return false;
     }
   }),
-  
+    
   groupMembers: computed('model.listResults',function() {
     const lr = this.get('model.listResults');
     let a = [];
