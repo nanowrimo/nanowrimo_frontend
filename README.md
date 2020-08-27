@@ -88,4 +88,7 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
 =======
 ### Wellness  
 Wellness while developing is not something most people care about until there is a problem. 
+<<<<<<< HEAD
+>>>>>>> parent of e60cf5b... Merge pull request #616 from nanowrimo/jezra/dev
+=======
 >>>>>>> parent of e60cf5b... Merge pull request #616 from nanowrimo/jezra/dev
