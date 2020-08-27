@@ -4,5 +4,4 @@ export default Route.extend({
   model() {
     return this.modelFor('authenticated.regions.show');
   }
-  
 });

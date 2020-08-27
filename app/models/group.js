@@ -24,7 +24,6 @@ const Group = Model.extend({
   joiningRule: attr('number'),
   description: attr('string'),
   url: attr('string'),
-  forumLink: attr('string'),
   
   
   // Members

@@ -47,7 +47,7 @@ export default Component.extend({
   locationErrorMessage: null,
   locationId: 0,
   eventTypeInPerson: false,
-  eventTypeOnline: true,
+  eventTypeOnline: false,
   
   street1: null,
   street2: null,

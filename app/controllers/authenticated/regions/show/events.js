@@ -15,6 +15,7 @@ export default Controller.extend({
   }),
   
   // Returns true if the user can edit the region
+  // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
     if (this.get('currentUser.user.groupUsersLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
