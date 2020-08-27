@@ -9,6 +9,7 @@ import ENV from 'nanowrimo/config/environment';
 
 export default Model.extend({
   url: attr('string'),
+  label: attr('string'),
 
   group: belongsTo(),
 
