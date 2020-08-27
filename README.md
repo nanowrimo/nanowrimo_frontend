@@ -86,3 +86,6 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
 
 ### Wellness  
 Wellness while developing is not something most people care about until there is a problem. 
+It order to stop problems before they start: 
+
+* every few minutes, turn away from the computer screen, and focus on something far away. Don't forget to blink.
