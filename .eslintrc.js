@@ -28,15 +28,15 @@ module.exports = {
   env: {
     browser: true
   },
-<<<<<<< HEAD
+//<<<<<<< HEAD
   rules: {
     "ember/no-observers":1,
     "ember/no-new-mixins":1,
     "ember/require-return-from-computed":1
   },
-=======
-  rules: {},
->>>>>>> fba111b... v3.12.0...v3.20.0
+//=======
+//  rules: {},
+//>>>>>>> fba111b... v3.12.0...v3.20.0
   overrides: [
     // node files
     {
@@ -54,8 +54,8 @@ module.exports = {
       env: {
         browser: false,
         node: true
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
       },
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
@@ -63,7 +63,7 @@ module.exports = {
         // this can be removed once the following is fixed
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
         'node/no-unpublished-require': 'off'
->>>>>>> fba111b... v3.12.0...v3.20.0
+//>>>>>>> fba111b... v3.12.0...v3.20.0
       }
     }
   ]
