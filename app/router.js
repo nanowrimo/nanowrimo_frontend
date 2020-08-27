@@ -1,5 +1,4 @@
 import EmberRouter from '@ember/routing/router';
-/*<<<<<<< HEAD
 import config from './config/environment';
 import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
 
@@ -7,15 +6,6 @@ const Router = EmberRouter.extend(GoogleAnalyticsRoute, {
   location: config.locationType,
   rootURL: config.rootURL
 });
-=======
-* */
-import config from 'nanowrimo/config/environment';
-
-export default class Router extends EmberRouter {
-  location = config.locationType;
-  rootURL = config.rootURL;
-}
-//>>>>>>> fba111b... v3.12.0...v3.20.0
 
 Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
@@ -149,10 +139,6 @@ Router.map(function() {
   this.route('delete-request', {path: '/delete-request/:token'});
   
 });
-/*<<<<<<< HEAD
 
 
 export default Router;
-=======
->>>>>>> fba111b... v3.12.0...v3.20.0
-*/

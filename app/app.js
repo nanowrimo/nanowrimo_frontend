@@ -1,9 +1,8 @@
 import Application from '@ember/application';
-import Resolver from 'ember-resolver';
+import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
-import config from 'nanowrimo/config/environment';
-/*
-<<<<<<< HEAD
+import config from './config/environment';
+
 const App = Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
@@ -11,13 +10,7 @@ const App = Application.extend({
   LOG_TRANSITIONS_INTERNAL: false,
   Resolver
 });
-//=======
-*/
-export default class App extends Application {
-  modulePrefix = config.modulePrefix;
-  podModulePrefix = config.podModulePrefix;
-  Resolver = Resolver;
-}
-//>>>>>>> fba111b... v3.12.0...v3.20.0
 
 loadInitializers(App, config.modulePrefix);
+
+export default App;

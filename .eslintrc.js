@@ -1,17 +1,11 @@
-'use strict';
-
 module.exports = {
   globals: {
     server: true,
   },
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    ecmaFeatures: {
-      legacyDecorators: true
-    }
+    ecmaVersion: 2017,
+    sourceType: 'module'
   },
   plugins: [
     'ember'
@@ -45,13 +39,6 @@ module.exports = {
       env: {
         browser: false,
         node: true
-      },
-      plugins: ['node'],
-      extends: ['plugin:node/recommended'],
-      rules: {
-        // this can be removed once the following is fixed
-        // https://github.com/mysticatea/eslint-plugin-node/issues/77
-        'node/no-unpublished-require': 'off'
       }
     }
   ]
