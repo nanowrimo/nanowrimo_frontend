@@ -14,3 +14,4 @@ export default ApplicationAdapter.extend({
     return this._super(...arguments);
   }
 });
+
