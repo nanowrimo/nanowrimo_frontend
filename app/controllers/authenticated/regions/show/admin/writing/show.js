@@ -2,15 +2,23 @@ import Controller from '@ember/controller';
 import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { sort } from '@ember/object/computed';
 
 export default Controller.extend({
-  router: service(),
-  group: alias('model'),
+  session: service(),
   currentUser: service(),
+  router: service(),
+  group: alias('model.group'),
+  activeTab: 'members',
   
-  canAddEvent: computed('currentUser.user.name', function() {
-    return true;//((this.get('currentUser.user.name')=="Dave Beck")||(this.get('currentUser.user.name')=="Jezra"));
+  challengeSortingDesc: Object.freeze(['startsAt:desc']),
+  
+  // Gets all challenges from the store
+  availableOptionsForChallenges:  computed('getChallengeOptions', function() {
+    return this.get('store').query('challenge',{ available: false});
   }),
+ 
+  optionsForChallenges: sort('availableOptionsForChallenges','challengeSortingDesc'),
   
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
@@ -34,5 +42,22 @@ export default Controller.extend({
     }
   }),
   
+  
+  groupMembers: computed('model.listResults',function() {
+    const lr = this.get('model.listResults');
+    let a = [];
+    let b = [];
+    for (const [key, value] of Object.entries(lr)) {
+      a.push(value[0]);
+      b.push(key);
+    }
+    return a;
+  }),
+  
+  actions: {
+    associateChallengeSelect(challengeId) {
+      this.get('router').transitionTo('authenticated.regions.show.admin.writing.show', this.get('group.slug'), challengeId );
+    },
+  }
   
 });

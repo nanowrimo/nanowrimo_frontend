@@ -4,13 +4,11 @@ import { alias }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  session: service(),
+  currentUser: service(),
   router: service(),
   group: alias('model'),
-  currentUser: service(),
-  
-  canAddEvent: computed('currentUser.user.name', function() {
-    return true;//((this.get('currentUser.user.name')=="Dave Beck")||(this.get('currentUser.user.name')=="Jezra"));
-  }),
+  activeTab: 'members',
   
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
@@ -33,6 +31,16 @@ export default Controller.extend({
       return false;
     }
   }),
-  
+    
+  groupMembers: computed('model.listResults',function() {
+    const lr = this.get('model.listResults');
+    let a = [];
+    let b = [];
+    for (const [key, value] of Object.entries(lr)) {
+      a.push(value[0]);
+      b.push(key);
+    }
+    return a;
+  }),
   
 });

@@ -60,6 +60,18 @@
               style="width: 100%; padding-left: 10px;"
             />
           </div>
+          {{#if group.isRegion}}
+            <div class="form-group">
+              <label>Link to forums</label>
+              <Input
+                @property="forumLink"
+                @value={{group.forumLink}}
+                style="width: 100%; padding-left: 10px;"
+              />
+            </div>
+            
+          {{/if}}
+          
           {{group-edit-links group=group}}
         {{/tab.pane}}
 

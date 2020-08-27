@@ -1,0 +1,32 @@
+Note: All dates are in Greenwich Mean Time
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Homed?</th>
+      <th>Participant?</th>
+      <th>Win?</th>
+      <th>Word Count</th>
+      <th>Goal</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each groupMembers as |u|}}
+      <tr>
+        <td>
+          {{#link-to 'authenticated.users.show' u.slug}}
+            {{u.name}}
+          {{/link-to}}
+        </td>
+        <td>{{u.homed}}</td>
+        <td>{{u.participant}}</td>
+        <td>{{u.win}}</td>
+        <td>{{u.wordcount}}</td>
+        <td>{{u.goal}}</td>
+        <td>{{u.update}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

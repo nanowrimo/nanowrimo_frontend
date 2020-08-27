@@ -75,7 +75,13 @@ Router.map(function() {
           this.route('pending');
           this.route('show', { path: '/:event_slug' });
         });
-        this.route('members');
+        this.route('admin', function() {
+          this.route('members');
+          this.route('writing', function() {
+            this.route('show', { path: '/:challenge_id' });
+          }),
+          this.route('locations');
+        });
       });
     });
     this.route('writing-groups', function() {

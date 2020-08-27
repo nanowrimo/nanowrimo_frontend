@@ -91,6 +91,7 @@ export default Component.extend({
             this._callAction('afterSubmit', modelIsNew);
           })
           .catch((error) => {
+            this.set('hasAttemptedSubmit', true);
             this._callAction('afterError', error);
           });
          
