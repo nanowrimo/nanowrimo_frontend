@@ -2,17 +2,6 @@
 # yarn lockfile v1
 
 
-"@addepar/style-toolbox@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@addepar/style-toolbox/-/style-toolbox-0.8.1.tgz#fed2de7149d6ac264a6275b310cd63b5d42bf3d5"
-  integrity sha512-Pa27K/Zitk5TqC6GcPRPN+S6gdhB0G/ZXwoKX/6MQh8ChFTF9MG4P1T97uUCjgvyirASWGfXNMb6jS/LBmmIAw==
-  dependencies:
-    broccoli-file-creator "^1.1.1"
-    broccoli-funnel "^2.0.1"
-    broccoli-merge-trees "^3.0.0"
-    ember-cli-babel "^6.6.0"
-    ember-cli-sass "^10.0.1"
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
