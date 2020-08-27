@@ -1,30 +1,26 @@
-Note: All dates are in Greenwich Mean Time
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Signed up</th>
-      <th>Joined region</th>
-      <th>Signed in</th>
-      <th>Homed?</th>
-      <th>Last Update</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {{#each groupMembers as |u|}}
-      <tr>
-        <td>
-          {{#link-to 'authenticated.users.show' u.slug}}
-            {{u.name}}
-          {{/link-to}}
-        </td>
-        <td>{{u.joined_site}}</td>
-        <td>{{u.joined_region}}</td>
-        <td>{{u.sign_in}}</td>
-        <td>{{u.homed}}</td>
-        <td>{{u.last_update}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+<i>Note: All dates are in Greenwich Mean Time.</i>
+<EmberTable as |t|>
+  <t.head
+    @columns={{columns}}
+    @sorts={{sorts}}
+    @onUpdateSorts={{action (mut sorts)}}
+    @enableResize={{resize}}
+    @enableReorder={{reorder}}
+    @widthConstraint='gte-container'
+    as |h|
+  >
+    <h.row as |r|>
+      <r.cell as |columnValue columnMeta|>
+        {{columnValue.name}}
+        <EmberTh::SortIndicator @columnMeta={{columnMeta}} />
+      </r.cell>
+    </h.row>
+  </t.head>
+  <t.body @rows={{groupMembers}} as |b|>
+    <b.row as |r|>
+      <r.cell as |cellValue|>
+        {{{cellValue}}}
+      </r.cell>
+    </b.row>
+  </t.body>
+</EmberTable>

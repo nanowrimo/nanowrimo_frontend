@@ -1,13 +1,20 @@
-Note: All dates are in Greenwich Mean Time
+<i>Note: All dates are in Greenwich Mean Time.</i>
 <EmberTable as |t|>
   <t.head
     @columns={{columns}}
     @sorts={{sorts}}
-
     @onUpdateSorts={{action (mut sorts)}}
-
+    @enableResize={{resize}}
+    @enableReorder={{reorder}}
     @widthConstraint='gte-container'
-    @fillMode='first-column'
-  />
+    as |h|
+  >
+    <h.row as |r|>
+      <r.cell as |columnValue columnMeta|>
+        {{columnValue.name}}
+        <EmberTh::SortIndicator @columnMeta={{columnMeta}} />
+      </r.cell>
+    </h.row>
+  </t.head>
   <t.body @rows={{groupMembers}} />
 </EmberTable>

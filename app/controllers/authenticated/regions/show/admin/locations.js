@@ -8,6 +8,8 @@ export default Controller.extend({
   currentUser: service(),
   router: service(),
   group: alias('model'),
+  reorder: false,
+  resize: true,
   columns: [
       {
         name: `Homed?`,
@@ -63,7 +65,6 @@ export default Controller.extend({
     let a = [];
     let b = [];
     for (const [key, value] of Object.entries(lr)) {
-      console.log(value[0]);
       a.push(value[0]);
       b.push(key);
     }
