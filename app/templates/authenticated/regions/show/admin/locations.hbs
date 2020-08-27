@@ -1,13 +1,34 @@
 Note: All dates are in Greenwich Mean Time
-<EmberTable as |t|>
-  <t.head
-    @columns={{columns}}
-    @sorts={{sorts}}
+{{#table-data records=groupMembers as |tableData|}}
+  {{#tableData.table class="table-striped col-12" as |table|}}
+    {{#table.header as |header|}}
+      {{#header.row as |row|}}
+        {{#row.cell}}
+          Homed?
+        {{/row.cell}}
+        {{#row.cell}}
+          Location
+        {{/row.cell}}
+        {{#row.cell}}
+          Last Event RSVP
+        {{/row.cell}}
+      {{/header.row}}
+    {{/table.header}}
 
-    @onUpdateSorts={{action (mut sorts)}}
+    {{#table.body as |body record|}}
 
-    @widthConstraint='gte-container'
-    @fillMode='first-column'
-  />
-  <t.body @rows={{groupMembers}} />
-</EmberTable>
+      {{#body.row as |row|}}
+        {{#row.cell}}
+          {{record.homed}}
+        {{/row.cell}}
+        {{#row.cell}}
+          {{record.location}}
+        {{/row.cell}}
+        {{#row.cell}}
+          {{record.rsvp}}
+        {{/row.cell}}
+      {{/body.row}}
+
+    {{/table.body}}
+  {{/tableData.table}}
+{{/table-data}}
