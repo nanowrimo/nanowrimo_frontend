@@ -12,58 +12,64 @@ export default Controller.extend({
   activeTab: 'members',
   reorder: false,
   resize: true,
-  columns: [
-      {
-        name: `User`,
-        valuePath: `name`
-      },
-      {
-        name: `Homed?`,
-        valuePath: `homed`
-      },
-      {
-        name: `Win?`,
-        valuePath: `win`
-      },
-      {
-        name: `Word Count`,
-        valuePath: `wordcount`
-      },
-      {
-        name: `Goal`,
-        valuePath: `goal`
-      },
-      {
-        name: `Last update`,
-        valuePath: `update`
-      },
-    ],
-  sorts: [
-      {
-        valuePath: 'name',
-        isAscending: false,
-      },
-      {
-        valuePath: 'homed',
-        isAscending: false,
-      },
-      {
-        valuePath: 'win',
-        isAscending: false,
-      },
-      {
-        valuePath: 'wordcount',
-        isAscending: false,
-      },
-      {
-        valuePath: 'goal',
-        isAscending: false,
-      },
-      {
-        valuePath: 'update',
-        isAscending: false,
-      },
-    ],
+  columns: computed(function() {
+    const a = [
+        {
+          name: `User`,
+          valuePath: `name`
+        },
+        {
+          name: `Homed?`,
+          valuePath: `homed`
+        },
+        {
+          name: `Win?`,
+          valuePath: `win`
+        },
+        {
+          name: `Word Count`,
+          valuePath: `wordcount`
+        },
+        {
+          name: `Goal`,
+          valuePath: `goal`
+        },
+        {
+          name: `Last update`,
+          valuePath: `update`
+        },
+      ];
+    return a;
+  }),
+  sorts: computed(function() {
+    const a = [
+        {
+          valuePath: 'name',
+          isAscending: false,
+        },
+        {
+          valuePath: 'homed',
+          isAscending: false,
+        },
+        {
+          valuePath: 'win',
+          isAscending: false,
+        },
+        {
+          valuePath: 'wordcount',
+          isAscending: false,
+        },
+        {
+          valuePath: 'goal',
+          isAscending: false,
+        },
+        {
+          valuePath: 'update',
+          isAscending: false,
+        },
+      ];
+    return a;
+  }),
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
