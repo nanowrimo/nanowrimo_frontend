@@ -158,15 +158,19 @@ export default Component.extend({
     }
   }),
   
-  // get all sessions in the store when this projectChallenges sessions array changes
-  sessions: computed('projectChallenge.projectSessions.[]', function() {
+  /* TODO: determine if 'sessions' and 'projectChallengeSessions'
+   * computed properties can be refactored to the stats-progress-updates component
+   */ 
+  
+  // get all sessions in the store when this projectChallenge's currentCount changes
+  sessions: computed('projectChallenge.currentCount', function() {
     let s = this.get('store');
     let sessions = s.peekAll('projectSession');
     return sessions;
   }),
   
   // filter the sessions that are specific to this project Challenge
-  projectChallengeSessions: computed('projectChallenge', 'sessions.[]', function() {
+  projectChallengeSessions: computed('sessions.[]', function() {
     let pc = this.get('projectChallenge');
     if (pc) {
       //peek the sessions associated with the projectChallenge
