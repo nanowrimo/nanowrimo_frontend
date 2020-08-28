@@ -1,7 +1,7 @@
 import ToriiAuthenticator from 'ember-simple-auth/authenticators/torii';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';

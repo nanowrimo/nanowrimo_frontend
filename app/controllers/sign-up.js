@@ -5,7 +5,7 @@ import ENV from 'nanowrimo/config/environment';
 
 import TimeZones from 'nanowrimo/lib/time-zones';
 import moment from 'moment';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 
 export default Controller.extend({
   session: service(),

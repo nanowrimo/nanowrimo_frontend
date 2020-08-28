@@ -1,6 +1,6 @@
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
 import { isEmpty } from '@ember/utils';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';

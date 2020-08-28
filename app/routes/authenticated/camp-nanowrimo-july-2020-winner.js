@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';
 

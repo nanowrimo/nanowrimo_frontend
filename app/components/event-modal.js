@@ -198,7 +198,7 @@ export default Component.extend({
     }
     let dstr = this.get('startDate') + ' ' + this.get('startTime') + ':00';
     let startMoment = moment.tz(dstr,tz);
-    let endMoment = moment.tz(dstr,tz).add((this.get('durationHours')*60) + this.get("durationMinutes"), 'minutes');
+    let endMoment = moment.tz(dstr,tz).add((parseInt(this.get('durationHours'))*60) + parseInt(this.get("durationMinutes")), 'minutes');
     g.set("startDt",startMoment.toDate());
     g.set("endDt",endMoment.toDate());
     g.set("userId",this.get("currentUserId"));
@@ -586,7 +586,7 @@ export default Component.extend({
       this.set("locationErrorMessage",null);
       this.set("locationId",0);
       this.set("eventTypeInPerson",false);
-      this.set("eventTypeOnline",false);
+      this.set("eventTypeOnline",true);
       let callback = this.get('onHidden');
       if (callback) {
         callback();

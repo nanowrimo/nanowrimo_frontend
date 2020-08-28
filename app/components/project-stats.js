@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
 import { next } from '@ember/runloop';

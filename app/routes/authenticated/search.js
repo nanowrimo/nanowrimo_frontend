@@ -1,4 +1,4 @@
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';
 import ScrollRoute from 'nanowrimo/routes/scroll-route'
