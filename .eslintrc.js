@@ -3,6 +3,7 @@ module.exports = {
     server: true,
   },
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module'
@@ -20,7 +21,8 @@ module.exports = {
   rules: {
     "ember/no-observers":1,
     "ember/no-new-mixins":1,
-    "ember/require-return-from-computed":1
+    "ember/require-return-from-computed":1,
+    'ember/no-jquery': 1
   },
   overrides: [
     // node files
