@@ -100,8 +100,9 @@
   .nw-item-link {
     width: 100%;
     text-align: center;
+    font-size: 16px;
     a {
-      color: $nw-darkaqua;
+      color: $nw-link-color;
     }
   }
   i {
