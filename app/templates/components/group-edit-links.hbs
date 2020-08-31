@@ -12,6 +12,11 @@
         placeholder=(if link.service (concat "https://" link.service ".com/username") "https://example.com")
         value=link.changeset.url
       }}
+      {{input
+        class="form-control left-margin"
+        placeholder="Label"
+        value=link.changeset.label
+      }}
       <div {{action "clearLink" link}} class="input-group-append" style="cursor:pointer">
         <div class="input-group-text">
           {{fa-icon "minus-circle" fixedWidth=true}}
