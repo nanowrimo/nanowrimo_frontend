@@ -22,14 +22,17 @@ module.exports = {
   ],
   env: {
     browser: true
-  },/*
+  },
   rules: {
     "ember/no-observers":1,
     "ember/no-new-mixins":1,
     "ember/require-return-from-computed":1,
-    'ember/no-jquery': 1
-  },*/
-  rules: {},
+    'ember/no-jquery': 1,
+    'ember/no-get':1,
+    'ember/no-mixins':1,
+    'ember/use-ember-data-rfc-395-imports':1,
+    'ember/require-computed-property-dependencies':1
+  },
   overrides: [
     // node files
     {
@@ -47,13 +50,7 @@ module.exports = {
       env: {
         browser: false,
         node: true
-      },
-      plugins: ['node'],
-      extends: ['plugin:node/recommended'],
-      rules: {
-        // this can be removed once the following is fixed
-        // https://github.com/mysticatea/eslint-plugin-node/issues/77
-        'node/no-unpublished-require': 'off'
+
       }
     }
   ]
