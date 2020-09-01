@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import ENV from 'nanowrimo/config/environment';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({

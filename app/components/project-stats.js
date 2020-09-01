@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import ENV from 'nanowrimo/config/environment';
 import moment from 'moment';
 import { next } from '@ember/runloop';
@@ -159,14 +159,14 @@ export default Component.extend({
   }),
   
   // get all sessions in the store when this projectChallenges sessions array changes
-  sessions: computed('projectChallenge.projectSessions.[]', function() {
+  sessions: computed('projectChallenge.currentCount', function() {
     let s = this.get('store');
     let sessions = s.peekAll('projectSession');
     return sessions;
   }),
   
   // filter the sessions that are specific to this project Challenge
-  projectChallengeSessions: computed('projectChallenge', 'sessions.[]', function() {
+  projectChallengeSessions: computed( 'sessions.[]', function() {
     let pc = this.get('projectChallenge');
     if (pc) {
       //peek the sessions associated with the projectChallenge

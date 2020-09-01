@@ -6,9 +6,9 @@
 {{#each otherLinks as |link|}}
   <div class="nw-item-link">
     {{#if link.label}}
-      <a href={{link.url}}><i class="fa fa-link" style="font-size: 14px;"></i>{{link.label}}</a>
+      <a href={{link.url}} target="_blank"><i class="fa fa-link" style="font-size: 14px;"></i>{{link.label}}</a>
     {{else}}
-      <a href={{link.url}}>{{link.url}}</a>
+      <a href={{link.url}} target="_blank">{{link.url}}</a>
     {{/if}}
   </div>
 {{/each}}

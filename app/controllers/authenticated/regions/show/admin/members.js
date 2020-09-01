@@ -9,6 +9,66 @@ export default Controller.extend({
   router: service(),
   group: alias('model'),
   activeTab: 'members',
+  reorder: false,
+  resize: true,
+  columns: computed(function() {
+    const a = [
+        {
+          name: `User`,
+          valuePath: `name`
+        },
+        {
+          name: `Signed up`,
+          valuePath: `joined_site`
+        },
+        {
+          name: `Joined region`,
+          valuePath: `joined_region`
+        },
+        {
+          name: `Last login`,
+          valuePath: `sign_in`
+        },
+        {
+          name: `Homed?`,
+          valuePath: `homed`
+        },
+        {
+          name: `Last update`,
+          valuePath: `last_update`
+        },
+      ];
+    return a;
+  }),
+  sorts: computed(function() {
+    const a = [
+        {
+          valuePath: 'name',
+          isAscending: false,
+        },
+        {
+          valuePath: 'joined_site',
+          isAscending: false,
+        },
+        {
+          valuePath: 'joined_region',
+          isAscending: false,
+        },
+        {
+          valuePath: 'sign_in',
+          isAscending: false,
+        },
+        {
+          valuePath: 'homed',
+          isAscending: false,
+        },
+        {
+          valuePath: 'last_update',
+          isAscending: false,
+        },
+      ];
+    return a;
+  }),
   
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {

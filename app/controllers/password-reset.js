@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import ENV from 'nanowrimo/config/environment';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 import passwordResetValidation from 'nanowrimo/validations/password-reset-attempt';

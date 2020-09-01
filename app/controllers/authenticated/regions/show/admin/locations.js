@@ -8,7 +8,42 @@ export default Controller.extend({
   currentUser: service(),
   router: service(),
   group: alias('model'),
-  
+  reorder: false,
+  resize: true,
+  columns: computed(function() {
+    const a = [
+        {
+          name: `Homed?`,
+          valuePath: `homed`
+        },
+        {
+          name: `Location`,
+          valuePath: `location`
+        },
+        {
+          name: `Last event RSVP`,
+          valuePath: `rsvp`
+        },
+      ];
+    return a;
+  }),
+  sorts: computed(function() {
+    const a = [
+        {
+          valuePath: 'homed',
+          isAscending: false,
+        },
+        {
+          valuePath: 'location',
+          isAscending: false,
+        },
+        {
+          valuePath: 'rsvp',
+          isAscending: false,
+        },
+      ];
+    return a;
+  }),
   // Returns true if the user can edit the region
   canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
     if (this.get('currentUser.user.groupUsersLoaded')) {

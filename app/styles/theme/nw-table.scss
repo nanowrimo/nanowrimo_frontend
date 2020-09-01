@@ -1,0 +1,39 @@
+table {
+  thead {
+    tr {
+      th {
+        cursor: pointer;
+        button {
+          display: none;
+        }
+        .et-sort-indicator {
+          color: transparent;
+          &:before {
+            color: #666;
+            display: inline-block;
+            border: none;
+            line-height: 1;
+            transform: rotate(0deg);
+            content: '\25be';
+          }
+          &.is-ascending:before {
+            transform: rotate(180deg);
+          }
+        }
+      }
+      th.is-sortable {
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e8f8e8;
+        }
+      }
+    }
+  }
+  tbody {
+    border-top: solid 2px #ccc;
+    tr {
+      border-bottom: solid 1px #ddd;
+    }
+  }
+}

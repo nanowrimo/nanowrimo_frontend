@@ -281,29 +281,6 @@
     }
   }
 }
-.ember-sortable-table {
-  th {
-    cursor: pointer;
-    padding-right: 10px;
-  }
-  th:after {
-    content: ' ';
-    position: relative;
-    left: 2px;
-    border-top-color: transparent;
-    border: 6px solid transparent;
-  }
-  .headerSortDown:after {
-    top: 12px;
-    border-top-color: black;
-  }
-
-  .headerSortUp:after {
-    bottom: 12px;
-    border-bottom-color: black;
-  }
-
-}
 .nano-icon-tabs {
   display: flex;
   width: 100%;

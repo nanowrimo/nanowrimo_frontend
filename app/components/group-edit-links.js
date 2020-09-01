@@ -35,7 +35,7 @@ export default Component.extend({
   }),
   
   canAddAnotherLink: computed('_otherSavedLinks.[]', '_newLinks.[]', function() {
-    return this.get('_otherSavedLinks').length + this.get('_newLinks').length < 5;
+    return this.get('_otherSavedLinks').length + this.get('_newLinks').length < 10;
   }),
 
   _newGroupExternalLink(attrs) {

@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import ENV from 'nanowrimo/config/environment';
 import {computed} from '@ember/object';
-import fetch from 'fetch';
+//import fetch from 'fetch';
 
 export default Controller.extend({
   emailError: false,

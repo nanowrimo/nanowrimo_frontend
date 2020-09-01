@@ -9,13 +9,13 @@
   {{#form-for
     afterSubmit=modal.close
     onSubmit=(action "updateChangeset")
-    afterError=(action "responseError")
     model=user
     data-test-user-edit-profile-form=true
     changeset=changeset
     as |f|
   }}
     {{#modal.body}}
+
       {{#bs-tab
         activeId=activeTab
         onChange=(action (mut activeTab))

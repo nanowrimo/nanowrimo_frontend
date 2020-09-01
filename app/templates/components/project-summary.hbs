@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="nw-project-progress">
-        {{#if project.activeProjectChallenge }}
+        {{#if project.futureProjectChallenge }}
         {{else}}
           {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params addGoal="true") }}
             <button class='nano-button-small'>Create a New Goal</button>
