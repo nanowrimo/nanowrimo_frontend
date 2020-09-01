@@ -1,6 +1,6 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
 //import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
+import config from 'nanowrimo/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
