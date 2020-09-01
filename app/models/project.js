@@ -191,6 +191,18 @@ const Project = Model.extend({
     return active;
   }),
 
+  futureProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
+    let active = null;
+    //loop through this project's projectChallenges
+    this.get('projectChallenges').forEach((pc)=>{
+      if (!pc.hasEnded ) {
+        active = pc;
+      }
+    });
+    //alert(active);
+    return active;
+  }),
+
   latestProjectChallenge: computed('projectChallenges.[]', function(){
     const promise = this.get('projectChallenges').then((pcs)=>{
       //loop through the pcs
