@@ -10,22 +10,26 @@
     {{/dd.toggle}}
   {{/nav.dropdown}}
 
-  {{#nav.dropdown onHide=(action 'notificationsViewed') as |dd|}}
-    {{#dd.toggle}}
-      <button class="button-clear" aria-label="Display your notifications.">
-        {{#if (media "isDesktop")}}
-          <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
-        {{/if}}
-        {{#if (media "isMobile")}}
-          <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
-        {{/if}}
-        <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>
-      </button>
-    {{/dd.toggle}}
-    {{#dd.menu align="right" as |ddm|}}
-      {{notifications-menu-dropdown allNotifications=sortedNotifications clickAction=(action 'notificationClicked')}}
-    {{/dd.menu}}
-  {{/nav.dropdown}}
+  <div class="btn-group" role="group" id="notification-triggers">
+    <button class="button-clear" aria-label="Display your notifications." {{action 'toggleNotifications'}}>
+      {{#if (media "isDesktop")}}
+        <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
+      {{/if}}
+      {{#if (media "isMobile")}}
+        <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
+      {{/if}}
+      <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>
+    </button>
+    {{#if displayNotifications}}
+      {{notifications-modal
+        open='true'
+        closeFormAction=(action "toggleNotifications")
+        allNotifications=sortedNotifications
+        clickAction=(action 'notificationClicked')
+      }}
+    {{/if}}
+  </div>
+  
 {{/bs-nav}}
 {{#if showBadgeSplash}}
   {{splash-badge badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
