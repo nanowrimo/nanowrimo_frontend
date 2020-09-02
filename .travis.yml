@@ -25,7 +25,7 @@ install:
 
 script:
   - yarn lint:js
-  - yarn test
+  - yarn test:ember
 
 deploy:
   - provider: script
