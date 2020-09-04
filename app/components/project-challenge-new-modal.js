@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
-import { filterBy, sort } from '@ember/object/computed';
+import { sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import Challenge from 'nanowrimo/models/challenge';
@@ -159,46 +159,13 @@ export default Component.extend({
     return '0';
   }),
   
-  filteredOptionsForChallenges: filterBy('baseChallenges', "isNaNoOrCampEvent", true),
-  
-  // get the challenges that the user has not associated with a project 
-  unassignedOptionsForChallenges: computed('project.projectChallenges.[]', 'filteredOptionsForChallenges','isEditingModal', function() {
-    // create an array to hold the unassigned challenges
-    let availableChallenges = [];
-    // an array of the OLL challenges 
-    let challenges = this.get('filteredOptionsForChallenges');
-    
-        /* when editing, it is necessary to NOT filter out the currently assigned challenge */
-    if (this.get("isEditingModal") ){
-      return challenges;
-    }
-    // an array of the goal associations of the current project
-    let goals = this.get('project.projectChallenges');
-    // loop through the filtered challenges
-    challenges.forEach(function(challenge) {
-      // for each challenge, assume there was no associated challenge
-      let found = false;
-      // loop the projects challenge associations
-      goals.forEach(function(goal) {
-        // is the goal associated with the challenge?
-        if (goal.challenge_id === parseInt(challenge.id)) {
-          // a match has been found
-          found = true;
-        }
-      });
-      
-      if (!found) {
-        availableChallenges.pushObject(challenge);
-      }
-    });
-    return availableChallenges;
+   // Gets all challenges from the store
+  unassignedOptionsForChallenges:  computed('getChallengeOptions', function() {
+    return this.get('store').query('challenge',{ available: true});
   }),
-  
+
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
   
-  baseChallenges:  computed(function() {
-    return this.get('store').findAll('challenge');
-  }),
   optionsForWritingType: computed('associateWithChallenge', function() {
     return Challenge.optionsForWritingType;
   }),
