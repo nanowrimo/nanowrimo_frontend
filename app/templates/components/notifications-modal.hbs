@@ -15,6 +15,7 @@
     {{/each}}
   {{/modal.body}}
   {{#modal.footer}}
-    <input class='nano-button btn-underlined' {{action 'cancel'}} type='button' value='Cancel'>
+    <div><span style='cursor: pointer;' {{action 'openPreferences'}}>Preferences</span> | <span style='cursor: pointer;' {{action 'openNotifications'}}>View all</span></div>
+    <input class='nano-button btn-underlined' {{action 'cancel'}} type='button' value='Close'>
   {{/modal.footer}}
 {{/bs-modal}}
