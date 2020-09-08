@@ -135,12 +135,15 @@ export default Component.extend({
     return this.get('projectChallenge.currentCount');
   }),
   
-  projectedFinishDate: computed('challengeSessions.[]', function() {
+  projectedFinishDate: computed('dailyAverage', function() {
     //  today's date + (goal remaining / average per day) days  
     let date = moment();
-    let remainingCount = this.get('goal') - this.get('count');
-    let daysToGo = remainingCount/this.get('dailyAverage');
+    let pc = this.get('projectChallenge');
+    let remainingCount = pc.goal - pc.currentCount;
+    let average = this.get('dailyAverage');
+    let daysToGo = remainingCount/average;
     date.add(daysToGo, 'd');
+    
     return date.format("MMMM D");
   }),
   //
