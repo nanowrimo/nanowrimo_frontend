@@ -26,6 +26,8 @@ export default ChartBaseComponent.extend({
     if (!aggs.length) {
       return 0;
     }
+    // sort the aggregates by day
+    aggs = aggs.sortBy("day");
     // is the last aggregate from today or yesterday?
     let lastAgg = aggs[aggs.length-1];
     
@@ -40,9 +42,6 @@ export default ChartBaseComponent.extend({
     }
     
     var daysStraight=1; // assume the first aggregate counts as 1
-    
-    // sort the aggregates by day
-    aggs = aggs.sortBy("day");
     
     // loop through the aggs
     for (var i=0; i<aggs.length; i++) {
