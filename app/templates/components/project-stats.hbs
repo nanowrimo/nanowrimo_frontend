@@ -47,7 +47,7 @@
         {{stats-my-daily-word-count projectChallenge=projectChallenge class="nw-card g3-col2 g3-row3 g3-hspan2 g2-col1 g2-row4 g2-hspan2"}}
         {{stats-where-i-write projectChallenge=projectChallenge user=currentUser.user class="nw-card g3-col1 g3-row4 g2-col2 g2-row5"}}
         {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular class="nw-card g3-col2 g3-row4 g2-col1 g2-row6 flippable"}}
-        {{stats-when-ill-finish finishDate=projectedFinishDate class="nw-card g3-col3 g3-row4 g2-col2 g2-row6 flippable"}}
+        {{stats-when-ill-finish user=currentUser.user dailyAverage=dailyAverage projectChallenge=projectChallenge class="nw-card g3-col3 g3-row4 g2-col2 g2-row6 flippable"}}
         {{stats-my-writing-speed writingSpeed=writingSpeed class="nw-card g3-col1 g3-row5 g2-col1 g2-row7"}}
         {{stats-how-i-feel averageFeeling=averageFeeling class="nw-card g3-col2 g3-row5 g2-col2 g2-row7"}}
       {{/if}}
