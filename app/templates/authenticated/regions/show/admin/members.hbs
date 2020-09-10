@@ -1,4 +1,32 @@
-<i>Note: All dates are in Greenwich Mean Time.</i>
+<div style='background-color: #eee; padding: 10px; border-radius: 10px; display: flex; justify-content: flex-start;'>
+  <div style='flex: 0 0 30%; font-size: 30px; text-align: right; padding-right: 30px; align-self: center;'>Filters</div>
+  <div style='flex: 0 0 50%;'>
+    <div class='select-container' style='max-width: 350px;'>
+      <select class='form-control' onchange={{action "associateHomedSelect" value="target.value"}}>
+        <option value='0'>Show both homed and not homed members</option>
+        <option value='1'>Show only homed members</option>
+        <option value='-1'>Show only not homed members</option>
+      </select>
+    </div>
+    <div class='select-container' style='max-width: 350px;'>
+      <select class='form-control' onchange={{action "associateUpdateSelect" value="target.value"}}>
+        <option value='0'>Show all members, with or without updates</option>
+        <option value='1'>Show only members with updates</option>
+        <option value='-1'>Show only members without updates</option>
+      </select>
+    </div>
+  </div>
+  <div style='flex: 0 0 20%; align-self: center;'>
+    <LoadingButton
+      @buttonLabel='Download CSV'
+      @isLoading={{csvIsLoading}}
+      @isDisabled={{csvIsLoading}}
+      @actionOnClick={{action 'downloadCSV'}}
+    />
+  </div>
+</div>
+<div style='font-size: 24px; margin-top: 20px; margin-bottom: 10px;'><b>{{numRows}} region members found!</b></div>
+<div><i>Note: All dates are in Greenwich Mean Time.</i></div>
 <EmberTable as |t|>
   <t.head
     @columns={{columns}}
