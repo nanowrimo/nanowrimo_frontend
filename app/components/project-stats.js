@@ -86,19 +86,11 @@ export default Component.extend({
     return retval;
   }),
 
-  dailyAverage: computed('projectChallenge.dailyAggregates.[]', function(){
-    let aggs = this.get('projectChallenge.dailyAggregates');
-    if (aggs && aggs.length>0) {
-      let values = aggs.mapBy('count');
-      let sum = 0;
-      for (var i=0 ; i < values.length ; i++) {
-        let val = values[i];
-        if(val==null) {
-          break;
-        }
-        sum+=val;
-      }
-      let average = parseInt(sum/i);
+  dailyAverage: computed('projectChallenge.currentCount', function(){
+    let total = this.get('projectChallenge.currentCount');
+    if (total) {
+      let elapsedDays = this.get("projectChallenge").numElapsedDays();
+      let average = parseInt(total/elapsedDays);
       return average;
     } else {
       return 0;
@@ -135,18 +127,7 @@ export default Component.extend({
     return this.get('projectChallenge.currentCount');
   }),
   
-  projectedFinishDate: computed('dailyAverage', function() {
-    //  today's date + (goal remaining / average per day) days  
-    let date = moment();
-    let pc = this.get('projectChallenge');
-    let remainingCount = pc.goal - pc.currentCount;
-    let average = this.get('dailyAverage');
-    let daysToGo = remainingCount/average;
-    date.add(daysToGo, 'd');
-    
-    return date.format("MMMM D");
-  }),
-  //
+ 
   todaysSessions: computed('challengeSessions.[]', function() {
     let css = this.get('challengeSessions');
     if (css) {
