@@ -16,7 +16,6 @@ export default Controller.extend({
   updated: true,
   notUpdated: true,
   csvIsLoading: false,
-  displayDownloadLoading: "display: none;",
   columns: computed(function() {
     const a = [
         {
@@ -152,7 +151,7 @@ export default Controller.extend({
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
-    hiddenElement.download = 'members.csv';
+    hiddenElement.download = 'region-members.csv';
     hiddenElement.click();
     this.set('csvIsLoading', false);
   },
@@ -174,7 +173,6 @@ export default Controller.extend({
     downloadCSV() {
       this.set('csvIsLoading', true);
       this.generateCSV();
-      //setTimeout(() => {  this.generateCSV(); }, 1000);
     }
     
   }
