@@ -17,7 +17,7 @@ export default ChartBaseComponent.extend({
     let average = this.get('dailyAverage');
     let daysToGo = remainingCount/average;
     date.add(daysToGo, 'd');
-    return date.format("MMMM D Y");
+    return date.format("MMMM D, Y");
   }),
   
   userHasWritten: computed('projectChallenge.currentCount', function(){
