@@ -142,3 +142,7 @@
     position: relative;
   }
 }
+.notifications-modal-body {
+  max-height: 400px;
+  overflow-y: scroll;
+}

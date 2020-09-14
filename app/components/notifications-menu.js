@@ -13,6 +13,7 @@ export default Component.extend({
   showBadgeSplash: false,
   showWinnerSplash: false,
   badgeForSplash: null,
+  displayNotifications: false,
   
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
     let ns = this.get('store').peekAll('notification');
@@ -45,6 +46,11 @@ export default Component.extend({
   }),
   
   actions: {
+    
+    toggleNotifications() {
+      const dn = this.get('displayNotifications');
+      this.set('displayNotifications', !dn);
+    },
     
     // Called when the notifications menu is opened
     notificationsViewed() {

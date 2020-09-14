@@ -121,11 +121,11 @@ button, input.nano-button {
     }
   }
 }
+
     
 button:focus, input.nano-button:focus {
   outline: 0;
 }
-
 
 button.btn {
   width: 100%;
@@ -142,4 +142,29 @@ button .spinner {
   font-size: 16px;
   color: $nw-mediumgrey;
   text-decoration: underline;
+}
+
+.nw-loading-button {
+  position: relative;
+  i {
+    position: absolute;
+    font-size: 24px;
+    width: 90%;
+    top: 0;
+    display: none;
+  }
+  &.is-loading {
+    i {
+      display: block;
+    }
+  }
+}
+.nw-loading-button:disabled {
+  cursor: default;
+  opacity: 0.6 !important;
+  color: rgba(255,255,255,0.3);
+  i {
+    color: rgba(255,255,255,1.0);
+  }
+  
 }

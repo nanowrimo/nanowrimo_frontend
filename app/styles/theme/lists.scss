@@ -78,7 +78,7 @@
         .nano-list-item-info {
           flex: 1 1 50%;
           font-size: 14px;
-          color: $nw-lightgrey;
+          color: $nw-mediumgrey;
         }
         .nano-list-item-buttons {
           flex: 1 1 50%;
@@ -97,8 +97,6 @@
         color: $nw-darkgrey;
       }
       .nano-list-item-subcontent {
-        .nano-list-item-info {
-        }
         .nano-list-item-buttons {
           visibility: visible;
         }
