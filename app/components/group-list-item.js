@@ -30,21 +30,15 @@ export default Component.extend({
       let g = this.get('groupContainer.groupObject');
       // Set the local group user to null
       let gu = null;
-      // Set a variable to track the primary group
-      let maxPrimary = -1;
       cu.groupUsers.forEach(function(obj) {
-        if (obj.primary>maxPrimary) {
-          maxPrimary = obj.primary;
-        }
+        // If this is the correct group user
         if (obj.group_id==g.id) {
           gu = obj;
         }
       });
-      let newMax = maxPrimary + 1;
-      gu.set('primary', newMax);
+      gu.set('primary', 1);
       gu.save().then(() => {
-        let newInt = cu.get('recalculateHome') + 1;
-        cu.set('recalculateHome', newInt);
+        this.get('currentUser').checkForRegionUpdates();
       });
     },
     leaveGroup() {
@@ -63,6 +57,7 @@ export default Component.extend({
           g.get('groupUsers').removeObject(gu);
           cu.get('groups').removeObject(g);
           g.get('users').removeObject(cu);
+          this.get('currentUser').checkForRegionUpdates();
         });
       }
     }

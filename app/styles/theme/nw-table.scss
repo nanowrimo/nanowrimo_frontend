@@ -37,3 +37,44 @@ table {
     }
   }
 }
+.nw-filters {
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  @media (max-width: $screen-lg) {
+    flex-direction: column;
+  }
+  .nw-filters-label {
+    flex: 0 0 30%;
+    font-size: 30px;
+    text-align: right;
+    padding-right: 30px;
+    align-self: center;
+  }
+  .nw-filters-select {
+    align-self: center;
+    flex: 0 0 50%;
+    @media (max-width: $screen-lg) {
+      flex: 0 0 100%;
+      width: 100%;
+      padding-left: 20px;
+    }
+    .select-container {
+      max-width: 350px;
+    }
+  }
+  .nw-filters-buttons {
+    flex: 0 0 20%;
+    align-self: center;
+    @media (max-width: $screen-lg) {
+      margin-top: 10px;
+    }
+  }
+}
+.nw-filters-count {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

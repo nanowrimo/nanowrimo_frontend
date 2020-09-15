@@ -28,5 +28,30 @@ export default Service.extend({
     } else {
       return resolve();
     }
-  }
+  },
+  
+  checkForRegionUpdates() {
+    let u = this.get('user');
+    if (u) {
+      this.store.query('group-user', {
+        filter: {
+          user_id: u.get('id')
+        },
+        group_types: 'region'
+      }).then(function() {
+        let newInt = u.get('recalculateHome') + 1;
+        u.set('recalculateHome', newInt);
+      }).catch((error)=>{
+        for (var i=0; i<error.errors.length; i++) {
+          let e = error.errors[i];
+          if (e.status=="401") {
+            //authorization has failed, de-auth now
+            this.get('session').invalidate();
+            break;
+          }
+        }
+      });
+    }
+  },
+  
 });

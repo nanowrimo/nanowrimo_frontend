@@ -10,6 +10,13 @@ export default Controller.extend({
   group: alias('model'),
   reorder: false,
   resize: true,
+  homed: true,
+  notHomed: true,
+  loc: true,
+  notLocation: true,
+  rsvp: true,
+  notRsvp: true,
+  csvIsLoading: false,
   columns: computed(function() {
     const a = [
         {
@@ -66,15 +73,88 @@ export default Controller.extend({
     }
   }),
   
-  groupMembers: computed('model.listResults',function() {
+  numRows: computed('groupMembers',function() {
+    const lr = this.get('groupMembers');
+    return lr.length;
+  }),
+  
+  groupMembers: computed('model.listResults','homed','notHomed','loc','notLocation','rsvp','notRsvp',function() {
     const lr = this.get('model.listResults');
+    let homed = this.get('homed');
+    let loc = this.get('loc');
+    let rsvp = this.get('rsvp');
+    let notHomed = this.get('notHomed');
+    let notLocation = this.get('notLocation');
+    let notRsvp = this.get('notRsvp');
     let a = [];
-    let b = [];
     for (const [key, value] of Object.entries(lr)) {
-      a.push(value[0]);
-      b.push(key);
+      let c = value[0];
+      let h = (c.homed == "Yes");
+      let l = (c.location != null);
+      let r = (c.rsvp != null);
+      if (key && ((h==homed)||(!h==notHomed)) && ((l==loc)||(!l==notLocation)) && ((r==rsvp)||(!r==notRsvp))) {
+        a.push(c);
+      }
     }
     return a;
   }),
+
+  escapeString(str) {
+    if (str!=null) {
+      return str.replace('"','""');
+    } else {
+      return '';
+    }
+  },
+  
+  generateCSV() {
+    let t = this;
+    let csv = 'Homed?, Location, Last event RSVP\n';
+    let groupMembers = this.get('groupMembers');
+    groupMembers.forEach(function(c) {
+      csv += c.homed;
+      csv += ',';
+      csv += '"' + t.escapeString(c.location) + '"';
+      csv += ',';
+      if (c.rsvp) {
+        csv += c.rsvp;
+      } else {
+        csv += '';
+      }
+      csv += "\n";
+    });
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'region-locations.csv';
+    hiddenElement.click();
+    this.set('csvIsLoading', false);
+  },
+
+  actions: {
+        
+    associateHomedSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('homed',(sv>-1));
+      this.set('notHomed',(sv<1));
+    },
+    
+    associateLocationSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('loc',(sv>-1));
+      this.set('notLocation',(sv<1));
+    },
+    
+    associateRsvpSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('rsvp',(sv>-1));
+      this.set('notRsvp',(sv<1));
+    },
+    
+    downloadCSV() {
+      this.set('csvIsLoading', true);
+      this.generateCSV();
+    }
+  }
   
 });

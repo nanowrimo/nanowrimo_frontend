@@ -80,8 +80,15 @@
       .nw-two-fifths {
         padding: 10px;
         flex: 0 0 40%;
+        position: relative;
+        min-height: 100px;
+        height: 100%;
         img {
-          width: 100%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          max-height: 100%;
+          max-width: 100%;
         }
       }
       .nw-three-fifths {
@@ -296,6 +303,7 @@
       .nw-one-third {
         flex: 0 0 33%;
         text-align: center;
+        padding: 10px;
         img {
           width: 100%;
         }
@@ -546,6 +554,10 @@
       font-size: 20px;
       line-height: 24px;
       margin-bottom: 10px;
+    }
+    .nw-two-thirds {
+      max-height: 260px;
+      overflow: scroll;
     }
   }
 }
