@@ -1,10 +1,13 @@
 <div class="container-fluid nw-footer">
   <div class="nw-footer-section nw-footer-left">
     <div class="nw-footer-logos">
-      <a href="/"><img src="/images/logo/logo.svg" style="margin-right: 10px;" /><img src="/images/logo/logo_long_text.svg" style="padding-top: 10px;" /></a>
+      <a href="/"><img alt="NaNoWriMo logo" src="/images/logo/logo.svg" style="margin-right: 10px;" /><img
+          alt="text in logo that says 'National Novel Writing Month' " src="/images/logo/logo_long_text.svg"
+          style="padding-top: 10px;" /></a>
     </div>
     <div class="nw-footer-description">
-      National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing. <a href="/">Learn More</a>
+      National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing. <a
+        href="/">Learn More</a>
     </div>
     <div class="nw-footer-header">
       <a href="https://nanowrimo.org/about-nano">What is NaNoWriMo?</a>
@@ -14,34 +17,34 @@
     </div>
   </div>
   {{#if currentUserName}}
-    {{#each footerSubmenus as |footerSubmenu i|}}
-      <div class="nw-footer-section nw-footer-{{i}}">
-        <div class="nw-footer-submenu">
-          <div class="nw-footer-header">
-            {{footerSubmenu.toggleLabel}}
-          </div>
-          <ul>
-            {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
-              {{#if footerSubmenuItem}}
-                <li>
-                  {{#if footerSubmenuItem.url}}
-                    <a href="{{footerSubmenuItem.url}}">{{footerSubmenuItem.label}}</a>
-                  {{else}}
-                    {{#if footerSubmenuItem.segment}}
-                      {{#link-to footerSubmenuItem.route footerSubmenuItem.segment}}
-                        {{footerSubmenuItem.label}}
-                      {{/link-to}}
-                    {{else}}
-                      {{link-to footerSubmenuItem.label footerSubmenuItem.route}}
-                    {{/if}}
-                  {{/if}}
-                </li>
-              {{/if}}
-            {{/each}}
-          </ul>
-        </div>
+  {{#each footerSubmenus as |footerSubmenu i|}}
+  <div class="nw-footer-section nw-footer-{{i}}">
+    <div class="nw-footer-submenu">
+      <div class="nw-footer-header">
+        {{footerSubmenu.toggleLabel}}
       </div>
-    {{/each}}
+      <ul>
+        {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
+        {{#if footerSubmenuItem}}
+        <li>
+          {{#if footerSubmenuItem.url}}
+          <a href="{{footerSubmenuItem.url}}">{{footerSubmenuItem.label}}</a>
+          {{else}}
+          {{#if footerSubmenuItem.segment}}
+          {{#link-to footerSubmenuItem.route footerSubmenuItem.segment}}
+          {{footerSubmenuItem.label}}
+          {{/link-to}}
+          {{else}}
+          {{link-to footerSubmenuItem.label footerSubmenuItem.route}}
+          {{/if}}
+          {{/if}}
+        </li>
+        {{/if}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  {{/each}}
   {{/if}}
   <div class="nw-footer-section nw-footer-right">
     <div>
@@ -63,7 +66,7 @@
     </div>
     <div class="ywp-logo">
       <a href="https://ywp.nanowrimo.org" alt="Young Writer's Program">
-        <img src="/images/logo/ywp_logo.svg" />
+        <img alt="Young Writers Program log" src="/images/logo/ywp_logo.svg" />
       </a>
     </div>
   </div>
@@ -79,7 +82,8 @@
         &bull;
         &#20;
       </span>
-      Copyright © 1999 - {{currentYear}} National Novel Writing Month. All posted novel excerpts remain copyright to their authors.
+      Copyright © 1999 - {{currentYear}} National Novel Writing Month. All posted novel excerpts remain copyright to
+      their authors.
     </p>
   </div>
 </div>
