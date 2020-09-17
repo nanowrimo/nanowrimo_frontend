@@ -100,7 +100,7 @@
   flex-direction: row;
   @media (max-width: $screen-xs-max) {
     height: unset;
-    margin-bottom: unset;
+    margin-bottom: 5px;
     flex-direction: column;
     > div {
       align-self: center;
