@@ -24,6 +24,7 @@
     padding: 28px;
     @media(max-width: $screen-md) {
       padding: 10px;
+      padding-top: 20px;
     }
     padding-bottom: 1px;
     .nw-card {
@@ -98,9 +99,14 @@
   display: flex;
   flex-direction: row;
   @media (max-width: $screen-xs-max) {
+    height: unset;
+    margin-bottom: unset;
     flex-direction: column;
     > div {
       align-self: center;
+    }
+    > button, div {
+      margin-bottom: 10px;
     }
   }
   justify-content: space-between;
