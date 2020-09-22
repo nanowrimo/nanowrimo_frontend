@@ -37,7 +37,10 @@
   </div>
 {{/if}}
 {{#if hasCouponCode}}
-  <div class='nw-coupon-code {{copyClass}}' {{action 'copyCode'}}>
-    <i class="fa fa-link"></i> <span class="nw-underlined">{{copyText}}</span>
+  <div class="nw-card-footer {{if (not-eq offer.order 1) "nw-white-back"}}">
+    <div class='nw-coupon-code {{copyClass}}' {{action 'copyCode'}}>
+      <i class="fa fa-link"></i> <span class="nw-underlined">{{copyText}}</span>
+    </div>
   </div>
+  
 {{/if}}

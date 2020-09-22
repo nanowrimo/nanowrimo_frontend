@@ -283,9 +283,7 @@
         }
       }
     }
-    &.nw-white-back {
-      background-color: #ffffff;
-    }
+  
     &.nw-card-horizontal {
       flex-direction: row;
       justify-content: space-between;
@@ -310,6 +308,8 @@
       }
       .nw-two-thirds {
         flex: 0 0 64%;
+        max-height: 230px;
+        overflow-y:auto;
       }
       @media (max-width: $screen-xs-max) {
         flex-direction: column;
@@ -401,7 +401,7 @@
     }
   }
   .nw-card-footer {
-  
+    min-height: 30px;
   }
 }
 .nw-flippy-card {
@@ -556,7 +556,7 @@
       margin-bottom: 10px;
     }
     .nw-two-thirds {
-      max-height: 260px;
+      max-height: 230px;
       overflow-y: auto;
     }
   }
@@ -601,4 +601,7 @@
       background-color: rgba(200,255,255,0.2);
     }
   }
+}
+.nw-white-back {
+  background-color: #ffffff;
 }
