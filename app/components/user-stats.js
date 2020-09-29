@@ -1,9 +1,10 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
-
+import { inject as service } from '@ember/service';
 export default Component.extend({
   tagName: '',
+  media: service(),
   user: alias('author'),
   
   didReceiveAttrs() {
@@ -23,5 +24,27 @@ export default Component.extend({
     } else {
       return 0;
     }
+  }), 
+  
+  firstEnabled: computed('user.statsWordCountEnabled', 'user.statsProjectsEnabled', 'user.statsYearsEnabled','user.statsWordiestEnabled','user.statsStreakEnabled', function(){
+    let props = [
+      "statsWordCountEnabled",
+      "statsProjectsEnabled",
+      "statsYearsEnabled",
+      "statsWordiestEnabled",
+      "statsWritingPaceEnabled",
+      "statsStreakEnabled"
+    ];
+    
+    //loop through the stats
+    let propIndex = 0;
+    for( var i = 0; i< props.length; i++) {
+      let prop = props[i];
+      //is this prop selected by the user?
+      if (this.get(`user.${prop}`) ) {
+        return prop;
+      }
+    }
+    return null;
   })
 });
