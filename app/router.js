@@ -1,11 +1,11 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
-import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
+//import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
+import config from 'nanowrimo/config/environment';
 
-const Router = EmberRouter.extend(GoogleAnalyticsRoute, {
-  location: config.locationType,
-  rootURL: config.rootURL
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
+}
 
 Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
@@ -141,5 +141,3 @@ Router.map(function() {
   
 });
 
-
-export default Router;
