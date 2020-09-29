@@ -149,6 +149,13 @@
         &:hover {
           color: $nw-mediumaqua;
         }
+        margin-right: 15px;
+        a {
+          color: $nw-mediumgrey;
+          &:hover {
+            color: $nw-mediumaqua;
+          }
+        }
       }
       &.nw-card-actions-left {
         text-align: left;
@@ -228,6 +235,7 @@
     flex: 1 1 100%;
     position: relative;
     padding: 20px;
+    justify-content: space-between;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     &.nw-card-list {
@@ -591,6 +599,14 @@
     left: 200px;
     top: 25px;
   }
+  &.nw-tiny-card {
+    font-size: 20px;
+    line-height: 35px;
+    height: 40px;
+    transform: rotate(-5deg);
+    left: 80px;
+    top: 15px;
+  }
 }
 .nw-card.nw-full-link {
   a:hover, a:visited, a:link, a:active {
@@ -599,6 +615,57 @@
   a:hover {
     .nw-card-content {
       background-color: rgba(200,255,255,0.2);
+    }
+  }
+}
+.nw-card .nw-card-content.nw-event-container {
+  justify-content: flex-start;
+  .nw-event-promo {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 2px solid #dfe4e6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .nw-event-promo-date {
+      flex: 0 0 40px;
+      align-self: center;
+      margin-right: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      color: #2f3061;
+      text-transform: uppercase;
+      .nw-event-promo-month {
+        line-height: 14px;
+      }
+      .nw-event-promo-day {
+        font-size: 36px;
+        line-height: 32px;
+      }
+    }
+    .nw-event-promo-details {
+      flex: 1 1 100%;
+      text-align: left;
+      align-self: center;
+      .nw-event-promo-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #2f3061;
+      }
+      .nw-event-promo-time {
+        font-size: 14px;
+        color: #343434;
+        .nw-event-promo-dotw {
+          color: #979797;
+        }
+      }
+    }
+    .nw-event-promo-button {
+      flex: 0 0 130px;
+      text-align: right;
+      align-self: center;
     }
   }
 }
