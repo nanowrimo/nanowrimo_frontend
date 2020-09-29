@@ -56,19 +56,16 @@ export default Component.extend({
   
   // Returns the start monthte as a readable string
   startMonth: computed(function() {
-    let etz = this.get('event.timeZone');
     return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("MMM");
   }),
   
   // Returns the start date as a readable string
   startDate: computed(function() {
-    let etz = this.get('event.timeZone');
     return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("D");
   }),
   
   // Returns the start date as a readable string
   startDay: computed(function() {
-    let etz = this.get('event.timeZone');
     return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("dddd");
   }),
   

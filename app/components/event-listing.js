@@ -17,6 +17,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
   },
+  
   groupUsersFound: computed(function() {
     let store = this.get('store');
     let gus = store.peekAll('group_user');
