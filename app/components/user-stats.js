@@ -26,7 +26,7 @@ export default Component.extend({
     }
   }), 
   
-  firstEnabled: computed('user.statsWordCountEnabled', 'user.statsProjectsEnabled', 'user.statsYearsEnabled','user.statsWordiestEnabled','user.statsStreakEnabled', function(){
+  firstEnabled: computed('user.[statsWordCountEnabled,statsProjectsEnabled,statsYearsEnabled,statsWordiestEnabled,statsStreakEnabled', function(){
     let props = [
       "statsWordCountEnabled",
       "statsProjectsEnabled",
@@ -37,7 +37,6 @@ export default Component.extend({
     ];
     
     //loop through the stats
-    let propIndex = 0;
     for( var i = 0; i< props.length; i++) {
       let prop = props[i];
       //is this prop selected by the user?
