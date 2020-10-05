@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed }  from '@ember/object';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import ENV from 'nanowrimo/config/environment';
@@ -11,49 +11,49 @@ export default Component.extend({
   badgesService: service(),
   badge: null,
   userBadgeEndpoint: `${ENV.APP.API_HOST}/user-badges/`,
-  
+
   projectChallenge: null,
   user: null,
   renderSize: null,
   classNames: ['badge-cell'],
-  
-  init(){
+
+  init() {
     this._super(...arguments);
     this.get('badgesService.recomputeBadges');
   },
-  
-  userBadges: computed('badgesService.recomputeBadges', function() {
+
+  userBadges: computed('badgesService.recomputeBadges', function () {
     return this.get('store').peekAll('user-badge');
   }),
-  userBadge: computed('badgesService.recomputeBadges',function() {
+  userBadge: computed('badgesService.recomputeBadges', function () {
     let ubs = this.get('userBadges');
     let b = this.get('badge');
     let ad = false;
     let pc = this.get('projectChallenge');
-    ubs.forEach(function(ub) {
-      if (b && (b.id==ub.badge_id)&&(pc.get('id')==ub.project_challenge_id)) {
+    ubs.forEach(function (ub) {
+      if (b && (b.id == ub.badge_id) && (pc.get('id') == ub.project_challenge_id)) {
         ad = ub;
       }
     });
     return ad;
   }),
-  
+
   // Returns true if the badge belongs to the current user
-  ownsBadge: computed('currentUser','user',function() {
-    if (this.get('currentUser.user.id')==this.get('user.id')) {
+  ownsBadge: computed('currentUser', 'user', function () {
+    if (this.get('currentUser.user.id') == this.get('user.id')) {
       return true;
     } else {
       return false;
     }
   }),
-  
+
   // Returns true if badge should be rendered half-size
-  renderSmall: computed('renderSize',function() {
-    return this.get('renderSize')=='small';
+  renderSmall: computed('renderSize', function () {
+    return this.get('renderSize') == 'small';
   }),
-  
+
   // Returns date if the badge has been won in the current context
-  awardDate: computed('userBadge',function() {
+  awardDate: computed('userBadge', function () {
     let ub = this.get('userBadge');
     let ad = false;
     if (ub) {
@@ -62,25 +62,25 @@ export default Component.extend({
     return ad;
   }),
   // Returns true if the user can award themselves the badge
-  awardable: computed('badge.badge_type','ownsBadge',function() {
+  awardable: computed('badge.badge_type', 'ownsBadge', function () {
     let badge = this.get('badge');
     if (badge) {
-      return ((badge.badge_type=='self-awarded')&&(this.get('ownsBadge')));// {
+      return ((badge.badge_type == 'self-awarded') && (this.get('ownsBadge')));// {
     }
     return null;
   }),
-  
+
   // Changes the cursor on self-awardable badges
-  clickableClass: computed('awardable',function() {
+  clickableClass: computed('awardable', function () {
     if (this.get('awardable')) {
       return 'clickable';
     } else {
       return '';
     }
   }),
-  
-  
-  badgeImageUrl: computed('badgesService.recomputeBadges',function() {
+
+
+  badgeImageUrl: computed('badgesService.recomputeBadges', function () {
     let b = this.get('badge');
     if (b) {
       let imageUrl = b.unawarded;
@@ -91,7 +91,20 @@ export default Component.extend({
     }
     return null;
   }),
-  badgeDescription: computed('badgesService.recomputeBadges',function() {
+
+  badgeAltText: computed('awardDate', function () {
+    let b = this.get('badge');
+    if (b) {
+      let status = "Unearned";
+      if (this.get('awardDate')) {
+        status = "Earned";
+      }
+      return (b.title + " Badge " + status);
+    }
+    return null;
+  }),
+
+  badgeDescription: computed('badgesService.recomputeBadges', function () {
     let b = this.get('badge');
     let desc = '';
     if (b) {
@@ -105,35 +118,35 @@ export default Component.extend({
     }
     return desc;
   }),
-  badgeNote: computed('userBadges.[]',function() {
+  badgeNote: computed('userBadges.[]', function () {
     let awardDate = this.get('awardDate');
     let badge = this.get('badge');
     let ownsBadge = this.get('ownsBadge');
     let note = "";
     if (badge && ownsBadge) {
-      if (badge.badge_type=='self-awarded') {
+      if (badge.badge_type == 'self-awarded') {
         note = "Click on a badge to award it to yourself! Click on it again to remove it."
       } else {
         if (awardDate) {
-          let str_val = moment(awardDate).fromNow(); 
-          note = "You won this badge " + str_val + "."; 
+          let str_val = moment(awardDate).fromNow();
+          note = "You won this badge " + str_val + ".";
         }
       }
     } else {
       if (awardDate) {
-        let str_val = moment(awardDate).fromNow(); 
-        note = this.get('user.name') + " won this badge " + str_val + "."; 
+        let str_val = moment(awardDate).fromNow();
+        note = this.get('user.name') + " won this badge " + str_val + ".";
       }
     }
     return note;
   }),
-  
+
   actions: {
     toggleBadge() {
       let badge = this.get('badge');
       let ownsBadge = this.get('ownsBadge');
       if (ownsBadge) {
-        if (badge.badge_type=='self-awarded') {
+        if (badge.badge_type == 'self-awarded') {
           if (this.get('awardDate')) {
             let ub = this.get('userBadge');
             ub.destroyRecord().then(() => {
@@ -155,6 +168,6 @@ export default Component.extend({
       }
     },
   }
-  
-  
+
+
 });
