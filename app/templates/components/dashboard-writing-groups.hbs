@@ -15,18 +15,21 @@
       Camp has started! Create a writing group to navigate the challenge with friends!
     </div>
     <div>
-      <button {{action "openNewWritingGroupModal"}}>
-        Create a writing group
-      </button>
+      <div class="nw-promo-text">
+        November is right around the corner! Create a writing group to navigate the challenge with friends!
+      </div>
+      <div>
+        <button {{action "openNewWritingGroupModal"}}>
+          Create a writing group
+        </button>
+        {{group-create-modal
+          onHidden=(action "afterWritingGroupModalClose")
+          open=addWritingGroup
+          user=user
+        }}
+      </div>
     </div>
-  </div>
-  <div class="nw-card-bottom-image"><img alt="drawing of a tent" src="/images/global/tent.svg"
-      style="width: 70px; margin-top: 10px;" /></div>
-  {{/if}}
-  {{group-create-modal
-    onHidden=(action "afterWritingGroupModalClose")
-    open=addWritingGroup
-    user=user
-  }}
+    <div class="nw-card-bottom-image"><img src="/images/cards/handsclapping.svg" style='width: 70px;' /></div>
+    {{/if}}
 
-</div>
+  </div>

@@ -54,7 +54,9 @@ export default Service.extend({
           this.get('homeRegionItem'),
           { label: "My Groups", route: "authenticated.users.show.groups", segment: this.get('userSlug'), teaser: "Regions and writing groups", src: "/images/nav/groups.svg" },
           { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" },
-          //{label: "Word Sprints", route: "wordSprints", segment: null, teaser: "Ready... set... write", src: "/images/nav/pencil_flag.svg"}
+          { label: "Get Involved", url: "/come-write-in", segment: null, teaser: "Come Write In, MLs, & more", src: "/images/nav/comewritein.png" },
+          { label: "Our Values", url: "/dei", segment: null, teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }
+
         ]
       },
       {
