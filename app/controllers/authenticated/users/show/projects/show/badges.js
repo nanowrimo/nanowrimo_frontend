@@ -1,7 +1,10 @@
 import Controller from '@ember/controller';
 import { alias } from '@ember/object/computed';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+
 export default Controller.extend({
+  badgesService: service(),
   project: alias('model'),
   _projectChallenge: null,
   projectChallenge: computed('_projectChallenge','project.projectChallenges',function() {
@@ -26,7 +29,10 @@ export default Controller.extend({
       for(var i=0; i<len; i++){
         let pc = pcs.objectAt(i);
         if (pc.id == v) {
-          this.set('projectChallenge', pc);
+          this.set('_projectChallenge', pc);
+          // update the badges data 
+          let b = this.get('badgesService');
+          b.checkForUpdates();
           break;
         }
       }
