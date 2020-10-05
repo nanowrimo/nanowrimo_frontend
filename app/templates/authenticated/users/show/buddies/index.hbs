@@ -2,19 +2,19 @@
   <div class='buddy-listings'>
     <div>
       {{#each user.buddiesInvited as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
+      {{buddy-listing user=buddy buttons=true}}
       {{/each}}
     </div>
     <div>
       {{#each user.buddiesInvitedBy as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
+      {{buddy-listing user=buddy buttons=true}}
       {{/each}}
     </div>
   </div>
   <div class='buddy-listings'>
     <div>
       {{#each user.buddiesActive as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
+      {{buddy-listing user=buddy buttons=true}}
       {{/each}}
       <div class="nw-card nw-prompt-card">
         <div class='nw-hflex'>
@@ -25,11 +25,11 @@
           </div>
           <div class='action'>
             {{#link-to "authenticated.search"}}
-              Find buddies!
+            Find buddies!
             {{/link-to}}
           </div>
           <div class='prompt-image'>
-            <img src="/images/cards/handsclapping.svg">
+            <img alt="Two hands giving each other a High Five." src="/images/cards/handsclapping.svg">
           </div>
         </div>
       </div>

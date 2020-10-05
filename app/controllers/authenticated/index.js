@@ -163,9 +163,9 @@ export default Controller.extend({
       if (cu) {
         if (cu.currentDateInDateRange(newc.prepStartsAt, newc.endsAt)) {
           if (newc.eventType == 1) {
-            str = "<img alt='drawing of a tent' src='/images/global/tent.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to Camp";
+            str = "<img alt='Tent.' src='/images/global/tent.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to Camp";
           } else {
-            str = "<img alt='graphic of a helmet' src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to " + newc.name;
+            str = "<img alt='Horned helmet ' src='/images/global/helmet.svg' style='width: 36px; padding-bottom: 10px;' /> Welcome to " + newc.name;
           }
         }
       }
