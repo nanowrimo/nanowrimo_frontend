@@ -102,7 +102,7 @@ export default Component.extend({
   }),
   
 
-  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges','user.userBadges.{[]}', function() {
+  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges', function() {
     let rb = this.get('badgesService.recomputeBadges');
     let newbs = [];
     if (rb>=0) {
