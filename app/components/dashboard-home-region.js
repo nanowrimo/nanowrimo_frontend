@@ -13,18 +13,25 @@ export default Component.extend({
   
   init(){
     this._super(...arguments);
-    setTimeout(() => { this.getEvents() }, 1000);
+    //setTimeout(() => { this.getEvents() }, 1000);
   },
   
-  getEvents() {
+  /*getEvents() {
+    let region = this.get('currentUser.user.homeRegion');
+  },*/
+  
+  eventsLoading: computed('currentUser.user.homeRegion', function() {
     let region = this.get('currentUser.user.homeRegion');
     let t = this;
     if (region) {
       this.get('store').query('group', { filter: {group_id: region.id, group_type: "event", event_type: "upcoming"}}).then(() => {
         t.set('eventsLoaded',true);
       });
+      return true;
+    } else {
+      return false;
     }
-  },
+  }),
   
   homeRegion: computed('currentUser.user.homeRegion', function() {
     let region = this.get('currentUser.user.homeRegion');

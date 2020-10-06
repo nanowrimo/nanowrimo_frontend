@@ -14,29 +14,31 @@
     </div>
   </div>
 </div>
-{{#if currentUser}}
+{{#if currentUser.user}}
   {{#if homeRegion}}
-    {{#if eventsLoaded}}
-      {{#if hasEvents}}
-        <div class="nw-card-content nw-center-horiz nw-event-container">
-          {{#each topFourEvents as |e|}}
-            {{event-listing-small event=e group=homeRegion status='upcoming'}}
-          {{/each}}
-        </div>
-      {{else}}
-        <div class="nw-card-content nw-center-horiz">
-          <div>
-            <div class="nw-promo-text">
-              There are no upcoming events in {{homeRegion.name}}. Perhaps you should host one!
-            </div>
-            <div>
-              {{#link-to 'authenticated.regions.show.events.upcoming' homeRegion.slug tagName="button"}}
-                Submit an event
-              {{/link-to}}
-            </div>
+    {{#if eventsLoading}}
+      {{#if eventsLoaded}}
+        {{#if hasEvents}}
+          <div class="nw-card-content nw-center-horiz nw-event-container">
+            {{#each topFourEvents as |e|}}
+              {{event-listing-small event=e group=homeRegion status='upcoming'}}
+            {{/each}}
           </div>
-          <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>
-        </div>
+        {{else}}
+          <div class="nw-card-content nw-center-horiz">
+            <div>
+              <div class="nw-promo-text">
+                There are no upcoming events in {{homeRegion.name}}. Perhaps you should host one!
+              </div>
+              <div>
+                {{#link-to 'authenticated.regions.show.events.upcoming' homeRegion.slug tagName="button"}}
+                  Submit an event
+                {{/link-to}}
+              </div>
+            </div>
+            <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>
+          </div>
+        {{/if}}
       {{/if}}
     {{else}}
       <NwLoading />
