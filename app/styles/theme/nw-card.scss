@@ -151,7 +151,7 @@
         }
         margin-right: 15px;
         a {
-          color: $nw-mediumgrey;
+          color: #055;
           &:hover {
             color: $nw-mediumaqua;
           }
@@ -652,7 +652,16 @@
       .nw-event-promo-title {
         font-size: 16px;
         font-weight: bold;
-        color: #2f3061;
+        a {
+          color: #055;
+        }
+        -ms-word-break: break-all;
+        word-break: break-all;
+        /* Non standard for WebKit */
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
       }
       .nw-event-promo-time {
         font-size: 14px;
