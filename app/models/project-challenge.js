@@ -323,6 +323,12 @@ const ProjectChallenge = Model.extend({
   }),
   
   loadAggregates: function() {
+    // get the ID of self
+    let id = this.get('id');
+    // if there is no id, return 
+    if (id==null) {
+      return;
+    }
      // fetch the daily aggregates that reference this project challenge
     let endpoint =  `${ENV.APP.API_HOST}/project-challenges/${this.get('id')}/daily-aggregates`;
     let { auth_token } = this.get('session.data.authenticated');
