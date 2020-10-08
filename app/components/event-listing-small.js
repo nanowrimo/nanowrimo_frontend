@@ -70,14 +70,9 @@ export default Component.extend({
   }),
   
   // Returns the start date as a readable string
-  startTime: computed(function() {
+  eventTime: computed(function() {
     let etz = this.get('event.timeZone');
-    let utz = this.get('currentUser.user.timeZone');
-    if (etz==utz) {
-      return moment(this.get('event.startDt')).tz(etz).format("h:mm a z");
-    } else {
-      return moment(this.get('event.startDt')).tz(etz).format("h:mm a z") + " (" + moment(this.get('event.startDt')).tz(utz).format("h:mm a z") + ")";
-    }
+    return (moment(this.get('event.startDt')).tz(etz).format("h:mm") + " to " + moment(this.get('event.endDt')).tz(etz).format("h:mm a z"));
   }),
   
   duration: computed(function() {
