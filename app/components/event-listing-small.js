@@ -12,12 +12,11 @@ export default Component.extend({
   status: null,
   recomputeEvents: 0,
   editEvent: false,
-  classNames: ['nw-card','nano-listing-mini-card','event-listing-card'],
+  classNames: ['nw-event-promo'],
   
   init() {
     this._super(...arguments);
   },
-  
   groupUsersFound: computed(function() {
     let store = this.get('store');
     let gus = store.peekAll('group_user');
@@ -55,6 +54,27 @@ export default Component.extend({
     }
   }),
   
+  // Returns the start monthte as a readable string
+  startMonth: computed(function() {
+    return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("MMM");
+  }),
+  
+  // Returns the start date as a readable string
+  startDate: computed(function() {
+    return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("D");
+  }),
+  
+  // Returns the start date as a readable string
+  startDay: computed(function() {
+    return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("dddd");
+  }),
+  
+  // Returns the start date as a readable string
+  eventTime: computed(function() {
+    let etz = this.get('event.timeZone');
+    return (moment(this.get('event.startDt')).tz(etz).format("h:mm") + " to " + moment(this.get('event.endDt')).tz(etz).format("h:mm a z"));
+  }),
+  
   duration: computed(function() {
     let start = moment(this.get('event.startDt'));
     let end = moment(this.get('event.endDt'));
@@ -82,37 +102,10 @@ export default Component.extend({
     });
   },
     
-  doApprove() {
-    let e = this.get('event');
-    let uid = this.get('currentUser.user.id');
-    e.set("approvedById",uid);
-    e.save().then(()=>{
-      // Increment recompute location
-      let re = this.get('recomputeEvents');
-      this.set('recomputeEvents',re+1);
-    });
-  },
-    
-  doReject() {
-    let e = this.get('event');
-    let uid = -1;
-    e.set("approvedById",uid);
-    e.save().then(()=>{
-      // Increment recompute location
-      let re = this.get('recomputeEvents');
-      this.set('recomputeEvents',re+1);
-    });
-  },
     
   actions: {
     joinEvent() {
       this.doJoin();
-    },
-    approveEvent() {
-      this.doApprove();
-    },
-    rejectEvent() {
-      this.doReject();
     },
   }
 });

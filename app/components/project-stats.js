@@ -101,7 +101,8 @@ export default Component.extend({
     //create the data thingy for the current user 
     let currentCount = this.get('projectChallenge.currentCount');
     let goal = this.get('goal');
-    let percent = (currentCount*100/goal);
+    let roundedNum = Number(currentCount*100/goal).toFixed(2)
+    let percent = parseFloat(roundedNum);
     var data = {
       name: this.get('currentUser.user.name'),
       percent: percent

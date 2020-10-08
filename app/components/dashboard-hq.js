@@ -20,26 +20,12 @@ export default Component.extend({
     let region = this.get('currentUser.user.homeRegion');
   },*/
   
-  eventsLoading: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
+  eventsLoading: computed(function() {
     let t = this;
-    if (region) {
-      this.get('store').query('group', { filter: {group_id: region.id, group_type: "event", event_type: "upcoming"}}).then(() => {
-        t.set('eventsLoaded',true);
-      });
-      return true;
-    } else {
-      return false;
-    }
-  }),
-  
-  homeRegion: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
-    if (region) {
-      return region;
-    } else {
-      return null;
-    }
+    this.get('store').query('group', { filter: {group_id: 323, group_type: "event", event_type: "upcoming"}}).then(() => {
+      t.set('eventsLoaded',true);
+    });
+    return true;
   }),
   
   allEvents: computed('eventsLoaded',function() {

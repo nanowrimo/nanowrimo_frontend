@@ -1,0 +1,28 @@
+<div class='nw-event-promo-date'>
+  <div class='nw-event-promo-month'>{{startMonth}}</div>
+  <div class='nw-event-promo-day'>{{startDate}}</div>
+</div>
+<div class='nw-event-promo-details'>
+  <div class='nw-event-promo-title'>
+    {{#link-to 'authenticated.regions.show.events.show' group.slug event.slug}}
+      {{event.name}}
+    {{/link-to}}
+  </div>
+  <div class='nw-event-promo-time'><span class='nw-event-promo-dotw'>{{startDay}}</span> {{eventTime}}</div>
+</div>
+<div class='nw-event-promo-button'>
+  {{#if isEnrolled}}
+    <b><i class="fa fa-check"></i> You're signed up!</b>
+  {{else}}
+    {{#if (eq isCancelled false)}}
+      <button {{action 'joinEvent'}}>
+        Count me in!
+      </button>
+    {{/if}}
+  {{/if}}
+</div>
+{{#if isCancelled}}
+  <div class='nw-cancelled nw-tiny-card'>
+    Cancelled
+  </div>
+{{/if}}
