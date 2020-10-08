@@ -119,7 +119,11 @@ export default Component.extend({
   
   firstBadge: computed('filteredBadges.[]', function() {
     let bs = this.get('filteredBadges');
-    return bs[0];
+    if (bs){
+      return bs[0];
+    } else {
+      return null;
+    }
   }),
   
   // Returns the browser width
