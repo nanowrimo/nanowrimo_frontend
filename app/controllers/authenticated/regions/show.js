@@ -30,6 +30,13 @@ export default Controller.extend({
     }
     return found;
   }),
+  
+  // Returns true if the chat space is enabled
+  chatEnabled: computed('group.groupType', function() {
+    let gt = this.get('group.groupType');
+    return (gt != 'everyone');
+  }),
+  
   plateStyle: computed('group.plateUrl', 'canEditGroup', function() {
     let styles = [];
     let plateUrl = this.get('group.plateUrl');

@@ -10,8 +10,9 @@ export default Controller.extend({
   dataLoaded: false,
   
   addEvent: false,
-  canAddEvent: computed('currentUser.user.name', function() {
-    return true;
+  canAddEvent: computed('group.groupType', function() {
+    let gt = this.get('group.groupType');
+    return ((gt!='everyone')||(this.get('canEditGroup')));
   }),
   
   // Returns true if the user can edit the region
