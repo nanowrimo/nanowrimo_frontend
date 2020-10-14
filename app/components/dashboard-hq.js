@@ -10,25 +10,29 @@ export default Component.extend({
   store: service(),
   eventsLoaded: false,
   eventSortingDesc: Object.freeze(['startDt:asc']),
-  
+  group: null,
   init(){
     this._super(...arguments);
-    //setTimeout(() => { this.getEvents() }, 1000);
+    setTimeout(() => { this.loadEvents() }, 1000);
   },
   
-  /*getEvents() {
-    let region = this.get('currentUser.user.homeRegion');
-  },*/
-  
-  eventsLoading: computed(function() {
+  loadEvents() {
     let t = this;
-    this.get('store').query('group', { filter: {group_id: 323, group_type: "event", event_type: "upcoming"}}).then(() => {
-      t.set('eventsLoaded',true);
+    let s = this.get('store');
+    let gs = s.peekAll('group');
+    gs.forEach(function(g) {
+      if (g.groupType=='everyone') {
+        t.set('group',g);
+      }
     });
-    return true;
-  }),
+    if (this.get('group')) {
+      s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
+        t.set('eventsLoaded',true);
+      });
+    }
+  },
   
-  allEvents: computed('eventsLoaded',function() {
+  allEvents: computed('group','eventsLoaded',function() {
     let el = this.get('eventsLoaded');
     if (el) {
       let store = this.get('store');
@@ -41,9 +45,9 @@ export default Component.extend({
   
   // Returns an array of future approved events
   activeEvents: computed('allEvents.{[],@each.approvedById}', function() {
-    let region = this.get('currentUser.user.homeRegion');
+    let nanogroup = this.get('group');
     let gs = this.get('allEvents');
-    let gid = region.id;
+    let gid = nanogroup.id;
     let ae = [];
     let now = moment();
     gs.forEach(function(g) {

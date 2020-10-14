@@ -1,15 +1,17 @@
 {{#if hasEventsFrame}}
   <div class="nw-panel-primary-container">
-    <div class='nw-panel-actions'>
-      <button id="announce-new-event-button" class="nano-button-large" {{action "openEventModal"}}>
-        Submit an event
-      </button>
-      {{event-modal
-        open=addEvent
-        user=user
-        groupId=group.id
-      }}
-    </div>
+    {{#if canAddEvent}}
+      <div class='nw-panel-actions'>
+        <button id="announce-new-event-button" class="nano-button-large" {{action "openEventModal"}}>
+          Submit an event
+        </button>
+        {{event-modal
+          open=addEvent
+          user=user
+          groupId=group.id
+        }}
+      </div>
+    {{/if}}
   </div>
   <div class="nw-panel-secondary-container">
     <div class="nw-panel-secondary nw-panel-flex">
