@@ -43,8 +43,8 @@ export default Component.extend({
         }
       });
       if (this.get('group')) {
-        s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
-          t.set('eventsLoaded',true);
+        return s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
+          return true;
         });
       } else {
         return false;
