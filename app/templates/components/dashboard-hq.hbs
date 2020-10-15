@@ -4,9 +4,11 @@
   </div>
   <div class='nw-card-actions'>
     <div class='nw-card-action-link'>
-      {{#link-to 'authenticated.regions.show.events.upcoming' group.slug}}
-        See All
-      {{/link-to}}
+      {{#if group}}
+        {{#link-to 'authenticated.regions.show.events.upcoming' group.slug}}
+          See All
+        {{/link-to}}
+      {{/if}}
     </div>
   </div>
 </div>
