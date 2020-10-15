@@ -8,6 +8,7 @@
   {{/modal.header}}
   {{#form-for
     afterSubmit=modal.close
+    afterError=(action "handleSubmitErrors")
     onSubmit=(action "updateChangeset")
     model=user
     data-test-user-edit-profile-form=true
@@ -27,6 +28,7 @@
             {{f.input
               label="What is your username?"
               property="name"
+              forcedError=nameError
             }}
           </div>
           <div class="form-group">
