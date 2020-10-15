@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { resolve }  from 'rsvp';
+import { later } from '@ember/runloop';
 
 export default Service.extend({
   session: service(),
@@ -9,6 +10,7 @@ export default Service.extend({
   user: null,
   isLoaded: false,
   load() {
+    let t = this;
     if (this.get('session.isAuthenticated')) {
       return this.get('store').queryRecord('user',
       { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
@@ -22,7 +24,16 @@ export default Service.extend({
 
         }).then(() => {
             //get the current user's buddies and regions
-            user.loadGroupUsers('buddies,regions');
+            return this.get('store').query('group-user',
+            {
+              filter: { user_id: user.id },
+              group_types: 'buddies,regions',
+              include: 'user,group'
+            }).then(() => {
+              later(function() {
+                t.set('isLoaded',true);
+              }, 500);
+            });
           });
       });
     } else {

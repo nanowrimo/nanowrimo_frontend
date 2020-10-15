@@ -10,7 +10,7 @@
     </div>
   </div>
 </div>
-{{#if currentUser.user}}
+{{#if currentUser.user.isLoaded}}
   {{#if eventsLoaded}}
     {{#if hasEvents}}
       <div class="nw-card-content nw-center-horiz nw-event-container">
