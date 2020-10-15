@@ -28,15 +28,29 @@ export default Service.extend({
               group_types: 'buddies,regions',
               include: 'user,group'
             }).then(() => {
-              later(function() {
-                t.set('isLoaded',true);
-              }, 500);
+              t.delayUntilGroupsLoaded();
+              /*later(function() {
+                if (this.get('store').peekAll('group').length>0) {
+                  t.set('isLoaded',true);
+              }, 500);*/
             });
           });
       });
     } else {
       return resolve();
     }
+  },
+  
+  delayUntilGroupsLoaded() {
+    let t = this;
+    later(function() {
+      if (t.get('store').peekAll('group').length>0) {
+        t.set('isLoaded',true);
+      } else {
+        t.delayUntilGroupsLoaded();
+      }
+    }, 1000);
+    
   },
   
   checkForRegionUpdates() {

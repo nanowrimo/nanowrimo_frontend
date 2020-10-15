@@ -54,7 +54,7 @@ export default Component.extend({
     }
   }),
   
-  allEvents: computed('group','eventsLoaded',function() {
+  allEvents: computed('eventsLoaded',function() {
     let el = this.get('eventsLoaded');
     if (el) {
       let store = this.get('store');
