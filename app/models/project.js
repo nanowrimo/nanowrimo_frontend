@@ -282,7 +282,11 @@ const Project = Model.extend({
     let latest = null;
     let pending = null;
     //get the time now in user's timezone 
-    let now = moment().tz(this.get('computedUser.timeZone'));
+    let tz = this.get('computedUser.timeZone')
+    if (tz==null) {
+      return null;
+    }
+    let now = moment().tz(tz);
     //loop through this project's projectChallenges
     this.get('computedProjectChallenges').forEach((pc)=>{
       //get the start and end as moments
