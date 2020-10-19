@@ -80,7 +80,6 @@ export default Controller.extend({
     
   // Returns true is it's camp and the user hasn't created a project
   displayNanoBanner: computed('currentUser.user.projects.[]','primaryProject.currentProjectChallenge.count',function() {
-    return true;
     let ps = this.get('currentUser.user.projects');
     let c = this.get('primaryProject.currentProjectChallenge.count');
     let d = false;
