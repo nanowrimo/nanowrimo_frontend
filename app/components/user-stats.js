@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   tagName: '',
   media: service(),
-  user: alias('author'),
+  //user: alias('author'),
   
   didReceiveAttrs() {
     //refresh the user stats
@@ -18,15 +18,15 @@ export default Component.extend({
   }),
   
   yearsDoneCount: computed('user.stats.yearsDone.[]', function() {
-    let stats = this.get('user.stats');
-    if (stats) {
-      return this.get('user.stats.yearsDone').length;
+    let statsYearsDone = this.get('user.stats.yearsDone');
+    if (statsYearsDone) {  
+      return statsYearsDone.length;
     } else {
       return 0;
     }
   }), 
   
-  firstEnabled: computed('user.[statsWordCountEnabled,statsProjectsEnabled,statsYearsEnabled,statsWordiestEnabled,statsStreakEnabled', function(){
+  firstEnabled: computed('user.{statsWordCountEnabled,statsProjectsEnabled,statsYearsEnabled,statsWordiestEnabled,statsStreakEnabled}', function(){
     let props = [
       "statsWordCountEnabled",
       "statsProjectsEnabled",
@@ -45,5 +45,15 @@ export default Component.extend({
       }
     }
     return null;
+  }),
+  
+  totalWordCount: computed('user.stats.totalWordCount', function(){
+    let twc = this.get('user.stats.totalWordCount');
+    return (twc) ? twc : 0;
+  }),
+  
+  wordiest: computed('user.stats.wordiest', function(){
+    let wordy = this.get('user.stats.wordiest');
+    return (wordy) ? wordy : 0;
   })
 });
