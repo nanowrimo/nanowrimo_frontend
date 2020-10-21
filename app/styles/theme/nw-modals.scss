@@ -243,7 +243,14 @@
       overflow-x: scroll;
       white-space: nowrap;
       .nav-item {
-        display:inline-block;
+        display: inline-block;
+        a {
+          margin-left: 5px !important;
+          margin-right: 5px !important;
+        }
+      }
+      :first-child {
+        margin-left: 25px;
       }
     }
   }
