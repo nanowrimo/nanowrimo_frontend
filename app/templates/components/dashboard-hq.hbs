@@ -4,13 +4,15 @@
   </div>
   <div class='nw-card-actions'>
     <div class='nw-card-action-link'>
-      {{#link-to 'authenticated.regions.show.events.upcoming' group.slug}}
-        See All
-      {{/link-to}}
+      {{#if eventsLoaded}}
+        {{#link-to 'authenticated.regions.show.events.upcoming' group.slug}}
+          See All
+        {{/link-to}}
+      {{/if}}
     </div>
   </div>
 </div>
-{{#if currentUser.user}}
+{{#if currentUser.user.isLoaded}}
   {{#if eventsLoaded}}
     {{#if hasEvents}}
       <div class="nw-card-content nw-center-horiz nw-event-container">

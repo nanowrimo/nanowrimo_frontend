@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { resolve }  from 'rsvp';
+import { later } from '@ember/runloop';
 
 export default Service.extend({
   session: service(),
@@ -9,25 +10,47 @@ export default Service.extend({
   user: null,
   isLoaded: false,
   load() {
+    let t = this;
     if (this.get('session.isAuthenticated')) {
       return this.get('store').queryRecord('user',
       { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
         this.set('user', user);
-
         //get the current user's projects
         return this.get('store').query('project',
         {
           filter: { user_id: user.id },
           include: 'genres,challenges,project-challenges'
-
         }).then(() => {
             //get the current user's buddies and regions
-            user.loadGroupUsers('buddies,regions');
+            return this.get('store').query('group-user',
+            {
+              filter: { user_id: user.id },
+              group_types: 'buddies,regions',
+              include: 'user,group'
+            }).then(() => {
+              t.delayUntilGroupsLoaded();
+              /*later(function() {
+                if (this.get('store').peekAll('group').length>0) {
+                  t.set('isLoaded',true);
+              }, 500);*/
+            });
           });
       });
     } else {
       return resolve();
     }
+  },
+  
+  delayUntilGroupsLoaded() {
+    let t = this;
+    later(function() {
+      if (t.get('store').peekAll('group').length>0) {
+        t.set('isLoaded',true);
+      } else {
+        t.delayUntilGroupsLoaded();
+      }
+    }, 1000);
+    
   },
   
   checkForRegionUpdates() {

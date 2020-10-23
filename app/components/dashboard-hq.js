@@ -8,15 +8,15 @@ export default Component.extend({
   
   currentUser: service(),
   store: service(),
-  eventsLoaded: false,
+  //eventsLoaded: false,
   eventSortingDesc: Object.freeze(['startDt:asc']),
   group: null,
   init(){
     this._super(...arguments);
-    setTimeout(() => { this.loadEvents() }, 1000);
+    //setTimeout(() => { this.loadEvents() }, 1000);
   },
   
-  loadEvents() {
+  /*loadEvents() {
     let t = this;
     let s = this.get('store');
     let gs = s.peekAll('group');
@@ -30,9 +30,31 @@ export default Component.extend({
         t.set('eventsLoaded',true);
       });
     }
-  },
+  },*/
   
-  allEvents: computed('group','eventsLoaded',function() {
+  eventsLoaded: computed('currentUser.isLoaded', function() {
+    if (this.get('currentUser.isLoaded')) {
+      let t = this;
+      let s = this.get('store');
+      let gs = s.peekAll('group');
+      gs.forEach(function(g) {
+        if (g.groupType=='everyone') {
+          t.set('group',g);
+        }
+      });
+      if (this.get('group')) {
+        return s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
+          return true;
+        });
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }),
+  
+  allEvents: computed('eventsLoaded',function() {
     let el = this.get('eventsLoaded');
     if (el) {
       let store = this.get('store');

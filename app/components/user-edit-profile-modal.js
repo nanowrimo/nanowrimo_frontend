@@ -16,7 +16,7 @@ export default Component.extend({
   tagName: '',
 
   store: service(),
-
+  nameError:null,
   tab: null,
   open: null,
   user: null,
@@ -191,6 +191,15 @@ export default Component.extend({
 
     deleteBook(book) {
       book.deleteRecord();
+    },
+    handleSubmitErrors(errorData) {
+      console.log(errorData.errors);
+      errorData.errors.forEach(error=>{
+        // is this a BAD-NAME error?
+        if (error.title=="BAD-NAME") {
+          this.set('nameError', error.detail);
+        }        
+      });
     }
   },
   /* component methods */

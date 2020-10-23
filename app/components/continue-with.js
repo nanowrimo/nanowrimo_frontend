@@ -5,7 +5,7 @@ export default Component.extend({
   session: service(),
   authFacebook: false,
   authGoogle: false,
-  
+  submitDisabled: null,
   actions: {
     authenticateFacebook() {
       this.set('authFacebook', true);
