@@ -16,7 +16,6 @@ export default Component.extend({
     //setTimeout(() => { this.loadEvents() }, 1000);
   },
   
-  
   /*loadEvents() {
     let t = this;
     let s = this.get('store');
