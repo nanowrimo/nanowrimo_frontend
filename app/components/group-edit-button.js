@@ -10,9 +10,9 @@ export default Component.extend({
   buttonType: null,
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
+  canEditGroup: computed('currentUser.isLoaded',function() {
     let found = false;
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+    if (this.get('currentUser.issLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         found = true;
       } else {
