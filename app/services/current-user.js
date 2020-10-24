@@ -46,6 +46,7 @@ export default Service.extend({
     later(function() {
       if (t.get('store').peekAll('group').length>0) {
         t.set('isLoaded',true);
+        t.user.set('groupUsersLoaded',true);
       } else {
         t.delayUntilGroupsLoaded();
       }
