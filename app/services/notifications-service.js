@@ -35,7 +35,7 @@ export default Service.extend({
     this.store.findAll('notification').then(function() {
       t.incrementRecomputeNotifications();
     });
-    debounce(this, this.checkForUpdates, 15000, false);
+    debounce(this, this.checkForUpdates, 20000, false);
   },
   
   notificationClicked(notification){
