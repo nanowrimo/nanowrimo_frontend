@@ -1,11 +1,9 @@
-<!--
 <button style="margin-bottom: 10px" class="nano-button-dark-blue full-width" {{action 'authenticateFacebook'}} disabled={{submitDisabled}}>
   {{fa-icon "facebook-f"}} Continue with Facebook
   {{#if authFacebook}}
     <img class='spinner' src="/images/spinner.svg">
   {{/if}}
 </button>
--->
 <button class="nano-button-red full-width" {{action 'authenticateGoogle'}} disabled={{submitDisabled}}>
   {{fa-icon "google"}} Continue with Google
   {{#if authGoogle}}
