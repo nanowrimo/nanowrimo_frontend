@@ -39,3 +39,5 @@ deploy:
     script: TARGET=staging node_modules/.bin/ember deploy production --verbose
     on:
       branch: staging
+
+
