@@ -34,14 +34,6 @@ deploy:
     on:
       branch: master
       
-  - provider: script
-    skip_cleanup: true
-    script: TARGET=staging node_modules/.bin/ember deploy production --verbose
-    on:
-      branch: staging
-
-
-
 
 
 
