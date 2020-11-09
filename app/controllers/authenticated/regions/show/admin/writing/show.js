@@ -12,6 +12,11 @@ export default Controller.extend({
   activeTab: 'members',
   reorder: false,
   resize: true,
+  homed: true,
+  notHomed: true,
+  win: true,
+  notWin: true,
+  csvIsLoading: false,
   columns: computed(function() {
     const a = [
         {
@@ -81,8 +86,8 @@ export default Controller.extend({
   optionsForChallenges: sort('availableOptionsForChallenges','challengeSortingDesc'),
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+  canEditGroup: computed('currentUser.isLoaded',function() {
+    if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         return true;
       } else {
@@ -102,22 +107,89 @@ export default Controller.extend({
     }
   }),
   
+  numRows: computed('groupMembers',function() {
+    const lr = this.get('groupMembers');
+    return lr.length;
+  }),
   
-  groupMembers: computed('model.listResults',function() {
+  groupMembers: computed('model.listResults','homed','notHomed','win','notWin',function() {
     const lr = this.get('model.listResults');
+    let homed = this.get('homed');
+    let win = this.get('win');
+    let notHomed = this.get('notHomed');
+    let notWin = this.get('notWin');
     let a = [];
-    let b = [];
     for (const [key, value] of Object.entries(lr)) {
-      a.push(value[0]);
-      b.push(key);
+      let c = value[0];
+      let h = (c.homed == "Yes");
+      let w = (c.win == "Yes");
+      if (key && ((h==homed)||(!h==notHomed)) && ((w==win)||(!w==notWin))) {
+        a.push(c);
+      }
     }
     return a;
   }),
   
+  escapeString(str) {
+    let n = str.replace(/(<([^>]+)>)/gi, "");
+    n = n.replace('"','""');
+    return n;
+  },
+  
+  generateCSV() {
+    let t = this;
+    let csv = 'User, Homed?, Win?, Word Count, Goal, Last update\n';
+    let groupMembers = this.get('groupMembers');
+    groupMembers.forEach(function(c) {
+      csv += '"' + t.escapeString(c.name) + '"';
+      csv += ',';
+      csv += c.homed;
+      csv += ',';
+      csv += c.win;
+      csv += ',';
+      csv += c.wordcount;
+      csv += ',';
+      csv += c.goal;
+      csv += ',';
+      if (c.update) {
+        csv += c.update;
+      } else {
+        csv += '';
+      }
+      csv += "\n";
+    });
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'region-writing.csv';
+    hiddenElement.click();
+    this.set('csvIsLoading', false);
+  },
+  
   actions: {
-    associateChallengeSelect(challengeId) {
+    
+    /*associateChallengeSelect(challengeId) {
       this.get('router').transitionTo('authenticated.regions.show.admin.writing.show', this.get('group.slug'), challengeId );
+    },*/
+    
+    associateHomedSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('homed',(sv>-1));
+      this.set('notHomed',(sv<1));
     },
+  
+    associateWinSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('win',(sv>-1));
+      this.set('notWin',(sv<1));
+    },
+  
+    downloadCSV() {
+      this.set('csvIsLoading', true);
+      this.generateCSV();
+    }
+  
+  
   }
   
 });

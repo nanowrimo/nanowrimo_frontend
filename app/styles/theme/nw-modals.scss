@@ -186,6 +186,11 @@
     padding-top: 14px;
     padding-bottom: 14px;
     justify-content: space-between;
+    .underline-link {
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: underline;
+    }
   }
   .modal-footer > * {
     margin: 0px;
@@ -224,3 +229,30 @@
     height: 20px;
   }
 }
+
+/* profile edit modal tabs */
+
+.edit-profile-horizontal-tabs {
+  @media(max-width: $screen-sm) {
+
+    .nav {  
+      
+      height:38px !important;
+      display: block;
+      overflow-y: hidden; 
+      overflow-x: scroll;
+      white-space: nowrap;
+      .nav-item {
+        display: inline-block;
+        a {
+          margin-left: 5px !important;
+          margin-right: 5px !important;
+        }
+      }
+      :first-child {
+        margin-left: 25px;
+      }
+    }
+  }
+}
+  

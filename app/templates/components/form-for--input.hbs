@@ -3,6 +3,7 @@
   hasAttemptedSubmit=hasAttemptedSubmit
   hasBlurred=hasBlurred
   property=property
+  forcedError=forcedError
   as |hasError|
 }}
   <label for={{name}}>{{label}}</label>
@@ -20,6 +21,7 @@
     disabled=isDisabled
     min=min
     max=max
+    key-up=(action "changed")
   }}
   {{get changeset}}
 {{/validation-error}}

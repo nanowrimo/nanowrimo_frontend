@@ -3,8 +3,7 @@ language: node_js
 node_js:
   - "10"
 
-sudo: false
-dist: trusty
+dist: xenial
 
 addons:
   chrome: stable
@@ -26,7 +25,7 @@ install:
 
 script:
   - yarn lint:js
-  - yarn test
+  - yarn test:ember
 
 deploy:
   - provider: script
@@ -35,8 +34,6 @@ deploy:
     on:
       branch: master
       
-  - provider: script
-    skip_cleanup: true
-    script: TARGET=staging node_modules/.bin/ember deploy production --verbose
-    on:
-      branch: staging
+
+
+

@@ -13,9 +13,9 @@ export default Controller.extend({
   
   
   // Returns true if the user can view the group
-  canViewGroup: computed('currentUser.user.{groupUsersLoaded,id}','group.id',function() {
+  canViewGroup: computed('currentUser.isLoaded','group.id',function() {
     let found = false;
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+    if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         found = true;
       } else {
@@ -32,9 +32,9 @@ export default Controller.extend({
     return found;
   }),
   // Returns true if the user can edit the group
-  canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
+  canEditGroup: computed('currentUser.isLoaded',function() {
     let found = false;
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+    if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         found = true;
       } else {

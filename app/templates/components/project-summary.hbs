@@ -12,17 +12,9 @@
     <div class="nw-project-container">
       <div class="nw-project">
         <div class='nw-project-cover' >
-          <div class='nw-project-cover-clip {{if canEdit "user-editable" ""}}'>
+          <div class='nw-project-cover-clip'>
             <img src="{{project.coverUrl}}">
-            <div class="nw-listing-cover-overlay nw-image-editable-overlay" {{action (if canEdit "openCoverModal" 'doNothing')}}>{{fa-icon 'edit'}}</div>
-          </div>
-          {{project-edit-cover-modal
-            onHidden=(action "afterCoverModalClose")
-            open=editCover
-            project=project
-            tab=editCoverTab
-          }}
-        
+          </div>       
         </div>
         <div class='nw-project-name-genres'>
           <div class='nw-title'>

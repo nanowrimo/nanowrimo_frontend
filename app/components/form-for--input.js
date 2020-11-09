@@ -13,6 +13,12 @@ export default Component.extend({
   type: 'text',
   min: null,
   max: null,
-
-  name: reads('property')
+  name: reads('property'),
+  forcedError: null,
+  actions: {
+    changed() {
+      //remove the forcedError
+      this.set('forcedError', null);
+    }
+  }
 });

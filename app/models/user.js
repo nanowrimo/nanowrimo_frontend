@@ -268,7 +268,7 @@ const User = Model.extend({
   
   recalculateHome: 0,
   
-  homeRegion: computed('regions.[]','groupUsers.[]','recalculateHome', function(){
+  homeRegion: computed('regions.[]','groupUsers.@each.{primary}','recalculateHome', function(){
     let r = this.get('regions');
     let gu = this.get('groupUsers');
     let maxPrimary = -1;
@@ -597,7 +597,7 @@ const User = Model.extend({
       debounce(u, u.connectGroupUsers, 1000, false);
     });
   },
-
+  
   connectGroupUsers() {
     //let store = this.get('store');
     //let gus = store.peekAll('group-user');

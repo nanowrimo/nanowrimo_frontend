@@ -1,8 +1,8 @@
-{{#if user.statsWordCountEnabled}}
+{{#if (or (and (media "isDesktop") user.statsWordCountEnabled)  (and (media "isMobile") (eq firstEnabled "statsWordCountEnabled")))  }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-word-count>
       {{#if hasStats }}
-        {{format-number user.stats.totalWordCount}}
+        {{format-number totalWordCount}}
       {{else}}
         <i class="fa fa-spinner fa-spin"></i>
       {{/if}}
@@ -11,7 +11,7 @@
   </div>
 {{/if}}
 
-{{#if user.statsYearsEnabled}}
+{{#if (or (and (media "isDesktop") user.statsYearsEnabled) (and (media "isMobile") (eq firstEnabled "statsYearsEnabled"))) }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-years>
       {{#if hasStats }}
@@ -34,55 +34,54 @@
   </div>
 {{/if}}
 
-  {{#if user.statsProjectsEnabled}}
-    <div class="plate-area">
-      <div class="plate-stat" data-test-user-stats-projects>
-        {{#if hasStats}}
-          {{format-number user.projects.length}}
-        {{else}}
-          <i class="fa fa-spinner fa-spin"></i>
-        {{/if}}
-      </div>
-      <div class="plate-descriptor">Total projects</div>
+{{#if (or (and (media "isDesktop") user.statsProjectsEnabled) (and (media "isMobile") (eq firstEnabled "statsProjectsEnabled"))) }}
+  <div class="plate-area">
+    <div class="plate-stat" data-test-user-stats-projects>
+      {{#if hasStats}}
+        {{format-number user.projects.length}}
+      {{else}}
+        <i class="fa fa-spinner fa-spin"></i>
+      {{/if}}
     </div>
-  {{/if}}
+    <div class="plate-descriptor">Total projects</div>
+  </div>
+{{/if}}
 
-  {{#if user.statsWordiestEnabled}}
-    <div class="plate-area">
-      <div class="plate-stat" data-test-user-stats-wordiest>
-        {{#if hasStats}}
-          {{format-number user.stats.wordiest}}
-        {{else}}
-          <i class="fa fa-spinner fa-spin"></i>
-        {{/if}}
-      </div>
-      <div class="plate-descriptor">Wordiest project</div>
+{{#if (or (and (media "isDesktop") user.statsWordiestEnabled) (and (media "isMobile") (eq firstEnabled "statsWordiestEnabled")))}}
+  <div class="plate-area">
+    <div class="plate-stat" data-test-user-stats-wordiest>
+      {{#if hasStats}}
+        {{format-number wordiest}}
+      {{else}}
+        <i class="fa fa-spinner fa-spin"></i>
+      {{/if}}
     </div>
-  {{/if}}
+    <div class="plate-descriptor">Wordiest project</div>
+  </div>
+{{/if}}
 
-  {{#if user.statsWritingPaceEnabled}}
-    <div class="plate-area">
-      <div class="plate-stat" data-test-user-stats-writing-pace>
-        {{#if hasStats}}
-          {{format-number user.stats.writingPace}}
-        {{else}}
-          <i class="fa fa-spinner fa-spin"></i>
-        {{/if}}
-      </div>
-      <div class="plate-descriptor">Average writing pace</div>
+{{#if (or (and (media "isDesktop") user.statsWritingPaceEnabled) (and (media "isMobile") (eq firstEnabled "statsWritingpaceEnabled")))}}
+  <div class="plate-area">
+    <div class="plate-stat" data-test-user-stats-writing-pace>
+      {{#if hasStats}}
+        {{format-number user.stats.writingPace}}
+      {{else}}
+        <i class="fa fa-spinner fa-spin"></i>
+      {{/if}}
     </div>
-  {{/if}}
+    <div class="plate-descriptor">Average writing pace</div>
+  </div>
+{{/if}}
 
-  {{#if user.statsStreakEnabled}}
-    <div class="plate-area">
-      <div class="plate-stat" data-test-user-stats-streak>
-        {{#if hasStats}}
-          {{format-number user.stats.longestStreak}}
-        {{else}}
-          <i class="fa fa-spinner fa-spin"></i>
-        {{/if}}
-      </div>
-      <div class="plate-descriptor">Longest NaNo streak</div>
+{{#if (or (and (media "isDesktop") user.statsStreakEnabled) (and (media "isMobile") (eq firstEnabled "statsStreakEnabled")))}}
+  <div class="plate-area">
+    <div class="plate-stat" data-test-user-stats-streak>
+      {{#if hasStats}}
+        {{format-number user.stats.longestStreak}}
+      {{else}}
+        <i class="fa fa-spinner fa-spin"></i>
+      {{/if}}
     </div>
-  {{/if}}
-
+    <div class="plate-descriptor">Longest NaNo streak</div>
+  </div>
+{{/if}}

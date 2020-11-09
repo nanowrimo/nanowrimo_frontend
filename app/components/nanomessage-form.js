@@ -18,19 +18,17 @@ export default Component.extend({
     if (callback) { callback(); }
   },
   
-  userIsAdmin: computed('currentUser.user.{isLoaded,groupUsersLoaded}',function() {
+  userIsAdmin: computed('currentUser.isLoaded}',function() {
     let found = false;
-    if (this.get('currentUser.user.isLoaded')) {
-      if (this.get('currentUser.user.groupUsersLoaded')) {
-        let gus = this.get('store').peekAll('groupUser');
-        let g = this.get('group');
-        let cu = this.get('currentUser.user');
-        gus.forEach(function(gu) {
-          if ((gu.group_id==g.id)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
-            found = true;
-          }
-        });
-      }
+    if (this.get('currentUser.isLoaded')) {
+      let gus = this.get('store').peekAll('groupUser');
+      let g = this.get('group');
+      let cu = this.get('currentUser.user');
+      gus.forEach(function(gu) {
+        if ((gu.group_id==g.id)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
+          found = true;
+        }
+      });
     }
     return found;
   }),
