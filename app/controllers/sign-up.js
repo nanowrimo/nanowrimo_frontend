@@ -9,7 +9,7 @@ import moment from 'moment';
 
 export default Controller.extend({
   session: service(),
-    
+  submitDisabled: true,
   emailErrorMessage: null,
   passwordErrorMessage: null,
   nameErrorMessage:null,
@@ -40,6 +40,9 @@ export default Controller.extend({
         //wipe the error 
         this.set('nameErrorMessage',null) ;
       }
+    },
+    termsClicked(val) {
+      this.set("submitDisabled", !val);
     }
   },
   

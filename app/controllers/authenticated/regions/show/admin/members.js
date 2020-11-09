@@ -11,6 +11,11 @@ export default Controller.extend({
   activeTab: 'members',
   reorder: false,
   resize: true,
+  homed: true,
+  notHomed: true,
+  updated: true,
+  notUpdated: true,
+  csvIsLoading: false,
   columns: computed(function() {
     const a = [
         {
@@ -71,8 +76,8 @@ export default Controller.extend({
   }),
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+  canEditGroup: computed('currentUser.isLoaded',function() {
+    if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         return true;
       } else {
@@ -91,16 +96,84 @@ export default Controller.extend({
       return false;
     }
   }),
-    
-  groupMembers: computed('model.listResults',function() {
+  
+  numRows: computed('groupMembers',function() {
+    const lr = this.get('groupMembers');
+    return lr.length;
+  }),
+  
+  groupMembers: computed('model.listResults','homed','notHomed','updated','notUpdated',function() {
     const lr = this.get('model.listResults');
+    let homed = this.get('homed');
+    let updated = this.get('updated');
+    let notHomed = this.get('notHomed');
+    let notUpdated = this.get('notUpdated');
     let a = [];
-    let b = [];
     for (const [key, value] of Object.entries(lr)) {
-      a.push(value[0]);
-      b.push(key);
+      let c = value[0];
+      let h = (c.homed == "Yes");
+      let u = (c.last_update != null);
+      if (key && ((h==homed)||(!h==notHomed)) && ((u==updated)||(!u==notUpdated))) {
+        a.push(c);
+      }
     }
     return a;
   }),
   
+  escapeString(str) {
+    let n = str.replace(/(<([^>]+)>)/gi, "");
+    n = n.replace('"','""');
+    return n;
+  },
+  
+  generateCSV() {
+    let t = this;
+    let csv = 'User, Signed up, Joined region, Last login, Homed?, Last update\n';
+    let groupMembers = this.get('groupMembers');
+    groupMembers.forEach(function(c) {
+      csv += '"' + t.escapeString(c.name) + '"';
+      csv += ',';
+      csv += c.joined_site;
+      csv += ',';
+      csv += c.joined_region;
+      csv += ',';
+      csv += c.sign_in;
+      csv += ',';
+      csv += c.homed;
+      csv += ',';
+      if (c.last_update) {
+        csv += c.last_update;
+      } else {
+        csv += '';
+      }
+      csv += "\n";
+    });
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'region-members.csv';
+    hiddenElement.click();
+    this.set('csvIsLoading', false);
+  },
+  
+  actions: {
+        
+    associateHomedSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('homed',(sv>-1));
+      this.set('notHomed',(sv<1));
+    },
+    
+    associateUpdateSelect(selectValue) {
+      let sv = parseInt(selectValue);
+      this.set('updated',(sv>-1));
+      this.set('notUpdated',(sv<1));
+    },
+    
+    downloadCSV() {
+      this.set('csvIsLoading', true);
+      this.generateCSV();
+    }
+    
+  }
 });

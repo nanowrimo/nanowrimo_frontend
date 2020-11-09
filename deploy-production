@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+# run a command 
+def runCmd(cmd)
+	puts cmd
+	puts
+	output = `#{cmd}`
+	# was the command a success?
+	unless $?.success?
+		puts output
+		puts	
+		puts "FAILED"
+		exit(false)
+	end
+	return output
+end
+		
+# get the current branch
+current_branch = runCmd('git branch --show-current').chomp()
+
+# switch to the production branch
+runCmd("git checkout master")
+
+# pull the new production code
+runCmd("git pull")
+
+# run the tests
+runCmd("yarn lint:js")
+runCmd("yarn test:ember")
+
+# perform the deploy
+
+# what is the command for a production deploy?
+cmd = "node_modules/.bin/ember deploy production --verbose"
+runCmd(cmd)
+
+# switch back to the "current"
+runCmd("git checkout #{current_branch}")
+

@@ -56,8 +56,11 @@ export default Component.extend({
   actions: {
     
     confirmDelete(){
+      // set the title
+      let title = this.get('project.title');
+      this.set('deleteConfirmationQuestion', `Delete "${title}"?`);
       //show the delete dialog
-      this.set('showConfirmDelete', true);
+      this.set('showConfirmDelete', true);      
     },
     
     deleteConfirmationYes(){

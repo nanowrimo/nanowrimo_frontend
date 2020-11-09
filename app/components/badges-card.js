@@ -31,7 +31,7 @@ export default Component.extend({
       let eventType = pc.get('eventType');
       badges.forEach((badge)=>{
         switch(badge.title) { 
-          case "Wrote 50,000 Words During NaNoWriMo":
+          case "Wrote 50,000 Words In November":
           if (eventType==0) {filteredBadges.pushObject(badge);} 
           break;  
                  
@@ -102,7 +102,7 @@ export default Component.extend({
   }),
   
 
-  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges','user.userBadges.{[]}', function() {
+  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges', function() {
     let rb = this.get('badgesService.recomputeBadges');
     let newbs = [];
     if (rb>=0) {
@@ -119,7 +119,11 @@ export default Component.extend({
   
   firstBadge: computed('filteredBadges.[]', function() {
     let bs = this.get('filteredBadges');
-    return bs[0];
+    if (bs){
+      return bs[0];
+    } else {
+      return null;
+    }
   }),
   
   // Returns the browser width

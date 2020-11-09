@@ -1,4 +1,32 @@
-<i>Note: All dates are in Greenwich Mean Time.</i>
+<div class='nw-filters'>
+  <div class='nw-filters-label'>Filters</div>
+  <div class='nw-filters-select'>
+    <div class='select-container'>
+      <select class='form-control' onchange={{action "associateHomedSelect" value="target.value"}}>
+        <option value='0'>Show both homed and not homed members</option>
+        <option value='1'>Show only homed members</option>
+        <option value='-1'>Show only not homed members</option>
+      </select>
+    </div>
+    <div class='select-container'>
+      <select class='form-control' onchange={{action "associateWinSelect" value="target.value"}}>
+        <option value='0'>Show all members, with or without wins</option>
+        <option value='1'>Show only members with wins</option>
+        <option value='-1'>Show only members without wins</option>
+      </select>
+    </div>
+  </div>
+  <div class='nw-filters-buttons'>
+    <LoadingButton
+      @buttonLabel='Download CSV'
+      @isLoading={{csvIsLoading}}
+      @isDisabled={{csvIsLoading}}
+      @actionOnClick={{action 'downloadCSV'}}
+    />
+  </div>
+</div>
+<div class='nw-filters-count'><b>{{numRows}} region members found!</b></div>
+<div><i>Note: All dates are in Greenwich Mean Time.</i></div>
 <EmberTable as |t|>
   <t.head
     @columns={{columns}}

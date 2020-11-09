@@ -34,7 +34,7 @@
     <div style="padding-top: 15px; padding-bottom: 15px;">
       {{event.description}}
     </div>
-    {{#if currentUser.user.groupUsersLoaded}}
+    {{#if currentUser.isLoaded}}
       {{#if (eq status 'upcoming')}}
         {{#if isEnrolled}}
           <b><i class="fa fa-check"></i> You're signed up!</b>

@@ -112,7 +112,7 @@
         {{/if}} 
         {{#if currentUserHasProject }}
           <div class="nw-card g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1">
-            {{badges-card cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=primaryProject.latestProjectChallenge}}
+            {{badges-card cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=primaryProject.currentProjectChallenge}}
           </div>
         {{else}}
           <div class="nw-card nw-prompt-card g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1">
@@ -130,12 +130,13 @@
         {{/if}}
         
         {{dashboard-my-buddies class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1"}}
-        {{dashboard-home-region class="nw-card g3-col1 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row3 g2-hspan2 g2-vspan1"}}
-        {{dashboard-writing-groups class="nw-card g3-col2 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row3 g2-hspan1 g2-vspan1"}}
-        {{dashboard-my-offers class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row4 g2-hspan1 g2-vspan1"}}
-        {{dashboard-nano-store class="nw-card g3-col1 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row4 g2-hspan1 g2-vspan1"}}
-        {{dashboard-twitter class="nw-card g3-col2 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row4 g2-hspan1 g2-vspan1"}}
-        {{dashboard-writers-resources class="nw-card g3-col3 g3-row4 g3-hspan1 g3-vspan1 g2-col1 g2-row5 g2-hspan1 g2-vspan1"}}
+        {{dashboard-home-region class="nw-card g3-col1 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row3 g2-hspan1 g2-vspan1"}}
+        {{dashboard-hq class="nw-card g3-col2 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1"}}
+        {{dashboard-writing-groups class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row4 g2-hspan1 g2-vspan1"}}
+        {{dashboard-my-offers class="nw-card g3-col1 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row4 g2-hspan1 g2-vspan1"}}
+        {{dashboard-nano-store class="nw-card g3-col2 g3-row4 g3-hspan1 g3-vspan1 g2-col1 g2-row5 g2-hspan1 g2-vspan1"}}
+        {{dashboard-twitter class="nw-card g3-col3 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row5 g2-hspan1 g2-vspan1"}}
+        {{dashboard-writers-resources class="nw-card g3-col1 g3-row5 g3-hspan1 g3-vspan1 g2-col1 g2-row6 g2-hspan1 g2-vspan1"}}
       </div>
     </div>
   </div>

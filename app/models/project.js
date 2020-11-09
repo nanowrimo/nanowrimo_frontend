@@ -88,7 +88,13 @@ const Project = Model.extend({
   
   // get the user from the store based on this.user_id
   computedUser: computed('user_id', function(){
-    let user = this.get('store').peekRecord('user', this.get('user_id'));
+    // make sure the user_id exists
+    let uid = this.get('user_id');
+    if (uid==null) {
+      return null;
+    }
+    // get the user from the store with the given id
+    let user = this.get('store').peekRecord('user', uid);
     return user;
   }),
   
@@ -276,7 +282,11 @@ const Project = Model.extend({
     let latest = null;
     let pending = null;
     //get the time now in user's timezone 
-    let now = moment().tz(this.get('computedUser.timeZone'));
+    let tz = this.get('computedUser.timeZone')
+    if (tz==null) {
+      return null;
+    }
+    let now = moment().tz(tz);
     //loop through this project's projectChallenges
     this.get('computedProjectChallenges').forEach((pc)=>{
       //get the start and end as moments

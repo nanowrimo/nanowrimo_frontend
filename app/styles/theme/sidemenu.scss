@@ -30,10 +30,9 @@
   }
   .nano-side-menu-toggle {
     position: absolute;
-    width: 40px;
     height: 40px;
     top: 0px;
-    right: -10px;
+    right: 10px;
     font-size: 26px;
   }
   li {
@@ -84,5 +83,18 @@
     background-color: $nw-lightgreyblue;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+  .nw-search {
+    width: 210px;
+    .nw-search-field {
+      .nw-search-button {
+        top: 0px;
+      }
+    }
+  }
+  .nano-avatar-small {
+    img {
+      width:230px;
+    }
   }
 }

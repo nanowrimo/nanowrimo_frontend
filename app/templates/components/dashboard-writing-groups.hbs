@@ -12,20 +12,20 @@
   {{else}}
     <div>
       <div class="nw-promo-text">
-        Camp has started! Create a writing group to navigate the challenge with friends!
+        November is right around the corner! Create a writing group to navigate the challenge with friends!
       </div>
       <div>
         <button {{action "openNewWritingGroupModal"}}>
           Create a writing group
         </button>
+        {{group-create-modal
+          onHidden=(action "afterWritingGroupModalClose")
+          open=addWritingGroup
+          user=user
+        }}
       </div>
     </div>
-    <div class="nw-card-bottom-image"><img src="/images/global/tent.svg" style="width: 70px; margin-top: 10px;" /></div>
+    <div class="nw-card-bottom-image"><img src="/images/cards/handsclapping.svg" style='width: 70px;' /></div>
   {{/if}}
-  {{group-create-modal
-    onHidden=(action "afterWritingGroupModalClose")
-    open=addWritingGroup
-    user=user
-  }}
   
 </div>
