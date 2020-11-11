@@ -11,6 +11,20 @@
     color: $nw-lightblue;
   }
   .congratulations {
+    width: 400px;
+    height: 120px;
+    @media (max-width: $screen-xs-max) {
+      width: 350px;
+      height: 105px;
+    }
+    
+    font-family: "SerifSemiBold", serif;
+    font-size: 40px;
+    text {
+      fill: #ffe680;
+    }
+  }
+  .congratulations {
     text {
       font-family: "SourceSerifPro";
       font-size: 40px;
@@ -25,10 +39,10 @@
     font-size: 26px;
     text-align: center;
     color: $nw-lightgreyblue;
-    margin-bottom: 35px;
+    margin-bottom: 5px;
   }
   .badge-image{
-    margin-bottom: 28px;
+    margin-bottom: 8px;
     img{
       width: 95.3px;
       height: 107.8px;
@@ -47,17 +61,17 @@
     line-height: 1.38;
     text-align: center;
     color: $nw-lightgreyblue;
-    margin-bottom: 37px;
+    margin-bottom: 0px;
   }
   
 }
 
 .nw-winner-splash {
   background-color: rgba(47, 48, 97, 0.98);
-  
+  overflow-y: scroll;
   .confetti {
     width: 100%;
-    height: 75%;
+    height: 100%;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -65,18 +79,31 @@
   }
   .winner-message {
     font-size: 26px;
+    line-height: 26px;
     font-weight: bold;
     text-align: center;
     color: $nw-yellow;
-    width: 626px;
+    margin-bottom: 10px;
+    width: 650px;
+    @media (max-width: $screen-xs-max) {
+      width: 350px;
+    }
     font-family: SourceSerifPro;
   }
   
   .winner-splash-content{
     width: 650px;
-    
+    @media (max-width: $screen-xs-max) {
+      width: 350px;
+    }
+    hr {
+      border-color: $nw-yellow;
+    }
     #winner-splash-step-1-badge-information{
-      width: 550px;
+      width: 650px;
+      @media (max-width: $screen-xs-max) {
+        width: 350px;
+      }
     }
     .cert-download {
       padding-top: 20px;
@@ -84,11 +111,20 @@
         color: $nw-lightblue;
       }
     }
+    img.winner-cert {
+      max-width: 650px;
+      @media (max-width: $screen-xs-max) {
+        width: 350px;
+      }
+    }
   }
   
   .winner-splash-laurel {
     text-align: center;
-    width: 550px;
+    width: 650px;
+    @media (max-width: $screen-xs-max) {
+      width: 350px;
+    }
     color: $nw-lightblue;
     .title{
       font-family: SourceSerifPro;
@@ -114,13 +150,14 @@
   
   .splash-footer {
     padding-top: 20px;
+    padding-bottom: 20px;
   }
-  .circle-indicators {
+  /*.circle-indicators {
     position: absolute;
     bottom: 10px;
     margin-left: auto;
     margin-right: auto;
-  }
+  }*/
   
 }
 

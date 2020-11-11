@@ -688,15 +688,14 @@ const User = Model.extend({
   }),
   
   //get an array of nano years won
-   yearsWon: computed('projectChallenge.@each.metGoal', function(){
-    let ids = [];
-    let years = [];
+  yearsWon: computed('projectChallenges.@each.metGoal', function(){
+    //let ids = new Set();
+    let years = []; //new Set();
     //loop the user's projects
     this.get('projectChallenges').forEach((pc)=>{
       //is the projectChallenge a nanowrimo?
-      if(pc.nanoEvent && !ids.includes(pc.id)) { // counting words
-        ids.push(pc.id);
-        
+      if(pc.eventType===0) { // counting words
+        //ids.push(pc.id);
         //did the project challenge win?
         if (pc.metGoal) {
           //years.push(pc.startsAt.getFullYear());

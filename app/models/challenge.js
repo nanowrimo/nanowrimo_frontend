@@ -39,6 +39,11 @@ const Challenge = Model.extend({
     return (type === 0 || type === 1 );
   }),
   
+  isNaNoEvent: computed('eventType', function(){
+    let type = this.get('eventType');
+    return (type === 0);
+  }),
+  
   duration: computed("startsAt", "endsAt", function(){
     // return the difference between start and end in number of days
     let s = moment(this.get('startsAt'));
