@@ -684,22 +684,23 @@ const User = Model.extend({
   //how many times has the user won nano?
   nanoWinCount: computed('yearsWon', function(){
     let yw = this.get('yearsWon');
-    return yw.length;
+    return yw.size;
   }),
   
   //get an array of nano years won
-  yearsWon: computed('projectChallenges.@each.metGoal', function(){
-    //let ids = new Set();
-    let years = []; //new Set();
+   yearsWon: computed('projectChallenge.@each.metGoal', function(){
+    //let ids = [];
+    let years = new Set();
     //loop the user's projects
     this.get('projectChallenges').forEach((pc)=>{
       //is the projectChallenge a nanowrimo?
-      if(pc.eventType===0) { // counting words
+      if (pc.eventType===0) { // counting words
         //ids.push(pc.id);
+        
         //did the project challenge win?
         if (pc.metGoal) {
           //years.push(pc.startsAt.getFullYear());
-          years.push(pc.startsAt.substring(0,4));
+          years.add(pc.startsAt.substring(0,4));
         }
       }
     });
