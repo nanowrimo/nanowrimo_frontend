@@ -164,6 +164,13 @@
 }
 
 .nw-badge-splash {
+  overflow-y: scroll;
+  hr {
+    margin-top:30px;
+    margin-bottom:20px;
+    border-color: $nw-yellow;
+  }
+  
   /*background-color: rgba(52, 52, 52, 0.94);*/
 
 }
