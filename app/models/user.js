@@ -688,7 +688,7 @@ const User = Model.extend({
   }),
   
   //get an array of nano years won
-   yearsWon: computed('projectChallenge.@each.metGoal', function(){
+   yearsWon: computed('projectChallenges.@each.metGoal', function(){
     //let ids = [];
     let years = new Set();
     //loop the user's projects
