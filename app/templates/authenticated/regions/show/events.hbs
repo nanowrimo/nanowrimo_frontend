@@ -29,14 +29,15 @@
         </div>
       {{/if}}
     </div>
-    <ul class="nw-panel-tabs">
-      <li>{{link-to 'Upcoming' 'authenticated.regions.show.events.upcoming'}}</li>
-      <li>{{link-to 'Past' 'authenticated.regions.show.events.past'}}</li>
-      {{#if canEditGroup}}
-        <li>{{link-to 'Pending' 'authenticated.regions.show.events.pending'}}</li>
-      {{/if}}
-    </ul>
   </div>
+  <ul class="nw-panel-tabs">
+    <li>{{link-to 'Upcoming' 'authenticated.regions.show.events.upcoming'}}</li>
+    <li>{{link-to 'Past' 'authenticated.regions.show.events.past'}}</li>
+    {{#if canEditGroup}}
+    <li>{{link-to 'Pending' 'authenticated.regions.show.events.pending'}}</li>
+    {{/if}}
+  </ul>
+</div>
 {{else}}
-  {{outlet}}
+{{outlet}}
 {{/if}}

@@ -2,21 +2,21 @@
   <div class="container-fluid">
     <div class="shield-logo-container" aria="hidden">
       {{#link-to nanoMenuService.homeUrl class="shield-logo"}}
-      <img src="/images/logo/logo.svg" alt="" />
+      <img src="/images/logo/logo.svg" alt="NaNoWriMo home." />
       {{/link-to}}
     </div>
     {{#if session.isAuthenticated}}
-      {{search-field size='small' class='nw-menu-search-field-container'}}
+    {{search-field size='small' class='nw-menu-search-field-container'}}
     {{/if}}
     <div class="nav-store flex-row-reverse">
       <ul class="navbar-nav store-blue">
         {{#each storeLinks as |storeLink|}}
-          <li class="nav-item"><a href="{{storeLink.url}}" class="nav-link">{{storeLink.label}}</a></li>
+        <li class="nav-item"><a href="{{storeLink.url}}" class="nav-link">{{storeLink.label}}</a></li>
         {{/each}}
       </ul>
       <ul class="navbar-nav">
         {{#each helpLinks as |helpLink|}}
-          <li class="nav-item"><a href="{{helpLink.url}}" class="nav-link">{{helpLink.label}}</a></li>
+        <li class="nav-item"><a href="{{helpLink.url}}" class="nav-link">{{helpLink.label}}</a></li>
         {{/each}}
       </ul>
     </div>

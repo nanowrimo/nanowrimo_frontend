@@ -1,9 +1,9 @@
 <div class="nw-card-header">
-  <div class="nw-card-title">{{fa-icon "home"}} 
+  <div class="nw-card-title">{{fa-icon "home"}}
     {{#if homeRegion}}
-      {{homeRegion.name}}
+    {{homeRegion.name}}
     {{else}}
-      Home Region
+    Home Region
     {{/if}}
   </div>
   <div class='nw-card-actions'>
@@ -36,7 +36,7 @@
                 {{/link-to}}
               </div>
             </div>
-            <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>
+            <div class="nw-card-bottom-image"><img alt="" img src="/images/cards/homeregion.svg" /></div>
           </div>
         {{/if}}
       {{/if}}
@@ -55,9 +55,25 @@
           </LinkTo>
         </div>
       </div>
-      <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>
+      <div class="nw-card-bottom-image"><img alt="" img src="/images/cards/homeregion.svg" /></div>
     </div>
   {{/if}}
 {{else}}
   <NwLoading />
+{{/if}}
+{{else}}
+<div class="nw-card-content nw-center-horiz">
+  <div>
+    <div class="nw-promo-text">
+      There are lots of fun things going on around you, but we don't know your home region yet.
+    </div>
+    <div>
+      <LinkTo @route="authenticated.regions.find" @tagName="button" @query={{hash ps="false"}}>
+        Find Home Region
+      </LinkTo>
+    </div>
+  </div>
+  <div class="nw-card-bottom-image"><img alt="" src="/images/cards/homeregion.svg" />
+  </div>
+</div>
 {{/if}}

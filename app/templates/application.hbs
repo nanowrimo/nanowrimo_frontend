@@ -1,29 +1,41 @@
 {{#if is_authenticated}}
-  <div class="page-background">
-    <header>
-      {{#if (media "isMobile")}}
-        {{nano-side-menu}}
-      {{/if}}
-      {{#if (media "isDesktop")}}
-        {{micro-nav}} 
-      {{/if}} 
-      {{main-nav}}
-    </header>
-    <main class="logged-in">
-      {{outlet}}
-    </main>
-    {{#if show_footer}}
-      {{authenticated-footer}}
+<div class="page-background">
+  <header>
+    {{#if (media "isMobile")}}
+    <nav>
+      {{nano-side-menu}}
+    </nav>
     {{/if}}
-  </div>
-{{else}}
-  {{#if show_navigation}}
-    {{logged-out-menu}}
-  {{/if}}
-  <main>
+    {{#if (media "isDesktop")}}
+    <nav>
+      {{micro-nav}}
+    </nav>
+    {{/if}}
+    <nav>
+      {{main-nav}}
+    </nav>
+  </header>
+  <main class="logged-in">
     {{outlet}}
   </main>
-  {{#if show_navigation}}
-    {{logged-out-footer}}
+  {{#if show_footer}}
+  <footer>
+    {{authenticated-footer}}
+  </footer>
   {{/if}}
+</div>
+{{else}}
+{{#if show_navigation}}
+<nav>
+  {{logged-out-menu}}
+</nav>
+{{/if}}
+<main>
+  {{outlet}}
+</main>
+{{#if show_navigation}}
+<footer>
+  {{logged-out-footer}}
+</footer>
+{{/if}}
 {{/if}}
