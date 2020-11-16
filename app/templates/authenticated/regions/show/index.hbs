@@ -1,7 +1,10 @@
 <div class="grid-wrapper">
   {{#if group.forumLink}}
     <div class="g3-col1 g3-row1 g3-hspan2 g2-col1 g2-row1 g2-hspan1">
-      <a href="{{group.forumLink}}" class="region-forum-link"><i class="fa fa-link" style="font-size: 14px; color: #666;"></i> For more conversation, check out your regional forum here.</a>
+      <div style='display: flex;'>
+        <div><a href="{{group.forumLink}}" class="region-forum-link"><i class="fa fa-external-link" style="font-size: 24px; color: #666;"></i></a></div>
+        <div style="line-height: 18px; margin-left: 10px;"><a href="{{group.forumLink}}" target="_blank" class="region-forum-link">Go to your regional forum!</a></div>
+      </div>
     </div>
     {{group-chat context='region' group=group class="g3-col1 g3-row2 g3-hspan2 g2-col1 g2-row2 g2-hspan1"}}
     {{group-users-list group=group listType='MLs' class="nw-card g3-col3 g3-row1 g3-hspan1 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}

@@ -12,8 +12,8 @@ export default Component.extend({
   },
   
   _checkDonationDayTime(){
-    let startTime = "2019-11-09 00:00";
-    let endTime = "2019-11-09 23:59";
+    let startTime = "2020-10-30 00:00";
+    let endTime = "2020-11-02 00:00";
     //rerun this method every minutes
     later(this, "_checkDonationDayTime", 60000);
     let time = moment.tz(moment(), 'America/Los_Angeles').format('YYYY-MM-DD HH:mm');

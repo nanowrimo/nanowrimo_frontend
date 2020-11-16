@@ -9,37 +9,57 @@
   <div class='nw-card-actions'>
     <div class='nw-card-action-link'>
       {{#link-to 'authenticated.regions.show.events.upcoming' homeRegion.slug}}
-      See all
+        See All
       {{/link-to}}
     </div>
   </div>
 </div>
-{{#if homeRegion}}
-{{#if eventsLoaded}}
-{{#if hasEvents}}
-<div class="nw-card-content nw-center-horiz nw-event-container">
-  {{#each topFourEvents as |e|}}
-  {{event-listing-small event=e group=homeRegion status='upcoming'}}
-  {{/each}}
-</div>
-{{else}}
-<div class="nw-card-content nw-center-horiz">
-  <div>
-    <div class="nw-promo-text">
-      There are no upcoming events in {{homeRegion.name}}. Perhaps you should host one!
+{{#if currentUser.user}}
+  {{#if homeRegion}}
+    {{#if eventsLoading}}
+      {{#if eventsLoaded}}
+        {{#if hasEvents}}
+          <div class="nw-card-content nw-center-horiz nw-event-container">
+            {{#each topFourEvents as |e|}}
+              {{event-listing-small event=e group=homeRegion status='upcoming'}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="nw-card-content nw-center-horiz">
+            <div>
+              <div class="nw-promo-text">
+                There are no upcoming events in {{homeRegion.name}}. Perhaps you should host one!
+              </div>
+              <div>
+                {{#link-to 'authenticated.regions.show.events.upcoming' homeRegion.slug tagName="button"}}
+                  Submit an event
+                {{/link-to}}
+              </div>
+            </div>
+            <div class="nw-card-bottom-image"><img alt="" img src="/images/cards/homeregion.svg" /></div>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{else}}
+      <NwLoading />
+    {{/if}}
+  {{else}}
+    <div class="nw-card-content nw-center-horiz">
+      <div>
+        <div class="nw-promo-text">
+          There are lots of fun things going on around you, but we don't know your home region yet.
+        </div>
+        <div>
+          <LinkTo @route="authenticated.regions.find" @tagName="button" @query={{hash ps="false"}} >
+            Find Home Region
+          </LinkTo>
+        </div>
+      </div>
+      <div class="nw-card-bottom-image"><img alt="" img src="/images/cards/homeregion.svg" /></div>
     </div>
-    <div>
-      {{#link-to 'authenticated.regions.show.events.upcoming' homeRegion.slug tagName="button"}}
-      Submit an event
-      {{/link-to}}
-    </div>
-  </div>
-  <div class="nw-card-bottom-image"><img alt="Two buildings next to each other." src="/images/cards/homeregion.svg" />
-  </div>
-</div>
-{{/if}}
+  {{/if}}
 {{else}}
-<NwLoading />
+  <NwLoading />
 {{/if}}
 {{else}}
 <div class="nw-card-content nw-center-horiz">

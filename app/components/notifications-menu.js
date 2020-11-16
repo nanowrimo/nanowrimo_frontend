@@ -64,6 +64,8 @@ export default Component.extend({
         this.set("badgeForSplash", r[0]);
         this.set(r[1], true);
       }
+      const dn = this.get('displayNotifications');
+      this.set('displayNotifications', !dn);
     },
     
     hideBadgeSplash(){

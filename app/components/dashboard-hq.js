@@ -8,37 +8,49 @@ export default Component.extend({
   
   currentUser: service(),
   store: service(),
-  eventsLoaded: false,
+  //eventsLoaded: false,
   eventSortingDesc: Object.freeze(['startDt:asc']),
-  
+  group: null,
   init(){
     this._super(...arguments);
-    //setTimeout(() => { this.getEvents() }, 1000);
+    //setTimeout(() => { this.loadEvents() }, 1000);
   },
   
-  /*getEvents() {
-    let region = this.get('currentUser.user.homeRegion');
-  },*/
-  
-  eventsLoading: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
+  /*loadEvents() {
     let t = this;
-    if (region) {
-      this.get('store').query('group', { filter: {group_id: region.id, group_type: "event", event_type: "upcoming"}}).then(() => {
+    let s = this.get('store');
+    let gs = s.peekAll('group');
+    gs.forEach(function(g) {
+      if (g.groupType=='everyone') {
+        t.set('group',g);
+      }
+    });
+    if (this.get('group')) {
+      s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
         t.set('eventsLoaded',true);
       });
-      return true;
+    }
+  },*/
+  
+  eventsLoaded: computed('currentUser.isLoaded', function() {
+    if (this.get('currentUser.isLoaded')) {
+      let t = this;
+      let s = this.get('store');
+      let gs = s.peekAll('group');
+      gs.forEach(function(g) {
+        if (g.groupType=='everyone') {
+          t.set('group',g);
+        }
+      });
+      if (this.get('group')) {
+        return s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
+          return true;
+        });
+      } else {
+        return false;
+      }
     } else {
       return false;
-    }
-  }),
-  
-  homeRegion: computed('currentUser.user.homeRegion', function() {
-    let region = this.get('currentUser.user.homeRegion');
-    if (region) {
-      return region;
-    } else {
-      return null;
     }
   }),
   
@@ -55,9 +67,9 @@ export default Component.extend({
   
   // Returns an array of future approved events
   activeEvents: computed('allEvents.{[],@each.approvedById}', function() {
-    let region = this.get('currentUser.user.homeRegion');
+    let nanogroup = this.get('group');
     let gs = this.get('allEvents');
-    let gid = region.id;
+    let gid = nanogroup.id;
     let ae = [];
     let now = moment();
     gs.forEach(function(g) {

@@ -8,6 +8,7 @@
   {{/modal.header}}
   {{#form-for
     afterSubmit=modal.close
+    afterError=(action "handleSubmitErrors")
     onSubmit=(action "updateChangeset")
     model=user
     data-test-user-edit-profile-form=true
@@ -16,7 +17,7 @@
   }}
     {{#modal.body}}
 
-      {{#bs-tab
+      {{#bs-tab classNames='edit-profile-horizontal-tabs'
         activeId=activeTab
         onChange=(action (mut activeTab))
         as |tab|
@@ -27,6 +28,7 @@
             {{f.input
               label="What is your username?"
               property="name"
+              forcedError=nameError
             }}
           </div>
           <div class="form-group">

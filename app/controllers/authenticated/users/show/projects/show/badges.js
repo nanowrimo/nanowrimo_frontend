@@ -32,7 +32,7 @@ export default Controller.extend({
           this.set('_projectChallenge', pc);
           // update the badges data 
           let b = this.get('badgesService');
-          b.checkForUpdates();
+          b.incrementRecomputeBadges();
           break;
         }
       }
