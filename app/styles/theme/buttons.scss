@@ -18,7 +18,7 @@ button, input.nano-button {
   
   /* Background and border */
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, $nw-mediumgreen, $nw-darkgreen);
+  background-image: linear-gradient(to bottom, $nw-darkgreen, $nw-mediumgreen);
   &:hover, &:active {
     background-image: linear-gradient(to bottom, $nw-lightgreen, $nw-mediumgreen);
   }
