@@ -391,30 +391,29 @@ export default Component.extend({
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
+      let endDate = null;
+      let today = moment();
+      let ymd = today.format('YYYY-MM-DD');
       // have start and end been set?
       if (end) {
         moreInfo = 1;
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
-        let endDate = moment(ymd+" "+end).toDate();
+        endDate = moment(ymd+" "+end).toDate();
         session.set('end', endDate);
       }
       if (start) {
         moreInfo = 1;
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
         let endTime = null;
         if (end) {
-          endTime = moment(end).format("HH:mm");
+          endTime = moment(endDate).format("HH:mm");
         } else {
           let m = moment();
           endTime = m.format("HH:mm");
         }
         //let startTime = moment(start).format("HH:mm");
         //if (startTime > endTime) {
-        if (start > end) {
+        if (start > endTime) {
           //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
