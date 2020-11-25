@@ -414,7 +414,7 @@ export default Component.extend({
         }
         //let startTime = moment(start).format("HH:mm");
         //if (startTime > endTime) {
-        if (start > endTime) {
+        if (start > end) {
           //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
@@ -422,10 +422,9 @@ export default Component.extend({
         let startDate = moment(ymd+" "+start).toDate();
         session.set('start', startDate);
       }
-      
       session.set('count', count);
       session.save();
-      
+    
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
       user.set("settingSessionCountBySession", this.get('countType'));
@@ -437,7 +436,7 @@ export default Component.extend({
         //save the user
         user.save();
       }
-      
+    
       let cfa = this.get('closeFormAction');
       cfa();
       return true;
