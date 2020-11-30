@@ -820,17 +820,23 @@ const User = Model.extend({
     let store = this.get('store');
     // get all challenges
     let challenges = store.peekAll('challenge');
-    let targetChallenge = challenges.findBy('name', eventName);
-
+    // filter by eventName
+    challenges = challenges.filterBy('name', eventName);
+    // filter by userId of 0 
+    challenges = challenges.filterBy('userId', 0);
+    // the targetChallenge  will be the first in the array (it should also be the only one in the array)
+    let targetChallenge = challenges.firstObject;
+    
     if (targetChallenge) {
-      // does the user have a projectChallenge for the targetChallenge
+      /* does the user have a projectChallenge for the targetChallenge */
+      // get all project-challenges
       let pcs = store.peekAll('project-challenge');
       //filter for this user's project-challenges
       pcs = pcs.filterBy("user_id", parseInt(this.id));
-      
       //filter for project challenges associated with the target challenge
       let targetPCs = pcs.filterBy("challenge_id", parseInt(targetChallenge.id));
-      // is there a target project challenge?
+      
+      // are there target project challenges? (there should only be 1)
       if (targetPCs) {
         // loop through the project challenges
         for (var i =0; i<targetPCs.length; i++) {
