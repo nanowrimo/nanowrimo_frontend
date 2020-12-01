@@ -84,17 +84,21 @@ export default Component.extend({
       }
     }
     return retval;
-  }),
-
-  dailyAverage: computed('projectChallenge.currentCount', function(){
+  }), 
+  
+  rawDailyAverage: computed('projectChallenge.currentCount', function() {
     let total = this.get('projectChallenge.currentCount');
     if (total) {
       let elapsedDays = this.get("projectChallenge").numElapsedDays();
-      let average = parseInt(total/elapsedDays);
+      let average = total/elapsedDays;
       return average;
     } else {
       return 0;
     }
+  }),
+  
+  dailyAverage: computed('rawDailyAverage', function(){
+    return parseInt( this.get('rawDailyAverage') );
   }),
   
   userPercentData: computed('projectChallenge.currentCount', function() {
