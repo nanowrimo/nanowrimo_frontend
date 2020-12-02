@@ -20,20 +20,25 @@ table {
             transform: rotate(180deg);
           }
         }
+        
       }
-      th.is-sortable {
-        cursor: pointer;
+        th.is-sortable {
+          cursor: pointer;
 
-        &:hover {
-          background-color: #e8f8e8;
+          &:hover {
+            background-color: #e8f8e8;
+          }
         }
       }
     }
-  }
   tbody {
     border-top: solid 2px #ccc;
     tr {
       border-bottom: solid 1px #ddd;
+    }
+    td {
+      padding:0 70px 0 0;
+      vertical-align: top;
     }
   }
 }
