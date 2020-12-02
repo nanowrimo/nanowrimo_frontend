@@ -9,6 +9,13 @@
       opacity: .7;
     }
   }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
   .nw-footer {
     padding-left: 15px;
     padding-right: 15px;
@@ -64,4 +71,5 @@
   img {
     margin-right: 35px;
   }
+ 
 }
