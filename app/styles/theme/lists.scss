@@ -1,6 +1,7 @@
 .icon-list {
   width: 100%;
   li {
+    list-style-type: none;
     font-size: 16px;
     color: $nw-darkgrey;
     width: 100%;
@@ -92,6 +93,6 @@
     margin-bottom: 14px;
   }
   
- }
-//  .conversations-list-item {
-//  }
+}
+// .conversations-list-item {
+// }

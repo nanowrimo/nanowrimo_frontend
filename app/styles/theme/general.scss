@@ -175,7 +175,7 @@ button.btn {
   margin-top: 4px;
   margin-bottom: 4px;
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, $nw-mediumgreen, $nw-darkgreen);
+  background-image: linear-gradient(to bottom, $nw-darkgreen, $nw-mediumgreen);
   border: solid 1px $nw-darkgreen;
   color: $nw-lightblue;
   font-size: 16px;
@@ -260,9 +260,9 @@ button.btn {
 // ----------------------------------
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  list-style-type: disc;
+  // margin: 0;
+  // padding: 0;
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
 }
@@ -319,18 +319,6 @@ ul {
   height: 100%;
   border-radius: 6px;
 }
-// ---------------
-// Congratulations
-// ---------------
-.congratulations {
-  width: 400px;
-  height: 120px;
-  font-family: "SerifSemiBold", serif;
-  font-size: 40px;
-  text {
-    fill: #ffe680;
-  }
-}
 .nw-title {
   font-family: 'SerifRegular', serif ;
   font-size: 24px;
@@ -361,4 +349,7 @@ a.nw-grey-link {
 }
 .fa-trash {
   cursor: pointer;
+}
+.fa-bullhorn {
+  font-size: 60px;
 }

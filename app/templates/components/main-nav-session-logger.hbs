@@ -40,10 +40,15 @@
         </div>
       </div>
       <div id='progress-update-form'>
-        <form>
+        <form onSubmit={{action 'formSubmit'}}>
           <div class='form-group' style="display: flex; justify-content: center; align-items: center;">
             <div style="flex: 0 0 120px; margin-right: 10px;">
-              {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
+              {{input
+                type='number'
+                name='count'
+                value=countValue
+                class='form-control progress-update-input'
+              }}
             </div>
             <div class="select-container" style="max-width: 140px;">
               <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>

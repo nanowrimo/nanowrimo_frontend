@@ -1,42 +1,42 @@
 {{#if hasEventsFrame}}
-  <div class="nw-panel-primary-container">
-    {{#if canAddEvent}}
-      <div class='nw-panel-actions'>
-        <button id="announce-new-event-button" class="nano-button-large" {{action "openEventModal"}}>
-          Submit an event
-        </button>
-        {{event-modal
+<div class="nw-panel-primary-container">
+  {{#if canAddEvent}}
+  <div class='nw-panel-actions'>
+    <button id="announce-new-event-button" class="nano-button-large" {{action "openEventModal"}}>
+      Submit an event
+    </button>
+    {{event-modal
           open=addEvent
           user=user
           groupId=group.id
         }}
+  </div>
+  {{/if}}
+</div>
+<div class="nw-panel-secondary-container">
+  <div class="nw-panel-secondary nw-panel-flex">
+    {{outlet}}
+    {{#if canAddEvent}}
+    <div class="nw-card nw-prompt-card">
+      <div class='nw-hflex'>
+        <div class='action'>
+          <a href="#" {{action "openEventModal"}}>Create a new event!</a>
+        </div>
+        <div class='prompt-image'>
+          <img src="/images/users/projects/megaphone.svg">
+        </div>
       </div>
+    </div>
     {{/if}}
   </div>
-  <div class="nw-panel-secondary-container">
-    <div class="nw-panel-secondary nw-panel-flex">
-      {{outlet}}
-      {{#if canAddEvent}}
-        <div class="nw-card nw-prompt-card">
-          <div class='nw-hflex'>
-            <div class='action'>
-              <a href="#" {{action "openEventModal"}}>Create a new event!</a>
-            </div>
-            <div class='prompt-image'>
-              <img src="/images/users/projects/megaphone.svg">
-            </div>
-          </div>
-        </div>
-      {{/if}}
-    </div>
-    <ul class="nw-panel-tabs">
-      <li>{{link-to 'Upcoming' 'authenticated.regions.show.events.upcoming'}}</li>
-      <li>{{link-to 'Past' 'authenticated.regions.show.events.past'}}</li>
-      {{#if canEditGroup}}
-        <li>{{link-to 'Pending' 'authenticated.regions.show.events.pending'}}</li>
-      {{/if}}
-    </ul>
-  </div>
+</div>
+<ul class="nw-panel-tabs">
+  <li>{{link-to 'Upcoming' 'authenticated.regions.show.events.upcoming'}}</li>
+  <li>{{link-to 'Past' 'authenticated.regions.show.events.past'}}</li>
+  {{#if canEditGroup}}
+  <li>{{link-to 'Pending' 'authenticated.regions.show.events.pending'}}</li>
+  {{/if}}
+</ul>
 {{else}}
-  {{outlet}}
+{{outlet}}
 {{/if}}
