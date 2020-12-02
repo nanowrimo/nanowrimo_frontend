@@ -23,6 +23,11 @@ export default Component.extend({
   hasValidationError: false,
   showConfirmDelete: false,
   
+  isEventListAllowed: computed('isEditingModal','currentUser.user.isAdmin',function() {
+    const isEditingModal = this.get('isEditingModal');
+    const isAdmin = this.get('currentUser.user.isAdmin');
+    return (!isEditingModal || isAdmin);
+  }),
   
   init() {
     this._super(...arguments);
