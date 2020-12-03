@@ -23,6 +23,11 @@ export default Component.extend({
   hasValidationError: false,
   showConfirmDelete: false,
   
+  isEventListAllowed: computed('isEditingModal','currentUser.user.isAdmin',function() {
+    const isEditingModal = this.get('isEditingModal');
+    const isAdmin = this.get('currentUser.user.isAdmin');
+    return (!isEditingModal || isAdmin);
+  }),
   
   init() {
     this._super(...arguments);
@@ -160,8 +165,14 @@ export default Component.extend({
   }),
   
    // Gets all challenges from the store
-  unassignedOptionsForChallenges:  computed('getChallengeOptions', function() {
-    return this.get('store').query('challenge',{ available: true});
+  unassignedOptionsForChallenges:  computed('isEditingModal','getChallengeOptions', function() {
+    const isAdmin = this.get('currentUser.user.isAdmin');
+    const isEditing = this.get('isEditingModal');
+    if ((isAdmin)&&(isEditing)) {
+      return this.get('store').query('challenge',{});
+    } else {
+      return this.get('store').query('challenge',{ available: true});
+    }
   }),
 
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),

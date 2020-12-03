@@ -102,6 +102,11 @@ const User = Model.extend({
   
   stats: null,
   
+  // Returns true if the user is an admin
+  isAdmin: computed('adminLevel', function() {
+    return (this.get('adminLevel')>0);
+  }),
+  
   // ---------------------------
   // BEGINNING OF DATETIME FUNCTIONS
   // ---------------------------

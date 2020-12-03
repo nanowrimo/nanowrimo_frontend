@@ -11,7 +11,7 @@ export default Component.extend({
   canEdit: computed('project', function(){
     let currentUser = this.get('currentUser.user');
     let author = this.get('author');
-    return currentUser === author;
+    return ((currentUser === author) || currentUser.isAdmin);
   }),
   
   svg: computed('projectChallenge', function() {

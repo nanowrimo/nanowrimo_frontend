@@ -14,16 +14,7 @@
     {{/modal.header}}
     {{#modal.body}}
       <div class="project-challenge-new-form">
-      {{#if isEditingModal }}
-        <div class="form-group">
-          {{#if associateWithChallenge}}
-            <i>The name of this goal may not be changed because it is associated with an official NaNoWriMo event.</i>
-          {{else}}
-            <i>This is a personal writing goal that is not associated with an official NaNoWriMo event.</i>
-          {{/if}}
-        </div>
-      
-      {{else}}
+      {{#if isEventListAllowed }}
         {{#if optionsForChallenges}}
           <div class="form-group">
             {{input class= 'form-control' 
@@ -46,6 +37,14 @@
           </div>
     
         {{/if}}          
+      {{else}}
+        <div class="form-group">
+          {{#if associateWithChallenge}}
+            <i>The name of this goal may not be changed because it is associated with an official NaNoWriMo event.</i>
+          {{else}}
+            <i>This is a personal writing goal that is not associated with an official NaNoWriMo event.</i>
+          {{/if}}
+        </div>
       {{/if}}          
       <div class="form-group">
         <label for='name'>Goal name</label>

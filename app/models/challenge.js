@@ -12,6 +12,7 @@ const Challenge = Model.extend({
   winAllowedAt: attr('string'),
   eventType: attr('number'),
   userId: attr('number'),
+  winnerLink: attr('string'),
   //eventType is defined in the api as:
   // 0 = NaNoWriMo
   // 1 = Camp
