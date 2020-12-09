@@ -7,6 +7,7 @@
 .nw-card.event-card {
   .nw-card-content.nw-card-horizontal {
     align-items: flex-start;
+    word-break: break-word;
     .nw-title {
       margin-top: 5px;
       color: $nw-darkgreen;
@@ -21,11 +22,13 @@
       .nw-event-mo {
         font-family: 'SansBold', sans-serif;;
         font-size: 31px;
+        word-break: normal;
       }
       .nw-event-date {
         font-family: 'SansSemiBold', sans-serif;
         font-size: 56px;
         line-height: 56px;
+        word-break: normal;
       }
     }
   }
