@@ -1,50 +1,51 @@
 <div class="container-fluid nw-footer">
   <div class="nw-footer-section nw-footer-left">
     <div class="nw-footer-logos">
-      <a href="/"><img src="/images/logo/logo.svg" /><img src="/images/logo/logo_text.svg" style="padding-top: 10px;" /></a>
+      <a href="/"><img src="/images/logo/logo.svg" alt="" /><img src="/images/logo/logo_text.svg"
+          alt="National Novel Writing Month home." style="padding-top: 10px;" /></a>
     </div>
     <div class="nw-footer-description">
-      National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing. 
+      National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing.
     </div>
     <div class="nw-footer-header">
       <a href="https://nanowrimo.org/about-nano">About NaNoWriMo</a>
       <a href="https://nanowrimo.org/staff">Staff</a>
       <a href="https://store.nanowrimo.org/collections/donate">Donate</a>
       <a href="https://store.nanowrimo.org/collections/shop">Shop</a>
-      <br/>
+      <br />
       <a href="/board-of-directors">Board of Directors</a>
       <a href="/writers-board">Writers Board</a>
     </div>
   </div>
   {{#if currentUserName}}
-    {{#each footerSubmenus as |footerSubmenu i|}}
-      <div class="nw-footer-section nw-footer-{{i}}">
-        <div class="nw-footer-submenu">
-          <div class="nw-footer-header">
-            {{footerSubmenu.toggleLabel}}
-          </div>
-          <ul>
-            {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
-              {{#if footerSubmenuItem}}
-                <li>
-                  {{#if footerSubmenuItem.url}}
-                    <a href="{{footerSubmenuItem.url}}">{{footerSubmenuItem.label}}</a>
-                  {{else}}
-                    {{#if footerSubmenuItem.segment}}
-                      {{#link-to footerSubmenuItem.route footerSubmenuItem.segment}}
-                        {{footerSubmenuItem.label}}
-                      {{/link-to}}
-                    {{else}}
-                      {{link-to footerSubmenuItem.label footerSubmenuItem.route}}
-                    {{/if}}
-                  {{/if}}
-                </li>
-              {{/if}}
-            {{/each}}
-          </ul>
-        </div>
+  {{#each footerSubmenus as |footerSubmenu i|}}
+  <div class="nw-footer-section nw-footer-{{i}}">
+    <div class="nw-footer-submenu">
+      <div class="nw-footer-header">
+        {{footerSubmenu.toggleLabel}}
       </div>
-    {{/each}}
+      <ul>
+        {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
+        {{#if footerSubmenuItem}}
+        <li>
+          {{#if footerSubmenuItem.url}}
+          <a href="{{footerSubmenuItem.url}}">{{footerSubmenuItem.label}}</a>
+          {{else}}
+          {{#if footerSubmenuItem.segment}}
+          {{#link-to footerSubmenuItem.route footerSubmenuItem.segment}}
+          {{footerSubmenuItem.label}}
+          {{/link-to}}
+          {{else}}
+          {{link-to footerSubmenuItem.label footerSubmenuItem.route}}
+          {{/if}}
+          {{/if}}
+        </li>
+        {{/if}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  {{/each}}
   {{/if}}
   <div class="nw-footer-section nw-footer-right">
     <div>
@@ -66,14 +67,14 @@
     </div>
     <div class="ywp-logo">
       <a href="https://ywp.nanowrimo.org" alt="Young Writer's Program">
-        <img src="/images/logo/ywp_logo.svg" />
+        <img alt="NaNoWriMo Young Writers Program home." src="/images/logo/ywp_logo.svg" />
       </a>
     </div>
   </div>
   <div class="nw-footer-footer">
     <p>
       <span class="links">
-        {{link-to "Terms and Conditions" "terms-conditions" class="link"}}
+        <a class='link' href="/terms-and-conditions">Terms and Conditions</a>
         &nbsp;
         &bull;
         &nbsp;
@@ -82,7 +83,8 @@
         &bull;
         &nbsp;
       </span>
-      Copyright © 1999 - {{currentYear}} National Novel Writing Month. All posted novel excerpts remain copyright to their authors.
+      Copyright © 1999 - {{currentYear}} National Novel Writing Month. All posted novel excerpts remain copyright to
+      their authors.
     </p>
   </div>
 </div>

@@ -684,23 +684,23 @@ const User = Model.extend({
   //how many times has the user won nano?
   nanoWinCount: computed('yearsWon', function(){
     let yw = this.get('yearsWon');
-    return yw.length;
+    return yw.size;
   }),
   
   //get an array of nano years won
-   yearsWon: computed('projectChallenge.@each.metGoal', function(){
-    let ids = [];
-    let years = [];
+   yearsWon: computed('projectChallenges.@each.metGoal', function(){
+    //let ids = [];
+    let years = new Set();
     //loop the user's projects
     this.get('projectChallenges').forEach((pc)=>{
       //is the projectChallenge a nanowrimo?
-      if(pc.nanoEvent && !ids.includes(pc.id)) { // counting words
-        ids.push(pc.id);
+      if (pc.eventType===0) { // counting words
+        //ids.push(pc.id);
         
         //did the project challenge win?
         if (pc.metGoal) {
           //years.push(pc.startsAt.getFullYear());
-          years.push(pc.startsAt.substring(0,4));
+          years.add(pc.startsAt.substring(0,4));
         }
       }
     });
@@ -820,17 +820,23 @@ const User = Model.extend({
     let store = this.get('store');
     // get all challenges
     let challenges = store.peekAll('challenge');
-    let targetChallenge = challenges.findBy('name', eventName);
-
+    // filter by eventName
+    challenges = challenges.filterBy('name', eventName);
+    // filter by userId of 0 
+    challenges = challenges.filterBy('userId', 0);
+    // the targetChallenge  will be the first in the array (it should also be the only one in the array)
+    let targetChallenge = challenges.firstObject;
+    
     if (targetChallenge) {
-      // does the user have a projectChallenge for the targetChallenge
+      /* does the user have a projectChallenge for the targetChallenge */
+      // get all project-challenges
       let pcs = store.peekAll('project-challenge');
       //filter for this user's project-challenges
       pcs = pcs.filterBy("user_id", parseInt(this.id));
-      
       //filter for project challenges associated with the target challenge
       let targetPCs = pcs.filterBy("challenge_id", parseInt(targetChallenge.id));
-      // is there a target project challenge?
+      
+      // are there target project challenges? (there should only be 1)
       if (targetPCs) {
         // loop through the project challenges
         for (var i =0; i<targetPCs.length; i++) {

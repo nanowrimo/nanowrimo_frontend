@@ -181,8 +181,8 @@ const Project = Model.extend({
     this.get('projectChallenges').forEach((pc)=>{
       //get the start and end as moments
       let startsAt = moment(pc.startsAt).tz(tz);
-      let isEvent = pc.nanoEvent;
-      if (isEvent) {
+      //let isEvent = pc.nanoEvent;
+      if ((pc.eventType===0)) {
         let cStart = moment(pc.startsAt);
         let newStart = cStart.utc().format("YYYY-MM-DD");
         var m = moment.tz(newStart, "YYYY-MM-DD", tz);

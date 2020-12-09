@@ -391,23 +391,22 @@ export default Component.extend({
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
+      let endDate = null;
+      let today = moment();
+      let ymd = today.format('YYYY-MM-DD');
       // have start and end been set?
       if (end) {
         moreInfo = 1;
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
-        let endDate = moment(ymd+" "+end).toDate();
+        endDate = moment(ymd+" "+end).toDate();
         session.set('end', endDate);
       }
       if (start) {
         moreInfo = 1;
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
         let endTime = null;
         if (end) {
-          endTime = moment(end).format("HH:mm");
+          endTime = moment(endDate).format("HH:mm");
         } else {
           let m = moment();
           endTime = m.format("HH:mm");
@@ -422,10 +421,9 @@ export default Component.extend({
         let startDate = moment(ymd+" "+start).toDate();
         session.set('start', startDate);
       }
-      
       session.set('count', count);
       session.save();
-      
+    
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
       user.set("settingSessionCountBySession", this.get('countType'));
@@ -437,7 +435,7 @@ export default Component.extend({
         //save the user
         user.save();
       }
-      
+    
       let cfa = this.get('closeFormAction');
       cfa();
       return true;

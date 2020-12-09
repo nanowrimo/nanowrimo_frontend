@@ -3,13 +3,17 @@
 </div>
 <div class="nw-card-content nw-center-horiz">
   {{#if hasWritingGroup}}
-    <div style="max-height: 350px; overflow-y: scroll;">
-      {{#each writingGroups as |group|}}
-        {{group-listing group=group buttons=true message=false}}
-        <br />
-      {{/each}}
-    </div>
+  <div style="max-height: 350px; overflow-y: scroll;">
+    {{#each writingGroups as |group|}}
+    {{group-listing group=group buttons=true message=false}}
+    <br />
+    {{/each}}
+  </div>
   {{else}}
+  <div>
+    <div class="nw-promo-text">
+      Camp has started! Create a writing group to navigate the challenge with friends!
+    </div>
     <div>
       <div class="nw-promo-text">
         November is right around the corner! Create a writing group to navigate the challenge with friends!
@@ -26,6 +30,5 @@
       </div>
     </div>
     <div class="nw-card-bottom-image"><img src="/images/cards/handsclapping.svg" style='width: 70px;' /></div>
-  {{/if}}
-  
-</div>
+  </div>
+  {{/if}}</div>
