@@ -26,13 +26,13 @@ export default Component.extend({
     if ((lt == 'eventAll')||(lt == 'all')) {
       this.get('store').query('groupUser', {
         filter: { group_id: g.id },
-        include: 'users'
+        include: 'user'
       });
     }
     if (lt == 'MLs') {
       this.get('store').query('groupUser', {
         filter: { group_id: g.id, isAdmin: true },
-        include: 'users'
+        include: 'user'
       });
     }
   },
