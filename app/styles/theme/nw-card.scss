@@ -411,6 +411,23 @@
   .nw-card-footer {
     min-height: 30px;
   }
+  &.year-in-review-stat {
+    background-image: none;
+    border: solid 0px $nw-lightgreyblue;
+    margin-left: 10%;
+    margin-right: 10%;
+    .nw-supertitle {
+      font-size: 20px;
+    }
+    .nw-title {
+      margin-top: 0px;
+      font-size: 30px;
+    }
+    .nw-subtitle {
+      font-style: italic;
+      font-size: 20px;
+    }
+  }
 }
 .nw-flippy-card {
   min-width: 280px;

@@ -99,7 +99,9 @@ Router.map(function() {
     this.route('camp-nanowrimo-april-2020-winner');
     this.route('nano-winner-2019');
     this.route('nano-winner-2020');
-    this.route('year-in-review', { path: '/:year'}, function() {
+    this.route('year-in-review', function() {
+      this.route('show', { path: '/:year'}, function() {
+      });
     });
     
   });
