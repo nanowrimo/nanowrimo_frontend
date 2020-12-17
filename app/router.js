@@ -99,6 +99,8 @@ Router.map(function() {
     this.route('camp-nanowrimo-april-2020-winner');
     this.route('nano-winner-2019');
     this.route('nano-winner-2020');
+    this.route('year-in-review', { path: '/:year'}, function() {
+    });
     
   });
 
@@ -124,7 +126,6 @@ Router.map(function() {
   this.route('nano-prep');
   this.route('offers');
   this.route('programming-and-impact');
-  
   
   this.route('404');
   this.route('not-found', { path: '/*path' });
