@@ -4,4 +4,5 @@ import { alias } from '@ember/object/computed';
 
 export default Controller.extend({
   year: null,
+  annualStats: null,
 });
