@@ -156,19 +156,19 @@ export default Component.extend({
   imgSrc: computed('statType', function() {
     const st = this.get('statType');
     if (st==='total words') {
-      return 'NaNo-OldSchool@2x.png';
+      return 'NaNo-OldSchool.png';
     }
     if (st==='best project') {
-      return 'NaNo-CreatedNovel@2x.png';
+      return 'NaNo-CreatedNovel.png';
     }
     if (st==='one day') {
-      return 'NaNo-OldSchool@2x.png';
+      return 'NaNo-OldSchool.png';
     }
     if (st==='longest streak') {
-      return 'NaNo-Streak-Fire@2x.png';
+      return 'NaNo-Streak-Fire.png';
     }
     if (st==='home region') {
-      return 'NaNo-Region@2x.png';
+      return 'NaNo-Region.png';
     }
     return '';
   }),
