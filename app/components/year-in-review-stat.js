@@ -61,7 +61,7 @@ export default Component.extend({
     const se = this.get('annualStats.streak_end');
     if (ss && se) {
       if (sd>1) {
-        return "Your streak lasted from " + ss + " to " + se + "."
+        return "Your streak lasted from " + ss + ", to " + se + "."
       } else {
         return "Your one-day streak happened on " + ss + "."
       }
