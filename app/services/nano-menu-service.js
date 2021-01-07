@@ -62,8 +62,9 @@ export default Service.extend({
       {
         toggleLabel: "Writer's Resources",
         submenuItems: [
+          { label: "Now What?", url: "/now-what", segment: null, teaser: "Editing and publishing resources", src: "/images/nav/thought_bubble.svg" },
           { label: "Camp NaNo", url: "/what-is-camp-nanowrimo", segment: null, teaser: "How to participate and more", src: "/images/nav/tent.svg" },
-          { label: "NaNo Prep", url: "/nano-prep-101", segment: null, teaser: "Get ready for the big event", src: "/images/nav/thought_bubble.svg" },
+          { label: "NaNo Prep", url: "/nano-prep-101", segment: null, teaser: "Get ready to write a novel", src: "/images/nav/thought_bubble.svg" },
           { label: "Pep Talks", url: "/pep-talks", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg" },
           { label: "Offers", url: "/offers", segment: null, teaser: "Discounts on writer tools", src: "/images/nav/present.svg" }
         ]
