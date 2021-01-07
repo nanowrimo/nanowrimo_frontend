@@ -35,31 +35,6 @@ export default BaseAuthenticator.extend({
     });
   },
 
-  // For spoofing another user
-  /*spoof(user_id) {
-    alert('spoofing');
-    return new Promise((resolve, reject) => {
-      return fetch(this.get('serverSpoofEndpoint'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id })
-      })
-      .then((response) => {
-        return response.json()
-        .then((json)=>{
-          if (this._validate(json)) {
-            resolve(json);
-          } else {
-            reject(json);
-          }
-        })
-      })
-      .catch((error) => {
-        reject(error);
-      });
-    });
-  },*/
-
   restore(data){
     return new Promise((resolve, reject) => {
       if (!isEmpty(data.auth_token) ) {
@@ -74,15 +49,14 @@ export default BaseAuthenticator.extend({
     // get the auth_token from the session data
     let { auth_token }  = this.get('session.data.authenticated');
     // make a POST request to the API's logout endpoint 
-    fetch(this.get('serverLogoutEndpoint'), { 
+    return fetch(this.get('serverLogoutEndpoint'), { 
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
     }).then(()=>{
-      //we do nothing
+      //we do nothing?
+      Promise.resolve();
     });
-    
-    //return a resolved promise to unauthenticate 
-    return Promise.resolve();
+
   },
 
   _validate(data) {
