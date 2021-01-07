@@ -52,13 +52,11 @@ export default BaseAuthenticator.extend({
     return fetch(this.get('serverLogoutEndpoint'), { 
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
-    }).then((resp)=>{
+    }).then(()=>{
       //we do nothing?
       Promise.resolve();
     });
-    
-    //return a resolved promise to unauthenticate 
-    return;
+
   },
 
   _validate(data) {
