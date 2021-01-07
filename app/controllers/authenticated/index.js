@@ -26,6 +26,16 @@ export default Controller.extend({
   }),
 
   // Returns true is it's camp and the user hasn't created a project
+  displayYiRBanner: computed('currentUser.user.projects.[]', function () {
+    let ps = this.get('currentUser.user.projects');
+    if (ps.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+
+  // Returns true is it's camp and the user hasn't created a project
   displayCampBanner: computed('currentUser.user.projects.[]', 'primaryProject.currentProjectChallenge.count', function () {
     let d = false;
     // Set a local variable for the store
