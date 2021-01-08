@@ -18,9 +18,9 @@ export default Component.extend({
     const tw = this.get('annualStats.total_words_last_year');
     if (tw>0) {
       if (tw>1) {
-        return "Last year you wrote " + tw.toLocaleString() + " words.";
+        return "In " + (this.get('year')-1) + ", you wrote " + tw.toLocaleString() + " words.";
       } else {
-        return "Last year you wrote " + tw.toLocaleString() + " word.";
+        return "In " + (this.get('year')-1) + ", you wrote " + tw.toLocaleString() + " word.";
       }
     } else {
       return '';
@@ -96,7 +96,7 @@ export default Component.extend({
   superString: computed('statType', function() {
     const st = this.get('statType');
     if (st==='total words') {
-      return 'Total Words Written this Year';
+      return 'Total Words Written in ' + this.get('year');
     }
     if (st==='best project') {
       return 'Writing Project You Worked on the Most';
