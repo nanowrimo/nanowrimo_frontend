@@ -29,7 +29,7 @@ module.exports = function(environment) {
     },
     emberTracker: {
         analyticsSettings: {
-            trackingId: 'UA-635901-1',
+            trackingId: 'G-Q3XHKESGGR',
         },
     },
     
