@@ -112,6 +112,15 @@
       height: 147px;
     }
   }
+  &.badge-small {
+    margin-top: 20px;
+    flex: 0 0 100px;
+    height: 100px;
+    img {
+      width: 82px;
+      height: auto;
+    }
+  }
   &.nw-card-icon-bottom {
     margin-bottom: -20px;
   }
