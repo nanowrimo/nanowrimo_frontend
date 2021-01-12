@@ -48,6 +48,22 @@
       color: #999;
       margin-right: 10px;
       margin-top: -7px;
+      position: relative;
+      .fa {
+ 
+        width: 32px;
+        height: 38px;
+        border: 0;
+        background-image: none;
+        background-color: transparent;
+        color: $nw-darkgreen;
+        line-height: 38px;
+        position: relative;
+
+      }
+      .nw-unread-circle {
+        top: 4px;
+      }
     }
     .nw-icon-text {
       max-height: 100px;
