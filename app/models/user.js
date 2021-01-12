@@ -101,6 +101,7 @@ const User = Model.extend({
   regions: filterBy('groups', 'groupType', 'region'),
   
   stats: null,
+  annualStats: null,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -814,6 +815,19 @@ const User = Model.extend({
     }).then(resp=>{
       resp.json().then(json=>{
         this.set('stats', json);
+      });
+    });
+  },
+  
+  refreshAnnualStats: function(year) {
+    let { auth_token } = this.get('session.data.authenticated');
+    //fetch the stats from the API
+    let endpoint = `${ENV.APP.API_HOST}/users/annual_stats/`+year;
+    fetch(endpoint, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+    }).then(resp=>{
+      resp.json().then(json=>{
+        this.set('annualStats', json);
       });
     });
   },

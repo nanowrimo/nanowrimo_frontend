@@ -411,6 +411,21 @@
   .nw-card-footer {
     min-height: 30px;
   }
+  &.year-in-review-stat {
+    background-image: none;
+    border: solid 0px $nw-lightgreyblue;
+    .nw-supertitle {
+      font-size: 20px;
+    }
+    .nw-title {
+      margin-top: 7px;
+      font-size: 30px;
+    }
+    .nw-subtitle {
+      font-style: italic;
+      font-size: 20px;
+    }
+  }
 }
 .nw-flippy-card {
   min-width: 280px;
@@ -655,8 +670,6 @@
         a {
           color: #055;
         }
-        -ms-word-break: break-all;
-        word-break: break-all;
         /* Non standard for WebKit */
         word-break: break-word;
         -webkit-hyphens: auto;
