@@ -200,8 +200,8 @@ export default Component.extend({
       let tz = this.get('currentUser.user.timeZone');
       
       //determine what 'count' we need to send to the API
-      let count = parseInt( this.get('countValue'));
-      
+      let rawCount = this.get('countValue');
+      let count = parseInt( rawCount.replace(",", "") );
       //what project are we actually dealing with?
       let project = this.get('project');
       let projectChallenge = this.get('projectChallenge');
