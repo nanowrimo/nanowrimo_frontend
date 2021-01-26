@@ -196,6 +196,7 @@ export default Component.extend({
     },
 
     formSubmit() {
+      event.stopPropagation();
       // Get the current user's time zone
       let tz = this.get('currentUser.user.timeZone');
       

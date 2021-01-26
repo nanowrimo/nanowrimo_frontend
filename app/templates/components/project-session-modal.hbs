@@ -6,6 +6,7 @@
   {{#modal.header closeButton=false}}
       New Progress Update
   {{/modal.header}}
+  <form  onSubmit={{action 'formSubmit'}}>
   {{#modal.body}}
     <div class="nw-no-blue" id="progress-update-form">
       <div class='tab-content'>
@@ -121,9 +122,9 @@
 
   {{#modal.footer}}
 
-    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Progress' {{action "formSubmit"}}/>
+    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Progress'/>
     <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
 
   {{/modal.footer}}
-
+  </form>
 {{/bs-modal}}
