@@ -354,8 +354,9 @@ export default Component.extend({
     formSubmit() {
       // Variable for tracking whether more info should default to open
       let moreInfo = 0;
-      //determine what 'count' we need to send to the API
-      let count = parseInt( this.get('countValue'));
+      //determine what 'count' we need to send to the API, strip ","
+      let rawCount = this.get('countValue');
+      let count = parseInt( rawCount.replace(",", "") );
       //do we need to determine the session count based on the total count?
       let ct = this.get('countType');
       if (ct < 1) {
