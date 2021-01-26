@@ -8,6 +8,7 @@
   {{#modal.header closeButton=false}}
     How's your writing going?
   {{/modal.header}}
+  <form onSubmit={{action 'formSubmit'}}>
   {{#modal.body}}
     <div id='menu-progress-update-project-display'>
       <div class='primary-project-scrolling-tools'>
@@ -40,7 +41,7 @@
         </div>
       </div>
       <div id='progress-update-form'>
-        <form onSubmit={{action 'formSubmit'}}>
+        
           <div class='form-group' style="display: flex; justify-content: center; align-items: center;">
             <div style="flex: 0 0 120px; margin-right: 10px;">
               {{input
@@ -146,12 +147,13 @@
               </div>
             </div>
           </div>
-        </form>
+        
       </div>
     </div>
   {{/modal.body}}
   {{#modal.footer}}
-    <input class='nano-button' type='submit' value='Update progress' {{action "formSubmit" }}>
+    <input class='nano-button' type='submit' value='Update progress'>
     <input class='nano-button btn-underlined' {{action 'cancel'}} type='button' value='Cancel'>
   {{/modal.footer}}
+  </form>
 {{/bs-modal}}
