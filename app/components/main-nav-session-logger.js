@@ -351,7 +351,7 @@ export default Component.extend({
       }
     },
     
-    formSubmit(form) {
+    formSubmit() {
       event.stopPropagation();
       // Variable for tracking whether more info should default to open
       let moreInfo = 0;
