@@ -36,6 +36,7 @@
     font-size: 26px;
   }
   li {
+    list-style-type: none;
     line-height: 29px;
     margin-top: 13px;
     margin-bottom: 13px;
@@ -52,6 +53,7 @@
       }
     }
     ul {
+      list-style-type: none;
       -webkit-transition-property: max-height;
       -webkit-transition-duration: 0.5s;
       -webkit-transition-timing-function: ease-in-out;
@@ -61,6 +63,7 @@
       max-height: 0px;
       overflow: hidden;
       padding-left: 12px;
+      
     }
     .nano-side-menu-submenu-toggle {
       cursor: pointer;
