@@ -22,68 +22,68 @@
       <b>Duration: </b> {{duration}}
     </div>
     {{#if locationAddress}}
-      <div>
-        <b>Where:</b> {{locationName}}, {{locationAddress}}
-      </div>
+    <div>
+      <b>Where:</b> {{locationName}}, {{locationAddress}}
+    </div>
     {{/if}}
     {{#if event.url}}
-      <div>
-        <b>URL:</b> <a href="{{event.url}}" target="_BLANK">{{event.url}} <i class="fa fa-external-link"></i></a>
-      </div>
+    <div>
+      <a href="{{event.url}}" target="_BLANK"><b>Event Description</b><i class="fa fa-external-link"></i></a>
+    </div>
     {{/if}}
     <div style="padding-top: 15px; padding-bottom: 15px;">
       {{event.description}}
     </div>
     {{#if currentUser.isLoaded}}
-      {{#if (eq status 'upcoming')}}
-        {{#if isEnrolled}}
-          <b><i class="fa fa-check"></i> You're signed up!</b>
-          {{#if (eq isCancelled false)}}
-            <div>
-              <a href="#" {{action 'leaveEvent'}}>Remove yourself from this event</a>
-            </div>
-          {{/if}}
+    {{#if (eq status 'upcoming')}}
+    {{#if isEnrolled}}
+    <b><i class="fa fa-check"></i> You're signed up!</b>
+    {{#if (eq isCancelled false)}}
+    <div>
+      <a href="#" {{action 'leaveEvent'}}>Remove yourself from this event</a>
+    </div>
+    {{/if}}
+    {{else}}
+    {{#if (eq isCancelled false)}}
+    <button {{action 'joinEvent'}}>
+      Count me in!
+    </button>
+    {{/if}}
+    {{/if}}
+    {{#if canEditEvent}}
+    <div style="padding-top: 20px;">
+      <span><b>ML tools: </b></span>
+      <span>
+        {{#if isCancelled}}
+        <a href="#" {{action "confirmRestore"}}>
+          Restore event
+        </a>
         {{else}}
-          {{#if (eq isCancelled false)}}
-            <button {{action 'joinEvent'}}>
-              Count me in!
-            </button>
-          {{/if}}
+        <a href="#" {{action "confirmCancel"}}>
+          Cancel event
+        </a>
         {{/if}}
-        {{#if canEditEvent}}
-          <div style="padding-top: 20px;">
-            <span><b>ML tools: </b></span>
-            <span>
-              {{#if isCancelled}}
-                <a href="#" {{action "confirmRestore"}}>
-                  Restore event
-                </a>
-              {{else}}
-                <a href="#" {{action "confirmCancel"}}>
-                  Cancel event
-                </a>
-              {{/if}}
-            </span>
-            &bull;
-            <span>
-              <a href="#" {{action "confirmDelete"}}>
-                Delete event
-              </a>
-              {{#if false}}
-                <button {{action 'openNewEventModal'}}>
-                  Edit event
-                </button>
-                {{event-modal
+      </span>
+      &bull;
+      <span>
+        <a href="#" {{action "confirmDelete"}}>
+          Delete event
+        </a>
+        {{#if false}}
+        <button {{action 'openNewEventModal'}}>
+          Edit event
+        </button>
+        {{event-modal
                   open=editEvent
                   user=user
                   group=event
                   groupId=group.id
                 }}
-              {{/if}}
-            </span>
-          </div>
-          {{#if isCancelled}}
-            {{confirmation-modal
+        {{/if}}
+      </span>
+    </div>
+    {{#if isCancelled}}
+    {{confirmation-modal
               yes=restoreConfirmationYesText 
               no=restoreConfirmationNoText 
               title=restoreConfirmationTitleText
@@ -92,8 +92,8 @@
               yesAction=(action "restoreConfirmationYes")
               noAction=(action "restoreConfirmationNo")
             }}
-          {{else}}
-            {{confirmation-modal
+    {{else}}
+    {{confirmation-modal
               yes=cancelConfirmationYesText 
               no=cancelConfirmationNoText 
               title=cancelConfirmationTitleText
@@ -102,8 +102,8 @@
               yesAction=(action "cancelConfirmationYes")
               noAction=(action "cancelConfirmationNo")
             }}
-          {{/if}}
-          {{confirmation-modal
+    {{/if}}
+    {{confirmation-modal
             yes=deleteConfirmationYesText 
             no=deleteConfirmationNoText 
             title=deleteConfirmationTitleText
@@ -112,24 +112,24 @@
             yesAction=(action "deleteConfirmationYes")
             noAction=(action "deleteConfirmationNo")
           }}
-          
-        {{/if}}
-      {{/if}}
-      {{#if (eq status 'pending')}}
-        {{#if canEditEvent}}
-          <button {{action 'approveEvent'}}>
-            Approve
-          </button>
-          <button {{action 'rejectEvent'}}>
-            Reject
-          </button>
-        {{/if}}
-      {{/if}}
+
+    {{/if}}
+    {{/if}}
+    {{#if (eq status 'pending')}}
+    {{#if canEditEvent}}
+    <button {{action 'approveEvent'}}>
+      Approve
+    </button>
+    <button {{action 'rejectEvent'}}>
+      Reject
+    </button>
+    {{/if}}
+    {{/if}}
     {{/if}}
   </div>
   {{#if isCancelled}}
-    <div class='nw-cancelled'>
-      Cancelled
-    </div>
+  <div class='nw-cancelled'>
+    Cancelled
+  </div>
   {{/if}}
 </div>
