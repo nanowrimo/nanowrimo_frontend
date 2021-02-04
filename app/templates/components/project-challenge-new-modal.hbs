@@ -12,6 +12,7 @@
         New Goal
       {{/if}}
     {{/modal.header}}
+    <form {{action "saveProjectChallenge" on="submit"}}>
     {{#modal.body}}
       <div class="project-challenge-new-form">
       {{#if isEventListAllowed }}
@@ -166,7 +167,7 @@
     {{/modal.body}}
 
     {{#modal.footer}}
-      <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
+      <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' />
       <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
       {{#if isEditingModal }}
         <div style="flex: 0 0 100%; margin-top: 10px;">
@@ -176,6 +177,7 @@
         </div>
       {{/if}}
     {{/modal.footer}}
+    </form>
   {{/bs-modal}}
 {{else}}
   {{confirmation-modal
