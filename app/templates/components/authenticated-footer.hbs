@@ -21,9 +21,11 @@
   {{#each footerSubmenus as |footerSubmenu i|}}
   <div class="nw-footer-section nw-footer-{{i}}">
     <div class="nw-footer-submenu">
-      <div class="nw-footer-header">
-        {{footerSubmenu.toggleLabel}}
-      </div>
+      <h2>
+        <div class="nw-footer-header">
+          {{footerSubmenu.toggleLabel}}
+        </div>
+      </h2>
       <ul>
         {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
         {{#if footerSubmenuItem}}
@@ -49,9 +51,11 @@
   {{/if}}
   <div class="nw-footer-section nw-footer-right">
     <div>
-      <div class="nw-footer-header">
-        Connect with NaNo
-      </div>
+      <h2>
+        <div class="nw-footer-header">
+          Connect with NaNo
+        </div>
+      </h2>
       <ul>
         <li>
           <div class="nw-footer-social">
