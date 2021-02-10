@@ -78,6 +78,7 @@
   .nw-noti-content-container {
     flex: 1 1 100%;
     padding-left: 15px;
+    text-align: left;
     .nw-noti-content {
       width: 100%;
       line-height: 1.29;
@@ -94,6 +95,7 @@
         font-size: 12px;
         line-height: 1.67;
         color: $nw-black;
+        font-family: "SourceSansPro-Regular",sans-serif;
       }
       .nw-noti-button {
         flex: 1 1 100%;
