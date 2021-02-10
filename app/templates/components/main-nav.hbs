@@ -1,7 +1,7 @@
 <nav class="navbar mainnav navbar-expand-lg" aria-label="main">
   <div class="container-fluid">
     {{#link-to nanoMenuService.homeUrl class="navbar-brand text-logo"}}<img src="/images/logo/logo_text.svg"
-      alt="" />{{/link-to}}
+      alt="NANOWRIMO home" />{{/link-to}}
     {{#if session.isAuthenticated}}
     {{#if currentUserName}}
     {{#bs-nav as |nav|}}
@@ -56,13 +56,13 @@
     {{#dd.menu as |ddm|}}
     <ul class="dropdown">
       {{!--
-              {{#ddm.item tagName="li"}}
-                <a href="/" class="dropdown-item">
-                  <div class="dropdown-icon">{{fa-icon "list-alt"}}</div>
-                  <div class="dropdown-headline">Activity Log</div>
-                </a>
-              {{/ddm.item}}
-              --}}
+      {{#ddm.item tagName="li"}}
+      <a href="/" class="dropdown-item">
+        <div class="dropdown-icon">{{fa-icon "list-alt"}}</div>
+        <div class="dropdown-headline">Activity Log</div>
+      </a>
+      {{/ddm.item}}
+      --}}
       {{#ddm.item tagName="li"}}
       {{#ddm.link-to 'authenticated.settings.account' class="dropdown-item"}}
       <div class="dropdown-icon">{{fa-icon "cog"}}</div>
@@ -70,7 +70,7 @@
       {{/ddm.link-to}}
       {{/ddm.item}}
       {{#ddm.item tagName="li"}}
-      <a href="#" class="dropdown-item" {{action 'invalidateSession'}} data-test-log-out>
+      <a href="#" class="dropdown-item" {{action 'invalidateSession' }} data-test-log-out>
         <div class="dropdown-icon">{{fa-icon "sign-out"}}</div>
         <div class="dropdown-headline">Logout</div>
       </a>
