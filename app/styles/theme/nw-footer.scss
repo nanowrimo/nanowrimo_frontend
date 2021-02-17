@@ -37,6 +37,7 @@
       grid-row: 2;
       font-size: 12px;
       display: flex;
+      flex-wrap: wrap;
     }
   }
   @media (max-width: $screen-sm-max) {
@@ -67,9 +68,14 @@
   a { text-decoration: underline; }
 }
 .nw-footer-funder-logos {
-  flex: 0 0 550px;
+  flex: 1 1 40%; 
+  text-align: center;
   img {
     margin-right: 35px;
+    margin-bottom: 15px;
   }
- 
+}
+
+.nw-footer-copyright {
+  flex: 1 1 50%;
 }
