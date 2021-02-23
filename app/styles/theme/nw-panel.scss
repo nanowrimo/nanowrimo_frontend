@@ -43,6 +43,9 @@
       @media (min-width: $screen-sm) {
         border-radius: 0 0 $border-radius $border-radius;
       }
+      @media (max-width: $screen-sm) {
+         padding: 10px 0px;
+      }
       &.nw-panel-hidden {
         display: none;
       }
@@ -69,28 +72,34 @@
   color: $nw-lightgrey;
   margin-top: -31px;
   padding-left: 40px;
-    li {
-      list-style-type: none;
-      margin-left: 15px;
-      margin-right: 15px;
-      font-size: 16px;
-      color: $nw-lightgrey;
+  @media (max-width: $screen-sm) {
+    padding-left: 10px;
+  }
+  li {
+    list-style-type: none;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 16px;
+    color: $nw-lightgrey;
+    border-radius: 4px;
+    height: 36px;
+    a {
+      line-height: 36px;
+      cursor: pointer;
       border-radius: 4px;
+      color: #555555;
+      padding-bottom: 10px;
       height: 36px;
-      a {
-        line-height: 36px;
-        cursor: pointer;
-        border-radius: 4px;
-        color: #555555;
-        padding-bottom: 10px;
-        height: 36px;
-        &.active, &:hover {
-          text-decoration: none;
-          color: #005555;
-          background: linear-gradient(to top, #005555 0px,#005555 7px,transparent 7px,transparent 500px);
-        }
+      &.active, &:hover {
+        text-decoration: none;
+        color: #005555;
+        background: linear-gradient(to top, #005555 0px,#005555 7px,transparent 7px,transparent 500px);
       }
-    
+    }
+    @media (max-width: $screen-sm) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 }
 .nw-panel-actions {
