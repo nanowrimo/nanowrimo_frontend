@@ -43,6 +43,9 @@
       @media (min-width: $screen-sm) {
         border-radius: 0 0 $border-radius $border-radius;
       }
+      @media (max-width: $screen-sm) {
+         padding: 10px 0px;
+      }
       &.nw-panel-hidden {
         display: none;
       }
