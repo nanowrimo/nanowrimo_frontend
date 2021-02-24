@@ -1,4 +1,4 @@
-{{#if (eq firstEnabled "statsWordCountEnabled")  }}
+{{#if (eq user.firstEnabledStat "statsWordCountEnabled")  }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-word-count>
       {{#if hasStats }}
@@ -11,7 +11,7 @@
   </div>
 {{/if}}
 
-{{#if  (eq firstEnabled "statsYearsEnabled") }}
+{{#if  (eq user.firstEnabledStat "statsYearsEnabled") }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-years>
       {{#if hasStats }}
@@ -34,7 +34,7 @@
   </div>
 {{/if}}
 
-{{#if (eq firstEnabled "statsProjectsEnabled") }}
+{{#if (eq user.firstEnabledStat "statsProjectsEnabled") }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-projects>
       {{#if hasStats}}
@@ -47,7 +47,7 @@
   </div>
 {{/if}}
 
-{{#if (eq firstEnabled "statsWordiestEnabled") }}
+{{#if (eq user.firstEnabledStat "statsWordiestEnabled") }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-wordiest>
       {{#if hasStats}}
@@ -60,7 +60,7 @@
   </div>
 {{/if}}
 
-{{#if (eq firstEnabled "statsWritingpaceEnabled") }}
+{{#if (eq user.firstEnabledStat "statsWritingPaceEnabled") }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-writing-pace>
       {{#if hasStats}}
@@ -73,7 +73,7 @@
   </div>
 {{/if}}
 
-{{#if (eq firstEnabled "statsStreakEnabled") }}
+{{#if (eq user.firstEnabledStat "statsStreakEnabled") }}
   <div class="plate-area">
     <div class="plate-stat" data-test-user-stats-streak>
       {{#if hasStats}}
