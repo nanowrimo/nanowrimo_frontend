@@ -142,12 +142,6 @@ export default Component.extend({
     statsSelect1Changed(val) {
       this.set('stat1', val);
     },
-    statsSelect2Changed(val) {
-      this.set('stat2', val);
-    },
-    statsSelect3Changed(val) {
-      this.set('stat3', val);
-    },
     
     updateChangeset() {
       let cs = this.get('changeset');
@@ -162,14 +156,6 @@ export default Component.extend({
       let s1 = this.get('stat1');
       if (s1) {
         cs.set(s1, true);
-      }
-      let s2 = this.get('stat2');
-      if (s2) {
-        cs.set(s2, true);
-      }
-      let s3 = this.get('stat3');
-      if (s3) {
-        cs.set(s3, true);
       }
     },
     
