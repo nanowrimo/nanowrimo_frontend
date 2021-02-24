@@ -4,10 +4,11 @@
 <div class="nw-card-content">
 
   {{#if hasAverageFeeling }}
-    <div class="nw-card-icon"><img src="{{feelingImg}}" /></div>
-    <div class="nw-promo-text">{{feelingIntroString}}! Looks like you <span class="nw-highlight">felt {{feelingString}}</span> working on this goal!</div>
+  <div class="nw-card-icon"><img src="{{feelingImg}}" alt="" /></div>
+  <div class="nw-promo-text">{{feelingIntroString}}! Looks like you <span class="nw-highlight">felt
+      {{feelingString}}</span> working on this goal!</div>
   {{else}}
-    <div class="nw-card-icon"><img src="/images/cards/how-i-feel/no-data.svg" /></div>
-    <div class="nw-promo-text">You're a closed book. Any chance you're writing a mystery?</div>
+  <div class="nw-card-icon"><img src="/images/cards/how-i-feel/no-data.svg" alt="" /></div>
+  <div class="nw-promo-text">You're a closed book. Any chance you're writing a mystery?</div>
   {{/if}}
 </div>

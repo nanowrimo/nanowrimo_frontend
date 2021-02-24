@@ -3,10 +3,12 @@
 </div>
 <div class="nw-card-content">
   {{#if hasData}}
-    <div class="nw-card-icon"><img src="/images/cards/when-i-write/{{animalType}}.svg" /></div>
-    <div class="nw-promo-text">{{catchyPhrase}}<br />You write the most between<div class="nw-highlight">{{dataPhrase}}!</div></div>
+  <div class="nw-card-icon"><img src="/images/cards/when-i-write/{{animalType}}.svg" alt="" /></div>
+  <div class="nw-promo-text">{{catchyPhrase}}<br />You write the most between<div class="nw-highlight">{{dataPhrase}}!
+    </div>
+  </div>
   {{else}}
-    <div class="nw-card-icon"><img src="/images/cards/when-i-write/no-data.svg" /></div>
-    <div class="nw-promo-text">Time is meaningless. Either that, or you haven't logged when you write.</div>
+  <div class="nw-card-icon"><img src="/images/cards/when-i-write/no-data.svg" alt="" /></div>
+  <div class="nw-promo-text">Time is meaningless. Either that, or you haven't logged when you write.</div>
   {{/if}}
 </div>
