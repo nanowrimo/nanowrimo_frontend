@@ -1,28 +1,27 @@
 <div class='nw-card-header nw-card-header-no-height'>
   <div class='nw-card-actions'>
     {{!--
-      {{#if projectChallenge.isPrimary}}
-        <i class='fa fa-thumb-tack primary-thumb-tack'></i>
-      {{/if}}
+    {{#if projectChallenge.isPrimary}}
+    <i class='fa fa-thumb-tack primary-thumb-tack'></i>
+    {{/if}}
     --}}
     {{#if canEdit}}
-      <a href="#" {{action "editProjectChallenge"}}>
-        <i class="fa fa-gear"></i>
-      </a>
+    <a href="#" {{action "editProjectChallenge" }}>
+      <i class="fa fa-gear"></i>
+    </a>
     {{/if}}
   </div>
 </div>
 <div class="nw-card-content nw-card-horizontal">
   <div class='nw-title'>
-    <a href="#" {{action "redirectToStats"}}>
+    <a href="#" {{action "redirectToStats" }}>
       {{projectChallenge.name}}
     </a>
   </div>
 
   <div class='project-challenge-progress'>{{project-challenge-progress projectChallenge=projectChallenge}}</div>
 
-  <div class='filler-image'><img src="{{svg}}"></div>
+  <div class='filler-image'><img src="{{svg}}" alt=""></div>
 
 </div>
 {{project-challenge-new-modal project=project projectChallenge=projectChallenge open=editProjectChallenge}}
-
