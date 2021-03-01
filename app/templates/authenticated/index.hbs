@@ -22,7 +22,6 @@
       </div>
     </div>
     {{else}}
-<<<<<<< HEAD
       {{#if displayCampBanner}}
         <div class="flash-banner">
           <div class="banner-left">
@@ -45,76 +44,52 @@
           </div>
           <div class="banner-right">
           </div>
-=======
-    {{#if displayCampBanner}}
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image image-unframed">
-          <img style="width:100px; margin: 10px;" src="/images/banners/bird.png" />
->>>>>>> ab69d1f09193f93d45a29e8a23de4614bf66a853
         </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Are you ready for your next great writing adventure? Join Camp NaNoWriMo this July and set a word-count goal
-            of your own, for any writing project.
-          </div>
-          <div class="flash-button">
-            <button {{action "openNewProjectModal" }}>
-              Join Camp!
-            </button>
-          </div>
+      {{/if}}
+      {{#if displayNanoBanner}}
+      <div class="flash-banner">
+        <div class="banner-left">
         </div>
-      </div>
-      <div class="banner-right">
-      </div>
-    </div>
-    {{/if}}
-    {{#if displayNanoBanner}}
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image image-unframed">
-          <img style="width:100px; height:101px; margin: 10px;" src="/images/banners/astronaut.png" />
-        </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Creativity is all around you. Imagine better worlds and invest in your creative energy by writing a novel
-            with us. Are you ready to commit to writing this November?
+        <div class="banner-content">
+          <div class="flash-image image-unframed">
+            <img style="width:100px; height:101px; margin: 10px;" src="/images/banners/astronaut.png" />
           </div>
-          <div class="flash-button">
-            <button {{action "openNewProjectModal" }}>
-              Announce your novel!
-            </button>
+          <div class="flash-content">
+            <div class="flash-text">
+              Creativity is all around you. Imagine better worlds and invest in your creative energy by writing a novel
+              with us. Are you ready to commit to writing this November?
+            </div>
+            <div class="flash-button">
+              <button {{action "openNewProjectModal" }}>
+                Announce your novel!
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="banner-right">
-      </div>
-    </div>
-    {{/if}}
-    {{#if displayYiRBanner}}
-    <div class="flash-banner">
-      <div class="banner-left">
-      </div>
-      <div class="banner-content">
-        <div class="flash-image image-unframed">
-          <img style="width:100px; height:101px; margin: 10px;" src="/images/banners/bird.png" />
+        <div class="banner-right">
         </div>
-        <div class="flash-content">
-          <div class="flash-text">
-            Happy New Year! Check out your <a href='/year-in-review/2020'
-              style='color: rgba(255,255,255, 0.9); padding-left: 7px; text-decoration: underline;'>2020 Year in
-              Review</a>.
+      </div>
+      {{/if}}
+      {{#if displayYiRBanner}}
+        <div class="flash-banner">
+          <div class="banner-left">
+          </div>
+          <div class="banner-content">
+            <div class="flash-image image-unframed">
+              <img style="width:100px; height:101px; margin: 10px;" src="/images/banners/bird.png" />
+            </div>
+            <div class="flash-content">
+              <div class="flash-text">
+                Happy New Year! Check out your <a href='/year-in-review/2020'
+                  style='color: rgba(255,255,255, 0.9); padding-left: 7px; text-decoration: underline;'>2020 Year in
+                  Review</a>.
+              </div>
+            </div>
+          </div>
+          <div class="banner-right">
           </div>
         </div>
-      </div>
-      <div class="banner-right">
-      </div>
-    </div>
-    {{/if}}
+      {{/if}}
     {{/if}}
 
     {{donation-day-banner}}
