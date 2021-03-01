@@ -28,11 +28,12 @@ export default Controller.extend({
   // Returns true if the user has at least 1 project
   displayYiRBanner: computed('currentUser.user.projects.[]', function () {
     let ps = this.get('currentUser.user.projects');
-    if (ps) {
-      return !!ps.length;
-    } else {
-      return false;
-    }
+    //if (ps) {
+      //return !!ps.length;
+    //} else {
+      //return false;
+    //}
+    return false;
   }),
 
   // Returns true is it's camp and the user hasn't created a project
