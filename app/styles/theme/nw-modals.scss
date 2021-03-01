@@ -41,6 +41,9 @@
         color: $nw-mediumgrey;
         &.step-current {
           color: $nw-mediumblue;
+          .step-name {
+            font-weight: 900;
+          }
         }
         &.step-completed {
           color: $nw-mediumblue;

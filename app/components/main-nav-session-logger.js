@@ -352,6 +352,7 @@ export default Component.extend({
     },
     
     formSubmit() {
+      event.stopPropagation();
       // Variable for tracking whether more info should default to open
       let moreInfo = 0;
       //determine what 'count' we need to send to the API, strip ","
