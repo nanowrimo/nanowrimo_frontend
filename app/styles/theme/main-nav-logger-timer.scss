@@ -115,6 +115,9 @@
 
 #timer-form-modes {
   .timer-sub-menu {
+    padding-left: 20px;
+    padding-top: 10px;
+    background: white;
     .timer-sub-menu-item {
       font-size: 16px;
       font-weight: 600;
@@ -127,6 +130,9 @@
     }
     .selected {
       color: $nw-mediumblue;
+      background: linear-gradient(to top, #005555 0px, #005555 7px, transparent 7px, transparent 500px);
+      border-radius: 4px;
+      padding-bottom: 9px;
     }
   }
   .timer-content {
