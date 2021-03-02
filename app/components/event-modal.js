@@ -117,7 +117,16 @@ export default Component.extend({
       return false;
     }
   }),
+  formCurrentStep: computed("step", function(){ 
+    return this.get('step')+1;
+  }),
   
+  formProgressText: computed("step", function(){
+    let step = this.get("step");
+    let texts = ["Step 1: Details", "Step 2: Venue", "Step 3: Approval"];
+    return texts[step];
+    
+  }),
   init() {
     this._super(...arguments);
     let now = moment();
