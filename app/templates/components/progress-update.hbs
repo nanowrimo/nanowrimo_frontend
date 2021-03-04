@@ -1,11 +1,10 @@
-<div class="nw-card-list-item">
-  <div class="nw-card-list-item-left">
-    {{formattedEnd}}
-  </div>
-  <div class="nw-card-list-item-center">
-    {{projectSession.count}} words
-  </div>
-  <div class="nw-card-list-item-right">
-    <i class="fa fa-trash" {{action 'deleteProjectSession'}}></i>
-  </div>
-</div>
+<tr>
+  <td>{{formattedEnd}}</td>
+  <td>{{projectSession.count}} words</td>
+  <td>
+    <button class="nw-button-undecorated" {{action 'deleteProjectSession'}}>
+      <span class="screen-reader-text">Delete  {{projectSession.count}} words from {{formattedEnd}}</span>
+      <i class="fa fa-trash" ></i>
+    </button>
+  </td>
+</tr>
