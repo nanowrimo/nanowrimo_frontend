@@ -29,7 +29,7 @@
     as |dropzone queue|
   }}
     {{#if hasUploaded}}
-      Image uploaded!
+      <span role="alert">Image uploaded!</span>
     {{else}}
       {{#if dropzone.active}}
         {{#if dropzone.valid}}
