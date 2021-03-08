@@ -3,7 +3,7 @@
     <div class='nw-card-header'>
       <div class='nw-card-actions'>
         <div class='nw-card-model-actions'>
-          <div class="nw-flippy-card-toggle" {{action "toggleSubcard"}}>
+          <div class="nw-flippy-card-toggle" {{action "toggleSubcard" }}>
             <div>{{fa-icon "repeat"}}</div>
           </div>
         </div>
@@ -12,47 +12,47 @@
     <div class='nw-card-content nw-project-details'>
       <div class='nw-project-flippy-title nw-scroll-y'>
         <div class='nw-promo-text nw-break-words'>{{project.title}}</div>
-        
-          <div class='nw-project-genres nw-horiz-flex'>
-            {{project.concatGenres}}
+
+        <div class='nw-project-genres nw-horiz-flex'>
+          {{project.concatGenres}}
+        </div>
+
+        {{#if hasPlaylistOrPinterest}}
+        <div class='nw-horiz-flex'>
+          <hr />
+          {{#if project.playlistUrl}}
+          <div>
+            <a href='{{project.playlistUrl}}' target='_blank'>
+              <i class="fa fa-music" aria-hidden="true"></i>
+              Soundtrack
+            </a>
           </div>
-          
-          {{#if hasPlaylistOrPinterest}}
-            <div class='nw-horiz-flex'>
-              <hr />
-              {{#if project.playlistUrl}}
-                <div>
-                  <a href='{{project.playlistUrl}}' target='_blank'>
-                    <i class="fa fa-music" aria-hidden="true"></i>
-                    Soundtrack
-                  </a>
-                </div>
-              {{/if}}
-              {{#if project.pinterestUrl}}
-                <div>
-                  <a href='{{project.pinterestUrl}}' target='_blank'>
-                    <i class="fa fa-pinterest" aria-hidden="true"></i>
-                    Inspiration
-                  </a>
-                </div>
-              {{/if}}
-            </div>
           {{/if}}
-        
+          {{#if project.pinterestUrl}}
+          <div>
+            <a href='{{project.pinterestUrl}}' target='_blank'>
+              <i class="fa fa-pinterest" aria-hidden="true"></i>
+              Inspiration
+            </a>
+          </div>
+          {{/if}}
+        </div>
+        {{/if}}
+
       </div>
       <div class='nw-scroll-y'>
         <div class='nw-label'>Summary</div>
         <div>
           {{#if project.summary}}
-            {{{newline-to-br project.summary}}}
+          {{{newline-to-br project.summary}}}
           {{/if}}
         </div>
       </div>
       <div class='nw-scroll-y'>
-        <div  class='nw-label'>Excerpt</div>
+        <div class='nw-label'>Excerpt</div>
         <div>
           {{#if project.excerpt}}
-            {{{newline-to-br project.excerpt}}}
+          {{{newline-to-br project.excerpt}}}
           {{/if}}
         </div>
       </div>
@@ -62,15 +62,16 @@
     <div class='nw-card-header' style="height: 0px; position: absolute; right: 0; top: 5px;">
       <div class='nw-card-actions'>
         <div class='nw-card-model-actions'>
-          <div class="nw-flippy-card-toggle" style="background-color: rgba(0,0,0,0.5); border-radius: 6px; width: 40px;" {{action "toggleSubcard"}}>
+          <div class="nw-flippy-card-toggle" style="background-color: rgba(0,0,0,0.5); border-radius: 6px; width: 40px;"
+            {{action "toggleSubcard" }}>
             {{fa-icon "repeat"}}
           </div>
         </div>
       </div>
     </div>
     <div class='nw-card-content nw-centered no-padding'>
-      <div class='nw-project-cover-large' {{action "toggleSubcard"}}>
-        <img src={{project.coverUrl}}>
+      <div class='nw-project-cover-large' {{action "toggleSubcard" }}>
+        <img src={{project.coverUrl}} alt="">
       </div>
     </div>
   </div>
