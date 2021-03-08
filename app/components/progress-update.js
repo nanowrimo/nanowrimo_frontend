@@ -6,7 +6,7 @@ export default Component.extend({
   store: service(),
   currentUser: service(),
   session: service(),
-  
+  tagName: '',
   projectSession: null,
   
   // Get the end date

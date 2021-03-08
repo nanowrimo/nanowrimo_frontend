@@ -9,50 +9,53 @@
     Ready...? Set...?
   {{/modal.header}}
   {{#modal.body}}
-    <div class='tab-content'>
-      <div id='timer-form-modes'>
-        {{#if showStopwatch}}
-          <div class='timer-sub-menu'>
-            <span class='selected timer-sub-menu-item'>Stopwatch</span>
-            <span class='timer-sub-menu-item'>
-              <a href="#" {{action 'selectTimer'}}>Timer</a>
-            </span>
-          </div>
+
+    <div id='timer-form-modes'>
+      {{#if showStopwatch}}
+        <div class='timer-sub-menu'>
+          <span class='selected timer-sub-menu-item'>Stopwatch</span>
+          <span class='timer-sub-menu-item'>
+            <a href="#" {{action 'selectTimer'}}>Timer</a>
+          </span>
+        </div>
 
 
-        {{else}}
-          <div class='timer-sub-menu'>
-            <span class='timer-sub-menu-item'>
-              <a href="#" {{action 'selectStopwatch'}}>Stopwatch</a>
-            </span>
-            <span class='selected timer-sub-menu-item'>Timer</span>
-          </div>
-          <div class='timer-content'>
-            {{#if countdownRemaining}}
-              {{countdownRemaining}}
-            {{else}}
+      {{else}}
+        <div class='timer-sub-menu'>
+          <span class='timer-sub-menu-item'>
+            <a href="#" {{action 'selectStopwatch'}}>Stopwatch</a>
+          </span>
+          <span class='selected timer-sub-menu-item'>Timer</span>
+        </div>
+        <div class='tab-content'>
+        <div class='timer-content'>
+          {{#if countdownRemaining}}
+            {{countdownRemaining}}
+          {{else}}
+            <!--
+            <div class='timer-instruction'>You can enter time as 1.5 or 1:30, they both mean 1 hour and 30 minutes.</div>
+            //-->
+            <div class='timer-duration form-group'>
               <!--
-              <div class='timer-instruction'>You can enter time as 1.5 or 1:30, they both mean 1 hour and 30 minutes.</div>
+              <input id='duration' class="form-control {{if validDurationInput '' 'is-invalid'}}" onchange={{action "durationChange" value="target.value"}}>
               //-->
-              <div class='timer-duration form-group'>
-                <!--
-                <input id='duration' class="form-control {{if validDurationInput '' 'is-invalid'}}" onchange={{action "durationChange" value="target.value"}}>
-                //-->
-                <div style="width: 200px; margin-bottom: 5px; font-family: 'SourceSansPro-Regular'">
-                  <input type='number' class="ember-text-field" min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}> hours
-                </div>
-                <div style="width: 200px; font-family: 'SourceSansPro-Regular'">
-                  <input type='number' class="ember-text-field" min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}> minutes
-                </div>
+              <div style="width: 200px; margin-bottom: 5px; font-family: 'SourceSansPro-Regular'">
+                <input type='number' class="ember-text-field" min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}> hours
               </div>
-            {{/if}}
+              <div style="width: 200px; font-family: 'SourceSansPro-Regular'">
+                <input type='number' class="ember-text-field" min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}> minutes
+              </div>
+            </div>
+          {{/if}}
 
-          </div>
-
-        {{/if}}
-      </div>
+        </div>
+        </div>
+      {{/if}}
     </div>
+
+    
   {{/modal.body}}
+  
   {{#modal.footer}}
     {{#if showStopwatch}}
       <input class='form-control nano-button' type='submit' value='Start Stopwatch' {{action "startStopwatch" }}>
