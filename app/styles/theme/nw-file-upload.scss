@@ -1,0 +1,26 @@
+label.file-upload {
+  position: relative;    
+}
+.nw-file-input{
+  opacity: 0;
+}
+
+.nw-file-input-span {
+  &:before {  
+    padding-top: 8px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    text-align: center;     
+    z-index: 6;
+    display: block;
+    content: "Select an image";
+    height: 100%;
+    width: 100%;
+    color: #555;
+    background-color: white;
+  }
+  &:focus{
+    border: 2px solid red;
+  }
+}
