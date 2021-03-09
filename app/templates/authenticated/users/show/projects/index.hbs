@@ -12,13 +12,14 @@
     }}
     {{/if}}
     <div class='nw-panel-actions-select'>
-      <span id='project-summary-sort-by-text' for='sort-by'>Sort by</span>
-      <span id='project-summary-sort-by-select'>
-        <select name='sort-by' onchange={{action "setSortSelection" value="target.value" }}>
-          <option value='0'>Date Created</option>
-          <option value='1'>Project Title</option>
-        </select>
-      </span>
+      <label id='project-summary-sort-by-text' for="project-listing-sort-by-select">Sort by</label>
+        <span id='project-summary-sort-by-select'>
+          <select id="project-listing-sort-by-select" name='sort-by' onchange={{action "setSortSelection" value="target.value" }}>
+            <option value='0'>Date Created</option>
+            <option value='1'>Project Title</option>
+          </select>
+        </span>
+     
     </div>
   </div>
 
