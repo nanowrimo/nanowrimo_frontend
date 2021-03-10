@@ -35,8 +35,13 @@
         </div>
         <div class='primary-project-scrolling-buttons'>
           {{#if hasMultipleProjects}}
-            <i class="fa fa-arrow-circle-up" {{action "projectPrevious" }}></i>
-            <i class="fa fa-arrow-circle-down" {{action "projectNext" }}></i>
+            <button class="nw-button-undecorated" aria-label="previous project" {{action "projectPrevious" }}>
+              <i class="fa fa-arrow-circle-up" ></i>
+            </button>
+             <button class="nw-button-undecorated" aria-label="next project" {{action "projectNext" }}>
+              <i class="fa fa-arrow-circle-down" ></i>
+             </button>
+            
           {{/if}}
         </div>
       </div>
