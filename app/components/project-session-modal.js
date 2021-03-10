@@ -196,7 +196,7 @@ export default Component.extend({
     },
 
     formSubmit() {
-      event.stopPropagation();
+      event.preventDefault();
       // Get the current user's time zone
       let tz = this.get('currentUser.user.timeZone');
       
@@ -248,7 +248,7 @@ export default Component.extend({
       session.save();
       
       this.set('open', false);
-      return true;
+      return false;
     },
     hideForms: function() {
       this.set('open', false);

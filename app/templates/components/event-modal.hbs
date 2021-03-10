@@ -8,16 +8,16 @@
     Submit an Event
   {{/modal.header}}
     {{#modal.body}}
-      <div class="steps">
+      <div class="steps" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow={{formCurrentStep}} aria-valuetext={{formProgressText}}>
         {{#if (eq step 0)}}
           <div class="step step-current">
-            <div>Details</div>
+            <div class='step-name'>Details</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}
           {{#if (eq step 1)}}
             <div class="step step-completed" {{action "setStep" 0}}>
-              <div>Details</div>
+              <div class='step-name'>Details</div>
               <div>{{fa-icon "check-circle"}}</div>
             </div>
           {{else}}
@@ -32,7 +32,7 @@
             <hr />
           </div>
           <div class="step step-current">
-            <div>Venue</div>
+            <div class='step-name'>Venue</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}
@@ -59,7 +59,7 @@
             <hr />
           </div>
           <div class="step step-current">
-            <div>Approval</div>
+            <div class='step-name'>Approval</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}

@@ -111,7 +111,16 @@ export default Component.extend({
       this.set('projectChallengeChangeset', new Changeset(newProjectChallenge) );
     }
   },
-
+  formCurrentStep: computed("formStepOverride", function(){ 
+    return this.get('formStepOverride')+1;
+  }),
+  
+  formProgressText: computed("formStepOverride", function(){
+    let step = this.get("formStepOverride");
+    let texts = ["Step 1: Overview", "Step 2: Goal", "Step 3: Details"];
+    return texts[step];
+    
+  }),
   actions: {
     associateChallengeSelect(challengeID) {
       this.set('associatedChallengeId', challengeID);
