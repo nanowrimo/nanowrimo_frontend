@@ -1,38 +1,38 @@
 {{#bs-modal
-  open=open
-  onShow=(action "onShow")
-  onHidden=(action "onHidden")
-  class='logger-timer-modal'
-  as |modal|
+open=open
+onShow=(action "onShow")
+onHidden=(action "onHidden")
+class='logger-timer-modal'
+as |modal|
 }}
-  {{#modal.header closeButton=false}}
-    How's your writing going?
-  {{/modal.header}}
-  <form onSubmit={{action 'formSubmit'}}>
+{{#modal.header closeButton=false}}
+How's your writing going?
+{{/modal.header}}
+<form onSubmit={{action 'formSubmit' }}>
   {{#modal.body}}
-    <div id='menu-progress-update-project-display'>
-      <div class='primary-project-scrolling-tools'>
-        <div class='primary-project-container'>
-          <div class='primary-project-scrollbox' style={{scrollDistance}}>
-            {{#each activeProjects as |project|}}
-              <div class='primary-project-display'>
-                <div class='project-cover' >
-                  <div class='project-cover-clip'>
-                    <img src="{{project.coverUrl}}">
-                  </div>
-                </div>
-                <div id='project-text'>
-                  <div class='project-title'>
-                    {{project.title}}
-                  </div>
-                  <div class='project-goal-title'>
-                    {{project.activeProjectChallenge.name}}
-                  </div>
-                </div>
+  <div id='menu-progress-update-project-display'>
+    <div class='primary-project-scrolling-tools'>
+      <div class='primary-project-container'>
+        <div class='primary-project-scrollbox' style={{scrollDistance}}>
+          {{#each activeProjects as |project|}}
+          <div class='primary-project-display'>
+            <div class='project-cover'>
+              <div class='project-cover-clip'>
+                <img src="{{project.coverUrl}}" alt="">
               </div>
-            {{/each}}
+            </div>
+            <div id='project-text'>
+              <div class='project-title'>
+                {{project.title}}
+              </div>
+              <div class='project-goal-title'>
+                {{project.activeProjectChallenge.name}}
+              </div>
+            </div>
           </div>
+          {{/each}}
         </div>
+
         <div class='primary-project-scrolling-buttons'>
           {{#if hasMultipleProjects}}
             <button class="nw-button-undecorated" aria-label="previous project" {{action "projectPrevious" }}>
@@ -40,125 +40,128 @@
             </button>
              <button class="nw-button-undecorated" aria-label="next project" {{action "projectNext" }}>
               <i class="fa fa-arrow-circle-down" ></i>
-             </button>
-            
+             </button>        
           {{/if}}
-        </div>
-      </div>
-      <div id='progress-update-form'>
-        
-          <div class='form-group' style="display: flex; justify-content: center; align-items: center;">
-            <div style="flex: 0 0 120px; margin-right: 10px;">
-              {{input
-                type='number'
-                name='count'
-                value=countValue
-                class='form-control progress-update-input'
-              }}
-            </div>
-            <div class="select-container" style="max-width: 140px;">
-              <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
-                <option value='0' selected={{countTypeGoalTotalSelected}}>total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
-                <option value='1' selected={{countTypeSessionSelected}}>{{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>
-              </select>
-            </div>
-          </div>
-          
-          <div id="progress-update-form-inputs" class='form-group' style='padding-top: 0px;'>
-            <fieldset style="width: 100%">
-              <div class="project-emoji-list">
-                <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}}/>
-                <label for='feeling5' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-5 {{if feeling5Selected 'selected' ''}}"></div>
-                </label>
-                <input id='feeling4' type='radio' value='Felt pretty good' name='feeling' {{action "changeFeeling" 4 }}/>
-                <label for='feeling4' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-4 {{if feeling4Selected 'selected' ''}}"></div>
-                </label>
-                <input id='feeling3' type='radio' value='Felt just OK' name='feeling' {{action "changeFeeling" 3 }}/>
-                <label for='feeling3' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-3 {{if feeling3Selected 'selected' ''}}"></div>
-                </label>
-                <input id='feeling2' type='radio' value='Felt stressed' name='feeling' {{action "changeFeeling" 2 }}/>
-                <label for='feeling2' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-2 {{if feeling2Selected 'selected' ''}}"></div>
-                </label>
-                <input id='feeling1' type='radio' value='Felt upset' name='feeling' {{action "changeFeeling" 1 }}/>
-                <label for='feeling1' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-1 {{if feeling1Selected 'selected' ''}}"></div>
-                </label>
-              </div>
-            </fieldset>
-          </div>
-          <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>{{if _projectAdditionalInfoShow 'Hide' 'Show'}} more options {{fa-icon "caret-down"}}{{fa-icon "caret-up"}}</div>
-          <div class="project-additional-info {{projectAdditionalInfoShow}}">
-         
-            <div class="form-group side-by-side">
-              <div>
-                <label>Where were you writing?</label>
-                {{#power-select-with-create
-                  options=writingLocations
-                  selected=selectedWhere
-                  searchField='name'
-                  searchEnabled='true'
-                  showCreatePosition="bottom"
-                  showCreateWhen=(action "showCreateWhen")
-                  dropdownClass="in-modal-dropdown"
-                  renderInPlace=true
-                  onChange=(action (mut selectedWhere))
-                  onCreate=(action "createWhere")
-                  as |opt|
-                }}
-                  {{opt.name}}
-                {{/power-select-with-create}}
-              </div>
-              <div>
-                <label>How were you writing?</label>
-                {{#power-select-with-create
-                  options=writingMethods
-                  selected=selectedHow
-                  searchField='name'
-                  searchEnabled='true'
-                  showCreatePosition="bottom"
-                  showCreateWhen=(action "showCreateWhen")
-                  dropdownClass="in-modal-dropdown"
-                  renderInPlace=true
-                  onChange=(action (mut selectedHow))
-                  onCreate=(action "createHow")
-                  as |opt|
-                }}
-                  {{opt.name}}
-                {{/power-select-with-create}}
-              </div>
-            </div>
-            <div class="form-group side-by-side" style="justify-content: space-between">
-              <div style="flex: 0 0 130px; width: 130px;">
-                <label>When did you start?</label>
-                {{input
-                  type='time'
-                  name='when_start'
-                  class='form-control progress-update-input time-input'
-                  value=whenStart
-                }}
-              </div>
-              <div style="flex: 0 0 130px; width: 130px; text-align: right;">
-                <label>When did you end?</label>
-                {{input
-                  type='time'
-                  name='when_end'
-                  class='form-control progress-update-input time-input'
-                  value=whenEnd
-                }}
-              </div>
-            </div>
-          </div>
-        
       </div>
     </div>
+    <div id='progress-update-form'>
+
+      <div class='form-group' style="display: flex; justify-content: center; align-items: center;">
+        <div style="flex: 0 0 120px; margin-right: 10px;">
+          {{input
+          type='number'
+          name='count'
+          value=countValue
+          class='form-control progress-update-input'
+          }}
+        </div>
+        <div class="select-container" style="max-width: 140px;">
+          <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value' }}>
+            <option value='0' selected={{countTypeGoalTotalSelected}}>total
+              {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
+            <option value='1' selected={{countTypeSessionSelected}}>
+              {{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div id="progress-update-form-inputs" class='form-group' style='padding-top: 0px;'>
+        <fieldset style="width: 100%">
+          <div class="project-emoji-list">
+            <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}} />
+            <label for='feeling5' style='padding-top: 0px; margin-bottom: 0px;'>
+              <div class="project-emoji emoji-5 {{if feeling5Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling4' type='radio' value='Felt pretty good' name='feeling' {{action "changeFeeling" 4 }} />
+            <label for='feeling4' style='padding-top: 0px; margin-bottom: 0px;'>
+              <div class="project-emoji emoji-4 {{if feeling4Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling3' type='radio' value='Felt just OK' name='feeling' {{action "changeFeeling" 3 }} />
+            <label for='feeling3' style='padding-top: 0px; margin-bottom: 0px;'>
+              <div class="project-emoji emoji-3 {{if feeling3Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling2' type='radio' value='Felt stressed' name='feeling' {{action "changeFeeling" 2 }} />
+            <label for='feeling2' style='padding-top: 0px; margin-bottom: 0px;'>
+              <div class="project-emoji emoji-2 {{if feeling2Selected 'selected' ''}}"></div>
+            </label>
+            <input id='feeling1' type='radio' value='Felt upset' name='feeling' {{action "changeFeeling" 1 }} />
+            <label for='feeling1' style='padding-top: 0px; margin-bottom: 0px;'>
+              <div class="project-emoji emoji-1 {{if feeling1Selected 'selected' ''}}"></div>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo' }}>{{if
+        _projectAdditionalInfoShow 'Hide' 'Show'}} more options {{fa-icon "caret-down"}}{{fa-icon "caret-up"}}</div>
+      <div class="project-additional-info {{projectAdditionalInfoShow}}">
+
+        <div class="form-group side-by-side">
+          <div>
+            <label>Where were you writing?</label>
+            {{#power-select-with-create
+            options=writingLocations
+            selected=selectedWhere
+            searchField='name'
+            searchEnabled='true'
+            showCreatePosition="bottom"
+            showCreateWhen=(action "showCreateWhen")
+            dropdownClass="in-modal-dropdown"
+            renderInPlace=true
+            onChange=(action (mut selectedWhere))
+            onCreate=(action "createWhere")
+            as |opt|
+            }}
+            {{opt.name}}
+            {{/power-select-with-create}}
+          </div>
+          <div>
+            <label>How were you writing?</label>
+            {{#power-select-with-create
+            options=writingMethods
+            selected=selectedHow
+            searchField='name'
+            searchEnabled='true'
+            showCreatePosition="bottom"
+            showCreateWhen=(action "showCreateWhen")
+            dropdownClass="in-modal-dropdown"
+            renderInPlace=true
+            onChange=(action (mut selectedHow))
+            onCreate=(action "createHow")
+            as |opt|
+            }}
+            {{opt.name}}
+            {{/power-select-with-create}}
+          </div>
+        </div>
+        <div class="form-group side-by-side" style="justify-content: space-between">
+          <div style="flex: 0 0 130px; width: 130px;">
+            <label>When did you start?</label>
+            {{input
+            type='time'
+            name='when_start'
+            class='form-control progress-update-input time-input'
+            value=whenStart
+            }}
+          </div>
+          <div style="flex: 0 0 130px; width: 130px; text-align: right;">
+            <label>When did you end?</label>
+            {{input
+            type='time'
+            name='when_end'
+            class='form-control progress-update-input time-input'
+            value=whenEnd
+            }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
   {{/modal.body}}
   {{#modal.footer}}
-    <input class='nano-button' type='submit' value='Update progress'>
-    <input class='nano-button btn-underlined' {{action 'cancel'}} type='button' value='Cancel'>
+  <input class='nano-button' type='submit' value='Update progress'>
+  <input class='nano-button btn-underlined' {{action 'cancel' }} type='button' value='Cancel'>
   {{/modal.footer}}
-  </form>
+</form>
 {{/bs-modal}}
