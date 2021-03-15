@@ -36,7 +36,7 @@ export default Component.extend({
       newGroup.set('userId',uid);
       newGroup.set('groupId',null);
       newGroup.set('approvedById',0);
-      newGroup.set('maxMemberCount',12);
+      newGroup.set('maxMemberCount',20);
       this.set('group', newGroup);
     }
   },
@@ -73,6 +73,7 @@ export default Component.extend({
             newGroupUser.normalize();
             t.set('inProcess',false);
             t.set('groupCreated',true);
+            g.set('maxMemberCount', 20);
           });
         });
       }
