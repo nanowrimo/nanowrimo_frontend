@@ -5,12 +5,8 @@
   position: fixed;
   right: -285px;
   overflow: scroll;
-  -webkit-transition-property: right;
-  -webkit-transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease-in-out;
-  transition-property: right;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-in-out;
+  visibility: hidden;
+  transition: right 400ms ease-in-out, visibility 500ms;
   z-index: 1000;
   width: 285px;
   height: 100%;
