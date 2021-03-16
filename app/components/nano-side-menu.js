@@ -19,11 +19,13 @@ export default Component.extend({
   classNames: ["nano-side-menu"],
   style: computed("nanoMenuService.sideMenuIsOpen",function () {
     if (get(this, "sideMenuIsOpen")) {
-      return htmlSafe("right: -285px");
+      return htmlSafe("right: -285px; visibility: hidden;");
     } else {
-      return htmlSafe("right: 0px");
+      return htmlSafe("right: 0px; visibility: visible");
     }
+    
   }),
+  
   actions: {
     invalidateSession() {
       this.get('session').invalidate();
