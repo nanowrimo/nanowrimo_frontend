@@ -16,7 +16,7 @@ export default Component.extend({
   showConfirmDelete: false,
   
   filteredOptionsForGenres: computed("optionsForGenres.[]", function(){
-    let userId = this.get('user.id');
+    let userId = this.get('project.user.id');
     return this.get('optionsForGenres').reject((option)=>{
       return (option.userId!=0 && option.userId!=userId);
     });
