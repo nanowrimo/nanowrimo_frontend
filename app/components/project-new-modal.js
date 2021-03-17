@@ -65,6 +65,13 @@ export default Component.extend({
     return 'nano-hide';
   }),
   
+  filteredOptionsForGenres: computed("optionsForGenres.[]", function(){
+    let userId = this.get('currentUser.user.id');
+    return this.get('optionsForGenres').reject((option)=>{
+      return (option.userId!=0 && option.userId!=userId);
+    });
+  }),
+  
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
