@@ -7,7 +7,9 @@ export default Component.extend({
 
     classNames: ["nano-side-menu-toggle"],
 
-    click() {
-      get(this, "nanoMenuService").toggleSideMenu();
+    actions: {
+      toggle: function(){
+        get(this, "nanoMenuService").toggleSideMenu();
+      }      
     }
 });
