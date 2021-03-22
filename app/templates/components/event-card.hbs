@@ -27,8 +27,8 @@
     </div>
     {{/if}}
     {{#if event.url}}
-    <div>
-      <a href="{{event.url}}" target="_BLANK"><b>Event Description</b><i class="fa fa-external-link"></i></a>
+    <div style="word-break:break-all">
+      <b>URL: </b><a href="{{event.url}}" target="_BLANK">{{event.url}} <i class="fa fa-external-link"></i></a>
     </div>
     {{/if}}
     <div style="padding-top: 15px; padding-bottom: 15px;">
@@ -40,12 +40,12 @@
     <b><i class="fa fa-check"></i> You're signed up!</b>
     {{#if (eq isCancelled false)}}
     <div>
-      <a href="#" {{action 'leaveEvent'}}>Remove yourself from this event</a>
+      <a href="#" {{action 'leaveEvent' }}>Remove yourself from this event</a>
     </div>
     {{/if}}
     {{else}}
     {{#if (eq isCancelled false)}}
-    <button {{action 'joinEvent'}}>
+    <button {{action 'joinEvent' }}>
       Count me in!
     </button>
     {{/if}}
@@ -55,72 +55,72 @@
       <span><b>ML tools: </b></span>
       <span>
         {{#if isCancelled}}
-        <a href="#" {{action "confirmRestore"}}>
+        <a href="#" {{action "confirmRestore" }}>
           Restore event
         </a>
         {{else}}
-        <a href="#" {{action "confirmCancel"}}>
+        <a href="#" {{action "confirmCancel" }}>
           Cancel event
         </a>
         {{/if}}
       </span>
       &bull;
       <span>
-        <a href="#" {{action "confirmDelete"}}>
+        <a href="#" {{action "confirmDelete" }}>
           Delete event
         </a>
         {{#if false}}
-        <button {{action 'openNewEventModal'}}>
+        <button {{action 'openNewEventModal' }}>
           Edit event
         </button>
         {{event-modal
-                  open=editEvent
-                  user=user
-                  group=event
-                  groupId=group.id
-                }}
+        open=editEvent
+        user=user
+        group=event
+        groupId=group.id
+        }}
         {{/if}}
       </span>
     </div>
     {{#if isCancelled}}
     {{confirmation-modal
-              yes=restoreConfirmationYesText 
-              no=restoreConfirmationNoText 
-              title=restoreConfirmationTitleText
-              question=restoreConfirmationQuestion 
-              open=showConfirmRestore
-              yesAction=(action "restoreConfirmationYes")
-              noAction=(action "restoreConfirmationNo")
-            }}
+    yes=restoreConfirmationYesText
+    no=restoreConfirmationNoText
+    title=restoreConfirmationTitleText
+    question=restoreConfirmationQuestion
+    open=showConfirmRestore
+    yesAction=(action "restoreConfirmationYes")
+    noAction=(action "restoreConfirmationNo")
+    }}
     {{else}}
     {{confirmation-modal
-              yes=cancelConfirmationYesText 
-              no=cancelConfirmationNoText 
-              title=cancelConfirmationTitleText
-              question=cancelConfirmationQuestion 
-              open=showConfirmCancel
-              yesAction=(action "cancelConfirmationYes")
-              noAction=(action "cancelConfirmationNo")
-            }}
+    yes=cancelConfirmationYesText
+    no=cancelConfirmationNoText
+    title=cancelConfirmationTitleText
+    question=cancelConfirmationQuestion
+    open=showConfirmCancel
+    yesAction=(action "cancelConfirmationYes")
+    noAction=(action "cancelConfirmationNo")
+    }}
     {{/if}}
     {{confirmation-modal
-            yes=deleteConfirmationYesText 
-            no=deleteConfirmationNoText 
-            title=deleteConfirmationTitleText
-            question=deleteConfirmationQuestion 
-            open=showConfirmDelete
-            yesAction=(action "deleteConfirmationYes")
-            noAction=(action "deleteConfirmationNo")
-          }}
+    yes=deleteConfirmationYesText
+    no=deleteConfirmationNoText
+    title=deleteConfirmationTitleText
+    question=deleteConfirmationQuestion
+    open=showConfirmDelete
+    yesAction=(action "deleteConfirmationYes")
+    noAction=(action "deleteConfirmationNo")
+    }}
 
     {{/if}}
     {{/if}}
     {{#if (eq status 'pending')}}
     {{#if canEditEvent}}
-    <button {{action 'approveEvent'}}>
+    <button {{action 'approveEvent' }}>
       Approve
     </button>
-    <button {{action 'rejectEvent'}}>
+    <button {{action 'rejectEvent' }}>
       Reject
     </button>
     {{/if}}
