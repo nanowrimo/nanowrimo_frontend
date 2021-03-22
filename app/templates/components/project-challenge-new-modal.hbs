@@ -48,9 +48,10 @@
         </div>
       {{/if}}          
       <div class="form-group">
-        <label>Goal name
+        <label for="goal-name">Goal name
           {{input
-            name="name"
+            name="name" 
+            id="goal-name"
             disabled=disableName
             value=displayName
             class='form-control'
@@ -95,8 +96,8 @@
         <div class="side-by-side">
           <div class="form-group side-by-side-even">
 
-            <label class='form-group'>What's your start date?
-            <input name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
+            <label for="start-date" class='form-group'>What's your start date?
+            <input id="start-date" name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
               oninput={{action "startsAtChanged" value="target.value"}} 
               value={{displayStartsAt}}
               disabled={{disableStart}}
@@ -108,8 +109,8 @@
           </div>
           <div class="form-group side-by-side-even">
         
-            <label >When is the last day of writing?
-            <input name='challenge-last-day' type='date' class='form-control'
+            <label for="challenge-last-day" >When is the last day of writing?
+            <input id='challenge-last-day'name='challenge-last-day' type='date' class='form-control'
               oninput={{action "endsAtChanged" value="target.value"}} 
               value={{displayEndsAt}}
               disabled={{disableStartEnd}}
