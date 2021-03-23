@@ -125,8 +125,16 @@ export default Component.extend({
     let step = this.get("step");
     let texts = ["Step 1: Details", "Step 2: Venue", "Step 3: Approval"];
     return texts[step];
-    
   }),
+  
+  progressStepText: computed("step", function(){
+    let step = this.get("step");
+    let texts = ["Step 1 of 32: Event details", 
+      "Step 2 of 2: Event venue", "Step 3 of 3: Event approval"];
+    return texts[step];
+  }),
+  
+  
   init() {
     this._super(...arguments);
     let now = moment();

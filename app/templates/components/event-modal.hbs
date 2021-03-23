@@ -9,6 +9,8 @@
   {{/modal.header}}
     {{#modal.body}}
       <div class="steps" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow={{formCurrentStep}} aria-valuetext={{formProgressText}}>
+        <div class="screen-reader-text">{{progressStepText}}</div>
+        
         {{#if (eq step 0)}}
           <div class="step step-current">
             <div class='step-name'>Details</div>
@@ -16,8 +18,9 @@
           </div>
         {{else}}
           {{#if (eq step 1)}}
-            <div class="step step-completed" {{action "setStep" 0}}>
-              <div class='step-name'>Details</div>
+            <div class="step step-completed" >
+              <button class="nw-button-undecorated nw-button-form-step" {{action "setStep" 0}}>
+                Details</button>
               <div>{{fa-icon "check-circle"}}</div>
             </div>
           {{else}}
