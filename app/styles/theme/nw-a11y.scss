@@ -15,3 +15,7 @@
   /* padding: 1px; */
   outline: 2px dashed $nw-mediumblue;
 }
+
+.notifications-modal-body button:focus {
+  background-color: $nw-lightaqua;
+}
