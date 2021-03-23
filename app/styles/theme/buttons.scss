@@ -30,7 +30,7 @@ button, input.nano-button {
     border: solid 2px $nw-darkgreen;
     color: $nw-darkgreen;
     padding-top: 0.1rem;
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
       background-image: linear-gradient(to bottom, $nw-lightgreen, $nw-mediumgreen);
       color: $nw-lightblue;
       &.button-danger {
