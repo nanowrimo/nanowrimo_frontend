@@ -13,9 +13,9 @@
     <div id='menu-progress-update-project-display'>
       <div class='primary-project-scrolling-tools'>
         <div class='primary-project-container'>
-          <div class='primary-project-scrollbox' style={{scrollDistance}}>
-            {{#each activeProjects as |project|}}
-              <div class='primary-project-display'>
+          <div id='primary-project-scrollbox-id' class='primary-project-scrollbox' style={{scrollDistance}}>
+            {{#each activeProjects as |project index|}}
+              <div id='primary-project-display-{{index}}' class='primary-project-display' aria-hidden="true" tabindex="-1" >
                 <div class='project-cover' >
                   <div class='project-cover-clip'>
                     <img src="{{project.coverUrl}}" alt="">

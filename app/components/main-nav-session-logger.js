@@ -171,6 +171,7 @@ export default Component.extend({
     }
     this.set('projectSelected', pSelected);
     this.resetCount();
+    setTimeout(() => {  this.setAccessibilityAttributes(); }, 100);
   },
   
   resetCount() {
@@ -192,6 +193,25 @@ export default Component.extend({
     }
     
   },
+  
+  //Changes aria-hidden and tab-index based on whether projects are visible
+  setAccessibilityAttributes() {
+    let ps = this.get('projectSelected');
+    for (let i=0; i<1000; i++) {
+      let el = document.getElementById("primary-project-display-" + i);
+      if (el) {
+        if (i==ps) {
+          el.tabIndex=0;
+          el.ariaHidden=false;
+        } else {
+          el.tabIndex=-1;
+          el.ariaHidden=true;
+        }
+      } else {
+        i=1000;
+      }
+    }
+  },
 
   actions: {
     
@@ -208,6 +228,7 @@ export default Component.extend({
       if (newps<0) { newps=ap.length-1; }
       this.set('projectSelected',newps);
       this.resetCount();
+      this.setAccessibilityAttributes();
     },
     
     projectNext() {
@@ -217,6 +238,7 @@ export default Component.extend({
       if (newps>=ap.length) { newps=0; }
       this.set('projectSelected',newps);
       this.resetCount();
+      this.setAccessibilityAttributes();
     },
     
     changeFeeling(val){
