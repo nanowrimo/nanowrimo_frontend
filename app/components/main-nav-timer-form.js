@@ -1,12 +1,15 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
+import { computed } from '@ember/object';
+
+const DEFAULT_TAB = 'timer-modal-stopwatch';
 
 export default Component.extend({
   currentUser: service(),
   store: service(),
   progressUpdaterService: service(),
-
+  tab: null,
   closeFormAction: null,
   user: null,
   primaryProject: null,
@@ -24,7 +27,20 @@ export default Component.extend({
     this.set('user',  user);
     this.set('primaryProject', user.primaryProject);
   },
-
+  
+  activeTab: computed('tab', {
+    get() {
+      return this.get('tab') || DEFAULT_TAB;
+    },
+    set(key, value) {
+      if (value === DEFAULT_TAB) {
+        this.set('tab', null);
+      } else {
+        this.set('tab', value);
+      }
+      return value;
+    }
+  }),
 
   actions: {
     
@@ -42,12 +58,14 @@ export default Component.extend({
       cfa();
       //this.attrs.closeFormAction();
     },
+    /*
     selectTimer: function() {
       this.set('showStopwatch', false);
     },
     selectStopwatch: function() {
       this.set('showStopwatch', true);
     },
+     */
     startTimer: function() {
       if (this.get('validDurationInput')) {
         //determine the duration
