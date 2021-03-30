@@ -6,7 +6,8 @@
 </div>
   
 
-<div class="menu-content nano-side-menu {{if displayMenu 'display' ''}}">
+<div class="menu-content nano-side-menu {{if displayMenu 'display' ''}}"
+  role="dialog" aria-modal="true" aria-label="Menu">
   <div class='menu-close-trigger'>
     <a href="#" class="menu-close-trigger" {{action "hideMenu"}} aria-label="hide menu">
       <span aria-hidden="false">{{fa-icon "times"}}</span>
