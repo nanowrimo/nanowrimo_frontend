@@ -132,18 +132,20 @@
             </div>
             <div class="form-group side-by-side" style="justify-content: space-between">
               <div style="flex: 0 0 130px; width: 130px;">
-                <label>When did you start?</label>
+                <label for="main-nav-session-logger-start-time">When did you start?</label>
                 {{input
                   type='time'
+                  id="main-nav-session-logger-start-time"
                   name='when_start'
                   class='form-control progress-update-input time-input'
                   value=whenStart
                 }}
               </div>
               <div style="flex: 0 0 130px; width: 130px; text-align: right;">
-                <label>When did you end?</label>
+                <label for="main-nav-session-logger-end-time">When did you end?</label>
                 {{input
-                  type='time'
+                  type='time' 
+                  id="main-nav-session-logger-end-time"
                   name='when_end'
                   class='form-control progress-update-input time-input'
                   value=whenEnd
