@@ -1,13 +1,9 @@
 {{#bs-nav class="nw-nav-notify-buttons" as |nav|}}
   {{#nav.dropdown as |dd|}}
-    {{#dd.toggle}}
-      {{#link-to  "authenticated.nanomessages"}}
-        <button class="button-clear" aria-label="Go to your NanoMessages.">
-          <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
-          <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
-        </button>
-      {{/link-to}}
-    {{/dd.toggle}}
+    {{#link-to  "authenticated.nanomessages"}}
+      <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
+      <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
+    {{/link-to}}
   {{/nav.dropdown}}
 
   <div class="btn-group" role="group" id="notification-triggers">

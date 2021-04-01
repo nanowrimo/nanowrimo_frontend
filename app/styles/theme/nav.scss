@@ -56,7 +56,7 @@
         line-height: 35px;
       }
     }
-    .dropdown-item:hover, .dropdown-item.active {
+    .dropdown-item:hover, .dropdown-item.active, .dropdown-item:focus {
       background-color: $nw-darkblue;
       .dropdown-icon {
         color: $nw-white;
@@ -190,11 +190,11 @@
         font-family: 'SansBold', sans-serif;
         font-size: 14px;
         color: $nw-darkbrown;
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
         letter-spacing: 0;
         text-align: center;
-        line-height: 22px;
+        line-height: 32px;
         text-transform: uppercase;
         &.user-menu {
           font-family: 'SansRegular', sans-serif;
@@ -203,6 +203,15 @@
       }
       .nav {
         li.nav-item {
+          a {
+            &:hover, &:active, &:focus {
+              background-color: $nw-darkblue;
+              color: $nw-white;
+              outline: 0;
+            }
+          }
+          margin-top: -10px;
+          margin-bottom: -10px;
           margin-left: 1rem;
           margin-right: 1rem;
         }
