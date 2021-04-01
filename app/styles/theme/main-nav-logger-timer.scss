@@ -138,7 +138,8 @@
   .timer-content {
     padding: 0px;
     padding-top: 10px;
-    display: flex;
+    display: flex; 
+    flex-flow: column;
     justify-content: space-between;
     .timer-instruction {
       flex: 0 0 57%;
