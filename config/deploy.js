@@ -2,7 +2,11 @@
 
 module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
 
+  var assetsKey;
+  var secretKey;
   var assetsBucket;
+  var indexKey;
+  var indexSecret;
   var indexBucket;
   if (process.env.TARGET=='staging') {
     assetsKey = process.env.ASSETS_STAGING_AWS_KEY;
