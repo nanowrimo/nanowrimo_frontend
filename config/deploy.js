@@ -3,7 +3,7 @@
 module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
 
   var assetsKey;
-  var secretKey;
+  var assetsSecret;
   var assetsBucket;
   var indexKey;
   var indexSecret;
