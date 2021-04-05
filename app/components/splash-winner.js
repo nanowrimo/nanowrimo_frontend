@@ -12,6 +12,7 @@ export default Component.extend({
     link to /nano-winner-YYYY
   */
   
+  
   isNaNo: computed('badge', function() {
     //get the badge 
     let b = this.get('badge');
