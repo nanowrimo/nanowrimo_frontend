@@ -5,10 +5,18 @@ module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
   var assetsBucket;
   var indexBucket;
   if (process.env.TARGET=='staging') {
+    assetsKey = process.env.ASSETS_STAGING_AWS_KEY;
+    assetsSecret = process.env.ASSETS_STAGING_AWS_SECRET;
     assetsBucket = process.env.ASSETS_STAGING_BUCKET;
+    indexKey = process.env.INDEX_STAGING_AWS_KEY;
+    indexSecret = process.env.INDEX_STAGING_AWS_SECRET;
     indexBucket = process.env.INDEX_STAGING_BUCKET;
   } else {
+    assetsKey = process.env.ASSETS_PRODUCTION_AWS_KEY;
+    assetsSecret = process.env.ASSETS_PRODUCTION_AWS_SECRET;
     assetsBucket = process.env.ASSETS_PRODUCTION_BUCKET;
+    indexKey = process.env.INDEX_PRODUCTION_AWS_KEY;
+    indexSecret = process.env.INDEX_PRODUCTION_AWS_SECRET;
     indexBucket = process.env.INDEX_PRODUCTION_BUCKET;
   }
   
@@ -26,14 +34,14 @@ module.exports = function(deployTarget) { // eslint-disable-line no-unused-vars
     },
     s3: {
       filePattern: '**/*.{m4a,ogg,mp3,js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,wasm}',
-      accessKeyId: process.env.ASSETS_PRODUCTION_AWS_KEY,
-      secretAccessKey: process.env.ASSETS_PRODUCTION_AWS_SECRET,
+      accessKeyId: assetsKey,
+      secretAccessKey: assetsSecret,
       bucket: assetsBucket,
       region: process.env.ASSETS_PRODUCTION_REGION
     },
     "s3-index": {
-      accessKeyId: process.env.INDEX_PRODUCTION_AWS_KEY,
-      secretAccessKey: process.env.INDEX_PRODUCTION_AWS_SECRET,
+      accessKeyId: indexKey,
+      secretAccessKey: indexSecret,
       bucket: indexBucket,
       region: process.env.INDEX_PRODUCTION_REGION
     }
