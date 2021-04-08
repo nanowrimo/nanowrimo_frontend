@@ -194,17 +194,15 @@ export default Component.extend({
     
   },
   
-  //Changes aria-hidden and tab-index based on whether projects are visible
+  //Changes aria-hidden based on whether projects are visible
   setAccessibilityAttributes() {
     let ps = this.get('projectSelected');
     for (let i=0; i<1000; i++) {
       let el = document.getElementById("primary-project-display-" + i);
       if (el) {
         if (i==ps) {
-          el.tabIndex=0;
           el.ariaHidden=false;
         } else {
-          el.tabIndex=-1;
           el.ariaHidden=true;
         }
       } else {
