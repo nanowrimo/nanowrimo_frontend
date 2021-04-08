@@ -64,36 +64,9 @@
           </div>
           
           <div id="progress-update-form-inputs" class='form-group' style='padding-top: 0px;'>
-            <fieldset class="feelings-radios" style="width: 100%">
-              <legend>How did you feel while writing?</legend>
-              <div class="project-emoji-list">
-                
-                <input class="sr-only" id='feeling5' type='radio' value='5' name='feeling' />
-                <label for='feeling5' class="project-emoji emoji-5" >
-                  <span class='sr-only'>felt great</span>
-                </label>
-                
-                <input class="sr-only" id='feeling4' type='radio' value='4' name='feeling' />
-                <label for='feeling4' class="project-emoji emoji-4">
-                  <span class='sr-only'>felt pretty good</span>
-                </label>
-                
-                <input class="sr-only" id='feeling3' type='radio' value='3' name='feeling'/>
-                <label for='feeling3' class="project-emoji emoji-3" >
-                  <span class='sr-only'>felt just OK</span>
-                </label>
-                
-                <input class="sr-only" id='feeling2' type='radio' value='2' name='feeling'/>
-                <label for='feeling2' class="project-emoji emoji-2" >
-                  <span class='sr-only'>felt stressed</span>
-                </label>
-                
-                <input class="sr-only" id='feeling1' type='radio' value='1' name='feeling'/>
-                <label for='feeling1' class="project-emoji emoji-1" >
-                  <span class='sr-only'>felt upset</span>
-                </label>
-              </div>
-            </fieldset>
+            
+          <NwSessionFeelingFieldset/>
+          
           </div>
           <div class="more-info-toggle  {{projectAdditionalInfoShow}}" {{action 'toggleAdditionalInfo'}}>{{if _projectAdditionalInfoShow 'Hide' 'Show'}} more options {{fa-icon "caret-down"}}{{fa-icon "caret-up"}}</div>
           <div class="project-additional-info {{projectAdditionalInfoShow}}">

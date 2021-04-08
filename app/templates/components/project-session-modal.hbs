@@ -19,31 +19,8 @@
             words this session
           </div>
         </div>
-        <fieldset>
-          
-          <div class="project-emoji-list" style="justify-content: center; align-items: center;">
-            <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}}/>
-            <label for='feeling5' >
-              <div class="project-emoji emoji-5 {{if feeling5Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling4' type='radio' value='Felt pretty good' name='feeling' {{action "changeFeeling" 4 }}/>
-            <label for='feeling4' >
-              <div class="project-emoji emoji-4 {{if feeling4Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling3' type='radio' value='Felt just OK' name='feeling' {{action "changeFeeling" 3 }}/>
-            <label for='feeling3' >
-              <div class="project-emoji emoji-3 {{if feeling3Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling2' type='radio' value='Felt stressed' name='feeling' {{action "changeFeeling" 2 }}/>
-            <label for='feeling2' >
-              <div class="project-emoji emoji-2 {{if feeling2Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling1' type='radio' value='Felt upset' name='feeling' {{action "changeFeeling" 1 }}/>
-            <label for='feeling1' >
-              <div class="project-emoji emoji-1 {{if feeling1Selected 'selected' ''}}"></div>
-            </label>
-          </div>
-        </fieldset>
+       
+       <NwSessionFeelingFieldset />
  
         <div class="form-group side-by-side">
           <div>
