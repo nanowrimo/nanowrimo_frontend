@@ -197,12 +197,12 @@ export default Component.extend({
 
     formSubmit() {
       event.preventDefault();
+      event.preventDefault();
       // Get the current user's time zone
       let tz = this.get('currentUser.user.timeZone');
       
       //determine what 'count' we need to send to the API
-      let rawCount = this.get('countValue');
-      let count = parseInt( rawCount.replace(",", "") );
+      let count = this.get('countValue');
       //what project are we actually dealing with?
       let project = this.get('project');
       let projectChallenge = this.get('projectChallenge');
@@ -214,7 +214,7 @@ export default Component.extend({
       session.set('unitType', 0);
       
       //check for other metrics
-      session.set('feeling', this.get('selectedFeeling'));
+      session.set('feeling', event.target.elements['feeling'].value);
       if (this.get('selectedWhere') ) {
         session.set('where', this.get('selectedWhere').value);
       }
