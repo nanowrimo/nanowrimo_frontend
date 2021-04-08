@@ -64,27 +64,33 @@
           </div>
           
           <div id="progress-update-form-inputs" class='form-group' style='padding-top: 0px;'>
-            <fieldset style="width: 100%">
+            <fieldset class="feelings-radios" style="width: 100%">
+              <legend>How did you feel while writing?</legend>
               <div class="project-emoji-list">
-                <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}}/>
-                <label for='feeling5' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-5 {{if feeling5Selected 'selected' ''}}"></div>
+                
+                <input class="sr-only" id='feeling5' type='radio' value='5' name='feeling' />
+                <label for='feeling5' class="project-emoji emoji-5" >
+                  <span class='sr-only'>felt great</span>
                 </label>
-                <input id='feeling4' type='radio' value='Felt pretty good' name='feeling' {{action "changeFeeling" 4 }}/>
-                <label for='feeling4' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-4 {{if feeling4Selected 'selected' ''}}"></div>
+                
+                <input class="sr-only" id='feeling4' type='radio' value='4' name='feeling' />
+                <label for='feeling4' class="project-emoji emoji-4">
+                  <span class='sr-only'>felt pretty good</span>
                 </label>
-                <input id='feeling3' type='radio' value='Felt just OK' name='feeling' {{action "changeFeeling" 3 }}/>
-                <label for='feeling3' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-3 {{if feeling3Selected 'selected' ''}}"></div>
+                
+                <input class="sr-only" id='feeling3' type='radio' value='3' name='feeling'/>
+                <label for='feeling3' class="project-emoji emoji-3" >
+                  <span class='sr-only'>felt just OK</span>
                 </label>
-                <input id='feeling2' type='radio' value='Felt stressed' name='feeling' {{action "changeFeeling" 2 }}/>
-                <label for='feeling2' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-2 {{if feeling2Selected 'selected' ''}}"></div>
+                
+                <input class="sr-only" id='feeling2' type='radio' value='2' name='feeling'/>
+                <label for='feeling2' class="project-emoji emoji-2" >
+                  <span class='sr-only'>felt stressed</span>
                 </label>
-                <input id='feeling1' type='radio' value='Felt upset' name='feeling' {{action "changeFeeling" 1 }}/>
-                <label for='feeling1' style='padding-top: 0px; margin-bottom: 0px;' >
-                  <div class="project-emoji emoji-1 {{if feeling1Selected 'selected' ''}}"></div>
+                
+                <input class="sr-only" id='feeling1' type='radio' value='1' name='feeling'/>
+                <label for='feeling1' class="project-emoji emoji-1" >
+                  <span class='sr-only'>felt upset</span>
                 </label>
               </div>
             </fieldset>
