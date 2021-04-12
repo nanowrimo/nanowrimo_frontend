@@ -31,10 +31,10 @@
             {{else}}
               <div class='timer-duration form-group'>
                 <div style="width: 200px; margin-bottom: 5px; font-family: 'SourceSansPro-Regular'">
-                  <input type='number' class="ember-text-field" min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}> hours
+                  <input type='number' id='hours-field' class="ember-text-field" min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}> <label for="hours-field">hours</label>
                 </div>
                 <div style="width: 200px; font-family: 'SourceSansPro-Regular'">
-                  <input type='number' class="ember-text-field" min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}> minutes
+                  <input type='number' id='minutes-field' class="ember-text-field" min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}> <label for="minutes-field">minutes</label>
                 </div>
               </div>
               <div >
