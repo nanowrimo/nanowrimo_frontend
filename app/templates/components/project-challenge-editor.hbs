@@ -51,7 +51,7 @@
     <div>
 
       <label for='start-date' class='form-group'>{{startLabel}}</label>
-      <input name='start-date' type='date' class='form-control'
+      <input id="start-date" name='start-date' type='date' class='form-control'
         oninput={{action "startsAtChanged" value="target.value"}} 
         value={{displayStartsAt}}
         disabled={{disableStartEnd}}
@@ -64,7 +64,7 @@
     </div>
     <div>
       <label for='challenge-last-day'>{{durationLabel}}</label>
-      <input name='challenge-last-day' type='date' class='form-control'
+      <input id="challenge-last-day" name='challenge-last-day' type='date' class='form-control'
         oninput={{action "endsAtChanged" value="target.value"}} 
         value={{displayEndsAt}}
         disabled={{disableStartEnd}}

@@ -12,6 +12,7 @@ export default Component.extend({
     link to /nano-winner-YYYY
   */
   
+  
   isNaNo: computed('badge', function() {
     //get the badge 
     let b = this.get('badge');
@@ -20,7 +21,7 @@ export default Component.extend({
   
   winnerImage: computed('isNaNo', function(){
     let i = this.get('isNaNo');
-    let path = (i) ? "/images/splash/NaNo-20-Winner-Certificate-Image.jpg" : "/images/splash/camp-2020-certificate.png";
+    let path = (i) ? "/images/splash/NaNo-20-Winner-Certificate-Image.jpg" : "/images/splash/Camp-2021-Winner-Certificate.jpg";
     return path;
   }),
 
