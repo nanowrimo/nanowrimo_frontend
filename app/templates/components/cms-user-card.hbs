@@ -1,9 +1,9 @@
 <div class='nw-flippy-wrapper'>
-  <div class='nw-card nw-card-white nw-card-face-back'>
+  <div class='nw-card nw-card-white nw-card-face-back' aria-hidden={{ariaHiddenBack}}>
     <div class='nw-card-header'>
       <div class='nw-card-actions'>
         <div class='nw-card-model-actions'>
-          <button class="nw-flippy-card-toggle nw-button-undecorated" {{action "toggleSubcard"}} aria-label="show less">
+          <button class="nw-flippy-card-toggle nw-button-undecorated" {{action "toggleSubcard"}} aria-label="show less" style={{backToggleStyle}}>
             <div>{{fa-icon "repeat"}}</div>
           </button>
         </div>
@@ -13,11 +13,11 @@
       <div class='nw-card-scrollable'>{{{post.attributes.body}}}</div>
     </div>
   </div>
-  <div class='nw-card nw-card-white nw-card-face-front'>
+  <div class='nw-card nw-card-white nw-card-face-front' aria-hidden={{ariaHiddenFront}}>
     <div class='nw-card-header'>
       <div class='nw-card-actions'>
         <div class='nw-card-model-actions'>
-           <button class="nw-flippy-card-toggle nw-button-undecorated" {{action "toggleSubcard"}} aria-label="show more">
+           <button class="nw-flippy-card-toggle nw-button-undecorated" {{action "toggleSubcard"}} aria-label="show more" style={{frontToggleStyle}}>
             <div>{{fa-icon "repeat"}}</div>
           </button>
         </div>
