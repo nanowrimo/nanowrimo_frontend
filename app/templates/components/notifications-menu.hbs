@@ -6,7 +6,7 @@
     {{/link-to}}
   {{/nav.dropdown}}
 
-  <div class="btn-group" role="group" id="notification-triggers">
+  {{#nav.dropdown as |dd|}}
     <button class="button-clear" aria-label="Display your notifications." {{action 'toggleNotifications'}}>
       {{#if (media "isDesktop")}}
         <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
@@ -16,16 +16,8 @@
       {{/if}}
       <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>
     </button>
-    {{#if displayNotifications}}
-      {{notifications-modal
-        open='true'
-        closeFormAction=(action "toggleNotifications")
-        allNotifications=sortedNotifications
-        clickAction=(action 'notificationClicked')
-      }}
-    {{/if}}
-  </div>
-  
+  {{/nav.dropdown}}
+
 {{/bs-nav}}
 {{#if showBadgeSplash}}
   {{splash-badge badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
@@ -33,3 +25,12 @@
 {{#if showWinnerSplash}}
   {{splash-winner badge=badgeForSplash closeAction=(action 'hideWinnerSplash')}}
 {{/if}}
+{{#if displayNotifications}}
+  {{notifications-modal
+    open='true'
+    closeFormAction=(action "toggleNotifications")
+    allNotifications=sortedNotifications
+    clickAction=(action 'notificationClicked')
+  }}
+{{/if}}
+
