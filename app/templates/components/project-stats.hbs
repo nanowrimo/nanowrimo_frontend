@@ -9,11 +9,11 @@
     </div>
 
     <div id='stats-project-switcher' class='switcher'>
-      <div class='switcher-title'>
+      <label class='switcher-title' for="project-switcher-select">
         Project:
-      </div>
+      </label>
       <div class='switcher-select'>
-        <select class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'
+        <select id="project-switcher-select" class='form-control' name='project-select' onChange={{action 'projectSelectChanged' value='target.value'
           }}>
           {{#each currentUser.user.persistedProjectsWithGoals as |p|}}
           <option value='{{p.id}}' selected={{eq p project}}>{{p.truncatedTitle}}</option>
@@ -22,11 +22,11 @@
       </div>
     </div>
     <div id='stats-project-challenge-switcher' class='switcher'>
-      <div class='switcher-title'>
+      <label class='switcher-title' for="challenge-switcher-select">
         Challenge:
-      </div>
+      </label>
       <div class='switcher-select'>
-        <select class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged'
+        <select id="challenge-switcher-select" class='form-control' name='challenge-select' onChange={{action 'challengeSelectChanged'
           value='target.value' }}>
           {{#each project.projectChallenges as |pc|}}
           <option value='{{pc.id}}' selected={{eq pc projectChallenge}}>{{pc.name}}</option>

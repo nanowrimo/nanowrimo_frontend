@@ -28,6 +28,7 @@
             <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
           </div>
           <div class="form-group {{hideClass}}">
+            <label for="associateSelect">NaNoWriMo Event</label>
             <div class="select-container">
               <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
                 {{#each optionsForChallenges as |c|}}
