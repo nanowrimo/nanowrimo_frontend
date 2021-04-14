@@ -25,7 +25,10 @@
     </div>
     <div class='nw-card-content nw-centered'>
       <div class="nw-card-icon nw-centered">
-        <div class="nw-avatar-irregular" style="{{safeSrc}}">
+        <div class="nw-avatar-irregular">
+          {{#if imgSrc }}
+            <img class="nw-avatar-img" src={{imgSrc}} alt={{{post.attributes.headline}}}>
+          {{/if}}
         </div>
       </div>
       <div class='nw-card-headline nw-centered'>{{{post.attributes.headline}}}</div>
