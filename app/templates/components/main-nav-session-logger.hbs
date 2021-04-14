@@ -48,15 +48,16 @@
         
           <div class='form-group' style="display: flex; justify-content: center; align-items: center;">
             <div style="flex: 0 0 120px; margin-right: 10px;">
-              {{input
+              <Input
                 type='number'
                 name='count'
-                value=countValue
+                @value={{countValue}}
                 class='form-control progress-update-input'
-              }}
+                aria-labelledby="countType"
+              />
             </div>
             <div class="select-container" style="max-width: 140px;">
-              <select class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
+              <select id="countType" class='form-control' name='update-type' onChange={{action 'selectChanged' value='target.value'}}>
                 <option value='0' selected={{countTypeGoalTotalSelected}}>total {{primaryProject.activeProjectChallenge.unitTypePlural}}</option>
                 <option value='1' selected={{countTypeSessionSelected}}>{{primaryProject.activeProjectChallenge.unitTypePlural}} this session</option>
               </select>
