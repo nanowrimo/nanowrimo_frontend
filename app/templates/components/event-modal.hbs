@@ -126,7 +126,7 @@
               </div>
               <div class="form-group nw-label-flex">
                 <div class="nw-left-label">
-                  Time zone:
+                  <label for="timeZone">Time zone:</label>
                 </div>
                 <div class="select-container">
                   <select id='timeZone' name='timeZone'
@@ -142,9 +142,14 @@
                   </select>
                 </div>
               </div>
+
+              <p>Duration</p>
               <div class="form-group nw-label-flex">
                 <div class="nw-left-label">
-                  Duration:
+                  <label for="hours">
+                    hours:
+                  </label>
+                  
                 </div>
                 <div class="select-container">
                   <select id='hours' name='hours'
@@ -165,6 +170,14 @@
                     <option value='12'>12 hours</option>
                   </select>
                 </div>
+                <div class="nw-left-label">
+                 
+                  <label for="minutes">
+                    minutes:
+                  </label>
+                  
+                </div>
+               
                 <div class="select-container">
                   <select id='minutes' name='minutes'
                     class={{concat 'form-control' (if showDurationError ' is-invalid')}}
@@ -187,6 +200,8 @@
                   <div class="invalid-feedback">{{durationErrorMessage}}</div>
                 {{/if}}
               </div>
+
+
             </div>
           </div>
         {{else if (eq step 1)}}
