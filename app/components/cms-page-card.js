@@ -21,5 +21,12 @@ export default Component.extend({
     return moment(this.get('page.attributes.show-after')).format("MMMM D, YYYY");
   }),
   
+  imgSrc: computed('page.attributes.promotional-card-image', function() {
+    return new htmlSafe( this.get('page.attributes.promotional-card-image') );
+  }),
   
+  imgAlt: computed('page.attributes.headline', function() {
+    // strip "Pep Talk from " out of the headline
+    return this.get('page.attributes.headline').replace("Pep Talk from ", "");
+  })
 });
