@@ -1,12 +1,19 @@
 <div class='challenge-progress'>
   {{nano-progress-bar percent=percentCompleted}}
-  <div class="challenge-info">
+
+  <div class="left-right-links challenge-info">
     <div class='progress-text'>
-      <span class="count {{if goalMet 'goal-met' ''}}">{{format-number projectChallenge.count}}</span><span class='goal'> / {{format-number projectChallenge.goal}} {{projectChallenge.unitTypePlural}}</span>
+      <span class="count {{if goalMet 'goal-met' ''}}">{{format-number projectChallenge.count}}</span>
+      <span class='goal'> / {{format-number projectChallenge.goal}} WORDS </span>
     </div>
     <div class='challenge-start'>
       <span class="started">Started</span>
       <span class="date">{{formattedStart}}</span>
     </div>
   </div>
+
+
+
+
+
 </div>

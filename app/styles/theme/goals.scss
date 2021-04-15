@@ -42,7 +42,7 @@
     height: 80px;
   }
   .project-challenge-progress {
-    min-width: 260px;
+    min-width: 300px;
     .challenge-progress {
       width: 100%;
     }
@@ -64,9 +64,7 @@
         }
       }
       .challenge-start {
-        position: absolute;
-        right: 0px;
-        top: 0px;
+        margin-top: 7.5px;
         float: right;
         .started {
           color: $nw-lightgrey;

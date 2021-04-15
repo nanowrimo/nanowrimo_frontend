@@ -35,7 +35,9 @@
         {{writing-group-buttons user=user}}
         {{#if canEditUser}}
           <div>
-            <i {{action "openEditModal"}} class="fa fa-edit"></i>
+            <button class='nw-button-undecorated' {{action "openEditModal"}} aria-label="edit user profile">
+              <i  class="fa fa-edit"></i>
+            </button>
           </div>
           {{user-edit-profile-modal
             onHidden=(action "afterEditModalClose")
