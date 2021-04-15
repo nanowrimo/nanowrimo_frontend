@@ -165,7 +165,9 @@ export default Component.extend({
       this.set('showForm', true);
       //assign the user to the project
       this.get('user').projects.pushObject(this.get('project'))
-      
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Create a project");
     },
     onHidden() {
       let callback = this.get('onHidden');

@@ -73,6 +73,13 @@ export default Component.extend({
       this.validateInput();
     },
     
+    onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "edit this group");
+    },
+    
+    
     onHidden() {
       this.get('group').rollbackGroupExternalLinks();
       let callback = this.get('onHidden');

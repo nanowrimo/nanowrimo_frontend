@@ -45,6 +45,9 @@ export default Component.extend({
   actions: {
     
     onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "start stopwatch/timer");
     },
     
     onHidden() {

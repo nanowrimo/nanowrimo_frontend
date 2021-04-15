@@ -155,6 +155,9 @@ export default Component.extend({
       
       //set the 'count' to zero
       this.set('countValue', 0);
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "submit a progress update");
     },
     
     // Session actions
