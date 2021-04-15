@@ -81,7 +81,7 @@ export default Component.extend({
     return "What type of goal " + this.get('isConjugated') + " this?"
   }),
   goalCountLabel: computed('pastTense', function() {
-    return "What " + this.get('isConjugated') + " your goal?"
+    return "What " + this.get('isConjugated') + " your word-count goal?"
   }),
   startLabel: computed('pastTense', function() {
     if (this.get('pastTense')) {
