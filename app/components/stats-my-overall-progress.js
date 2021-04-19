@@ -4,6 +4,26 @@ import moment from 'moment';
 
 export default ChartBaseComponent.extend({
   
+  displayTabularData: computed("primaryDisplay", function(){
+    let primaryDisplay = this.get('primaryDisplay');
+    console.log(primaryDisplay);
+    return primaryDisplay=="TABLE";
+  }),
+  
+  tableRows: computed("successData.[]", "userDailyTotals.[]", function(){
+    let responseData = []
+    // get the data 
+    let success = this.get('successData');
+    let totals = this.get('userDailyTotals');
+    let dates = this.get('projectChallenge.datesShortMonthDayFormat');
+    // loop through the dates 
+    for (var i = 0; i < dates.length; i++) {
+      responseData.pushObject({"date": dates[i], "success": success[i], "total": totals[i]});
+    }
+    console.log(responseData);
+    return responseData;
+  }),
+  
   successData: computed('projectChallenge', function() {
     let pc = this.get('projectChallenge');
     let data = [];
