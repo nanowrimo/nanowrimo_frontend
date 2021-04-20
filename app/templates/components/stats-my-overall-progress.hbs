@@ -2,9 +2,18 @@
   <div class="nw-card-title">My Overall Progress</div>
   <div class="nw-card-actions nw-card-actions-left" aria-hidden=true>
     {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
-      {{#bg.button type="default" value=true}}{{fa-icon "line-chart"}}{{/bg.button}}
-      {{#bg.button type="default" value=false}}{{fa-icon "bar-chart"}}{{/bg.button}}
-      {{#bg.button type="default" value="TABLE"}}{{fa-icon "table"}}{{/bg.button}}
+      {{#bg.button type="default" value=true}}
+        {{fa-icon "line-chart"}}
+        <span class="sr-only">Display line chart</span>
+      {{/bg.button}}
+      {{#bg.button type="default" value=false}}
+        {{fa-icon "bar-chart"}}
+        <span class="sr-only">Display bar chart</span>
+      {{/bg.button}}
+      {{#bg.button type="default" value="TABLE"}}
+        {{fa-icon "table"}}
+        <span class="sr-only">Display tabular data</span>
+      {{/bg.button}}bg.button type="default" value="TABLE"}}{{fa-icon "table"}}{{/bg.button}}
       
     {{/bs-button-group}}
   </div>
@@ -33,8 +42,7 @@
     </table>
   {{else}}
     <div aria-hidden=true>
-      {{high-charts content=chartData chartOptions=chartOptions theme=theme aria-hidden=true}}
+      {{high-charts content=chartData chartOptions=chartOptions theme=theme }}
     </div>
-    
   {{/if}}
 </div>

@@ -6,7 +6,6 @@ export default ChartBaseComponent.extend({
   
   displayTabularData: computed("primaryDisplay", function(){
     let primaryDisplay = this.get('primaryDisplay');
-    console.log(primaryDisplay);
     return primaryDisplay=="TABLE";
   }),
   
@@ -20,7 +19,6 @@ export default ChartBaseComponent.extend({
     for (var i = 0; i < dates.length; i++) {
       responseData.pushObject({"date": dates[i], "success": success[i], "total": totals[i]});
     }
-    console.log(responseData);
     return responseData;
   }),
   
