@@ -214,6 +214,9 @@ export default Component.extend({
   actions: {
     
     onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Update your word count");
     },
     
     onHidden() {

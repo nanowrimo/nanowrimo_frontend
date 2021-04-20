@@ -254,6 +254,9 @@ export default Component.extend({
       }
       // validate?
       this._validate();
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Create a new goal");
     },
     
     onHidden() {

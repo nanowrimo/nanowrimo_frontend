@@ -130,6 +130,12 @@ export default Component.extend({
   
   /* actions */
   actions: {
+    onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "edit your profile");
+    },
+    
     onHidden() {
       this.get('user').rollbackExternalLinks();
       let callback = this.get('onHidden');
