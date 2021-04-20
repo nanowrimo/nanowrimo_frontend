@@ -4,6 +4,28 @@ import moment from 'moment';
 
 export default ChartBaseComponent.extend({
   
+   displayTabularData: computed("primaryDisplay", function(){
+    let primaryDisplay = this.get('primaryDisplay');
+    return primaryDisplay=="TABLE";
+  }),
+  
+  tableRows: computed( "userDailyCounts.[]", function(){
+    let responseData = []
+    // get the data 
+    let counts = this.get('userDailyCounts');
+    // get the keys from the counts object
+    let keys = Object.keys(counts);
+    console.log(counts);
+    let dates = this.get('projectChallenge.datesShortMonthDayFormat');
+    // loop through the dates 
+    for (var i = 0; i < dates.length; i++) {
+      let countKey = keys[i];
+      let c = counts[countKey];
+      responseData.pushObject({"date": dates[i], "count": c});
+    }
+    return responseData;
+  }),
+  
   countData: computed('myChartType','userDailyCounts.[]',function() {
     let cData = [
       {

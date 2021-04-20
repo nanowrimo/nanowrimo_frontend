@@ -1,12 +1,46 @@
 <div class="nw-card-header">
   <div class="nw-card-title">My Daily Word Count</div>
-  <div class="nw-card-actions nw-card-actions-left">
+  <div class="nw-card-actions nw-card-actions-left" aria-hidden=true>
     {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
-      {{#bg.button type="default" value=true}}{{fa-icon "line-chart"}}{{/bg.button}}
-      {{#bg.button type="default" value=false}}{{fa-icon "bar-chart"}}{{/bg.button}}
+      {{#bg.button type="default" value=true}}
+        {{fa-icon "line-chart"}}
+        <span class="sr-only">Display line chart</span>
+      {{/bg.button}}
+      {{#bg.button type="default" value=false}}
+        {{fa-icon "bar-chart"}}
+        <span class="sr-only">Display bar chart</span>
+      {{/bg.button}}
+      {{#bg.button type="default" value="TABLE"}}
+        {{fa-icon "table"}}
+        <span class="sr-only">Display tabular data</span>
+      {{/bg.button}}
     {{/bs-button-group}}
   </div>
 </div>
 <div class="nw-card-content">
-  {{high-charts content=chartData chartOptions=chartOptions theme=theme}}
+ <table class="sr-only">
+    <tr><th scope="col">Date</th><th scope="col">Count</th></tr>
+      {{#each tableRows as |row|}}
+        <tr>
+          <td>{{row.date}}</td>
+          <td>{{row.count}}</td>
+        </tr>
+      {{/each}}
+  </table>
+  {{#if displayTabularData}}
+    <table class='stats-table' tabindex=0>
+      <tr><th scope="col">Date</th><th scope="col">Count</th></tr>
+      {{#each tableRows as |row|}}
+        <tr>
+          <td>{{row.date}}</td>
+          <td>{{row.count}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  {{else}}
+    <div aria-hidden=true>
+      {{high-charts content=chartData chartOptions=chartOptions theme=theme }}
+    </div>
+    
+  {{/if}}
 </div>
