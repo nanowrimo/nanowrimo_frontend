@@ -86,3 +86,13 @@
     }
   }
 }
+.stats-table {
+  height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: block;
+  width: 100%;
+  th {
+    width: 100px;
+    }
+}

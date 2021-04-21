@@ -19,7 +19,7 @@ export default NwFlippyCard.extend({
   backToggleStyle: computed("nw-flipped", function() {
     return (this.get('nw-flipped')) ? "" : "display:none;" ;
   }),
-    imgSrc: computed('post.attributes.card-image', function() {
+  imgSrc: computed('post.attributes.card-image', function() {
     return new htmlSafe( this.get('post.attributes.card-image') );
   })
 });

@@ -227,6 +227,11 @@
       background-size: cover;
       border-radius: 5px 5px 0px 0px;
       background-position: center center;
+      img {
+        height: 144px;
+        width: 300px;
+        object-fit: cover;
+      }
     }
   }
   .nw-card-content {
