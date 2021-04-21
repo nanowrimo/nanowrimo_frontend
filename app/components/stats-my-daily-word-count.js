@@ -15,7 +15,6 @@ export default ChartBaseComponent.extend({
     let counts = this.get('userDailyCounts');
     // get the keys from the counts object
     let keys = Object.keys(counts);
-    console.log(counts);
     let dates = this.get('projectChallenge.datesShortMonthDayFormat');
     // loop through the dates 
     for (var i = 0; i < dates.length; i++) {
