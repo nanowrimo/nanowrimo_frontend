@@ -24,6 +24,9 @@ runCmd("git checkout staging")
 # pull the new staging code
 runCmd("git pull")
 
+# update yarn, in case the yarn.lock file changed
+runCmd("yarn")
+
 # run the tests
 runCmd("yarn lint:js")
 runCmd("yarn test:ember")
