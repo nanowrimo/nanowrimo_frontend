@@ -47,6 +47,9 @@ export default Component.extend({
   
   actions: {
     
+    linkToNanomessages() {
+      router.transitionTo('authenticated.nanomessages');
+    },
     toggleNotifications() {
       const dn = this.get('displayNotifications');
       this.set('displayNotifications', !dn);
