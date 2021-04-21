@@ -11,7 +11,6 @@ export default Component.extend({
   // Returns the group users in the store
   invitationAccepted: computed('groupUser',function() {
     let gu = this.get('groupUser');
-    console.log(gu);
     return gu.invitationAccepted;
   }),
   
