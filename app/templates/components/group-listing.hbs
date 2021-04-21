@@ -1,5 +1,5 @@
 <div class="nw-card short-card small-gap nw-full-link">
-  {{#if invitationAccepted}}
+  {{#if (and invitationAccepted isCurrentUser)}}
     {{#link-to group.linkPath group.slug}}
       <div class="nw-card-content">
         <div class='nw-group-listing'>
@@ -44,15 +44,17 @@
           </div>
           {{group.description}}
         </div>
-        <div class='nw-group-invite' style="display: flex; flex-wrap: wrap;">
-          <div style="margin-bottom: 10px;">
-            <i>You've been invited to join the {{group.groupType}} {{group.name}}.</i>
+        {{#if isCurrentUser}}
+          <div class='nw-group-invite' style="display: flex; flex-wrap: wrap;">
+            <div style="margin-bottom: 10px;">
+              <i>You've been invited to join the {{group.groupType}} {{group.name}}.</i>
+            </div>
+            <div>
+              <button {{action "approveInvitation"}}>Join Group</button>
+              <button {{action "rejectInvitation"}} class="button-reversed" style="margin-left: 10px;">No Thanks</button>
+            </div>
           </div>
-          <div>
-            <button {{action "approveInvitation"}}>Join Group</button>
-            <button {{action "rejectInvitation"}} class="button-reversed" style="margin-left: 10px;">No Thanks</button>
-          </div>
-        </div>
+        {{/if}}
       </div>
     </div>
   {{/if}}
