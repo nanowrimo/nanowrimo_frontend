@@ -10,6 +10,11 @@ export default Controller.extend({
   dataLoaded: false,
   
   addEvent: false,
+  
+  pageTitle: computed('group.name', function() {
+    return "Events | " + this.get('group.name');
+  }),
+  
   canAddEvent: computed('group.groupType','canEditGroup', function() {
     let gt = this.get('group.groupType');
     return ((gt!='everyone')||(this.get('canEditGroup')));
