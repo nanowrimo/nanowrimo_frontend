@@ -10,10 +10,12 @@
    word-wrap:normal !important;
 }
 
-/* a hightlight for focused elements */
-*:focus {
-  /* padding: 1px; */
-  outline: 2px dashed $nw-mediumblue;
+/* a highlight for focused elements */
+p {
+  *:focus {
+    /* padding: 1px; */
+    outline: 2px dashed $nw-mediumblue;
+  }
 }
 
 .notifications-modal-body button:focus {
