@@ -172,6 +172,7 @@
     .container-fluid {
       
       .navbar-brand.text-logo {
+        height: 48px;
         flex: 0 0 220px;
         padding-top: 0px;
         padding-bottom: 0px;
@@ -180,10 +181,15 @@
         @media (max-width: $screen-md-max) {
           flex: 0 0 144px;
           margin-left: -10px;
+          height: 36px;
           img {
             width: 144px;
             height: 36px;
           }
+        }
+        &:hover,&:focus {
+          background-color: $nw-mediumblue;
+          outline: 0;
         }
       }
       .dropdown-toggle {
@@ -203,7 +209,7 @@
       }
       .nav {
         li.nav-item {
-          a {
+          a, button {
             &:hover, &:active, &:focus {
               background-color: $nw-darkblue;
               color: $nw-white;
@@ -214,6 +220,10 @@
           margin-bottom: -10px;
           margin-left: 1rem;
           margin-right: 1rem;
+        }
+        button {
+          border-radius: 0;
+          height: 48px;
         }
         .dropdown {
           @media (max-width: $screen-md-max) {
@@ -324,7 +334,7 @@
         line-height: 23px;
         &.button-clear {
           width: 32px;
-          height: 38px;
+          height: 48px;
           border: 0;
           background-image: none;
           background-color: transparent;

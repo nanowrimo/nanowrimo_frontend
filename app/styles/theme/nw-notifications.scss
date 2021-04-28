@@ -1,5 +1,8 @@
 .navbar {
   &.mainnav {
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
     .container-fluid {
       .nav.nw-nav-notify-buttons {
         height: 48px;

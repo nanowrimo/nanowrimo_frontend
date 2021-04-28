@@ -48,6 +48,12 @@ export default Component.extend({
       var t = document.getElementById("ember-bootstrap-wormhole");
       t.firstElementChild.setAttribute("aria-modal", "true");
       t.firstElementChild.setAttribute("aria-label", "start stopwatch/timer");
+      //var aTabs = t.firstElementChild.querySelectorAll('.nav-link');
+      //for (var i=0; i<aTabs.length; i++) {
+        //var href = aTabs[i].href.split('#');
+        //var id = href[1];
+        //aTabs[i].setAttribute("aria-controls", id);
+      //}
     },
     
     onHidden() {

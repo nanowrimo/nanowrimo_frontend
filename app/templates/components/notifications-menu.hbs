@@ -1,9 +1,9 @@
 {{#bs-nav class="nw-nav-notify-buttons" as |nav|}}
   {{#nav.dropdown as |dd|}}
-    {{#link-to  "authenticated.nanomessages"}}
+    <button class="button-clear" aria-label="Go to your nanomessages" {{action 'linkToNanomessages'}}>
       <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
       <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
-    {{/link-to}}
+    </button>
   {{/nav.dropdown}}
 
   {{#nav.dropdown as |dd|}}

@@ -130,6 +130,10 @@
         box-shadow: inset 0 1px 4px 0 $nw-grey50;
         background-color: $nw-white-1;
         border: solid 1px $nw-mediumgrey;
+        &:focus {
+          border: solid 2px #305555;
+        }
+        
         &.ember-checkbox {
           box-shadow: none;
           background-color: transparent;

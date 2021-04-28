@@ -185,7 +185,6 @@ export default Component.extend({
       book.deleteRecord();
     },
     handleSubmitErrors(errorData) {
-      console.log(errorData.errors);
       errorData.errors.forEach(error=>{
         // is this a BAD-NAME error?
         if (error.title=="BAD-NAME") {
