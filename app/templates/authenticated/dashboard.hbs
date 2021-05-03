@@ -59,7 +59,7 @@
                 with us. Are you ready to commit to writing this November?
               </div>
               <div class="flash-button">
-                <button {{action "openNewProjectModal" }}>
+                <button {{action "openNewProjectModal"}}>
                   Announce your novel!
                 </button>
               </div>
@@ -79,9 +79,7 @@
             </div>
             <div class="flash-content">
               <div class="flash-text">
-                Happy New Year! Check out your <a href='/year-in-review/2020'
-                  style='color: rgba(255,255,255, 0.9); padding-left: 7px; text-decoration: underline;'>2020 Year in
-                  Review</a>.
+                Happy New Year! Check out your  <a href='/year-in-review/2020' style='color: rgba(255,255,255, 0.9); padding-left: 7px; text-decoration: underline;'>2020 Year in Review</a>.
               </div>
             </div>
           </div>
@@ -115,28 +113,26 @@
               </div>
             </div>
             <div class='action'>
-              <a href="#" {{action "openNewProjectModal" }}>Announce a new project!</a>
+              <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
             </div>
             <div class='prompt-image'>
-              <img alt="" src="/images/users/projects/megaphone.svg">
+              <img alt="A hand holding a megaphone." src="/images/users/projects/megaphone.svg">
             </div>
           </div>
         </div>
         {{/unless}}
         {{project-new-modal
-        onHidden=(action "afterProjectModalClose")
-        open=addProject
-        user=currentUser.user
-        }}
+            onHidden=(action "afterProjectModalClose")
+            open=addProject
+            user=currentUser.user
+          }}
         {{/if}}
         {{#if currentUserHasProject}}
-        {{project-summary project=primaryProject class="nw-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1
-        g2-hspan2 g2-vspan1"}}
+        {{project-summary project=primaryProject class="nw-card g3-col1 g3-row1 g3-hspan3 g3-vspan1 g2-col1 g2-row1 g2-hspan2 g2-vspan1"}}
         {{/if}}
         {{#if currentUserHasProject }}
         <div class="nw-card g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1">
-          {{badges-card cardTitle='Writing badges' badgeType='word count' user=currentUser.user
-          projectChallenge=primaryProject.currentProjectChallenge}}
+          {{badges-card cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=primaryProject.currentProjectChallenge}}
         </div>
         {{else}}
         <div class="nw-card nw-prompt-card g3-col1 g3-row2 g3-hspan2 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1">
@@ -147,23 +143,20 @@
           </div>
           <div class='nw-hflex'>
             <div class='action' style="padding-top: 80px;">
-              <a href="#" {{action "openNewProjectModal" }}>Create a project to start winning writing badges!</a>
+              <a href="#" {{action "openNewProjectModal"}}>Create a project to start winning writing badges!</a>
             </div>
           </div>
         </div>
         {{/if}}
 
         {{dashboard-my-buddies class="nw-card g3-col3 g3-row2 g3-hspan1 g3-vspan1 g2-col2 g2-row2 g2-hspan1 g2-vspan1"}}
-        {{dashboard-home-region class="nw-card g3-col1 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row3 g2-hspan1
-        g2-vspan1"}}
+        {{dashboard-home-region class="nw-card g3-col1 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row3 g2-hspan1 g2-vspan1"}}
         {{dashboard-hq class="nw-card g3-col2 g3-row3 g3-hspan1 g3-vspan1 g2-col2 g2-row3 g2-hspan1 g2-vspan1"}}
-        {{dashboard-writing-groups class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row4 g2-hspan1
-        g2-vspan1"}}
+        {{dashboard-writing-groups class="nw-card g3-col3 g3-row3 g3-hspan1 g3-vspan1 g2-col1 g2-row4 g2-hspan1 g2-vspan1"}}
         {{dashboard-my-offers class="nw-card g3-col1 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row4 g2-hspan1 g2-vspan1"}}
         {{dashboard-nano-store class="nw-card g3-col2 g3-row4 g3-hspan1 g3-vspan1 g2-col1 g2-row5 g2-hspan1 g2-vspan1"}}
         {{dashboard-twitter class="nw-card g3-col3 g3-row4 g3-hspan1 g3-vspan1 g2-col2 g2-row5 g2-hspan1 g2-vspan1"}}
-        {{dashboard-writers-resources class="nw-card g3-col1 g3-row5 g3-hspan1 g3-vspan1 g2-col1 g2-row6 g2-hspan1
-        g2-vspan1"}}
+        {{dashboard-writers-resources class="nw-card g3-col1 g3-row5 g3-hspan1 g3-vspan1 g2-col1 g2-row6 g2-hspan1 g2-vspan1"}}
       </div>
     </div>
   </div>

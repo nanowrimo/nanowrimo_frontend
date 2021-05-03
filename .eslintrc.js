@@ -33,7 +33,9 @@ module.exports = {
     'ember/use-ember-data-rfc-395-imports':1,
     'ember/require-computed-property-dependencies':1,
     'ember/require-computed-macros':1,
-    'ember/no-invalid-dependent-keys':1
+    'ember/no-invalid-dependent-keys':1,
+    "no-console": 2,
+    "no-debugger": 2
     
   },
   overrides: [

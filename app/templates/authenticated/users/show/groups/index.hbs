@@ -14,19 +14,20 @@
           join.</a></b>
     </div>
   </div>
-  {{/if}}
+  
   <div class='group-listings'>
     <div>
       {{#each user.myInvitations as |group|}}
-      {{group-listing group=group buttons=true message=true}}
+      {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
       {{/each}}
     </div>
   </div>
+  {{/if}}
   <div class='group-listings'>
     <div>
       {{#if hasRegions}}
       {{#each user.myGroups as |group|}}
-      {{group-listing group=group buttons=true message=true}}
+      {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
       {{/each}}
       {{else}}
       <div class="nw-card nw-prompt-card">
