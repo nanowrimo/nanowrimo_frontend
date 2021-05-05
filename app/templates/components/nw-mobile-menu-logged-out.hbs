@@ -2,16 +2,15 @@
   <button class='nw-button-undecorated' aria-label="show menu" {{action 'showMenu'}}>
     <i class="fa fa-bars" aria-hidden="true"></i>
   </button>
-
 </div>
   
 
 <div class="menu-content nano-side-menu {{if displayMenu 'display' ''}}"
   role="dialog" aria-modal="true" aria-label="Menu">
-  <div class='menu-close-trigger'>
-    <a href="#" class="menu-close-trigger" {{action "hideMenu"}} aria-label="hide menu">
+  <div class='nano-side-menu-toggle'>
+    <button id="mobile-menu-logged-out-close" href="#" class=" nw-button-undecorated menu-close" {{action "hideMenu"}} aria-label="hide menu">
       <span aria-hidden="false">{{fa-icon "times"}}</span>
-    </a>
+    </button>
   </div>
   <div class='menu-items'>
     <div class="menu-item">
