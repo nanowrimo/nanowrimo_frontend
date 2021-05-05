@@ -20,6 +20,19 @@ export default Controller.extend({
       return false;
     }
   }),
+  
+  pageTitle: computed('group.{name,groupType}','hasGroup', function() {
+    let hasGroup = this.get('hasGroup');
+    if (hasGroup) {
+      if (this.get('group.groupType')!='buddies') {
+        return this.get('group.name') + " | Nanomessages";
+      } else {
+        return "Buddies | Nanomessages";
+      }
+    } else {
+      return "Nanomessages";
+    }
+  }),
   setOldGroup() {
     let g = this.get('group');
     this.set('oldgroupid',g.id);

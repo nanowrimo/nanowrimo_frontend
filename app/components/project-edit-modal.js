@@ -88,6 +88,9 @@ export default Component.extend({
       if (this.get('project.isNotPrimary')){
         this.set('project.primary', 0);
       }
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Edit your project");
     },
     
     onHidden() {

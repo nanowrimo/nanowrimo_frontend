@@ -8,8 +8,8 @@
       National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing.
     </div>
     <div class="nw-footer-header">
-      <a href="https://nanowrimo.org/about-nano">About NaNoWriMo</a>
-      <a href="https://nanowrimo.org/staff">Staff</a>
+      <a href="/about-nano">About NaNoWriMo</a>
+      <a href="/staff">Staff</a>
       <a href="https://store.nanowrimo.org/collections/donate">Donate</a>
       <a href="https://store.nanowrimo.org/collections/shop">Shop</a>
       <br />
@@ -21,9 +21,11 @@
   {{#each footerSubmenus as |footerSubmenu i|}}
   <div class="nw-footer-section nw-footer-{{i}}">
     <div class="nw-footer-submenu">
-      <div class="nw-footer-header">
-        {{footerSubmenu.toggleLabel}}
-      </div>
+      <h2>
+        <div class="nw-footer-header">
+          {{footerSubmenu.toggleLabel}}
+        </div>
+      </h2>
       <ul>
         {{#each footerSubmenu.submenuItems as |footerSubmenuItem|}}
         {{#if footerSubmenuItem}}
@@ -49,25 +51,27 @@
   {{/if}}
   <div class="nw-footer-section nw-footer-right">
     <div>
-      <div class="nw-footer-header">
-        Connect with NaNo
-      </div>
+      <h2>
+        <div class="nw-footer-header">
+          Connect with NaNo
+        </div>
+      </h2>
       <ul>
         <li>
           <div class="nw-footer-social">
-            <a href="https://www.facebook.com/nanowrimo" class="social-button">{{fa-icon 'facebook-square'}}</a>
-            <a href="https://twitter.com/nanowrimo" class="social-button">{{fa-icon 'twitter-square'}}</a>
-            <a href="https://blog.nanowrimo.org/" class="social-button">{{fa-icon 'tumblr-square'}}</a>
-            <a href="https://www.youtube.com/c/nanowrimo" class="social-button">{{fa-icon 'youtube-square'}}</a>
-            <a href="https://www.instagram.com/nanowrimo" class="social-button">{{fa-icon 'instagram'}}</a>
-            <a href="https://www.pinterest.com/nanowrimo" class="social-button">{{fa-icon 'pinterest-square'}}</a>
+            <a href="https://www.facebook.com/nanowrimo" class="social-button" aria-label='Link to the NaNoWriMo Facebook page'>{{fa-icon 'facebook-square'}}</a>
+            <a href="https://twitter.com/nanowrimo" class="social-button" aria-label='Link to the NaNoWriMo Twitter page'>{{fa-icon 'twitter-square'}}</a>
+            <a href="https://blog.nanowrimo.org/" class="social-button" aria-label='Link to the NaNoWriMo blog'>{{fa-icon 'tumblr-square'}}</a>
+            <a href="https://www.youtube.com/c/nanowrimo" class="social-button" aria-label='Link to the NaNoWriMo YouTube channel'>{{fa-icon 'youtube-square'}}</a>
+            <a href="https://www.instagram.com/nanowrimo" class="social-button" aria-label='Link to the NaNoWriMo Instagram page'>{{fa-icon 'instagram'}}</a>
+            <a href="https://www.pinterest.com/nanowrimo" class="social-button" aria-label='Link to the NaNoWriMo Pinterest page'>{{fa-icon 'pinterest-square'}}</a>
           </div>
         </li>
       </ul>
     </div>
     <div class="ywp-logo">
       <a href="https://ywp.nanowrimo.org" alt="Young Writer's Program">
-        <img alt="NaNoWriMo Young Writers Program home." src="/images/logo/ywp_logo.svg" />
+        <img alt="NaNoWriMo Young Writers Program logo" src="/images/logo/ywp_logo.svg" />
       </a>
     </div>
   </div>

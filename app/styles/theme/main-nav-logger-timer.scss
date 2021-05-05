@@ -115,6 +115,9 @@
 
 #timer-form-modes {
   .timer-sub-menu {
+    padding-left: 20px;
+    padding-top: 10px;
+    background: white;
     .timer-sub-menu-item {
       font-size: 16px;
       font-weight: 600;
@@ -127,12 +130,16 @@
     }
     .selected {
       color: $nw-mediumblue;
+      background: linear-gradient(to top, #005555 0px, #005555 7px, transparent 7px, transparent 500px);
+      border-radius: 4px;
+      padding-bottom: 9px;
     }
   }
   .timer-content {
     padding: 0px;
     padding-top: 10px;
-    display: flex;
+    display: flex; 
+    flex-flow: column;
     justify-content: space-between;
     .timer-instruction {
       flex: 0 0 57%;
@@ -170,14 +177,14 @@
   }
   .primary-project-scrolling-buttons {
     padding: 10px;
-    font-size: 30px;
-    color: #ddd;
+    
     display: flex;
     max-height: 90px;
     flex-direction: column;
     justify-content: space-between;
-    i {
-      cursor: pointer;
+    button {
+      font-size: 30px;
+      color: #ddd;
     }
     i:hover {
       color: #000;
@@ -269,55 +276,6 @@
   flex: 0 0 200px;
 }*/
 
-.project-emoji-list {
-  display: flex;
-  width: 100%;
-  margin-bottom: 10px;
-  justify-content: center;
-  label {
-    padding-top: 0px;
-  }
-  .project-emoji {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    margin: 5px;
-    &.emoji-1 {
-      background-image: url('/images/projects/emoji/unselected/1.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/1.svg');
-      }
-    }
-    &.emoji-2 {
-      background-image: url('/images/projects/emoji/unselected/2.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/2.svg');
-      }
-    }
-    &.emoji-3 {
-      background-image: url('/images/projects/emoji/unselected/3.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/3.svg');
-      }
-    }
-    &.emoji-4 {
-      background-image: url('/images/projects/emoji/unselected/4.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/4.svg');
-      }
-    }
-    &.emoji-5 {
-      background-image: url('/images/projects/emoji/unselected/5.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/5.svg');
-      }
-    }
-  }
-  input {
-    display: none;
-  }
-  
-}
 
 #progress-update-form.nw-no-blue {
   .more-info-toggle {

@@ -2,7 +2,12 @@
   <a href="/{{{page.attributes.url}}}">
     <div class='nw-card nw-card-fixed-size nw-card-white nw-card-face-front'>
       <div class='nw-card-header nw-card-page-card'>
-        <div class="nw-promo-image" style="{{safeSrc}}" />
+        <div class="nw-promo-image">
+          {{#if imgSrc }}
+            <img class="nw-avatar-img" src={{imgSrc}} alt={{imgAlt}}>
+          {{/if}}
+        </div>
+        
       </div>
       <div class='nw-card-content nw-fixed-card'>
         <h4 class="nw-card-superhead"><strong style='color: #54301a;'>{{{page.attributes.content-type}}}</strong> | {{{computeShowAfter}}}</h4>

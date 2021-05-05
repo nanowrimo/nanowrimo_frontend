@@ -1,3 +1,4 @@
+{{page-title user.name}}
 <div class='plate-wrapper {{if canEditUser "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
   <div class="nano-user-plate full-width" {{action "openEditModal" "headerTab"}} style={{plateStyle}} data-test-user-edit-plate>
     <div class="plate-cover">
@@ -35,7 +36,9 @@
         {{writing-group-buttons user=user}}
         {{#if canEditUser}}
           <div>
-            <i {{action "openEditModal"}} class="fa fa-edit"></i>
+            <button class='nw-button-undecorated' {{action "openEditModal"}} aria-label="edit user profile">
+              <i  class="fa fa-edit"></i>
+            </button>
           </div>
           {{user-edit-profile-modal
             onHidden=(action "afterEditModalClose")

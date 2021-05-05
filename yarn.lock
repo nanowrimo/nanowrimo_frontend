@@ -6503,6 +6503,13 @@ ember-on-helper@^0.1.0:
   dependencies:
     ember-cli-babel "^7.7.3"
 
+ember-page-title@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/ember-page-title/-/ember-page-title-6.2.1.tgz#aa2d539fab8eddb618289cdba91adf699debf7da"
+  integrity sha512-cfBDuP14KBJCdz/AeBQJFGnJbUHd2gmenG+i0ilR2kYX0G0zHAsseFZFuTNVZDNiQ8BnMdrdjRnfjx9Vdi/dag==
+  dependencies:
+    ember-cli-babel "^7.22.1"
+
 ember-place-autocomplete@^2.0.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ember-place-autocomplete/-/ember-place-autocomplete-2.1.2.tgz#681d5fa0e5dfa0fc71e545736f1312e97276d133"

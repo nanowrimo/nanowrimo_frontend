@@ -18,15 +18,20 @@
     }}
       {{#modal.body}}
 
-        <div class="steps">
+        <div class="steps" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow={{formCurrentStep}} aria-valuetext={{formProgressText}}>
+          <div class="screen-reader-text">{{progressStepText}}</div>
+          
           {{#if (eq f.currentStepIndex 0)}}
             <div class="step step-current">
-              <div>Overview</div>
+              <div class='step-name'>Overview</div>
               <div>{{fa-icon "circle-o"}}</div>
             </div>
           {{else}}
-            <div class="step step-completed" {{action "setStep" 0}}>
-              <div>Overview</div>
+            <div class="step step-completed">
+              <button class="nw-button-undecorated nw-button-form-step"
+              {{action "setStep" 0}} aria-label="Return to step 1 of 3: project overview">
+                Overview
+              </button>
               <div>{{fa-icon "check-circle"}}</div>
             </div>
           {{/if}}
@@ -35,15 +40,18 @@
               <hr />
             </div>
             <div class="step step-current">
-              <div>Goal</div>
+              <div class='step-name'>Goal</div>
               <div>{{fa-icon "circle-o"}}</div>
             </div>
           {{else if (gt f.currentStepIndex 1)}}
             <div class="step-connector connector-blue">
               <hr />
             </div>
-            <div class="step step-completed" {{action "setStep" 1}}>
-              <div>Goal</div>
+            <div class="step step-completed" >
+              <button class="nw-button-undecorated nw-button-form-step"
+              {{action "setStep" 1}} aria-label="Return to step 2 of 3: project goal">
+                Goal
+              </button>
               <div>{{fa-icon "check-circle"}}</div>
             </div>
           {{else}}
@@ -60,7 +68,7 @@
               <hr />
             </div>
             <div class="step step-current">
-              <div>Details</div>
+              <div class='step-name'>Details</div>
               <div>{{fa-icon "circle-o"}}</div>
             </div>
           {{else}}

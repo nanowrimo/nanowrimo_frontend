@@ -31,8 +31,14 @@
     <div class="nw-card-title">Find a Region</div>
     <div class="nw-card-actions nw-card-actions-left">
       {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
-        {{#bg.button type="default" value=true}}{{fa-icon "search"}}{{/bg.button}}
-        {{#bg.button type="default" value=false}}{{fa-icon "map-marker"}}{{/bg.button}}
+        {{#bg.button ariaLabel="Search by name" type="default" value=true}}
+          {{fa-icon "search"}}
+          <span class="screen-reader-text">Search by region name</span>
+        {{/bg.button}}
+        {{#bg.button type="default" value=false}}
+          {{fa-icon "map-marker"}}
+          <span class="screen-reader-text">Search by location</span>
+        {{/bg.button}}
       {{/bs-button-group}}
       
     </div>

@@ -22,6 +22,7 @@ export default Controller.extend({
       return true;
     }
   }),*/
+    
   canEditUser: computed('currentUser.user.id', 'user.id', function() {
     return this.get('currentUser.user.id') === this.get('user.id');
   }),

@@ -71,6 +71,9 @@ form {
     box-shadow: inset 0 1px 4px 0 $nw-grey50;
     background-color: $nw-white-1;
     border: solid 1px #699c8d;
+    &:focus {
+      border: solid 2px #305555;
+    }
     font-size: 20px;
     line-height: 22px;
     color: $nw-darkgrey;
@@ -319,4 +322,83 @@ label.checkbox-label {
 /* one off for the project session modal 'date' */
 #project-session-modal-date {
   background-position: 135px center;
+}
+
+/* feelings radios */
+.project-emoji-list {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+  justify-content: center;
+  label {
+    padding-top: 0px;
+  }
+  .project-emoji {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    margin: 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+    &.emoji-1 {
+      background-image: url('/images/projects/emoji/unselected/1.svg');
+      &:hover {
+        background-image: url('/images/projects/emoji/selected/1.svg');
+      }
+    }
+    &.emoji-2 {
+      background-image: url('/images/projects/emoji/unselected/2.svg');
+      &:hover {
+        background-image: url('/images/projects/emoji/selected/2.svg');
+      }
+    }
+    &.emoji-3 {
+      background-image: url('/images/projects/emoji/unselected/3.svg');
+      &:hover {
+        background-image: url('/images/projects/emoji/selected/3.svg');
+      }
+    }
+    &.emoji-4 {
+      background-image: url('/images/projects/emoji/unselected/4.svg');
+      &:hover {
+        background-image: url('/images/projects/emoji/selected/4.svg');
+      }
+    }
+    &.emoji-5 {
+      background-image: url('/images/projects/emoji/unselected/5.svg');
+      &:hover {
+        background-image: url('/images/projects/emoji/selected/5.svg');
+      }
+    }
+  }  
+  input:focus + label {     
+    background-color: $nw-mediumblue;    
+    border-radius: 25px;  
+  }
+  input:checked + label {     
+    background-color: $nw-mediumblue;    
+    border-radius: 25px;  
+  }
+  #feeling5:checked + label{
+    background-image: url('/images/projects/emoji/selected/5.svg');
+  }
+  #feeling4:checked + label{
+    background-image: url('/images/projects/emoji/selected/4.svg');
+  }
+  #feeling3:checked + label{
+    background-image: url('/images/projects/emoji/selected/3.svg');
+  }
+  #feeling2:checked + label{
+    background-image: url('/images/projects/emoji/selected/2.svg');
+  }
+  #feeling1:checked + label {
+    background-image: url('/images/projects/emoji/selected/1.svg');
+  }
+}
+
+.feelings-radios {
+  legend {
+    font-size: 18px;
+    text-align: center;
+  }
 }

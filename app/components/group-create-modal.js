@@ -36,12 +36,18 @@ export default Component.extend({
       newGroup.set('userId',uid);
       newGroup.set('groupId',null);
       newGroup.set('approvedById',0);
-      newGroup.set('maxMemberCount',12);
+      newGroup.set('maxMemberCount',20);
       this.set('group', newGroup);
     }
   },
   
   actions: {
+    
+    onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "create a group");
+    },
     
     // Called when the value of the name input changes
     nameChanged(val) {
@@ -73,6 +79,7 @@ export default Component.extend({
             newGroupUser.normalize();
             t.set('inProcess',false);
             t.set('groupCreated',true);
+            g.set('maxMemberCount', 20);
           });
         });
       }

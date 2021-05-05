@@ -25,27 +25,6 @@ export default Component.extend({
     }
   }), 
   
-  firstEnabled: computed('user.{statsWordCountEnabled,statsProjectsEnabled,statsYearsEnabled,statsWordiestEnabled,statsStreakEnabled}', function(){
-    let props = [
-      "statsWordCountEnabled",
-      "statsProjectsEnabled",
-      "statsYearsEnabled",
-      "statsWordiestEnabled",
-      "statsWritingPaceEnabled",
-      "statsStreakEnabled"
-    ];
-    
-    //loop through the stats
-    for( var i = 0; i< props.length; i++) {
-      let prop = props[i];
-      //is this prop selected by the user?
-      if (this.get(`user.${prop}`) ) {
-        return prop;
-      }
-    }
-    return null;
-  }),
-  
   totalWordCount: computed('user.stats.totalWordCount', function(){
     let twc = this.get('user.stats.totalWordCount');
     return (twc) ? twc : 0;

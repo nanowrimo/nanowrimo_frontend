@@ -25,6 +25,13 @@ export default Component.extend({
   }),
 
   actions: {
+
+    onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "edit your project cover");
+    },
+    
     onHidden() {
       let callback = this.get('onHidden');
       if (callback) {

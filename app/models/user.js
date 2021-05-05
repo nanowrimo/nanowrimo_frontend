@@ -806,6 +806,27 @@ const User = Model.extend({
     });
   },
   
+  firstEnabledStat: computed('statsWordCountEnabled','statsProjectsEnabled','statsYearsEnabled','statsWordiestEnabled','statsStreakEnabled', function(){
+    let props = [
+      "statsWordCountEnabled",
+      "statsProjectsEnabled",
+      "statsYearsEnabled",
+      "statsWordiestEnabled",
+      "statsWritingPaceEnabled",
+      "statsStreakEnabled"
+    ];
+    
+    //loop through the stats
+    for( var i = 0; i< props.length; i++) {
+      let prop = props[i];
+      //is this prop selected by the user?
+      if (this.get(`${prop}`) ) {
+        return prop;
+      }
+    }
+    return null;
+  }),
+  
   refreshStats: function() {
     let { auth_token } = this.get('session.data.authenticated');
     //fetch the stats from the API

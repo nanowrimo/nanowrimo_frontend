@@ -54,6 +54,9 @@
           {{#if (eq post.data.attributes.api-code "all_pep_talks")}}
             {{cms-pep-talks}}
           {{/if}}
+          {{#if (eq post.data.attributes.api-code "nanowrimo_hq_calendar")}}
+            {{dashboard-hq}}
+          {{/if}}
           {{#if (eq post.data.attributes.api-code "all_donors")}}
             {{all-donors}}
           {{/if}}

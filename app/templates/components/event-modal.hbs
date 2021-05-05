@@ -7,314 +7,231 @@
   {{#modal.header closeButton=false}}
     Submit an Event
   {{/modal.header}}
-    {{#modal.body}}
-      <div class="steps">
-        {{#if (eq step 0)}}
-          <div class="step step-current">
-            <div>Details</div>
-            <div>{{fa-icon "circle-o"}}</div>
-          </div>
-        {{else}}
-          {{#if (eq step 1)}}
-            <div class="step step-completed" {{action "setStep" 0}}>
-              <div>Details</div>
-              <div>{{fa-icon "check-circle"}}</div>
-            </div>
-          {{else}}
-            <div class="step step-completed">
-              <div>Details</div>
-              <div>{{fa-icon "check-circle"}}</div>
-            </div>
-          {{/if}}
-        {{/if}}
+  {{#modal.body}}
+    <div class="steps" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow={{formCurrentStep}} aria-valuetext={{formProgressText}}>
+      <div class="screen-reader-text">{{progressStepText}}</div>
+    
+      {{#if (eq step 0)}}
+        <div class="step step-current">
+          <div class='step-name'>Details</div>
+          <div>{{fa-icon "circle-o"}}</div>
+        </div>
+      {{else}}
         {{#if (eq step 1)}}
-          <div class="step-connector connector-blue">
-            <hr />
-          </div>
-          <div class="step step-current">
-            <div>Venue</div>
-            <div>{{fa-icon "circle-o"}}</div>
+          <div class="step step-completed" >
+            <button class="nw-button-undecorated nw-button-form-step" {{action "setStep" 0}}>
+              Details</button>
+            <div>{{fa-icon "check-circle"}}</div>
           </div>
         {{else}}
-          {{#if (eq step 0)}}
-            <div class="step-connector">
-              <hr />
-            </div>
-            <div class="step">
-              <div>Venue</div>
-              <div>{{fa-icon "circle-o"}}</div>
-            </div>
-          {{else}}
-            <div class="step-connector">
-              <hr />
-            </div>
-            <div class="step step-completed">
-              <div>Venue</div>
-              <div>{{fa-icon "check-circle"}}</div>
-            </div>
-          {{/if}}
+          <div class="step step-completed">
+            <div>Details</div>
+            <div>{{fa-icon "check-circle"}}</div>
+          </div>
         {{/if}}
-        {{#if (eq step 2)}}
-          <div class="step-connector connector-blue">
+      {{/if}}
+      {{#if (eq step 1)}}
+        <div class="step-connector connector-blue">
+          <hr />
+        </div>
+        <div class="step step-current">
+          <div class='step-name'>Venue</div>
+          <div>{{fa-icon "circle-o"}}</div>
+        </div>
+      {{else}}
+        {{#if (eq step 0)}}
+          <div class="step-connector">
             <hr />
           </div>
-          <div class="step step-current">
-            <div>Approval</div>
+          <div class="step">
+            <div>Venue</div>
             <div>{{fa-icon "circle-o"}}</div>
           </div>
         {{else}}
           <div class="step-connector">
             <hr />
           </div>
-          <div class="step">
-            <div>Approval</div>
-            <div>{{fa-icon "circle-o"}}</div>
+          <div class="step step-completed">
+            <div>Venue</div>
+            <div>{{fa-icon "check-circle"}}</div>
           </div>
         {{/if}}
-      </div>
+      {{/if}}
+      {{#if (eq step 2)}}
+        <div class="step-connector connector-blue">
+          <hr />
+        </div>
+        <div class="step step-current">
+          <div class='step-name'>Approval</div>
+          <div>{{fa-icon "circle-o"}}</div>
+        </div>
+      {{else}}
+        <div class="step-connector">
+          <hr />
+        </div>
+        <div class="step">
+          <div>Approval</div>
+          <div>{{fa-icon "circle-o"}}</div>
+        </div>
+      {{/if}}
+    </div>
 
-      <div class="tab-content">
+    <div class="tab-content">
 
-        {{#if (eq step 0)}}
+      {{#if (eq step 0)}}
 
-          <div class="nw-form-section">
-            <div class="nw-form-section-icon">
-              <i class="fa fa-bullhorn" />
+        <div class="nw-form-section">
+          <div class="nw-form-section-icon">
+            <i class="fa fa-bullhorn" />
+          </div>
+          <div class="nw-form-section-content">
+            <div class="form-group">
+              {{nw-form-input
+                name='name'
+                label='What is the name of your event?'
+                type='text'
+                value=name
+                errorMessage=nameError
+                submit=(action 'nameValueChanged')
+                placeholder='My New Event...'
+              }}
             </div>
-            <div class="nw-form-section-content">
+            <div class="form-group">
+              <label for='event-description' class='form-group'>Event details:</label>
+              <textarea id="event-description" name='description' class='form-control' onchange={{action 'descriptionChanged' value="target.value"}} rows=3 />
+            </div>
+          </div>
+        </div>
+        <div class="nw-form-section">
+          <div class="nw-form-section-icon">
+            <i class="fa fa-calendar" />
+          </div>
+          <div class="nw-form-section-content">
+            <div class="form-group side-by-side">
+              <div>
+                <label for='event-date' class='form-group'>What day is the event?</label>
+                <input id="event-date" name='date' type='date' class='form-control'
+                  onchange={{action 'startDateChanged' value="target.value"}}
+                  value={{startDate}}
+                  min='1999-07-01'
+                />
+              </div>
+              <div>
+                <label for='event-time' class='form-group'>What time is the event?</label>
+                <input id="event-time" name='time' type='time' class='form-control'
+                  onchange={{action 'startTimeChanged' value="target.value"}}
+                  value={{startTime}}
+                />
+              </div>
+            </div>
+            <div class="form-group nw-label-flex">
+              <div class="nw-left-label">
+                <label for="timeZone">Time zone:</label>
+              </div>
+              <div class="select-container">
+                <select id='timeZone' name='timeZone'
+                  class='form-control'
+                  onchange={{action 'timeZoneChanged' value="target.value"}}>
+                  {{#each timeZoneOptions as |tz|}}
+                    {{#if (eq tz.value currentUser.user.timeZone)}}
+                      <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                    {{else}}
+                      <option value="{{tz.value}}">{{tz.name}}</option>
+                    {{/if}}
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+
+            <p>Duration</p>
+            <div class="form-group nw-label-flex">
+              <div class="nw-left-label">
+                <label for="hours">
+                  hours:
+                </label>
+              
+              </div>
+              <div class="select-container">
+                <select id='hours' name='hours'
+                  class={{concat 'form-control' (if showDurationError ' is-invalid')}}
+                  onchange={{action 'hoursChanged' value="target.value"}}>
+                  <option value='0'>0 hours</option>
+                  <option value='1'>1 hour</option>
+                  <option value='2' selected>2 hours</option>
+                  <option value='3'>3 hours</option>
+                  <option value='4'>4 hours</option>
+                  <option value='5'>5 hours</option>
+                  <option value='6'>6 hours</option>
+                  <option value='7'>7 hours</option>
+                  <option value='8'>8 hours</option>
+                  <option value='9'>9 hours</option>
+                  <option value='10'>10 hours</option>
+                  <option value='11'>11 hours</option>
+                  <option value='12'>12 hours</option>
+                </select>
+              </div>
+              <div class="nw-left-label">
+             
+                <label for="minutes">
+                  minutes:
+                </label>
+              
+              </div>
+           
+              <div class="select-container">
+                <select id='minutes' name='minutes'
+                  class={{concat 'form-control' (if showDurationError ' is-invalid')}}
+                  onchange={{action 'minutesChanged' value="target.value"}}>
+                  <option value='0' selected>0 minutes</option>
+                  <option value='5'>5 minutes</option>
+                  <option value='10'>10 minutes</option>
+                  <option value='15'>15 minutes</option>
+                  <option value='20'>20 minutes</option>
+                  <option value='25'>25 minutes</option>
+                  <option value='30'>30 minutes</option>
+                  <option value='35'>35 minutes</option>
+                  <option value='40'>40 minutes</option>
+                  <option value='45'>45 minutes</option>
+                  <option value='50'>50 minutes</option>
+                  <option value='55'>55 minutes</option>
+                </select>
+              </div>
+              {{#if showDurationError}}
+                <div class="invalid-feedback">{{durationErrorMessage}}</div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      {{else if (eq step 1)}}
+        <div class="nw-form-section">
+          <div class="nw-form-section-icon">
+            <i class="fa fa-laptop" />
+          </div>
+          <div class="nw-form-section-content">
+            {{#if eventTypeOnline}}
               <div class="form-group">
                 {{nw-form-input
-                  name='name'
-                  label='What is the name of your event?'
+                  name='venueUrl'
+                  label='URL where people may participate in this event:'
                   type='text'
-                  value=name
-                  errorMessage=nameError
-                  submit=(action 'nameValueChanged')
-                  placeholder='My New Event...'
+                  value=venueUrl
+                  errorMessage=venueUrlError
+                  submit=(action 'venueUrlChanged')
+                  placeholder='http://writing_event.com'
                 }}
               </div>
-              <div class="form-group">
-                <label for='name' class='form-group'>Event details:</label>
-                <textarea name='description' class='form-control' onchange={{action 'descriptionChanged' value="target.value"}} rows=3 />
-              </div>
-            </div>
-          </div>
-          <div class="nw-form-section">
-            <div class="nw-form-section-icon">
-              <i class="fa fa-calendar" />
-            </div>
-            <div class="nw-form-section-content">
-              <div class="form-group side-by-side">
-                <div>
-                  <label for='date' class='form-group'>What day is the event?</label>
-                  <input name='date' type='date' class='form-control'
-                    onchange={{action 'startDateChanged' value="target.value"}}
-                    value={{startDate}}
-                    min='1999-07-01'
-                  />
-                </div>
-                <div>
-                  <label for='time' class='form-group'>What time is the event?</label>
-                  <input name='time' type='time' class='form-control'
-                    onchange={{action 'startTimeChanged' value="target.value"}}
-                    value={{startTime}}
-                  />
-                </div>
-              </div>
-              <div class="form-group nw-label-flex">
-                <div class="nw-left-label">
-                  Time zone:
-                </div>
-                <div class="select-container">
-                  <select id='timeZone' name='timeZone'
-                    class='form-control'
-                    onchange={{action 'timeZoneChanged' value="target.value"}}>
-                    {{#each timeZoneOptions as |tz|}}
-                      {{#if (eq tz.value currentUser.user.timeZone)}}
-                        <option value="{{tz.value}}" selected>{{tz.name}}</option>
-                      {{else}}
-                        <option value="{{tz.value}}">{{tz.name}}</option>
-                      {{/if}}
-                    {{/each}}
-                  </select>
-                </div>
-              </div>
-              <div class="form-group nw-label-flex">
-                <div class="nw-left-label">
-                  Duration:
-                </div>
-                <div class="select-container">
-                  <select id='hours' name='hours'
-                    class={{concat 'form-control' (if showDurationError ' is-invalid')}}
-                    onchange={{action 'hoursChanged' value="target.value"}}>
-                    <option value='0'>0 hours</option>
-                    <option value='1'>1 hour</option>
-                    <option value='2' selected>2 hours</option>
-                    <option value='3'>3 hours</option>
-                    <option value='4'>4 hours</option>
-                    <option value='5'>5 hours</option>
-                    <option value='6'>6 hours</option>
-                    <option value='7'>7 hours</option>
-                    <option value='8'>8 hours</option>
-                    <option value='9'>9 hours</option>
-                    <option value='10'>10 hours</option>
-                    <option value='11'>11 hours</option>
-                    <option value='12'>12 hours</option>
-                  </select>
-                </div>
-                <div class="select-container">
-                  <select id='minutes' name='minutes'
-                    class={{concat 'form-control' (if showDurationError ' is-invalid')}}
-                    onchange={{action 'minutesChanged' value="target.value"}}>
-                    <option value='0' selected>0 minutes</option>
-                    <option value='5'>5 minutes</option>
-                    <option value='10'>10 minutes</option>
-                    <option value='15'>15 minutes</option>
-                    <option value='20'>20 minutes</option>
-                    <option value='25'>25 minutes</option>
-                    <option value='30'>30 minutes</option>
-                    <option value='35'>35 minutes</option>
-                    <option value='40'>40 minutes</option>
-                    <option value='45'>45 minutes</option>
-                    <option value='50'>50 minutes</option>
-                    <option value='55'>55 minutes</option>
-                  </select>
-                </div>
-                {{#if showDurationError}}
-                  <div class="invalid-feedback">{{durationErrorMessage}}</div>
-                {{/if}}
-              </div>
-            </div>
-          </div>
-        {{else if (eq step 1)}}
-          <!--<div class="form-group">
-            <p>Is this event in-person, online, or both?</p>
-            {{#if showEventTypeError}}
-              <div class="ext-invalid-feedback">{{eventTypeErrorMessage}}</div>
             {{/if}}
           </div>
-          <div class="nw-form-section">
-            <div class="nw-form-section-icon">
-              <i class="fa fa-map-marker" />
-            </div>
-            <div class="nw-form-section-content">
-              <div class="form-group">
-                <label class="nw-checkbox-container">In-person
-                  <input
-                    type="checkbox"
-                    name="eventTypeInPerson"
-                    id="eventTypeInPerson"
-                    class="form-control"
-                    checked={{eventTypeInPerson}}
-                    onchange={{action 'eventTypeInPersonChanged' value="target.checked"}}
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              {{#if eventTypeInPerson}}
-                {{#if hasLocations}}
-                  <div class="form-group select-container">
-                    <select name='venueSelect' id='venueSelect' class='form-control'
-                      onchange={{action 'locationChanged' value="target.value"}}
-                    >
-                      <option value="0">Select or add a venue...</option>
-                      {{#each acceptedLocations as |c|}}
-                        <option value="{{c.id}}">{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
-                      {{/each}}
-                      <option value="-1">+ Add a new venue</option>
-                    </select>
-                    {{#if showVenueError}}
-                      <div class="ext-invalid-feedback">{{venueErrorMessage}}</div>
-                    {{/if}}
-                  </div>
-                {{else}}
-                  <div class="form-group">
-                    <div class="select-container">
-                      <select id='associateSelect' class='form-control'
-                        onchange={{action 'locationChanged' value="target.value"}}
-                      >
-                        <option value="0">Select...</option>
-                        <option value="-1">+ Add a new venue</option>
-                      </select>
-                    </div>
-                    {{#if showVenueError}}
-                      <div class="ext-invalid-feedback">{{venueErrorMessage}}</div>
-                    {{/if}}
-                  </div>
-                {{/if}}          
-                {{#if addingLocation}}
-                  <div class="form-group">
-                    {{nw-form-input
-                      name='venueName'
-                      label='What is the venue called?'
-                      type='text'
-                      value=venueName
-                      errorMessage=venueNameError
-                      submit=(action 'venueNameChanged')
-                      placeholder='E.g. "Nanoville Library"'
-                    }}
-            
-                  </div>
-                  <div class="form-group">
-                    <label for='time' class='form-group'>Street Address (begin typing, then select the correct option)</label>
-                    {{place-autocomplete-field
-                      value=address2
-                      inputClass= 'place-autocomplete--input form-control ember-text-field'
-                      placeChangedCallback=(action "placeChanged")
-                    }}
-                    {{#if showLocationError}}
-                      <div class="ext-invalid-feedback">{{locationErrorMessage}}</div>
-                    {{/if}}
-                  </div>
-                {{/if}}
-              {{/if}}
-            </div>
-          </div>
-          <hr />-->
-          <div class="nw-form-section">
-            <div class="nw-form-section-icon">
-              <i class="fa fa-laptop" />
-            </div>
-            <div class="nw-form-section-content">
-              <!--<div class="form-group">
-                <label class="nw-checkbox-container">Online
-                  <input
-                    type="checkbox"
-                    name="eventTypeOnline"
-                    id="eventTypeOnline"
-                    class="form-control"
-                    checked={{eventTypeOnline}}
-                    onchange={{action 'eventTypeOnlineChanged' value="target.checked"}}
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>-->
-              {{#if eventTypeOnline}}
-                <div class="form-group">
-                  {{nw-form-input
-                    name='venueUrl'
-                    label='URL where people may participate in this event:'
-                    type='text'
-                    value=venueUrl
-                    errorMessage=venueUrlError
-                    submit=(action 'venueUrlChanged')
-                    placeholder='http://writing_event.com'
-                  }}
-                </div>
-              {{/if}}
-            </div>
-          </div>
-        {{else}}
-          <p><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
-        {{/if}}
-      </div>
-
-    {{/modal.body}}
-    {{#modal.footer}}
-
-      <input type="button" class="nano-button" {{action "changeStep"}} value={{if (eq step 1) "Submit Event for Approval" (if (eq step 0) "Next: Venue" (if (eq step 2) "Close"))}} />
-      {{#if (not-eq step 2)}}
-        <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
+        </div>
+      {{else}}
+        <p role="alert"><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
       {{/if}}
-    {{/modal.footer}}
+    </div>
+  {{/modal.body}}
+  {{#modal.footer}}
+    <input type="button" class="nano-button" {{action "changeStep"}} value={{if (eq step 1) "Submit Event for Approval" (if (eq step 0) "Next: Venue" (if (eq step 2) "Close"))}} />
+    {{#if (not-eq step 2)}}
+      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
+    {{/if}}
+  {{/modal.footer}}
 {{/bs-modal}}

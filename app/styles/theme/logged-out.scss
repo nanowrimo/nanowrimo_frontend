@@ -143,6 +143,14 @@ main { margin-top: 90px; }
 .container {clear: both; margin: 0 auto; max-width: 80rem; padding: 0 1.25rem; position: relative;} 
 .small-container {clear: both; margin: 0 auto; max-width: 52.75rem; padding: 0 1.25rem; position: relative;} 
 
+.store-blue-lo{
+    display: flex;
+    background: $nw-darkblue;
+    -webkit-border-radius: 21px 0px 0px 21px;
+          -moz-border-radius: 21px 0px 0px 21px;
+          border-radius: 21px 0px 0px 21px;
+}
+
 /* Button Styles */
 .btn {border-radius: 0.375rem;letter-spacing: 0.0181rem;line-height: 1.375rem;padding: 0.4375rem 0.875rem;text-align: center;text-decoration: none;text-transform: uppercase;display: inline-block;font-family: "Source Sans Pro Bold";transition: 0.5s;position: relative;z-index: 1;}
 .btn-green {background: linear-gradient($nw-mediumgreen, $nw-darkgreen);border:solid 0.0625rem $nw-darkgreen;color:$nw-lightblue}
@@ -436,7 +444,13 @@ footer .link:hover, footer .social:hover { opacity: .7; }*/
 /* Stats */
 .stats { overflow: hidden; }
 .stats .background {height:36.25rem;width:100%;display: block;}
-.stats .stat-wrapper {display: flex;align-items: center;justify-content: center;margin-top: -4.375rem;}
+.stats .stat-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -4.375rem;
+  flex-wrap: wrap;
+}
 .stats .stat-wrapper .stat {background: #FFF;border:solid 0.0625rem $nw-lightgreyblue;box-shadow: 0 0.1875rem 0.875rem $nw-darkblue10;border-radius: 0.375rem;padding:1.75rem;text-align: center;margin-right:1.75rem;width:calc(18.6875rem - 2.5rem);margin-bottom:1.75rem;}
 .home-page .stats .stat-wrapper .stat:nth-last-of-type(1) {margin-right:0;}
 .stats .stat-wrapper .stat .number {font-family: "Source Serif Pro Bold";font-size:3.125rem;color:$nw-mediumgreen;width:100%}

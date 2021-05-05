@@ -56,7 +56,7 @@
         line-height: 35px;
       }
     }
-    .dropdown-item:hover, .dropdown-item.active {
+    .dropdown-item:hover, .dropdown-item.active, .dropdown-item:focus {
       background-color: $nw-darkblue;
       .dropdown-icon {
         color: $nw-white;
@@ -172,6 +172,7 @@
     .container-fluid {
       
       .navbar-brand.text-logo {
+        height: 48px;
         flex: 0 0 220px;
         padding-top: 0px;
         padding-bottom: 0px;
@@ -180,21 +181,26 @@
         @media (max-width: $screen-md-max) {
           flex: 0 0 144px;
           margin-left: -10px;
+          height: 36px;
           img {
             width: 144px;
             height: 36px;
           }
+        }
+        &:hover,&:focus {
+          background-color: $nw-mediumblue;
+          outline: 0;
         }
       }
       .dropdown-toggle {
         font-family: 'SansBold', sans-serif;
         font-size: 14px;
         color: $nw-darkbrown;
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
         letter-spacing: 0;
         text-align: center;
-        line-height: 22px;
+        line-height: 32px;
         text-transform: uppercase;
         &.user-menu {
           font-family: 'SansRegular', sans-serif;
@@ -203,8 +209,21 @@
       }
       .nav {
         li.nav-item {
+          a, button {
+            &:hover, &:active, &:focus {
+              background-color: $nw-darkblue;
+              color: $nw-white;
+              outline: 0;
+            }
+          }
+          margin-top: -10px;
+          margin-bottom: -10px;
           margin-left: 1rem;
           margin-right: 1rem;
+        }
+        button {
+          border-radius: 0;
+          height: 48px;
         }
         .dropdown {
           @media (max-width: $screen-md-max) {
@@ -315,7 +334,7 @@
         line-height: 23px;
         &.button-clear {
           width: 32px;
-          height: 38px;
+          height: 48px;
           border: 0;
           background-image: none;
           background-color: transparent;

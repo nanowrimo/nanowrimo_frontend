@@ -1,7 +1,7 @@
 .mobile-menu-logged-out {
   .menu-trigger {
     float: right;
-    a {
+    button {
       color: $nw-darkgreen;
       font-size: 28px;
       line-height: 38px;
@@ -11,8 +11,10 @@
     top: 0px;
     
     &.display {
+      visibility: visible;
       right: 0px;
     }
+
     .menu-close-trigger {
       float: right;
     }

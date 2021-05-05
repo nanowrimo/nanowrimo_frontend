@@ -64,6 +64,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-modal-dialog": "^3.0.1",
     "ember-moment": "^8.0.0",
+    "ember-page-title": "^6.2.1",
     "ember-place-autocomplete": "^2.0.1",
     "ember-power-select": "^4.0.0-beta.4",
     "ember-power-select-with-create": "^0.7.0",
@@ -91,5 +92,6 @@
   },
   "ember": {
     "edition": "octane"
-  }
+  },
+  "dependencies": {}
 }

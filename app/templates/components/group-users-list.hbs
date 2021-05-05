@@ -1,12 +1,12 @@
 <div class="nw-card-header">
   <div class="nw-card-title">{{cardLabel}}</div>
   <div class="nw-card-actions nw-card-actions-right">
-    {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
-      {{#bg.button type="default" value=true}}{{fa-icon "users"}}{{/bg.button}}
-      {{#if canInviteUsers}}
-        {{#bg.button type="default" value=false}}{{fa-icon "user-plus"}}{{/bg.button}}
-      {{/if}}
-    {{/bs-button-group}}
+    {{#if canInviteUsers}}
+      {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
+        {{#bg.button type="default" value=true}}<span class="sr-only">Display Users</span>{{fa-icon "users"}}{{/bg.button}}
+        {{#bg.button type="default" value=false}}<span class="sr-only">Add Users</span>{{fa-icon "user-plus"}}{{/bg.button}}
+      {{/bs-button-group}}
+    {{/if}}
   </div>
 </div>
 <div class="nw-card-content" style="padding: 0px;">

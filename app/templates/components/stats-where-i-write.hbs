@@ -4,12 +4,13 @@
 <div class="nw-card-content">
   <div class="nw-card-icon">
     {{#if svgPath}}
-      <img src="{{svgPath}}" />
+    <img src="{{svgPath}}" alt="" />
     {{/if}}
   </div>
   {{#if writingLocation}}
-    <div class="nw-promo-text">You've written mostly<div class="nw-highlight">{{writingLocation}}!</div></div>
+  <div class="nw-promo-text">You've written mostly<div class="nw-highlight">{{writingLocation}}!</div>
+  </div>
   {{else}}
-    <div class="nw-promo-text">Where in the world is {{user.name}} writing? We don't know yet.</div>
+  <div class="nw-promo-text">Where in the world is {{user.name}} writing? We don't know yet.</div>
   {{/if}}
 </div>

@@ -1,31 +1,34 @@
 <div class='nw-flippy-wrapper'>
-  <div class='nw-card nw-card-white nw-card-face-back'>
+  <div class='nw-card nw-card-white nw-card-face-back' aria-hidden={{ariaHiddenBack}}>
     <div class='nw-card-header'>
       <div class='nw-card-actions'>
         <div class='nw-card-model-actions'>
-          <div class="nw-flippy-card-toggle" {{action "toggleSubcard"}}>
+          <button class="nw-flippy-card-toggle nw-button-undecorated" {{action "toggleSubcard"}} aria-label="show less" style={{backToggleStyle}}>
             <div>{{fa-icon "repeat"}}</div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
     <div class='nw-card-content'>
-      <div class='nw-card-scrollable'>{{{post.attributes.body}}}</div>
+      <div class='nw-card-scrollable' tabindex=0>{{{post.attributes.body}}}</div>
     </div>
   </div>
-  <div class='nw-card nw-card-white nw-card-face-front'>
+  <div class='nw-card nw-card-white nw-card-face-front' aria-hidden={{ariaHiddenFront}}>
     <div class='nw-card-header'>
       <div class='nw-card-actions'>
         <div class='nw-card-model-actions'>
-          <div class="nw-flippy-card-toggle" {{action "toggleSubcard"}}>
+           <button class="nw-flippy-card-toggle nw-button-undecorated" {{action "toggleSubcard"}} aria-label="show more" style={{frontToggleStyle}}>
             <div>{{fa-icon "repeat"}}</div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
     <div class='nw-card-content nw-centered'>
       <div class="nw-card-icon nw-centered">
-        <div class="nw-avatar-irregular" style="{{safeSrc}}">
+        <div class="nw-avatar-irregular">
+          {{#if imgSrc }}
+            <img class="nw-avatar-img" src={{imgSrc}} alt={{{post.attributes.headline}}}>
+          {{/if}}
         </div>
       </div>
       <div class='nw-card-headline nw-centered'>{{{post.attributes.headline}}}</div>

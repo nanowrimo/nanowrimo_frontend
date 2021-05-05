@@ -1,12 +1,12 @@
 <div class="nw-item-social">
   {{#each socialLinks as |link|}}
-    <a href={{link.url}} class="social-button">{{fa-icon link.service}}</a>
+    <a href={{link.url}} class="social-button" aria-label={{link.service}} target="_blank">{{fa-icon link.service}}</a>
   {{/each}}
 </div>
 {{#each otherLinks as |link|}}
   <div class="nw-item-link">
     {{#if link.label}}
-      <a href={{link.url}} target="_blank"><i class="fa fa-link" style="font-size: 14px;"></i>{{link.label}}</a>
+      <a href={{link.url}} aria-label={{link.label}} target="_blank"><i class="fa fa-link" style="font-size: 14px;"></i>{{link.label}}</a>
     {{else}}
       <a href={{link.url}} target="_blank">{{link.url}}</a>
     {{/if}}
