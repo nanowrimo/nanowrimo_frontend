@@ -14,10 +14,18 @@
   </div>
   <div class='menu-items'>
     <div class="menu-item">
-      {{#link-to "sign-up"}}Sign Up{{/link-to}}
+      {{#link-to "sign-up"}}
+      <span {{action "hideMenu"}}>
+        Sign Up
+      </span>
+      {{/link-to}}
     </div>
     <div class="menu-item">
-      {{#link-to "sign-in"}}Sign In{{/link-to}}
+      {{#link-to "sign-in"}}
+      <span {{action "hideMenu"}}>
+        Sign In
+      </span> 
+      {{/link-to}}
     </div>
     <div class="menu-item">
       <a href="https://store.nanowrimo.org/collections/shop" target='_blank'>
