@@ -1,6 +1,6 @@
 <div class="nw-card-header">
   <div class="nw-card-title">My Overall Progress</div>
-  <div class="nw-card-actions nw-card-actions-left" aria-hidden=true>
+  <div class="nw-card-actions nw-card-actions-left" >
     {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
       {{#bg.button type="default" value=true}}
         {{fa-icon "line-chart"}}
