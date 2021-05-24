@@ -9,7 +9,7 @@ export default ChartBaseComponent.extend({
     this._super(...arguments);
     this.set('chartType', 'line');
   },
-   tableSelected: computed("chartType", function(){
+  tableSelected: computed("chartType", function(){
     return this.get('chartType')=="table";
   }),
   lineChartSelected: computed("chartType", function(){
