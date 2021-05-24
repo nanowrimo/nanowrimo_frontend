@@ -92,13 +92,10 @@ export default ChartBaseComponent.extend({
     switch (this.get('chartType') ){
       case 'table':   
         return '';
-        break;
       case "line": 
         return "spline";
-        break;
       case "bar": 
         return "column";
-        break;
     }
   }),
   chartId: computed('chartType', function() {
