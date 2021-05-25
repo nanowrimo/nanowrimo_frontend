@@ -1344,7 +1344,7 @@ box-shadow: 0rem 0.1875rem 0.875rem $nw-darkblue10; padding: 2.625rem 0; text-al
 }
 @media only screen and (max-width: 780px) {
     header .top {display:none;}
-    header .mobile-logo {display:block;}
+    header .mobile-logo {display:block; margin-top: 14%;}
     header .mobile-nav-menu {display: block;}
     header .main-nav {align-items: center;padding:0 28px;}
     header .company-logo {display:none}
