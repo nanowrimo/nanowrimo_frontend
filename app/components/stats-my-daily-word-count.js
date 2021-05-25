@@ -3,10 +3,20 @@ import { get,computed } from '@ember/object';
 import moment from 'moment';
 
 export default ChartBaseComponent.extend({
+  chartType: null,
   
-   displayTabularData: computed("primaryDisplay", function(){
-    let primaryDisplay = this.get('primaryDisplay');
-    return primaryDisplay=="TABLE";
+  init() {
+    this._super(...arguments);
+    this.set('chartType', 'line');
+  },
+  tableSelected: computed("chartType", function(){
+    return this.get('chartType')=="table";
+  }),
+  lineChartSelected: computed("chartType", function(){
+    return this.get('chartType')=="line";
+  }),
+  barChartSelected: computed("chartType", function(){
+    return this.get('chartType')=="bar";
   }),
   
   tableRows: computed( "userDailyCounts.[]", function(){
@@ -40,13 +50,20 @@ export default ChartBaseComponent.extend({
     return cData;
   }),
 
-  myChartType: computed('primaryDisplay',function() {
-    if (get(this,'primaryDisplay')) {
-      return 'spline';
-    } else {
-      return 'column';
+  myChartType: computed('chartType',function() {
+    switch (this.get('chartType') ){
+      case 'table':   
+        return '';
+      case "line": 
+        return "spline";
+      case "bar": 
+        return "column";
     }
   }),
+  chartId: computed('chartType', function() {
+    return `pane-${this.get('chartType')}-chart`;
+  }),
+  
   chartOptions: computed('xAxisRange', function() {
     // Set _this equal to component for later reference
     // let _this = this;
@@ -167,5 +184,10 @@ export default ChartBaseComponent.extend({
     
   }),
   
+  actions: {
+    setChartType: function(val){
+      this.set('chartType', val);
+    }
+  }
   
 });

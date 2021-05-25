@@ -1,21 +1,28 @@
 <div class="nw-card-header">
   <div class="nw-card-title">My Overall Progress</div>
-  <div class="nw-card-actions nw-card-actions-left" aria-hidden=true>
-    {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
-      {{#bg.button type="default" value=true}}
-        {{fa-icon "line-chart"}}
-        <span class="sr-only">Display line chart</span>
-      {{/bg.button}}
-      {{#bg.button type="default" value=false}}
-        {{fa-icon "bar-chart"}}
+  <div class="nw-card-actions nw-card-actions-left" >
+    <div class='btn-group' role='tablist'>
+        <button class="btn {{if lineChartSelected 'active' ''}}" 
+          {{action "setChartType" 'line'}} role='tab'
+          aria-contols='pane-line-chart' aria-selected={{lineChartSelected}}>
+          {{fa-icon "line-chart"}}
+          <span class='sr-only'>Display Line Chart</span>
+        </button>
+        
+        <button class="btn {{if barChartSelected 'active' ''}}" 
+          {{action "setChartType" 'bar'}} role='tab'
+          aria-controls='pane-bar-chart' aria-selected={{barChartSelected}}>
+          {{fa-icon "bar-chart"}}
         <span class="sr-only">Display bar chart</span>
-      {{/bg.button}}
-      {{#bg.button type="default" value="TABLE"}}
-        {{fa-icon "table"}}
+        </button>
+        
+        <button class="btn {{if tableSelected 'active' ''}}" 
+          {{action "setChartType" 'table'}} role='tab'
+          aria-controls='pane-table' aria-selected={{tableSelected}}>
+          {{fa-icon "table"}}
         <span class="sr-only">Display tabular data</span>
-      {{/bg.button}}
-      
-    {{/bs-button-group}}
+        </button>
+      </div>
   </div>
 </div>
 <div class="nw-card-content">
@@ -29,8 +36,8 @@
       </tr>
     {{/each}}
   </table>
-  {{#if displayTabularData}}
-    <table class='stats-table' tabindex=0>
+  {{#if tableSelected}}
+    <table id='pane-table' class='stats-table' tabindex=0>
       <tr><th scope="col">Date</th><th scope="col">Total Count</th><th scope="col">Goal</th></tr>
       {{#each tableRows as |row|}}
         <tr>
@@ -41,7 +48,7 @@
       {{/each}}
     </table>
   {{else}}
-    <div aria-hidden=true>
+    <div id={{chartId}}>
       {{high-charts content=chartData chartOptions=chartOptions theme=theme }}
     </div>
   {{/if}}

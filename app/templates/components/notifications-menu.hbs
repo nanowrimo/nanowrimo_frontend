@@ -1,13 +1,15 @@
 {{#bs-nav class="nw-nav-notify-buttons" as |nav|}}
   {{#nav.dropdown as |dd|}}
-    <button class="button-clear" aria-label="Go to your nanomessages" {{action 'linkToNanomessages'}}>
+    <a class="button-clear" {{action 'linkToNanomessages'}}>
+      <span class='sr-only'>nanomessages</span>
       <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
       <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
-    </button>
+    </a>
   {{/nav.dropdown}}
 
   {{#nav.dropdown as |dd|}}
-    <button class="button-clear" aria-label="Display your notifications." {{action 'toggleNotifications'}}>
+    <button class="button-clear" {{action 'toggleNotifications'}}>
+      <span class='sr-only'>Notifications</span>
       {{#if (media "isDesktop")}}
         <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
       {{/if}}

@@ -2,11 +2,16 @@
   button {
     font-size: 28px !important;
     &.menu-close {
-      color: white;
+      color: white; 
+      &:focus {
+        border: 1px solid white !important;
+        border-radius: 5px !important;
+      }  
     }
     &.menu-open {
       color: $nw-mediumgreen;;
-    }    
+    } 
+     
   }
 }
 

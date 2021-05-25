@@ -10,7 +10,7 @@ export default Service.extend({
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
   userSlug: reads('currentUser.user.slug'),
-  sideMenuIsOpen: true,
+  sideMenuIsOpen: false,
   homeUrl: "authenticated",
   homeRegionItem: computed('currentUser.user.homeRegion', function () {
     let region = this.get('currentUser.user.homeRegion');
