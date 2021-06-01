@@ -13,6 +13,7 @@ export default Component.extend({
   */
   
   
+  
   isNaNo: computed('badge', function() {
     //get the badge 
     let b = this.get('badge');
@@ -27,7 +28,7 @@ export default Component.extend({
 
   winnerRoute: computed('isNaNo', function(){
     let i = this.get('isNaNo');
-    let route = (i) ? "authenticated.nano-winner-2020" : "authenticated.camp-nanowrimo-april-2021-winner";
+    let route = (i) ? "authenticated.nano-winner-2020" : "authenticated.camp-nanowrimo-july-2021-winner";
     return route;
   }),
   

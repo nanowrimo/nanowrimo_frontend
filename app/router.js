@@ -98,6 +98,7 @@ Router.map(function() {
     //temporary route to camp-nanowrimo-april-2020-winner 
     this.route('camp-nanowrimo-july-2020-winner');
     this.route('camp-nanowrimo-april-2020-winner');
+    this.route('camp-nanowrimo-july-2021-winner');
     this.route('camp-nanowrimo-april-2021-winner');
     this.route('nano-winner-2019');
     this.route('nano-winner-2020');
