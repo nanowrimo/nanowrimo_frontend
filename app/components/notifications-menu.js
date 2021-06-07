@@ -10,7 +10,7 @@ export default Component.extend({
   notificationsService: service(),
   media: service(),
   currentUser: service(),
-  oldWonAt: null,
+  initialWinnerDisplayed: false,
   showBadgeSplash: false,
   showWinnerSplash: false,
   badgeForSplash: null,
@@ -52,22 +52,28 @@ export default Component.extend({
     else return "";
   }),
   
-  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.currentCount', function() {
+  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.{winnerBadge,wonAt}', function() {
+    // get the winner badge
+    let winnerBadge = this.get('currentUser.user.primaryProject.currentProjectChallenge.winnerBadge');
+    let wonAt = this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
     //get the eventType 
     let eventType = this.get('currentUser.user.primaryProject.currentProjectChallenge.eventType');
+    
+    
     // is this nano or camp?
-    if (eventType<2) {
-      let user = this.get('currentUser.user')
-      let projectChallenge = user.primaryProject.currentProjectChallenge;
-      // get the wonAt
-      let wonAt = projectChallenge.wonAt;
+    if (eventType<2 && wonAt && winnerBadge) {
       // get the current time in the user's timezone
-      let tz = user.timeZone;
-      let curTime = moment().tz(tz);
+      let tz = this.get('currentUser.user.timeZone');
+      // get the wonAt
+      let wonMoment = moment(wonAt);
+      
+      let curTime = moment().tz(tz).local();
       // is the curTime < 2 minutes from the wonAt?
-      let diff = curTime.diff(wonAt);
-      if (diff <=2000) {
-        this.set('badgeForSplash', projectChallenge.winnerBadge);
+      
+      let diff = curTime.diff(wonMoment,"seconds");
+      if (diff <=120 && !this.get('initialWinnerDisplayed')) {
+        this.set('initialWinnerDisplayed', true);
+        this.set('badgeForSplash',winnerBadge);
         this.set('showWinnerSplash', true);
       }
     }

@@ -361,8 +361,7 @@ const ProjectChallenge = Model.extend({
       var pcBadge = projectChallengeBadges[i];
       var badge = store.peekRecord('badge', pcBadge.badge_id);
       if (badge.winner) {
-        winnerBadge = badge;
-        break;
+        return badge;
       }
     }
     return winnerBadge;
