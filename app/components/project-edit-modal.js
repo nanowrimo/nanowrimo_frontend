@@ -61,7 +61,6 @@ export default Component.extend({
 
   actions: {
     setActiveTab(val) {
-      console.log(val);
       this.set('activeTab', val);
     },
     confirmDelete(){
