@@ -25,7 +25,7 @@ export default Service.extend({
             return this.get('store').query('group-user',
             {
               filter: { user_id: user.id },
-              group_types: 'buddies,regions',
+              group_types: 'buddies',
               include: 'user,group'
             }).then(() => {
               t.delayUntilGroupsLoaded();
