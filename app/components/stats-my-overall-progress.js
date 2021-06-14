@@ -120,7 +120,7 @@ export default ChartBaseComponent.extend({
         labels: {
           style: {
             color: '#979797',
-            fontSize: 13,
+            fontSize: 18,
           }
         }
       },
@@ -128,10 +128,11 @@ export default ChartBaseComponent.extend({
         title: null,
         endOnTick: false,
         gridLineWidth: 2,
+        gridLineColor: '#939393',
         labels: {
           style: {
-            color: '#b8b8b8',
-            fontSize: 11
+            color: '#979797',
+            fontSize: 18
           }
         }
       },
