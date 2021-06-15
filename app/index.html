@@ -24,6 +24,13 @@
     {{content-for "head-footer"}}
   </head>
   <body>
+    <div id="application-loading-indicator">
+      <div class="nw-list-loading">
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+      Loading...
+    </div>
+
+    </div>
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>
