@@ -81,7 +81,8 @@ export default ChartBaseComponent.extend({
         labels: {
           style: {
             color: '#979797',
-            fontSize: 18,
+            fontSize: 14,
+            fontWeight: "bold"
           }
         }
       },
@@ -93,7 +94,8 @@ export default ChartBaseComponent.extend({
         labels: {
           style: {
             color: '#979797',
-            fontSize: 18
+            fontSize: 14,
+            fontWeight: "bold"
           }
         }
       },
