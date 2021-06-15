@@ -66,7 +66,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   actions: {
-    async loading(transition, originRoute) {
+    async loading(transition, originRoute) {  // eslint-disable-line no-unused-vars
       let controller = this.controllerFor('application');
       controller.set('isLoading', true);
       transition.promise.finally(function() {
