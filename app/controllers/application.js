@@ -44,7 +44,9 @@ export default Controller.extend({
     if (!loading) {
       // remove the loading-indicator from the dom
       let element = document.getElementById('application-loading-indicator');
-      element.remove();
+      if (element) {
+        element.remove();
+      }
     }
   }),
   //routeName: computed('currentPath', function() {
