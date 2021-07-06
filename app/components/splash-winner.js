@@ -11,6 +11,7 @@ export default Component.extend({
   badge: null,  
   extraData: null,
   
+  
   isNaNo: computed('badge', function() {
     //get the badge 
     let b = this.get('badge');

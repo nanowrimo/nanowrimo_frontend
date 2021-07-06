@@ -1,7 +1,8 @@
 import Component from '@ember/component';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import { sort }  from '@ember/object/computed';
+import moment from 'moment';
 
 export default Component.extend({
   store: service(),
@@ -9,12 +10,19 @@ export default Component.extend({
   notificationsService: service(),
   media: service(),
   currentUser: service(),
-  
+  initialWinnerDisplayed: false,
   showBadgeSplash: false,
   showWinnerSplash: false,
   badgeForSplash: null,
   displayNotifications: false,
   badgeExtraData: null,
+  
+  init(){
+    this._super(...arguments);
+    //access the 'currentUser.user.primaryProject.currentProjectChallenge.wonAt' for observing reasons
+    let wonAt =this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
+    this.set('oldWonAt', wonAt);
+  },
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
     let ns = this.get('store').peekAll('notification');
     let newns = [];
@@ -45,6 +53,32 @@ export default Component.extend({
     else return "";
   }),
   
+  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.{winnerBadge,wonAt}', function() {
+    // get the winner badge
+    let winnerBadge = this.get('currentUser.user.primaryProject.currentProjectChallenge.winnerBadge');
+    let wonAt = this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
+    //get the eventType 
+    let eventType = this.get('currentUser.user.primaryProject.currentProjectChallenge.eventType');
+    
+    
+    // is this nano or camp?
+    if (eventType<2 && wonAt && winnerBadge) {
+      // get the current time in the user's timezone
+      let tz = this.get('currentUser.user.timeZone');
+      // get the wonAt
+      let wonMoment = moment(wonAt);
+      
+      let curTime = moment().tz(tz).local();
+      // is the curTime < 2 minutes from the wonAt?
+      
+      let diff = curTime.diff(wonMoment,"seconds");
+      if (diff <=120 && !this.get('initialWinnerDisplayed')) {
+        this.set('initialWinnerDisplayed', true);
+        this.set('badgeForSplash',winnerBadge);
+        this.set('showWinnerSplash', true);
+      }
+    }
+  }),
   actions: {
     
     linkToNanomessages() {

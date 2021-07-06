@@ -213,6 +213,10 @@ button.btn {
     &:hover {
       color: $nw-mediumblue;
     }
+    &:focus {
+      border: 3px solid $nw-mediumblue;
+      color: black;
+    }
     &.is-invalid {
       bottom: 24px;
     }

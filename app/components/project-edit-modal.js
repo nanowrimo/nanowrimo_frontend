@@ -3,7 +3,7 @@ import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
 
-const DEFAULT_TAB = 'overview';
+const DEFAULT_TAB = 'details';
 
 export default Component.extend({
   store: service(),
@@ -60,7 +60,9 @@ export default Component.extend({
   },
 
   actions: {
-    
+    setActiveTab(val) {
+      this.set('activeTab', val);
+    },
     confirmDelete(){
       // set the title
       let title = this.get('project.title');

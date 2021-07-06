@@ -18,7 +18,8 @@ const ProjectChallenge = Model.extend({
   currentCount: attr('number'),
   goal: attr('number'),
   startsAt: attr('string'),
-  endsAt: attr('string'),
+  endsAt: attr('string'), 
+  wonAt: attr('date'),
   writingType: attr('number'),
   unitType: attr('number'),
   eventType: attr('number'),
@@ -345,7 +346,26 @@ const ProjectChallenge = Model.extend({
         this.set('dailyAggregates', aggs);
       });
     });
-  }
+  },
+  
+  winnerBadge: computed('userBadges.[]', function(){
+    //use the store
+    let store = this.get('store');
+    // get the badges
+    let badges = store.peekAll('userBadge'); 
+    let id = parseInt(this.get('id')); 
+    let projectChallengeBadges = badges.filterBy('project_challenge_id', id);
+        let winnerBadge=null;
+    //loop
+    for (var i = 0; i < projectChallengeBadges.length; i++) {
+      var pcBadge = projectChallengeBadges[i];
+      var badge = store.peekRecord('badge', pcBadge.badge_id);
+      if (badge.winner) {
+        return badge;
+      }
+    }
+    return winnerBadge;
+  })
   
 });
 
