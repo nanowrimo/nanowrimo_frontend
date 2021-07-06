@@ -55,6 +55,7 @@ export default Service.extend({
         //display the splash
         r.push('showBadgeSplash');
       }
+      r.push(notification.extraData);
     }
     if(notification.actionType=='BUDDIES_PAGE') {
       this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));

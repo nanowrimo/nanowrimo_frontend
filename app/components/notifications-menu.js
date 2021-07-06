@@ -15,6 +15,7 @@ export default Component.extend({
   showWinnerSplash: false,
   badgeForSplash: null,
   displayNotifications: false,
+  badgeExtraData: null,
   
   init(){
     this._super(...arguments);
@@ -99,6 +100,7 @@ export default Component.extend({
       if (r.length>0) {
         this.set("badgeForSplash", r[0]);
         this.set(r[1], true);
+        this.set('badgeExtraData', r[2]);
       }
       const dn = this.get('displayNotifications');
       this.set('displayNotifications', !dn);
