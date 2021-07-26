@@ -1,0 +1,179 @@
+.nanomessages-panel {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+  align-items: stretch;
+  margin: 0px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 21px;
+  padding-right: 21px;
+}
+.nw-card.nanomessages-card {
+  max-height: 600px;
+  min-height: 100px;
+  .nw-card-header {
+    background-color: #A5D9E4;
+    border-bottom: 1px solid #979797;
+    .nw-card-title {
+      background-color: transparent;
+    }
+  }
+  .nw-card-content.conversation {
+    display: flex;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 0px;
+    .conversation-footer {
+      flex: 0 0 46px;
+      padding: 14px;
+      background-color: #FFF;
+      color: $nw-mediumgrey;
+      .conversation-name {
+        font-family: 'SansBold', sans-serif;
+        color: #3C2109;
+      }
+    }
+    .conversation-content {
+      flex: 1 1 100%;
+      background: $white;
+      padding-left: 28px;
+      padding-right: 28px;
+      margin-left: 0px;
+      margin-right: 0px;
+      width: auto;
+      overflow-y: scroll;
+      -webkit-transition: all 0.6s;
+      transition: all 0.6s;
+      @media(max-width: $screen-sm) {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .nanomessages-container {
+        padding-top: 28px;
+        -webkit-transition: all 0.6s;
+        transition: all 0.6s;
+
+        .nanomessage {
+          opacity: 1;
+          -webkit-transition: all 0.6s;
+          transition: all 0.6s;
+          &.message-new {
+            opacity: 0;
+            height: 0px;
+            margin-bottom: 0px;
+            overflow: hidden;
+          }
+  
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          margin-bottom: 14px;
+          .nw-avatar {
+            width: 36px;
+            margin-right: 7px;
+            img {
+              width: 36px;
+              height: 36px;
+            }
+          }
+          .nanomessage-arrow-left {
+            flex: 0 0 10px;
+            width: 10px;
+            background-image: url('/images/global/nanomessage-left.svg');
+            background-repeat: no-repeat;
+            background-position: 0px 10px;
+          }
+          .nanomessage-arrow-right {
+            flex: 0 0 10px;
+            width: 10px;
+            background-image: url('/images/global/nanomessage-right.svg');
+            background-repeat: no-repeat;
+            background-position: -10px 10px;
+          }
+          .nanomessage-content-container {
+            flex: 1 1 100%;
+            max-width: 527px;
+            .nanomessage-content {
+              padding: 14px;
+              background-color: #DFE4E6;
+              border-radius: 6px;
+              font-size: 16px;
+              line-height: 1.25;
+              text-align: left;
+              color: $nw-darkgrey;
+              overflow-wrap: anywhere;
+              img {
+                max-width: 100%;
+              }
+            }
+            .nanomessage-timesince {
+              line-height: 1.57;
+              letter-spacing: 0.3px;
+              font-size: 14px;
+              margin-top: 4px;
+              color: #767676;
+            }
+            &.nw-no-speech-bubble {
+              flex-wrap: wrap;
+              .nanomessage-content {
+                padding: 0px;
+                font-size: 14px;
+                background-color: transparent;
+                display: flex;
+              }
+              .nanomessage-timesince {
+                padding-left: 0px;
+              }
+            }
+          }
+          &.nanomessage-left {
+            .nanomessage-content-container {
+              .nanomessage-content {
+              }
+              .nanomessage-timesince {
+                text-align: left;
+              }
+            }
+          }
+          &.nanomessage-right {
+            justify-content: flex-end;
+            .nanomessage-content-container {
+              .nanomessage-content {
+                background-color: #D4F5FF;
+              }
+              .nanomessage-timesince {
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+    }
+    .new-message-form {
+      flex: 0 0 154px;
+      padding: 14px;
+      padding-left: 14px;
+      padding-right: 14px;
+      label {
+      }
+      textarea, .nw-message-form {
+        padding: 10px;
+        width: 100%;
+        height: 84px;
+      }
+    }
+  }
+}
+.nw-no-speech-bubble {
+  display: flex;
+  .nw-system-message-image {
+    img {
+      border-radius: 18px;
+      width: 36px;
+    }
+    margin-right: 10px;
+  }
+}

@@ -75,7 +75,7 @@ export default Component.extend({
     }
     return newms;
   }),
-  messageSortingDesc: Object.freeze(['createdAt:desc']),
+  messageSortingDesc: Object.freeze(['createdAt:asc']),
   sortedMessages: sort('filteredMessages','messageSortingDesc'),
   
   showToDiv: computed('group.groupType', function() {

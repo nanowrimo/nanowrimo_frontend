@@ -1,13 +1,6 @@
 {{#if showForm}}
   <div class="new-message-form">
     <form {{action "afterSubmit" this on='submit'}} class="full-width">
-      <div class="form-group">
-        <div
-          id='nw-message-form'
-          class="editable"
-          data-placeholder="What's going on, writer? Type here."
-        ></div>
-      </div>
       {{#if userIsAdmin}}
         {{#if contextNotNanomessages}}
           <div class="form-group inline-checkbox">
@@ -48,6 +41,13 @@
           </div>
         {{/if}}
       {{/if}}
+      <div class="form-group">
+        <div
+          id='nw-message-form'
+          class="editable"
+          data-placeholder="What's going on, writer? Type here."
+        ></div>
+      </div>
       <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
     </form>
     <script>var editor = new MediumEditor('.editable', {
