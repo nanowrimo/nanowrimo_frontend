@@ -2,21 +2,21 @@
   <div class="nw-card-title">My Overall Progress</div>
   <div class="nw-card-actions nw-card-actions-left" >
     <div class='btn-group' role='tablist'>
-        <button class="btn {{if lineChartSelected 'active' ''}}" 
+        <button class="{{if lineChartSelected 'active' ''}}" 
           {{action "setChartType" 'line'}} role='tab'
           aria-contols='pane-line-chart' aria-selected={{lineChartSelected}}>
           {{fa-icon "line-chart"}}
           <span class='sr-only'>Display Line Chart</span>
         </button>
         
-        <button class="btn {{if barChartSelected 'active' ''}}" 
+        <button class="{{if barChartSelected 'active' ''}}" 
           {{action "setChartType" 'bar'}} role='tab'
           aria-controls='pane-bar-chart' aria-selected={{barChartSelected}}>
           {{fa-icon "bar-chart"}}
         <span class="sr-only">Display bar chart</span>
         </button>
         
-        <button class="btn {{if tableSelected 'active' ''}}" 
+        <button class="{{if tableSelected 'active' ''}}" 
           {{action "setChartType" 'table'}} role='tab'
           aria-controls='pane-table' aria-selected={{tableSelected}}>
           {{fa-icon "table"}}

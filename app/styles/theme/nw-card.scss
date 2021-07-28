@@ -200,17 +200,12 @@
           i {
             color: $nw-lightgrey;
           }
-          &.active {
+          &.active, &:focus {
             background-color: none;
             border-bottom: solid 3px $nw-lightorange;
             box-shadow: none;
             i {
               color: $nw-mediumdarkgrey;
-            }
-            &:focus {
-              border-left: 3px solid $nw-lightblue;
-              border-right: 3px solid $nw-lightblue;
-              border-top: 3px solid $nw-lightblue;
             }
           }
           &:hover {
