@@ -40,7 +40,8 @@ export default ChartBaseComponent.extend({
       {
         name: 'My count',
         type: get(this,'myChartType'),
-        color: '#2f3061',
+        //color: '#2f3061',
+        color: '#558d9e',
         
         data: this.get('userData')
       }

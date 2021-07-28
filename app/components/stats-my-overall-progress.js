@@ -52,7 +52,8 @@ export default ChartBaseComponent.extend({
       {
         name: 'My count',
         type: get(this,'myChartType'),
-        color: '#2f3061',
+        //color: '#659dae',
+        color: '#558d9e',
         data: this.get('userDailyTotals')
       }
     ];
@@ -140,7 +141,7 @@ export default ChartBaseComponent.extend({
       },
       plotOptions: {
         series: {
-          color: '#0000aa'
+          color: '#959595'
         },
           spline: {
             marker: {
@@ -166,6 +167,7 @@ export default ChartBaseComponent.extend({
         borderColor: '#d5e2e6',
         borderRadius: 6,
         style: {
+          //color: '#73ab9b'
           color: '#73ab9b'
         }
       },
