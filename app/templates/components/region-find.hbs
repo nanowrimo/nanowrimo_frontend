@@ -29,23 +29,21 @@
 <div class="nw-card g3-col1 g3-row2 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2 wrap-content">
   <div class="nw-card-header">
     <div class="nw-card-title">Find a Region</div>
-    <div class="nw-card-actions nw-card-actions-left" role='tablist'>
-  
-      <div class='btn-group'>
-        <button class="btn {{if primaryDisplay 'active' ''}}" 
+    <div class="nw-card-actions nw-card-actions-left">
+      <div class='btn-group' role='tablist'>
+        <button class="{{if primaryDisplay 'active' ''}}" 
           {{action "setPrimaryDisplay" true}} role='tab'
           aria-contols='pane-search-by-name' aria-selected={{searchByNameSelected}}>
           {{fa-icon "search"}} 
           <span class='sr-only'>Search regions by name</span>
         </button>
-        <button class="btn {{if primaryDisplay '' 'active'}}" 
+        <button class="{{if primaryDisplay '' 'active'}}" 
           {{action "setPrimaryDisplay" false}} role='tab'
           aria-controls='pane-search-by-location' aria-selected={{searchByLocationSelected}}>
           {{fa-icon "map-marker"}}
           <span class='sr-only'>Search regions by location</span>
         </button>
       </div>
-      
     </div>
   </div>
   <div class="nw-card-content no-padding" style="flex-wrap: wrap;">
