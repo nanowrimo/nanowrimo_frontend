@@ -47,8 +47,9 @@
           class="editable"
           data-placeholder="What's going on, writer? Type here."
         ></div>
+        <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
       </div>
-      <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
+      
     </form>
     <script>var editor = new MediumEditor('.editable', {
       paste: {
