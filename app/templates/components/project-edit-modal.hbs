@@ -16,13 +16,13 @@
     }}
       {{#modal.body}}
       <ul class="nav nav-tabs" role="tablist" id='projectEditTabs'>
-        <li class='nav-item {{if (eq activeTab 'details') 'active' ''}}'
+        <li id='details-tab' class='nav-item {{if (eq activeTab 'details') 'active' ''}}'
         role='tab' aria-controls="project-details"
         aria-selected="{{if (eq activeTab 'details') 'true' 'false'}}">
           <a href="#project-details" class="nav-link {{if (eq activeTab 'details') 'active' ''}}"
           {{action "setActiveTab" "details" }}>Details</a>
         </li>
-        <li class='nav-item {{if (eq activeTab 'cover') 'active' ''}}'
+        <li id='cover-tab' class='nav-item {{if (eq activeTab 'cover') 'active' ''}}'
         role='tab' aria-controls="project-cover"
         aria-selected="{{if (eq activeTab 'cover') 'true' 'false'}}" >
           <a href="#project-cover" class="nav-link {{if (eq activeTab 'cover') 'active' ''}}"
@@ -31,7 +31,8 @@
       </ul>
       <div class='tab-content' id='projectEditTabsContent'>
         <div class='tab-pane {{if (eq activeTab 'details') 'show active' ''}}' 
-        id='project-details' role='tabpanel'>
+        id='project-details' role='tabpanel' aria-labeledby="details-tab"
+        tabindex="{{if (eq activeTab 'details') '0' '-1'}}">
                    <div class="form-group">
                 {{f.input
                   label="What is the name of your project?"
@@ -99,7 +100,8 @@
         
         </div>
         <div class='tab-pane {{if (eq activeTab 'cover') 'show active' ''}}' 
-        id='project-cover' role='tabpanel'>
+        id='project-cover' role='tabpanel' aria-labeledby='cover-tab'
+        tabindex="{{if (eq activeTab 'cover') '0' '-1'}}">
           <div class="form-group">
               {{f.imageUpload
                 label="Update your cover image"
