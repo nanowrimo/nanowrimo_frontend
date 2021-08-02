@@ -78,6 +78,7 @@
           {{#nano-side-menu-toggle  classes="menu-open" ariaLabel="Open Menu"}}
             <span aria-hidden="false">{{fa-icon "bars"}}</span>
           {{/nano-side-menu-toggle}}
+          <NwSideMenuModalBg {{action "closeMobileMenu"}} />
         {{/if}}
       {{/if}}
     {{/if}}

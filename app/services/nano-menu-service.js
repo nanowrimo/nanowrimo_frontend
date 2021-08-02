@@ -10,7 +10,7 @@ export default Service.extend({
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
   userSlug: reads('currentUser.user.slug'),
-  sideMenuIsOpen: true,
+  sideMenuIsOpen: false,
   homeUrl: "authenticated",
   homeRegionItem: computed('currentUser.user.homeRegion', function () {
     let region = this.get('currentUser.user.homeRegion');
@@ -82,7 +82,7 @@ export default Service.extend({
   helpLinks: computed(function () {
     let links = [
       { label: "Brought to You By", url: "/brought-to-you-by", segment: null },
-      { label: "Help Desk", url: "https://nanowrimo.uservoice.com/" }
+      { label: "Help Desk", url: "https://nanowrimo.zendesk.com/" }
 
     ];
     return links;

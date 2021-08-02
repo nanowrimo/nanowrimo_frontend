@@ -15,6 +15,9 @@ export default Component.extend({
   actions: {
     invalidateSession() {
       this.get('session').invalidate();
+    },
+    closeMobileMenu() {
+      this.set("nanoMenuService.sideMenuIsOpen", false);
     }
   }
 });

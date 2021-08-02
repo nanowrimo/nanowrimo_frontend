@@ -9,7 +9,10 @@ export default Component.extend({
  
  actions: {
    showMenu: function() {
-     this.set('displayMenu', true);
+     this.set('displayMenu', true); 
+     window.setTimeout(function(){
+       document.getElementById("mobile-menu-logged-out-close").focus();
+       },300);
    },
    hideMenu: function() {
      this.set('displayMenu', false);

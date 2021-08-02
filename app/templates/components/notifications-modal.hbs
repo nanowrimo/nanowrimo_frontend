@@ -5,7 +5,7 @@
   as |modal|
 }}
   {{#modal.header closeButton=false}}
-    Recent Notifications
+    <h1 class='modal-header'>Recent Notifications</h1>
   {{/modal.header}}
   {{#modal.body
     class='notifications-modal-body'
@@ -15,7 +15,7 @@
     {{/each}}
   {{/modal.body}}
   {{#modal.footer}}
-    <div><a href="" class="underline-link" {{action 'openPreferences'}}>Preferences</a> | <a class="underline-link" {{action 'openNotifications'}}>View all</a></div>
+    <div><a href="" class="underline-link" {{action 'openPreferences'}}>Preferences</a> | <a href="" class="underline-link" {{action 'openNotifications'}}>View all</a></div>
     <div><button type='button' {{action 'cancel'}}>Close</button></div>
   {{/modal.footer}}
 {{/bs-modal}}

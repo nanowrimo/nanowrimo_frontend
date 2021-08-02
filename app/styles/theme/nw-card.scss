@@ -196,11 +196,12 @@
           margin-top: 0px;
           margin-bottom: 0px;
           background-image: none;
-          background-color: none;
+          background-color: transparent;
+          
           i {
             color: $nw-lightgrey;
           }
-          &.active {
+          &.active, &:focus {
             background-color: none;
             border-bottom: solid 3px $nw-lightorange;
             box-shadow: none;

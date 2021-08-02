@@ -4,13 +4,12 @@ import {computed} from '@ember/object';
 
 export default Component.extend({
   currentUser: service(),
+  store: service(),
   router: service(),
   step: 0,
   closeAction: null,
-  badge: null,
-  /* TODO: get the year in YYYY format if it will be necessary to 
-    link to /nano-winner-YYYY
-  */
+  badge: null,  
+  extraData: null,
   
   
   isNaNo: computed('badge', function() {
@@ -25,10 +24,28 @@ export default Component.extend({
     return path;
   }),
 
-  winnerRoute: computed('isNaNo', function(){
-    let i = this.get('isNaNo');
-    let route = (i) ? "authenticated.nano-winner-2020" : "authenticated.camp-nanowrimo-july-2021-winner";
-    return route;
+  winnerRoute: computed('eventName', function(){
+    // get the event name 
+    let name = this.get('eventName');
+    if (name) {
+      // convert the name
+      name = name.toLowerCase().replace(/ /g,"-")+"-winner";
+      // return the route
+      return `authenticated.${name}`;
+    }
+    return null;
+  }),
+  
+  eventName: computed('extraData', function() {
+    let data = JSON.parse(this.get('extraData'));
+    let id = data.challenge_id;
+    if (id) {
+      //get the related challenge from the store
+      var store = this.get('store');
+      var event = store.peekRecord('challenge', id);
+      return event.name;
+    }
+    return null;
   }),
   
   actions: {

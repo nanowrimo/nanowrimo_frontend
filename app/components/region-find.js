@@ -74,6 +74,15 @@ export default Component.extend({
       return 'nano-show';
     }
   }),
+  searchByNameSelected: computed('primaryDisplay', function() {
+    return this.get('primaryDisplay');
+  }),
+  
+  searchByLocationSelected: computed('primaryDisplay', function() {
+    return !this.get('primaryDisplay');
+  }),
+  
+  
   geoObject: null,
   userLocation: null,
   searchString: '',
@@ -294,6 +303,9 @@ export default Component.extend({
     },*/
     searchStringChange: function() {
       debounce(this, this.updateSearch, 250, false);
+    },
+    setPrimaryDisplay: function(val){
+      this.set('primaryDisplay', val);
     }
   },
   _setSortOption: function(value){

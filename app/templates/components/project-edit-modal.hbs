@@ -6,7 +6,7 @@
     as |modal|
   }}
     {{#modal.header closeButton=false}}
-      making some changes
+      <h1 class='modal-header'>making some changes</h1>
     {{/modal.header}}
     {{#form-for
       data-test-project-form=true
@@ -15,16 +15,25 @@
       as |f|
     }}
       {{#modal.body}}
-        {{#bs-tab
-          activeId=activeTab
-          onChange=(action (mut activeTab))
-          as |tab|
-        }}
-
-          {{#tab.pane title="Details" id="overview"}}
-    
-            <div class="tab-content">
-              <div class="form-group">
+      <ul class="nav nav-tabs" role="tablist" id='projectEditTabs'>
+        <li id='details-tab' class='nav-item {{if (eq activeTab 'details') 'active' ''}}'
+        role='tab' aria-controls="project-details"
+        aria-selected="{{if (eq activeTab 'details') 'true' 'false'}}">
+          <a href="#project-details" class="nav-link {{if (eq activeTab 'details') 'active' ''}}"
+          {{action "setActiveTab" "details" }}>Details</a>
+        </li>
+        <li id='cover-tab' class='nav-item {{if (eq activeTab 'cover') 'active' ''}}'
+        role='tab' aria-controls="project-cover"
+        aria-selected="{{if (eq activeTab 'cover') 'true' 'false'}}" >
+          <a href="#project-cover" class="nav-link {{if (eq activeTab 'cover') 'active' ''}}"
+          {{action "setActiveTab" "cover" }}>Cover</a>
+        </li>
+      </ul>
+      <div class='tab-content' id='projectEditTabsContent'>
+        <div class='tab-pane {{if (eq activeTab 'details') 'show active' ''}}' 
+        id='project-details' role='tabpanel' aria-labeledby="details-tab"
+        tabindex="{{if (eq activeTab 'details') '0' '-1'}}">
+                   <div class="form-group">
                 {{f.input
                   label="What is the name of your project?"
                   property="title"
@@ -88,24 +97,26 @@
                   property="playlistUrl"
                 }}
               </div>
-            </div>
-          {{/tab.pane}}
-          {{#tab.pane title="Cover" id="coverTab"}}
-            <div class="form-group">
+        
+        </div>
+        <div class='tab-pane {{if (eq activeTab 'cover') 'show active' ''}}' 
+        id='project-cover' role='tabpanel' aria-labeledby='cover-tab'
+        tabindex="{{if (eq activeTab 'cover') '0' '-1'}}">
+          <div class="form-group">
               {{f.imageUpload
                 label="Update your cover image"
                 property="cover"
               }}
             </div>
-          {{/tab.pane}}
-        {{/bs-tab}}
+        </div>
+      </div>
       
       {{/modal.body}}
 
       {{#modal.footer}}
         <input type="submit" class="nano-button" value='Save Changes'/>
         <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} data-test-project-cancel />
-        {{#if (eq activeTab "overview")}}
+        {{#if (eq activeTab "details")}}
           <div style="flex: 0 0 100%; margin-top: 10px;">
             <a href="#" {{action "confirmDelete"}}>
               <div class='full-width-menu-item'><i class="fa fa-trash"></i> Delete This Project</div>

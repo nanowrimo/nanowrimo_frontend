@@ -17,13 +17,13 @@ export default Component.extend({
   helpLinks: reads("nanoMenuService.helpLinks"),
   attributeBindings: ["style"],
   classNames: ["nano-side-menu"],
+  
   style: computed("nanoMenuService.sideMenuIsOpen",function () {
     if (get(this, "sideMenuIsOpen")) {
-      return htmlSafe("right: -285px; visibility: hidden;");
-    } else {
       return htmlSafe("right: 0px; visibility: visible");
+    } else {
+      return htmlSafe("right: -285px; visibility: hidden;");
     }
-    
   }),
   
   actions: {

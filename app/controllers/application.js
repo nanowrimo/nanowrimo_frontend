@@ -1,12 +1,16 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
-
+import { computed, observer } from '@ember/object';
+ 
 export default Controller.extend({
   session: service(),
   router: service(),
   media: service(),
   
+  init(){
+    this._super(...arguments);
+    this.set('isLoading', true);
+  },
   // which routes should display navigation? 
   show_navigation: computed('routeName', function() {
     let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset",'unsubscribe'];
@@ -32,6 +36,17 @@ export default Controller.extend({
       return true;
     } else {
       return false;
+    }
+  }),
+  observeLoading: observer('isLoading', function(){
+    let loading = this.get('isLoading');
+    // if loading is now false...
+    if (!loading) {
+      // remove the loading-indicator from the dom
+      let element = document.getElementById('application-loading-indicator');
+      if (element) {
+        element.remove();
+      }
     }
   }),
   //routeName: computed('currentPath', function() {

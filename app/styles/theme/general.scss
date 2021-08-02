@@ -213,6 +213,10 @@ button.btn {
     &:hover {
       color: $nw-mediumblue;
     }
+    &:focus {
+      border: 3px solid $nw-mediumblue;
+      color: black;
+    }
     &.is-invalid {
       bottom: 24px;
     }
@@ -352,4 +356,11 @@ a.nw-grey-link {
 }
 .fa-bullhorn {
   font-size: 60px;
+}
+
+#application-loading-indicator {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  text-align: center;
 }
