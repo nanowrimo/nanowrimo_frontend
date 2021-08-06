@@ -440,3 +440,22 @@
     }
   }
 }
+button {
+  &.button-clear {
+    width: 46px;
+    height: 38px;
+    border: 0;
+    background-image: none;
+    background-color: transparent;
+    color: $nw-darkgreen;
+    font-size: 36px;
+    line-height: 38px;
+    position: relative;
+    .nw-unread-circle {
+      top: 0px;
+      right: 0px;
+      font-size: 10px;
+      letter-spacing: 0px;
+    }
+  }
+}

@@ -1,15 +1,27 @@
-<div class="nw-card-content conversation">
-  <div class="conversation-header">
-    To: <span class='conversation-name'>{{groupName}}</span>
-    {{#if showForm}}
-      {{nanomessage-form group=group context=context adminIsChecked=adminIsChecked refreshMessages=(action 'afterNanomessageSubmit')}}
-    {{/if}}
+<div class="nw-card-header">
+  <div class="nw-card-title">
+    <div class="nw-card-title-left">
+      <div
+        onClick={{action 'doClearGroup'}}
+      >
+        <i class="fa fa-chevron-left" />
+      </div>
+    </div>
+    <div class="nw-card-title-center">{{groupName}}</div>
+    <div class="nw-card-title-right"></div>
   </div>
+</div>
+<div class="nw-card-content conversation">
   <div class="conversation-content" id="convo-content">
     <div class="nanomessages-container">
       {{#each sortedMessages as |n|}}
         {{nanomessage-item nanomessage=n userIsAdmin=userIsAdmin}}
       {{/each}}
     </div>
+  </div>
+  <div class="conversation-footer">
+    {{#if showForm}}
+      {{nanomessage-form group=group context=context adminIsChecked=adminIsChecked refreshMessages=(action 'afterNanomessageSubmit')}}
+    {{/if}}
   </div>
 </div>
