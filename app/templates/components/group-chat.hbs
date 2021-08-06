@@ -1,5 +1,15 @@
 <div class="nw-card-header">
-  <div class="nw-card-title">{{groupName}}</div>
+  <div class="nw-card-title">
+    <div class="nw-card-title-left">
+      <div
+        onClick={{action 'doClearGroup'}}
+      >
+        <i class="fa fa-chevron-left" />
+      </div>
+    </div>
+    <div class="nw-card-title-center">{{groupName}}</div>
+    <div class="nw-card-title-right"></div>
+  </div>
 </div>
 <div class="nw-card-content conversation">
   <div class="conversation-content" id="convo-content">

@@ -100,7 +100,7 @@ export default Component.extend({
         if (gu.user_id) {
           let u = store.peekRecord('user', gu.user_id);
           if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
-            gn = u.name;
+            gn = "@" + u.name;
           }
         }
       });
@@ -140,6 +140,12 @@ export default Component.extend({
       debounce(this, this.doShowForm, 0, false);
       //debounce(this, this.gotoBottom, 500, false);
     },
+    
+    doClearGroup() {
+      //alert('c1');
+      this.clearGroup();
+    },
+    
   }
   
 });

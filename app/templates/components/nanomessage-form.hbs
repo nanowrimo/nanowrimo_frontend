@@ -42,12 +42,17 @@
         {{/if}}
       {{/if}}
       <div class="form-group">
-        <div
-          id='nw-message-form'
-          class="editable"
-          data-placeholder="What's going on, writer? Type here."
-        ></div>
-        <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
+        <div style="display: flex;">
+          <div
+            style="width: 85%;"
+            id='nw-message-form'
+            class="editable"
+            data-placeholder="What's going on, writer? Type here."
+          ></div>
+          <button type="submit" class="button-clear" style="width: 70px;" aria-label="Submit your message." disabled={{isDisabled}}>
+            <span aria-hidden="false"><i class="fa fa-paper-plane-o" aria-hidden="true" /></span>
+          </button>
+        </div>
       </div>
       
     </form>

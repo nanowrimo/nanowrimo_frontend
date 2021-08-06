@@ -7,6 +7,7 @@ export default Controller.extend({
   group: alias('model'),
   oldgroupid: null,
   hasGroup: computed('group','oldgroupid', function() {
+    //alert('computing');
     let g = this.get('group');
     let ogid = this.get('oldgroupid');
     if (g) {
@@ -36,6 +37,11 @@ export default Controller.extend({
   setOldGroup() {
     let g = this.get('group');
     this.set('oldgroupid',g.id);
+  },
+  clearGroup() {
+    //alert('clearing');
+    this.set('group',null);
+    this.set('oldgroupid',null);
   },
   
 });

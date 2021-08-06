@@ -4,19 +4,63 @@
   margin: 1rem;
   align-items: stretch;
   margin: 0px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-left: 21px;
-  padding-right: 21px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .nw-card.nanomessages-card {
   max-height: 600px;
   min-height: 100px;
+  background-image: none;
+  background-color: #fff;
+  @media(max-width: $screen-sm) {
+    max-height: 1200px;
+    border-radius: 0;
+    position: fixed;
+    padding-top: 48px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+  
   .nw-card-header {
     background-color: #A5D9E4;
     border-bottom: 2px solid #b0b0b0;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
     .nw-card-title {
+      width: 100%;
       background-color: transparent;
+      text-align: center;
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      .nw-card-title-left, .nw-card-title-right {
+        width: 30px;
+        i {
+          line-height: 20px;
+          display: none;
+        }
+        @media(max-width: $screen-sm) {
+          i {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .nw-card-content {
+    padding: 0px;
+    ul {
+      padding-inline-start: 0px;
+      .convo-item {
+        border-bottom: 1px solid #eeeeee;
+        &:hover {
+          background-color: #eee;
+        }
+      }
     }
   }
   .nw-card-content.conversation {
@@ -48,8 +92,8 @@
       -webkit-transition: all 0.6s;
       transition: all 0.6s;
       @media(max-width: $screen-sm) {
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
       }
       .nanomessages-container {
         padding-top: 28px;
@@ -182,5 +226,13 @@
       width: 36px;
     }
     margin-right: 10px;
+  }
+}
+a {
+  .nw-last-message {
+    font-size: 12px;
+    color: #000;
+    font-weight: normal;
+    width: 100%;
   }
 }
