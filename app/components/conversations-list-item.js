@@ -20,16 +20,14 @@ export default Component.extend({
     }
   }),
   
-  timeSince: computed('groupUser', 'groupUser.latestMessage',function() {
+  timeSince: computed('group', 'group.latestMessageDt',function() {
     let t = '';
-    let gu = this.get('groupUser');
-    if (gu) {
-      let lm = this.get('groupUser.latestMessage');
+    let g = this.get('group');
+    if (g) {
+      let lm = this.get('group.latestMessageDt');
       // if found, return the number of unread messages; otherwise return zero
       if (lm!=null) {
-        var lm0 = lm.split("|-|");
-        var dt = lm0[1];
-        t = moment(dt).fromNow();
+        t = moment(lm).fromNow();
       }
     }
     return t;
@@ -133,17 +131,16 @@ export default Component.extend({
     return tgu;
   }),
   // Returns the latestMessage for this group
-  latestMessage: computed('groupUser', 'groupUser.latestMessage', function() {
+  latestMessage: computed('group', 'group.latestMessage', function() {
     // Get the group user
-    let gu = this.get('groupUser');
-    if (gu) {
-      let lm = this.get('groupUser.latestMessage');
-      // if found, return the number of unread messages; otherwise return zero
+    let g = this.get('group');
+    if (g) {
+      let lm = this.get('group.latestMessage');
+      // if found, return the message; otherwise return null
       if (lm!=null) {
-        var lm0 = lm.split("|-|");
         // Strip tags from message
         var div = document.createElement("div");
-        div.innerHTML = lm0[0];
+        div.innerHTML = lm;
         var text = div.textContent || div.innerText || "";
         // Truncate string
         if (text.length>75) {

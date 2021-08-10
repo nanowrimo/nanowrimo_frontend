@@ -1,20 +1,23 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed }  from '@ember/object';
+import { sort }  from '@ember/object/computed';
 
 export default Component.extend({
   currentUser: service(),
   officialOnly: null,
-  conversations: computed('currentUser.user.{nanomessagesGroups.[],buddyGroupsActive.[]}',function() {
-    let oo = this.get('officialOnly');
+  
+  conversations: computed('currentUser.user.nanomessagesGroups.[]',function() {
     let es = null;
-    if (oo) {
-      es =  this.get('currentUser.user.nanomessagesGroups');
-    } else {
-      es = this.get('currentUser.user.buddyGroupsActive');
-    }
+    es =  this.get('currentUser.user.nanomessagesGroups');
     return es;
   }),
+  
+  conversationSortingDesc: Object.freeze(['latestMessageDt:desc']),
+  
+  // Sorts the conversations by date, with the most immediate first
+  sortedConversations: sort('conversations','conversationSortingDesc'),
+  
   actions: {
   }
 });

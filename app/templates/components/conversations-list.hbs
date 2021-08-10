@@ -1,5 +1,5 @@
 <ul>
-  {{#each conversations as |conversation index|}}
+  {{#each sortedConversations as |conversation index|}}
     {{conversations-list-item group=conversation selectedGroup=group officialOnly=officialOnly}}
   {{/each}}
 </ul>
