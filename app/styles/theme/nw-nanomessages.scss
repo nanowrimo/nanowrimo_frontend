@@ -221,6 +221,19 @@
     }
   }
 }
+.nw-card.nanomessages-card.hide-mobile {
+  @media(max-width: $screen-sm) {
+    display: none;
+    max-height: 1200px;
+    border-radius: 0;
+    position: fixed;
+    padding-top: 48px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+}
 .nw-no-speech-bubble {
   display: flex;
   .nw-system-message-image {

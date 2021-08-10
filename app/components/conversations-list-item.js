@@ -146,8 +146,8 @@ export default Component.extend({
         div.innerHTML = lm0[0];
         var text = div.textContent || div.innerText || "";
         // Truncate string
-        if (text.length>100) {
-          text = text.substring(0,100) + '...';
+        if (text.length>75) {
+          text = text.substring(0,75) + '...';
         }
         return text;
       } else {

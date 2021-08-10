@@ -26,11 +26,16 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    let options = ['createdAt:asc'];
-    this.set('sortOptions', options);
-    this.set('selectedSortOption', [options[0]]);
-    //debounce(this, this.gotoBottom, 1000, false);
-    this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
+    let g = this.get('group');
+    if (g) {
+      let options = ['createdAt:asc'];
+      this.set('sortOptions', options);
+      this.set('selectedSortOption', [options[0]]);
+      //debounce(this, this.gotoBottom, 1000, false);
+      this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
+    } else {
+      this.set('classNames', ['nw-card nanomessages-card hide-mobile']);
+    }
   },
 
   userIsAdmin: computed('currentUser.user.isLoaded',function() {
