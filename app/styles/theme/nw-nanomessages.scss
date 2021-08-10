@@ -81,6 +81,8 @@
       }
     }
     .conversation-content {
+      display: flex;
+      flex-direction: column-reverse;
       flex: 1 1 100%;
       background: $white;
       padding-left: 28px;
@@ -96,6 +98,7 @@
         padding-right: 15px;
       }
       .nanomessages-container {
+        
         padding-top: 28px;
         -webkit-transition: all 0.6s;
         transition: all 0.6s;
@@ -230,9 +233,17 @@
 }
 a {
   .nw-last-message {
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 18px;
     color: #000;
     font-weight: normal;
     width: 100%;
   }
+}
+.conversation-list-item {
+  border: solid 2px #FFFFFF;
+}
+.conversation-list-item.is-selected {
+  background-color: #F7F7F7;
+  border: solid 2px #5F8C7F;
 }

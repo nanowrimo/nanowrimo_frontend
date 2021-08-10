@@ -7,7 +7,42 @@ export default Component.extend({
   notificationsService: service(),
   currentUser: service(),
   group: null,
+  selectedGroup: null,
   classNames: ["convo-item"],
+  
+  groupIsRegion: computed('group', function() {
+    let g = this.get('group');
+    if (g.get('groupType')=='region') {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
+  timeSince: computed('groupUser', 'groupUser.latestMessage',function() {
+    let t = '';
+    let gu = this.get('groupUser');
+    if (gu) {
+      let lm = this.get('groupUser.latestMessage');
+      // if found, return the number of unread messages; otherwise return zero
+      if (lm!=null) {
+        var lm0 = lm.split("|-|");
+        var dt = lm0[1];
+        t = moment(dt).fromNow();
+      }
+    }
+    return t;
+  }),
+  
+  isSelected: computed('group','selectedGroup',function() {
+    let g = this.get('group');
+    let sg = this.get('selectedGroup');
+    if (g.id==sg.id) {
+      return 'is-selected';
+    } else {
+      return '';
+    }
+  }),
   
   conversationLabel: computed('group',function() {
     let g = this.get('group');
@@ -103,7 +138,16 @@ export default Component.extend({
       let lm = this.get('groupUser.latestMessage');
       // if found, return the number of unread messages; otherwise return zero
       if (lm!=null) {
-        return lm;
+        var lm0 = lm.split("|-|");
+        // Strip tags from message
+        var div = document.createElement("div");
+        div.innerHTML = lm0[0];
+        var text = div.textContent || div.innerText || "";
+        // Truncate string
+        if (text.length>100) {
+          text = text.substring(0,100) + '...';
+        }
+        return text;
       } else {
         return "<p>There are no messages yet. Why not start the discussion?</p>";
       }

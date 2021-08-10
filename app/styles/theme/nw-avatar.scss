@@ -126,11 +126,18 @@
 }
 
 .nw-avatar-frame-small {
-
+  width: 56px;
 }
 
 .nw-avatar-frame-medium {
-
+  width: 56px;
+  .nw-avatar {
+    .nw-avatar-missing {
+      .nw-avatar-text {
+        font-size: 9px;
+      }
+    }
+  }
 }
 
 .nw-avatar-frame-large {
