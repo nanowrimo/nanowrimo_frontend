@@ -38,11 +38,12 @@ export default Component.extend({
   isSelected: computed('group','selectedGroup',function() {
     let g = this.get('group');
     let sg = this.get('selectedGroup');
-    if (g.id==sg.id) {
-      return 'is-selected';
-    } else {
-      return '';
+    if (g && sg) {
+      if (g.id==sg.id) {
+        return 'is-selected';
+      }
     }
+    return '';
   }),
   
   conversationLabel: computed('group',function() {
