@@ -520,7 +520,7 @@ const User = Model.extend({
       let store = this.get('store');
       gus.forEach(function(gu) {
         let g = store.peekRecord('group', gu.group_id);
-        if ((g.groupType=='region')||(g.groupType=='buddies')) {
+        if ((g.groupType=='everyone')||(g.groupType=='region')||(g.groupType=='buddies')) {
           eGroups.push(g);
         }
       });

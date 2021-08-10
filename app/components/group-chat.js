@@ -19,6 +19,7 @@ export default Component.extend({
   recompute: 0,
   messages: null,
   tempDebounce: null,
+  messagesLoaded: false,
   adminIsChecked: computed('context',function() {
     let c = this.get("context");
     return (c=='nanomessages');
@@ -58,7 +59,7 @@ export default Component.extend({
     cancel(td);
   },
   
-  filteredMessages: computed('messages.[]','group.id','context',function() {
+  filteredMessages: computed('messages.[]','group.groupType','context',function() {
     let ms = this.get("messages");
     let c = this.get("context");
     let t = this.get('group.groupType');
@@ -126,7 +127,7 @@ export default Component.extend({
     let g = this.get('group');
     let gid = g.id;
     let t = this;
-    
+    this.set('messagesLoaded',true);
     this.get('store').query('nanomessage', {
       group_id: gid
     }).then(function(ms) {

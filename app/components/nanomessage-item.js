@@ -7,7 +7,8 @@ export default Component.extend({
   currentUser: service(),
   store: service(),
   nanomessage: null,
-  newMessage: 'message-new',
+  //newMessage: 'message-new',
+  newMessage: '',
   
   systemMessage: computed('nanomessage', function() {
     let n = this.get('nanomessage');
@@ -41,7 +42,8 @@ export default Component.extend({
   },
   init() {
     this._super(...arguments);
-    debounce(this, this.updateHeight, 100, false);
+    //this.set('newMessage','');
+    //debounce(this, this.updateHeight, 100, false);
   },
   
   actions: {

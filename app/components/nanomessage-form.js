@@ -37,7 +37,7 @@ export default Component.extend({
     let gt = this.get('group.groupType');
     return ((c!='nanomessages')&&(gt!='writing group'));
   }),
-  showForm: computed('context',function() {
+  showForm: computed('context','group.groupType',function() {
     let c = this.get("context");
     let t = this.get('group.groupType');
     let showit = false;
