@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed }  from '@ember/object';
+import moment from 'moment';
 
 export default Component.extend({
   store: service(),
@@ -37,11 +38,12 @@ export default Component.extend({
   isSelected: computed('group','selectedGroup',function() {
     let g = this.get('group');
     let sg = this.get('selectedGroup');
-    if (g.id==sg.id) {
-      return 'is-selected';
-    } else {
-      return '';
+    if (g && sg) {
+      if (g.id==sg.id) {
+        return 'is-selected';
+      }
     }
+    return '';
   }),
   
   conversationLabel: computed('group',function() {
