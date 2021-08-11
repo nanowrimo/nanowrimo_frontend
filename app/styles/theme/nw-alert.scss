@@ -1,0 +1,19 @@
+.nw-alert {
+  width: 100%;
+  border: 1px solid;
+  border-radius: 2px;
+  text-align: center;
+  padding: 4px;
+  a {
+    text-decoration: underline !important;            
+    font-weight: bold;
+  }
+  &.warning {
+    background-color: $red;
+    color: white;
+  }
+  &.success {
+    background-color: $nw-mediumaqua;
+    color: white;
+  }
+}
