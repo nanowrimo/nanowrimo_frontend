@@ -22,6 +22,9 @@ body.full-screen > .ember-view {
 }
 main {
   margin-top: 90px;
+  &.unverified {
+    margin-top: 160px;
+  }
   @media (max-width: $screen-lg) {
     margin-top: 42px;
   }

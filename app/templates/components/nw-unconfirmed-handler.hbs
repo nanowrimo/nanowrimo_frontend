@@ -1,0 +1,58 @@
+{{#if displayUnconfirmedAlert }}
+  <NwAlert @alertType="warning" @dismissable="false">
+    <strong>Verify your email address.</strong> Certain features may not work
+    until you verify your email address. Don't see the verification email in your inbox?
+    <a {{action 'resendClicked'}}>Resend the verification email.</a>
+  </NwAlert>
+{{/if}}
+
+{{#if displaySuccessAlert }}
+  <NwAlert @alertType="success" @dismissable="true">
+    <strong>Check your email.</strong> A verification email was sent to {{emailRecipient}}.
+  </NwAlert>
+{{/if}}
+
+
+{{#bs-modal
+  open=displayEmailModal
+  onShow=(action "onModalShow")
+  onHidden=(action "onModalHidden")
+  as |modal| }}
+  
+  {{#modal.header closeButton=false}}
+    Resend Verification Email
+  {{/modal.header}}
+  <form {{action "confirmEmailSubmit" modal on="submit"}}>
+  {{#modal.body}}
+    <div class='tab-content'>
+      <div class='form-group'>
+        <label for='email'>Please confirm or correct your email address</label>     
+        {{input
+          class=(concat 'form-control' (if hasError ' is-invalid'))
+          autocomplete="email"
+          autofocus=true
+          placeholder="user@domain.com"
+          name="email"
+          id='email'
+          type="email"
+          value=currentUser.user.email
+          key-press=(action "emailChange")
+        }}
+      </div>
+      {{#if emailError}}
+        <div class="invalid-feedback">Please enter a valid email.</div>
+      {{/if}}
+      {{#if errorMessage}}
+        <div class="alert alert-danger">{{errorMessage}}</div>
+      {{/if}}
+    </div>
+    
+    {{/modal.body}}
+    {{#modal.footer}}
+
+        <input type="submit" disabled={{hasValidationError}} class="nano-button" value="Resend" />
+        <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />
+     
+    {{/modal.footer}}
+    </form>
+{{/bs-modal}}
