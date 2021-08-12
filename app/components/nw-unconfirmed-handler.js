@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { computed, observer } from '@ember/object';
+import { computed } from '@ember/object';
 import ENV from 'nanowrimo/config/environment';
 
 export default Component.extend({
@@ -22,7 +22,6 @@ export default Component.extend({
   
   actions: {
     resendClicked(){
-      console.log('resend');
       //display the modal
       this.set('displayEmailModal', true);
     },
