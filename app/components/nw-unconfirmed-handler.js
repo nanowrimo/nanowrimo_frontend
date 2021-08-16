@@ -1,13 +1,38 @@
-import Controller from '@ember/controller';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 import ENV from 'nanowrimo/config/environment';
-//import fetch from 'fetch';
-export default Controller.extend({
+
+export default Component.extend({
+  currentUser: service(),
+  session: service(),
+  emailSent: false,
+  displayResendForm: false,
+  displaySuccessAlert: false,
   emailError: false,
   successMessage: false,
   errorMessage: null,
+  
+  init(){
+    this._super(...arguments);
+  },
+  displayUnconfirmedAlert: computed('currentUser.user.isNotConfirmed','emailSent', function(){
+    return this.get('currentUser.user.isNotConfirmed') && !this.get('emailSent');
+  }),
+  
   actions: {
-    submit(form) {
-      let email = form.get('email');
+    resendClicked(){
+      //display the modal
+      this.set('displayEmailModal', true);
+    },
+    onModalShow(){
+    },
+    onModalHidden(){
+      this.set('displayEmailModal', false);
+    },
+    confirmEmailSubmit(modal) {
+      let email = event.target.email.value;
+      this.set('emailRecipient', email);
       if (this.validEmail(email) ){
         //get the user's auth token
         let { auth_token }  = this.get('session.data.authenticated');
@@ -30,6 +55,11 @@ export default Controller.extend({
               this.set('errorMessage', json.error);
             }else if (json.message) {
               this.set('successMessage', json.message);
+              // hide the modal
+              modal.close();
+              this.set('displayResendForm', false);
+              // show the success alert
+              this.set('displaySuccessAlert', true);
             }
           });
         });
@@ -43,9 +73,7 @@ export default Controller.extend({
       }
     }
   },
-  
   validEmail: function(value) {
-    
     return (value.includes("@") && value.includes("."));
-  },
+  }
 });
