@@ -32,7 +32,6 @@ export default Component.extend({
       let options = ['createdAt:asc'];
       this.set('sortOptions', options);
       this.set('selectedSortOption', [options[0]]);
-      //debounce(this, this.gotoBottom, 1000, false);
       this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
     } else {
       this.set('classNames', ['nw-card nanomessages-card hide-mobile']);
@@ -111,18 +110,13 @@ export default Component.extend({
         }
       });
     }
+    this.checkForMessages();
     return gn;
   }),
   
   doShowForm() {
     this.set('showForm',true);
   },
-  /*gotoBottom(){
-    var objDiv = document.getElementById("convo-content");
-    if (objDiv) {
-      objDiv.scrollTop = objDiv.scrollHeight;
-    }
-  },*/
   checkForUpdates() {
     let g = this.get('group');
     let gid = g.id;
@@ -144,11 +138,9 @@ export default Component.extend({
       this.checkForUpdates();
       this.set('showForm',false);
       debounce(this, this.doShowForm, 0, false);
-      //debounce(this, this.gotoBottom, 500, false);
     },
     
     doClearGroup() {
-      //alert('c1');
       this.clearGroup();
     },
     

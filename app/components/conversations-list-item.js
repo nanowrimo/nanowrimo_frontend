@@ -44,6 +44,15 @@ export default Component.extend({
     return '';
   }),
   
+  isUnread: computed('newNanomessagesCount','isSelected',function() {
+    let c = this.get('newNanomessagesCount');
+    let s = this.get('isSelected');
+    if ((c>0)&&(s=='')) {
+      return 'is-unread';
+    }
+    return '';
+  }),
+  
   conversationLabel: computed('group',function() {
     let g = this.get('group');
     let store = this.get('store');

@@ -42,8 +42,6 @@ export default Component.extend({
   },
   init() {
     this._super(...arguments);
-    //this.set('newMessage','');
-    //debounce(this, this.updateHeight, 100, false);
   },
   
   actions: {

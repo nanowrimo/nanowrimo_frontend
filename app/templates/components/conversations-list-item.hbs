@@ -1,5 +1,5 @@
 {{#link-to 'authenticated.nanomessages.show' conversationSlug}}
-  <div class='conversation-list-item nw-user-listing {{isSelected}}'>
+  <div class='conversation-list-item nw-user-listing {{isSelected}} {{isUnread}}'>
     {{#if groupIsRegion}}
       {{group-avatar group=group canEdit='false' size='medium'}}
     {{else}}
@@ -9,7 +9,7 @@
     {{/if}}
     <div class='nw-user-info' style='height: 56px;'>
       <div class='nw-user-name' style='padding-bottom: 7px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 14px; line-height: 14px;'>
-        <div>
+        <div class='nw-user-name-text'>
           {{conversationLabel}}
         </div>
         <div style='font-size: 14px; font-weight: 100; color: #343434; font-family: "SourceSansPro-Regular", sans-serif;'>

@@ -260,3 +260,16 @@ a {
   background-color: #F7F7F7;
   border: solid 2px #5F8C7F;
 }
+.conversation-list-item.is-unread {
+  .nw-avatar {
+    img {
+      border: 2px solid #FF6B6B;
+    }
+  }
+  .nw-user-name-text {
+    color: #000;
+  }
+  .nw-last-message {
+    font-weight: 600;
+  }
+}
