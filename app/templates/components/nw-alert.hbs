@@ -1,4 +1,11 @@
-<div class='nw-alert {{@alertType}}' role='alert'>
-<i class='fa {{typeIcon}}' aria-hidden='true'></i>
-{{yield}}
-</div>
+{{#if (not isDismissed)}}
+  <div class='nw-alert {{@alertType}}' role='alert'>
+    <i class='fa {{typeIcon}}' aria-hidden='true'></i>
+    {{yield}}
+    {{#if showClose}}
+      <button class='nw-alert-close' aria-label='Close' {{action 'dismiss'}}>
+        <i class='fa fa-times' aria-hidden='true'></i>
+      </button>
+    {{/if}}
+  </div>
+{{/if}}
