@@ -11,7 +11,11 @@
             {{conversations-list group=group class="full-width"}}
           </div>
         </div>
-        {{group-chat group=group messagesLoaded=false context='nanomessages' clearGroup=clearGroup class="g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}
+        {{#if group}}
+          {{group-chat group=group messagesLoaded=false context='nanomessages' clearGroup=clearGroup class="g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}
+        {{else}}
+          {{group-chat-placeholder class="g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}
+        {{/if}}
       </div>
     </div>
   </div>

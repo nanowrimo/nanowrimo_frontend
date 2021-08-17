@@ -95,22 +95,30 @@ export default Component.extend({
   
   groupName: computed('group', function() {
     let g = this.get('group');
-    let gt = g.get('groupType');
-    let gn = g.get('name');
-    if (gt=='buddies') {
-      let store = this.get('store');
-      let id = this.get('currentUser.user.id');
-      let gus = g.get('groupUsers');
-      gus.forEach(function(gu) {
-        if (gu.user_id) {
-          let u = store.peekRecord('user', gu.user_id);
-          if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
-            gn = "@" + u.name;
+    let gn = null;
+    if (g) {
+      console.log(g);
+      this.set('classNames', ['nw-card nanomessages-card']);
+      let gt = g.get('groupType');
+      gn = g.get('name');
+      if (gt=='buddies') {
+        let store = this.get('store');
+        let id = this.get('currentUser.user.id');
+        let gus = g.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
+              gn = "@" + u.name;
+            }
           }
-        }
-      });
+        });
+      }
+      this.checkForMessages();
+    } else {
+      console.log(g);
+      this.set('classNames', ['nw-card nanomessages-card hide-mobile']);
     }
-    this.checkForMessages();
     return gn;
   }),
   
@@ -119,14 +127,16 @@ export default Component.extend({
   },
   checkForUpdates() {
     let g = this.get('group');
-    let gid = g.id;
-    let t = this;
-    this.set('messagesLoaded',true);
-    this.get('store').query('nanomessage', {
-      group_id: gid
-    }).then(function(ms) {
-      t.set("messages",ms);
-    });
+    if (g) {
+      let gid = g.id;
+      let t = this;
+      this.set('messagesLoaded',true);
+      this.get('store').query('nanomessage', {
+        group_id: gid
+      }).then(function(ms) {
+        t.set("messages",ms);
+      });
+    }
   },
   
   checkForMessages() {
