@@ -1,5 +1,14 @@
-<ul>
-  {{#each sortedConversations as |conversation index|}}
-    {{conversations-list-item group=conversation selectedGroup=group officialOnly=officialOnly}}
-  {{/each}}
-</ul>
+<div style='display: flex; flex-direction: column;'>
+  <div style='height: 50px;'>
+    <div id='pane-search-by-name' class="nw-list-search" style="padding-top: 10px;">
+      {{input class="nano-list-search-field" placeholder="Search names..." value=tempSearchString key-up=(action "searchStringChange")}}
+    </div>
+  </div>
+  <div style='height: 100%; max-height: 500px; overflow: scroll;'>
+    <ul>
+      {{#each sortedConversations as |conversation index|}}
+        {{conversations-list-item group=conversation searchString=tempSearchString selectedGroup=group officialOnly=officialOnly}}
+      {{/each}}
+    </ul>
+  </div>
+</div>

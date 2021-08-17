@@ -60,6 +60,9 @@
         &:hover {
           background-color: #eee;
         }
+        &.convo-hidden {
+          display: none;
+        }
       }
     }
   }

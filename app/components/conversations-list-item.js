@@ -9,6 +9,7 @@ export default Component.extend({
   currentUser: service(),
   group: null,
   selectedGroup: null,
+  searchString: null,
   classNames: ["convo-item"],
   
   groupIsRegion: computed('group', function() {
