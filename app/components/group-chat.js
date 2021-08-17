@@ -97,8 +97,6 @@ export default Component.extend({
     let g = this.get('group');
     let gn = null;
     if (g) {
-      console.log(g);
-      this.set('classNames', ['nw-card nanomessages-card']);
       let gt = g.get('groupType');
       gn = g.get('name');
       if (gt=='buddies') {
@@ -115,9 +113,6 @@ export default Component.extend({
         });
       }
       this.checkForMessages();
-    } else {
-      console.log(g);
-      this.set('classNames', ['nw-card nanomessages-card hide-mobile']);
     }
     return gn;
   }),
