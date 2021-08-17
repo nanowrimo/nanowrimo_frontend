@@ -14,31 +14,33 @@ export default Component.extend({
     const es =  this.get('currentUser.user.nanomessagesGroups');
     const ss =  this.get('tempSearchString').toLowerCase();
     let newes = [];
-    if (ss) {
-      let store = this.get('store');
-      let id = this.get('currentUser.user.id');
-      for (let i=0; i<es.length; i++) {
-        let g = es[i];
-        let name = g.get('name').toLowerCase();
-        if (g.get('groupType')=='buddies') {
-          let gus = g.get('groupUsers');
-          gus.forEach(function(gu) {
-            if (gu.user_id) {
-              let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
-                name = u.name.toLowerCase();
+    if (es) {
+      if (ss) {
+        let store = this.get('store');
+        let id = this.get('currentUser.user.id');
+        for (let i=0; i<es.length; i++) {
+          let g = es[i];
+          let name = g.get('name').toLowerCase();
+          if (g.get('groupType')=='buddies') {
+            let gus = g.get('groupUsers');
+            gus.forEach(function(gu) {
+              if (gu.user_id) {
+                let u = store.peekRecord('user', gu.user_id);
+                if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
+                  name = u.name.toLowerCase();
+                }
               }
-            }
-          });
+            });
+          }
+          if (name.indexOf(ss) !== -1) {
+            newes.push(es[i]);
+          }
         }
-        if (name.indexOf(ss) !== -1) {
-          newes.push(es[i]);
-        }
-      }
-    } else {
-      for (let i=0; i<es.length; i++) {
-        if (es[i].latestMessageDt!=null) {
-          newes.push(es[i]);
+      } else {
+        for (let i=0; i<es.length; i++) {
+          if (es[i].latestMessageDt!=null) {
+            newes.push(es[i]);
+          }
         }
       }
     }

@@ -28,7 +28,7 @@ export default Component.extend({
       let lm = this.get('group.latestMessageDt');
       // if found, return the number of unread messages; otherwise return zero
       if (lm!=null) {
-        t = moment(lm).fromNow();
+        t = moment.utc(lm, 'YYYY-MM-DD HH:mm:ss').local().fromNow();
       }
     }
     return t;
