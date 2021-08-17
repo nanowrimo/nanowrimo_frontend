@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed }  from '@ember/object';
 import { sort }  from '@ember/object/computed';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   store: service(),
