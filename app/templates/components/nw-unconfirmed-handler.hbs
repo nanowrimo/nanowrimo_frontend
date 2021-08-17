@@ -1,5 +1,5 @@
 {{#if displayUnconfirmedAlert }}
-  <NwAlert @alertType="warning" @dismissable="false">
+  <NwAlert @alertType="warning">
     <strong>Verify your email address.</strong> Certain features may not work
     until you verify your email address. Don't see the verification email in your inbox?
     <a {{action 'resendClicked'}}>Resend the verification email.</a>
@@ -7,7 +7,7 @@
 {{/if}}
 
 {{#if displaySuccessAlert }}
-  <NwAlert @alertType="success" @dismissable="true">
+  <NwAlert @alertType="success" @dismissable=true @dismissAction={{action 'dismissSuccess'}}>
     <strong>Check your email.</strong> A verification email was sent to {{emailRecipient}}.
   </NwAlert>
 {{/if}}

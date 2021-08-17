@@ -21,6 +21,9 @@ export default Component.extend({
   }),
   
   actions: {
+    dismissSuccess(){
+      this.set('displaySuccessAlert', false);
+    },
     resendClicked(){
       //display the modal
       this.set('displayEmailModal', true);
