@@ -13,7 +13,8 @@ export default Controller.extend({
   showBadgeSplash: false,
   showWinnerSplash: false,
   badgeForSplash: null,
-  
+  badgeExtraData: null,
+   
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
     return this.get('store').peekAll('notification');
   }),
@@ -54,6 +55,7 @@ export default Controller.extend({
       if (r.length>0) {
         this.set("badgeForSplash", r[0]);
         this.set(r[1], true);
+        this.set('badgeExtraData', r[2]);
       }
     },
     hideBadgeSplash(){
