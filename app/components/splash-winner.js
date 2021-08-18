@@ -38,14 +38,19 @@ export default Component.extend({
   
   eventName: computed('extraData', function() {
     let data = JSON.parse(this.get('extraData'));
-    let id = data.challenge_id;
-    if (id) {
+    if (data) {
+      let id = data.challenge_id;
       //get the related challenge from the store
       var store = this.get('store');
       var event = store.peekRecord('challenge', id);
       return event.name;
     }
     return null;
+  }),
+  
+  hasEventName: computed('eventName', function() {
+    let eventName = this.get('eventName');
+    return eventName != null;
   }),
   
   actions: {
