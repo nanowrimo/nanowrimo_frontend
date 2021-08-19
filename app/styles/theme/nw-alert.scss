@@ -6,9 +6,10 @@
   a {
     text-decoration: underline !important;            
     font-weight: bold;
+    cursor: pointer;
   }
   &.warning {
-    background-color: $red;
+    background-color: $nw-alert-red;
     color: white;
   }
   &.success {

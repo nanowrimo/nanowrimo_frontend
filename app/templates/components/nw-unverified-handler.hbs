@@ -1,4 +1,4 @@
-{{#if displayUnconfirmedAlert }}
+{{#if displayUnverifiedAlert }}
   <NwAlert @alertType="warning">
     <strong>Verify your email address.</strong> Certain features may not work
     until you verify your email address. Don't see the verification email in your inbox?
@@ -30,7 +30,6 @@
         {{input
           class=(concat 'form-control' (if hasError ' is-invalid'))
           autocomplete="email"
-          autofocus=true
           placeholder="user@domain.com"
           name="email"
           id='email'
