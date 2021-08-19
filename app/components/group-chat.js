@@ -142,7 +142,7 @@ export default Component.extend({
     afterNanomessageSubmit() {
       this.checkForUpdates();
       this.set('showForm',false);
-      debounce(this, this.doShowForm, 100, false);
+      //debounce(this, this.doShowForm, 0, false);
     },
     
     doClearGroup() {
