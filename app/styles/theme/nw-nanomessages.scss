@@ -37,7 +37,7 @@
       color: #000;
       display: flex;
       justify-content: space-between;
-      .nw-card-title-left, .nw-card-title-right {
+      .nw-card-title-left {
         width: 30px;
         i {
           line-height: 20px;
@@ -47,6 +47,12 @@
           i {
             display: block;
           }
+        }
+      }
+      .nw-card-title-right {
+        width: 30px;
+        i {
+          line-height: 20px;
         }
       }
     }
@@ -63,6 +69,22 @@
         &.convo-hidden {
           display: none;
         }
+      }
+      .convo-item.is-new {
+        margin: 6px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-bottom: 0px solid #eeeeee;
+        border: 1px solid #ededed;
+        border-radius: 5px;
+        background-image: linear-gradient(#FFF, #ededed);
+        .conversation-list-item {
+          border: 0px;
+        }
+      }
+      .convo-item.is-new.active {
+        border: 1px solid #5f8c6f;
+        
       }
     }
   }

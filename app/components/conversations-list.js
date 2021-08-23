@@ -9,12 +9,15 @@ export default Component.extend({
   currentUser: service(),
   officialOnly: null,
   tempSearchString: '',
+  newMessage: null,
   
-  conversations: computed('currentUser.user.nanomessagesGroups.[]','tempSearchString',function() {
+  conversations: computed('currentUser.user.nanomessagesGroups.[]','tempSearchString','newMessage',function() {
     const es =  this.get('currentUser.user.nanomessagesGroups');
     const ss =  this.get('tempSearchString').toLowerCase();
     let newes = [];
+    // If the user has one or more groups
     if (es) {
+      // If there's an active search string
       if (ss) {
         let store = this.get('store');
         let id = this.get('currentUser.user.id');
@@ -36,10 +39,19 @@ export default Component.extend({
             newes.push(es[i]);
           }
         }
-      } else {
-        for (let i=0; i<es.length; i++) {
-          if (es[i].latestMessageDt!=null) {
-            newes.push(es[i]);
+      } else { // If there isn't an active search string
+        // If it's the new message state
+        if (this.get('newMessage')) {
+          for (let i=0; i<es.length; i++) {
+            if (es[i].latestMessageDt==null) {
+              newes.push(es[i]);
+            }
+          }
+        } else { // Just the regular list
+          for (let i=0; i<es.length; i++) {
+            if (es[i].latestMessageDt!=null) {
+              newes.push(es[i]);
+            }
           }
         }
       }
@@ -59,6 +71,16 @@ export default Component.extend({
   actions: {
     searchStringChange: function() {
       debounce(this, this.updateSearch, 250, false);
+    },
+    initiateNewMessage: function() {
+      this.set('newMessage', true);
+      const pinm = this.get('parentInitiateNewMessage');
+      pinm();
+    },
+    cancelNewMessage: function() {
+      this.set('newMessage', false);
+      const pcnm = this.get('parentCancelNewMessage');
+      pcnm();
     },
   }
 });

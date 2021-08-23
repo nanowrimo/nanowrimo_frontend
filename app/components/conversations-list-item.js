@@ -12,6 +12,19 @@ export default Component.extend({
   searchString: null,
   classNames: ["convo-item"],
   
+  init() {
+    this._super(...arguments);
+    let g = this.get('group');
+    if (g) {
+      let lm = this.get('group.latestMessageDt');
+      // if found, return the number of unread messages; otherwise return zero
+      if (lm==null) {
+        this.set('classNames', ['convo-item is-new']);
+      }
+    }
+  },
+
+  
   groupIsRegion: computed('group', function() {
     let g = this.get('group');
     if (g.get('groupType')=='region') {

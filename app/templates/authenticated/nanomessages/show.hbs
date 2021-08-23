@@ -5,10 +5,23 @@
       <div class="grid-wrapper">
         <div class="nw-card nanomessages-card g3-col1 g3-row1 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2">
           <div class="nw-card-header">
-            <div class="nw-card-title">Nanomessages</div>
+            <div class="nw-card-title">
+              <div class="nw-card-title-left">
+              </div>
+              <div class="nw-card-title-center">{{cardTitle}}</div>
+              <div class="nw-card-title-right">
+                {{#if newMessage}}
+                  <div
+                    onClick={{action 'cancelNewMessage'}}
+                  >
+                    <i class="fa fa-times" />
+                  </div>
+                {{/if}}
+              </div>
+            </div>
           </div>
           <div class="nw-card-content">
-            {{conversations-list group=group class="full-width"}}
+            {{conversations-list group=group parentInitiateNewMessage=(action 'initiateNewMessage') parentCancelNewMessage=(action 'cancelNewMessage') newMessage=newMessage class="full-width"}}
           </div>
         </div>
         {{#if group}}

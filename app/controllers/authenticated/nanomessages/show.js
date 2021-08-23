@@ -7,8 +7,9 @@ import { debounce } from '@ember/runloop';
 export default Controller.extend({
   group: alias('model'),
   router: service(),
-  
+  newMessage: false,
   oldgroupid: null,
+  
   hasGroup: computed('group','oldgroupid', function() {
     //alert('computing');
     let g = this.get('group');
@@ -37,6 +38,15 @@ export default Controller.extend({
       return "Nanomessages";
     }
   }),
+  
+  cardTitle: computed('newMessage', function() {
+    if (this.get('newMessage')) {
+      return 'New Message';
+    } else {
+      return 'NanoMessages';
+    }
+  }),
+  
   setOldGroup() {
     let g = this.get('group');
     this.set('oldgroupid',g.id);
@@ -47,5 +57,14 @@ export default Controller.extend({
     let r = this.get('router');
     r.transitionTo('/nanomessages');
   },
+  
+  actions: {
+    initiateNewMessage: function() {
+      this.set('newMessage', true);
+    },
+    cancelNewMessage: function() {
+      this.set('newMessage', false);
+    },
+  }
   
 });
