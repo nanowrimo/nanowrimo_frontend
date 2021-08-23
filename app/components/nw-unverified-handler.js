@@ -16,11 +16,14 @@ export default Component.extend({
   init(){
     this._super(...arguments);
   },
-  displayUnconfirmedAlert: computed('currentUser.user.isNotConfirmed','emailSent', function(){
+  displayUnverifiedAlert: computed('currentUser.user.isNotConfirmed','emailSent', function(){
     return this.get('currentUser.user.isNotConfirmed') && !this.get('emailSent');
   }),
   
   actions: {
+    dismissSuccess(){
+      this.set('displaySuccessAlert', false);
+    },
     resendClicked(){
       //display the modal
       this.set('displayEmailModal', true);
@@ -57,9 +60,9 @@ export default Component.extend({
               this.set('successMessage', json.message);
               // hide the modal
               modal.close();
-              this.set('displayResendForm', false);
               // show the success alert
               this.set('displaySuccessAlert', true);
+              this.set('emailSent', true);
             }
           });
         });

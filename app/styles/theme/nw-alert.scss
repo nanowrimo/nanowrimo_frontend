@@ -1,19 +1,33 @@
 .nw-alert {
   width: 100%;
-  border: 1px solid;
   border-radius: 2px;
   text-align: center;
-  padding: 4px;
+  padding: 5px;
   a {
     text-decoration: underline !important;            
     font-weight: bold;
+    cursor: pointer;
   }
   &.warning {
-    background-color: $red;
+    background-color: $nw-alert-red;
     color: white;
   }
   &.success {
     background-color: $nw-mediumaqua;
     color: white;
+  }
+  .nw-alert-close {
+    border-color: transparent;
+    background-image: none !important;
+    background-color: transparent !important;
+    text-transform: none !important;
+    height: auto;
+    border-radius: 0px !important;
+
+    float: right;
+    &:focus {
+      border-color: black;
+
+    }
   }
 }
