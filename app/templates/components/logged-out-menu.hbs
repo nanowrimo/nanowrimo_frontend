@@ -37,11 +37,15 @@
       {{nw-mobile-menu-logged-out }}
       
       <ul>
-        <li class="menu-item">
-          <a href="https://nanowrimo.org/about-nano">What is NaNoWriMo?</a>
+        <li class="menu-item">  
+          {{#link-to "pages" "about-nano"}}
+            What is NaNoWriMo?
+          {{/link-to}}
         </li>
-         <li class="menu-item">
-          <a href="/come-write-in">Partner With Us</a>
+        <li class="menu-item">
+          {{#link-to "pages" "come-write-in"}}
+            Partner With Us
+          {{/link-to}}
         </li>
 
       </ul>
@@ -59,14 +63,7 @@
       <h4 class="title">What is NaNoWriMo?</h4>
       <p class="copy">It's a website, a community, a wildly ambitious writing event — and so much more!</p>
     </a>
-    <!--<a href="" class="link">
-      <h4 class="title">Writer's Resources</h4>
-      <p class="copy">Discover our resources for tips and tricks on starting and finishing your next great writing project.</p>
-    </a>
-    <a href="" class="link">
-      <h4 class="title">Connect</h4>
-      <p class="copy">Check out what NaNoWriMo's got going on at the moment, from events to book releases to writer chats.</p>
-    </a>-->
+
   </div>
   <div class="quick-links">
     <a href="https://store.nanowrimo.org/collections/shop" class="link">Shop</a>
