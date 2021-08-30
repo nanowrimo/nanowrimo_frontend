@@ -10,6 +10,10 @@ export default ScrollRoute.extend({
   model(params) {
     if (params.path) {
       let endpoint =  `${ENV.APP.API_HOST}/pages/${params.path}`;
+      if (params.path==="offers") {
+        endpoint =  `${ENV.APP.API_HOST}/offers`;
+        this.set('templateName', "offers");
+      }
       return fetch(endpoint).then((data)=>{
         return data.json().then((json)=>{
           return json;
