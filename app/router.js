@@ -8,6 +8,8 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
+    // dynamic routes
+  this.route('pages', {path: '/:path'});
   this.route('authenticated', { path: '' }, function() {
     this.route('dashboard');
     this.route('search');
@@ -147,6 +149,8 @@ Router.map(function() {
 
   //delete request
   this.route('delete-request', {path: '/delete-request/:token'});
+  
+
   
 });
 
