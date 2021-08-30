@@ -86,6 +86,7 @@ export default Component.extend({
       if (tx) {
         nm.save().then(() => {
           this.set('isDisabled',false);
+          document.querySelector('.medium-editor-element').innerHTML = '';
           let rm = this.get('refreshMessages');
           rm();
         });

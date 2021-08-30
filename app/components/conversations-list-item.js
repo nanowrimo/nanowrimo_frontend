@@ -171,10 +171,10 @@ export default Component.extend({
         }
         return text;
       } else {
-        return "<p>There are no messages yet. Why not start the discussion?</p>";
+        return "";
       }
     } else {
-      return "<p>There are no messages yet. Why not start the discussion?</p>";
+      return "";
     }
   }),
   
