@@ -13,6 +13,7 @@ export default Component.extend({
   adminIsChecked: null,
   emailIsChecked: null,
   isDisabled: false,
+  
   _callAfterSubmit() {
     let callback = this.get('afterSubmit');
     if (callback) { callback(); }
@@ -55,6 +56,7 @@ export default Component.extend({
     }
     return showit;
   }),
+  
   init() {
     this._super(...arguments);
     let nm = this.get('store').createRecord('nanomessage');
@@ -65,6 +67,9 @@ export default Component.extend({
     this.set('newNanomessage', nm);
   },
 
+  iconClass: computed(function() {
+    return "fa fa-paper-plane-o";
+  }),
   
   actions: {
     doingSomething(isChecked) {
