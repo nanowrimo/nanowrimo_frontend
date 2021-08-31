@@ -65,6 +65,18 @@
         unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
       }
     });</script>
+    {{#if isSubmittedNoEmail}}
+      {{confirmation-modal
+        yes=cancelConfirmationYesText
+        no=cancelConfirmationNoText
+        title=cancelConfirmationTitleText
+        question=cancelConfirmationQuestion
+        open=showConfirmCancel
+        yesAction=(action "cancelConfirmationYes")
+        noAction=(action "cancelConfirmationNo")
+      }}
+    {{/if}}
+    
   </div>
 {{else}}
   <div class="new-message-form" style='text-align: center;'>
