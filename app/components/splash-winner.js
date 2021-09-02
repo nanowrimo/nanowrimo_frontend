@@ -20,7 +20,7 @@ export default Component.extend({
   
   winnerImage: computed('isNaNo', function(){
     let i = this.get('isNaNo');
-    let path = (i) ? "/images/splash/NaNo-20-Winner-Certificate-Image.jpg" : "/images/splash/Camp-2021-Winner-Certificate.jpg";
+    let path = (i) ? "/images/splash/NaNo-2021-Winner-Certificate.png" : "/images/splash/Camp-2021-Winner-Certificate.jpg";
     return path;
   }),
 
