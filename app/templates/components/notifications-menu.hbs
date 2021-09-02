@@ -1,7 +1,7 @@
 {{#bs-nav class="nw-nav-notify-buttons" as |nav|}}
   <button class="button-clear" aria-label="Go to your nanomessages" {{action 'linkToNanomessages'}}>
     <span aria-hidden="false">{{fa-icon "comment"}}</span>
-    <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
+    <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{newNanomessagesCount}}</div>
   </button>
   {{#nav.dropdown as |dd|}}
     <button class="button-clear" {{action 'toggleNotifications'}}>
