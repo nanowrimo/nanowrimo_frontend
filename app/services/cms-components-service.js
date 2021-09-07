@@ -43,21 +43,6 @@ export default Service.extend({
     });
   },
   
-  /*getDynamicSponsorOffer(offerCode) {
-    let endpoint =  `${ENV.APP.API_HOST}/dynamic_sponsor_offer/` + offerCode;
-    let { auth_token } = this.get('session.data.authenticated');
-    fetch(endpoint, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
-    })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((error) => {
-      reject(error);
-    });
-  },*/
-  
   loadedSponsorOffers: computed('sponsorOffers',function() {
     return this.get('sponsorOffers');
   }),

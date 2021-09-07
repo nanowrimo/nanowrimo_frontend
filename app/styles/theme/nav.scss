@@ -432,7 +432,8 @@
       line-height: 38px;
       position: relative;
       .nw-unread-circle {
-        top: 0px;
+        position: absolute;
+        bottom: 0px;
         right: 0px;
         font-size: 10px;
         letter-spacing: 0px;
@@ -452,7 +453,8 @@ button {
     line-height: 38px;
     position: relative;
     .nw-unread-circle {
-      top: 0px;
+      position: absolute;
+      bottom: 5px;
       right: 0px;
       font-size: 10px;
       letter-spacing: 0px;

@@ -5,6 +5,7 @@ import ENV from 'nanowrimo/config/environment';
 
 export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
+  pingService: service(),
   badgesService: service(),
   notificationsService: service(),
   session: service(),
@@ -43,6 +44,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel() {
+    this._loadPingService();
     this._loadBadgesService();
     this._loadNotificationsService();
     return this._loadCurrentUser();
@@ -51,12 +53,16 @@ export default Route.extend(ApplicationRouteMixin, {
   sessionAuthenticated() {
     this._super(...arguments);
     this._loadCurrentUser();
+    this._loadPingService();
     this._loadBadgesService();
     this._loadNotificationsService();
   },
 
   _loadCurrentUser() {
     return this.get('currentUser').load().catch(() => this.get('session').invalidate());
+  },
+  _loadPingService() {
+    return this.get('pingService').load();
   },
   _loadBadgesService() {
     return this.get('badgesService').load();
