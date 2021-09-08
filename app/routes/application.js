@@ -7,7 +7,6 @@ export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
   pingService: service(),
   badgesService: service(),
-  notificationsService: service(),
   session: service(),
   //include the airbrake service 
   airbrake: service(),
@@ -46,7 +45,6 @@ export default Route.extend(ApplicationRouteMixin, {
   beforeModel() {
     this._loadPingService();
     this._loadBadgesService();
-    this._loadNotificationsService();
     return this._loadCurrentUser();
   },
 
@@ -55,7 +53,6 @@ export default Route.extend(ApplicationRouteMixin, {
     this._loadCurrentUser();
     this._loadPingService();
     this._loadBadgesService();
-    this._loadNotificationsService();
   },
 
   _loadCurrentUser() {

@@ -1,5 +1,4 @@
 import Service from '@ember/service';
-import { Promise } from 'rsvp';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
@@ -7,7 +6,7 @@ import ENV from 'nanowrimo/config/environment';
 export default Service.extend({
   session: service(),
   currentUser: service(),
-
+  newNotifications: null,
   init() {
     this._super(...arguments);
   },
@@ -24,14 +23,17 @@ export default Service.extend({
     return fetch((endpoint), { 
       method: 'get',
       headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
-    }).then(() => {
+    }).then((response) => {
+      return response.json().then((json)=>{
+        this.set("newNotifications", json.data.notifications);
+      })
     }).catch(() => {
-      alert('Something went wrong! Please reload the page and try again.');
+      //alert('Something went wrong! Please reload the page and try again.');
     });
   },
   
   cyclePing() {
-    let result = this.pingApi();
+    this.pingApi();
     debounce(this, this.cyclePing, 10000, false);
   },
     
