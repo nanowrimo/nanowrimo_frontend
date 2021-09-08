@@ -8,6 +8,7 @@ export default Component.extend({
   store: service(),
   router: service(),
   notificationsService: service(),
+  pingService: service(),
   media: service(),
   currentUser: service(),
   initialWinnerDisplayed: false,
@@ -36,8 +37,8 @@ export default Component.extend({
   notificationSortingDesc: Object.freeze(['displayAt:desc']),
   sortedNotifications: sort('allNotifications','notificationSortingDesc'),
   
-  newNotificationsCount: computed('notificationsService.newNotificationsCount', function() {
-    return this.get('notificationsService.newNotificationsCount');
+  newNotificationsCount: computed('pingService.newNotifications', function() {
+    return this.get('pingService.newNotifications');
   }),
   newNanomessagesCount: computed('notificationsService.newNanomessagesCount', function() {
     return this.get('notificationsService.newNanomessagesCount');
@@ -86,6 +87,9 @@ export default Component.extend({
     },
     toggleNotifications() {
       const dn = this.get('displayNotifications');
+      if (dn==false) {
+        this.get('notificationsService').checkForUpdates();
+      }
       this.set('displayNotifications', !dn);
     },
     

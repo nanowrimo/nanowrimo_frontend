@@ -7,12 +7,6 @@ export default Component.extend({
   // page is passed into the component
   page: null,
   
-    didInsertElement: function(model){
-    Ember.run.scheduleOnce('afterRender', this, function(model) {
-      let cliList = CwiList.create();
-    });
-  },
-  
   // Returns the publication date as a readable string
   computeShowAfter: computed(function() {
     return moment(this.get('page.data.attributes.show-after')).format("MMMM D, YYYY");
