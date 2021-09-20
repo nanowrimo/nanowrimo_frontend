@@ -1,7 +1,6 @@
 import Service from '@ember/service';
 import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import { observer } from '@ember/object';
 import ENV from 'nanowrimo/config/environment';
 
 export default Service.extend({
@@ -9,7 +8,7 @@ export default Service.extend({
   currentUser: service(),
   notificationData: null,
   unreadMessageCount: 0,
-  groupsWithUnreadMessages: [],
+  groupsWithUnreadMessages: null,
   instantiated: false,
   
   init() {
