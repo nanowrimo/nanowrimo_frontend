@@ -17,12 +17,7 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    let nm = this.get('store').createRecord('nanomessage');
-    let cu = this.get('currentUser.user');
-    nm.set('user',cu);
-    let g = this.get('group');
-    nm.set('group',g);
-    this.set('newNanomessage', nm);
+    this.setNewNanoMessage();
     // No email confirmation settings
     this.set('cancelConfirmationYesText', 'Continue');
     this.set('cancelConfirmationNoText', 'Cancel'); 
@@ -114,8 +109,18 @@ export default Component.extend({
           document.querySelector('.medium-editor-element').innerHTML = '';
           let rm = this.get('refreshMessages');
           rm();
+          //set a new nanomessage
+          this.setNewNanoMessage();
         });
       }
     },
+  }, 
+  setNewNanoMessage() {
+    let nm = this.get('store').createRecord('nanomessage');
+    let cu = this.get('currentUser.user');
+    nm.set('user',cu);
+    let g = this.get('group');
+    nm.set('group',g);
+    this.set('newNanomessage', nm);
   }
 });
