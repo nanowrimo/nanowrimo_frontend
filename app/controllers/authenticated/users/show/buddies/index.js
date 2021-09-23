@@ -21,5 +21,9 @@ export default Controller.extend({
     this.set('selectedSortOption', [options[0]]);
   },
 
+  actions: {
+    setSortSelection() {
+    },
+  }
   
 });
