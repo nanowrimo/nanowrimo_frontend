@@ -37,19 +37,21 @@ export default Component.extend({
   notificationSortingDesc: Object.freeze(['displayAt:desc']),
   sortedNotifications: sort('allNotifications','notificationSortingDesc'),
   
-  newNotificationsCount: computed('pingService.newNotifications', function() {
-    return this.get('pingService.newNotifications');
+  newNotificationsCount: computed('pingService.NotificationData', function() {
+    return this.get('pingService.NotificationData');
   }),
-  newNanomessagesCount: computed('notificationsService.newNanomessagesCount', function() {
-    return this.get('notificationsService.newNanomessagesCount');
+  
+  newNanomessagesCount: computed('pingService.unreadMessageCount', function() {
+    return this.get('pingService.unreadMessageCount');
   }),
+  
   displayStyle: computed('newNotificationsCount', function() {
     var c = this.get('newNotificationsCount');
     if (c==0) return "nw-hidden";
     else return "";
   }),
-  nanomessagesDisplayStyle: computed('newNanomessagesCount', function() {
-    var c = this.get('newNanomessagesCount');
+  nanomessagesDisplayStyle: computed('pingService.unreadMessageCount', function() {
+    var c = this.get('pingService.unreadMessageCount');
     if (c==0) return "nw-hidden";
     else return "";
   }),

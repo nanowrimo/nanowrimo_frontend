@@ -16,6 +16,8 @@ export default Controller.extend({
     this._super(...arguments);
     let pra =  this.store.createRecord('password-reset-attempt');
     this.set("changeset", new Changeset(pra, lookupValidator(passwordResetValidation), passwordResetValidation));
+    // remove the "application-loading-indicator"
+    document.getElementById("application-loading-indicator").remove();
   },
   
   actions: {
