@@ -9,6 +9,9 @@ export default Component.extend({
   store: service(),
   currentUser: service(),
   session: service(),
+  
+  classNames: ['buddy-buttons'],
+  
   user: null,
   newBuddyEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy/`,
   approveBuddyEndpoint: `${ENV.APP.API_HOST}/groups/approve_buddy/`,

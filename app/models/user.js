@@ -404,6 +404,28 @@ const User = Model.extend({
     }
     return pending;
   }),
+  buddyGroupUsersInvited: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+    let bgus = this.get('buddyGroupUsers');
+    const store = this.get('store');
+    let pending = [];
+    let id = this.get('id');
+    
+    //are there buddy group users?
+    if (bgus) {
+      bgus.forEach(function(bgu) {
+        let gus = bgu.group.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='0')) {
+              pending.push(gu);
+            }
+          }
+        });
+      });
+    }
+    return pending;
+  }),
   buddyGroupUsersBlocked: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let blocked = [];

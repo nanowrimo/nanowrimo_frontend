@@ -1,27 +1,37 @@
 <div class='nw-card-primary nw-flex-center' style="flex-direction: column;">
   <div class='nw-flex-center'>
     <div style="flex: 56px;">
-      {{user-avatar user=user linkTo=true size='50'}}
+      {{user-avatar user=buddy linkTo=true size='50'}}
     </div>
-    <div style="flex: 100%; text-align: right;">Button</div>
+    <div style="flex: 100%; text-align: right;">
+      {{#if isActive}}
+        {{#link-to 'authenticated.nanomessages.show' conversationSlug}}
+          <button class="nw-round-icon-button nw-drop-shadow">
+            {{fa-icon "comments"}}
+          </button>
+        {{/link-to}}
+      {{/if}}
+    </div>
   </div>
   <div style="width: 100%; padding-top: 10px;">
     <div class="nw-user-name">
-      {{#link-to 'authenticated.users.show' user.slug}}
-        {{user.name}}
+      {{#link-to 'authenticated.users.show' buddy.slug}}
+        {{buddy.name}}
       {{/link-to}}
     </div>
-    <div class="nw-project-name">
-      Book title really0 really1really0 really1really0
-    </div>
+    {{#if isActive}}
+      <div class="nw-project-name">
+        Book title really0 really1really0 really1really0
+      </div>
+    {{/if}}
   </div>
 </div>
-{{#if buttons2}}
-  <div class='user-buttons nw-card-secondary'>
-    {{buddy-buttons user=user}}
-  </div>
-{{else}}
+{{#if isActive}}
   <div class="nw-flex-center nw-card-secondary">
     {{charts/goal-progress-summary}}
+  </div>
+{{else}}
+  <div class='user-buttons nw-card-secondary'>
+    {{buddy-buttons user=buddy}}
   </div>
 {{/if}}

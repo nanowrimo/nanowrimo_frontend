@@ -1,0 +1,37 @@
+.nw-user-card {
+  background-color: #F7F7F7;
+  border: solid #DFE4E6 1px;
+  border-radius: 5px;
+  @media (max-width: $screen-sm-max) {
+    flex-direction: column;
+  }
+  .nw-card-primary {
+    flex: 0 0 50%;
+    padding: 15px;
+  }
+  .nw-card-secondary {
+    flex: 0 0 50%;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    background-color: #FFF; 
+    padding: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    .buddy-status {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    @media (max-width: $screen-md-max) {
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 5px;
+      .buddy-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

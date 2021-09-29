@@ -8,17 +8,17 @@ export default Controller.extend({
   selectedSortOption: null,
   sortOptions: null,
   user: null,
-  buddiesActive: computed('user.buddiesActive.[]',function() {
+  /*buddiesActive: computed('user.buddiesActive.[]',function() {
     let u = this.get('user');
     return u.buddiesActive;
   }),
-  sortedBuddies: sort('user.activeBuddies', 'selectedSortOption'),
+  sortedBuddies: sort('user.activeBuddies', 'selectedSortOption'),*/
   
   init() {
     this._super(...arguments);
-    let options = ['name'];
-    this.set('sortOptions', options);
-    this.set('selectedSortOption', [options[0]]);
+    //let options = ['name'];
+    //this.set('sortOptions', options);
+    //this.set('selectedSortOption', [options[0]]);
   },
 
   actions: {

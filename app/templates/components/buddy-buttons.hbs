@@ -1,20 +1,18 @@
 {{#if notCurrentUser}}
   {{#if buddyInvited}}
-    <div class="buddy-buttons">
-      <div class="buddy-status">
-        You've invited {{user.name}} to be buddies.
-      </div>
-      <button {{action "cancelInvitation" }} class="button-reversed">
-        {{fa-icon "minus-circle"}}
-        Cancel invitation
-      </button>
+    <div class="buddy-status">
+      You've invited {{user.name}} to be buddies.
     </div>
+    <button {{action "cancelInvitation" }} class="button-reversed">
+      {{fa-icon "minus-circle"}}
+      Cancel invitation
+    </button>
   {{/if}}
   {{#if buddyInvitedBy}}
-    <div class="buddy-buttons">
-      <div class="buddy-status">
-        {{user.name}} has invited you to be buddies.
-      </div>
+    <div class="buddy-status">
+      {{user.name}} has invited you to be buddies.
+    </div>
+    <div>
       <button {{action "approveInvitation" }} class="button-reversed">
         {{fa-icon "user-plus"}}
         Accept
@@ -32,30 +30,26 @@
     </div>
   {{/if}}
   {{#if buddyActive}}
-    <div class="buddy-buttons">
-      <div class="buddy-status">
-        You are buddies with {{user.name}}.
-      </div>
-      <div {{action "removeBuddy" }} class="remove-element">
-        {{fa-icon "trash-o"}}
-        Remove as buddy
-      </div>
+    <div class="buddy-status">
+      You are buddies with {{user.name}}.
+    </div>
+    <div {{action "removeBuddy" }} class="remove-element">
+      {{fa-icon "trash-o"}}
+      Remove as buddy
     </div>
   {{/if}}
   {{#if notBuddy}}
-    <div class="buddy-buttons">
-      <div class="buddy-status">
-        You aren't buddies with {{user.name}}.
-      </div>
-      <button {{action "sendInvitation"}}>
-        {{fa-icon "user-plus"}}
-        Send invitation
-      </button>
+    <div class="buddy-status">
+      You aren't buddies with {{user.name}}.
     </div>
+    <button {{action "sendInvitation"}}>
+      {{fa-icon "user-plus"}}
+      Send invitation
+    </button>
   {{/if}}
 
   {{#if userBlocked}}
-    <div class="buddy-buttons button-danger">
+    <div class="button-danger">
       <div class="buddy-status">
         You've blocked {{user.name}}.
       </div>
