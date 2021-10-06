@@ -10,6 +10,7 @@ export default Service.extend({
   unreadMessageCount: 0,
   groupsWithUnreadMessages: null,
   instantiated: false,
+  buddiesData: [],
   
   init() {
     this._super(...arguments);
@@ -43,7 +44,20 @@ export default Service.extend({
           count += dataSet.unread_message_count;
           groups.push(dataSet.group_id);
         });
-
+        
+        // Handle buddies data
+        let bd = this.get('buddiesData');
+        json.data.buddies.forEach((dataSet)=>{
+          // Remove buddies data from existing array if there's new information
+          for (let i = bd.length - 1; i>-1; i--) {
+            if (bd[i].user_id == dataSet.user_id) {
+              bd.splice(i,1);
+            }
+          }
+          // Add the new buddy data to the array
+          bd.push(dataSet);
+        });
+        this.set('buddiesData',bd);
         this.set('unreadMessageCount', count);
         this.set('groupsWithUnreadMessages', groups);
         

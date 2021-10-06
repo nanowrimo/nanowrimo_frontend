@@ -21,17 +21,17 @@
     </div>
     {{#if isActive}}
       <div class="nw-project-name">
-        Book title really0 really1really0 really1really0
+        {{primaryProjectState.project_title}}
       </div>
     {{/if}}
   </div>
 </div>
 {{#if isActive}}
   <div class="nw-flex-center nw-card-secondary">
-    {{charts/goal-progress-summary}}
+    {{charts/goal-progress-summary user=buddy eventType=eventType showData=showData overallCount=overallCount overallGoal=overallGoal dailyCount=dailyCount dailyGoal=dailyGoal overallProgress=overallProgress dailyProgress=dailyProgress streak=streak updatedAt=updatedAt}}
   </div>
 {{else}}
   <div class='user-buttons nw-card-secondary'>
-    {{buddy-buttons user=buddy}}
+    {{buddies/buddy-buttons user=buddy}}
   </div>
 {{/if}}

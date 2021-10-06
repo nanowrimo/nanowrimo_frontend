@@ -35,3 +35,29 @@
     }
   }
 }
+.nw-my-buddies {
+  .nw-card-content {
+    max-height: 450px;
+    overflow: scroll;
+    @media (max-width: $screen-xlg) {
+      max-height: 600px;
+    }
+    @media (max-width: $screen-lg) {
+      max-height: 800px;
+    }
+    .nw-user-card {
+      flex-direction: column;
+      .nw-card-secondary {
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 5px;
+        .buddy-buttons {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
