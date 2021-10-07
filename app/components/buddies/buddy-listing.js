@@ -29,23 +29,25 @@ export default Component.extend({
     const buddiesData = _this.get('pingService.buddiesData');
     const buddyId = _this.get('buddy.id');
     let pps = null;
-    for (let i = 0; i<buddiesData.length; i++) {
-      if (buddiesData[i].user_id == buddyId) {
-        pps = JSON.parse(buddiesData[i].primary_project_state);
-      }
-    }
-    if (pps) {
-      if (_this.get('updatedAt') != pps.updated_at) {
-        if (_this.get('updatedAt') == null) {
-          _this.set('updatedAt',pps.updated_at);
-        } else {
-          _this.set('nwDropShadow', false);
-          _this.set('nwHighlightShadow', true);
-          _this.set('updatedAt',pps.updated_at);
+    if (buddiesData) {
+      for (let i = 0; i<buddiesData.length; i++) {
+        if (buddiesData[i].user_id == buddyId) {
+          pps = JSON.parse(buddiesData[i].primary_project_state);
         }
-      } else {
-        _this.set('nwDropShadow', true);
-        _this.set('nwHighlightShadow', false);
+      }
+      if (pps) {
+        if (_this.get('updatedAt') != pps.updated_at) {
+          if (_this.get('updatedAt') == null) {
+            _this.set('updatedAt',pps.updated_at);
+          } else {
+            _this.set('nwDropShadow', false);
+            _this.set('nwHighlightShadow', true);
+            _this.set('updatedAt',pps.updated_at);
+          }
+        } else {
+          _this.set('nwDropShadow', true);
+          _this.set('nwHighlightShadow', false);
+        }
       }
     }
   },
