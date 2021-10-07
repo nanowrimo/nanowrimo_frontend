@@ -1,10 +1,10 @@
 <div style="width: 80px; flex: 0 0 80px;">
   {{#if needsDonut}}
-    {{charts/donut overallProgress=overallProgress dailyProgress=dailyProgress eventType=eventType}}
+    {{charts/donut user=user eventType=eventType}}
   {{else}}
     {{charts/fireball streak=streak}}
   {{/if}}
 </div>
 <div style="flex: 1 1 100%; padding-left: 20px;">
-  {{charts/stats-large-over-small user=user eventType=eventType showData=showData overallcount=overallCount overallGoal=overallGoal dailyCount=dailyCount dailyGoal=dailyGoal overallProgress=overallProgress dailyProgress=dailyProgress streak=streak updatedAt=updatedAt}}
+  {{charts/stats-large-over-small user=user eventType=eventType showData=showData}}
 </div>

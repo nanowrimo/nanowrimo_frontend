@@ -36,29 +36,38 @@ export default Component.extend({
     return (buddiesInvited.length + buddiesPending.length);
   }),
   
-  sortedBuddies: computed('user.buddyGroupsActive.[]','searchString', function() {
+  searchedBuddies: computed('user.buddyGroupsActive.[]','searchString', function() {
     const cu = this.get('user');
     const store = this.get('store');
-    const unsortedBuddies = this.get('user.buddyGroupsActive');
+    const unsearchedBuddies = this.get('user.buddyGroupsActive');
     const searchString = this.get('searchString').toLowerCase();
-    let sortedBuddies = [];
+    let searchedBuddies = [];
     if (searchString == '') {
-      sortedBuddies = unsortedBuddies;
+      searchedBuddies = unsearchedBuddies;
     } else {
-      for (let i=0; i<unsortedBuddies.length; i++) {
-        const gus = unsortedBuddies[i].get('groupUsers');
+      for (let i=0; i<unsearchedBuddies.length; i++) {
+        const gus = unsearchedBuddies[i].get('groupUsers');
         gus.forEach(function(gu) {
           if (gu.user_id) {
             let u = store.peekRecord('user', gu.user_id);
             if ((u) && (u.id!=cu.id) && (gu.exitAt==null)) {
               if (u.name.toLowerCase().search(searchString)>=0) {
-                sortedBuddies.push(unsortedBuddies[i]);
+                searchedBuddies.push(unsearchedBuddies[i]);
               }
             }
           }
         });
       }
     }
+    return searchedBuddies;
+  }),
+  
+  sortedBuddies: computed('user.buddyGroupsActive.[]','searchedBuddies', function() {
+    const cu = this.get('user');
+    const store = this.get('store');
+    const unsortedBuddies = this.get('searchedBuddies');
+    let sortedBuddies = [];
+    sortedBuddies = unsortedBuddies;
     return sortedBuddies;
   }),
   

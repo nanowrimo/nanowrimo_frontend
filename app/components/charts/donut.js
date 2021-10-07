@@ -1,20 +1,20 @@
-//import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
-//import { computed } from '@ember/object';
-
-//export default ChartBaseComponent.extend({
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  pingService: service(),
+
   paneBackgrounds: null,
-  overallProgress: null,
-  dailyProgress: null,
   eventType: null,
   showIcon: true,
   classNames: ['nw-square-80 chart-donut'],
+  updateCount: 0,
   
   init(){
     this._super(...arguments);
+    setInterval(this.incrementUpdateCount, 2000, this);
+    
     // Donut charts have two rings, the outer one for overall progress, the inner one for daily progress
     this.set('paneBackgrounds', [
       {
@@ -31,6 +31,44 @@ export default Component.extend({
       },
     ]);
   },
+  
+  incrementUpdateCount: function(_this){
+    let updateCount = _this.get('updateCount');
+    _this.set('updateCount', updateCount+1);
+  },
+    
+  pps: function() {
+    const buddiesData = this.get('pingService.buddiesData');
+    const buddyId = this.get('user.id');
+    let pps = null;
+    for (let i = 0; i<buddiesData.length; i++) {
+      if (buddiesData[i].user_id == buddyId) {
+        pps = JSON.parse(buddiesData[i].primary_project_state);
+      }
+    }
+    return pps;
+  },
+  
+  overallProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'updateCount', function() {
+    const updateCount = this.get('updateCount');
+    const pps = this.pps();
+    if (pps) {
+      return Math.min(Math.round((pps.current_word_count/pps.goal_total)*100),100);
+    } else {
+      return 100;
+    }
+    
+  }),
+  
+  dailyProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+    const updateCount = this.get('updateCount');
+    const pps = this.pps();
+    if (pps) {
+      return Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100);
+    } else {
+      return 0;
+    }
+  }),
   
   // Hides the center icon on mouseover so the tooltip can be read
   mouseEnter(){
@@ -103,7 +141,7 @@ export default Component.extend({
   }),
   
   // Sets the ring colors, radii, and percentage
-  chartData: computed(function() {
+  chartData: computed('overallProgress','dailyProgress',function() {
     let cFormat = [];
     const overallProgress = {
       name: "Overall progress",

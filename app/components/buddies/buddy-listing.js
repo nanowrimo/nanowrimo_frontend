@@ -12,11 +12,56 @@ export default Component.extend({
   user: null,
   overallProgress: 80,
   dailyProgress: 50,
-  classNames: ['nw-flex-center','nw-user-card','nw-drop-shadow'],
+  classNames: ['nw-flex-center','nw-user-card'],
+  classNameBindings: ['nwDropShadow','nwHighlightShadow'],
+  nwDropShadow: true,
+  nwHighlightShadow: false,
   showData: 'Overall Progress',
+  updatedAt: null,
+  updateCount: 0,
   
   init() {
     this._super(...arguments);
+    setInterval(this.incrementUpdateCount, 2000, this);
+  },
+  
+  incrementUpdateCount: function(_this){
+    let updateCount = _this.get('updateCount');
+    _this.set('updateCount', updateCount+1);
+    const buddiesData = _this.get('pingService.buddiesData');
+    const buddyId = _this.get('buddy.id');
+    let pps = null;
+    for (let i = 0; i<buddiesData.length; i++) {
+      if (buddiesData[i].user_id == buddyId) {
+        pps = JSON.parse(buddiesData[i].primary_project_state);
+      }
+    }
+    if (pps) {
+      if (_this.get('updatedAt') != pps.updated_at) {
+        if (_this.get('updatedAt') == null) {
+          _this.set('updatedAt',pps.updated_at);
+        } else {
+          _this.set('nwDropShadow', false);
+          _this.set('nwHighlightShadow', true);
+          _this.set('updatedAt',pps.updated_at);
+        }
+      } else {
+        _this.set('nwDropShadow', true);
+        _this.set('nwHighlightShadow', false);
+      }
+    }
+  },
+    
+  pps: function() {
+    const buddiesData = this.get('pingService.buddiesData');
+    const buddyId = this.get('user.id');
+    let pps = null;
+    for (let i = 0; i<buddiesData.length; i++) {
+      if (buddiesData[i].user_id == buddyId) {
+        pps = JSON.parse(buddiesData[i].primary_project_state);
+      }
+    }
+    return pps;
   },
   
   buddy: computed('group.groupUsers','user', function() {
@@ -37,7 +82,6 @@ export default Component.extend({
   
   // Retrieves the primary project state from the ping service
   primaryProjectState: computed('pingService.buddiesData.{[],@each.updated_at}', 'buddy.id', function() {
-    alert('p');
     const buddiesData = this.get('pingService.buddiesData');
     const buddyId = this.get('buddy.id');
     let pps = null;
@@ -108,17 +152,6 @@ export default Component.extend({
       return 0;
     }
 
-  }),
-  
-  updatedAt: computed('primaryProjectState.updated_at', function() {
-    const ppsua = this.get('primaryProjectState.updated_at');
-    alert(ppsua);
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return pps.updated_at;
-    } else {
-      return null;
-    }
   }),
   
   streak: computed('primaryProjectState', function() {
