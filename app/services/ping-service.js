@@ -14,6 +14,7 @@ export default Service.extend({
   
   init() {
     this._super(...arguments);
+    this.set('buddiesData', []);
   },
   
   load() {
