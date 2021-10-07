@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
-import { sort } from '@ember/object/computed';
 
 export default Component.extend({
   currentUser: service(),
@@ -63,8 +62,6 @@ export default Component.extend({
   }),
   
   sortedBuddies: computed('user.buddyGroupsActive.[]','searchedBuddies', function() {
-    const cu = this.get('user');
-    const store = this.get('store');
     const unsortedBuddies = this.get('searchedBuddies');
     let sortedBuddies = [];
     sortedBuddies = unsortedBuddies;
