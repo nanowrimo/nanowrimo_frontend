@@ -121,7 +121,6 @@ export default Component.extend({
   }),
   
   dailyCount: computed('primaryProjectState.updated_at', function() {
-    const ppsua = this.get('primaryProjectState.updated_at');
     const pps = this.get('primaryProjectState');
     if (pps) {
       return pps.daily_total;

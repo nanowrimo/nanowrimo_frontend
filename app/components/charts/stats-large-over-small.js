@@ -1,7 +1,5 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { equal }  from '@ember/object/computed';
-import { htmlSafe }  from '@ember/string';
 import moment from 'moment';
 import { inject as service } from '@ember/service';
 
@@ -39,7 +37,6 @@ export default Component.extend({
   
   timeSince: computed('pingService.buddiesData.{[],@each.primary_project_state}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
-    const buddiesData = this.get('pingService.buddiesData');
     let t = '';
     const pps = this.pps();
     if (pps && updateCount) {
