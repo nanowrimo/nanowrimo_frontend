@@ -10,8 +10,6 @@ export default Component.extend({
   
   group: null,
   user: null,
-  overallProgress: 80,
-  dailyProgress: 50,
   classNames: ['nw-flex-center','nw-user-card'],
   classNameBindings: ['nwDropShadow','nwHighlightShadow'],
   nwDropShadow: true,
