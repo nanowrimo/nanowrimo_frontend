@@ -134,7 +134,6 @@ export default Component.extend({
     } else {
       return null;
     }
-    return Math.round(pps.goal_total/pps.challenge_days);
   }),
   
   overallProgress: computed('overallCount', 'overallGoal', function() {

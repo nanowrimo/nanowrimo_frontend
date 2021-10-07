@@ -10,7 +10,7 @@ export default Service.extend({
   unreadMessageCount: 0,
   groupsWithUnreadMessages: null,
   instantiated: false,
-  buddiesData: [],
+  buddiesData: null,
   
   init() {
     this._super(...arguments);

@@ -9,7 +9,7 @@ export default Component.extend({
   eventType: null,
   showIcon: true,
   classNames: ['nw-square-80 chart-donut'],
-  updateCount: 0,
+  updateCount: 1,
   
   init(){
     this._super(...arguments);
@@ -52,7 +52,7 @@ export default Component.extend({
   overallProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return Math.min(Math.round((pps.current_word_count/pps.goal_total)*100),100);
     } else {
       return 100;
@@ -63,7 +63,7 @@ export default Component.extend({
   dailyProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100);
     } else {
       return 0;
@@ -85,10 +85,8 @@ export default Component.extend({
     switch(this.get('eventType')) {
       case 0: // This is a November event
         return true;
-        break;
       case 1: // This is a Camp event
         return true;
-        break;
       default: // This is any other kind of event
         return false;
     }
@@ -99,10 +97,8 @@ export default Component.extend({
     switch(this.get('eventType')) {
       case 0: // This is a November event
         return '/images/global/helmet.svg';
-        break;
       case 1: // This is a Camp event
         return '/images/global/tent-blue.svg';
-        break;
       default: // This is any other kind of event
         return '';
     }
@@ -113,10 +109,8 @@ export default Component.extend({
     switch(this.get('eventType')) {
       case 0: // This is a November event
         return 'Helmet icon for November challenges';
-        break;
       case 1: // This is a Camp event
         return 'Tent icon for Camp challenges';
-        break;
       default: // This is any other kind of event
         return '';
     }
@@ -130,10 +124,8 @@ export default Component.extend({
       switch(this.get('eventType')) {
         case 0: // This is a November event
           return '#A5D9E4';
-          break;
         case 1: // This is a Camp event
           return '#1B75BB';
-          break;
         default: // This is any other kind of event
           return '#005555';
       }
