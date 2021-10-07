@@ -13,7 +13,7 @@ export default Component.extend({
   user: null,
   showData: null,
   updatedAt: null,
-  updateCount: 0,
+  updateCount: 1,
   
   init() {
     this._super(...arguments);
@@ -37,11 +37,12 @@ export default Component.extend({
     return pps;
   },
   
-  timeSince: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
-    let t = '';
+  timeSince: computed('pingService.buddiesData.{[],@each.primary_project_state}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
+    const buddiesData = this.get('pingService.buddiesData');
+    let t = '';
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       let updated_at = pps.updated_at;
       if (updated_at) {
         t = moment.utc(updated_at, 'YYYY-MM-DD HH:mm:ss').local().fromNow();
@@ -53,7 +54,7 @@ export default Component.extend({
   overallCount: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return pps.current_word_count.toLocaleString();
     } else {
       return 0;
@@ -63,7 +64,7 @@ export default Component.extend({
   overallGoal: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return pps.goal_total.toLocaleString();
     } else {
       return 50000;
@@ -73,7 +74,7 @@ export default Component.extend({
   overallProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'overallCount', 'overallGoal', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return Math.min(Math.round((pps.current_word_count/pps.goal_total)*100),100);
     } else {
       return 100;
@@ -84,7 +85,7 @@ export default Component.extend({
   dailyCount: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return pps.daily_total.toLocaleString();
     } else {
       return 0;
@@ -94,7 +95,7 @@ export default Component.extend({
   dailyGoal: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return Math.round(pps.goal_total/pps.challenge_days).toLocaleString();
     } else {
       return 1667;
@@ -104,7 +105,7 @@ export default Component.extend({
   dailyProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100);
     } else {
       return 0;
@@ -114,7 +115,7 @@ export default Component.extend({
   streak: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
-    if (pps) {
+    if (pps && updateCount) {
       return pps.streak_days.toLocaleString();
     } else {
       return 0;
