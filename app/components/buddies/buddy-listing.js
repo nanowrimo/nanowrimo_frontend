@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   
@@ -20,14 +21,17 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    setInterval(this.incrementUpdateCount, 2000, this);
+    this.incrementUpdateCount();
   },
   
-  incrementUpdateCount: function(_this){
-    let updateCount = _this.get('updateCount');
-    _this.set('updateCount', updateCount+1);
-    const buddiesData = _this.get('pingService.buddiesData');
-    const buddyId = _this.get('buddy.id');
+  incrementUpdateCount: function(){
+    if (this.isDestroyed) {
+        return;
+    }
+    let updateCount = this.get('updateCount');
+    this.set('updateCount', updateCount+1);
+    const buddiesData = this.get('pingService.buddiesData');
+    const buddyId = this.get('buddy.id');
     let pps = null;
     if (buddiesData) {
       for (let i = 0; i<buddiesData.length; i++) {
@@ -36,20 +40,21 @@ export default Component.extend({
         }
       }
       if (pps) {
-        if (_this.get('updatedAt') != pps.updated_at) {
-          if (_this.get('updatedAt') == null) {
-            _this.set('updatedAt',pps.updated_at);
+        if (this.get('updatedAt') != pps.updated_at) {
+          if (this.get('updatedAt') == null) {
+            this.set('updatedAt',pps.updated_at);
           } else {
-            _this.set('nwDropShadow', false);
-            _this.set('nwHighlightShadow', true);
-            _this.set('updatedAt',pps.updated_at);
+            this.set('nwDropShadow', false);
+            this.set('nwHighlightShadow', true);
+            this.set('updatedAt',pps.updated_at);
           }
         } else {
-          _this.set('nwDropShadow', true);
-          _this.set('nwHighlightShadow', false);
+          this.set('nwDropShadow', true);
+          this.set('nwHighlightShadow', false);
         }
       }
     }
+    debounce(this, this.incrementUpdateCount, 2000, false);
   },
     
   pps: function() {

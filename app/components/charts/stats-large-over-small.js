@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import moment from 'moment';
 import { inject as service } from '@ember/service';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   pingService: service(),
@@ -15,12 +16,16 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    setInterval(this.incrementUpdateCount, 2000, this);
+    this.incrementUpdateCount();
   },
   
-  incrementUpdateCount: function(_this){
-    let updateCount = _this.get('updateCount');
-    _this.set('updateCount', updateCount+1);
+  incrementUpdateCount: function(){
+    if (this.isDestroyed) {
+        return;
+    }
+    let updateCount = this.get('updateCount');
+    this.set('updateCount', updateCount+1);
+    debounce(this, this.incrementUpdateCount, 2000, false);
   },
     
   pps: function() {

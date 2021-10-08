@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   pingService: service(),
@@ -10,10 +11,11 @@ export default Component.extend({
   showIcon: true,
   classNames: ['nw-square-80 chart-donut'],
   updateCount: 1,
+  user: null,
   
   init(){
     this._super(...arguments);
-    setInterval(this.incrementUpdateCount, 2000, this);
+    this.incrementUpdateCount();
     
     // Donut charts have two rings, the outer one for overall progress, the inner one for daily progress
     this.set('paneBackgrounds', [
@@ -32,9 +34,13 @@ export default Component.extend({
     ]);
   },
   
-  incrementUpdateCount: function(_this){
-    let updateCount = _this.get('updateCount');
-    _this.set('updateCount', updateCount+1);
+  incrementUpdateCount: function(){
+    if (this.isDestroyed) {
+        return;
+    }
+    let updateCount = this.get('updateCount');
+    this.set('updateCount', updateCount+1);
+    debounce(this, this.incrementUpdateCount, 2000, false);
   },
     
   pps: function() {
