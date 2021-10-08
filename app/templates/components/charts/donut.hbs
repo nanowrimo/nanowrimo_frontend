@@ -1,10 +1,13 @@
-{{#if iconNeeded}}
-  {{#if showIcon}}
-    <div class="nw-absolute nw-square-80 nw-flex-center chart-icon">
-      <img src={{iconSrc}} alt={{iconAlt}} class="nw-square-24" />
-    </div>
+{{#if noData}}
+{{else}}
+  {{#if iconNeeded}}
+    {{#if showIcon}}
+      <div class="nw-absolute nw-square-80 nw-flex-center chart-icon">
+        <img src={{iconSrc}} alt={{iconAlt}} class="nw-square-24" />
+      </div>
+    {{/if}}
   {{/if}}
+  <div class="nw-absolute nw-square-80">
+    {{high-charts content=chartData chartOptions=chartOptions theme=theme}}
+  </div>
 {{/if}}
-<div class="nw-absolute nw-square-80">
-  {{high-charts content=chartData chartOptions=chartOptions theme=theme}}
-</div>

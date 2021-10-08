@@ -49,7 +49,18 @@ export default Component.extend({
     return pps;
   },
   
-  overallProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'updateCount', function() {
+  // Hides the donut chart if no data
+  noData: computed('updateCount', function() {
+    const updateCount = this.get('updateCount');
+    const pps = this.pps();
+    if (pps && updateCount) {
+      return false;
+    } else {
+      return true;
+    }
+  }),
+  
+  overallProgress: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -60,7 +71,7 @@ export default Component.extend({
     
   }),
   
-  dailyProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  dailyProgress: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {

@@ -35,7 +35,17 @@ export default Component.extend({
     return pps;
   },
   
-  timeSince: computed('pingService.buddiesData.{[],@each.primary_project_state}', 'user', 'updateCount', function() {
+  // Hides the donut chart if no data
+  noData: computed('updateCount', function() {
+    const updateCount = this.get('updateCount');
+    const pps = this.pps();
+    if (pps && updateCount) {
+      return false;
+    } else {
+      return true;
+    }
+  }),  
+  timeSince: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     let t = '';
     const pps = this.pps();
@@ -48,7 +58,7 @@ export default Component.extend({
     return t;
   }),
   
-  overallCount: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  overallCount: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -58,7 +68,7 @@ export default Component.extend({
     }
   }),
   
-  overallGoal: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  overallGoal: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -68,7 +78,7 @@ export default Component.extend({
     }
   }),
   
-  overallProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'overallCount', 'overallGoal', 'updateCount', function() {
+  overallProgress: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -79,7 +89,7 @@ export default Component.extend({
     
   }),
   
-  dailyCount: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  dailyCount: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -89,7 +99,7 @@ export default Component.extend({
     }
   }),
   
-  dailyGoal: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  dailyGoal: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -99,7 +109,7 @@ export default Component.extend({
     }
   }),
   
-  dailyProgress: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  dailyProgress: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
@@ -109,7 +119,7 @@ export default Component.extend({
     }
   }),
   
-  streak: computed('pingService.buddiesData.{[],@each.updated_at}', 'user', 'updateCount', function() {
+  streak: computed('updateCount', function() {
     const updateCount = this.get('updateCount');
     const pps = this.pps();
     if (pps && updateCount) {
