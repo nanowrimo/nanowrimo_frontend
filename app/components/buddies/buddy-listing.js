@@ -16,7 +16,7 @@ export default Component.extend({
   nwHighlightShadow: false,
   showData: 'Overall Progress',
   updatedAt: null,
-  updateCount: 0,
+  updateCount: 1,
   
   init() {
     this._super(...arguments);
@@ -54,7 +54,7 @@ export default Component.extend({
     
   pps: function() {
     const buddiesData = this.get('pingService.buddiesData');
-    const buddyId = this.get('user.id');
+    const buddyId = this.get('buddy.id');
     let pps = null;
     for (let i = 0; i<buddiesData.length; i++) {
       if (buddiesData[i].user_id == buddyId) {
@@ -63,6 +63,16 @@ export default Component.extend({
     }
     return pps;
   },
+  
+  // Displays the project title
+  displayTitle: computed( 'updateCount', function() {
+    const updateCount = this.get('updateCount');
+    const pps = this.pps();
+    if (pps && updateCount) {
+      return pps.project_title
+    }
+    return '';
+  }),
   
   buddy: computed('group.groupUsers','user', function() {
     const gus = this.get('group.groupUsers');
@@ -99,65 +109,6 @@ export default Component.extend({
       return pps.event_type;
     } else {
       return null;
-    }
-  }),
-  
-  overallCount: computed('primaryProjectState', function() {
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return pps.current_word_count;
-    } else {
-      return 0;
-    }
-  }),
-  
-  overallGoal: computed('primaryProjectState', function() {
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return pps.goal_total;
-    } else {
-      return 50000;
-    }
-  }),
-  
-  dailyCount: computed('primaryProjectState.updated_at', function() {
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return pps.daily_total;
-    } else {
-      return 0;
-    }
-  }),
-  
-  dailyGoal: computed('primaryProjectState', function() {
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return pps.event_type;
-    } else {
-      return null;
-    }
-  }),
-  
-  overallProgress: computed('overallCount', 'overallGoal', function() {
-    return Math.round((this.get('overallCount')/this.get('overallGoal'))*100);
-  }),
-  
-  dailyProgress: computed('dailyCount', 'dailyGoal', function() {
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return Math.round((this.get('dailyCount')/(this.get('dailyGoal')/pps.challenge_days))*100);
-    } else {
-      return 0;
-    }
-
-  }),
-  
-  streak: computed('primaryProjectState', function() {
-    const pps = this.get('primaryProjectState');
-    if (pps) {
-      return pps.streak_days;
-    } else {
-      return 0;
     }
   }),
   
