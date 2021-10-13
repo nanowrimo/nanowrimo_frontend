@@ -37,11 +37,12 @@ export default Component.extend({
     return (buddiesInvited.length + buddiesPending.length);
   }),
   
-  searchedBuddies: computed('user.buddiesActive.[]','searchString', function() {
+  searchedBuddies: computed('user.buddiesActive.[]','searchString', 'pingService.updateCount', function() {
+    const updateCount = this.get('pingService.updateCount');
     const unsearchedBuddies = this.get('user.buddiesActive');
     const searchString = this.get('searchString').toLowerCase();
     let searchedBuddies = [];
-    if (searchString == '') {
+    if (searchString == '' && updateCount) {
       searchedBuddies = unsearchedBuddies;
     } else {
       for (let i=0; i<unsearchedBuddies.length; i++) {
