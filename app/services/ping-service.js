@@ -11,6 +11,7 @@ export default Service.extend({
   groupsWithUnreadMessages: null,
   instantiated: false,
   buddiesData: null,
+  buddiesLastUpdatedAt: null,
   updateCount: 1,
   
   init() {
@@ -47,10 +48,10 @@ export default Service.extend({
   
   fetchApiData: function(){
     let { auth_token }  = this.get('session.data.authenticated');
-    let endpoint = `${ENV.APP.API_HOST}/ping`;
+    let endpoint = `${ENV.APP.API_HOST}/ping?buddies_last_updated_at=` + this.get('buddies_last_updated_at');
     // if this service has not been instantiated, instantiate
     if (!this.get("instantiated")) {
-      endpoint+="?instantiate=true";
+      endpoint+="&instantiate=true";
       this.set('instantiated', true);
     }
     return fetch((endpoint), { 
