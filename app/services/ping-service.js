@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { debounce } from '@ember/runloop';
+import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
 
@@ -11,6 +12,7 @@ export default Service.extend({
   groupsWithUnreadMessages: null,
   instantiated: false,
   buddiesData: null,
+  updateCount: 1,
   
   init() {
     this._super(...arguments);
@@ -21,6 +23,27 @@ export default Service.extend({
     if (this.get('session.isAuthenticated')) {
       this.loopApiRequest();
     }
+  },
+  
+  // Retrieves the primary project state data for a specific buddy. Called by several other components.
+  primaryProjectState: function(buddyId) {
+    const buddiesData = this.get('buddiesData');
+    let pps = null;
+    for (let i = 0; i<buddiesData.length; i++) {
+      if (buddiesData[i].user_id == buddyId) {
+        pps = JSON.parse(buddiesData[i].primary_project_state);
+      }
+    }
+    return pps;
+  },
+  
+  // Increments the update count, which signals to other components that they might need to update themselves
+  incrementUpdateCount: function(){
+    if (this.isDestroyed) {
+      return;
+    }
+    let updateCount = this.get('updateCount');
+    this.set('updateCount', updateCount+1);
   },
   
   fetchApiData: function(){
@@ -61,7 +84,7 @@ export default Service.extend({
         this.set('buddiesData',bd);
         this.set('unreadMessageCount', count);
         this.set('groupsWithUnreadMessages', groups);
-        
+        this.incrementUpdateCount();
       })
     }).catch(() => {
       //alert('Something went wrong! Please reload the page and try again.');

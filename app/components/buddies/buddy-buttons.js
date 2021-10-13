@@ -27,6 +27,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   buddyActive: computed('currentUser.user.buddiesActive.[]',function() {
     let buddiesActive = this.get('currentUser.user.buddiesActive');
     if (buddiesActive.includes(this.get('user'))) {
@@ -34,6 +35,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   buddyInvited: computed('currentUser.user.buddiesInvited.[]',function() {
     let buddiesInvited = this.get('currentUser.user.buddiesInvited');
     if (buddiesInvited.includes(this.get('user'))) {
@@ -41,6 +43,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   buddyInvitedBy: computed('currentUser.user.buddiesInvitedBy.[]',function() {
     let buddiesInvitedBy = this.get('currentUser.user.buddiesInvitedBy');
     if (buddiesInvitedBy.includes(this.get('user'))) {
@@ -48,6 +51,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   userBlocked: computed('currentUser.user.usersBlocked',function() {
     let usersBlocked = this.get('currentUser.user.usersBlocked');
     if (usersBlocked.includes(this.get('user'))) {
@@ -55,6 +59,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   notBuddy: computed('currentUser.user.{buddiesActive,buddiesInvited,buddiesInvitedBy,usersBlocked}',function() {
     let buddyActive = this.get('buddyActive');
     let buddyInvited = this.get('buddyInvited');

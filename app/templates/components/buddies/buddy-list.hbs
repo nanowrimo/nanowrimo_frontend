@@ -8,11 +8,11 @@
   {{/if}}
   <div class='nw-column-cards'>
     {{#if buddyRequestCount}}
-      {{#each user.buddyGroupUsersInvited as |gu|}}
-        {{buddies/buddy-listing group=gu.group user=user buttons=true}}
+      {{#each user.buddiesInvited as |buddy|}}
+        {{buddies/buddy-listing buddy=buddy user=user isActive=false buttons=true}}
       {{/each}}
-      {{#each user.buddyGroupUsersPending as |gu|}}
-        {{buddies/buddy-listing group=gu.group user=user buttons=true}}
+      {{#each user.buddiesInvitedBy as |buddy|}}
+        {{buddies/buddy-listing buddy=buddy user=user isActive=false buttons=true}}
       {{/each}}
     {{else}}
       {{buddies/buddy-prompt}}
@@ -51,8 +51,8 @@
   {{/if}}
   <div class='nw-column-cards'>
     {{#if buddyCount}}
-      {{#each sortedBuddies as |group|}}
-        {{buddies/buddy-listing group=group user=user buttons=false showData=selectedSortOption}}
+      {{#each sortedBuddies as |buddy|}}
+        {{buddies/buddy-listing buddy=buddy user=user isActive=true buttons=false showData=selectedSortOption}}
       {{/each}}
     {{else}}
       {{buddies/buddy-prompt}}

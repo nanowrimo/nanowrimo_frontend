@@ -1,21 +1,19 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { debounce } from '@ember/runloop';
 
 export default Component.extend({
+  
   pingService: service(),
 
   paneBackgrounds: null,
   eventType: null,
   showIcon: true,
   classNames: ['nw-square-80 chart-donut'],
-  updateCount: 1,
   user: null,
   
   init(){
     this._super(...arguments);
-    this.incrementUpdateCount();
     
     // Donut charts have two rings, the outer one for overall progress, the inner one for daily progress
     this.set('paneBackgrounds', [
@@ -34,57 +32,25 @@ export default Component.extend({
     ]);
   },
   
-  incrementUpdateCount: function(){
-    if (this.isDestroyed) {
-        return;
-    }
-    let updateCount = this.get('updateCount');
-    this.set('updateCount', updateCount+1);
-    debounce(this, this.incrementUpdateCount, 2000, false);
-  },
-    
-  pps: function() {
-    const buddiesData = this.get('pingService.buddiesData');
-    const buddyId = this.get('user.id');
-    let pps = null;
-    for (let i = 0; i<buddiesData.length; i++) {
-      if (buddiesData[i].user_id == buddyId) {
-        pps = JSON.parse(buddiesData[i].primary_project_state);
-      }
-    }
-    return pps;
-  },
-  
   // Hides the donut chart if no data
-  noData: computed('updateCount', function() {
-    const updateCount = this.get('updateCount');
-    const pps = this.pps();
-    if (pps && updateCount) {
-      return false;
-    } else {
-      return true;
-    }
+  noData: computed('pingService.updateCount', function() {
+    const updateCount = this.get('pingService.updateCount');
+    const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
+    return !(pps && updateCount);
   }),
   
-  overallProgress: computed('updateCount', function() {
-    const updateCount = this.get('updateCount');
-    const pps = this.pps();
-    if (pps && updateCount) {
-      return Math.min(Math.round((pps.current_word_count/pps.goal_total)*100),100);
-    } else {
-      return 100;
-    }
-    
+  // Returns the percent achieved for a challenge
+  overallProgress: computed('pingService.updateCount', function() {
+    const updateCount = this.get('pingService.updateCount');
+    const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
+    return (pps && updateCount) ? Math.min(Math.round((pps.current_word_count/pps.goal_total)*100),100) : 100;
   }),
   
-  dailyProgress: computed('updateCount', function() {
-    const updateCount = this.get('updateCount');
-    const pps = this.pps();
-    if (pps && updateCount) {
-      return Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100);
-    } else {
-      return 0;
-    }
+  // Returns the percent achieved for the last daily update
+  dailyProgress: computed('pingService.updateCount', function() {
+    const updateCount = this.get('pingService.updateCount');
+    const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
+    return (pps && updateCount) ? Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100) : 0;
   }),
   
   // Hides the center icon on mouseover so the tooltip can be read

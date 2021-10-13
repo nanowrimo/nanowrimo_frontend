@@ -1,10 +1,13 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
+import { sort }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
   currentUser: service(),
+  pingService: service(),
   store: service(),
+  
   user: null,
   showRequests: false,
   searchString: '',
@@ -13,8 +16,8 @@ export default Component.extend({
   showTools: false,
   
   // Determines the number of active buddies
-  buddyCount: computed('user.buddyGroupsActive', function() {
-    const buddies = this.get('user.buddyGroupsActive');
+  buddyCount: computed('user.buddiesActive', function() {
+    const buddies = this.get('user.buddiesActive');
     if (buddies) {
       return buddies.length;
     } else {
@@ -35,38 +38,57 @@ export default Component.extend({
     return (buddiesInvited.length + buddiesPending.length);
   }),
   
-  searchedBuddies: computed('user.buddyGroupsActive.[]','searchString', function() {
+  searchedBuddies: computed('user.buddiesActive.[]','searchString', function() {
     const cu = this.get('user');
     const store = this.get('store');
-    const unsearchedBuddies = this.get('user.buddyGroupsActive');
+    const unsearchedBuddies = this.get('user.buddiesActive');
     const searchString = this.get('searchString').toLowerCase();
     let searchedBuddies = [];
     if (searchString == '') {
       searchedBuddies = unsearchedBuddies;
     } else {
       for (let i=0; i<unsearchedBuddies.length; i++) {
-        const gus = unsearchedBuddies[i].get('groupUsers');
-        gus.forEach(function(gu) {
-          if (gu.user_id) {
-            let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.id!=cu.id) && (gu.exitAt==null)) {
-              if (u.name.toLowerCase().search(searchString)>=0) {
-                searchedBuddies.push(unsearchedBuddies[i]);
-              }
-            }
-          }
-        });
+        if (unsearchedBuddies[i].name.toLowerCase().search(searchString)>=0) {
+          searchedBuddies.push(unsearchedBuddies[i]);
+        }
       }
     }
     return searchedBuddies;
   }),
   
-  sortedBuddies: computed('user.buddyGroupsActive.[]','searchedBuddies', function() {
-    const unsortedBuddies = this.get('searchedBuddies');
+  presortedBuddies: computed('user.buddiesActive.[]','searchedBuddies','selectedSortOption', function() {
+    let unsortedBuddies = this.get('searchedBuddies');
     let sortedBuddies = [];
+    let pps = null;
+    const selectedSortOption = this.get('selectedSortOption');
+    for (let i=0; i<unsortedBuddies.length; i++) {
+      pps = this.get('pingService').primaryProjectState(unsortedBuddies[i].id);
+      let sortNum = 0;
+      if (pps) {
+        switch (selectedSortOption) {
+          case 'Overall Progress':
+            sortNum = Math.min(Math.round((pps.current_word_count/pps.goal_total)*100),100);
+            break;
+          case 'Daily Progress':
+            sortNum = Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100);
+            break;
+          case 'Writing Streak':
+            sortNum = pps.streak_days.toLocaleString();
+            break;
+          default:
+            sortNum = 0;
+        }
+      }
+      unsortedBuddies[i].sortNum = sortNum;
+    }
+    
     sortedBuddies = unsortedBuddies;
     return sortedBuddies;
   }),
+  
+  buddiesSortingDesc: Object.freeze(['sortNum:desc']),
+  
+  sortedBuddies: sort('presortedBuddies','buddiesSortingDesc'),
   
   searchStringComputed: computed('searchString', function() {
     return this.get('searchString');
