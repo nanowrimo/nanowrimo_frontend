@@ -4,9 +4,8 @@ import { sort }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-  currentUser: service(),
+
   pingService: service(),
-  store: service(),
   
   user: null,
   showRequests: false,
@@ -39,8 +38,6 @@ export default Component.extend({
   }),
   
   searchedBuddies: computed('user.buddiesActive.[]','searchString', function() {
-    const cu = this.get('user');
-    const store = this.get('store');
     const unsearchedBuddies = this.get('user.buddiesActive');
     const searchString = this.get('searchString').toLowerCase();
     let searchedBuddies = [];

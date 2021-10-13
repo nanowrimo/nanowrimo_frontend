@@ -51,7 +51,7 @@ export default Component.extend({
   eventType: computed('pingService.updateCount', function() {
     const updateCount = this.get('pingService.updateCount');
     const pps = this.get('pingService').primaryProjectState(this.get('buddy.id'));
-    return (pps) ? pps.event_type : null;
+    return (pps && updateCount) ? pps.event_type : null;
   }),
   
 });

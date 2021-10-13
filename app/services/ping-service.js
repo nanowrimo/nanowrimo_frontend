@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { debounce } from '@ember/runloop';
-import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import ENV from 'nanowrimo/config/environment';
 
