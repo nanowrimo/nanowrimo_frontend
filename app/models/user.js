@@ -465,7 +465,7 @@ const User = Model.extend({
     return buddyGroups;
   }),
   
-  buddiesActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
+  buddiesActive: computed('buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
@@ -488,7 +488,7 @@ const User = Model.extend({
       return buddies;
     }
   }),
-  buddiesInvited: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
+  buddiesInvited: computed('buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
