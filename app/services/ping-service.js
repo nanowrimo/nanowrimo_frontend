@@ -48,7 +48,7 @@ export default Service.extend({
   
   fetchApiData: function(){
     let { auth_token }  = this.get('session.data.authenticated');
-    let endpoint = `${ENV.APP.API_HOST}/ping?buddies_last_updated_at=` + this.get('buddies_last_updated_at');
+    let endpoint = `${ENV.APP.API_HOST}/ping?buddies_last_updated_at=` + this.get('buddiesLastUpdatedAt');
     // if this service has not been instantiated, instantiate
     if (!this.get("instantiated")) {
       endpoint+="&instantiate=true";
@@ -82,6 +82,8 @@ export default Service.extend({
           bd.push(dataSet);
         });
         this.set('buddiesData',bd);
+        console.log(json.data.buddies_last_updated_at);
+        this.set('buddiesLastUpdatedAt',json.data.buddies_last_updated_at);
         this.set('unreadMessageCount', count);
         this.set('groupsWithUnreadMessages', groups);
         this.incrementUpdateCount();
