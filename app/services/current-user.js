@@ -78,4 +78,30 @@ export default Service.extend({
     }
   },
   
+  reloadBuddies() {
+    // reload the user's buddies
+    //return this.get('user').hasMany('groups').reload();
+    console.log('reload buddies');
+    return this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('user').id },
+      group_types: 'buddies',
+      include: 'user,group'
+    }).then(data=>{
+      // keep track of the ids for returned content
+      let newIds = [];
+      data.content.forEach((gu)=>{
+        newIds.push(gu.id);
+        console.log(gu);
+      });
+      // unload any of this users buddy group_users that have an id not in the newIds
+      this.get('user').buddyGroupUsers.forEach(bgu=>{
+        if (newIds.indexOf(bgu.id)==-1) {
+          // no longer a buddy
+          bgu.unloadRecord();
+        }
+      });
+    });
+    
+  }
 });

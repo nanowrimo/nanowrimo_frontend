@@ -13,6 +13,7 @@ export default Service.extend({
   buddiesData: null,
   buddiesLastUpdatedAt: null,
   updateCount: 1,
+  buddyshipUpdatedAt: 0,
   
   init() {
     this._super(...arguments);
@@ -83,6 +84,20 @@ export default Service.extend({
           // Add the new buddy data to the array
           bd.push(dataSet);
         });
+        // buddyship changes
+        let buddyshipUpdatedAt = this.get('buddyshipUpdatedAt');
+        // is this the first ping response?
+        if (buddyshipUpdatedAt == 0) {
+          // set the buddyshipUpdatedAt based on the response data
+          this.set('buddyshipUpdatedAt', json.data.buddyship_updated_at);
+        } else {
+          if (buddyshipUpdatedAt < json.data.buddyship_updated_at){
+            // update the user's buddies
+            this.get('currentUser').reloadBuddies();
+            // record the updated at
+            this.set('buddyshipUpdatedAt', json.data.buddyship_updated_at);
+          }
+        }        
         this.set('buddiesData',bd);
         this.set('buddiesLastUpdatedAt',json.data.buddies_last_updated_at);
         this.set('unreadMessageCount', count);

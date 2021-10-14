@@ -15,7 +15,7 @@ export default Component.extend({
   showTools: false,
   
   // Determines the number of active buddies
-  buddyCount: computed('user.buddiesActive', function() {
+  buddyCount: computed('user.buddiesActive.[]', function() {
     const buddies = this.get('user.buddiesActive');
     if (buddies) {
       return buddies.length;
