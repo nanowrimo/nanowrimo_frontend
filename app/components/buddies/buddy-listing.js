@@ -9,7 +9,6 @@ export default Component.extend({
 
   pingService: service(),
   
-  //group: null,
   buddy: null,
   isActive: null,
   user: null,

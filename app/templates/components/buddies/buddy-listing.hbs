@@ -3,18 +3,9 @@
     <div style="flex: 56px;">
       {{user-avatar user=buddy linkTo=true size='50'}}
     </div>
-    <div style="flex: 100%; display: flex; justify-content: flex-end;">
-      {{#if isActive}}
-        {{buddies/buddy-buttons user=buddy displayTiny=true}}
-        <div style="width: 42px; height: 40px;">
-          {{#link-to 'authenticated.nanomessages.show' conversationSlug}}
-            <button class="nw-round-icon-button nw-drop-shadow">
-              {{fa-icon "comments"}}
-            </button>
-          {{/link-to}}
-        </div>
-      {{/if}}
-    </div>
+    {{#if isActive}}
+      {{buddies/buddy-buttons user=buddy displayTiny=true}}
+    {{/if}}
   </div>
   <div style="width: 100%; padding-top: 10px;">
     <div class="nw-user-name">
