@@ -84,6 +84,7 @@ export default Service.extend({
           bd.push(dataSet);
         });
         this.set('buddiesData',bd);
+        this.set('buddiesLastUpdatedAt',json.data.buddies_last_updated_at);
         this.set('unreadMessageCount', count);
         this.set('groupsWithUnreadMessages', groups);
         this.incrementUpdateCount();
