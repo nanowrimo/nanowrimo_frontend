@@ -52,6 +52,9 @@
 /* Buttons */
 
 .nw-round-icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 36px;
   height: 36px;
   background-image: linear-gradient(to top, #055555, #188162);
@@ -62,7 +65,6 @@
   .fa {
     font-size: 20px;
     line-height: 16px;
-    margin-top: -3px;
   }
 }
 
