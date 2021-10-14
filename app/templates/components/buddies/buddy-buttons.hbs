@@ -31,10 +31,10 @@
   {{/if}}
   {{#if buddyActive}}
     {{#if displayTiny}}
-      <div class="nw-buddy-status" style="text-align: left; color: #999; align-self: center; margin-right: 10px;">
+      <div class="nw-buddy-status" style="text-align: left; color: #999; align-self: center; margin-right: 10px;" {{action "startRemovingBuddy" }} >
         <div class="nw-default-status">Status: buddies</div>
         <div class="nw-mouseover-status">
-          <div {{action "startRemovingBuddy" }} class="remove-element">
+          <div class="remove-element">
             {{fa-icon "trash-o"}}
             Remove as buddy
           </div>
