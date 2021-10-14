@@ -48,7 +48,7 @@ export default Service.extend({
   
   fetchApiData: function(){
     let { auth_token }  = this.get('session.data.authenticated');
-    let endpoint = `${ENV.APP.API_HOST}/ping?buddies_last_updated_at=` + this.get('buddies_last_updated_at');
+    let endpoint = `${ENV.APP.API_HOST}/ping?buddies_last_updated_at=` + this.get('buddiesLastUpdatedAt');
     // if this service has not been instantiated, instantiate
     if (!this.get("instantiated")) {
       endpoint+="&instantiate=true";
@@ -59,6 +59,8 @@ export default Service.extend({
       headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
     }).then((response) => {
       return response.json().then((json)=>{
+        // track the last update
+        this.set('buddiesLastUpdatedAt', json.data.buddies_last_updated_dt);
         this.set("notificationData", json.data.notifications);
         // process the message data
         let groups = [];
