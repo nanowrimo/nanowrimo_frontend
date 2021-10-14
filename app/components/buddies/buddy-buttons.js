@@ -13,6 +13,8 @@ export default Component.extend({
   classNames: ['buddy-buttons'],
   
   user: null,
+  displayTiny: false,
+  isRemoving: false,
   newBuddyEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy/`,
   approveBuddyEndpoint: `${ENV.APP.API_HOST}/groups/approve_buddy/`,
   rejectBuddyEndpoint: `${ENV.APP.API_HOST}/groups/reject_buddy/`,
@@ -20,6 +22,15 @@ export default Component.extend({
   cancelInvitationEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy_cancel/`,
   blockUserEndpoint: `${ENV.APP.API_HOST}/groups/block_user/`,
   unblockUserEndpoint: `${ENV.APP.API_HOST}/groups/unblock_user/`,
+  
+  init() {
+    this._super(...arguments);
+    let name = this.get('user.name');
+    this.set('removeBuddyYesText', 'Yes, remove as buddy');
+    this.set('removeBuddyNoText', 'No, thanks'); 
+    this.set('removeBuddyTitleText', 'Confirm Buddy Removal');
+    this.set('removeBuddyQuestion', `Do you really want to remove "${name}" as a buddy?`);
+  },
   
   notCurrentUser: computed('currentUser.user','user',function() {
     if (this.get('currentUser.user') != this.get('user')) {
@@ -174,6 +185,10 @@ export default Component.extend({
       });
     },
     
+    startRemovingBuddy() {
+      this.set('isRemoving', true);
+    },
+    
     removeBuddy() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
@@ -317,6 +332,11 @@ export default Component.extend({
           alert('There was a problem unblocking this user. Please check your internet connection and try again.');
         });
       });
+    },
+    
+    removeBuddyNo(){
+      //close the modal
+      this.set('isRemoving', false);
     },
     
   }

@@ -30,13 +30,25 @@
     </div>
   {{/if}}
   {{#if buddyActive}}
-    <div class="buddy-status">
-      You are buddies with {{user.name}}.
-    </div>
-    <div {{action "removeBuddy" }} class="remove-element">
-      {{fa-icon "trash-o"}}
-      Remove as buddy
-    </div>
+    {{#if displayTiny}}
+      <div class="nw-buddy-status" style="text-align: left; color: #999; align-self: center; margin-right: 10px;">
+        <div class="nw-default-status">Status: buddies</div>
+        <div class="nw-mouseover-status">
+          <div {{action "startRemovingBuddy" }} class="remove-element">
+            {{fa-icon "trash-o"}}
+            Remove as buddy
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="buddy-status">
+        You are buddies with {{user.name}}.
+      </div>
+      <div {{action "startRemovingBuddy" }} class="remove-element">
+        {{fa-icon "trash-o"}}
+        Remove as buddy
+      </div>
+    {{/if}}
   {{/if}}
   {{#if notBuddy}}
     <div class="buddy-status">
@@ -59,4 +71,15 @@
       </button>
     </div>
   {{/if}}
+{{/if}}
+{{#if buddyActive}}
+  {{confirmation-modal
+    yes=removeBuddyYesText
+    no=removeBuddyNoText
+    title=removeBuddyTitleText
+    question=removeBuddyQuestion
+    open=isRemoving
+    yesAction=(action "removeBuddy")
+    noAction=(action "removeBuddyNo")
+  }}
 {{/if}}

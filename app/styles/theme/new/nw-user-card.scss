@@ -61,3 +61,18 @@
     }
   }
 }
+.nw-buddy-status {
+  .nw-default-status {
+  }
+  .nw-mouseover-status {
+    display: none;
+  }
+  &:hover {
+    .nw-default-status {
+      display: none;
+    }
+    .nw-mouseover-status {
+      display: block;
+    }
+  }
+}
