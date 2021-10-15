@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
 
+  currentUser: service(),
   pingService: service(),
   
   user: null,
@@ -13,6 +14,10 @@ export default Component.extend({
   tempSearchString: '',
   selectedSortOption: 'Overall Progress',
   showTools: false,
+  
+  isLoading: computed('currentUser.isLoading', function() {
+    return this.get('currentUser.isLoading');
+  }),
   
   // Determines the number of active buddies
   buddyCount: computed('user.buddiesActive.[]', function() {
