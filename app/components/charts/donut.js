@@ -36,8 +36,14 @@ export default Component.extend({
   noData: computed('pingService.updateCount', function() {
     const updateCount = this.get('pingService.updateCount');
     const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
-    return !(pps && updateCount);
-  }),
+    return (!pps || (!pps.project_private && updateCount && !pps.goal_total));
+  }), 
+  
+  isPrivate: computed('pingService.updateCount', function() {
+    const updateCount = this.get('pingService.updateCount');
+    const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
+    return (pps.project_private && updateCount);
+  }), 
   
   // Returns the percent achieved for a challenge
   overallProgress: computed('pingService.updateCount', function() {
