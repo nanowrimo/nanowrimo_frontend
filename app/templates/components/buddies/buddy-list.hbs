@@ -48,9 +48,11 @@
                 </span>
               </div>
             {{/if}}
-            <div style="cursor: pointer; text-decoration: underline; font-weight: bold; flex: 1 1 100%; text-align: right;" onClick={{action 'toggleRequestsView'}}>
-              BUDDY REQUESTS ({{buddyRequestCount}})
-            </div>
+            {{#if isCurrentUser}}
+              <div style="cursor: pointer; text-decoration: underline; font-weight: bold; flex: 1 1 100%; text-align: right;" onClick={{action 'toggleRequestsView'}}>
+                BUDDY REQUESTS ({{buddyRequestCount}})
+              </div>
+            {{/if}}
           </div>
         </div>
       </div>

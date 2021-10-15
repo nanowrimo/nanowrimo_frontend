@@ -15,6 +15,10 @@ export default Component.extend({
   selectedSortOption: 'Overall Progress',
   showTools: false,
   
+  isCurrentUser: computed('currentUser.user.id', 'user.id', function() {
+    return (this.get('currentUser.user.id')==this.get('user.id'))
+  }),
+  
   isLoading: computed('currentUser.isLoading', function() {
     return this.get('currentUser.isLoading');
   }),
