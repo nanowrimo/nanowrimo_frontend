@@ -13,6 +13,7 @@ export default Service.extend({
   buddiesData: null,
   buddyProjectsLastUpdatedAt: null,
   updateCount: 1,
+  buddyshipUpdatedAt: 0,
   
   init() {
     this._super(...arguments);
@@ -59,6 +60,8 @@ export default Service.extend({
       headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
     }).then((response) => {
       return response.json().then((json)=>{
+        // track the last update
+        this.set('buddiesLastUpdatedAt', json.data.buddies_last_updated_dt);
         this.set("notificationData", json.data.notifications);
         // process the message data
         let groups = [];
@@ -81,6 +84,20 @@ export default Service.extend({
           // Add the new buddy data to the array
           bd.push(dataSet);
         });
+        // buddyship changes
+        let buddyshipUpdatedAt = this.get('buddyshipUpdatedAt');
+        // is this the first ping response?
+        if (buddyshipUpdatedAt == 0) {
+          // set the buddyshipUpdatedAt based on the response data
+          this.set('buddyshipUpdatedAt', json.data.buddyship_updated_at);
+        } else {
+          if (buddyshipUpdatedAt < json.data.buddyship_updated_at){
+            // update the user's buddies
+            this.get('currentUser').reloadBuddies();
+            // record the updated at
+            this.set('buddyshipUpdatedAt', json.data.buddyship_updated_at);
+          }
+        }        
         this.set('buddiesData',bd);
         this.set('buddyProjectsLastUpdatedAt',json.data.buddy_projects_last_updated_at);
         this.set('unreadMessageCount', count);
