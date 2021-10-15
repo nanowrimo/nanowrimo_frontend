@@ -254,7 +254,7 @@ export default Component.extend({
           }
         })
         .catch(() => {
-          alert('There was a problem removing this buddy. Please check your internet connection and try again.');
+          //alert('There was a problem removing this buddy. Please check your internet connection and try again.');
         });
       });
     },
