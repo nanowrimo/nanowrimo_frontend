@@ -365,8 +365,7 @@ const User = Model.extend({
   }),
   
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
-  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}','store', function() {
-    const store = this.get('store');
+  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
     let gus = this.get('groupUsers');
     let bgus = [];
     //are there group users?
