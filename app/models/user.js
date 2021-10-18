@@ -364,6 +364,11 @@ const User = Model.extend({
     return bgus;
   }),
   
+  
+  // ---------------------------
+  // BEGINNING OF BUDDY FUNCTIONS
+  // ---------------------------
+
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
     let gus = this.get('groupUsers');
@@ -465,14 +470,15 @@ const User = Model.extend({
     return buddyGroups;
   }),
   
-  buddiesActive: computed('buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
+  buddiesActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
+      let gul = this.get('groupUsersLoaded');
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
       let store = this.get('store');
       let id = this.get('id');
       // are there buddyGroupUsersAccepted?
-      if (bgus) {
+      if (bgus && gul) {
         bgus.forEach(function(bgu) {
           let gus = bgu.group.get('groupUsers');
           gus.forEach(function(gu) {
@@ -535,6 +541,10 @@ const User = Model.extend({
     }
   }),
 
+  // ---------------------------
+  // END OF BUDDY FUNCTIONS
+  // ---------------------------
+  
   nanomessagesGroups: computed('groupUsersLoaded','groupUsers.[]', function(){
     let eGroups = [];
     if (this.get('groupUsersLoaded')) {

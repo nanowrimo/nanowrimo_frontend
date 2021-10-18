@@ -39,12 +39,13 @@ export default Component.extend({
     return false;
   }),
   
-  buddyActive: computed('currentUser.user.buddiesActive.[]',function() {
+  buddyActive: computed('currentUser.user.buddiesActive.[]','user', function() {
     let buddiesActive = this.get('currentUser.user.buddiesActive');
     if (buddiesActive.includes(this.get('user'))) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }),
   
   buddyInvited: computed('currentUser.user.buddiesInvited.[]',function() {
@@ -71,15 +72,16 @@ export default Component.extend({
     return false;
   }),
   
-  notBuddy: computed('currentUser.user.{buddiesActive,buddiesInvited,buddiesInvitedBy,usersBlocked}',function() {
+  notBuddy: computed('buddyActive','buddyInvited','buddyInvitedBy','userBlocked',function() {
     let buddyActive = this.get('buddyActive');
     let buddyInvited = this.get('buddyInvited');
     let buddyInvitedBy = this.get('buddyInvitedBy');
     let userBlocked = this.get('userBlocked');
     if (!buddyActive && !buddyInvited && !buddyInvitedBy && !userBlocked) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }),
   
   conversationSlug: computed('user', function() {
