@@ -26,36 +26,36 @@
     </div>
   {{else}}
     {{#if showTools}}
-      <div class="nw-panel-actions" style="height: auto;">
-        <div style="display: flex; flex-direction: column; width: 100%;" >
-          {{#if searchNeeded}}
-            <div style='height: 50px;'>
-              <div id='pane-search-by-name' style="padding-top: 0px; padding-right: 0px; padding-bottom: 100px; padding left: 0px; max-width: 300px;" >
-                {{input class="nano-list-search-field" placeholder="Search your buddies..." value=tempSearchString key-up=(action "searchStringChange") }}
-              </div>
-            </div>
-          {{/if}}
-          <div style="display: flex; justify-content: space-between;">
-            {{#if buddyCount}}
-              <div class='nw-panel-actions-select' style='flex: 1 1 100%;'>
-                <label id='project-summary-sort-by-text' for="project-listing-sort-by-select">Sort by</label>
-                <span id='project-summary-sort-by-select'>
-                  <select id="project-listing-sort-by-select" name='sort-by' onchange={{action "setSortSelection" value="target.value" }}>
-                    <option value='Overall Progress'>Overall Progress</option>
-                    <option value='Daily Progress'>Last Daily Progress</option>
-                    <option value='Writing Streak'>Writing Streak</option>
-                  </select>
-                </span>
+      {{#if isCurrentUser}}
+        <div class="nw-panel-actions" style="height: auto;">
+          <div style="display: flex; flex-direction: column; width: 100%;" >
+            {{#if searchNeeded}}
+              <div style='height: 50px;'>
+                <div id='pane-search-by-name' style="padding-top: 0px; padding-right: 0px; padding-bottom: 100px; padding left: 0px; max-width: 300px;" >
+                  {{input class="nano-list-search-field" placeholder="Search your buddies..." value=tempSearchString key-up=(action "searchStringChange") }}
+                </div>
               </div>
             {{/if}}
-            {{#if isCurrentUser}}
+            <div style="display: flex; justify-content: space-between;">
+              {{#if buddyCount}}
+                <div class='nw-panel-actions-select' style='flex: 1 1 100%;'>
+                  <label id='project-summary-sort-by-text' for="project-listing-sort-by-select">Sort by</label>
+                  <span id='project-summary-sort-by-select'>
+                    <select id="project-listing-sort-by-select" name='sort-by' onchange={{action "setSortSelection" value="target.value" }}>
+                      <option value='Overall Progress'>Overall Progress</option>
+                      <option value='Daily Progress'>Last Daily Progress</option>
+                      <option value='Writing Streak'>Writing Streak</option>
+                    </select>
+                  </span>
+                </div>
+              {{/if}}
               <div style="cursor: pointer; text-decoration: underline; font-weight: bold; flex: 1 1 100%; text-align: right;" onClick={{action 'toggleRequestsView'}}>
                 BUDDY REQUESTS ({{buddyRequestCount}})
               </div>
-            {{/if}}
+            </div>
           </div>
         </div>
-      </div>
+      {{/if}}
     {{/if}}
     <div class='nw-column-cards'>
       {{#if buddyCount}}
@@ -63,7 +63,9 @@
           {{buddies/buddy-listing buddy=buddy user=user isActive=true buttons=false showData=selectedSortOption}}
         {{/each}}
       {{else}}
-        {{buddies/buddy-prompt}}
+        {{#if isCurrentUser}}
+          {{buddies/buddy-prompt}}
+        {{/if}}
       {{/if}}
     </div>
   {{/if}}
