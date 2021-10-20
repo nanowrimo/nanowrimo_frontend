@@ -30,12 +30,12 @@ export default Controller.extend({
     let hasGroup = this.get('hasGroup');
     if (hasGroup) {
       if (this.get('group.groupType')!='buddies') {
-        return this.get('group.name') + " | Nanomessages";
+        return this.get('group.name') + " | NaNoMessages";
       } else {
-        return "Buddies | Nanomessages";
+        return "Buddies | NaNoMessages";
       }
     } else {
-      return "Nanomessages";
+      return "NaNoMessages";
     }
   }),
   
@@ -43,7 +43,7 @@ export default Controller.extend({
     if (this.get('newMessage')) {
       return 'New Message';
     } else {
-      return 'NanoMessages';
+      return 'NaNoMessages';
     }
   }),
   
