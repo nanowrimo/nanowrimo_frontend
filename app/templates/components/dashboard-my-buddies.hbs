@@ -1,5 +1,12 @@
 <div class="nw-card-header">
   <div class="nw-card-title">My Buddies</div>
+  <div class='nw-card-actions'>
+    <div class='nw-card-action-link'>
+      {{#link-to 'authenticated.users.show.buddies' currentUser.user.slug}}
+        See All
+      {{/link-to}}
+    </div>
+  </div>
 </div>
 <div class="nw-card-content">
   {{buddies/buddy-list user=currentUser.user requests=false showTools=false}}
