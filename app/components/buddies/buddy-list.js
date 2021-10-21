@@ -19,14 +19,14 @@ export default Component.extend({
     return (this.get('currentUser.user.id')==this.get('user.id'))
   }),
   
-  isLoading: computed('currentUser.isLoading', function() {
-    return this.get('currentUser.isLoading');
+  isLoading: computed('currentUser.groupUsersLoaded', function() {
+    return !this.get('currentUser.groupUsersLoaded');
   }),
   
   // Determines the number of active buddies
-  buddyCount: computed('user.buddiesActive.[]','currentUser.isLoading', function() {
+  buddyCount: computed('user.buddiesActive.[]','isLoading', function() {
     const buddies = this.get('user.buddiesActive');
-    const isLoading = this.get('currentUser.isLoading');
+    const isLoading = this.get('isLoading');
     if (!isLoading && buddies) {
       return buddies.length;
     } else {

@@ -9,6 +9,7 @@ export default Service.extend({
 
   user: null,
   isLoaded: false,
+  groupUsersLoaded: false,
   load() {
     let t = this;
     if (this.get('session.isAuthenticated')) {
@@ -29,10 +30,6 @@ export default Service.extend({
               include: 'user,group'
             }).then(() => {
               t.delayUntilGroupsLoaded();
-              /*later(function() {
-                if (this.get('store').peekAll('group').length>0) {
-                  t.set('isLoaded',true);
-              }, 500);*/
             });
           });
       });
@@ -46,6 +43,7 @@ export default Service.extend({
     later(function() {
       if (t.get('store').peekAll('group').length>0) {
         t.set('isLoaded',true);
+        t.set('groupUsersLoaded',true);
         t.user.set('groupUsersLoaded',true);
       } else {
         t.delayUntilGroupsLoaded();
