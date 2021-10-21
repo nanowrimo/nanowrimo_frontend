@@ -14,7 +14,6 @@
   background-image: none;
   background-color: #fff;
   @media(max-width: $screen-sm) {
-    max-height: 1200px;
     border-radius: 0;
     position: fixed;
     padding-top: 48px;
@@ -256,6 +255,13 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
+  }
+}
+.nw-card.nanomessages-card.not-fixed {
+  @media(max-width: $screen-sm) {
+    position: static;
+    padding-top: 0px;
+    height: 450px;
   }
 }
 .nw-no-speech-bubble {

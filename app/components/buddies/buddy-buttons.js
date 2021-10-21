@@ -91,7 +91,7 @@ export default Component.extend({
     let slug = null;
     gus.forEach(function(gu) {
       let g = store.peekRecord('group', gu.group_id);
-      if (g.groupType=='buddies') {
+      if (g && g.groupType=='buddies') {
         gus.forEach(function(gu2) {
           if ((gu2.group_id==g.id) && (gu2.user_id!=user.id) && (gu2.invitationAccepted=='1')) {
             slug = g.slug;

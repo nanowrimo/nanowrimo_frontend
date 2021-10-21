@@ -61,6 +61,26 @@
     }
   }
 }
+.nw-my-groups {
+  max-height: 450px;
+  overflow: scroll;
+  @media (max-width: $screen-xlg) {
+    max-height: 600px;
+  }
+  a {
+    width: 100%;
+    .nw-card-content {
+      max-height: 450px;
+      overflow: scroll;
+      @media (max-width: $screen-xlg) {
+        max-height: 600px;
+      }
+      @media (max-width: $screen-lg) {
+        max-height: 800px;
+      }
+    }
+  }
+}
 .nw-buddy-status {
   .nw-default-status {
   }

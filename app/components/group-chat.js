@@ -12,6 +12,7 @@ export default Component.extend({
   group: null,
   context: null,
   sortOptions: null,
+  notFixed: false,
   //sortedMessages: sort('nanomessages', 'selectedSortOption'),
   nanomessage: null,
   selectedSortOption: null,
@@ -28,6 +29,9 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     let g = this.get('group');
+    if (this.get('notFixed')) {
+      this.set('classNames', ['nw-card nanomessages-card not-fixed']);
+    }
     if (g) {
       let options = ['createdAt:asc'];
       this.set('sortOptions', options);

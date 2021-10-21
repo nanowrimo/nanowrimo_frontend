@@ -16,21 +16,18 @@
     </div>
   </div>
   
-  <div class='group-listings'>
-    <div>
-      {{#each user.myInvitations as |group|}}
+  <div class='nw-column-cards'>
+    {{#each user.myInvitations as |group|}}
       {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
-      {{/each}}
-    </div>
+    {{/each}}
   </div>
   {{/if}}
-  <div class='group-listings'>
-    <div>
-      {{#if hasRegions}}
+  <div class='nw-column-cards'>
+    {{#if hasRegions}}
       {{#each user.myGroups as |group|}}
-      {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
+        {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
       {{/each}}
-      {{else}}
+    {{else}}
       <div class="nw-card nw-prompt-card">
         <div class='nw-hflex'>
           <div class="project-announce-quote">
@@ -48,7 +45,6 @@
           </div>
         </div>
       </div>
-      {{/if}}
-    </div>
+    {{/if}}
   </div>
 </div>
