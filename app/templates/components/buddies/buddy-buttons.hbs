@@ -32,13 +32,13 @@
   {{#if buddyActive}}
     {{#if displayTiny}}
       <div style="flex: 100%; display: flex; justify-content: flex-end;">
-        <div style="width: 42px; height: 40px;">
+        <div style="width: 40px; height: 40px;">
           {{#link-to 'authenticated.nanomessages.show' conversationSlug class="nw-round-icon-button nw-drop-shadow"}}
             <div class='sr-only'>Send message</div>
             {{fa-icon "comments"}}
           {{/link-to}}
         </div>
-        <div class="nw-buddy-status" style="height: 40px; text-align: left; color: #999; align-self: center; margin-right: 10px;" >
+        <div class="nw-buddy-status" style="height: 40px; text-align: left; color: #999; align-self: center; margin-left: 10px;" >
           <button class="nw-default-status nw-new-button nw-drop-shadow" {{action "startRemovingBuddy" }} >
             <div aria-hidden=true class='non-hf-content'>Buddies</div>
             <div aria-hidden=true class='hf-content'>Unbuddy</div>
