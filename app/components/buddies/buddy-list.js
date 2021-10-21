@@ -53,7 +53,11 @@ export default Component.extend({
   buddyRequestCount: computed('user.{buddyGroupUsersInvited,buddyGroupUsersPending}', function() {
     const buddiesInvited = this.get('user.buddyGroupUsersInvited');
     const buddiesPending = this.get('user.buddyGroupUsersPending');
-    return (buddiesInvited.length + buddiesPending.length);
+    if (buddiesInvited && buddiesPending) {
+      return (buddiesInvited.length + buddiesPending.length);
+    } else {
+      return 0;
+    }
   }),
   
   searchedBuddies: computed('user.buddiesActive.[]','searchString', 'pingService.updateCount', function() {
