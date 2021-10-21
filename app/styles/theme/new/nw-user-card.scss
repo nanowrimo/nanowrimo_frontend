@@ -83,16 +83,23 @@
 }
 .nw-buddy-status {
   .nw-default-status {
-  }
-  .nw-mouseover-status {
-    display: none;
-  }
-  &:hover {
-    .nw-default-status {
+    .hf-content {
       display: none;
     }
-    .nw-mouseover-status {
+    .non-hf-content {
       display: block;
     }
+    &:focus{
+      border: 2px solid black;
+    }
+    &:hover, &:focus{
+      .hf-content {
+        display: block;
+      }
+      .non-hf-content {
+        display: none;
+      }
+    }
   }
+
 }
