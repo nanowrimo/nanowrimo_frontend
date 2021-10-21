@@ -52,7 +52,7 @@ export default Service.extend({
       r.push(notification.extraData);
     }
     if(notification.actionType=='BUDDIES_PAGE') {
-      this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
+      this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'), { queryParams: { showRequests: true }});
     }
     if(notification.actionType=='GROUPS_PAGE') {
       this.get('router').transitionTo('authenticated.users.show.groups', this.get('currentUser.user.slug'));

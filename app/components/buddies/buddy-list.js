@@ -34,6 +34,15 @@ export default Component.extend({
     }
   }),
   
+  doShowRequests: computed('showRequests', function() {
+    const sr = this.get('showRequests');
+    if ((sr === 'true') || (sr === true)) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+  
   // Determines whether to display the search box
   searchNeeded: computed('buddyCount', function() {
     const buddyCount = this.get('buddyCount');
@@ -113,7 +122,12 @@ export default Component.extend({
     },
     
     toggleRequestsView() {
-      this.set('showRequests',!this.get('showRequests'));
+      const sr = this.get('showRequests');
+      if ((sr === 'true') || (sr === true)) {
+        this.set('showRequests', false);
+      } else {
+        this.set('showRequests', true);
+      }
     },
     
   }
