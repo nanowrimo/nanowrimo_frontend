@@ -61,6 +61,9 @@
       padding-inline-start: 0px;
       .convo-item {
         border-bottom: 1px solid #eeeeee;
+        a:hover {
+          text-decoration: none;
+        }
         &:hover {
           background-color: #eee;
         }

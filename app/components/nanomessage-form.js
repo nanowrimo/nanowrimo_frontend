@@ -17,7 +17,7 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    this.setNewNanoMessage();
+    //this.setNewNanoMessage();
     // No email confirmation settings
     this.set('cancelConfirmationYesText', 'Continue');
     this.set('cancelConfirmationNoText', 'Cancel'); 
@@ -30,17 +30,32 @@ export default Component.extend({
     if (callback) { callback(); }
   },
   
-  userIsAdmin: computed('group','currentUser.isLoaded}',function() {
+  thisGroup: computed('group.id', function() {
+    const groupid = this.get('group.id');
+    //const gid = this.get('gid');
+    const g = this.get('group');
+    if (groupid && g) {
+      //alert (gid + "|" + groupid + "|" + g.id);
+      return g;
+    } else {
+      return null;
+    }
+  }),
+  
+  userIsAdmin: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
     let found = false;
-    let g = this.get('group');
+    const gid = this.get('group.id');
+    const groupType = this.get('group.groupType');
     if (this.get('currentUser.isLoaded')) {
-      let gus = this.get('store').peekAll('groupUser');
-      let cu = this.get('currentUser.user');
-      gus.forEach(function(gu) {
-        if ((gu.group_id==g.id)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
-          found = true;
-        }
-      });
+      if ((groupType!='buddies') && (groupType!='writing group')) {
+        let gus = this.get('store').peekAll('groupUser');
+        let cu = this.get('currentUser.user');
+        gus.forEach(function(gu) {
+          if ((gu.group_id==gid)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
+            found = true;
+          }
+        });
+      }
     }
     return found;
   }),
@@ -94,6 +109,7 @@ export default Component.extend({
     },
     
     afterSubmit() {
+      this.setNewNanoMessage();
       this.set('isDisabled',true);
       let i = document.querySelector('.medium-editor-element').innerHTML;
       let tx = document.querySelector('.medium-editor-element').textContent;
@@ -109,8 +125,6 @@ export default Component.extend({
           document.querySelector('.medium-editor-element').innerHTML = '';
           let rm = this.get('refreshMessages');
           rm();
-          //set a new nanomessage
-          this.setNewNanoMessage();
         });
       }
     },
@@ -119,7 +133,7 @@ export default Component.extend({
     let nm = this.get('store').createRecord('nanomessage');
     let cu = this.get('currentUser.user');
     nm.set('user',cu);
-    let g = this.get('group');
+    let g = this.get('thisGroup');
     nm.set('group',g);
     this.set('newNanomessage', nm);
   }
