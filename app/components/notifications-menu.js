@@ -37,8 +37,8 @@ export default Component.extend({
   notificationSortingDesc: Object.freeze(['displayAt:desc']),
   sortedNotifications: sort('allNotifications','notificationSortingDesc'),
   
-  newNotificationsCount: computed('pingService.NotificationData', function() {
-    return this.get('pingService.NotificationData');
+  newNotificationsCount: computed('pingService.notificationData', function() {
+    return this.get('pingService.notificationData');
   }),
   
   newNanomessagesCount: computed('pingService.unreadMessageCount', function() {
