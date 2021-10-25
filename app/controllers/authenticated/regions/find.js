@@ -8,7 +8,6 @@ export default Controller.extend({
     this._super(...arguments);
     
     //load the regions
-    console.log('load regions');
     this.get('store').query('group', {
       filter: {
         group_type: 'region'

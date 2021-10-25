@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
 import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { debounce } from '@ember/runloop';
 
