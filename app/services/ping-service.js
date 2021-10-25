@@ -8,7 +8,8 @@ export default Service.extend({
   currentUser: service(),
   notificationData: null,
   unreadMessageCount: 0,
-  groupsWithUnreadMessages: null,
+  //groupsWithUnreadMessages: null,
+  messageData: null,
   instantiated: false,
   buddiesData: null,
   buddyProjectsLastUpdatedAt: null,
@@ -64,12 +65,17 @@ export default Service.extend({
         this.set('buddiesLastUpdatedAt', json.data.buddies_last_updated_dt);
         this.set("notificationData", json.data.notifications);
         // process the message data
-        let groups = [];
-        let count = 0;
+        //let groups = [];
+        //let count = 0;
         // loop through the data
-        json.data.messages.forEach((dataSet)=>{
+        //json.data.messages.forEach((dataSet)=>{
+          //count += dataSet.unread_message_count;
+          //groups.push(dataSet.group_id);
+        //});
+        this.set('messageData', json.data.message_data);
+        let count = 0;
+        json.data.message_data.forEach((dataSet)=>{
           count += dataSet.unread_message_count;
-          groups.push(dataSet.group_id);
         });
         
         // Handle buddies data
@@ -101,7 +107,7 @@ export default Service.extend({
         this.set('buddiesData',bd);
         this.set('buddyProjectsLastUpdatedAt',json.data.buddy_projects_last_updated_at);
         this.set('unreadMessageCount', count);
-        this.set('groupsWithUnreadMessages', groups);
+        //this.set('groupsWithUnreadMessages', groups);
         this.incrementUpdateCount();
       })
     }).catch(() => {

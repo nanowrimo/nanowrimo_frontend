@@ -11,6 +11,7 @@ export default Component.extend({
   selectedGroup: null,
   searchString: null,
   classNames: ["convo-item"],
+  oldMessagesCount: 0,
   
   init() {
     this._super(...arguments);
@@ -34,12 +35,12 @@ export default Component.extend({
     }
   }),
   
-  timeSince: computed('group', 'group.latestMessageDt',function() {
+  timeSince: computed('pingService.updateCount','group', 'group.latestMessageDt',function() {
+    const updateCount = this.get('pingService.updateCount');
     let t = '';
     let g = this.get('group');
-    if (g) {
+    if (g && updateCount) {
       let lm = this.get('group.latestMessageDt');
-      // if found, return the number of unread messages; otherwise return zero
       if (lm!=null) {
         t = moment.utc(lm, 'YYYY-MM-DD HH:mm:ss').local().fromNow();
       }
@@ -113,20 +114,32 @@ export default Component.extend({
     return g.get('slug');
   }),
   
-  newNanomessagesCount: computed('pingService.groupsWithUnreadMessages','group', function() {
-    const gwum = this.get('pingService.groupsWithUnreadMessages');
+  newNanomessagesCount: computed('pingService.messageData','group', function() {
+    const gwum = this.get('pingService.messageData');
     const g = this.get('group');
     const gid = g.get('id');
     let count = 0;
     gwum.forEach(function(obj) {
       // If this notification is about nanomessages
-      if (obj==gid) {
+      if (obj.group_id==gid) {
         // Add the data count to the total
-        count += 1;
+        count = obj.unread_message_count;
       }
     });
+    // If the count has changed
+    if (count != this.get('oldMessageCount')) {
+      this.reloadGroup(count);
+    }
     return count;
   }),
+  
+  // Reloads the group record in the store
+  reloadGroup(count) {
+    const g = this.get('group');
+    const gid = g.get('id');
+    this.set('oldMessageCount',count);
+    this.store.findRecord('group', gid, {reload: true});
+  },
   
   // Returns the group users in the store
   groupUsers: computed(function() {
