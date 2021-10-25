@@ -9,12 +9,8 @@ export default Component.extend({
   currentUser: service(),
   store: service(),
   pageLoaded: false,  
-  regions: alias('model'),
   primaryDisplay: true,
-  
-  init() {
-    this._super(...arguments);
-  },
+  regions:null,
   
   _mapZoom: 3,
   mapZoom: computed('sortOption', function() {
