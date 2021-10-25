@@ -296,14 +296,14 @@ a {
 .conversation-list-item.is-unread {
   .nw-avatar {
     img {
-      border: 2px solid #FF6B6B;
+      border: 3px solid $nw-alert-red;
     }
   }
   .nw-user-name-text {
     color: #000;
   }
   .nw-last-message {
-    font-weight: 600;
+    font-weight: bold;
   }
 }
 .fa-paper-plane-o {

@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export default Component.extend({
   store: service(),
-  notificationsService: service(),
+  pingService: service(),
   currentUser: service(),
   group: null,
   selectedGroup: null,
@@ -58,10 +58,11 @@ export default Component.extend({
     return '';
   }),
   
+  // Changes the CSS when a conversation has new messages
   isUnread: computed('newNanomessagesCount','isSelected',function() {
     let c = this.get('newNanomessagesCount');
     let s = this.get('isSelected');
-    if ((c>0)&&(s=='')) {
+    if (c && (s=='')) {
       return 'is-unread';
     }
     return '';
@@ -112,21 +113,18 @@ export default Component.extend({
     return g.get('slug');
   }),
   
-  newNanomessagesCount: computed('notificationsService.{newNanomessagesCount,recomputeNotifications}', function() {
-    let nnc = this.get('notificationsService.newNanomessagesCount');
-    let ns = this.store.peekAll('notification');
-    let g = this.get('group');
-    let gid = g.get('id');
-    var count = 0;
-    if (nnc==nnc) {
-      ns.forEach(function(obj) {
-        // If this notification is about nanomessages
-        if ((obj.actionType=='NANOMESSAGES')&&(obj.actionId==gid)) {
-          // Add the data count to the total
-          count += obj.dataCount;
-        }
-      });
-    }
+  newNanomessagesCount: computed('pingService.groupsWithUnreadMessages','group', function() {
+    const gwum = this.get('pingService.groupsWithUnreadMessages');
+    const g = this.get('group');
+    const gid = g.get('id');
+    let count = 0;
+    gwum.forEach(function(obj) {
+      // If this notification is about nanomessages
+      if (obj==gid) {
+        // Add the data count to the total
+        count += 1;
+      }
+    });
     return count;
   }),
   
