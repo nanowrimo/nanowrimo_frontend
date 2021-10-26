@@ -103,7 +103,7 @@ export default Component.extend({
         }
       });
     }
-    if (g.get('groupType')=='region') {
+    if ((g.get('groupType')=='region')||(g.get('groupType')=='everyone')) {
       avatarUrl = g.avatarUrl;
     }
     return avatarUrl;
