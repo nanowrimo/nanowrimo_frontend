@@ -88,12 +88,13 @@ export default Component.extend({
     const store = this.get('store');
     const user = this.get('user');
     const gus = store.peekAll('group-user');
+    const cu = this.get('currentUser.user');
     let slug = null;
     gus.forEach(function(gu) {
       let g = store.peekRecord('group', gu.group_id);
-      if (g && g.groupType=='buddies') {
+      if (g && g.groupType=='buddies' && (gu.user_id==user.id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
         gus.forEach(function(gu2) {
-          if ((gu2.group_id==g.id) && (gu2.user_id!=user.id) && (gu2.invitationAccepted=='1')) {
+          if ((gu2.group_id==g.id) && (gu2.user_id==cu.id) && (gu2.invitationAccepted=='1') && (gu2.exitAt==null)) {
             slug = g.slug;
           }
         });
