@@ -28,7 +28,7 @@ export default Component.extend({
   
   groupIsRegion: computed('group', function() {
     let g = this.get('group');
-    if (g.get('groupType')=='region') {
+    if ((g.get('groupType')=='region')||(g.get('groupType')=='everyone')) {
       return true;
     } else {
       return false;
