@@ -1,20 +1,32 @@
 <div class="container-fluid nw-footer">
   <div class="nw-footer-section nw-footer-left">
     <div class="nw-footer-logos">
-      <a href="/"><img src="/images/logo/logo.svg" alt="" /><img src="/images/logo/logo_text.svg"
-          alt="National Novel Writing Month home." style="padding-top: 10px;" /></a>
+      {{#link-to "index"}}
+          <img src="/images/logo/logo.svg" alt="" />
+          <img src="/images/logo/logo_text.svg"
+          alt="National Novel Writing Month home." style="padding-top: 10px;" />
+      {{/link-to}}
     </div>
     <div class="nw-footer-description">
       National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing.
     </div>
     <div class="nw-footer-header">
-      <a href="/about-nano">About NaNoWriMo</a>
-      <a href="/staff">Staff</a>
+       {{#link-to "pages" "about-nano"}}
+            About NaNoWriMo
+        {{/link-to}}
+         {{#link-to "pages" "staff"}}
+            Staff
+        {{/link-to}}
       <a href="https://store.nanowrimo.org/collections/donate">Donate</a>
       <a href="https://store.nanowrimo.org/collections/shop">Shop</a>
       <br />
-      <a href="/board-of-directors">Board of Directors</a>
-      <a href="/writers-board">Writers Board</a>
+        {{#link-to "pages" "board-of-directors"}}
+          Board of Directors
+        {{/link-to}}
+ 
+        {{#link-to "pages" "writers-board"}}
+          Writers Board
+        {{/link-to}}
     </div>
   </div>
   {{#if currentUserName}}
@@ -78,18 +90,24 @@
   <div class="nw-footer-footer">
     <p>
       <span class="links">
-        <a class='link' href="/terms-and-conditions">Terms and Conditions</a>
-        &nbsp;
-        &bull;
-        &nbsp;
-        <a class='link' href="/privacy-policy">Privacy Policy</a>
-        &nbsp;
-        &bull;
-        &nbsp;
-        <a class='link' href="/codes-of-conduct">Codes of Conduct</a>
-        &nbsp;
-        &bull;
-        &nbsp;
+          {{#link-to "pages" "terms-and-conditions"}}
+            Terms and Conditions
+          {{/link-to}}
+          &nbsp;
+          &bull;
+          &nbsp;
+          {{#link-to "pages" "privacy-policy"}}
+            Privacy Policy
+          {{/link-to}}
+          &nbsp;
+          &bull;
+          &nbsp;
+          {{#link-to "pages" "codes-of-conduct"}}
+            Codes of Conduct
+          {{/link-to}}
+          &nbsp;
+          &bull;
+          &nbsp;
       </span>
       Copyright © 1999 - {{currentYear}} National Novel Writing Month. All posted novel excerpts remain copyright to
       their authors.

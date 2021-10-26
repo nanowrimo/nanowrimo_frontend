@@ -3,25 +3,31 @@
   <div class="container-fluid">
     <div class="nw-panel nanomessages-panel nw-with-grid">
       <div class="grid-wrapper">
-        <div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan1">
+        <div class="nw-card nanomessages-card g3-col1 g3-row1 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2">
           <div class="nw-card-header">
-            <div class="nw-card-title">Official Messages</div>
+            <div class="nw-card-title">
+              <div class="nw-card-title-left">
+              </div>
+              <div class="nw-card-title-center">{{cardTitle}}</div>
+              <div class="nw-card-title-right">
+                {{#if newMessage}}
+                  <div
+                    onClick={{action 'cancelNewMessage'}}
+                  >
+                    <i class="fa fa-times" />
+                  </div>
+                {{/if}}
+              </div>
+            </div>
           </div>
           <div class="nw-card-content">
-            {{conversations-list officialOnly=true class="full-width"}}
+            {{conversations-list group=group parentInitiateNewMessage=(action 'initiateNewMessage') parentCancelNewMessage=(action 'cancelNewMessage') newMessage=newMessage class="full-width"}}
           </div>
         </div>
-        <div class="nw-card g3-col1 g3-row2 g3-hspan1 g3-vspan1 g2-col1 g2-row2 g2-hspan1 g2-vspan1">
-          <div class="nw-card-header">
-            <div class="nw-card-title">Buddies</div>
-          </div>
-          <div class="nw-card-content">
-            {{conversations-list officialOnly=false class="full-width"}}
-          </div>
-        </div>
-        {{#if hasGroup}}
-          {{group-chat group=group context='nanomessages' class="g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}
+        {{#if group}}
+          {{group-chat group=group messagesLoaded=false context='nanomessages' clearGroup=clearGroup class="g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}
         {{else}}
+          {{group-chat-placeholder class="g3-col2 g3-row1 g3-hspan2 g3-vspan2 g2-col2 g2-row1 g2-hspan1 g2-vspan2"}}
         {{/if}}
       </div>
     </div>

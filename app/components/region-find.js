@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
 import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { debounce } from '@ember/runloop';
 
@@ -9,12 +8,8 @@ export default Component.extend({
   currentUser: service(),
   store: service(),
   pageLoaded: false,  
-  regions: alias('model'),
   primaryDisplay: true,
-  
-  init() {
-    this._super(...arguments);
-  },
+  regions:null,
   
   _mapZoom: 3,
   mapZoom: computed('sortOption', function() {

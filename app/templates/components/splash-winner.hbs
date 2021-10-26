@@ -14,9 +14,11 @@
         <div class='nw-hflex'>
           <div>
             <img class='winner-cert' src="{{winnerImage}}" alt="" />
-            <div class='cert-download'>
-              <button {{action "goToWinnerRoute"}}>claim your winner goodies!</button>
-            </div>
+            {{#if hasEventName}}
+              <div class='cert-download'>
+                <button {{action "goToWinnerRoute"}}>claim your winner goodies!</button>
+              </div>
+            {{/if}}
           </div>
         </div>
         <hr />

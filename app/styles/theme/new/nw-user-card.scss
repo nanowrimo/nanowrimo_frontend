@@ -1,0 +1,105 @@
+.nw-user-card {
+  background-color: #F7F7F7;
+  border: solid #DFE4E6 1px;
+  border-radius: 5px;
+  @media (max-width: $screen-sm-max) {
+    flex-direction: column;
+  }
+  .nw-card-primary {
+    flex: 0 0 50%;
+    padding: 15px;
+  }
+  .nw-card-secondary {
+    flex: 0 0 50%;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    background-color: #FFF; 
+    padding: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    .buddy-status {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    @media (max-width: $screen-md-max) {
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 5px;
+      .buddy-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+.nw-my-buddies {
+  .nw-card-content {
+    max-height: 450px;
+    overflow: scroll;
+    @media (max-width: $screen-xlg) {
+      max-height: 600px;
+    }
+    @media (max-width: $screen-lg) {
+      max-height: 800px;
+    }
+    .nw-user-card {
+      flex-direction: column;
+      .nw-card-secondary {
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 5px;
+        .buddy-buttons {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+.nw-my-groups {
+  max-height: 450px;
+  overflow: scroll;
+  @media (max-width: $screen-xlg) {
+    max-height: 600px;
+  }
+  a {
+    width: 100%;
+    .nw-card-content {
+      max-height: 450px;
+      overflow: scroll;
+      @media (max-width: $screen-xlg) {
+        max-height: 600px;
+      }
+      @media (max-width: $screen-lg) {
+        max-height: 800px;
+      }
+    }
+  }
+}
+.nw-buddy-status {
+  .nw-default-status {
+    .hf-content {
+      display: none;
+    }
+    .non-hf-content {
+      display: block;
+    }
+    &:focus{
+      border: 2px solid black;
+    }
+    &:hover, &:focus{
+      .hf-content {
+        display: block;
+      }
+      .non-hf-content {
+        display: none;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,21 @@
+.chart-donut {
+  position: relative;
+  flex: 0 0 80px;
+  &.has-hover {
+    .chart-icon {
+      display: none;
+    }
+  }
+}
+
+.chart-fireball {
+  position: relative;
+  flex: 80px;
+  .chart-data {
+    padding-top: 26px;
+    padding-right: 6px;
+    color: #FFF;
+    font-size: 26px;
+    font-weight: 700;
+  }
+}

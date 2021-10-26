@@ -179,11 +179,12 @@
         margin-right: 0px;
         margin-left: 76px;
         @media (max-width: $screen-md-max) {
-          flex: 0 0 144px;
+          flex: 0 0 70px;
           margin-left: -10px;
           height: 36px;
+          margin-top: 5px;
           img {
-            width: 144px;
+            width: 70px;
             height: 36px;
           }
         }
@@ -432,11 +433,32 @@
       line-height: 38px;
       position: relative;
       .nw-unread-circle {
-        top: 0px;
+        position: absolute;
+        bottom: 0px;
         right: 0px;
         font-size: 10px;
         letter-spacing: 0px;
       }
+    }
+  }
+}
+button {
+  &.button-clear {
+    width: 46px;
+    height: 38px;
+    border: 0;
+    background-image: none;
+    background-color: transparent;
+    color: $nw-darkgreen;
+    font-size: 36px;
+    line-height: 38px;
+    position: relative;
+    .nw-unread-circle {
+      position: absolute;
+      bottom: 5px;
+      right: 0px;
+      font-size: 10px;
+      letter-spacing: 0px;
     }
   }
 }

@@ -38,23 +38,6 @@
   }
 }
 .logger-timer-modal {
-  /*all: initial;
-  z-index: 1000;
-  position:absolute;
-  border-radius: 6px;
-  box-shadow: 0 0 14px 3px $nw-darkblue10;
-  top: 44px;
-  font-family: 'SourceSansSerif-Regular', sans-serif;*/
-
-  /*.modal-content {
-    background-color: $nw-white;
-    background-image: none;
-    border: solid 0px $nw-lightgreyblue;
-    label {
-      padding-top: 10px;
-      font-size: 12px;
-    }
-  }*/
   #menu-progress-update-project-display {
     padding: 20px;
     padding-bottom: 4px;
@@ -218,7 +201,7 @@
   .project-additional-info {
     /*background-color: $nw-verylightaqua;*/
     .ember-power-select-selected-item, .ember-power-select-option, .ember-power-select-search {
-      font-family: 'SourceSansSerif-Regular', sans-serif;
+      font-family: 'SansRegular', sans-serif;
       color: $nw-mediumgrey;
       font-size: 14px;
     }

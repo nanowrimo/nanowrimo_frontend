@@ -7,12 +7,34 @@ def runCmd(cmd)
 	output = `#{cmd}`
 	# was the command a success?
 	unless $?.success?
-		puts output
-		puts	
-		puts "FAILED"
+		printErrors output
 		exit(false)
 	end
 	return output
+end
+
+def printErrors(text)
+  puts "\n--ERRORS--\n"
+  currentFile = ""
+  lines = text.split("\n")
+  lines.each do |line|
+    line = line.chomp()
+    unless line.empty?
+      if line.start_with? "/"
+        currentFile = line
+        currentFilePrinted = false
+      end
+      if line.include? "error "
+        unless currentFilePrinted   
+          puts "\n"
+          puts currentFile
+          currentFilePrinted = true
+        end
+        puts line
+      end
+    end
+  end
+  puts "\n\n"
 end
 		
 # get the current branch

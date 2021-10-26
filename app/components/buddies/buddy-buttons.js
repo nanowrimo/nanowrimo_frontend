@@ -9,7 +9,12 @@ export default Component.extend({
   store: service(),
   currentUser: service(),
   session: service(),
+  
+  classNames: ['buddy-buttons'],
+  
   user: null,
+  displayTiny: false,
+  isRemoving: false,
   newBuddyEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy/`,
   approveBuddyEndpoint: `${ENV.APP.API_HOST}/groups/approve_buddy/`,
   rejectBuddyEndpoint: `${ENV.APP.API_HOST}/groups/reject_buddy/`,
@@ -18,19 +23,31 @@ export default Component.extend({
   blockUserEndpoint: `${ENV.APP.API_HOST}/groups/block_user/`,
   unblockUserEndpoint: `${ENV.APP.API_HOST}/groups/unblock_user/`,
   
+  init() {
+    this._super(...arguments);
+    let name = this.get('user.name');
+    this.set('removeBuddyYesText', 'Yes, remove as buddy');
+    this.set('removeBuddyNoText', 'No, thanks'); 
+    this.set('removeBuddyTitleText', 'Confirm Buddy Removal');
+    this.set('removeBuddyQuestion', `Do you really want to remove "${name}" as a buddy?`);
+  },
+  
   notCurrentUser: computed('currentUser.user','user',function() {
     if (this.get('currentUser.user') != this.get('user')) {
       return true;
     }
     return false;
   }),
-  buddyActive: computed('currentUser.user.buddiesActive.[]',function() {
+  
+  buddyActive: computed('currentUser.user.buddiesActive.[]','user', function() {
     let buddiesActive = this.get('currentUser.user.buddiesActive');
     if (buddiesActive.includes(this.get('user'))) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }),
+  
   buddyInvited: computed('currentUser.user.buddiesInvited.[]',function() {
     let buddiesInvited = this.get('currentUser.user.buddiesInvited');
     if (buddiesInvited.includes(this.get('user'))) {
@@ -38,6 +55,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   buddyInvitedBy: computed('currentUser.user.buddiesInvitedBy.[]',function() {
     let buddiesInvitedBy = this.get('currentUser.user.buddiesInvitedBy');
     if (buddiesInvitedBy.includes(this.get('user'))) {
@@ -45,6 +63,7 @@ export default Component.extend({
     }
     return false;
   }),
+  
   userBlocked: computed('currentUser.user.usersBlocked',function() {
     let usersBlocked = this.get('currentUser.user.usersBlocked');
     if (usersBlocked.includes(this.get('user'))) {
@@ -52,16 +71,38 @@ export default Component.extend({
     }
     return false;
   }),
-  notBuddy: computed('currentUser.user.{buddiesActive,buddiesInvited,buddiesInvitedBy,usersBlocked}',function() {
+  
+  notBuddy: computed('buddyActive','buddyInvited','buddyInvitedBy','userBlocked',function() {
     let buddyActive = this.get('buddyActive');
     let buddyInvited = this.get('buddyInvited');
     let buddyInvitedBy = this.get('buddyInvitedBy');
     let userBlocked = this.get('userBlocked');
     if (!buddyActive && !buddyInvited && !buddyInvitedBy && !userBlocked) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }),
+  
+  conversationSlug: computed('user', function() {
+    const store = this.get('store');
+    const user = this.get('user');
+    const gus = store.peekAll('group-user');
+    const cu = this.get('currentUser.user');
+    let slug = null;
+    gus.forEach(function(gu) {
+      let g = store.peekRecord('group', gu.group_id);
+      if (g && g.groupType=='buddies' && (gu.user_id==user.id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+        gus.forEach(function(gu2) {
+          if ((gu2.group_id==g.id) && (gu2.user_id==cu.id) && (gu2.invitationAccepted=='1') && (gu2.exitAt==null)) {
+            slug = g.slug;
+          }
+        });
+      }
+    });
+    return slug;
+  }),
+  
   
   actions: {
     sendInvitation() {
@@ -166,6 +207,10 @@ export default Component.extend({
       });
     },
     
+    startRemovingBuddy() {
+      this.set('isRemoving', true);
+    },
+    
     removeBuddy() {
       let user = this.get('user');
       let cu = this.get('currentUser.user');
@@ -212,7 +257,7 @@ export default Component.extend({
           }
         })
         .catch(() => {
-          alert('There was a problem removing this buddy. Please check your internet connection and try again.');
+          //alert('There was a problem removing this buddy. Please check your internet connection and try again.');
         });
       });
     },
@@ -309,6 +354,11 @@ export default Component.extend({
           alert('There was a problem unblocking this user. Please check your internet connection and try again.');
         });
       });
+    },
+    
+    removeBuddyNo(){
+      //close the modal
+      this.set('isRemoving', false);
     },
     
   }

@@ -1,15 +1,6 @@
 {{#if showForm}}
   <div class="new-message-form">
     <form {{action "afterSubmit" this on='submit'}} class="full-width">
-      <div class="form-group">
-        <div
-          id='nw-message-form'
-          class="editable"
-          data-placeholder="What's going on, writer? Type here."
-          aria-label="Message"
-        >
-        </div>
-      </div>
       {{#if userIsAdmin}}
         {{#if contextNotNanomessages}}
           <div class="form-group inline-checkbox">
@@ -50,7 +41,20 @@
           </div>
         {{/if}}
       {{/if}}
-      <input id='nanomessage-form-submit' type="submit" value="send" class="nano-button" disabled={{isDisabled}} />
+      <div class="form-group">
+        <div style="display: flex;">
+          <div
+            style="width: 85%;"
+            id='nw-message-form'
+            class="editable"
+            data-placeholder="What's going on, writer? Type here."
+          ></div>
+          <button type="submit" class="button-clear" style="width: 40px;" aria-label="Submit your message." disabled={{isDisabled}}>
+            <span aria-hidden="false"><i class={{iconClass}} aria-hidden="true" /></span>
+          </button>
+        </div>
+      </div>
+      
     </form>
     <script>var editor = new MediumEditor('.editable', {
       paste: {
@@ -61,5 +65,21 @@
         unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
       }
     });</script>
+    {{#if isSubmittedNoEmail}}
+      {{confirmation-modal
+        yes=cancelConfirmationYesText
+        no=cancelConfirmationNoText
+        title=cancelConfirmationTitleText
+        question=cancelConfirmationQuestion
+        open=showConfirmCancel
+        yesAction=(action "cancelConfirmationYes")
+        noAction=(action "cancelConfirmationNo")
+      }}
+    {{/if}}
+    
+  </div>
+{{else}}
+  <div class="new-message-form" style='text-align: center;'>
+    Messaging is unavailable with this group.
   </div>
 {{/if}}

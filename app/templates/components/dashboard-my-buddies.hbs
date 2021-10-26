@@ -1,16 +1,13 @@
 <div class="nw-card-header">
   <div class="nw-card-title">My Buddies</div>
-</div>
-<div class="nw-card-content nw-center-horiz">
-  <div>
-    <div class="nw-promo-text">
-      You're three times more likely to finish a novel with a buddy!
-    </div>
-    <div>
-      {{#link-to "authenticated.search"}}
-      <button type="submit">Find buddies!</button>
+  <div class='nw-card-actions'>
+    <div class='nw-card-action-link'>
+      {{#link-to 'authenticated.users.show.buddies' currentUser.user.slug}}
+        See All
       {{/link-to}}
     </div>
   </div>
-  <div class="nw-card-bottom-image"><img alt="" src="/images/cards/handsclapping.svg" /></div>
+</div>
+<div class="nw-card-content">
+  {{buddies/buddy-list user=currentUser.user requests=false showTools=false}}
 </div>

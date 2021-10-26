@@ -8,6 +8,7 @@ export default Component.extend({
   store: service(),
   router: service(),
   notificationsService: service(),
+  pingService: service(),
   media: service(),
   currentUser: service(),
   initialWinnerDisplayed: false,
@@ -36,19 +37,21 @@ export default Component.extend({
   notificationSortingDesc: Object.freeze(['displayAt:desc']),
   sortedNotifications: sort('allNotifications','notificationSortingDesc'),
   
-  newNotificationsCount: computed('notificationsService.newNotificationsCount', function() {
-    return this.get('notificationsService.newNotificationsCount');
+  newNotificationsCount: computed('pingService.notificationData', function() {
+    return this.get('pingService.notificationData');
   }),
-  newNanomessagesCount: computed('notificationsService.newNanomessagesCount', function() {
-    return this.get('notificationsService.newNanomessagesCount');
+  
+  newNanomessagesCount: computed('pingService.unreadMessageCount', function() {
+    return this.get('pingService.unreadMessageCount');
   }),
+  
   displayStyle: computed('newNotificationsCount', function() {
     var c = this.get('newNotificationsCount');
     if (c==0) return "nw-hidden";
     else return "";
   }),
-  nanomessagesDisplayStyle: computed('newNanomessagesCount', function() {
-    var c = this.get('newNanomessagesCount');
+  nanomessagesDisplayStyle: computed('pingService.unreadMessageCount', function() {
+    var c = this.get('pingService.unreadMessageCount');
     if (c==0) return "nw-hidden";
     else return "";
   }),
@@ -86,6 +89,9 @@ export default Component.extend({
     },
     toggleNotifications() {
       const dn = this.get('displayNotifications');
+      if (dn==false) {
+        this.get('notificationsService').checkForUpdates();
+      }
       this.set('displayNotifications', !dn);
     },
     

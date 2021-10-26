@@ -15,7 +15,6 @@ export default Model.extend({
   group_id: attr('number'),
   user_id: attr('number'),
   messagesReadAt: attr('date'),
-  latestMessage: attr('string'),
   numUnreadMessages: attr('number'),
   groupType: attr('string'),
   group: belongsTo('group'),

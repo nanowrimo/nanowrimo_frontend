@@ -1,13 +1,14 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { debounce } from '@ember/runloop';
+//import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
   store: service(),
   nanomessage: null,
-  newMessage: 'message-new',
+  //newMessage: 'message-new',
+  newMessage: '',
   
   systemMessage: computed('nanomessage', function() {
     let n = this.get('nanomessage');
@@ -41,7 +42,6 @@ export default Component.extend({
   },
   init() {
     this._super(...arguments);
-    debounce(this, this.updateHeight, 100, false);
   },
   
   actions: {

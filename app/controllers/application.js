@@ -5,7 +5,8 @@ import { computed, observer } from '@ember/object';
 export default Controller.extend({
   session: service(),
   router: service(),
-  media: service(),
+  media: service(), 
+  currentUser: service(),
   
   init(){
     this._super(...arguments);

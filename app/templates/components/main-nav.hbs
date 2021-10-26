@@ -1,7 +1,12 @@
 <nav class="navbar mainnav navbar-expand-lg" aria-label="main">
   <div class="container-fluid">
     {{#link-to nanoMenuService.homeUrl class="navbar-brand text-logo"}}
-      <img src="/images/logo/logo_text.svg" alt="NANOWRIMO home" />
+      {{#if (media "isDesktop")}}
+        <img src="/images/logo/logo_text.svg" alt="NANOWRIMO home" class="nw-hide-when-mobile" />
+      {{/if}}
+      {{#if (media "isMobile")}}
+        <img src="/images/logo/logo_n.svg" alt="NANOWRIMO home" class="nw-show-when-mobile" style="height: 30px; position: relative; left: 10px;" />
+      {{/if}}
     {{/link-to}}
     {{#if session.isAuthenticated}}
       {{#if currentUserName}}

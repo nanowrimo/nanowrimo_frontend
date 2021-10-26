@@ -16,8 +16,9 @@
       <nav>
         {{main-nav}}
       </nav>
+      <NwUnverifiedHandler />
     </header>
-    <main class="logged-in">
+    <main class="logged-in {{if currentUser.user.isNotConfirmed 'unverified' ''}}">
       {{outlet}}
     </main>
     {{#if show_footer}}
