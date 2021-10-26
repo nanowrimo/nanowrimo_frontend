@@ -179,11 +179,12 @@
         margin-right: 0px;
         margin-left: 76px;
         @media (max-width: $screen-md-max) {
-          flex: 0 0 144px;
+          flex: 0 0 70px;
           margin-left: -10px;
           height: 36px;
+          margin-top: 5px;
           img {
-            width: 144px;
+            width: 70px;
             height: 36px;
           }
         }

@@ -105,3 +105,17 @@
 .nw-hide {
   display: none;
 }
+
+.nw-hide-when-mobile {
+  @media (max-width: $screen-lg) {
+    display: none;
+  }
+}
+
+.nw-show-when-mobile {
+  display: none;
+  @media (max-width: $screen-lg) {
+    display: block;
+  }
+}
+
