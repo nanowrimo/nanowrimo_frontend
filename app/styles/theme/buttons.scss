@@ -19,7 +19,7 @@ button, input.nano-button {
   /* Background and border */
   border-radius: 6px;
   background-image: linear-gradient(to bottom, $nw-darkgreen, $nw-mediumgreen);
-  &:hover, &:active {
+  &:hover, &:active, &:focus {
     background-image: linear-gradient(to bottom, $nw-lightgreen, $nw-mediumgreen);
   }
   border: solid 2px $nw-darkgreen;
@@ -30,7 +30,7 @@ button, input.nano-button {
     border: solid 2px $nw-darkgreen;
     color: $nw-darkgreen;
     padding-top: 0.1rem;
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
       background-image: linear-gradient(to bottom, $nw-lightgreen, $nw-mediumgreen);
       color: $nw-lightblue;
       &.button-danger {
@@ -93,12 +93,13 @@ button, input.nano-button {
   &.btn-underlined, &.truncate-multiline--button {
     background: transparent;
     border: 0px;
-    text-decoration: underline;
     font-size: 16px;
     letter-spacing: 0.3px;
     color: $nw-mediumgrey;
     text-transform: none;
-    
+    &:hover, &:active, &:focus {
+      text-decoration: underline;
+    }
   }
 }
 .modal-content {
@@ -110,13 +111,15 @@ button, input.nano-button {
       input.btn-underlined {
         background: transparent;
         border: 0px;
-        text-decoration: underline;
         font-size: 16px;
         letter-spacing: 0.3px;
         color: $nw-mediumgrey;
         text-transform: none;
         box-shadow: none;
         text-align: right;
+        &:hover, &:active, &:focus {
+          text-decoration: underline;
+        }
       }
     }
   }

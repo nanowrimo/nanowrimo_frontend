@@ -65,6 +65,13 @@ export default Component.extend({
     return 'nano-hide';
   }),
   
+  filteredOptionsForGenres: computed("optionsForGenres.[]", function(){
+    let userId = this.get('currentUser.user.id');
+    return this.get('optionsForGenres').reject((option)=>{
+      return (option.userId!=0 && option.userId!=userId);
+    });
+  }),
+  
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
   }),
@@ -119,8 +126,14 @@ export default Component.extend({
     let step = this.get("formStepOverride");
     let texts = ["Step 1: Overview", "Step 2: Goal", "Step 3: Details"];
     return texts[step];
-    
   }),
+  progressStepText: computed("formStepOverride", function(){
+    let step = this.get("formStepOverride");
+    let texts = ["Step 1 of 3: Project Overview", 
+      "Step 2 of 3: Project Goal", "Step 3 of 3: Project Details"];
+    return texts[step];
+  }),
+  
   actions: {
     associateChallengeSelect(challengeID) {
       this.set('associatedChallengeId', challengeID);
@@ -152,7 +165,9 @@ export default Component.extend({
       this.set('showForm', true);
       //assign the user to the project
       this.get('user').projects.pushObject(this.get('project'))
-      
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Create a project");
     },
     onHidden() {
       let callback = this.get('onHidden');

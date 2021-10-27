@@ -1,43 +1,45 @@
-{{#nano-side-menu-toggle}}
+{{#nano-side-menu-toggle classes="menu-close" ariaLabel="Close Menu"}}
   <span aria-hidden="false">{{fa-icon "times"}}</span>
 {{/nano-side-menu-toggle}}
-<ul>
-  {{#if session.isAuthenticated}}
-    {{#if currentUserName}}
-      <li>
-       
-          <div class="nano-avatar-small">
-            <img src={{currentUserAvatar}} alt={{currentUserName}} data-test-user-avatar>
-          </div>
-          <div class="user-name">
-            Hi, {{currentUserName}}!
-          </div>
+<div role='dialog' aria-modal='true' aria-label="Menu">
+  <ul>
+    {{#if session.isAuthenticated}}
+      {{#if currentUserName}}
+        <li>
+         
+            <div class="nano-avatar-small">
+              <img src={{currentUserAvatar}} alt={{currentUserName}} data-test-user-avatar>
+            </div>
+            <div class="user-name">
+              Hi, {{currentUserName}}!
+            </div>
 
-      </li>
-      <li class="menu-break"></li>
-      <li>
-        <div class="nano-search">
-          {{search-field}}
-        </div>
-      </li>
-      <li>{{nano-side-menu-link menuItem='{route:"index",label:"Home"}' }}</li>
-      {{#each submenus as |submenu|}}
-        {{nano-side-menu-submenu thisSubmenu=submenu}}
-      {{/each}}
-      <li class="menu-break"></li>
-      <li>
-        {{nano-side-menu-link menuItem=nanoMenuService.accountSettings }}
-      </li>
-      <li class="menu-break"></li>
+        </li>
+        <li class="menu-break"></li>
+        <li>
+          <div class="nano-search">
+            {{search-field}}
+          </div>
+        </li>
+        <li>{{nano-side-menu-link menuItem='{route:"index",label:"Home"}' }}</li>
+        {{#each submenus as |submenu|}}
+          {{nano-side-menu-submenu thisSubmenu=submenu}}
+        {{/each}}
+        <li class="menu-break"></li>
+        <li>
+          {{nano-side-menu-link menuItem=nanoMenuService.accountSettings }}
+        </li>
+        <li class="menu-break"></li>
+      {{/if}}
     {{/if}}
-  {{/if}}
-  {{#each storeLinks as |storeLink|}}
-    <li>{{nano-side-menu-link menuItem=storeLink}}</li>
-  {{/each}}
-  {{#each helpLinks as |helpLink|}}
-    <li>
-      {{nano-side-menu-link menuItem=helpLink.url}}
-    </li>
-  {{/each}}
-  <li><a href="#" {{action 'invalidateSession'}}>Logout</a></li>
-</ul>
+    {{#each storeLinks as |storeLink|}}
+      <li>{{nano-side-menu-link menuItem=storeLink}}</li>
+    {{/each}}
+    {{#each helpLinks as |helpLink|}}
+      <li>
+        {{nano-side-menu-link menuItem=helpLink.url}}
+      </li>
+    {{/each}}
+    <li><a href="#" {{action 'invalidateSession'}}>Logout</a></li>
+  </ul>
+</div>

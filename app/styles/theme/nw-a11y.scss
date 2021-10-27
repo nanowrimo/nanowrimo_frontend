@@ -9,3 +9,15 @@
    position: absolute !important;
    word-wrap:normal !important;
 }
+
+/* a highlight for focused elements */
+p {
+  *:focus {
+    /* padding: 1px; */
+    outline: 2px dashed $nw-mediumblue;
+  }
+}
+
+.notifications-modal-body button:focus {
+  background-color: $nw-lightaqua;
+}

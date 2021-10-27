@@ -8,7 +8,7 @@ html {
 body {
   min-height: 100%;
   background-color: $nw-lightblue;
-  font-family: 'SourceSansPro-Regular', sans-serif;
+  font-family: 'SansRegular', sans-serif;
   font-size: 14px;
   color: $nw-darkgrey;
   line-height: 1.4;
@@ -22,6 +22,9 @@ body.full-screen > .ember-view {
 }
 main {
   margin-top: 90px;
+  &.unverified {
+    margin-top: 160px;
+  }
   @media (max-width: $screen-lg) {
     margin-top: 42px;
   }
@@ -194,7 +197,7 @@ button.btn {
 }
 .password-reveal-container {
   position: relative;
-  a.password-reveal {
+  .password-reveal {
     display: flex;
     cursor: pointer;
     background-image: none;
@@ -212,6 +215,10 @@ button.btn {
     align-content: center;
     &:hover {
       color: $nw-mediumblue;
+    }
+    &:focus {
+      border: 3px solid $nw-mediumblue;
+      color: black;
     }
     &.is-invalid {
       bottom: 24px;
@@ -352,4 +359,11 @@ a.nw-grey-link {
 }
 .fa-bullhorn {
   font-size: 60px;
+}
+
+#application-loading-indicator {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  text-align: center;
 }

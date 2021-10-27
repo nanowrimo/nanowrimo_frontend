@@ -1,54 +1,102 @@
-.nw-nav-notify-buttons {
-  height: 38px;
-  .nav-item {
-    line-height: 38px;
-    .dropdown-toggle {
-      &.nav-link {
-        padding-top: 0px;
-        padding-bottom: 0px;
+.navbar {
+  &.mainnav {
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    .container-fluid {
+      .nav.nw-nav-notify-buttons {
+        height: 48px;
+        li.nav-item {
+          line-height: 48px;
+          height: 48px;
+          margin-top: 0px;
+          margin-bottom: 0px;
+          .dropdown-toggle {
+            &.nav-link {
+              padding-top: 0px;
+              padding-bottom: 0px;
+            }
+            &::after {
+              display: none;
+            }
+          }
+          .dropdown-menu {
+            margin-top: -16px;
+          }
+          a {
+            tabindex: 0;
+            display: block;
+            line-height: 48px;
+            width: 48px;
+            height: 48px;
+            border: 0;
+            background-image: none;
+            background-color: transparent;
+            color: $nw-darkgreen;
+            font-size: 20px;
+            .fa-bell-o {
+              font-size: 18px;
+              color: $nw-darkgrey;
+            }
+            .fa-bars {
+              font-size: 28px;
+            }
+            .non-mobile {
+              display: block;
+              height: 48px;
+              width: 48px;
+              line-height: 48px;
+              text-align: center;
+              i {
+                height: 48px;
+                line-height: 48px;
+              }
+            }
+            &:hover, &:active, &:focus {
+              background-color: $nw-darkblue;
+              i {
+                color: $nw-white;
+              }
+            } 
+          }
+        }
+        .nw-noti-modal-container {
+          max-height: 350px;
+        }
+
+        .nw-noti-modal {
+          .nw-noti-modal-header {
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            a {
+              color: $nw-white;
+              text-transform: capitalize;
+              font-size: 12px;
+              line-height: 1.67;
+              text-decoration: underline;
+            }
+            .nw-noti-header-left {
+              flex: 1 1 100%;
+              text-align: left;
+              padding-left: 10px;
+            }
+            .nw-noti-header-right {
+              flex: 1 1 100%;
+              text-align: right;
+              padding-right: 10px;
+            }
+          }
+          .nw-noti-modal-body {
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            max-height: 320px;
+            overflow: scroll;
+          }
+          .nw-noti-modal-footer {
+          }
+        }
       }
-      &::after {
-        display: none;
-      }
-    }
-    .dropdown-menu {
-      margin-top: -16px;
-    }
-  }
-  .nw-noti-modal-container {
-    max-height: 350px;
-  }
-  
-  .nw-noti-modal {
-    .nw-noti-modal-header {
-      height: 30px;
-      display: flex;
-      justify-content: space-between;
-      a {
-        color: $nw-white;
-        text-transform: capitalize;
-        font-size: 12px;
-        line-height: 1.67;
-        text-decoration: underline;
-      }
-      .nw-noti-header-left {
-        flex: 1 1 100%;
-        text-align: left;
-        padding-left: 10px;
-      }
-      .nw-noti-header-right {
-        flex: 1 1 100%;
-        text-align: right;
-        padding-right: 10px;
-      }
-    }
-    .nw-noti-modal-body {
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
-      max-height: 320px;
-      overflow: scroll;
-    }
-    .nw-noti-modal-footer {
     }
   }
 }
@@ -59,7 +107,6 @@
   padding-right: 15px;
   display: flex;
   border-bottom: 1px solid #ddd;
-  background-color: $nw-white;
   &:hover {
     background-color: $nw-lightaqua;
   }
@@ -95,7 +142,7 @@
         font-size: 12px;
         line-height: 1.67;
         color: $nw-black;
-        font-family: "SourceSansPro-Regular",sans-serif;
+        font-family: "SansRegular",sans-serif;
       }
       .nw-noti-button {
         flex: 1 1 100%;

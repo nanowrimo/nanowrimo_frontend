@@ -143,7 +143,8 @@
       .nw-card-action-link {
         padding-top: 6px;
         height: 24px;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 600;
         color: $nw-mediumgrey;
         cursor: pointer;
         &:hover {
@@ -196,11 +197,12 @@
           margin-top: 0px;
           margin-bottom: 0px;
           background-image: none;
-          background-color: none;
+          background-color: transparent;
+          
           i {
             color: $nw-lightgrey;
           }
-          &.active {
+          &.active, &:focus {
             background-color: none;
             border-bottom: solid 3px $nw-lightorange;
             box-shadow: none;
@@ -227,6 +229,11 @@
       background-size: cover;
       border-radius: 5px 5px 0px 0px;
       background-position: center center;
+      img {
+        height: 144px;
+        width: 300px;
+        object-fit: cover;
+      }
     }
   }
   .nw-card-content {
@@ -342,7 +349,7 @@
       justify-content: flex-start;
     }
     .nw-card-superhead {
-      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-family: 'SansRegular', sans-serif;
       font-size: 14px;
       font-weight: 600;
       line-height: 1.57;
@@ -362,7 +369,7 @@
       }
     }
     .nw-card-subhead {
-      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-family: 'SansRegular', sans-serif;
       font-size: 14px;
       font-weight: 600;
       line-height: 1.57;

@@ -29,7 +29,7 @@
     as |dropzone queue|
   }}
     {{#if hasUploaded}}
-      Image uploaded!
+      <span role="alert">Image uploaded!</span>
     {{else}}
       {{#if dropzone.active}}
         {{#if dropzone.valid}}
@@ -49,7 +49,6 @@
           name=property
           onfileadd=(action "uploadImage")
         }}
-          <a style="cursor:pointer">Select an image</a><br>
           
         {{/file-upload}}
         Images must be less than 10 MB, and .jpg, .png, or .gif file types.

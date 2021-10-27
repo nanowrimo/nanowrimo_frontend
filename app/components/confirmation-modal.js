@@ -21,6 +21,9 @@ export default Component.extend({
     onShow() {
       // ensure double check is false
       this.set('doubleCheckIsChecked', false);
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "confirm this action");
     },
     
     onHidden() {

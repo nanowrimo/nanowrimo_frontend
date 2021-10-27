@@ -1,3 +1,4 @@
+{{page-title project.title}}
 <div class='nw-panel-actions'>
   <div>
     {{#if canAddProjectChallenge}}
@@ -6,10 +7,13 @@
   </div>
   <div class='nw-panel-actions-select' >
     <span id='project-summary-sort-by-select'>
-      <select onChange={{action 'filterChanged' value='target.value'}}>
-        <option value='0'>show all goals</option>
-        <option value='1'>show active goals</option>
-        <option value='2'>show past goals</option>
+      <label for="project-challenge-filter">
+        Show goals: 
+      </label>
+      <select id="project-challenge-filter" onChange={{action 'filterChanged' value='target.value'}}>
+        <option value='0'>all</option>
+        <option value='1'>active</option>
+        <option value='2'>past</option>
       </select>
     </span>
   </div>

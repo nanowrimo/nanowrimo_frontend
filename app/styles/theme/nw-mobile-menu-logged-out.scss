@@ -1,7 +1,17 @@
 .mobile-menu-logged-out {
+  .background-cover {
+    z-index: 999;
+    position:fixed; 
+    top: 0; 
+    left:0; 
+    width:100%; 
+    height: 100%; 
+    background-color: black; 
+    opacity: 50%;
+  }
   .menu-trigger {
     float: right;
-    a {
+    button {
       color: $nw-darkgreen;
       font-size: 28px;
       line-height: 38px;
@@ -11,8 +21,11 @@
     top: 0px;
     
     &.display {
+      visibility: visible;
       right: 0px;
+      z-index: 1000;
     }
+
     .menu-close-trigger {
       float: right;
     }

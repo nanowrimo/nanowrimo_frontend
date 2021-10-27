@@ -1,16 +1,26 @@
 .nano-side-menu-toggle {
-  cursor: pointer;
+  button {
+    font-size: 28px !important;
+    &.menu-close {
+      color: white; 
+      &:focus {
+        border: 1px solid white !important;
+        border-radius: 5px !important;
+      }  
+    }
+    &.menu-open {
+      color: $nw-mediumgreen;;
+    } 
+     
+  }
 }
+
 .nano-side-menu {
   position: fixed;
   right: -285px;
-  overflow: scroll;
-  -webkit-transition-property: right;
-  -webkit-transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease-in-out;
-  transition-property: right;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-in-out;
+  overflow: auto;
+  visibility: hidden;
+  transition: right 400ms ease-in-out, visibility 500ms;
   z-index: 1000;
   width: 285px;
   height: 100%;
@@ -23,8 +33,11 @@
   letter-spacing: normal;
   text-align: left;
   color: $nw-lightblue;
-  padding: 28px;
+  padding: 28px; 
   padding-top: 14px;
+  ul {
+    padding: 0px;
+  }
   a {
     color: $nw-lightblue;
   }

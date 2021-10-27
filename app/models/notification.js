@@ -15,5 +15,6 @@ export default Model.extend({
   dataCount: attr('number'),
   displayStatus: attr('number'),
   lastViewedAt: attr('date'),
-  redirectUrl: attr('string'),
+  redirectUrl: attr('string'), 
+  extraData: attr('string'),
 });

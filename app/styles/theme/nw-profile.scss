@@ -1,5 +1,5 @@
 .nw-user-listing {
-  padding: 5px;
+  padding: 10px;
   display: flex;
   align-items: center;
   .nano-avatar {
@@ -26,6 +26,7 @@
   }
   .user-buttons {
     flex: 1 1 100%;
+    align-items: center;
     .buddy-buttons {
       padding: 0px;
     }

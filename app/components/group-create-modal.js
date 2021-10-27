@@ -43,6 +43,12 @@ export default Component.extend({
   
   actions: {
     
+    onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "create a group");
+    },
+    
     // Called when the value of the name input changes
     nameChanged(val) {
       // Set the group name to the input string

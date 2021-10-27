@@ -38,23 +38,6 @@
   }
 }
 .logger-timer-modal {
-  /*all: initial;
-  z-index: 1000;
-  position:absolute;
-  border-radius: 6px;
-  box-shadow: 0 0 14px 3px $nw-darkblue10;
-  top: 44px;
-  font-family: 'SourceSansSerif-Regular', sans-serif;*/
-
-  /*.modal-content {
-    background-color: $nw-white;
-    background-image: none;
-    border: solid 0px $nw-lightgreyblue;
-    label {
-      padding-top: 10px;
-      font-size: 12px;
-    }
-  }*/
   #menu-progress-update-project-display {
     padding: 20px;
     padding-bottom: 4px;
@@ -62,7 +45,7 @@
 
   .primary-project-display {
     display: flex;
-    min-width: 400px;
+    /*min-width: 400px;*/
     height: 100px;
     /*margin-top: 14px;
     height: 90px;
@@ -138,7 +121,8 @@
   .timer-content {
     padding: 0px;
     padding-top: 10px;
-    display: flex;
+    display: flex; 
+    flex-flow: column;
     justify-content: space-between;
     .timer-instruction {
       flex: 0 0 57%;
@@ -176,14 +160,14 @@
   }
   .primary-project-scrolling-buttons {
     padding: 10px;
-    font-size: 30px;
-    color: #ddd;
+    
     display: flex;
     max-height: 90px;
     flex-direction: column;
     justify-content: space-between;
-    i {
-      cursor: pointer;
+    button {
+      font-size: 30px;
+      color: #ddd;
     }
     i:hover {
       color: #000;
@@ -217,7 +201,7 @@
   .project-additional-info {
     /*background-color: $nw-verylightaqua;*/
     .ember-power-select-selected-item, .ember-power-select-option, .ember-power-select-search {
-      font-family: 'SourceSansSerif-Regular', sans-serif;
+      font-family: 'SansRegular', sans-serif;
       color: $nw-mediumgrey;
       font-size: 14px;
     }
@@ -275,55 +259,6 @@
   flex: 0 0 200px;
 }*/
 
-.project-emoji-list {
-  display: flex;
-  width: 100%;
-  margin-bottom: 10px;
-  justify-content: center;
-  label {
-    padding-top: 0px;
-  }
-  .project-emoji {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    margin: 5px;
-    &.emoji-1 {
-      background-image: url('/images/projects/emoji/unselected/1.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/1.svg');
-      }
-    }
-    &.emoji-2 {
-      background-image: url('/images/projects/emoji/unselected/2.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/2.svg');
-      }
-    }
-    &.emoji-3 {
-      background-image: url('/images/projects/emoji/unselected/3.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/3.svg');
-      }
-    }
-    &.emoji-4 {
-      background-image: url('/images/projects/emoji/unselected/4.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/4.svg');
-      }
-    }
-    &.emoji-5 {
-      background-image: url('/images/projects/emoji/unselected/5.svg');
-      &:hover, &.selected {
-        background-image: url('/images/projects/emoji/selected/5.svg');
-      }
-    }
-  }
-  input {
-    display: none;
-  }
-  
-}
 
 #progress-update-form.nw-no-blue {
   .more-info-toggle {

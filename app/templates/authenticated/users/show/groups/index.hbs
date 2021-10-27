@@ -1,3 +1,4 @@
+{{page-title "Groups"}}
 <div class="nw-panel-primary-container">
   {{#if isCurrentUser}}
   <div class='nw-panel-actions'>
@@ -14,21 +15,19 @@
           join.</a></b>
     </div>
   </div>
-  {{/if}}
-  <div class='group-listings'>
-    <div>
-      {{#each user.myInvitations as |group|}}
-      {{group-listing group=group buttons=true message=true}}
-      {{/each}}
-    </div>
+  
+  <div class='nw-column-cards'>
+    {{#each user.myInvitations as |group|}}
+      {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
+    {{/each}}
   </div>
-  <div class='group-listings'>
-    <div>
-      {{#if hasRegions}}
+  {{/if}}
+  <div class='nw-column-cards'>
+    {{#if hasRegions}}
       {{#each user.myGroups as |group|}}
-      {{group-listing group=group buttons=true message=true}}
+        {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
       {{/each}}
-      {{else}}
+    {{else}}
       <div class="nw-card nw-prompt-card">
         <div class='nw-hflex'>
           <div class="project-announce-quote">
@@ -46,7 +45,6 @@
           </div>
         </div>
       </div>
-      {{/if}}
-    </div>
+    {{/if}}
   </div>
 </div>

@@ -5,18 +5,20 @@
       {{svg-congratulations}}
       <div class='winner-message'>
         {{#if isNaNo}}
-          You met your NaNo goal head on, never gave up, and completed your novel!
+          Congratulations! You met your NaNoWriMo goal head on, never gave up, and completed your novel!
         {{else}}
-          You met your writing project head on, never gave up, and achieved your goal!
+          Congratulations! You met your Camp goal head on, never gave up, and completed your writing project!
         {{/if}}
       </div>
       <div class='winner-splash-content'>
         <div class='nw-hflex'>
           <div>
             <img class='winner-cert' src="{{winnerImage}}" alt="" />
-            <div class='cert-download'>
-              <button {{action "goToWinnerRoute"}}>claim your winner goodies!</button>
-            </div>
+            {{#if hasEventName}}
+              <div class='cert-download'>
+                <button {{action "goToWinnerRoute"}}>claim your winner goodies!</button>
+              </div>
+            {{/if}}
           </div>
         </div>
         <hr />
@@ -35,20 +37,22 @@
           </div>
         </div>
         <hr />
-        <div class='nw-hflex'>
-          <div class='winner-splash-laurel'>
-            <div class='title'>Don't rest on your laurels.</div>
-            <div class='nw-hflex'>
-             {{user-avatar user=currentUser.user}}
-            </div>
-            <div class='description'>
-              Way to go, this was your <b>{{ordinal-number-suffix currentUser.user.nanoWinCount}} time</b>
-              completing a NaNo event! From now on, your avatar will
-              look like this, so the whole world can know how awesome you are!
+        {{#if isNaNo}}
+          <div class='nw-hflex'>
+            <div class='winner-splash-laurel'>
+              <div class='title'>Don't rest on your laurels.</div>
+              <div class='nw-hflex'>
+               {{user-avatar user=currentUser.user}}
+              </div>
+              <div class='description'>
+                Way to go, this was your <b>{{ordinal-number-suffix currentUser.user.nanoWinCount}} time</b>
+                completing an official NaNoWriMo challenge! From now on, your avatar will
+                look like this, so the whole world can know how awesome you are!
+              </div>
             </div>
           </div>
-        </div>
-        <hr />
+          <hr />
+        {{/if}}
         <div class='nw-hflex'>
           <div>
             &nbsp;

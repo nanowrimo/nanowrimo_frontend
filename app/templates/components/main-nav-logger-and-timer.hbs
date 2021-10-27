@@ -20,7 +20,8 @@
       {{/if}}
       {{#if displayTimeOnButton}}
         <button class="button-log btn btn-primary wide-button" {{action 'toggleTimerForm'}} aria-label="Start a writing timer or stopwatch.">
-         {{fa-icon "stop-circle-o"}} {{timeProgress}} <aria label="Stop counter"></aria>
+         {{fa-icon "stop-circle-o"}} {{timeProgress}}
+         <span class="sr-only">Stop timer</span>
         </button>
       {{else}}
         <button class="button-log btn btn-primary" {{action 'toggleTimerForm'}} aria-label="Start a writing timer or stopwatch.">

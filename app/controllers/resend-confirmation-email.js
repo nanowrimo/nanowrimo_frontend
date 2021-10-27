@@ -9,7 +9,8 @@ export default Controller.extend({
     submit(form) {
       let email = form.get('email');
       if (this.validEmail(email) ){
-        //perform the query
+        //get the user's auth token
+        let { auth_token }  = this.get('session.data.authenticated');
         let url = `${ENV.APP.API_HOST}/users/resend_confirmation`;
         // send the data as a POST so that the email doesn't end up in the server logs
         return fetch(url, {
@@ -17,7 +18,8 @@ export default Controller.extend({
           method: 'POST',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': auth_token
           }
         }).then((response) => {       
           if (!response.ok) {

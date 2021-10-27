@@ -40,7 +40,7 @@
 @import "theme/lists";
 @import "theme/nw-badges";
 @import "theme/nw-notifications";
-@import "theme/nanomessages";
+@import "theme/nw-nanomessages";
 @import "theme/forms";
 @import "theme/nw-auth";
 @import "theme/main-nav-logger-timer";
@@ -50,6 +50,10 @@
 @import "theme/nw-stats";
 @import "theme/nw-cms";
 @import "theme/nw-card";
+@import "theme/nw-card-new";
+@import "theme/new/nw-general";
+@import "theme/new/nw-charts";
+@import "theme/new/nw-user-card";
 @import "theme/nw-settings";
 @import "theme/nw-layouts";
 @import "theme/nw-splash";
@@ -61,4 +65,6 @@
 @import "theme/nw-mobile-menu-logged-out";
 @import "theme/nw-buttons";
 @import "theme/nw-a11y";
+@import "theme/nw-file-upload";
+@import "theme/nw-alert";
 

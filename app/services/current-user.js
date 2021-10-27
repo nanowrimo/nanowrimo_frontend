@@ -9,6 +9,7 @@ export default Service.extend({
 
   user: null,
   isLoaded: false,
+  groupUsersLoaded: false,
   load() {
     let t = this;
     if (this.get('session.isAuthenticated')) {
@@ -25,14 +26,10 @@ export default Service.extend({
             return this.get('store').query('group-user',
             {
               filter: { user_id: user.id },
-              group_types: 'buddies,regions',
+              group_types: 'buddies',
               include: 'user,group'
             }).then(() => {
               t.delayUntilGroupsLoaded();
-              /*later(function() {
-                if (this.get('store').peekAll('group').length>0) {
-                  t.set('isLoaded',true);
-              }, 500);*/
             });
           });
       });
@@ -46,6 +43,7 @@ export default Service.extend({
     later(function() {
       if (t.get('store').peekAll('group').length>0) {
         t.set('isLoaded',true);
+        t.set('groupUsersLoaded',true);
         t.user.set('groupUsersLoaded',true);
       } else {
         t.delayUntilGroupsLoaded();
@@ -78,4 +76,28 @@ export default Service.extend({
     }
   },
   
+  reloadBuddies() {
+    // reload the user's buddies
+    //return this.get('user').hasMany('groups').reload();
+    return this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('user').id },
+      group_types: 'buddies',
+      include: 'user,group'
+    }).then(data=>{
+      // keep track of the ids for returned content
+      let newIds = [];
+      data.content.forEach((gu)=>{
+        newIds.push(gu.id);
+      });
+      // unload any of this users buddy group_users that have an id not in the newIds
+      this.get('user').buddyGroupUsers.forEach(bgu=>{
+        if (newIds.indexOf(bgu.id)==-1) {
+          // no longer a buddy
+          bgu.unloadRecord();
+        }
+      });
+    });
+    
+  }
 });

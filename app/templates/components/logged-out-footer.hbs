@@ -2,14 +2,19 @@
   <div class="container-fluid nw-footer">
     <div class="nw-footer-section nw-footer-left">
       <div class="nw-footer-logos">
-        <a href="/"><img src="/images/logo/logo.svg" alt="" /><img src="/images/logo/logo_text.svg"
-            alt="National Novel Writing Month home." style="padding-top: 10px;" /></a>
+        {{#link-to "index"}}
+          <img src="/images/logo/logo.svg" alt="" />
+          <img src="/images/logo/logo_text.svg"
+            alt="National Novel Writing Month home." style="padding-top: 10px;" />
+        {{/link-to}}
       </div>
       <div class="nw-footer-description">
         National Novel Writing Month (NaNoWriMo) is a fun, seat-of-your-pants approach to creative writing.
       </div>
       <div class="nw-footer-header">
-        <a href="/about-nano" class="link">About NaNoWriMo</a>
+        {{#link-to "pages" "about-nano"}}
+            About NaNoWriMo
+        {{/link-to}}
         <a href="https://ywp.nanowrimo.org" class="link">Young Writers Program</a>
       </div>
     </div>
@@ -22,22 +27,34 @@
         </h2>
         <ul>
           <li>
-            <a href="/dei" class="link">Our Values (DEI)</a>
+            {{#link-to "pages" "dei"}}
+              Our Values (DEI)
+            {{/link-to}}
           </li>
           <li>
-            <a href="https://nanowrimo.org/brought-to-you-by" class="link">Brought to You By...</a>
+            {{#link-to "pages" "brought-to-you-by"}}
+              Brought to You By...
+            {{/link-to}}
           </li>
           <li>
-            <a href="https://nanowrimo.org/staff" class="link">Staff</a>
+            {{#link-to "pages" "staff"}}
+              Staff
+            {{/link-to}}
           </li>
           <li>
-            <a href="/board-of-directors" class="link">Board of Directors</a>
+            {{#link-to "pages" "board-of-directors"}}
+              Board of Directors
+            {{/link-to}}
           </li>
           <li>
-            <a href="/writers-board" class="link">Writers Board</a>
+            {{#link-to "pages" "writers-board"}}
+              Writers Board
+            {{/link-to}}
           </li>
           <li>
-            <a href="/about-nano#contact" class="link">Contact Us</a>
+            {{#link-to "pages" "about-nano#contact"}}
+              Contact Us
+            {{/link-to}}
           </li>
 
         </ul>
@@ -70,10 +87,14 @@
         </h2>
         <ul>
           <li>
-            <a href="https://nanowrimo.org/pep-talks" class="link">Pep Talks</a>
+            {{#link-to "pages" "pep-talks"}}
+              Pep Talks
+            {{/link-to}}
           </li>
           <li>
-            <a href="https://nanowrimo.org/nano-prep-101" class="link">NaNo Prep</a>
+            {{#link-to "pages" "nano-prep-101"}}
+              NaNo Prep
+            {{/link-to}}
           </li>
         </ul>
       </div>
@@ -135,11 +156,21 @@
       </div>
       <div class='nw-footer-copyright'>
         <span class="links">
-          <a class='link' href="/terms-and-conditions">Terms and Conditions</a>
+          {{#link-to "pages" "terms-and-conditions"}}
+            Terms and Conditions
+          {{/link-to}}
           &nbsp;
           &bull;
           &nbsp;
-          <a class='link' href="/privacy-policy">Privacy Policy</a>
+          {{#link-to "pages" "privacy-policy"}}
+            Privacy Policy
+          {{/link-to}}
+          &nbsp;
+          &bull;
+          &nbsp;
+          {{#link-to "pages" "codes-of-conduct"}}
+            Codes of Conduct
+          {{/link-to}}
           &nbsp;
           &bull;
           &nbsp;

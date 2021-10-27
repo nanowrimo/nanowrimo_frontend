@@ -17,6 +17,9 @@ export default Component.extend({
     onShow() {
       this.set('open',true);
       this.get('notificationsService').notificationsViewed();
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Notifications");
     },
     onHidden() {
       this.set('open',false);

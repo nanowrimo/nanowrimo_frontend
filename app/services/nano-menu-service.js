@@ -10,7 +10,7 @@ export default Service.extend({
   currentUser: service(),
   currentUserName: reads('currentUser.user.name'),
   userSlug: reads('currentUser.user.slug'),
-  sideMenuIsOpen: true,
+  sideMenuIsOpen: false,
   homeUrl: "authenticated",
   homeRegionItem: computed('currentUser.user.homeRegion', function () {
     let region = this.get('currentUser.user.homeRegion');
@@ -54,19 +54,19 @@ export default Service.extend({
           this.get('homeRegionItem'),
           { label: "My Groups", route: "authenticated.users.show.groups", segment: this.get('userSlug'), teaser: "Regions and writing groups", src: "/images/nav/groups.svg" },
           { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" },
-          { label: "Get Involved", url: "/come-write-in", segment: null, teaser: "Come Write In, MLs, & more", src: "/images/nav/comewritein.png" },
-          { label: "Our Values", url: "/dei", segment: null, teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }
+          { label: "Get Involved",route: 'pages' , segment: "come-write-in", teaser: "Come Write In, MLs, & more", src: "/images/nav/comewritein.png" },
+          { label: "Our Values", route: 'pages' , segment: "dei", teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }
 
         ]
       },
       {
         toggleLabel: "Writer's Resources",
         submenuItems: [
-          { label: "Now What?", url: "/now-what", segment: null, teaser: "Editing and publishing resources", src: "/images/nav/thought_bubble.svg" },
-          { label: "Camp NaNo", url: "/what-is-camp-nanowrimo", segment: null, teaser: "How to participate and more", src: "/images/nav/tent.svg" },
-          { label: "NaNo Prep", url: "/nano-prep-101", segment: null, teaser: "Get ready to write a novel", src: "/images/nav/thought_bubble.svg" },
-          { label: "Pep Talks", url: "/pep-talks", segment: null, teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg" },
-          { label: "Offers", url: "/offers", segment: null, teaser: "Discounts on writer tools", src: "/images/nav/present.svg" }
+          { label: "Now What?", route: 'pages', segment: "now-what", teaser: "Editing and publishing resources", src: "/images/nav/thought_bubble.svg" },
+          { label: "Camp NaNo", route: 'pages', segment: "what-is-camp-nanowrimo", teaser: "How to participate and more", src: "/images/nav/tent.svg" },
+          { label: "NaNo Prep", route: "pages", segment: "nano-prep-101", teaser: "Get ready to write a novel", src: "/images/nav/thought_bubble.svg" },
+          { label: "Pep Talks", route: "pages", segment: 'pep-talks', teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg" },
+          { label: "Offers", route: "pages", segment: "offers", teaser: "Discounts on writer tools", src: "/images/nav/present.svg" }
         ]
       }
     ];
@@ -81,8 +81,8 @@ export default Service.extend({
   }),
   helpLinks: computed(function () {
     let links = [
-      { label: "Brought to You By", url: "/brought-to-you-by", segment: null },
-      { label: "Help Desk", url: "https://nanowrimo.uservoice.com/" }
+      { label: "Brought to You By", route: "pages", segment: "brought-to-you-by" },
+      { label: "Help Desk", url: "https://nanowrimo.zendesk.com/" }
 
     ];
     return links;

@@ -3,7 +3,7 @@
   <div class="nw-card-actions nw-card-actions-right">
     <div class="nw-card-actions-adjacent">
       {{#if importable}}
-        <div class="nw-card-action-link" {{action 'confirmReimport'}}>+ Import data</div>
+        <button class="nw-card-action-link nw-button-undecorated" {{action 'confirmReimport'}}>+ Import data</button>
         {{confirmation-modal
           yes=reimportConfirmationYesText 
           no=reimportConfirmationNoText 
@@ -16,7 +16,7 @@
           }}
       {{/if}}
       {{#if projectChallenge.hasStarted}}
-      <div class="nw-card-action-link" {{action 'newProjectSession'}}>+ Add new update</div>
+      <button class="nw-card-action-link nw-button-undecorated" {{action 'newProjectSession'}}>+ Add new update</button>
       {{/if}}
     </div>
   </div>
@@ -30,7 +30,11 @@
   </div>
   <InfiniScroll class="nw-card-list-content" @scrolledToBottom={{action "fetchSessions"}}>
     <table class="nw-table-full-width">
-      <tr><th>Date</th><th>Count</th><th class="screen-reader-text">Actions</th></tr>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Count</th>
+        <th scope="col" class="screen-reader-text">Actions</th>
+      </tr>
    
     {{#each sortedUpdates as |ps|}}
       <ProgressUpdate

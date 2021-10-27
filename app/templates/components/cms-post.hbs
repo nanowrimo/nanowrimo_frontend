@@ -54,6 +54,9 @@
           {{#if (eq post.data.attributes.api-code "all_pep_talks")}}
             {{cms-pep-talks}}
           {{/if}}
+          {{#if (eq post.data.attributes.api-code "nanowrimo_hq_calendar")}}
+            {{dashboard-hq}}
+          {{/if}}
           {{#if (eq post.data.attributes.api-code "all_donors")}}
             {{all-donors}}
           {{/if}}
@@ -63,26 +66,36 @@
   </section>
 {{/if}}
 {{#if isDynamicSponsorOffer}}
-  <div class="container-fluid">
-    <div class="nw-panel">
-      <div class="nw-flex-6-cols">
-        {{cms-offer offer=post.data.attributes}}
-      </div>
+  <div class="content-gutters nw-stripes">
+    <div class="container-fluid">
+      <section class="general-content">
+        <div class="nw-container">
+          <div class="nw-wrapper">
+            <div class="nw-wrapper-content" style="padding: 20px; padding-top: 40px; padding-bottom: 40px;">
+              <div class="nw-panel">
+                <div class="nw-flex-6-cols">
+                  {{cms-offer offer=post.data.attributes}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 {{/if}}
 {{#if isGeneralContent}}
-<div class="content-gutters nw-stripes">
-  <div class="container-fluid">
-    <section class="general-content">
-      <div class="nw-container">
-        <div class="nw-wrapper">
-          <div class="nw-wrapper-content" style="padding: 20px; padding-top: 40px; padding-bottom: 40px;">
-            <div class="nw-copy">{{{post.data.attributes.body}}}</div>
+  <div class="content-gutters nw-stripes">
+    <div class="container-fluid">
+      <section class="general-content">
+        <div class="nw-container">
+          <div class="nw-wrapper">
+            <div class="nw-wrapper-content" style="padding: 20px; padding-top: 40px; padding-bottom: 40px;">
+              <div class="nw-copy">{{{post.data.attributes.body}}}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
 {{/if}}
