@@ -11,6 +11,19 @@ export default Component.extend({
   primaryDisplay: true,
   regions:null,
   
+  init() {
+    this._super(...arguments);
+
+    //load the regions
+    this.get('store').query('group', {
+      filter: {
+        group_type: 'region'
+      },
+    }).then(data=>{
+      this.set('regions',data);
+    });
+  },
+  
   _mapZoom: 3,
   mapZoom: computed('sortOption', function() {
     if (this.get('sortOption')=='name') {

@@ -13,7 +13,11 @@ export default Component.extend({
   streak: computed('pingService.updateCount', function() {
     const updateCount = this.get('pingService.updateCount');
     const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
-    return (pps && updateCount) ? pps.streak_days.toLocaleString() : 0;
+    if (pps) {
+      return (pps.streak_days && updateCount) ? pps.streak_days.toLocaleString() : 0;
+    } else {
+      return 0;
+    }
   }),
   
   // Hides the donut chart if no data
