@@ -4,15 +4,26 @@
     </div>
     <div class="banner-content">
       <div class="flash-image image-unframed">
-        <img src="/images/banners/wavinghand.svg" />
+        <a href="#" {{action "hubAction"}}>
+          <img src="/images/banners/nano-2021-donor-art.png" />
+          <div class="sr-only">Donate Today</div>
+        </a>
+        
       </div>
       <div class="flash-content">
         <div class="flash-text">
           <span>
-            <b>It's Double-Up Donation Weekend!</b>
-            <a href="double-up" style="color: #53b6f6;">Learn more</a> about how you can participate and support NaNoWriMo's nonprofit programs.
+            It's
+            <a href="donation-weekend-2" style="color: #53b6f6;">Double-Up Donation Weekend!</a> 
+            Donate $25 through November 1 to get the $50 thank-you goodies... 
+            plus an exclusive enamel pin and the chance to win amazing prizes.
           </span>
         </div>
+        <div class="flash-button">
+              <button {{action "hubAction"}}>
+                Donate today!
+              </button>
+            </div>
       </div>
     </div>
     <div class="banner-right">
