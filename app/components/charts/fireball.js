@@ -24,7 +24,7 @@ export default Component.extend({
   noData: computed('pingService.updateCount', function() {
     const updateCount = this.get('pingService.updateCount');
     const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
-    return !(pps && updateCount);
+    return !(pps && pps.streak_days && updateCount);
   }),
   
 });

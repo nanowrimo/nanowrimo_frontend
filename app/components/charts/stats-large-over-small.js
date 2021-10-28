@@ -83,7 +83,7 @@ export default Component.extend({
   streak: computed('pingService.updateCount', function() {
     const updateCount = this.get('pingService.updateCount');
     const pps = this.get('pingService').primaryProjectState(this.get('user.id'));
-    return (pps && updateCount) ? pps.streak_days.toLocaleString() : 0;
+    return (pps && pps.streak_days && updateCount) ? pps.streak_days.toLocaleString() : 0;
   }),
   
   // Returns true if showing streak data
