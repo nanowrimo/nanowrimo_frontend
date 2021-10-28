@@ -84,7 +84,7 @@ export default Component.extend({
     const selectedSortOption = this.get('selectedSortOption');
     for (let i=0; i<unsortedBuddies.length; i++) {
       pps = this.get('pingService').primaryProjectState(unsortedBuddies[i].id);
-      let sortNum = 0;
+      let sortNum = -1;
       if (pps) {
         switch (selectedSortOption) {
           case 'Overall Progress':
