@@ -94,7 +94,11 @@ export default Component.extend({
             sortNum = Math.min(Math.round((pps.daily_total/(pps.goal_total/pps.challenge_days))*100),100);
             break;
           case 'Writing Streak':
-            sortNum = pps.streak_days.toLocaleString();
+            if (pps.streak_days) {
+              sortNum = pps.streak_days.toLocaleString();
+            } else {
+              sortNum = 0;
+            }
             break;
           default:
             sortNum = 0;
