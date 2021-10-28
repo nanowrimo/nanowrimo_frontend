@@ -95,7 +95,7 @@ export default Component.extend({
             break;
           case 'Writing Streak':
             if (pps.streak_days) {
-              sortNum = pps.streak_days.toLocaleString();
+              sortNum = pps.streak_days;
             } else {
               sortNum = 0;
             }
