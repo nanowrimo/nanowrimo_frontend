@@ -1,5 +1,4 @@
 import Service from '@ember/service';
-import { debounce } from '@ember/runloop';
 import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
@@ -23,7 +22,6 @@ export default Service.extend({
   },
   
   checkForUpdates() {
-    console.log('checking');
     let t = this;
     let nva = this.get('currentUser.user.notificationsViewedAt');
     this.set('lastCheck',nva);
@@ -31,7 +29,7 @@ export default Service.extend({
       t.incrementRecomputeNotifications();
       
     });
-    debounce(this, this.checkForUpdates, 20000, false);
+    //debounce(this, this.checkForUpdates, 20000, false);
   },
   
   notificationClicked(notification){
@@ -78,35 +76,31 @@ export default Service.extend({
   },
   
   newNotificationsCount: computed('recomputeNotifications', function() {
-    const recomputeNotifications = this.get('recomputeNotifications');
+    var ns = this.store.peekAll('notification');
     var count = 0;
     var new_badge = false;
-    if (recomputeNotifications) {
-      console.log("new count");
-      var ns = this.store.peekAll('notification');
-      var lc = this.get('lastCheck');
-      // self will need to be referenced later
-      let _this=this;
-      // get the array of badge ids
-      let notifiedBadgeIds = this.get('notifiedBadgeIds');
-      ns.forEach(function(obj) {
-        if ((obj.displayAt>lc)&&(obj.displayStatus==1)) {
-          console.log ("notif update " + obj.actionType);
-          count += 1;
-          if (obj.actionType=="BADGE_AWARDED") {
-            //alert('badge added');
-            // is the badges id NOT in the notifiedBadgeIds array?
-            if (!notifiedBadgeIds.includes(obj.id)){
-              // the badge is new
-              new_badge = true;
-              // add the badge's id to the array
-              notifiedBadgeIds.push(obj.id);
-              _this.set('notifiedBadgeIds', notifiedBadgeIds);
-            }
+    var lc = this.get('lastCheck');
+    // self will need to be referenced later
+    let _this=this;
+    // get the array of badge ids
+    let notifiedBadgeIds = this.get('notifiedBadgeIds');
+    ns.forEach(function(obj) {
+      if ((obj.displayAt>lc)&&(obj.displayStatus==1)) {
+        count += 1;
+        if (obj.actionType=="BADGE_AWARDED") {
+          
+          // is the badges id NOT in the notifiedBadgeIds array?
+          if (!notifiedBadgeIds.includes(obj.id)){
+            // the badge is new
+            new_badge = true;
+            // add the badge's id to the array
+            notifiedBadgeIds.push(obj.id);
+            _this.set('notifiedBadgeIds', notifiedBadgeIds);
           }
         }
-      });
-    }
+      }
+    });
+
     
     if (new_badge) {
       this.get('badgesService').checkForUpdates();
