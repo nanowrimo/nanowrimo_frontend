@@ -9,6 +9,7 @@ export default Component.extend({
   router: service(),
   notificationsService: service(),
   pingService: service(),
+  badgesService: service(),
   media: service(),
   currentUser: service(),
   initialWinnerDisplayed: false,
@@ -38,6 +39,8 @@ export default Component.extend({
   sortedNotifications: sort('allNotifications','notificationSortingDesc'),
   
   newNotificationsCount: computed('pingService.notificationData', function() {
+    const badgesService = this.get('badgesService');
+    badgesService.checkForUpdates();
     return this.get('pingService.notificationData');
   }),
   
