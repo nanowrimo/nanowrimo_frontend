@@ -140,7 +140,7 @@ export default Component.extend({
   
   checkForMessages() {
     this.checkForUpdates();
-    this.set('tempDebounce',debounce(this, this.checkForMessages, 10000, false));
+    this.set('tempDebounce',debounce(this, this.checkForMessages, 15000, false));
   },
   actions: {
     afterNanomessageSubmit() {
