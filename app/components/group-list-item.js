@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { debounce, cancel } from '@ember/runloop';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
