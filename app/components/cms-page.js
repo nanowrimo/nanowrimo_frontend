@@ -6,7 +6,7 @@ export default Component.extend({
   
   // page is passed into the component
   page: null,
-    
+  
   // Returns the publication date as a readable string
   computeShowAfter: computed(function() {
     return moment(this.get('page.data.attributes.show-after')).format("MMMM D, YYYY");

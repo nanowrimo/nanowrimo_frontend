@@ -3,6 +3,36 @@ import { get,computed } from '@ember/object';
 import moment from 'moment';
 
 export default ChartBaseComponent.extend({
+  chartType: null,
+  
+  init() {
+    this._super(...arguments);
+    this.set('chartType', 'line');
+  },
+  
+  tableSelected: computed("chartType", function(){
+    return this.get('chartType')=="table";
+  }),
+  lineChartSelected: computed("chartType", function(){
+    return this.get('chartType')=="line";
+  }),
+  barChartSelected: computed("chartType", function(){
+    return this.get('chartType')=="bar";
+  }),
+  
+  
+  tableRows: computed("successData.[]", "userDailyTotals.[]", function(){
+    let responseData = []
+    // get the data 
+    let success = this.get('successData');
+    let totals = this.get('userDailyTotals');
+    let dates = this.get('projectChallenge.datesShortMonthDayFormat');
+    // loop through the dates 
+    for (var i = 0; i < dates.length; i++) {
+      responseData.pushObject({"date": dates[i], "success": success[i], "total": totals[i]});
+    }
+    return responseData;
+  }),
   
   successData: computed('projectChallenge', function() {
     let pc = this.get('projectChallenge');
@@ -22,7 +52,8 @@ export default ChartBaseComponent.extend({
       {
         name: 'My count',
         type: get(this,'myChartType'),
-        color: '#2f3061',
+        //color: '#659dae',
+        color: '#558d9e',
         data: this.get('userDailyTotals')
       }
     ];
@@ -58,13 +89,20 @@ export default ChartBaseComponent.extend({
     return cData;
   }),
 
-  myChartType: computed('primaryDisplay',function() {
-    if (get(this,'primaryDisplay')) {
-      return 'spline';
-    } else {
-      return 'column';
+  myChartType: computed('chartType',function() {
+    switch (this.get('chartType') ){
+      case 'table':   
+        return '';
+      case "line": 
+        return "spline";
+      case "bar": 
+        return "column";
     }
   }),
+  chartId: computed('chartType', function() {
+    return `pane-${this.get('chartType')}-chart`;
+  }),
+  
   chartOptions: computed('projectChallenge', function() {
     // Set _this equal to component for later reference
     // let _this = this;
@@ -83,7 +121,8 @@ export default ChartBaseComponent.extend({
         labels: {
           style: {
             color: '#979797',
-            fontSize: 13,
+            fontSize: 14,
+            fontWeight: "bold",
           }
         }
       },
@@ -91,14 +130,19 @@ export default ChartBaseComponent.extend({
         title: null,
         endOnTick: false,
         gridLineWidth: 2,
+        gridLineColor: '#939393',
         labels: {
           style: {
-            color: '#b8b8b8',
-            fontSize: 11
+            color: '#979797',
+            fontSize: 14,
+            fontWeight: "bold"
           }
         }
       },
       plotOptions: {
+        series: {
+          color: '#959595'
+        },
           spline: {
             marker: {
               enable: false
@@ -123,6 +167,7 @@ export default ChartBaseComponent.extend({
         borderColor: '#d5e2e6',
         borderRadius: 6,
         style: {
+          //color: '#73ab9b'
           color: '#73ab9b'
         }
       },
@@ -169,4 +214,9 @@ export default ChartBaseComponent.extend({
       return [];
     }
   }),
+    actions: {
+    setChartType: function(val){
+      this.set('chartType', val);
+    }
+  }
 });

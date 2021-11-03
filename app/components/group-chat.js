@@ -12,6 +12,7 @@ export default Component.extend({
   group: null,
   context: null,
   sortOptions: null,
+  notFixed: false,
   //sortedMessages: sort('nanomessages', 'selectedSortOption'),
   nanomessage: null,
   selectedSortOption: null,
@@ -19,6 +20,7 @@ export default Component.extend({
   recompute: 0,
   messages: null,
   tempDebounce: null,
+  messagesLoaded: false,
   adminIsChecked: computed('context',function() {
     let c = this.get("context");
     return (c=='nanomessages');
@@ -26,11 +28,18 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    let options = ['createdAt:asc'];
-    this.set('sortOptions', options);
-    this.set('selectedSortOption', [options[0]]);
-    //debounce(this, this.gotoBottom, 1000, false);
-    this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
+    let g = this.get('group');
+    if (this.get('notFixed')) {
+      this.set('classNames', ['nw-card nanomessages-card not-fixed']);
+    }
+    if (g) {
+      let options = ['createdAt:asc'];
+      this.set('sortOptions', options);
+      this.set('selectedSortOption', [options[0]]);
+      this.set('tempDebounce',debounce(this, this.checkForMessages, 1000, false));
+    } else {
+      this.set('classNames', ['nw-card nanomessages-card hide-mobile']);
+    }
   },
 
   userIsAdmin: computed('currentUser.user.isLoaded',function() {
@@ -53,7 +62,7 @@ export default Component.extend({
     cancel(td);
   },
   
-  filteredMessages: computed('messages.[]','group.id','context',function() {
+  filteredMessages: computed('messages.[]','group.groupType','context',function() {
     let ms = this.get("messages");
     let c = this.get("context");
     let t = this.get('group.groupType');
@@ -75,7 +84,7 @@ export default Component.extend({
     }
     return newms;
   }),
-  messageSortingDesc: Object.freeze(['createdAt:desc']),
+  messageSortingDesc: Object.freeze(['createdAt:asc']),
   sortedMessages: sort('filteredMessages','messageSortingDesc'),
   
   showToDiv: computed('group.groupType', function() {
@@ -90,20 +99,24 @@ export default Component.extend({
   
   groupName: computed('group', function() {
     let g = this.get('group');
-    let gt = g.get('groupType');
-    let gn = g.get('name');
-    if (gt=='buddies') {
-      let store = this.get('store');
-      let id = this.get('currentUser.user.id');
-      let gus = g.get('groupUsers');
-      gus.forEach(function(gu) {
-        if (gu.user_id) {
-          let u = store.peekRecord('user', gu.user_id);
-          if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
-            gn = u.name;
+    let gn = null;
+    if (g) {
+      let gt = g.get('groupType');
+      gn = g.get('name');
+      if (gt=='buddies') {
+        let store = this.get('store');
+        let id = this.get('currentUser.user.id');
+        let gus = g.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
+              gn = "@" + u.name;
+            }
           }
-        }
-      });
+        });
+      }
+      this.checkForMessages();
     }
     return gn;
   }),
@@ -111,22 +124,18 @@ export default Component.extend({
   doShowForm() {
     this.set('showForm',true);
   },
-  /*gotoBottom(){
-    var objDiv = document.getElementById("convo-content");
-    if (objDiv) {
-      objDiv.scrollTop = objDiv.scrollHeight;
-    }
-  },*/
   checkForUpdates() {
     let g = this.get('group');
-    let gid = g.id;
-    let t = this;
-    
-    this.get('store').query('nanomessage', {
-      group_id: gid
-    }).then(function(ms) {
-      t.set("messages",ms);
-    });
+    if (g) {
+      let gid = g.id;
+      let t = this;
+      this.set('messagesLoaded',true);
+      this.get('store').query('nanomessage', {
+        group_id: gid
+      }).then(function(ms) {
+        t.set("messages",ms);
+      });
+    }
   },
   
   checkForMessages() {
@@ -137,9 +146,13 @@ export default Component.extend({
     afterNanomessageSubmit() {
       this.checkForUpdates();
       this.set('showForm',false);
-      debounce(this, this.doShowForm, 0, false);
-      //debounce(this, this.gotoBottom, 500, false);
+      //debounce(this, this.doShowForm, 0, false);
     },
+    
+    doClearGroup() {
+      this.clearGroup();
+    },
+    
   }
   
 });

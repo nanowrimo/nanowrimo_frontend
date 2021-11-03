@@ -155,6 +155,9 @@ export default Component.extend({
       
       //set the 'count' to zero
       this.set('countValue', 0);
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "submit a progress update");
     },
     
     // Session actions
@@ -196,12 +199,13 @@ export default Component.extend({
     },
 
     formSubmit() {
+      event.preventDefault();
+      event.preventDefault();
       // Get the current user's time zone
       let tz = this.get('currentUser.user.timeZone');
       
       //determine what 'count' we need to send to the API
-      let count = parseInt( this.get('countValue'));
-      
+      let count = this.get('countValue');
       //what project are we actually dealing with?
       let project = this.get('project');
       let projectChallenge = this.get('projectChallenge');
@@ -213,7 +217,7 @@ export default Component.extend({
       session.set('unitType', 0);
       
       //check for other metrics
-      session.set('feeling', this.get('selectedFeeling'));
+      session.set('feeling', event.target.elements['feeling'].value);
       if (this.get('selectedWhere') ) {
         session.set('where', this.get('selectedWhere').value);
       }
@@ -247,7 +251,7 @@ export default Component.extend({
       session.save();
       
       this.set('open', false);
-      return true;
+      return false;
     },
     hideForms: function() {
       this.set('open', false);

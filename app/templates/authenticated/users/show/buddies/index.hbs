@@ -1,38 +1,4 @@
+{{page-title "Buddies"}}
 <div class="nw-panel-primary-container">
-  <div class='buddy-listings'>
-    <div>
-      {{#each user.buddiesInvited as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
-      {{/each}}
-    </div>
-    <div>
-      {{#each user.buddiesInvitedBy as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
-      {{/each}}
-    </div>
-  </div>
-  <div class='buddy-listings'>
-    <div>
-      {{#each user.buddiesActive as |buddy|}}
-        {{buddy-listing user=buddy buttons=true}}
-      {{/each}}
-      <div class="nw-card nw-prompt-card">
-        <div class='nw-hflex'>
-          <div class="project-announce-quote">
-            <div class="quote-text">"One loyal friend is worth ten thousand relatives."<br />
-              <span class="quotee">Euripides</span>
-            </div>
-          </div>
-          <div class='action'>
-            {{#link-to "authenticated.search"}}
-              Find buddies!
-            {{/link-to}}
-          </div>
-          <div class='prompt-image'>
-            <img src="/images/cards/handsclapping.svg">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  {{buddies/buddy-list user=user showRequests=showRequests showTools=true}}
 </div>

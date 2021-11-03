@@ -1,15 +1,16 @@
 {{#if renderSmall}}
-  <img src="{{badgeImageUrl}}" {{action "toggleBadge"}} class="{{clickableClass}}" />
-  {{#bs-tooltip class="nw-tooltip" delayHide="0"}}
-    <div class="nw-tooltip-title">{{badge.title}}</div>
-    <div class="nw-tooltip-content">{{badgeDescription}}</div>
-    <div class="nw-tooltip-date">{{badgeNote}}</div>
-  {{/bs-tooltip}}
+<img alt="{{badgeAltText}}" src="{{badgeImageUrl}}" {{action "toggleBadge"}} class="{{clickableClass}}" tabindex=0/>
+{{#bs-tooltip class="nw-tooltip" delayHide="0"}}
+<div class="nw-tooltip-title">{{badge.title}}</div>
+<div class="nw-tooltip-content">{{badgeDescription}}</div>
+<div class="nw-tooltip-date">{{badgeNote}}</div>
+{{/bs-tooltip}}
 {{else}}
-  <div class="nw-card-icon badge-large"><img src="{{badgeImageUrl}}" {{action "toggleBadge"}} class="{{clickableClass}}"/></div>
-  <div>
-    <div class="max-color">{{badge.title.title}}</div>
-    <div>{{badgeDescription}}</div>
-    <div class="note-text badge-specific-note-text">{{badgeNote}}</div>
-  </div>
+<div class="nw-card-icon badge-large"><img src="{{badgeImageUrl}}" alt="{{badgeAltText}}" {{action "toggleBadge"}}
+    class="{{clickableClass}}" /></div>
+<div>
+  <div class="max-color">{{badge.title.title}}</div>
+  <div>{{badgeDescription}}</div>
+  <div class="note-text badge-specific-note-text">{{badgeNote}}</div>
+</div>
 {{/if}}

@@ -12,6 +12,7 @@ const Challenge = Model.extend({
   winAllowedAt: attr('string'),
   eventType: attr('number'),
   userId: attr('number'),
+  winnerLink: attr('string'),
   //eventType is defined in the api as:
   // 0 = NaNoWriMo
   // 1 = Camp
@@ -37,6 +38,11 @@ const Challenge = Model.extend({
   isNaNoOrCampEvent: computed('eventType', function(){
     let type = this.get('eventType');
     return (type === 0 || type === 1 );
+  }),
+  
+  isNaNoEvent: computed('eventType', function(){
+    let type = this.get('eventType');
+    return (type === 0);
   }),
   
   duration: computed("startsAt", "endsAt", function(){

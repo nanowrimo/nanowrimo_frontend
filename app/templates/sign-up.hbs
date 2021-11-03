@@ -1,3 +1,4 @@
+{{page-title "Sign Up"}}
 <div class="nano-centered">
   <div>
     <div class="nw-login-image"><img src="/images/other/login_image.svg" alt="" /></div>
@@ -64,7 +65,14 @@
             </select>
           </div>
           
-          <button type="submit" class="full-width nano-button-large">
+          <div class="form-group inline-checkbox">
+            <input type='checkbox' id="have-read-terms-and-privacy" class="form-control ember-checkbox" onClick={{action "termsClicked" value="target.checked"}}>
+            <label for="have-read-terms-and-privacy" class="checkbox-label">  
+              I have read and agree to the <a href="/terms-and-conditions">Terms and Conditions</a> and <a href="/privacy-policy">Privacy Policy</a>.
+            </label>
+          </div>
+          
+          <button type="submit" class="full-width nano-button-large" disabled={{submitDisabled}}>
             {{#if isSubmitting}}
               Signing Up
               <img class='spinner' src="/images/spinner.svg">
@@ -78,7 +86,7 @@
 
         <div class="left-right-links">{{link-to "Forgot password" 'forgot-password' bubble=false}}{{link-to "I have an account" 'sign-in' bubble=false}}</div>
         <div class="nano-hr">OR</div>
-        {{continue-with}}
+        {{continue-with submitDisabled=submitDisabled}}
         <div class="nano-hr">TERMS</div>
         <div class="left-right-links"><div>By signing up for NaNoWriMo, you agree to our Terms of Use and Privacy Policy.</div></div>
       </div>

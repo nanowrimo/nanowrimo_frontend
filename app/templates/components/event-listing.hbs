@@ -13,7 +13,7 @@
     </div>
   </div>
   <div>
-  {{#if currentUser.user.groupUsersLoaded}}
+  {{#if currentUser.isLoaded}}
     {{#if (eq status 'upcoming')}}
       {{#if isEnrolled}}
         <b><i class="fa fa-check"></i> You're signed up!</b>

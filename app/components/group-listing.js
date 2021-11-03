@@ -6,7 +6,9 @@ export default Component.extend({
   store: service(),
   currentUser: service(),
   group: null,
-
+  isCurrentUser: false,
+  classNames: ['nw-flex-center','nw-user-card','nw-drop-shadow'],
+  
   // Returns the group users in the store
   invitationAccepted: computed('groupUser',function() {
     let gu = this.get('groupUser');

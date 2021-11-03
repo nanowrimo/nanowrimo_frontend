@@ -16,7 +16,7 @@ export default Component.extend({
   tagName: '',
 
   store: service(),
-
+  nameError:null,
   tab: null,
   open: null,
   user: null,
@@ -130,6 +130,12 @@ export default Component.extend({
   
   /* actions */
   actions: {
+    onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "edit your profile");
+    },
+    
     onHidden() {
       this.get('user').rollbackExternalLinks();
       let callback = this.get('onHidden');
@@ -141,12 +147,6 @@ export default Component.extend({
     },
     statsSelect1Changed(val) {
       this.set('stat1', val);
-    },
-    statsSelect2Changed(val) {
-      this.set('stat2', val);
-    },
-    statsSelect3Changed(val) {
-      this.set('stat3', val);
     },
     
     updateChangeset() {
@@ -162,14 +162,6 @@ export default Component.extend({
       let s1 = this.get('stat1');
       if (s1) {
         cs.set(s1, true);
-      }
-      let s2 = this.get('stat2');
-      if (s2) {
-        cs.set(s2, true);
-      }
-      let s3 = this.get('stat3');
-      if (s3) {
-        cs.set(s3, true);
       }
     },
     
@@ -191,6 +183,14 @@ export default Component.extend({
 
     deleteBook(book) {
       book.deleteRecord();
+    },
+    handleSubmitErrors(errorData) {
+      errorData.errors.forEach(error=>{
+        // is this a BAD-NAME error?
+        if (error.title=="BAD-NAME") {
+          this.set('nameError', error.detail);
+        }        
+      });
     }
   },
   /* component methods */

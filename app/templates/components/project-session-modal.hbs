@@ -6,43 +6,21 @@
   {{#modal.header closeButton=false}}
       New Progress Update
   {{/modal.header}}
+  <form  onSubmit={{action 'formSubmit'}}>
   {{#modal.body}}
     <div class="nw-no-blue" id="progress-update-form">
       <div class='tab-content'>
         <div style="margin-bottom: 20px;">Please do not update with your word-count total; enter only the words you wrote for this writing session.</div>
         <div class='form-group' style="display: flex; justify-content: center; align-items: center; align-self: center;">
           <div style="flex: 0 0 120px; margin-right: 10px;">
-            {{input type='number' name='count' value=countValue class='form-control progress-update-input'}}
+            {{input type='number' name='count' min=0 value=countValue class='form-control progress-update-input'}}
           </div>
           <div>
             words this session
           </div>
         </div>
-        <fieldset>
-          
-          <div class="project-emoji-list" style="justify-content: center; align-items: center;">
-            <input id='feeling5' type='radio' value='Felt great' name='feeling' {{action "changeFeeling" 5}}/>
-            <label for='feeling5' >
-              <div class="project-emoji emoji-5 {{if feeling5Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling4' type='radio' value='Felt pretty good' name='feeling' {{action "changeFeeling" 4 }}/>
-            <label for='feeling4' >
-              <div class="project-emoji emoji-4 {{if feeling4Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling3' type='radio' value='Felt just OK' name='feeling' {{action "changeFeeling" 3 }}/>
-            <label for='feeling3' >
-              <div class="project-emoji emoji-3 {{if feeling3Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling2' type='radio' value='Felt stressed' name='feeling' {{action "changeFeeling" 2 }}/>
-            <label for='feeling2' >
-              <div class="project-emoji emoji-2 {{if feeling2Selected 'selected' ''}}"></div>
-            </label>
-            <input id='feeling1' type='radio' value='Felt upset' name='feeling' {{action "changeFeeling" 1 }}/>
-            <label for='feeling1' >
-              <div class="project-emoji emoji-1 {{if feeling1Selected 'selected' ''}}"></div>
-            </label>
-          </div>
-        </fieldset>
+       
+       <NwSessionFeelingFieldset />
  
         <div class="form-group side-by-side">
           <div>
@@ -121,9 +99,9 @@
 
   {{#modal.footer}}
 
-    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Progress' {{action "formSubmit"}}/>
+    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Progress'/>
     <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
 
   {{/modal.footer}}
-
+  </form>
 {{/bs-modal}}

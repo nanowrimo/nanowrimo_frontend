@@ -1,3 +1,4 @@
+{{page-title "Regions"}}
 <div class='plate-wrapper {{if canEditGroup "user-editable" ""}}' {{action "openEditModal" "headerTab" bubbles=false}}>
   <div class="nano-user-plate full-width" style={{plateStyle}}>
     <div class="plate-cover">
@@ -8,7 +9,7 @@
 
     </div>
   </div>
-  <div class='plate-editable-overlay nw-image-editable-overlay'>{{fa-icon "edit"}}</div>
+  <div class='plate-editable-overlay nw-image-editable-overlay'>{{group-edit-button group=group buttonType="icon"}}</div>
 </div>
 <div class="content-gutters">
   <div class="container-fluid align-top">
@@ -34,7 +35,9 @@
     </div>
     <div class="nw-panel right-resize nw-with-tabs">
       <ul class="nw-panel-tabs">
-        <li>{{link-to 'Overview' 'authenticated.regions.show.index'}}</li>
+        {{#if chatEnabled}}
+          <li>{{link-to 'Overview' 'authenticated.regions.show.index'}}</li>
+        {{/if}}
         <li>{{link-to 'Events' 'authenticated.regions.show.events.upcoming'}}</li>
         {{#if canEditGroup}}
           <li>{{link-to 'Admin' 'authenticated.regions.show.admin'}}</li>

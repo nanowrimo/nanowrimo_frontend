@@ -29,7 +29,7 @@ module.exports = function(environment) {
     },
     emberTracker: {
         analyticsSettings: {
-            trackingId: 'UA-635901-1',
+            trackingId: 'G-Q3XHKESGGR',
         },
     },
     
@@ -143,7 +143,7 @@ module.exports = function(environment) {
   }
 
   //is this a staging target?
-  if (process.env.TARGET=='staging') {
+  if (process.env.TARGET=='staging' || environment==="dev-with-staging-api") {
     ENV.APP.API_HOST = 'https://staging.api.nanowrimo.org';
     ENV.torii.providers['custom-google'].redirectUri = 'https://staging.nanowrimo.org/oauth2callback';
     ENV.forumsUrl = "https://staging.forums.nanowrimo.org";

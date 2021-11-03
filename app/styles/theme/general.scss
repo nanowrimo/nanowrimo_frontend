@@ -8,7 +8,7 @@ html {
 body {
   min-height: 100%;
   background-color: $nw-lightblue;
-  font-family: 'SourceSansPro-Regular', sans-serif;
+  font-family: 'SansRegular', sans-serif;
   font-size: 14px;
   color: $nw-darkgrey;
   line-height: 1.4;
@@ -22,6 +22,9 @@ body.full-screen > .ember-view {
 }
 main {
   margin-top: 90px;
+  &.unverified {
+    margin-top: 160px;
+  }
   @media (max-width: $screen-lg) {
     margin-top: 42px;
   }
@@ -175,7 +178,7 @@ button.btn {
   margin-top: 4px;
   margin-bottom: 4px;
   border-radius: 6px;
-  background-image: linear-gradient(to bottom, $nw-mediumgreen, $nw-darkgreen);
+  background-image: linear-gradient(to bottom, $nw-darkgreen, $nw-mediumgreen);
   border: solid 1px $nw-darkgreen;
   color: $nw-lightblue;
   font-size: 16px;
@@ -194,7 +197,7 @@ button.btn {
 }
 .password-reveal-container {
   position: relative;
-  a.password-reveal {
+  .password-reveal {
     display: flex;
     cursor: pointer;
     background-image: none;
@@ -212,6 +215,10 @@ button.btn {
     align-content: center;
     &:hover {
       color: $nw-mediumblue;
+    }
+    &:focus {
+      border: 3px solid $nw-mediumblue;
+      color: black;
     }
     &.is-invalid {
       bottom: 24px;
@@ -260,9 +267,9 @@ button.btn {
 // ----------------------------------
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  list-style-type: disc;
+  // margin: 0;
+  // padding: 0;
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
 }
@@ -319,18 +326,6 @@ ul {
   height: 100%;
   border-radius: 6px;
 }
-// ---------------
-// Congratulations
-// ---------------
-.congratulations {
-  width: 400px;
-  height: 120px;
-  font-family: "SerifSemiBold", serif;
-  font-size: 40px;
-  text {
-    fill: #ffe680;
-  }
-}
 .nw-title {
   font-family: 'SerifRegular', serif ;
   font-size: 24px;
@@ -361,4 +356,14 @@ a.nw-grey-link {
 }
 .fa-trash {
   cursor: pointer;
+}
+.fa-bullhorn {
+  font-size: 60px;
+}
+
+#application-loading-indicator {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  text-align: center;
 }

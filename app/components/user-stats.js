@@ -1,10 +1,10 @@
 import Component from '@ember/component';
 import { computed }  from '@ember/object';
-import { alias }  from '@ember/object/computed';
-
+import { inject as service } from '@ember/service';
 export default Component.extend({
   tagName: '',
-  user: alias('author'),
+  media: service(),
+  //user: alias('author'),
   
   didReceiveAttrs() {
     //refresh the user stats
@@ -17,11 +17,21 @@ export default Component.extend({
   }),
   
   yearsDoneCount: computed('user.stats.yearsDone.[]', function() {
-    let stats = this.get('user.stats');
-    if (stats) {
-      return this.get('user.stats.yearsDone').length;
+    let statsYearsDone = this.get('user.stats.yearsDone');
+    if (statsYearsDone) {  
+      return statsYearsDone.length;
     } else {
       return 0;
     }
+  }), 
+  
+  totalWordCount: computed('user.stats.totalWordCount', function(){
+    let twc = this.get('user.stats.totalWordCount');
+    return (twc) ? twc : 0;
+  }),
+  
+  wordiest: computed('user.stats.wordiest', function(){
+    let wordy = this.get('user.stats.wordiest');
+    return (wordy) ? wordy : 0;
   })
 });

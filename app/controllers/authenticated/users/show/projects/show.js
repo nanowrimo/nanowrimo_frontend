@@ -32,7 +32,7 @@ export default Controller.extend({
     editProject() {
       if(this.get('canEdit')){
         this.set('displayEditModal', true);
-        this.set('editTab', 'overview');
+        this.set('editTab', 'details');
         
       }
     },
@@ -51,7 +51,7 @@ export default Controller.extend({
     editCover() {
       if(this.get('canEdit')) {
         this.set('displayEditModal', true);
-        this.set('editTab', 'coverTab');
+        this.set('editTab', 'cover');
       }
     },
   },

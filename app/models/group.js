@@ -25,6 +25,9 @@ const Group = Model.extend({
   description: attr('string'),
   url: attr('string'),
   forumLink: attr('string'),
+  latestMessage: attr('string'),
+  latestMessageDt: attr('string'),
+  
   
   
   // Members

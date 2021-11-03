@@ -9,6 +9,13 @@
       opacity: .7;
     }
   }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
   .nw-footer {
     padding-left: 15px;
     padding-right: 15px;
@@ -30,6 +37,7 @@
       grid-row: 2;
       font-size: 12px;
       display: flex;
+      flex-wrap: wrap;
     }
   }
   @media (max-width: $screen-sm-max) {
@@ -50,6 +58,7 @@
   margin-top: 12px;
   margin-bottom: 12px;
   font-family: 'SansBold', sans-serif;
+  font-size: 14px;
   text-transform: uppercase;
   line-height: 16px;
   a { margin-right: 15px; }
@@ -60,8 +69,14 @@
   a { text-decoration: underline; }
 }
 .nw-footer-funder-logos {
-  flex: 0 0 550px;
+  flex: 1 1 40%; 
+  text-align: center;
   img {
     margin-right: 35px;
+    margin-bottom: 15px;
   }
+}
+
+.nw-footer-copyright {
+  flex: 1 1 50%;
 }

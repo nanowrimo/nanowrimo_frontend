@@ -67,6 +67,9 @@ pre {
 
 a {
   background-color: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*word-break: break-all;*/
 }
 
 /**

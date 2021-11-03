@@ -2,33 +2,25 @@
   <div class='nw-card-header nw-card-header-no-height'>
     <div class='nw-card-actions'>
       {{#if canEdit}}
-        <a href="#" {{action "editProject"}}>
-          <i class="fa fa-gear"></i>
-        </a>
+      <a href="Edit project" {{action "editProject" }} aria-label="Make changes to project">
+        <i class="fa fa-gear" aria-label="Make changes to project"></i>
+      </a>
       {{/if}}
     </div>
   </div>
   <div class="nw-card-content no-padding">
     <div class="nw-project-container">
       <div class="nw-project">
-        <div class='nw-project-cover' >
-          <div class='nw-project-cover-clip {{if canEdit "user-editable" ""}}'>
-            <img src="{{project.coverUrl}}">
-            <div class="nw-listing-cover-overlay nw-image-editable-overlay" {{action (if canEdit "openCoverModal" 'doNothing')}}>{{fa-icon 'edit'}}</div>
+        <div class='nw-project-cover'>
+          <div class='nw-project-cover-clip'>
+            <img src="{{project.coverUrl}}" alt="">
           </div>
-          {{project-edit-cover-modal
-            onHidden=(action "afterCoverModalClose")
-            open=editCover
-            project=project
-            tab=editCoverTab
-          }}
-        
         </div>
         <div class='nw-project-name-genres'>
           <div class='nw-title'>
-          {{#link-to 'authenticated.users.show.projects.show' project.computedAuthor.slug project.slug}}
+            {{#link-to 'authenticated.users.show.projects.show' project.computedAuthor.slug project.slug}}
             {{project.title}}
-          {{/link-to}}
+            {{/link-to}}
           </div>
           <div class='nw-project-genres'>
             {{project.concatGenres}}
@@ -38,32 +30,34 @@
       <div class="nw-project-progress">
         {{#if project.futureProjectChallenge }}
         {{else}}
-          {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params addGoal="true") }}
-            <button class='nano-button-small'>Create a New Goal</button>
-          {{/link-to}}
-          {{#if project.hasProjectChallenges}}
-            <hr />
-          {{/if}}
+        {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params
+        addGoal="true") }}
+        <button class='nano-button-small'>Create a New Goal</button>
+        {{/link-to}}
+        {{#if project.hasProjectChallenges}}
+        <hr />
         {{/if}}
-        {{#if project.hasProjectChallenges}} 
-          {{project-list-progress project=project}}
+        {{/if}}
+        {{#if project.hasProjectChallenges}}
+        {{project-list-progress project=project}}
         {{/if}}
       </div>
     </div>
     <div class='nw-card-flippy-doodle'>
-      <img src="{{project.flippyDoodlePath}}">
+      <img src="{{project.flippyDoodlePath}}" alt="Status: {{project.status}}">
     </div>
     {{project-edit-modal project=project open=editProject}}
     {{confirmation-modal
-      doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
-      yes=deleteConfirmationYesText 
-      no=deleteConfirmationNoText 
-      title=deleteConfirmationTitleText
-      question=deleteConfirmationQuestion
-      questionAddendum = "Deleting this writing project will also delete all associated goals and writing progress. A warning: project deletion can't be undone. NaNoWriMo has no way of retrieving deleted projects."
-      open=showConfirmDelete
-      yesAction=(action "deleteConfirmationYes")
-      noAction=(action "deleteConfirmationNo")
-      }}
+    doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
+    yes=deleteConfirmationYesText
+    no=deleteConfirmationNoText
+    title=deleteConfirmationTitleText
+    question=deleteConfirmationQuestion
+    questionAddendum = "Deleting this writing project will also delete all associated goals and writing progress. A
+    warning: project deletion can't be undone. NaNoWriMo has no way of retrieving deleted projects."
+    open=showConfirmDelete
+    yesAction=(action "deleteConfirmationYes")
+    noAction=(action "deleteConfirmationNo")
+    }}
   </div>
 </div>

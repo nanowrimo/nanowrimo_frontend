@@ -1,16 +1,26 @@
 .nano-side-menu-toggle {
-  cursor: pointer;
+  button {
+    font-size: 28px !important;
+    &.menu-close {
+      color: white; 
+      &:focus {
+        border: 1px solid white !important;
+        border-radius: 5px !important;
+      }  
+    }
+    &.menu-open {
+      color: $nw-mediumgreen;;
+    } 
+     
+  }
 }
+
 .nano-side-menu {
   position: fixed;
   right: -285px;
-  overflow: scroll;
-  -webkit-transition-property: right;
-  -webkit-transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease-in-out;
-  transition-property: right;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-in-out;
+  overflow: auto;
+  visibility: hidden;
+  transition: right 400ms ease-in-out, visibility 500ms;
   z-index: 1000;
   width: 285px;
   height: 100%;
@@ -23,20 +33,23 @@
   letter-spacing: normal;
   text-align: left;
   color: $nw-lightblue;
-  padding: 28px;
+  padding: 28px; 
   padding-top: 14px;
+  ul {
+    padding: 0px;
+  }
   a {
     color: $nw-lightblue;
   }
   .nano-side-menu-toggle {
     position: absolute;
-    width: 40px;
     height: 40px;
     top: 0px;
-    right: -10px;
+    right: 10px;
     font-size: 26px;
   }
   li {
+    list-style-type: none;
     line-height: 29px;
     margin-top: 13px;
     margin-bottom: 13px;
@@ -53,6 +66,7 @@
       }
     }
     ul {
+      list-style-type: none;
       -webkit-transition-property: max-height;
       -webkit-transition-duration: 0.5s;
       -webkit-transition-timing-function: ease-in-out;
@@ -62,6 +76,7 @@
       max-height: 0px;
       overflow: hidden;
       padding-left: 12px;
+      
     }
     .nano-side-menu-submenu-toggle {
       cursor: pointer;
@@ -84,5 +99,18 @@
     background-color: $nw-lightgreyblue;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+  .nw-search {
+    width: 210px;
+    .nw-search-field {
+      .nw-search-button {
+        top: 0px;
+      }
+    }
+  }
+  .nano-avatar-small {
+    img {
+      width:230px;
+    }
   }
 }

@@ -1,0 +1,31 @@
+<div class='nw-card-primary nw-flex-center' style="flex-direction: column;">
+  <div class='nw-flex-center'>
+    <div style="flex: 56px;">
+      {{user-avatar user=buddy linkTo=true size='50'}}
+    </div>
+    {{#if isActive}}
+      {{buddies/buddy-buttons user=buddy displayTiny=true}}
+    {{/if}}
+  </div>
+  <div style="width: 100%; padding-top: 10px;">
+    <div class="nw-user-name">
+      {{#link-to 'authenticated.users.show' buddy.slug}}
+        {{buddy.name}}
+      {{/link-to}}
+    </div>
+    {{#if isActive}}
+      <div class="nw-project-name">
+        {{displayTitle}}
+      </div>
+    {{/if}}
+  </div>
+</div>
+{{#if isActive}}
+  <div class="nw-flex-center nw-card-secondary">
+    {{charts/goal-progress-summary user=buddy eventType=eventType showData=showData}}
+  </div>
+{{else}}
+  <div class='user-buttons nw-card-secondary'>
+    {{buddies/buddy-buttons user=buddy}}
+  </div>
+{{/if}}

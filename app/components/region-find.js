@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
 import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { debounce } from '@ember/runloop';
 
@@ -9,11 +8,20 @@ export default Component.extend({
   currentUser: service(),
   store: service(),
   pageLoaded: false,  
-  regions: alias('model'),
   primaryDisplay: true,
+  regions:null,
   
   init() {
     this._super(...arguments);
+
+    //load the regions
+    this.get('store').query('group', {
+      filter: {
+        group_type: 'region'
+      },
+    }).then(data=>{
+      this.set('regions',data);
+    });
   },
   
   _mapZoom: 3,
@@ -74,6 +82,15 @@ export default Component.extend({
       return 'nano-show';
     }
   }),
+  searchByNameSelected: computed('primaryDisplay', function() {
+    return this.get('primaryDisplay');
+  }),
+  
+  searchByLocationSelected: computed('primaryDisplay', function() {
+    return !this.get('primaryDisplay');
+  }),
+  
+  
   geoObject: null,
   userLocation: null,
   searchString: '',
@@ -294,6 +311,9 @@ export default Component.extend({
     },*/
     searchStringChange: function() {
       debounce(this, this.updateSearch, 250, false);
+    },
+    setPrimaryDisplay: function(val){
+      this.set('primaryDisplay', val);
     }
   },
   _setSortOption: function(value){

@@ -1,19 +1,22 @@
 {{#ember-wormhole to="ember-bootstrap-wormhole"}}
-  <object data='/images/splash/confetti.svg' style="height: 100%; width: 100%; position: absolute; left: 0; top: 0; z-index: 4000; background-color: rgba(52, 52, 52, 0.94);" />
-  <div class='nw-splash nw-badge-splash '>
-    <div class="nw-vflex">
-      {{svg-congratulations}}
-      <div class='unlocked'>You unlocked a badge</div>
-      <div class='badge-image'>
-        <img src='{{badge.awarded}}' title='{{badge.title}}'>
+  <div class='nw-splash nw-winner-splash'>
+    <div class='nw-splash nw-badge-splash '>
+      <div class="nw-vflex">
+        <div class='winner-splash-content'>
+          <h1 class='unlocked'>You unlocked a badge</h1>
+          <div class='badge-image'>
+            <img src='{{badge.awarded}}' title='{{badge.title}}' alt="" />
+          </div>
+          <h2 class='badge-title'>
+            {{badge.title}}
+          </h2>
+          <div class='badge-description'>
+            {{badge.awarded_description}}
+          </div>
+          <hr />
+          <button {{action "closeClicked"}}>close</button>
+        </div>
       </div>
-      <div class='badge-title'>
-        {{badge.title}}
-      </div>
-      <div class='badge-description'>
-        {{badge.awarded_description}}
-      </div>
-      <button {{action "closeClicked"}}>close</button>
     </div>
   </div>
 {{/ember-wormhole}}

@@ -1,49 +1,43 @@
-<div class="nw-card short-card small-gap nw-full-link">
-  {{#if invitationAccepted}}
-    {{#link-to group.linkPath group.slug}}
-      <div class="nw-card-content">
-        <div class='nw-group-listing'>
-          {{#if message}}
-            {{group-avatar group=group linkTo=true size='large'}}
-          {{else}}
-            {{group-avatar group=group linkTo=true size='medium'}}
-          {{/if}}
-          <div class='nw-group-info'>
-            <div class="nw-group-name">
-              {{group.name}}
-            </div>
-            {{#if message}}
-              {{group.description}}
-            {{/if}}
-          </div>
-          <div class='nw-group-latest'>
-            <div class='nw-icon'>
-              <button class="button-clear" aria-label="Go to your NanoMessages.">
-                <span aria-hidden="false">{{fa-icon "comments"}}</span>
-                {{#if numUnreadMessages}}
-                  <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{numUnreadMessages}}</div>
-                {{/if}}
-              </button>
-            </div>
-            {{#if message}}
-              <div class='nw-icon-text'>
-                {{{latestMessage}}}
-              </div>
-            {{/if}}
-          </div>
-        </div>
-      </div>
-    {{/link-to}}
-  {{else}}
-    <div class="nw-card-content">
+{{#if (and invitationAccepted isCurrentUser)}}
+  {{#link-to group.linkPath group.slug}}
+    <div class="nw-card-content" style='width: 100%; padding: 0px;'>
       <div class='nw-group-listing'>
-        {{group-avatar group=group linkTo=true size='large'}}
+        {{group-avatar group=group linkTo=true size='medium'}}
         <div class='nw-group-info'>
           <div class="nw-group-name">
             {{group.name}}
           </div>
-          {{group.description}}
+          {{#if message}}
+            {{group.description}}
+          {{/if}}
         </div>
+        {{#if message}}
+          <div class='nw-group-latest'>
+            <div class='nw-icon'>
+              <span aria-hidden="false">{{fa-icon "comments"}}</span>
+              {{#if numUnreadMessages}}
+                <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{numUnreadMessages}}</div>
+              {{/if}}
+           </div>
+            <div class='nw-icon-text'>
+              {{{latestMessage}}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  {{/link-to}}
+{{else}}
+  <div class="nw-card-content">
+    <div class='nw-group-listing'>
+      {{group-avatar group=group linkTo=true size='large'}}
+      <div class='nw-group-info'>
+        <div class="nw-group-name">
+          {{group.name}}
+        </div>
+        {{group.description}}
+      </div>
+      {{#if isCurrentUser}}
         <div class='nw-group-invite' style="display: flex; flex-wrap: wrap;">
           <div style="margin-bottom: 10px;">
             <i>You've been invited to join the {{group.groupType}} {{group.name}}.</i>
@@ -53,7 +47,7 @@
             <button {{action "rejectInvitation"}} class="button-reversed" style="margin-left: 10px;">No Thanks</button>
           </div>
         </div>
-      </div>
+      {{/if}}
     </div>
-  {{/if}}
-</div>
+  </div>
+{{/if}}

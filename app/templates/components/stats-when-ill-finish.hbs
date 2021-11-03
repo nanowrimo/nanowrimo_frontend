@@ -2,6 +2,15 @@
   <div class="nw-card-title">When I'll Finish</div>
 </div>
 <div class="nw-card-content">
-  <div class="nw-card-icon"><img src="/images/cards/mountain.svg" /></div>
-  <div class="nw-promo-text">At this rate you'll be done on<div class="nw-highlight">{{finishDate}}!</div></div>
+  <div class="nw-card-icon"><img src="/images/cards/mountain.svg" alt="" /></div>
+  {{#if projectChallenge.hasStarted}}
+  {{#if userHasWritten}}
+  <div class="nw-promo-text">At this rate you'll be done on<div class="nw-highlight">{{projectedFinishDate}}!</div>
+  </div>
+  {{else}}
+  <div class='nw-promo-text'>Make your first progress update to see when you might finish!</div>
+  {{/if}}
+  {{else}}
+  <div class='nw-promo-text'>We'll predict your finish date once you can start work on your project!</div>
+  {{/if}}
 </div>

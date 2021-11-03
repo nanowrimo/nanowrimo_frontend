@@ -5,17 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>NaNoWriMo</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="og:image" content="/images/logged-out/newhomeimage.png">
     <link rel="icon" href="/favicon.png">
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
     <script src="/scripts/shopify.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q3XHKESGGR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Q3XHKESGGR');
+    </script>
     {{content-for "head"}}
 
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/nanowrimo.css">
     {{content-for "head-footer"}}
   </head>
   <body>
+    <div id="application-loading-indicator">
+      <div class="nw-list-loading">
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+      Loading...
+    </div>
+
+    </div>
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>

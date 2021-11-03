@@ -12,9 +12,10 @@ export default Controller.extend({
   dataLoaded: false,
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
+  canEditGroup: computed('currentUser.isLoaded',function() {
     let found = false;
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+    let allowed = this.get('currentUser.isLoaded');
+    if (allowed) {
       if (this.get('currentUser.user.adminLevel')) {
         found = true;
       } else {
@@ -30,6 +31,13 @@ export default Controller.extend({
     }
     return found;
   }),
+  
+  // Returns true if the chat space is enabled
+  chatEnabled: computed('group.groupType', function() {
+    let gt = this.get('group.groupType');
+    return (gt != 'everyone');
+  }),
+  
   plateStyle: computed('group.plateUrl', 'canEditGroup', function() {
     let styles = [];
     let plateUrl = this.get('group.plateUrl');

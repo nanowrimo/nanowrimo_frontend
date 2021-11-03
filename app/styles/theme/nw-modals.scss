@@ -1,0 +1,264 @@
+.modal-backdrop {
+    opacity:0.7 !important;
+}
+.modal-content {
+  background-image: url('/images/global/card_back.png');
+  background-repeat: repeat-x;
+  background-size: 4px 100%;
+  border-radius: 6px;
+  border-color: $nw-white-1;
+  .modal-header {
+    width: 100%;
+    height: 28px;
+    border-radius: 6px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: $nw-mediumgreen;
+    font-family: 'SansBold', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: $nw-white-1;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+  }
+  .modal-body {
+    padding: 0px;
+    .steps {
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      background-color: $nw-white;
+      .step {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 70px;
+        text-align: center;
+        color: $nw-mediumgrey;
+        &.step-current {
+          color: $nw-mediumblue;
+          .step-name {
+            font-weight: 900;
+          }
+        }
+        &.step-completed {
+          color: $nw-mediumblue;
+        }
+        div {
+          width: 100%;
+          
+        }
+      }
+      .step-connector {
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 8px;
+        width: 48px;
+        margin-left: -19px;
+        margin-right: -19px;
+        overflow: visible;
+        hr {
+          padding: 0;
+          height: 0;
+          width: 48px;
+          max-height: 0;
+          font-size: 1px;
+          line-height: 0;
+          clear: both;
+          border: none;
+          border-top: 1px solid $nw-mediumgrey;
+          border-bottom: 1px solid $nw-mediumgrey;
+        }
+        &.connector-blue {
+          hr {
+            border-top: 1px solid $nw-mediumblue;
+            border-bottom: 1px solid $nw-mediumblue;
+          }
+        }
+      }
+    }
+    .nav-tabs {
+      height: 34px;
+      background-color: $nw-white;
+      align-items: flex-start;
+      justify-content: center;
+      border-bottom: 0px;
+      .nav-item {
+        font-size: 16px;
+        color: $nw-lightgrey;
+        border-radius: 0px;
+        a {
+          border-top: 0px;
+          border-radius: 6px;
+          color: $nw-lightgrey;
+          height: 39px;
+          padding-top: 4px;
+          padding-left: 0px;
+          padding-right: 0px;
+          margin-left: 10px;
+          margin-right: 10px;
+          &:hover {
+            color: $nw-mediumblue;
+            border-color: transparent;
+          }
+        }
+        &.active {
+          color: $nw-mediumblue;
+          a {
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-color: transparent;
+            background: linear-gradient(to top, $nw-darkaqua 0px, $nw-darkaqua 4px, transparent 4px, transparent 500px);
+            color: $nw-mediumblue;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+    .tab-content {
+      padding: 20px;
+      padding-bottom: 4px;
+    }
+    .form-group {
+      input, textarea, .ember-power-select-multiple-trigger, #nw-message-form {
+        height: 36px;
+        border-radius: 6px;
+        box-shadow: inset 0 1px 4px 0 $nw-grey50;
+        background-color: $nw-white-1;
+        border: solid 1px $nw-mediumgrey;
+        &:focus {
+          border: solid 2px #305555;
+        }
+        
+        &.ember-checkbox {
+          box-shadow: none;
+          background-color: transparent;
+          padding-top: 0px;
+          height: 20px;
+        }
+      }
+      textarea {
+        height: 72px;
+      }
+      label.checkbox-label {
+        font-size: 16px;
+        line-height: 1.31;
+        color: $nw-darkgrey;
+      }
+      .input-group {
+        margin-bottom: 14px;
+        .input-group-prepend {
+          .input-group-text {
+            justify-content: center;
+            width: 36px;
+            border-color: $nw-mediumgrey;
+            box-shadow: inset 1px 1px 2px 0 $nw-darkgrey20;
+            background-color: $nw-lightgreyblue;
+            .fa {
+              font-size: 20px;
+              color: $nw-lightgrey;
+            }
+          }
+        }
+        .input-group-append {
+          .input-group-text {
+            border: 0px;
+            background-color: transparent;
+            padding-right: 0px;
+            .fa {
+              font-family: FontAwesome;
+              font-size: 20px;
+              color: $nw-darkred;
+            }
+          }
+        }
+        input.no-left-radius {
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        }
+        input.left-margin {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .modal-footer {
+    border-top: 1px solid $nw-lightgreyblue;
+    padding: 20px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    justify-content: space-between;
+    .underline-link {
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: underline;
+    }
+  }
+  .modal-footer > * {
+    margin: 0px;
+  }
+}
+
+.modal-confirmation {
+  .modal-body {
+    margin: 10px;
+    .confirmation-question {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .confirmation-doublecheck{
+      margin-top: 10px;
+      border: 1px solid $nw-darkred;
+      background: $nw-lightred;
+      padding: 4px;
+      border-radius: 5px;
+    }
+  }
+}
+.pac-container {
+  z-index: 6000;
+}
+#nw-message-form {
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 4px 0 $nw-grey50;
+  background-color: $nw-white-1;
+  border: solid 1px $nw-mediumgrey;
+  &.ember-checkbox {
+    box-shadow: none;
+    background-color: transparent;
+    padding-top: 0px;
+    height: 20px;
+  }
+}
+
+/* profile edit modal tabs */
+
+.edit-profile-horizontal-tabs {
+  @media(max-width: $screen-sm) {
+
+    .nav {  
+      
+      height:38px !important;
+      display: block;
+      overflow-y: hidden; 
+      overflow-x: scroll;
+      white-space: nowrap;
+      .nav-item {
+        display: inline-block;
+        a {
+          margin-left: 5px !important;
+          margin-right: 5px !important;
+        }
+      }
+      :first-child {
+        margin-left: 25px;
+      }
+    }
+  }
+}
+  

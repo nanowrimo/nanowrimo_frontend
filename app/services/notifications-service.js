@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { computed, observer }  from '@ember/object';
-import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import moment from "moment"
@@ -22,20 +21,15 @@ export default Service.extend({
     this.set('router', getOwner(this).lookup('router:main'));
   },
   
-  load() {
-    if (this.get('session.isAuthenticated')) {
-      debounce(this, this.checkForUpdates, 3000, false);
-    }
-  },
-  
   checkForUpdates() {
     let t = this;
     let nva = this.get('currentUser.user.notificationsViewedAt');
     this.set('lastCheck',nva);
-    this.store.findAll('notification').then(function() {
+    this.store.findAll('notification',{ reload: true }).then(function() {
       t.incrementRecomputeNotifications();
+      
     });
-    debounce(this, this.checkForUpdates, 15000, false);
+    //debounce(this, this.checkForUpdates, 20000, false);
   },
   
   notificationClicked(notification){
@@ -55,9 +49,10 @@ export default Service.extend({
         //display the splash
         r.push('showBadgeSplash');
       }
+      r.push(notification.extraData);
     }
     if(notification.actionType=='BUDDIES_PAGE') {
-      this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'));
+      this.get('router').transitionTo('authenticated.users.show.buddies', this.get('currentUser.user.slug'), { queryParams: { showRequests: true }});
     }
     if(notification.actionType=='GROUPS_PAGE') {
       this.get('router').transitionTo('authenticated.users.show.groups', this.get('currentUser.user.slug'));

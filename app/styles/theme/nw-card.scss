@@ -143,11 +143,19 @@
       .nw-card-action-link {
         padding-top: 6px;
         height: 24px;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 600;
         color: $nw-mediumgrey;
         cursor: pointer;
         &:hover {
           color: $nw-mediumaqua;
+        }
+        margin-right: 15px;
+        a {
+          color: #055;
+          &:hover {
+            color: $nw-mediumaqua;
+          }
         }
       }
       &.nw-card-actions-left {
@@ -189,11 +197,12 @@
           margin-top: 0px;
           margin-bottom: 0px;
           background-image: none;
-          background-color: none;
+          background-color: transparent;
+          
           i {
             color: $nw-lightgrey;
           }
-          &.active {
+          &.active, &:focus {
             background-color: none;
             border-bottom: solid 3px $nw-lightorange;
             box-shadow: none;
@@ -220,6 +229,11 @@
       background-size: cover;
       border-radius: 5px 5px 0px 0px;
       background-position: center center;
+      img {
+        height: 144px;
+        width: 300px;
+        object-fit: cover;
+      }
     }
   }
   .nw-card-content {
@@ -228,6 +242,7 @@
     flex: 1 1 100%;
     position: relative;
     padding: 20px;
+    justify-content: space-between;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     &.nw-card-list {
@@ -258,7 +273,7 @@
         max-height: 280px;
         padding-right: 15px;
         margin-right: -15px;
-        overflow: scroll;
+        overflow-y: auto;
         border-bottom: 1px solid #666;
         
         .nw-card-list-item {
@@ -283,9 +298,7 @@
         }
       }
     }
-    &.nw-white-back {
-      background-color: #ffffff;
-    }
+  
     &.nw-card-horizontal {
       flex-direction: row;
       justify-content: space-between;
@@ -310,6 +323,8 @@
       }
       .nw-two-thirds {
         flex: 0 0 64%;
+        max-height: 230px;
+        overflow-y:auto;
       }
       @media (max-width: $screen-xs-max) {
         flex-direction: column;
@@ -334,7 +349,7 @@
       justify-content: flex-start;
     }
     .nw-card-superhead {
-      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-family: 'SansRegular', sans-serif;
       font-size: 14px;
       font-weight: 600;
       line-height: 1.57;
@@ -354,7 +369,7 @@
       }
     }
     .nw-card-subhead {
-      font-family: 'SourceSansPro-Regular', sans-serif;
+      font-family: 'SansRegular', sans-serif;
       font-size: 14px;
       font-weight: 600;
       line-height: 1.57;
@@ -401,7 +416,22 @@
     }
   }
   .nw-card-footer {
-  
+    min-height: 30px;
+  }
+  &.year-in-review-stat {
+    background-image: none;
+    border: solid 0px $nw-lightgreyblue;
+    .nw-supertitle {
+      font-size: 20px;
+    }
+    .nw-title {
+      margin-top: 7px;
+      font-size: 30px;
+    }
+    .nw-subtitle {
+      font-style: italic;
+      font-size: 20px;
+    }
   }
 }
 .nw-flippy-card {
@@ -458,7 +488,7 @@
         .nw-card-scrollable {
           height: 100%;
           align-items: stretch;
-          overflow: scroll;
+          overflow-y: auto;
           font-size: 13px;
         }
         .nw-centered {
@@ -556,14 +586,14 @@
       margin-bottom: 10px;
     }
     .nw-two-thirds {
-      max-height: 260px;
-      overflow: scroll;
+      max-height: 230px;
+      overflow-y: auto;
     }
   }
 }
 .nw-card.flex-small {
   .nw-card-content {
-    overflow: scroll;
+    overflow-y: auto;
     a {
       color: $nw-darkblue;
     }
@@ -591,6 +621,14 @@
     left: 200px;
     top: 25px;
   }
+  &.nw-tiny-card {
+    font-size: 20px;
+    line-height: 35px;
+    height: 40px;
+    transform: rotate(-5deg);
+    left: 80px;
+    top: 15px;
+  }
 }
 .nw-card.nw-full-link {
   a:hover, a:visited, a:link, a:active {
@@ -601,4 +639,65 @@
       background-color: rgba(200,255,255,0.2);
     }
   }
+}
+.nw-card .nw-card-content.nw-event-container {
+  justify-content: flex-start;
+  .nw-event-promo {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 2px solid #dfe4e6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .nw-event-promo-date {
+      flex: 0 0 40px;
+      align-self: center;
+      margin-right: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      color: #2f3061;
+      text-transform: uppercase;
+      .nw-event-promo-month {
+        line-height: 14px;
+      }
+      .nw-event-promo-day {
+        font-size: 36px;
+        line-height: 32px;
+      }
+    }
+    .nw-event-promo-details {
+      flex: 1 1 100%;
+      text-align: left;
+      align-self: center;
+      .nw-event-promo-title {
+        font-size: 16px;
+        font-weight: bold;
+        a {
+          color: #055;
+        }
+        /* Non standard for WebKit */
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+      }
+      .nw-event-promo-time {
+        font-size: 14px;
+        color: #343434;
+        .nw-event-promo-dotw {
+          color: #979797;
+        }
+      }
+    }
+    .nw-event-promo-button {
+      flex: 0 0 130px;
+      text-align: right;
+      align-self: center;
+    }
+  }
+}
+.nw-white-back {
+  background-color: #ffffff;
 }

@@ -1,14 +1,17 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
-import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
+//import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
+import config from 'nanowrimo/config/environment';
 
-const Router = EmberRouter.extend(GoogleAnalyticsRoute, {
-  location: config.locationType,
-  rootURL: config.rootURL
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
+}
 
 Router.map(function() {
+    // dynamic routes
+  this.route('pages', {path: '/:path'});
   this.route('authenticated', { path: '' }, function() {
+    this.route('dashboard');
     this.route('search');
     this.route('genres', function() {
       this.route('new');
@@ -97,8 +100,19 @@ Router.map(function() {
     //temporary route to camp-nanowrimo-april-2020-winner 
     this.route('camp-nanowrimo-july-2020-winner');
     this.route('camp-nanowrimo-april-2020-winner');
+    this.route('camp-nanowrimo-july-2021-winner');
+    this.route('camp-nanowrimo-april-2021-winner');
+    this.route('camp-nanowrimo-july-2021-winner');
+    this.route('nanowrimo-2019-winner');
+    this.route('nanowrimo-2020-winner');
+    this.route('nanowrimo-2021-winner');
     this.route('nano-winner-2019');
     this.route('nano-winner-2020');
+    this.route('nano-winner-2021');
+    this.route('year-in-review', function() {
+      this.route('show', { path: '/:year'}, function() {
+      });
+    });
     
   });
 
@@ -125,7 +139,6 @@ Router.map(function() {
   this.route('offers');
   this.route('programming-and-impact');
   
-  
   this.route('404');
   this.route('not-found', { path: '/*path' });
   this.route('error');
@@ -139,7 +152,7 @@ Router.map(function() {
   //delete request
   this.route('delete-request', {path: '/delete-request/:token'});
   
+
+  
 });
 
-
-export default Router;

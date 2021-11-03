@@ -1,16 +1,19 @@
-<div class="nw-notification {{newNotiClass}}" {{action 'clicked'}}>
-  <div class="nw-noti-image {{imageStyle}}">
-    <img src="{{renderImage}}" />
-  </div>
-  <div class="nw-noti-content-container">
-    <div class="nw-noti-content">
-      <span class="nw-noti-headline-string">{{notification.headline}}</span>
-      <span class="nw-noti-content-string">{{notification.content}}</span>
+<button type='button' class='nw-button-undecorated nw-button-full-width'{{action 'clicked'}}>
+  <div class="nw-notification {{newNotiClass}}" >
+    <div class="nw-noti-image {{imageStyle}}">
+      <img src="{{renderImage}}" alt=""/>
     </div>
-    <div class="nw-noti-tools-container">
-      <div class="nw-noti-time-ago">
-        Posted {{timeSince}}
+    <div class="nw-noti-content-container">
+      <div class="nw-noti-content">
+        <span class="nw-noti-headline-string">{{notification.headline}}</span>
+        <span class="nw-noti-content-string">{{notification.content}}</span>
+      </div>
+      <div class="nw-noti-tools-container">
+        <div class="nw-noti-time-ago">
+          Posted {{timeSince}}
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+</button>

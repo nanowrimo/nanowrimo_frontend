@@ -12,18 +12,10 @@
         New Goal
       {{/if}}
     {{/modal.header}}
+    <form {{action "saveProjectChallenge" on="submit"}}>
     {{#modal.body}}
       <div class="project-challenge-new-form">
-      {{#if isEditingModal }}
-        <div class="form-group">
-          {{#if associateWithChallenge}}
-            <i>The name of this goal may not be changed because it is associated with an official NaNoWriMo event.</i>
-          {{else}}
-            <i>This is a personal writing goal that is not associated with an official NaNoWriMo event.</i>
-          {{/if}}
-        </div>
-      
-      {{else}}
+      {{#if isEventListAllowed }}
         {{#if optionsForChallenges}}
           <div class="form-group">
             {{input class= 'form-control' 
@@ -36,6 +28,7 @@
             <label for='associateCheckbox'>Associate with a NaNoWriMo event (optional)</label>
           </div>
           <div class="form-group {{hideClass}}">
+            <label for="associateSelect">NaNoWriMo Event</label>
             <div class="select-container">
               <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
                 {{#each optionsForChallenges as |c|}}
@@ -46,15 +39,25 @@
           </div>
     
         {{/if}}          
+      {{else}}
+        <div class="form-group">
+          {{#if associateWithChallenge}}
+            <i>The name of this goal may not be changed because it is associated with an official NaNoWriMo event.</i>
+          {{else}}
+            <i>This is a personal writing goal that is not associated with an official NaNoWriMo event.</i>
+          {{/if}}
+        </div>
       {{/if}}          
       <div class="form-group">
-        <label for='name'>Goal name</label>
+        <label for="goal-name">Goal name
           {{input
-            name="name"
+            name="name" 
+            id="goal-name"
             disabled=disableName
             value=displayName
             class='form-control'
           }}
+          </label>
         </div>
         <div class="form-group">
           <label for='writingType'>What type of goal is this?</label>
@@ -72,10 +75,11 @@
         </div>
         <div class="form-group side-by-side">
           <div>
-            <label for='goal'>What is your goal?</label>
+            <label for='goal'>What is your word-count goal?</label>
             <input class='form-control' id='goal' name='goal' min='1' type='number' onChange={{action "goalChange" value='target.value'}} value={{projectChallenge.goal}}  disabled={{if disableGoal 'disabled' ''}}/>
          
           </div>
+          <!--
           <div style='padding-left: 10px'> 
             <label for='unitType'></label>
             <div class="select-container">
@@ -90,29 +94,31 @@
               </select>
             </div>
           </div>
+          //-->
         </div>
         <div class="side-by-side">
           <div class="form-group side-by-side-even">
 
-            <label for='start-date' class='form-group'>What's your start date?</label>
-            <input name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
+            <label for="start-date" class='form-group'>What's your start date?
+            <input id="start-date" name='start-date' type='date' class='form-control {{if validationErrors.badStart 'is-invalid' ''}}'
               oninput={{action "startsAtChanged" value="target.value"}} 
               value={{displayStartsAt}}
               disabled={{disableStart}}
               min='1999-07-01'>
+              </label>
             {{#if validationErrors.startOverlap}}
               <span class='invalid-feedback'>a goal can't start before another goal ends</span>
             {{/if}}
           </div>
           <div class="form-group side-by-side-even">
         
-            <label for='challenge-last-day'>When is the last day of writing?</label>
-            <input name='challenge-last-day' type='date' class='form-control'
+            <label for="challenge-last-day" >When is the last day of writing?
+            <input id='challenge-last-day'name='challenge-last-day' type='date' class='form-control'
               oninput={{action "endsAtChanged" value="target.value"}} 
               value={{displayEndsAt}}
               disabled={{disableStartEnd}}
               min={{endDateMin}}>
-     
+            </label>
             
                {{#if validationErrors.endOverlap}}
               <span class='invalid-feedback'>a goal can't end after another goal has started</span>
@@ -167,7 +173,7 @@
     {{/modal.body}}
 
     {{#modal.footer}}
-      <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' {{action "saveProjectChallenge"}}/>
+      <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Goal' />
       <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
       {{#if isEditingModal }}
         <div style="flex: 0 0 100%; margin-top: 10px;">
@@ -177,6 +183,7 @@
         </div>
       {{/if}}
     {{/modal.footer}}
+    </form>
   {{/bs-modal}}
 {{else}}
   {{confirmation-modal

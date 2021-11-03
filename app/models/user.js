@@ -101,6 +101,12 @@ const User = Model.extend({
   regions: filterBy('groups', 'groupType', 'region'),
   
   stats: null,
+  annualStats: null,
+  
+  // Returns true if the user is an admin
+  isAdmin: computed('adminLevel', function() {
+    return (this.get('adminLevel')>0);
+  }),
   
   // ---------------------------
   // BEGINNING OF DATETIME FUNCTIONS
@@ -268,7 +274,7 @@ const User = Model.extend({
   
   recalculateHome: 0,
   
-  homeRegion: computed('regions.[]','groupUsers.[]','recalculateHome', function(){
+  homeRegion: computed('regions.[]','groupUsers.@each.{primary}','recalculateHome', function(){
     let r = this.get('regions');
     let gu = this.get('groupUsers');
     let maxPrimary = -1;
@@ -358,8 +364,13 @@ const User = Model.extend({
     return bgus;
   }),
   
+  
+  // ---------------------------
+  // BEGINNING OF BUDDY FUNCTIONS
+  // ---------------------------
+
   //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
-  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
     let gus = this.get('groupUsers');
     let bgus = [];
     //are there group users?
@@ -394,6 +405,28 @@ const User = Model.extend({
         if (bgu.invitationAccepted=='0') {
           pending.push(bgu);
         }
+      });
+    }
+    return pending;
+  }),
+  buddyGroupUsersInvited: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+    let bgus = this.get('buddyGroupUsers');
+    const store = this.get('store');
+    let pending = [];
+    let id = this.get('id');
+    
+    //are there buddy group users?
+    if (bgus) {
+      bgus.forEach(function(bgu) {
+        let gus = bgu.group.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='0')) {
+              pending.push(gu);
+            }
+          }
+        });
       });
     }
     return pending;
@@ -437,14 +470,15 @@ const User = Model.extend({
     return buddyGroups;
   }),
   
-  buddiesActive: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
+  buddiesActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
+      let gul = this.get('groupUsersLoaded');
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
       let store = this.get('store');
       let id = this.get('id');
       // are there buddyGroupUsersAccepted?
-      if (bgus) {
+      if (bgus && gul) {
         bgus.forEach(function(bgu) {
           let gus = bgu.group.get('groupUsers');
           gus.forEach(function(gu) {
@@ -460,7 +494,7 @@ const User = Model.extend({
       return buddies;
     }
   }),
-  buddiesInvited: computed('buddyGroupUsersAccepted','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
+  buddiesInvited: computed('buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
       let bgus = this.get('buddyGroupUsersAccepted');
       let buddies = [];
@@ -507,14 +541,18 @@ const User = Model.extend({
     }
   }),
 
-  everythingGroupsActive: computed('groupUsersLoaded','groupUsers.[]', function(){
+  // ---------------------------
+  // END OF BUDDY FUNCTIONS
+  // ---------------------------
+  
+  nanomessagesGroups: computed('groupUsersLoaded','groupUsers.[]', function(){
     let eGroups = [];
     if (this.get('groupUsersLoaded')) {
       let gus = this.get('groupUsers');
       let store = this.get('store');
       gus.forEach(function(gu) {
         let g = store.peekRecord('group', gu.group_id);
-        if ((g.groupType=='everyone')||(g.groupType=='region')) {
+        if ((g.groupType=='everyone')||(g.groupType=='region')||(g.groupType=='buddies')) {
           eGroups.push(g);
         }
       });
@@ -597,7 +635,7 @@ const User = Model.extend({
       debounce(u, u.connectGroupUsers, 1000, false);
     });
   },
-
+  
   connectGroupUsers() {
     //let store = this.get('store');
     //let gus = store.peekAll('group-user');
@@ -684,23 +722,23 @@ const User = Model.extend({
   //how many times has the user won nano?
   nanoWinCount: computed('yearsWon', function(){
     let yw = this.get('yearsWon');
-    return yw.length;
+    return yw.size;
   }),
   
   //get an array of nano years won
-   yearsWon: computed('projectChallenge.@each.metGoal', function(){
-    let ids = [];
-    let years = [];
+   yearsWon: computed('projectChallenges.@each.metGoal', function(){
+    //let ids = [];
+    let years = new Set();
     //loop the user's projects
     this.get('projectChallenges').forEach((pc)=>{
       //is the projectChallenge a nanowrimo?
-      if(pc.nanoEvent && !ids.includes(pc.id)) { // counting words
-        ids.push(pc.id);
+      if (pc.eventType===0) { // counting words
+        //ids.push(pc.id);
         
         //did the project challenge win?
         if (pc.metGoal) {
           //years.push(pc.startsAt.getFullYear());
-          years.push(pc.startsAt.substring(0,4));
+          years.add(pc.startsAt.substring(0,4));
         }
       }
     });
@@ -800,6 +838,27 @@ const User = Model.extend({
     });
   },
   
+  firstEnabledStat: computed('statsWordCountEnabled','statsProjectsEnabled','statsYearsEnabled','statsWordiestEnabled','statsStreakEnabled', function(){
+    let props = [
+      "statsWordCountEnabled",
+      "statsProjectsEnabled",
+      "statsYearsEnabled",
+      "statsWordiestEnabled",
+      "statsWritingPaceEnabled",
+      "statsStreakEnabled"
+    ];
+    
+    //loop through the stats
+    for( var i = 0; i< props.length; i++) {
+      let prop = props[i];
+      //is this prop selected by the user?
+      if (this.get(`${prop}`) ) {
+        return prop;
+      }
+    }
+    return null;
+  }),
+  
   refreshStats: function() {
     let { auth_token } = this.get('session.data.authenticated');
     //fetch the stats from the API
@@ -813,6 +872,19 @@ const User = Model.extend({
     });
   },
   
+  refreshAnnualStats: function(year) {
+    let { auth_token } = this.get('session.data.authenticated');
+    //fetch the stats from the API
+    let endpoint = `${ENV.APP.API_HOST}/users/annual_stats/`+year;
+    fetch(endpoint, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+    }).then(resp=>{
+      resp.json().then(json=>{
+        this.set('annualStats', json);
+      });
+    });
+  },
+  
   // determine if a user has won an event based on event name
   wonEventByName: function(eventName) {
     /* find the event */
@@ -820,17 +892,23 @@ const User = Model.extend({
     let store = this.get('store');
     // get all challenges
     let challenges = store.peekAll('challenge');
-    let targetChallenge = challenges.findBy('name', eventName);
-
+    // filter by eventName
+    challenges = challenges.filterBy('name', eventName);
+    // filter by userId of 0 
+    challenges = challenges.filterBy('userId', 0);
+    // the targetChallenge  will be the first in the array (it should also be the only one in the array)
+    let targetChallenge = challenges.firstObject;
+    
     if (targetChallenge) {
-      // does the user have a projectChallenge for the targetChallenge
+      /* does the user have a projectChallenge for the targetChallenge */
+      // get all project-challenges
       let pcs = store.peekAll('project-challenge');
       //filter for this user's project-challenges
       pcs = pcs.filterBy("user_id", parseInt(this.id));
-      
       //filter for project challenges associated with the target challenge
       let targetPCs = pcs.filterBy("challenge_id", parseInt(targetChallenge.id));
-      // is there a target project challenge?
+      
+      // are there target project challenges? (there should only be 1)
       if (targetPCs) {
         // loop through the project challenges
         for (var i =0; i<targetPCs.length; i++) {

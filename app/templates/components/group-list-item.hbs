@@ -1,4 +1,4 @@
-{{#link-to "authenticated.regions.show" groupContainer.groupObject.slug tagName="li" class="nano-list-item"}}
+<li class="nano-list-item">
   <div class="nano-list-icon">
     {{#if groupContainer.isHome}}
       {{fa-icon "home"}}
@@ -8,7 +8,9 @@
   </div>
   <div class="nano-list-item-content">
     <div class="nano-list-item-title">
-      {{groupContainer.groupObject.name}}
+      {{#link-to "authenticated.regions.show" groupContainer.groupObject.slug}}
+        {{groupContainer.groupObject.name}}
+      {{/link-to}}
     </div>
     <div class="nano-list-item-subcontent">
       <div class="nano-list-item-info">
@@ -20,16 +22,26 @@
         {{/unless}}
       </div>
       <div class="nano-list-item-buttons">
-        {{#if joinable}}
-          <button class="button-reversed nano-button-small" {{action 'joinGroup' bubbles=false}}>Join</button>
-        {{/if}}
-        {{#if leavable}}
-          {{#unless groupContainer.isHome}}
-            <button class="button-reversed nano-button-small" {{action 'makeHome' bubbles=false}}>Make Home</button>
-          {{/unless}}
-          <button class="button-reversed nano-button-small" {{action 'leaveGroup' bubbles=false}}>Leave</button>
+        {{#if isProcessing}}
+          <i class='fa fa-spinner fa-spin'></i>
+        {{else}}
+          {{#if joinable}}
+            <button class="nano-button-small" {{action 'joinGroup' bubbles=false}} >
+              Join
+            </button>
+          {{/if}}
+          {{#if leavable}}
+            {{#unless groupContainer.isHome}}
+              <button class="nano-button-small" {{action 'makeHome' bubbles=false}}>
+                Make Home
+              </button>
+            {{/unless}}
+            <button class="button-reversed nano-button-small" {{action 'leaveGroup' bubbles=false}}>
+              Leave
+            </button>
+          {{/if}}
         {{/if}}
       </div>
     </div>
   </div>
-{{/link-to}}
+</li>

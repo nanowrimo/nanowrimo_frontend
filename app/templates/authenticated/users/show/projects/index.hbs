@@ -1,47 +1,49 @@
+{{page-title "Projects"}}
 <div class="nw-panel-primary-container">
   <div class='nw-panel-actions'>
     {{#if canAddProject}}
-      <button {{action "openNewProjectModal"}}>
-        Announce New Project
-      </button>
+    <button {{action "openNewProjectModal" }}>
+      Announce New Project
+    </button>
 
-      {{project-new-modal
-        onHidden=(action "afterProjectModalClose")
-        open=addProject
-        user=user
-      }}
+    {{project-new-modal
+    onHidden=(action "afterProjectModalClose")
+    open=addProject
+    user=user
+    }}
     {{/if}}
-    <div class='nw-panel-actions-select' >
-      <span id='project-summary-sort-by-text' for='sort-by'>Sort by</span>
-      <span id='project-summary-sort-by-select'>
-        <select name='sort-by' onchange={{action "setSortSelection" value="target.value"}} >
-          <option value='0'>Date Created</option>
-          <option value='1'>Project Title</option>
-        </select>
-      </span>
+    <div class='nw-panel-actions-select'>
+      <label id='project-summary-sort-by-text' for="project-listing-sort-by-select">Sort by</label>
+        <span id='project-summary-sort-by-select'>
+          <select id="project-listing-sort-by-select" name='sort-by' onchange={{action "setSortSelection" value="target.value" }}>
+            <option value='0'>Date Created</option>
+            <option value='1'>Project Title</option>
+          </select>
+        </span>
+     
     </div>
   </div>
 
-  <div>
+  <div class='nw-column-cards'>
     {{#each sortedProjects as |project|}}
-      {{project-summary project=project}}
+    {{project-summary project=project}}
     {{/each}}
     {{#if canAddProject}}
-      <div class="nw-card nw-prompt-card">
-        <div class='nw-hflex'>
-          <div class="project-announce-quote">
-            <div class="quote-text">"Keep your head in the clouds and your hands on the keyboard."<br />
-              <span class="quotee">Marissa Meyer</span>
-            </div>
-          </div>
-          <div class='action'>
-            <a href="#" {{action "openNewProjectModal"}}>Announce a new project!</a>
-          </div>
-          <div class='prompt-image'>
-            <img src="/images/users/projects/megaphone.svg">
+    <div class="nw-card nw-prompt-card">
+      <div class='nw-hflex'>
+        <div class="project-announce-quote">
+          <div class="quote-text">"Keep your head in the clouds and your hands on the keyboard."<br />
+            <span class="quotee">Marissa Meyer</span>
           </div>
         </div>
+        <div class='action'>
+          <a href="#" {{action "openNewProjectModal" }}>Announce a new project!</a>
+        </div>
+        <div class='prompt-image'>
+          <img alt="" src="/images/users/projects/megaphone.svg">
+        </div>
       </div>
+    </div>
     {{/if}}
   </div>
 </div>

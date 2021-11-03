@@ -10,13 +10,19 @@ export default Controller.extend({
   dataLoaded: false,
   
   addEvent: false,
-  canAddEvent: computed('currentUser.user.name', function() {
-    return true;
+  
+  pageTitle: computed('group.name', function() {
+    return "Events | " + this.get('group.name');
+  }),
+  
+  canAddEvent: computed('group.groupType','canEditGroup', function() {
+    let gt = this.get('group.groupType');
+    return ((gt!='everyone')||(this.get('canEditGroup')));
   }),
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.user.groupUsersLoaded',function() {
-    if (this.get('currentUser.user.groupUsersLoaded')) {
+  canEditGroup: computed('currentUser.isLoaded',function() {
+    if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         return true;
       } else {

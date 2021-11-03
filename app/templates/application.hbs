@@ -1,29 +1,44 @@
+{{page-title "NaNoWriMo"  separator=" | "}}
+
 {{#if is_authenticated}}
   <div class="page-background">
     <header>
       {{#if (media "isMobile")}}
+      <nav>
         {{nano-side-menu}}
+      </nav>
       {{/if}}
       {{#if (media "isDesktop")}}
-        {{micro-nav}} 
-      {{/if}} 
-      {{main-nav}}
+      <nav>
+        {{micro-nav}}
+      </nav>
+      {{/if}}
+      <nav>
+        {{main-nav}}
+      </nav>
+      <NwUnverifiedHandler />
     </header>
-    <main class="logged-in">
+    <main class="logged-in {{if currentUser.user.isNotConfirmed 'unverified' ''}}">
       {{outlet}}
     </main>
     {{#if show_footer}}
-      {{authenticated-footer}}
+      <footer>
+        {{authenticated-footer}}
+      </footer>
     {{/if}}
   </div>
 {{else}}
   {{#if show_navigation}}
-    {{logged-out-menu}}
+    <nav>
+      {{logged-out-menu}}
+    </nav>
   {{/if}}
   <main>
     {{outlet}}
   </main>
   {{#if show_navigation}}
-    {{logged-out-footer}}
+    <footer>
+      {{logged-out-footer}}
+    </footer>
   {{/if}}
 {{/if}}

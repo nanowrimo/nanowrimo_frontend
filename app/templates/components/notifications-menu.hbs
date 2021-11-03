@@ -1,35 +1,27 @@
 {{#bs-nav class="nw-nav-notify-buttons" as |nav|}}
-  {{#nav.dropdown as |dd|}}
-    {{#dd.toggle}}
-      {{#link-to  "authenticated.nanomessages"}}
-        <button class="button-clear" aria-label="Go to your NanoMessages.">
-          <span class="non-mobile" aria-hidden="false">{{fa-icon "comment"}}</span>
-          <div class="nw-unread-circle {{nanomessagesDisplayStyle}}"></div>
-        </button>
-      {{/link-to}}
-    {{/dd.toggle}}
-  {{/nav.dropdown}}
+  <button class="button-clear" aria-label="Go to your nanomessages" {{action 'linkToNanomessages'}}>
+    <span aria-hidden="false">{{fa-icon "comment"}}</span>
+    <div class="nw-unread-circle {{nanomessagesDisplayStyle}}">{{newNanomessagesCount}}</div>
+  </button>
+  <button class="button-clear" {{action 'toggleNotifications'}}>
+    <span class='sr-only'>Notifications</span>
+    <span aria-hidden="false">{{fa-icon "bell"}}</span>
+    <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>
+  </button>
 
-  {{#nav.dropdown onHide=(action 'notificationsViewed') as |dd|}}
-    {{#dd.toggle}}
-      <button class="button-clear" aria-label="Display your notifications.">
-        {{#if (media "isDesktop")}}
-          <span class="non-mobile" aria-hidden="false">{{fa-icon "bell"}}</span>
-        {{/if}}
-        {{#if (media "isMobile")}}
-          <span class="mobile" aria-hidden="false">{{fa-icon "bell-o"}}</span>
-        {{/if}}
-        <div class="nw-unread-circle {{displayStyle}}">{{newNotificationsCount}}</div>
-      </button>
-    {{/dd.toggle}}
-    {{#dd.menu align="right" as |ddm|}}
-      {{notifications-menu-dropdown allNotifications=sortedNotifications clickAction=(action 'notificationClicked')}}
-    {{/dd.menu}}
-  {{/nav.dropdown}}
 {{/bs-nav}}
 {{#if showBadgeSplash}}
   {{splash-badge badge=badgeForSplash closeAction=(action 'hideBadgeSplash')}}
 {{/if}}
 {{#if showWinnerSplash}}
-  {{splash-winner badge=badgeForSplash closeAction=(action 'hideWinnerSplash')}}
+  {{splash-winner badge=badgeForSplash extraData=badgeExtraData closeAction=(action 'hideWinnerSplash')}}
 {{/if}}
+{{#if displayNotifications}}
+  {{notifications-modal
+    open='true'
+    closeFormAction=(action "toggleNotifications")
+    allNotifications=sortedNotifications
+    clickAction=(action 'notificationClicked')
+  }}
+{{/if}}
+

@@ -1,5 +1,6 @@
 {{#bs-modal
   open=open
+  onShow=(action "onShow")
   onHidden=(action "onHidden")
   as |modal|
 }}
@@ -16,8 +17,8 @@
     
         {{#if inProcess}}
           <div class="form-group">
+            <label>Writing group name</label>
             <Input
-              @label="Name"
               @property="name"
               @maxlength="60"
               style="width: 100%; padding-left: 10px;"

@@ -3,7 +3,7 @@ import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import Project from 'nanowrimo/models/project';
 
-const DEFAULT_TAB = 'overview';
+const DEFAULT_TAB = 'details';
 
 export default Component.extend({
   store: service(),
@@ -15,6 +15,12 @@ export default Component.extend({
   newPrimaryValue: false,
   showConfirmDelete: false,
   
+  filteredOptionsForGenres: computed("optionsForGenres.[]", function(){
+    let userId = this.get('project.user.id');
+    return this.get('optionsForGenres').reject((option)=>{
+      return (option.userId!=0 && option.userId!=userId);
+    });
+  }),
   
   optionsForGenres: computed(function() {
     return this.get('store').findAll('genre');
@@ -54,10 +60,15 @@ export default Component.extend({
   },
 
   actions: {
-    
+    setActiveTab(val) {
+      this.set('activeTab', val);
+    },
     confirmDelete(){
+      // set the title
+      let title = this.get('project.title');
+      this.set('deleteConfirmationQuestion', `Delete "${title}"?`);
       //show the delete dialog
-      this.set('showConfirmDelete', true);
+      this.set('showConfirmDelete', true);      
     },
     
     deleteConfirmationYes(){
@@ -79,6 +90,9 @@ export default Component.extend({
       if (this.get('project.isNotPrimary')){
         this.set('project.primary', 0);
       }
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Edit your project");
     },
     
     onHidden() {

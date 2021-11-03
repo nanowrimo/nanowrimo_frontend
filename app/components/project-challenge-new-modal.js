@@ -22,7 +22,13 @@ export default Component.extend({
   associatedChallenge: null,
   hasValidationError: false,
   showConfirmDelete: false,
+  createNew: false,
   
+  isEventListAllowed: computed('isEditingModal','currentUser.user.isAdmin',function() {
+    const isEditingModal = this.get('isEditingModal');
+    const isAdmin = this.get('currentUser.user.isAdmin');
+    return (!isEditingModal || isAdmin);
+  }),
   
   init() {
     this._super(...arguments);
@@ -160,8 +166,14 @@ export default Component.extend({
   }),
   
    // Gets all challenges from the store
-  unassignedOptionsForChallenges:  computed('getChallengeOptions', function() {
-    return this.get('store').query('challenge',{ available: true});
+  unassignedOptionsForChallenges:  computed('isEditingModal','getChallengeOptions', function() {
+    const isAdmin = this.get('currentUser.user.isAdmin');
+    const isEditing = this.get('isEditingModal');
+    if ((isAdmin)&&(isEditing)) {
+      return this.get('store').query('challenge',{});
+    } else {
+      return this.get('store').query('challenge',{ available: true});
+    }
   }),
 
   optionsForChallenges: sort('unassignedOptionsForChallenges','challengeSortingDesc'),
@@ -219,8 +231,8 @@ export default Component.extend({
     },
     onShow() {
       let pc = this.get('projectChallenge');
-      //we are editing if the projectChallenge has been persisted and has an id
-      if (pc && pc.id ){ 
+      // is the component not set to create a new project challenge?
+      if (!this.get('createNew')){ 
         this.set('isEditingModal', true);
         this.set('newDuration', pc.duration);  
         //this.set('displayStartsAt', moment.utc(pc.startsAt).format("YYYY-MM-DD"));
@@ -240,12 +252,18 @@ export default Component.extend({
       } else {
         this._newProjectChallenge();
       }
+      // validate?
+      this._validate();
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Create a new goal");
     },
     
     onHidden() {
       this.set('open', false);
     },
-    saveProjectChallenge() {
+    saveProjectChallenge() { 
+      event.stopPropagation();
       this._validate();
       if (this.get('projectChallengeIsValid') ){
         //assign the project to the project challenge
@@ -264,6 +282,7 @@ export default Component.extend({
           pc.set('name', this.get('displayName'));
         }
         pc.save();
+
         //hide the modal
         this.set('open', false);
       }
@@ -281,16 +300,12 @@ export default Component.extend({
     
     startsAtChanged(val) {
       //set the new StartsAt
-      //let m = moment.utc(val);
-      //this.set('newStartsAt', m);
       this.set('newStartsAt', val);
       this._validate();
     },
     
     endsAtChanged(val) {
       //set the new StartsAt
-      //let m = moment.utc(val);
-      //this.set('newEndsAt', m);
       this.set('newEndsAt', val);
       this._validate();
     }
@@ -306,13 +321,25 @@ export default Component.extend({
     this.set('displayName', "My New Goal");
     projectChallenge.set('unitType',"0");
     projectChallenge.set('goal',50000);
-    let now = moment();
-    this.set('displayStartsAt', now.format("YYYY-MM-DD"));
-    projectChallenge.set('startsAt', now.toDate()); 
-    this.set('newStartsAt', now.toDate());
-    projectChallenge.set('endsAt', now.add(30,'d').toDate()); 
-    this.set('displayEndsAt', now.format("YYYY-MM-DD"))
-    this.set('newEndsAt', now.toDate());
+    let startTime;
+    // get the project 
+    let project = this.get('project');
+    // does the project have an activeProjectChallenge?
+    if (project.activeProjectChallenge) { 
+      // set the start for the day after the active projectChallenge ends
+      startTime = moment(project.activeProjectChallenge.endsAt).add(1,'d');
+    }else{
+      startTime = moment();
+    }
+    var startYMD = startTime.format("YYYY-MM-DD")
+    this.set('displayStartsAt', startYMD);
+    projectChallenge.set('startsAt', startYMD); 
+    this.set('newStartsAt', startYMD);
+    
+    var endYMD = startTime.add(30,'d').format("YYYY-MM-DD")
+    projectChallenge.set('endsAt', endYMD); 
+    this.set('displayEndsAt', endYMD)
+    this.set('newEndsAt', endYMD);
     this.set('newDuration', 30);
   },
   
@@ -323,16 +350,10 @@ export default Component.extend({
     this.set('displayName', challenge.name);
     projectChallenge.set('unitType',challenge.unitType);
     projectChallenge.set('goal',challenge.defaultGoal);
-    //let start = moment.utc(challenge.startsAt);
-    //let end = moment.utc(challenge.endsAt);
-    //this.set('displayStartsAt', start.format("YYYY-MM-DD"));
-    //this.set('displayEndsAt', end.format("YYYY-MM-DD"));
     this.set('displayStartsAt', challenge.startsAt);
     this.set('displayEndsAt', challenge.endsAt);
     projectChallenge.set('startsAt', challenge.startsAt); 
     projectChallenge.set('endsAt', challenge.endsAt); 
-    //this.set('newStartsAt', moment.utc(challenge.startsAt).toDate());
-    //this.set('newEndsAt', moment.utc(challenge.endsAt).toDate());
     this.set('newStartsAt', challenge.startsAt);
     this.set('newEndsAt', challenge.endsAt);
     this.set('newDuration', challenge.duration);
@@ -350,20 +371,15 @@ export default Component.extend({
     let currentpc = this.get('projectChallenge');
     let errors = {"endsBeforeStart": false, "startOverlap":false, "endOverlap": false, "fullOverlap":false, "badEnd":false, "badStart":false };
     //get the proposed start and end as moments
-    //let startTime = moment.utc(this.get('newStartsAt'));
-    //let endTime = moment.utc(this.get('newEndsAt'));
     let startTime = this.get('newStartsAt');
     let endTime = this.get('newEndsAt');
     //errors.endsBeforeStart = endTime.isBefore(startTime);
     errors.endsBeforeStart = endTime<startTime;
     //loop through this project's projectChallenges
     let pcs = this.get('project.projectChallenges');
-    
     pcs.forEach((pc)=>{
       //don't validate against self
       if (pc !== currentpc) {
-        //let pcStart = moment(pc.startsAt);
-        //let pcEnd = moment(pc.endsAt);
         //check for a start overlap
         //if (startTime.isBefore(pcEnd) && startTime.isAfter(pcStart) ) {
         if (startTime<pc.endsAt && startTime>pc.startsAt ) {

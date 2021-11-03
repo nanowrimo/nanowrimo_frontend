@@ -30,19 +30,28 @@
   <div class="nw-card-header">
     <div class="nw-card-title">Find a Region</div>
     <div class="nw-card-actions nw-card-actions-left">
-      {{#bs-button-group value=primaryDisplay type="radio" onChange=(action (mut primaryDisplay)) as |bg|}}
-        {{#bg.button type="default" value=true}}{{fa-icon "search"}}{{/bg.button}}
-        {{#bg.button type="default" value=false}}{{fa-icon "map-marker"}}{{/bg.button}}
-      {{/bs-button-group}}
-      
+      <div class='btn-group' role='tablist'>
+        <button class="{{if primaryDisplay 'active' ''}}" 
+          {{action "setPrimaryDisplay" true}} role='tab'
+          aria-contols='pane-search-by-name' aria-selected={{searchByNameSelected}}>
+          {{fa-icon "search"}} 
+          <span class='sr-only'>Search regions by name</span>
+        </button>
+        <button class="{{if primaryDisplay '' 'active'}}" 
+          {{action "setPrimaryDisplay" false}} role='tab'
+          aria-controls='pane-search-by-location' aria-selected={{searchByLocationSelected}}>
+          {{fa-icon "map-marker"}}
+          <span class='sr-only'>Search regions by location</span>
+        </button>
+      </div>
     </div>
   </div>
   <div class="nw-card-content no-padding" style="flex-wrap: wrap;">
     <div>
-      <div class="nw-list-message" style={{cardSecondaryStyle}}>
+      <div id="pane-search-by-location" class="nw-list-message" style={{cardSecondaryStyle}}>
         Determining location...
       </div>
-      <div class="nw-list-search" style={{cardPrimaryStyle}}>
+      <div id='pane-search-by-name' class="nw-list-search" style={{cardPrimaryStyle}}>
         {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
       </div>
     </div>

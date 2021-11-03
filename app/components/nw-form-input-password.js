@@ -9,6 +9,7 @@
  */ 
 
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   errorMessage:null,
@@ -33,7 +34,10 @@ export default Component.extend({
       this.set('label', 'Password'); //default to 'password'
     }
   },
-
+  toggleVisibleInstruction: computed('fieldType', function() {
+    return (this.get('fieldType') == "password") ? "Show password" : "Hide password";
+  }),
+  
   actions: {
     passwordChanged(){
       let val = event.target.value;

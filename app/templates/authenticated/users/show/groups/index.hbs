@@ -1,49 +1,50 @@
+{{page-title "Groups"}}
 <div class="nw-panel-primary-container">
   {{#if isCurrentUser}}
-    <div class='nw-panel-actions'>
-      <button {{action "openNewWritingGroupModal"}}>
-        Create a writing group
-      </button>
-      {{group-create-modal
+  <div class='nw-panel-actions'>
+    <button {{action "openNewWritingGroupModal"}}>
+      Create a writing group
+    </button>
+    {{group-create-modal
         onHidden=(action "afterWritingGroupModalClose")
         open=addWritingGroup
         user=user
       }}
-      <b><a href="https://forums.nanowrimo.org/c/finding-your-crew/writing-groups/75">Or, find a writing group to join.</a></b>
-    </div>
-  {{/if}}
-  <div class='group-listings'>
     <div>
-      {{#each user.myInvitations as |group|}}
-        {{group-listing group=group buttons=true message=true}}
-      {{/each}}
+      <b><a href="https://forums.nanowrimo.org/c/finding-your-crew/writing-groups/75">Or, find a writing group to
+          join.</a></b>
     </div>
   </div>
-  <div class='group-listings'>
-    <div>
-      {{#if hasRegions}}
-        {{#each user.myGroups as |group|}}
-          {{group-listing group=group buttons=true message=true}}
-        {{/each}}
-      {{else}}
-        <div class="nw-card nw-prompt-card">
-          <div class='nw-hflex'>
-            <div class="project-announce-quote">
-              <div class="quote-text">"Don't forget who you are and where you come from."<br />
-                <span class="quotee">F. Scott Fitzgerald</span>
-              </div>
-            </div>
-            <div class='action'>
-              {{#link-to "authenticated.regions.find"}}
-                Join a region!
-              {{/link-to}}
-            </div>
-            <div class='prompt-image'>
-              <img src="/images/cards/homeregion.svg">
+  
+  <div class='nw-column-cards'>
+    {{#each user.myInvitations as |group|}}
+      {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
+    {{/each}}
+  </div>
+  {{/if}}
+  <div class='nw-column-cards'>
+    {{#if hasRegions}}
+      {{#each user.myGroups as |group|}}
+        {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
+      {{/each}}
+    {{else}}
+      <div class="nw-card nw-prompt-card">
+        <div class='nw-hflex'>
+          <div class="project-announce-quote">
+            <div class="quote-text">"Don't forget who you are and where you come from."<br />
+              <span class="quotee">F. Scott Fitzgerald</span>
             </div>
           </div>
+          <div class='action'>
+            {{#link-to "authenticated.regions.find"}}
+            Join a region!
+            {{/link-to}}
+          </div>
+          <div class='prompt-image'>
+            <img alt="" src="/images/cards/homeregion.svg">
+          </div>
         </div>
-      {{/if}}
-    </div>
+      </div>
+    {{/if}}
   </div>
 </div>

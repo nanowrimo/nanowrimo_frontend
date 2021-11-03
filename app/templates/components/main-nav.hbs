@@ -1,12 +1,21 @@
 <nav class="navbar mainnav navbar-expand-lg" aria-label="main">
   <div class="container-fluid">
-    {{#link-to nanoMenuService.homeUrl class="navbar-brand text-logo"}}<img src="/images/logo/logo_text.svg" alt="" />{{/link-to}}
+    {{#link-to nanoMenuService.homeUrl class="navbar-brand text-logo"}}
+      {{#if (media "isDesktop")}}
+        <img src="/images/logo/logo_text.svg" alt="NANOWRIMO home" class="nw-hide-when-mobile" />
+      {{/if}}
+      {{#if (media "isMobile")}}
+        <img src="/images/logo/logo_n.svg" alt="NANOWRIMO home" class="nw-show-when-mobile" style="height: 30px; position: relative; left: 10px;" />
+      {{/if}}
+    {{/link-to}}
     {{#if session.isAuthenticated}}
       {{#if currentUserName}}
         {{#bs-nav as |nav|}}
           {{#each submenus as |submenu|}}
             {{#nav.dropdown as |dd|}}
-              {{#dd.toggle}}{{submenu.toggleLabel}} <span class="caret"></span>{{/dd.toggle}}
+              {{#dd.toggle}}
+                {{submenu.toggleLabel}} <span class="caret"></span>
+              {{/dd.toggle}}
               {{#dd.menu as |ddm|}}
                 <img src="/images/nav/tab.svg" alt="" class="nano-menu-tab" />
                 <ul>
@@ -14,27 +23,33 @@
                     {{#if submenuItem}}
                       {{#ddm.item tagName="li"}}
                       {{!-- if the submenuItem has a URL, create the link, else handle the route --}}
-                        {{#if submenuItem.url}}
-                          <a href="{{submenuItem.url}}" class="dropdown-item">
-                            <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
+                      {{#if submenuItem.url}}
+                        <a href="{{submenuItem.url}}" class="dropdown-item">
+                          <div class="dropdown-image">
+                            <div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div>
+                          </div>
+                          <div class="dropdown-headline">{{submenuItem.label}}</div>
+                          <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                        </a>
+                      {{else}}
+                        {{#if submenuItem.segment}}
+                          {{#ddm.link-to submenuItem.route submenuItem.segment class="dropdown-item"}}
+                            <div class="dropdown-image">
+                              <div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div>
+                            </div>
                             <div class="dropdown-headline">{{submenuItem.label}}</div>
                             <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                          </a>
+                          {{/ddm.link-to}}
                         {{else}}
-                          {{#if submenuItem.segment}}
-                            {{#ddm.link-to submenuItem.route submenuItem.segment class="dropdown-item"}}
-                              <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                              <div class="dropdown-headline">{{submenuItem.label}}</div>
-                              <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                            {{/ddm.link-to}}
-                          {{else}}
-                            {{#ddm.link-to submenuItem.route class="dropdown-item"}}
-                              <div class="dropdown-image"><div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div></div>
-                              <div class="dropdown-headline">{{submenuItem.label}}</div>
-                              <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
-                            {{/ddm.link-to}}
-                          {{/if}}
+                          {{#ddm.link-to submenuItem.route class="dropdown-item"}}
+                            <div class="dropdown-image">
+                              <div class="icon-circle"><img src="{{submenuItem.src}}" alt="" /></div>
+                            </div>
+                            <div class="dropdown-headline">{{submenuItem.label}}</div>
+                            <div class="dropdown-teaser">{{submenuItem.teaser}}</div>
+                          {{/ddm.link-to}}
                         {{/if}}
+                      {{/if}}
                       {{/ddm.item}}
                     {{/if}}
                   {{/each}}
@@ -47,15 +62,7 @@
         {{#bs-dropdown as |dd|}}
           {{#dd.toggle class="user-menu"}}Hi, <u>{{currentUserName}}!</u> <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
-            <ul>
-              {{!--
-              {{#ddm.item tagName="li"}}
-                <a href="/" class="dropdown-item">
-                  <div class="dropdown-icon">{{fa-icon "list-alt"}}</div>
-                  <div class="dropdown-headline">Activity Log</div>
-                </a>
-              {{/ddm.item}}
-              --}}
+            <ul class="dropdown">
               {{#ddm.item tagName="li"}}
                 {{#ddm.link-to 'authenticated.settings.account' class="dropdown-item"}}
                   <div class="dropdown-icon">{{fa-icon "cog"}}</div>
@@ -63,7 +70,7 @@
                 {{/ddm.link-to}}
               {{/ddm.item}}
               {{#ddm.item tagName="li"}}
-                <a href="#" class="dropdown-item" {{action 'invalidateSession'}} data-test-log-out>
+                <a href="#" class="dropdown-item" {{action 'invalidateSession' }} data-test-log-out>
                   <div class="dropdown-icon">{{fa-icon "sign-out"}}</div>
                   <div class="dropdown-headline">Logout</div>
                 </a>
@@ -73,11 +80,11 @@
         {{/bs-dropdown}}
         {{notifications-menu}}
         {{#if (media "isMobile")}}
-          {{#nano-side-menu-toggle}}
-            <button class="button-clear button-hamburger"><span aria-hidden="false">{{fa-icon "bars"}}</span></button>
+          {{#nano-side-menu-toggle  classes="menu-open" ariaLabel="Open Menu"}}
+            <span aria-hidden="false">{{fa-icon "bars"}}</span>
           {{/nano-side-menu-toggle}}
+          <NwSideMenuModalBg {{action "closeMobileMenu"}} />
         {{/if}}
-        
       {{/if}}
     {{/if}}
   </div>

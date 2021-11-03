@@ -171,6 +171,7 @@ export default Component.extend({
     }
     this.set('projectSelected', pSelected);
     this.resetCount();
+    setTimeout(() => {  this.setAccessibilityAttributes(); }, 100);
   },
   
   resetCount() {
@@ -192,10 +193,30 @@ export default Component.extend({
     }
     
   },
+  
+  //Changes aria-hidden based on whether projects are visible
+  setAccessibilityAttributes() {
+    let ps = this.get('projectSelected');
+    for (let i=0; i<1000; i++) {
+      let el = document.getElementById("primary-project-display-" + i);
+      if (el) {
+        if (i==ps) {
+          el.ariaHidden=false;
+        } else {
+          el.ariaHidden=true;
+        }
+      } else {
+        i=1000;
+      }
+    }
+  },
 
   actions: {
     
     onShow() {
+      var t = document.getElementById("ember-bootstrap-wormhole");
+      t.firstElementChild.setAttribute("aria-modal", "true");
+      t.firstElementChild.setAttribute("aria-label", "Update your word count");
     },
     
     onHidden() {
@@ -208,6 +229,7 @@ export default Component.extend({
       if (newps<0) { newps=ap.length-1; }
       this.set('projectSelected',newps);
       this.resetCount();
+      this.setAccessibilityAttributes();
     },
     
     projectNext() {
@@ -217,6 +239,7 @@ export default Component.extend({
       if (newps>=ap.length) { newps=0; }
       this.set('projectSelected',newps);
       this.resetCount();
+      this.setAccessibilityAttributes();
     },
     
     changeFeeling(val){
@@ -352,10 +375,13 @@ export default Component.extend({
     },
     
     formSubmit() {
+      event.stopPropagation();
+      event.preventDefault();
+
       // Variable for tracking whether more info should default to open
       let moreInfo = 0;
-      //determine what 'count' we need to send to the API
-      let count = parseInt( this.get('countValue'));
+      //determine what 'count' we need to send to the API, strip ","
+      let count = this.get('countValue');
       //do we need to determine the session count based on the total count?
       let ct = this.get('countType');
       if (ct < 1) {
@@ -379,7 +405,7 @@ export default Component.extend({
       session.set('unitType', 0);
       
       //check for other metrics
-      session.set('feeling', this.get('selectedFeeling'));
+      session.set('feeling', event.target.elements['feeling'].value);
       if (this.get('selectedWhere') ) {
         session.set('where', this.get('selectedWhere').value);
         moreInfo = 1;
@@ -391,23 +417,22 @@ export default Component.extend({
       //fiddle with the dates
       let end = this.get('whenEnd');
       let start = this.get('whenStart');
+      let endDate = null;
+      let today = moment();
+      let ymd = today.format('YYYY-MM-DD');
       // have start and end been set?
       if (end) {
         moreInfo = 1;
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
-        let endDate = moment(ymd+" "+end).toDate();
+        endDate = moment(ymd+" "+end).toDate();
         session.set('end', endDate);
       }
       if (start) {
         moreInfo = 1;
         //get "today"
-        let today = moment();
-        let ymd = today.format('YYYY-MM-DD');
         let endTime = null;
         if (end) {
-          endTime = moment(end).format("HH:mm");
+          endTime = moment(endDate).format("HH:mm");
         } else {
           let m = moment();
           endTime = m.format("HH:mm");
@@ -422,10 +447,9 @@ export default Component.extend({
         let startDate = moment(ymd+" "+start).toDate();
         session.set('start', startDate);
       }
-      
       session.set('count', count);
       session.save();
-      
+    
       let user = this.get('currentUser.user');
       // check if the user has changed the counting type
       user.set("settingSessionCountBySession", this.get('countType'));
@@ -437,7 +461,7 @@ export default Component.extend({
         //save the user
         user.save();
       }
-      
+    
       let cfa = this.get('closeFormAction');
       cfa();
       return true;

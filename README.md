@@ -45,6 +45,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 * `ember test`
 * `ember test --server`
 
+
 ### Linting
 
 * `yarn lint:js`
@@ -83,4 +84,9 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
 
     to preserve scroll position when linking to a route, include "ps=true" query params in the link  
     {{link-to "SomeRoute" 'some.route' ((query-params ps="true"))}}
+
+
+
+
+
 

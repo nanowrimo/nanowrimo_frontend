@@ -146,3 +146,13 @@
     }
   }
 }
+
+/* override grid wrapper padding if the grid wrapper is in a nw-panel-primary-container */
+.nw-panel-primary-container {
+  .grid-wrapper {
+    padding: 0px;
+    @media(max-width: $screen-md) {
+      padding: 0px;
+    }
+  }
+}
