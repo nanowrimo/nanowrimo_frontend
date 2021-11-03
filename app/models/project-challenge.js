@@ -274,7 +274,8 @@ const ProjectChallenge = Model.extend({
     } else {
       duration = moment.duration(now.diff(s));
     }
-    return Math.round(duration.asDays());
+    // return the difference rounded up 
+    return Math.ceil(duration.asDays());
   },
   
   // Returns true if the challenge has started, otherwise false
