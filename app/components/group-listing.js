@@ -52,17 +52,19 @@ export default Component.extend({
   }),
   
   // Returns the latestMessage for this group
-  latestMessage: computed('groupUser', 'groupUser.latestMessage', function() {
+  latestMessage: computed('group.latestMessage', function() {
     // Get the group user
-    let gu = this.get('groupUser');
-    if (gu) {
-      let lm = this.get('groupUser.latestMessage');
-      // if found, return the number of unread messages; otherwise return zero
-      if (lm!=null) {
-        return lm;
-      } else {
-        return "<p>There are no messages yet. Why not start the discussion?</p>";
+    const lm = this.get('group.latestMessage');
+    if (lm) {
+      // Strip tags from message
+      var div = document.createElement("div");
+      div.innerHTML = lm;
+      var text = div.textContent || div.innerText || "";
+      // Truncate string
+      if (text.length>75) {
+        text = text.substring(0,75) + '...';
       }
+      return text;
     } else {
       return "<p>There are no messages yet. Why not start the discussion?</p>";
     }
