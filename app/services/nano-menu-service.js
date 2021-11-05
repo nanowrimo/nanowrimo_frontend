@@ -81,7 +81,7 @@ export default Service.extend({
   }),
   helpLinks: computed(function () {
     let links = [
-      { label: "Brought to You By", route: "pages", segment: "brought-to-you-by" },
+      { label: "Brought to You By", url: "/brought-to-you-by" },
       { label: "Help Desk", url: "https://nanowrimo.zendesk.com/" }
 
     ];
