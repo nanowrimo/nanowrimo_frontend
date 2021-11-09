@@ -117,7 +117,7 @@ export default Service.extend({
   
   loopApiRequest() {
     this.fetchApiData();
-    debounce(this, this.loopApiRequest, 30000, false);
+    debounce(this, this.loopApiRequest, 60000, false);
   },
     
 });
