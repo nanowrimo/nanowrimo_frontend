@@ -7,7 +7,18 @@
         <i class="fa fa-chevron-left" />
       </div>
     </div>
-    <div class="nw-card-title-center">{{groupName}}</div>
+    <div class="nw-card-title-center">
+      {{#if (eq group.groupType 'region')}}
+        {{#link-to "authenticated.regions.show" groupSlug}}
+          {{groupName}}
+        {{/link-to}}
+      {{/if}}
+      {{#if (eq group.groupType 'buddies')}}
+        {{#link-to "authenticated.users.show" groupSlug}}
+          {{groupName}}
+        {{/link-to}}
+      {{/if}}
+    </div>
     <div class="nw-card-title-right"></div>
   </div>
 </div>

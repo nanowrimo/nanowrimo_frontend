@@ -97,6 +97,29 @@ export default Component.extend({
     }
   }),
   
+  
+  groupSlug: computed('group', function() {
+    let g = this.get('group');
+    let gs;
+    if (g) {
+      let gt = g.get('groupType');
+      gs = g.get('slug');
+      if (gt=='buddies') {
+        let store = this.get('store');
+        let id = this.get('currentUser.user.id');
+        let gus = g.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
+              gs = u.slug;
+            }
+          }
+        });
+      }
+    }
+    return gs;
+  }),
   groupName: computed('group', function() {
     let g = this.get('group');
     let gn = null;
