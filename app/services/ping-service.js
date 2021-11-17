@@ -122,8 +122,12 @@ export default Service.extend({
   
   loopApiRequest() {
     this.fetchApiData();
+<<<<<<< HEAD
     let delay = this.get('pingDelay'); 
     debounce(this, this.loopApiRequest, delay, false);
+=======
+    debounce(this, this.loopApiRequest, 5000, false);
+>>>>>>> master
   },
   
   checkBadgeUpdates(timeFromPing) {
