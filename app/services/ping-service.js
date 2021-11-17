@@ -21,7 +21,7 @@ export default Service.extend({
   
   init() {
     this._super(...arguments);
-    this.set('pingDelay', 20000); 
+    this.set('pingDelay', 5000); 
     this.set('buddiesData', []);
   },
   
@@ -122,12 +122,8 @@ export default Service.extend({
   
   loopApiRequest() {
     this.fetchApiData();
-<<<<<<< HEAD
     let delay = this.get('pingDelay'); 
     debounce(this, this.loopApiRequest, delay, false);
-=======
-    debounce(this, this.loopApiRequest, 5000, false);
->>>>>>> master
   },
   
   checkBadgeUpdates(timeFromPing) {
