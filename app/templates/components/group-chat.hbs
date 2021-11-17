@@ -12,11 +12,13 @@
         {{#link-to "authenticated.regions.show" groupSlug}}
           {{groupName}}
         {{/link-to}}
-      {{/if}}
-      {{#if (eq group.groupType 'buddies')}}
+
+      {{else if (eq group.groupType 'buddies')}}
         {{#link-to "authenticated.users.show" groupSlug}}
           {{groupName}}
         {{/link-to}}
+      {{else}}
+        {{groupName}}
       {{/if}}
     </div>
     <div class="nw-card-title-right"></div>
