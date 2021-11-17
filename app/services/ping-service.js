@@ -6,6 +6,7 @@ import ENV from 'nanowrimo/config/environment';
 export default Service.extend({
   session: service(),
   currentUser: service(),
+  badgesService: service(),
   notificationData: null,
   unreadMessageCount: 0,
   //groupsWithUnreadMessages: null,
@@ -15,9 +16,12 @@ export default Service.extend({
   buddyProjectsLastUpdatedAt: null,
   updateCount: 1,
   buddyshipUpdatedAt: 0,
+  badgesUpdatedAt: 0,
+  pingDelay: null,
   
   init() {
     this._super(...arguments);
+    this.set('pingDelay', 20000); 
     this.set('buddiesData', []);
   },
   
@@ -63,6 +67,7 @@ export default Service.extend({
       return response.json().then((json)=>{
         // track the last update
         this.set('buddiesLastUpdatedAt', json.data.buddies_last_updated_dt);
+        this.checkBadgeUpdates(json.data.badges_updated_at);
         this.set("notificationData", json.data.notifications);
         // process the message data
         //let groups = [];
@@ -117,7 +122,18 @@ export default Service.extend({
   
   loopApiRequest() {
     this.fetchApiData();
-    debounce(this, this.loopApiRequest, 60000, false);
+    let delay = this.get('pingDelay'); 
+    debounce(this, this.loopApiRequest, delay, false);
   },
-    
+  
+  checkBadgeUpdates(timeFromPing) {
+    let localCheckTime = this.get('badgesUpdatedAt');
+    // is the local check time older than the the time send by Ping?
+    if (localCheckTime < timeFromPing) {
+      // update the lock check time
+      this.set('badgesUpdatedAt',  timeFromPing);
+      // update the badges
+      this.get('badgesService').checkForUpdates();
+    }
+  }
 });

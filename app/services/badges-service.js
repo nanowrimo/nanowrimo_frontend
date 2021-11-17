@@ -24,9 +24,17 @@ export default Service.extend({
     let t = this;
     let u = this.get('currentUser.user');
     if (u) {
+      let uId = u.id;
+      // clear the user's badges?
+      let userBadges = this.store.peekAll('user-badge');
+      userBadges.forEach((ub)=>{
+        if (ub.user_id == uId) {
+          this.store.unloadRecord(ub);
+        }
+      });
       this.store.query('user-badge', {
         filter: {
-          user_id: u.get('id')
+          user_id: uId
         }
       }).then(function() {
         t.incrementRecomputeBadges();
