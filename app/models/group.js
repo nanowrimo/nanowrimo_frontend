@@ -25,9 +25,12 @@ const Group = Model.extend({
   description: attr('string'),
   url: attr('string'),
   forumLink: attr('string'),
+  denormedLastMessage: attr('string'),
+  denormedLastMessageAt: attr('string'),
+  denormedLastOfficalMessage: attr('string'),
+  denormedLastOfficialMessageAt: attr('string'),
   latestMessage: attr('string'),
   latestMessageDt: attr('string'),
-  
   
   
   // Members

@@ -311,28 +311,28 @@ export default Component.extend({
         // set the whenEnd and whenStart
         let rs = this.get('referenceStart');
         let re = this.get('referenceEnd');
-        //let hhmmStart;
-        //let hhmmEnd;
+        let hhmmStart;
+        let hhmmEnd;
         let yyyymmddStart;
         if (rs) {
-          //let ms = moment(rs);
-          //hhmmStart = ms.format("HH:mm");
+          let ms = moment(rs);
+          hhmmStart = ms.format("HH:mm");
           let me = moment(re);
-          //hhmmEnd = me.format("HH:mm");
+          hhmmEnd = me.format("HH:mm");
           yyyymmddStart = me.format("YYYY-MM-DD");
         } else {
           let m = moment();
-          //hhmmEnd = m.format("HH:mm");
+          hhmmEnd = m.format("HH:mm");
           m.subtract(1, 'h');
-          //hhmmStart = m.format("HH:mm");
+          hhmmStart = m.format("HH:mm");
           yyyymmddStart = m.format("YYYY-MM-DD");
         }
 
         //get the time in HH:MM format and set that as the whenend
-        //this.set("whenEnd", hhmmEnd);
+        this.set("whenEnd", hhmmEnd);
 
         //get the time in HH:MM format and set that as the whenStart
-         //this.set("whenStart", hhmmStart);
+         this.set("whenStart", hhmmStart);
 
         //get the time in HH:MM format and set that as the whenStart
          this.set("dateStart", yyyymmddStart);
@@ -437,9 +437,9 @@ export default Component.extend({
           let m = moment();
           endTime = m.format("HH:mm");
         }
-        //let startTime = moment(start).format("HH:mm");
-        //if (startTime > endTime) {
-        if (start > endTime) {
+        let startTime = moment(start).format("HH:mm");
+        // if (startTime > endTime) {
+        if (startTime > endTime) {
           //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
