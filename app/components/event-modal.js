@@ -483,7 +483,6 @@ export default Component.extend({
     
     // Called when the value of the minutes select changes
     descriptionChanged(v) {
-      alert(v);
       this.set("description",v);
     },
     
