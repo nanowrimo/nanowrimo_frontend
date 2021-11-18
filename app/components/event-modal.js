@@ -373,6 +373,9 @@ export default Component.extend({
         case 0: {
           let e = this.validateInput('eventName');
           let d = this.validateInput('duration');
+          // get the inner HTML from the medium editor //TODO: remove unused 'description' code.
+          let desc = document.querySelector(".editable.form-control.medium-editor-element").innerHTML;
+          this.set('description', desc);
           if (e&&d) {
             this.set("step", 1);
           }
