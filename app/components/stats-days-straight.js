@@ -50,6 +50,8 @@ export default ChartBaseComponent.extend({
         // is current agg.day 1 day greater than previous day?
         if (moment(agg.day).isSame(moment(prevDay).add(1,'d'),'d')) {
           daysStraight+=1;
+        } else if (moment(agg.day).isSame(moment(prevDay),'d')) {
+          // this is a duplicate day, which should not be possible, so ignore it
         } else {
           daysStraight=1;
         }
