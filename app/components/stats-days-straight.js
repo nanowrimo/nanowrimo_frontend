@@ -16,6 +16,7 @@ export default ChartBaseComponent.extend({
         }
       });
     }
+    console.log(goodAggs);
     return goodAggs;
   }),
   
@@ -28,6 +29,7 @@ export default ChartBaseComponent.extend({
     }
     // sort the aggregates by day
     aggs = aggs.sortBy("day");
+    console.log(aggs);
     // is the last aggregate from today or yesterday?
     let lastAgg = aggs[aggs.length-1];
     
@@ -50,6 +52,8 @@ export default ChartBaseComponent.extend({
         // is current agg.day 1 day greater than previous day?
         if (moment(agg.day).isSame(moment(prevDay).add(1,'d'),'d')) {
           daysStraight+=1;
+        } else if (moment(agg.day).isSame(moment(prevDay),'d'))
+          // this is a duplicate day, which should not be possible, so ignore it
         } else {
           daysStraight=1;
         }
