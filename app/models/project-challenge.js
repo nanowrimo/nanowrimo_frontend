@@ -356,7 +356,7 @@ const ProjectChallenge = Model.extend({
     let badges = store.peekAll('userBadge'); 
     let id = parseInt(this.get('id')); 
     let projectChallengeBadges = badges.filterBy('project_challenge_id', id);
-        let winnerBadge=null;
+      let winnerBadge=null;
     //loop
     for (var i = 0; i < projectChallengeBadges.length; i++) {
       var pcBadge = projectChallengeBadges[i];

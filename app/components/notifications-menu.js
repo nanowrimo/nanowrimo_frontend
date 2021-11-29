@@ -59,7 +59,7 @@ export default Component.extend({
     else return "";
   }),
   
-  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.{winnerBadge,wonAt}', function() {
+  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.{winnerBadge}', function() {
     // get the winner badge
     let winnerBadge = this.get('currentUser.user.primaryProject.currentProjectChallenge.winnerBadge');
     let wonAt = this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
