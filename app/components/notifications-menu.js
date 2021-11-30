@@ -18,7 +18,6 @@ export default Component.extend({
   badgeForSplash: null,
   displayNotifications: false,
   badgeExtraData: null,
-  
   init(){
     this._super(...arguments);
     //access the 'currentUser.user.primaryProject.currentProjectChallenge.wonAt' for observing reasons
@@ -58,15 +57,18 @@ export default Component.extend({
     if (c==0) return "nw-hidden";
     else return "";
   }),
-  
-  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.{winnerBadge,wonAt}', function() {
+
+  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.wonAt', function() {
+    let pc = this.get('currentUser.user.primaryProject.currentProjectChallenge');
+    if(!pc) {
+      return;
+    }
     // get the winner badge
-    let winnerBadge = this.get('currentUser.user.primaryProject.currentProjectChallenge.winnerBadge');
-    let wonAt = this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
+    let winnerBadge = pc.winnerBadge();
+    let wonAt = pc.wonAt;
     //get the eventType 
-    let eventType = this.get('currentUser.user.primaryProject.currentProjectChallenge.eventType');
-    
-    
+    let eventType = pc.eventType;
+       
     // is this nano or camp?
     if (eventType<2 && wonAt && winnerBadge) {
       // get the current time in the user's timezone
