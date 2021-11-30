@@ -28,7 +28,7 @@ export default Service.extend({
   load() {
     if (this.get('session.isAuthenticated')) {
       // load the initial badge data 
-      this.get('badgesService').getBaseBadgeData();
+      //this.get('badgesService').getBaseBadgeData();
       this.loopApiRequest();
     }
   },
