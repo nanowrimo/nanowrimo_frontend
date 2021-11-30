@@ -15,7 +15,9 @@ export default Component.extend({
   isNaNo: computed('badge', function() {
     //get the badge 
     let b = this.get('badge');
-    return !b.title.includes("Camp");
+    if (b) {
+      return !b.title.includes("Camp");
+    }
   }),
   
   winnerImage: computed('isNaNo', function(){

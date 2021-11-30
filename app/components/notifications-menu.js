@@ -18,12 +18,13 @@ export default Component.extend({
   badgeForSplash: null,
   displayNotifications: false,
   badgeExtraData: null,
-  
+  currentProjectChallenge: null,
   init(){
     this._super(...arguments);
     //access the 'currentUser.user.primaryProject.currentProjectChallenge.wonAt' for observing reasons
     let wonAt =this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
     this.set('oldWonAt', wonAt);
+    this.set('currentProjectChallenge', this.get('currentUser.user.primaryProject.currentProjectChallenge'));
   },
   allNotifications: computed('notificationsService.recomputeNotifications', function() {
     let ns = this.get('store').peekAll('notification');
@@ -59,14 +60,15 @@ export default Component.extend({
     else return "";
   }),
   
-  observePotentialWin: observer('currentUser.user.primaryProject.currentProjectChallenge.{winnerBadge}', function() {
+  observePotentialWin: observer('currentProjectChallenge.wonAt', function() {
+    let pc = this.get('currentProjectChallenge');
     // get the winner badge
-    let winnerBadge = this.get('currentUser.user.primaryProject.currentProjectChallenge.winnerBadge');
-    let wonAt = this.get('currentUser.user.primaryProject.currentProjectChallenge.wonAt');
+    let winnerBadge = pc.winnerBadge();
+    
+    let wonAt = pc.wonAt;
     //get the eventType 
-    let eventType = this.get('currentUser.user.primaryProject.currentProjectChallenge.eventType');
-    
-    
+    let eventType = pc.eventType;
+       
     // is this nano or camp?
     if (eventType<2 && wonAt && winnerBadge) {
       // get the current time in the user's timezone

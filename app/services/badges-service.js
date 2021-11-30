@@ -14,9 +14,9 @@ export default Service.extend({
   },
   
   getBaseBadgeData() {
-    let t = this;
+    //let t = this;
     this.get('store').query('badge',{}).then(function() {
-      debounce(t, t.checkForUpdates, 1000, false);
+      //debounce(t, t.checkForUpdates, 1000, false);
     });
   },
   
