@@ -10,6 +10,22 @@ export default Component.extend({
   
   project: null,
   
+  winnerRoute: computed('project.currentProjectChallenge.eventType', function() {
+    let type = this.get('project.currentProjectChallenge.eventType');
+    if (type < 2){ // event is NaNoWriMo or Camp
+      // get the event name 
+      let name = this.get('project.currentProjectChallenge.name');
+      if (name && this.get('goalMet')) {
+        // convert the name
+        name = name.toLowerCase().replace(/ /g,"-")+"-winner";
+        // return the route
+        return `authenticated.${name}`;
+      }
+    }
+    return null;
+  }),
+  
+  
   writingTypeString: computed('project.currentProjectChallenge.writingType',function() {
     let t = this.get('project.currentProjectChallenge.writingType');
     if (t==1) {
