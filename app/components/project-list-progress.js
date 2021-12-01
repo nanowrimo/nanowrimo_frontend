@@ -19,7 +19,15 @@ export default Component.extend({
         // convert the name
         name = name.toLowerCase().replace(/ /g,"-")+"-winner";
         // return the route
-        return `authenticated.${name}`;
+        let route = `authenticated.${name}`;
+        let router = this.get('router');
+        let url;
+        try {
+          url = router.urlFor( route ); 
+          return route;
+        } catch (error) {
+          // bummer
+        }
       }
     }
     return null;
