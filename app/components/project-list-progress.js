@@ -21,9 +21,8 @@ export default Component.extend({
         // return the route
         let route = `authenticated.${name}`;
         let router = this.get('router');
-        let url;
         try {
-          url = router.urlFor( route ); 
+          router.urlFor( route );  // if this fails, no route exists
           return route;
         } catch (error) {
           // bummer
