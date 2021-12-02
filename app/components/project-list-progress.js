@@ -10,6 +10,29 @@ export default Component.extend({
   
   project: null,
   
+  winnerRoute: computed('project.currentProjectChallenge.eventType', function() {
+    let type = this.get('project.currentProjectChallenge.eventType');
+    if (type < 2){ // event is NaNoWriMo or Camp
+      // get the event name 
+      let name = this.get('project.currentProjectChallenge.name');
+      if (name && this.get('goalMet')) {
+        // convert the name
+        name = name.toLowerCase().replace(/ /g,"-")+"-winner";
+        // return the route
+        let route = `authenticated.${name}`;
+        let router = this.get('router');
+        try {
+          router.urlFor( route );  // if this fails, no route exists
+          return route;
+        } catch (error) {
+          // bummer
+        }
+      }
+    }
+    return null;
+  }),
+  
+  
   writingTypeString: computed('project.currentProjectChallenge.writingType',function() {
     let t = this.get('project.currentProjectChallenge.writingType');
     if (t==1) {

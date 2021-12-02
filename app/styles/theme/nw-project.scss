@@ -61,13 +61,21 @@
       padding-top: 5px;
     }
     .goal-text{ 
+      width: 100%;
+      display: flex;
+      
+      justify-content: space-between;
       margin-bottom: 7.5px;
       font-size: 16px;
-      text-align: left;
+
       .goal {
         color: $nw-mediumgrey
       }
+      .winner-route {
+        text-align: right;
+      }
     }
+    
     .nano-progress-bar{
       width: 100%;
     }

@@ -5,6 +5,12 @@
     </span>
     <span class=''>{{writingTypeString}} {{format-number project.currentProjectChallenge.goal}} words {{{goalIcon}}}</span>
   </a>
+
+  {{#if winnerRoute }}
+    <span class='winner-route'>
+      {{#link-to winnerRoute}}<img src='/images/cards/golden-trophy.svg' alt="" /> Winner Goodies{{/link-to}}
+    </span>
+  {{/if}}
 </div>
 
 {{nano-progress-bar percent=percentCompleted}}
