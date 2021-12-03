@@ -138,7 +138,12 @@
     </div>
   {{/modal.body}}
   {{#modal.footer}}
-    <input class='nano-button' type='submit' value='Update progress'>
+    <button class='nano-button' type='submit'  disabled={{disableSubmit}}>
+      Update progress
+      {{#if disableSubmit}}
+        <i class='fa fa-spinner fa-spin'></i>
+      {{/if}}
+    </button>
     <input class='nano-button btn-underlined' {{action 'cancel'}} type='button' value='Cancel'>
   {{/modal.footer}}
   </form>
