@@ -451,7 +451,7 @@ export default Component.extend({
         session.set('start', startDate);
       }
       session.set('count', count);
-      session.save().then(response=>{
+      session.save().then(()=>{
         let user = this.get('currentUser.user');
         // check if the user has changed the counting type
         user.set("settingSessionCountBySession", this.get('countType'));
