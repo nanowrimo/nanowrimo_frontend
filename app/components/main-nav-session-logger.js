@@ -27,6 +27,7 @@ export default Component.extend({
   _projectAdditionalInfoShow: false,
   projectSelected: 0,
   open: true,
+  disableSubmit: false,
   
   // Returns the distance the project list should scroll to show the selected project
   scrollDistance: computed('projectSelected', function() {
@@ -375,6 +376,8 @@ export default Component.extend({
     },
     
     formSubmit() {
+      // disable submit
+      this.set('disableSubmit', true);
       event.stopPropagation();
       event.preventDefault();
 
@@ -448,23 +451,27 @@ export default Component.extend({
         session.set('start', startDate);
       }
       session.set('count', count);
-      session.save();
-    
-      let user = this.get('currentUser.user');
-      // check if the user has changed the counting type
-      user.set("settingSessionCountBySession", this.get('countType'));
-      // check if the user is entering more data
-      user.set("settingSessionMoreInfo", moreInfo);
-      //user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
-      let isDirty = user.get('hasDirtyAttributes');
-      if (isDirty) {
-        //save the user
-        user.save();
-      }
-    
-      let cfa = this.get('closeFormAction');
-      cfa();
-      return true;
+      session.save().then(response=>{
+        let user = this.get('currentUser.user');
+        // check if the user has changed the counting type
+        user.set("settingSessionCountBySession", this.get('countType'));
+        // check if the user is entering more data
+        user.set("settingSessionMoreInfo", moreInfo);
+        //user.set("settingSessionMoreInfo", this.get("_projectAdditionalInfoShow"));
+        let isDirty = user.get('hasDirtyAttributes');
+        if (isDirty) {
+          //save the user
+          user.save();
+        }
+        //enable the submit
+        this.set('disableSubmit', false);
+        let cfa = this.get('closeFormAction');
+        cfa();
+        return true;
+        
+      });
+      
+      
     }
     
   }
