@@ -99,7 +99,11 @@
 
   {{#modal.footer}}
 
-    <input disabled={{hasValidationError}} type="submit" class="nano-button" value='Save Progress'/>
+    <button disabled={{submitDisabled}} type="submit" class="nano-button" >Save Progress
+     {{#if disableSubmit}}
+        <i class='fa fa-spinner fa-spin'></i>
+      {{/if}}
+    </button>
     <input type="button" class="nano-button btn-underlined" value="Cancel" {{action "closeModal"}}/>
 
   {{/modal.footer}}
