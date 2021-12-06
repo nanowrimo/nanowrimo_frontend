@@ -256,7 +256,7 @@ export default Component.extend({
       session.set('end', endDate);
       session.set('start', startDate);
       session.set('count', count);
-      session.save().then(response=>{
+      session.save().then(()=>{
         this.set('disableSubmit', false);
         this.set('open', false);
         return false;
