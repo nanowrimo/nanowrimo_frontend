@@ -7,6 +7,7 @@ export default Service.extend({
   session: service(),
   currentUser: service(),
   badgesService: service(),
+  notificationsService: service(),
   notificationData: null,
   unreadMessageCount: 0,
   //groupsWithUnreadMessages: null,
@@ -18,6 +19,7 @@ export default Service.extend({
   buddyshipUpdatedAt: 0,
   badgesUpdatedAt: 0,
   pingDelay: null,
+  notificationReset: 0,
   
   init() {
     this._super(...arguments);
@@ -115,6 +117,12 @@ export default Service.extend({
         this.set('buddyProjectsLastUpdatedAt',json.data.buddy_projects_last_updated_at);
         this.set('unreadMessageCount', count);
         //this.set('groupsWithUnreadMessages', groups);
+        // check the notification_reset
+        if (json.data.notification_reset > this.get('notificationReset') ) {
+          this.set('notificationReset', json.data.notification_reset);
+          // perform the reset
+          this.get('notificationsService').reset();
+        }
         this.incrementUpdateCount();
       })
     }).catch(() => {
