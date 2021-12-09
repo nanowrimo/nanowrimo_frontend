@@ -32,6 +32,15 @@ export default Service.extend({
     //debounce(this, this.checkForUpdates, 20000, false);
   },
   
+  reset(){
+    // get all notifications from the store
+    let store = this.get('store');
+    let notifs = store.peekAll('notification');
+    notifs.forEach(n=>n.unloadRecord());
+    //checkFor Updates
+    this.checkForUpdates();
+  },
+  
   notificationClicked(notification){
     // Set a variable to be returned
     let r = [];
