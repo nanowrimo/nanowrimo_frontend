@@ -149,9 +149,14 @@ export default Component.extend({
         let formatted = now.format("YYYY-MM-DD");
         this.set('dateStart',formatted);
       }
-      //set defaults for the times
+      //set defaults for the start time
       this.set('whenStart', "12:00");
-      this.set('whenEnd', "13:00");
+
+      //set end time
+      let hhmmEnd;
+      let m = moment();
+      hhmmEnd = m.format("HH:mm");
+      this.set('whenEnd',  hhmmEnd);
       
       //set the 'count' to zero
       this.set('countValue', 0);
