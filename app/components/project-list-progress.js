@@ -119,7 +119,7 @@ export default Component.extend({
     },
     
     viewGoals() {
-      this.get('router').transitionTo('authenticated.users.show.projects.show.goals', this.get('currentUser.user.slug'), this.get('project.slug') );
+      this.get('router').transitionTo('authenticated.users.show.projects.show.goals', this.get('project.computedAuthor.slug'), this.get('project.slug') );
     }
     
   }
