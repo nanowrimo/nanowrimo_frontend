@@ -61,7 +61,9 @@
   font-size: 14px;
   text-transform: uppercase;
   line-height: 16px;
-  a { margin-right: 15px; }
+  ul li { display: inline-block; }
+  ul li:after { content: "\00a0 \2022 \000a0 "; }
+  ul li:last-child:after { content: ""; }
 }
 .nw-footer-description {
   margin-top: 12px;

@@ -26,7 +26,13 @@ export default Component.extend({
   referenceTimer: null,
   referenceStopwatch: null,
   _projectAdditionalInfoShow: false,
+  disableSubmit: false,
   // End session vars
+  
+  // should submit button be disabled?
+  submitDisabled: computed('hasValidationError', 'disableSubmit', function(){
+    return this.get('hasValidationError') || this.get('disableSubmit');
+  }),
   
   // Session methods begin
   countTypeTotalSelected: computed('currentUser.user.settingSessionCountBySession', function(){
@@ -149,9 +155,14 @@ export default Component.extend({
         let formatted = now.format("YYYY-MM-DD");
         this.set('dateStart',formatted);
       }
-      //set defaults for the times
+      //set defaults for the start time
       this.set('whenStart', "12:00");
-      this.set('whenEnd', "13:00");
+
+      //set end time
+      let hhmmEnd;
+      let m = moment();
+      hhmmEnd = m.format("HH:mm");
+      this.set('whenEnd',  hhmmEnd);
       
       //set the 'count' to zero
       this.set('countValue', 0);
@@ -199,6 +210,8 @@ export default Component.extend({
     },
 
     formSubmit() {
+      // disable submit
+      this.set('disableSubmit', true);
       event.preventDefault();
       event.preventDefault();
       // Get the current user's time zone
@@ -248,10 +261,13 @@ export default Component.extend({
       session.set('end', endDate);
       session.set('start', startDate);
       session.set('count', count);
-      session.save();
+      session.save().then(()=>{
+        this.set('disableSubmit', false);
+        this.set('open', false);
+        return false;
+      });
       
-      this.set('open', false);
-      return false;
+      
     },
     hideForms: function() {
       this.set('open', false);
