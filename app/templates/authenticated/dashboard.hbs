@@ -1,7 +1,9 @@
 {{page-title "Dashboard"}}
 <div class="content-gutters">
   <div class="container-fluid">
-
+    {{#if displayNowWhatBanner}}
+      <HeadsUpBulletin @type="NowWhat" @buttonAction={{action "openNewProjectModal"}}></HeadsUpBulletin>
+    {{/if}}
     {{#if displayCampBanner}}
       <div class="flash-banner">
         <div class="banner-left">
