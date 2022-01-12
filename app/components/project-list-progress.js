@@ -12,7 +12,7 @@ export default Component.extend({
   
   winnerRoute: computed('project.currentProjectChallenge.eventType', function() {
     let type = this.get('project.currentProjectChallenge.eventType');
-    if (type < 2){ // event is NaNoWriMo or Camp
+    if (type < 2 || type==3){ // event is NaNoWriMo or Camp
       // get the event name 
       let name = this.get('project.currentProjectChallenge.name');
       if (name && this.get('goalMet')) {
@@ -103,6 +103,9 @@ export default Component.extend({
           }
           if (c.eventType==1) {
             str = "<img src='/images/global/tent.svg' style='' />";
+          }
+          if (c.eventType==3) {
+            str = "<img src='/images/global/now-what-pen.svg' style='' />";
           }
         }
       }
