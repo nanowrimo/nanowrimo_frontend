@@ -27,14 +27,7 @@ export default Component.extend({
 
     }
   }),
-  imageSource: computed("type", function(){
-    let type = this.get("type");
-    switch(type){
-      case "NowWhat": 
-        return "/images/global/now-what-pen.svg"
-
-    }
-  }),
+ 
   actions: {
    buttonClicked(){
      let action = this.get('buttonAction');
