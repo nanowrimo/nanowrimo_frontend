@@ -359,6 +359,9 @@ const ProjectChallenge = Model.extend({
       case 1:
         titleKey = "Achieved Your Camp NaNoWriMo Goal";
         break;
+      case 3:
+        titleKey = "Now What?";
+        break;
       default:
         return;
     }
