@@ -53,7 +53,6 @@ export default Component.extend({
       case 3:
         return "/images/splash/now-what-cert.png";
     }
-    return path;
   }),
 
   winnerRoute: computed('eventName', function(){
@@ -70,7 +69,6 @@ export default Component.extend({
   
   eventName: computed('extraData', function() {
     let data = JSON.parse(this.get('extraData'));
-    console.log(data);
     if (data) {
       let id = data.challenge_id;
       //get the related challenge from the store

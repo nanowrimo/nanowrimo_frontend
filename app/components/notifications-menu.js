@@ -65,7 +65,6 @@ export default Component.extend({
     }
     // get the winner badge
     let winnerBadge = pc.winnerBadge();
-    console.log(winnerBadge);
     let wonAt = pc.wonAt;
     //get the eventType 
     let eventType = pc.eventType;
