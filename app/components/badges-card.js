@@ -37,6 +37,10 @@ export default Component.extend({
                  
           case "Achieved Your Camp NaNoWriMo Goal":
           if (eventType==1) {filteredBadges.pushObject(badge);} 
+          break; 
+             
+          case "Now What?":
+          if (eventType==3) {filteredBadges.pushObject(badge);} 
           break;    
                
           case "Write 40,000 Words":
