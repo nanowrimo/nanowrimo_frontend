@@ -137,7 +137,7 @@
             
             {{/if}}          
           {{else if (eq f.currentStepIndex 1)}}
-            {{#if (lte challenge.eventType 1)}}
+            {{#if officialEvent}}
               <div id='you-chose-nanowrimo'>
               Because you have chosen {{challenge.name}}, some information cannot be edited. 
               (Go <a href=# {{action "setStep" 0}}>back</a> if needed)

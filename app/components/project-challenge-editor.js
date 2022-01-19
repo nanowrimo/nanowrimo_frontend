@@ -38,25 +38,26 @@ export default Component.extend({
     return Challenge.optionsForUnitType;
   }),
   disableName: computed(function() {
-    let et = this.get('challenge.eventType')
-    return  (et === 0 || et === 1);
+    let et = this.get('challenge.eventType');
+    return  (et === 0 || et === 1|| et===3);
   }),
   disableWritingType: computed(function() {
     return this.get('challenge.eventType') === 0;
   }),
   disableDefaultGoal: computed(function() {
-    return this.get('challenge.eventType') === 0;
+     let et = this.get('challenge.eventType');
+    return  (et === 0 || et===3);
   }),
   disableUnitType: computed(function() {
     return this.get('challenge.eventType') === 0;
   }),
   disableStartEnd: computed(function() {
     let et = this.get('challenge.eventType')
-    return  (et === 0 || et === 1);
+    return  (et === 0 || et === 1 || et===3);
   }),
   pastTense: computed('challenge',function() {
     let et = this.get('challenge.eventType')
-    if (et === 0 || et === 1) {
+    if (et === 0 || et === 1 || et===3) {
       let d = new Date();
       let c = this.get('challenge');
       if (c.endsAt < d) {
