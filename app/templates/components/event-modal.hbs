@@ -96,7 +96,7 @@
                 placeholder='My New Event...'
               }}
             </div>
-            <div class="form-group">
+            <div id='event-description-group' class="form-group">
               <label for='event-description' class='form-group'>Event details:</label>
               <textarea id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll"/>
           </div>

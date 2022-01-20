@@ -402,3 +402,10 @@ label.checkbox-label {
     text-align: center;
   }
 }
+
+/* medium editor in the events modal */ 
+#event-description-group {
+  .medium-editor-element {
+    min-height: 10rem;
+  }
+}
