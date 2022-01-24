@@ -24,7 +24,8 @@ export default Controller.extend({
     let pe = [];
     let now = moment();
     gs.forEach(function(g) {
-      if ((g.groupId==gid) && (g.endDt>now) && (g.approvedById<1)) {
+      // is the event a pending event for this group? 
+      if ((g.groupId==gid) && (g.endDt>now) && (g.approvedById===0)) {
         pe.push(g);
       }
     });
