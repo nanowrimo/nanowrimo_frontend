@@ -94,13 +94,14 @@ export default Component.extend({
   },
     
   doReject() {
+    // set the event's approvedById to -1 to signify rejection
     let e = this.get('event');
     let uid = -1;
     e.set("approvedById",uid);
     e.save().then(()=>{
       // Increment recompute location
-      let re = this.get('recomputeEvents');
-      this.set('recomputeEvents',re+1);
+      //let re = this.get('recomputeEvents');
+     // this.set('recomputeEvents',re+1);
     });
   },
     
