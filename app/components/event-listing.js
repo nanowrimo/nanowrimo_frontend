@@ -99,9 +99,7 @@ export default Component.extend({
     let uid = -1;
     e.set("approvedById",uid);
     e.save().then(()=>{
-      // Increment recompute location
-      //let re = this.get('recomputeEvents');
-     // this.set('recomputeEvents',re+1);
+      // save is the end of the rejection. Is anything needed here?
     });
   },
     
