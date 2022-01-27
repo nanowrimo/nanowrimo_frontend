@@ -137,8 +137,10 @@ export default Component.extend({
   officialEvent: computed("challenge", function(){
     let challenge = this.get('challenge');
     let ret = false;
-    if (challenge.eventType<2 || challenge.eventType==3){
-      ret = true;
+    if (challenge) {
+      if (challenge.eventType<2 || challenge.eventType==3){
+        ret = true;
+      }
     }
     return ret;
   }),
