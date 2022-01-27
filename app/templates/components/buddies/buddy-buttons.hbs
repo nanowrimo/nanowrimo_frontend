@@ -15,7 +15,10 @@
     <div>
       <button {{action "approveInvitation" }} class="button-reversed">
         {{fa-icon "user-plus"}}
-        Accept
+        Accept 
+        {{#if approvingInvite}}
+          <i class="fa fa-spinner fa-spin"></i>
+        {{/if}}
       </button>
       &nbsp;
       <button {{action "rejectInvitation" }} class="button-reversed">
