@@ -23,7 +23,7 @@ export default Component.extend({
     let type = this.get("type");
     switch(type){
       case "NowWhat": 
-        return  "Set your 150-page revision goal.";
+        return  "Join the revision challenge.";
 
     }
   }),
