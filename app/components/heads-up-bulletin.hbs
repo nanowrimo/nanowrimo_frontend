@@ -7,7 +7,12 @@
     </div>
     <div class="flash-content">
       <div class="flash-text">
-        {{text}}
+        {{#if (eq type "NowWhat")}}
+        <span>
+          So you wrote a novel... now what? During 
+          <LinkTo @route="pages" @model="now-what">the "Now What?" Months</LinkTo>, set a goal to revise 150 pages of your novel by the end of February.
+        </span>
+        {{/if}}
       </div>
       <div class="flash-button">
         <button {{action "buttonClicked"}}>

@@ -105,6 +105,11 @@
           font-size: 18px;
           line-height: 1.2;
         }
+        a {
+        color: rgba(255,255,255, 0.9); 
+        padding-left: 7px; 
+        text-decoration: underline;
+        }
       }
       .flash-button {
         flex: 1 1 30%;
