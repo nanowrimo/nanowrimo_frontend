@@ -223,19 +223,7 @@ export default Component.extend({
       this.set('status','upcoming');
     });
   },
-    
-  doReject() {
-    let e = this.get('event');
-    let uid = -1;
-    e.set("approvedById",uid);
-    e.save().then(()=>{
-      // Increment recompute location
-      let re = this.get('recomputeEvents');
-      this.set('recomputeEvents',re+1);
-      this.set('status','rejected');
-    });
-  },
-  
+
   doCancel() {
     let e = this.get('event');
     let uid = this.get('currentUser.user.id');
@@ -339,7 +327,14 @@ export default Component.extend({
       this.doApprove();
     },
     rejectEvent() {
-      this.doApprove();
+      // set the event to be approvedById of -1
+      let e = this.get('event');
+      let uid = -1;
+      e.set("approvedById",uid);
+      e.save().then(()=>{
+        let r = this.get('router');
+        r.transitionTo('authenticated.regions.show.events.pending');
+      });
     },
   }
 });

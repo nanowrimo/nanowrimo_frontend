@@ -129,6 +129,12 @@ const ProjectChallenge = Model.extend({
     let d = this.get('duration');
     return Math.round(g/d);
   }),
+  
+  fractionCountPerDay: computed('goal', 'duration', function(){
+    let g = this.get('goal');
+    let d = this.get('duration');
+    return g/d;
+  }),
 
   duration: computed("startsAt", "endsAt", function(){
     // return the difference between start and end in number of days
@@ -358,6 +364,9 @@ const ProjectChallenge = Model.extend({
         break;
       case 1:
         titleKey = "Achieved Your Camp NaNoWriMo Goal";
+        break;
+      case 3:
+        titleKey = "Now What?";
         break;
       default:
         return;

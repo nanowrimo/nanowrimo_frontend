@@ -69,8 +69,8 @@ export default Component.extend({
     //get the eventType 
     let eventType = pc.eventType;
        
-    // is this nano or camp?
-    if (eventType<2 && wonAt && winnerBadge) {
+    // is this nano or camp... or now what ?
+    if ((eventType<2 || eventType==3) && wonAt && winnerBadge) {
       // get the current time in the user's timezone
       let tz = this.get('currentUser.user.timeZone');
       // get the wonAt
@@ -84,6 +84,8 @@ export default Component.extend({
         this.set('initialWinnerDisplayed', true);
         this.set('badgeForSplash',winnerBadge);
         this.set('showWinnerSplash', true);
+        // the badgeExtraData must be set to a json string of the challenge_id
+        this.set('badgeExtraData', `{"challenge_id":${pc.challenge_id}}`);
       }
     }
   }),

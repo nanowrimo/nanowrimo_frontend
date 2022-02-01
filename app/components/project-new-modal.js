@@ -133,6 +133,17 @@ export default Component.extend({
       "Step 2 of 3: Project Goal", "Step 3 of 3: Project Details"];
     return texts[step];
   }),
+  // is this an official event?
+  officialEvent: computed("challenge", function(){
+    let challenge = this.get('challenge');
+    let ret = false;
+    if (challenge) {
+      if (challenge.eventType<2 || challenge.eventType==3){
+        ret = true;
+      }
+    }
+    return ret;
+  }),
   
   actions: {
     associateChallengeSelect(challengeID) {

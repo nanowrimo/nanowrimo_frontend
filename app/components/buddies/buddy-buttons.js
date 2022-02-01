@@ -15,6 +15,7 @@ export default Component.extend({
   user: null,
   displayTiny: false,
   isRemoving: false,
+  approvingInvite: false,
   newBuddyEndpoint: `${ENV.APP.API_HOST}/groups/invite_buddy/`,
   approveBuddyEndpoint: `${ENV.APP.API_HOST}/groups/approve_buddy/`,
   rejectBuddyEndpoint: `${ENV.APP.API_HOST}/groups/reject_buddy/`,
@@ -132,6 +133,7 @@ export default Component.extend({
     },
     
     approveInvitation() {
+      this.set('approvingInvite', true);
       let user = this.get('user');
       let cu = this.get('currentUser.user');
       return new Promise(() => {
@@ -144,6 +146,7 @@ export default Component.extend({
           body: JSON.stringify(body)
         }) 
         .then((response) => {
+          this.set('approvingInvite', false);
           if (response.ok) {
             cu.loadGroupUsers('buddies');
           } else {
@@ -151,6 +154,7 @@ export default Component.extend({
           }
         })
         .catch(() => {
+          this.set('approvingInvite', false);
           alert('There was a problem approving this invitation. Please check your internet connection and try again.');
         });
       });

@@ -11,6 +11,17 @@ export default Component.extend({
   badge: null,  
   extraData: null,
   
+  // return the event_type as defined in the API
+  eventType: computed('badge', function(){
+    let b = this.get('badge');
+    if (b.title.includes("Camp")) {
+      return 1;
+    }else if (b.title.includes("What") ){
+      return 3;
+    }else{
+      return 0;
+    }
+  }),
   
   isNaNo: computed('badge', function() {
     //get the badge 
@@ -20,10 +31,28 @@ export default Component.extend({
     }
   }),
   
-  winnerImage: computed('isNaNo', function(){
-    let i = this.get('isNaNo');
-    let path = (i) ? "/images/splash/NaNo-2021-Winner-Certificate.png" : "/images/splash/Camp-2021-Winner-Certificate.jpg";
-    return path;
+  winnerText: computed("eventType", function(){
+    let et = this.get('eventType');
+    switch(et) {
+      case 0:
+        return "Congratulations! You met your NaNoWriMo goal head on, never gave up, and completed your novel!"
+      case 1:
+        return  "Congratulations! You met your Camp goal head on, never gave up, and completed your writing project!"
+      case 3:
+        return "Congratulations! You met your \"Now What?\" goal head on, never gave up, and completed your revision goal!"
+    }
+  }),
+  
+  winnerImage: computed('eventType', function(){
+     let et = this.get('eventType');
+    switch(et) {
+      case 0:
+        return  "/images/splash/NaNo-2021-Winner-Certificate.png";
+      case 1:
+        return "/images/splash/Camp-2021-Winner-Certificate.jpg";
+      case 3:
+        return "/images/splash/now-what-cert.png";
+    }
   }),
 
   winnerRoute: computed('eventName', function(){

@@ -106,9 +106,15 @@ Router.map(function() {
     this.route('nanowrimo-2019-winner');
     this.route('nanowrimo-2020-winner');
     this.route('nanowrimo-2021-winner');
+    
+    this.route('now-what-2022-winner');
+    
+    
+    
     this.route('nano-winner-2019');
     this.route('nano-winner-2020');
     this.route('nano-winner-2021');
+
     this.route('winner-goodies-2021-2');
     this.route('year-in-review', function() {
       this.route('show', { path: '/:year'}, function() {

@@ -37,8 +37,10 @@ export default ChartBaseComponent.extend({
   successData: computed('projectChallenge', function() {
     let pc = this.get('projectChallenge');
     let data = [];
+    // get the fractionalCount/day
+    let fcpd = pc.fractionCountPerDay;
     for (var i=0; i < pc.duration; i++) {
-      let v = (i+1)*pc.countPerDay;
+      let v = Math.round( (i+1)*fcpd );
       if (i==pc.duration-1) {
         //this is the last day
         v = pc.goal;
