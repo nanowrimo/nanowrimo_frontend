@@ -357,33 +357,16 @@ const ProjectChallenge = Model.extend({
   
   winnerBadge: function(){ 
     let eType = this.get('eventType');
-    let titleKey;
-    switch (eType) {
-      case 0:
-        titleKey = "Wrote 50,000 Words In November";
-        break;
-      case 1:
-        titleKey = "Achieved Your Camp NaNoWriMo Goal";
-        break;
-      case 3:
-        titleKey = "Now What?";
-        break;
-      default:
-        return;
-    }
     //use the store
     let store = this.get('store');
     // get the badges 
     let badges = store.peekAll('badge');
     let winnerBadges = badges.filterBy("winner", true);
-    let winnerBadge;
-    // loop through the winnerbadges 
-    winnerBadges.forEach((badge)=>{
-      if (badge.title == titleKey) {
-        winnerBadge = badge;
-      }
-    });
-    return winnerBadge;
+    let eventWinnerBadges = winnerBadges.filterBy("eventType", eType)
+    if(eventWinnerBadges) {
+      let winnerBadge = eventWinnerBadges[0];
+      return winnerBadge;
+    }
   }
   
 });

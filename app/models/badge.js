@@ -13,6 +13,7 @@ const Badge = Model.extend({
   awarded_description: attr('string'),
   generic_description: attr('string'),
   winner: attr('boolean'),
+  eventType: attr('number'),
   // Awarded badges
   userBadges: hasMany('user-badge')
   
