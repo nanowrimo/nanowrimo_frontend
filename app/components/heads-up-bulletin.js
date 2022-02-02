@@ -23,7 +23,7 @@ export default Component.extend({
     let type = this.get("type");
     switch(type){
       case "NowWhat": 
-        return  "Join the revision challenge.";
+        return  "Join the revision challenge";
 
     }
   }),
