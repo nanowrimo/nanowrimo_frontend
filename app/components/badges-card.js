@@ -11,8 +11,10 @@ export default Component.extend({
   user: null,
   projectChallenge: null,
   parentRecomputeBadges: 0,
+  badgesServiceRecompute: null,
   init() {
     this._super(...arguments);
+    this.set('badgesServiceRecompute', this.get('badgesService.recomputeBadges') ); 
   },
   
   filteredBadges: computed('badges.[]','projectChallenge', function(){
@@ -106,7 +108,7 @@ export default Component.extend({
   }),
   
 
-  badges: computed('badgesService.recomputeBadges','badgeType','parentRecomputeBadges', function() {
+  badges: computed('badgesService.{recomputeBadges,baseBadgesLoaded}','badgeType','parentRecomputeBadges', function() {
     let rb = this.get('badgesService.recomputeBadges');
     let newbs = [];
     if (rb>=0) {

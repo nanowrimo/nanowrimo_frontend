@@ -8,15 +8,15 @@ export default Service.extend({
   store: service(),
   session: service(),
   recomputeBadges: -1,
-
+  baseBadgesLoaded: null,
   load() {
     debounce(this, this.getBaseBadgeData, 2000, false);
   },
   
   getBaseBadgeData() {
-    //let t = this;
+    let t = this;
     this.get('store').query('badge',{}).then(function() {
-      //debounce(t, t.checkForUpdates, 1000, false);
+      t.set('baseBadgesLoaded', true);
     });
   },
   
