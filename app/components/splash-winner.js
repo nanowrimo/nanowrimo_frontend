@@ -12,24 +12,28 @@ export default Component.extend({
   extraData: null,
   
   // return the event_type as defined in the API
-  eventType: computed('badge', function(){
-    let b = this.get('badge');
-    if (b.title.includes("Camp")) {
+  eventType: computed('eventName', function(){
+    let name = this.get('eventName');
+    if (name.includes("Camp")) {
       return 1;
-    }else if (b.title.includes("What") ){
+    }else if (name.includes("What") ){
       return 3;
     }else{
       return 0;
     }
   }),
   
-  isNaNo: computed('badge', function() {
-    //get the badge 
-    let b = this.get('badge');
-    if (b) {
-      return !b.title.includes("Camp");
-    }
+  isNaNo: computed('eventType', function() {
+    // is this type 0? 
+    return this.get('eventType')==0;
   }),
+  
+  hasWinnerGoodies:  computed('eventType', function() {
+    // is this type 0? 
+    let et = this.get('eventType');
+    return (et<2);
+  }),
+  
   
   winnerText: computed("eventType", function(){
     let et = this.get('eventType');
