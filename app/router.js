@@ -107,9 +107,7 @@ Router.map(function() {
     this.route('nanowrimo-2020-winner');
     this.route('nanowrimo-2021-winner');
     
-    //this.route('now-what-2022-winner');
-    
-    
+    this.route('now-what-2022-winner');
     
     this.route('nano-winner-2019');
     this.route('nano-winner-2020');
