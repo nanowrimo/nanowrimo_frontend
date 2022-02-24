@@ -5,27 +5,7 @@
       <HeadsUpBulletin @type="NowWhat" @buttonAction={{action "openNewProjectModal"}}></HeadsUpBulletin>
     {{/if}}
     {{#if displayCampBanner}}
-      <div class="flash-banner">
-        <div class="banner-left">
-        </div>
-        <div class="banner-content">
-          <div class="flash-image image-unframed">
-            <img style="width:100px; margin: 10px;" src="/images/banners/camp.png" />
-          </div>
-          <div class="flash-content">
-            <div class="flash-text">
-              Are you ready for your next great writing adventure? Join Camp NaNoWriMo this July to take on any writing project, novel or not, and set a word-count goal of your own.
-            </div>
-            <div class="flash-button">
-              <button {{action "openNewProjectModal"}}>
-                Create a Camp Project!
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="banner-right">
-        </div>
-      </div>
+      <HeadsUpBulletin @type="Camp" @buttonAction={{action "openNewProjectModal"}}></HeadsUpBulletin>
     {{/if}}
     {{#if displayNanoBanner}}
       <div class="flash-banner">
