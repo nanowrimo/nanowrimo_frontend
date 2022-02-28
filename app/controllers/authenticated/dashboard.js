@@ -85,7 +85,7 @@ export default Controller.extend({
         }
       }
     }
-    // Return if they won or not
+    // Return if the banner should display or not
     return d;
   }),
 

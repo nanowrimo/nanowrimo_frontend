@@ -13,6 +13,11 @@
           <LinkTo @route="pages" @model="now-what">the "Now What?" Months</LinkTo>, join the challenge to revise 150 pages of your novel by the end of February.
         </span>
         {{/if}}
+        {{#if (eq type "Camp")}}
+        <span>
+          {{text}}
+        </span>
+        {{/if}}
       </div>
       <div class="flash-button">
         <button {{action "buttonClicked"}}>
