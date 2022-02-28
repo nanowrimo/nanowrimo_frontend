@@ -28,13 +28,6 @@ export default Component.extend({
     return this.get('eventType')==0;
   }),
   
-  hasWinnerGoodies:  computed('eventType', function() {
-    // is this type 0? 
-    let et = this.get('eventType');
-    return (et<2);
-  }),
-  
-  
   winnerText: computed("eventType", function(){
     let et = this.get('eventType');
     switch(et) {
@@ -66,7 +59,14 @@ export default Component.extend({
       // convert the name
       name = name.toLowerCase().replace(/ /g,"-")+"-winner";
       // return the route
-      return `authenticated.${name}`;
+      let route = `authenticated.${name}`;
+      let router = this.get('router');
+      try {
+        router.urlFor( route );  // if this fails, no route exists
+        return route;
+      } catch (error) {
+        // bummer
+      }
     }
     return null;
   }),
