@@ -16,14 +16,11 @@ export default Controller.extend({
     let allowed = this.get('currentUser.isLoaded') && this.get('currentUser.groupUsersLoaded');
     if (allowed) {
       if (this.get('currentUser.user.adminLevel')) {
-        console.log('admin');
         return true;
       } else {
         // is the viewer's id in the group's adminids array?
         let adminIds = this.get('group.adminIds');
         let uid = this.get('currentUser.user.id');
-        console.log(adminIds);
-        console.log(uid);
         return adminIds.includes(uid);
       }
     }
