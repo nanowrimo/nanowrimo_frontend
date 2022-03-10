@@ -8,76 +8,33 @@ export default Component.extend({
   
   currentUser: service(),
   store: service(),
-  //eventsLoaded: false,
+  eventsLoaded: false,
   eventSortingDesc: Object.freeze(['startDt:asc']),
+  hqEvents: null,
   group: null,
   init(){
     this._super(...arguments);
-    //setTimeout(() => { this.loadEvents() }, 1000);
+    // set the hqEvents to an array
+    this.set('hqEvents', []);
+    let store = this.get("store");
+    // load the hq events
+    store.query('group', { filter: {group_name: "nanowrimo hq", group_type: "event", event_type: "upcoming"}}).then((resp) => {
+      this.set('hqEvents', resp);
+      this.set("eventsLoaded", true);
+    });
   },
   
-  /*loadEvents() {
-    let t = this;
-    let s = this.get('store');
-    let gs = s.peekAll('group');
-    gs.forEach(function(g) {
-      if (g.groupType=='everyone') {
-        t.set('group',g);
-      }
-    });
-    if (this.get('group')) {
-      s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
-        t.set('eventsLoaded',true);
-      });
-    }
-  },*/
-  
-  eventsLoaded: computed('currentUser.isLoaded', function() {
-    if (this.get('currentUser.isLoaded')) {
-      let t = this;
-      let s = this.get('store');
-      let gs = s.peekAll('group');
-      gs.forEach(function(g) {
-        if (g.groupType=='everyone') {
-          t.set('group',g);
-        }
-      });
-      if (this.get('group')) {
-        return s.query('group', { filter: {group_id: this.get('group').id, group_type: "event", event_type: "upcoming"}}).then(() => {
-          return true;
-        });
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }),
-  
-  allEvents: computed('eventsLoaded',function() {
-    let el = this.get('eventsLoaded');
-    if (el) {
-      let store = this.get('store');
-      let gs = store.peekAll('group');
-      return gs;
-    } else {
-      return [];
-    }
-  }),
-  
   // Returns an array of future approved events
-  activeEvents: computed('allEvents.{[],@each.approvedById}', function() {
-    let nanogroup = this.get('group');
-    let gs = this.get('allEvents');
-    let gid = nanogroup.id;
-    let ae = [];
+  activeEvents: computed('hqEvents.{[],@each.approvedById}', function() {
+    let hqEvents = this.get('hqEvents');
+    let activeEvents = [];
     let now = moment();
-    gs.forEach(function(g) {
-      if ((g.groupId==gid) && (g.endDt>now) && (g.approvedById>0)) {
-        ae.push(g);
+    hqEvents.forEach(function(event) {
+      if ((event.endDt>now) && (event.approvedById>0)) {
+        activeEvents.push(event);
       }
     });
-    return ae;
+    return activeEvents;
   }),
   
   // Sorts the events by date, with the most immediate first
