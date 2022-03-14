@@ -5,7 +5,7 @@
   <div class='nw-card-actions'>
     <div class='nw-card-action-link'>
       {{#if eventsLoaded}}
-        {{#link-to 'authenticated.regions.show.events.upcoming' group.slug}}
+        {{#link-to 'authenticated.regions.show.events.upcoming' "nanowrimo-hq"}}
           See All
         {{/link-to}}
       {{/if}}
@@ -24,7 +24,7 @@
       <div class="nw-card-content nw-center-horiz">
         <div>
           <div class="nw-promo-text">
-            There are no upcoming events in {{group.name}}.
+            There are no upcoming events in NaNoWriMo HQ.
           </div>
         </div>
         <div class="nw-card-bottom-image"><img src="/images/cards/homeregion.svg" /></div>

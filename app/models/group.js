@@ -31,7 +31,7 @@ const Group = Model.extend({
   denormedLastOfficialMessageAt: attr('string'),
   latestMessage: attr('string'),
   latestMessageDt: attr('string'),
-  
+  admin_ids: attr('string'),
   
   // Members
   users: hasMany('user'),
@@ -188,6 +188,9 @@ const Group = Model.extend({
       this.get('groupExternalLinks').forEach(link => link.persistChanges());
     });
   },
+  adminIds: computed('admin_ids', function(){
+    return this.get("admin_ids").split(",");
+  }),
   
 });
 
