@@ -13,7 +13,6 @@ export default Component.extend({
   context: null,
   sortOptions: null,
   notFixed: false,
-  //sortedMessages: sort('nanomessages', 'selectedSortOption'),
   nanomessage: null,
   selectedSortOption: null,
   showForm: true,
@@ -21,6 +20,7 @@ export default Component.extend({
   messages: null,
   tempDebounce: null,
   messagesLoaded: false,
+  
   adminIsChecked: computed('context',function() {
     let c = this.get("context");
     return (c=='nanomessages');
