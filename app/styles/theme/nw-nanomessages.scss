@@ -128,7 +128,9 @@
         padding-top: 28px;
         -webkit-transition: all 0.6s;
         transition: all 0.6s;
-
+        ul, ol {
+          padding-inline-start: 1rem;
+        }
         .nanomessage {
           opacity: 1;
           -webkit-transition: all 0.6s;
