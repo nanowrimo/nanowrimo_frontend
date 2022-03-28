@@ -4,8 +4,8 @@
 </div>
 <div class='nw-event-promo-details'>
   <div class='nw-event-promo-title'>
-    {{#link-to 'authenticated.regions.show.events.show' group.slug event.slug}}
-      {{event.name}}
+    {{#link-to 'authenticated.regions.show.events.show' groupSlug event.slug}}
+      {{event.name}} {{group.slug}}
     {{/link-to}}
   </div>
   <div class='nw-event-promo-time'><span class='nw-event-promo-dotw'>{{startDay}}</span> {{eventTime}}</div>

@@ -17,7 +17,7 @@
     {{#if hasEvents}}
       <div class="nw-card-content nw-center-horiz nw-event-container">
         {{#each topFourEvents as |e|}}
-          {{event-listing-small event=e group=group status='upcoming'}}
+          {{event-listing-small event=e group=group isHq=true status='upcoming'}}
         {{/each}}
       </div>
     {{else}}
