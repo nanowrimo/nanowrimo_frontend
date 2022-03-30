@@ -43,6 +43,11 @@ export default Component.extend({
   }),
   
   userIsAdmin: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
+    // user is admin if adminLevel > 0
+    if (this.get("currentUser.user.adminLevel")>0 ) {
+      return true;
+    }
+    
     let found = false;
     const gid = this.get('group.id');
     const groupType = this.get('group.groupType');

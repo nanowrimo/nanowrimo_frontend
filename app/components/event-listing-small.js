@@ -13,6 +13,7 @@ export default Component.extend({
   recomputeEvents: 0,
   editEvent: false,
   classNames: ['nw-event-promo'],
+  isHq: null,
   
   init() {
     this._super(...arguments);
@@ -81,7 +82,14 @@ export default Component.extend({
     let diff = end.diff(start);
     return moment.utc(diff).format("H:mm");
   }),
-  
+
+  groupSlug: computed("isHq", "group", function(){
+    if (this.get('isHq')){
+      return "nanowrimo-hq";
+    } else {
+      return this.get('group.slug');
+    }
+  }),
   doJoin() {
     let e = this.get('event');
     let eid = this.get('event.id');
