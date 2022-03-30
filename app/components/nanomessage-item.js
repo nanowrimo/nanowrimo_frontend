@@ -30,11 +30,8 @@ export default Component.extend({
   }),
   senderAvatarUrl: computed('nanomessage',function() {
     let n = this.get('nanomessage');
-    let store = this.get('store');
-    // is the sender in the store?
-    let sender = store.peekRecord('user', n.user_id);
-    if (sender) {
-      return sender.avatar;
+    if (n.sender_avatar_url) {
+      return n.sender_avatar_url;
     } else {
       return "/images/users/unknown-avatar.png";
     }
