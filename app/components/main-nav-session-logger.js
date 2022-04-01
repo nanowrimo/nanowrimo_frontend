@@ -433,16 +433,15 @@ export default Component.extend({
       if (start) {
         moreInfo = 1;
         //get "today"
-        let endTime = null;
         if (end) {
-          endTime = moment(endDate).format("HH:mm");
+          // end has already been handled
         } else {
           let m = moment();
-          endTime = m.format("HH:mm");
+          end = m.format("HH:mm");
+          session.set('end', endDate);
         }
-        let startTime = moment(start).format("HH:mm");
-        // if (startTime > endTime) {
-        if (startTime > endTime) {
+        // is the start from yesterday?
+        if (start > end) {
           //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
