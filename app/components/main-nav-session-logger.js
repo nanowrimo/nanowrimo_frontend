@@ -440,9 +440,8 @@ export default Component.extend({
           let m = moment();
           endTime = m.format("HH:mm");
         }
-        let startTime = moment(start).format("HH:mm");
-        // if (startTime > endTime) {
-        if (startTime > endTime) {
+        // is the start from yesterday?
+        if (start > end) {
           //start was yesterday
           let yesterday = today.subtract(1, 'd');
           ymd = yesterday.format('YYYY-MM-DD');
