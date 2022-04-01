@@ -433,12 +433,12 @@ export default Component.extend({
       if (start) {
         moreInfo = 1;
         //get "today"
-        let endTime = null;
         if (end) {
-          endTime = moment(endDate).format("HH:mm");
+          // end has already been handled
         } else {
           let m = moment();
-          endTime = m.format("HH:mm");
+          end = m.format("HH:mm");
+          session.set('end', endDate);
         }
         // is the start from yesterday?
         if (start > end) {
