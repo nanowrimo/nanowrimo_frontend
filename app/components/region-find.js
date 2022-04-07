@@ -22,6 +22,8 @@ export default Component.extend({
     }).then(data=>{
       this.set('regions',data);
     });
+    // load the currentUsers groupUsers of type region
+    this.get('currentUser').user.loadGroupUsers("regions");
   },
   
   _mapZoom: 3,

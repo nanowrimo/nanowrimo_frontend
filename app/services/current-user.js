@@ -16,6 +16,7 @@ export default Service.extend({
       return this.get('store').queryRecord('user',
       { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
         this.set('user', user);
+        user.loadHomeRegion();
         //get the current user's projects
         return this.get('store').query('project',
         {
@@ -26,7 +27,7 @@ export default Service.extend({
             return this.get('store').query('group-user',
             {
               filter: { user_id: user.id },
-              group_types: 'buddies,regions',
+              group_types: 'buddies',
               include: 'user,group'
             }).then(() => {
               t.delayUntilGroupsLoaded();
@@ -43,37 +44,11 @@ export default Service.extend({
     later(function() {
       if (t.get('store').peekAll('group').length>0) {
         t.set('isLoaded',true);
-        t.set('groupUsersLoaded',true);
-        t.user.set('groupUsersLoaded',true);
       } else {
         t.delayUntilGroupsLoaded();
       }
     }, 1000);
     
-  },
-  
-  checkForRegionUpdates() {
-    let u = this.get('user');
-    if (u) {
-      this.store.query('group-user', {
-        filter: {
-          user_id: u.get('id')
-        },
-        group_types: 'region'
-      }).then(function() {
-        let newInt = u.get('recalculateHome') + 1;
-        u.set('recalculateHome', newInt);
-      }).catch((error)=>{
-        for (var i=0; i<error.errors.length; i++) {
-          let e = error.errors[i];
-          if (e.status=="401") {
-            //authorization has failed, de-auth now
-            this.get('session').invalidate();
-            break;
-          }
-        }
-      });
-    }
   },
   
   reloadBuddies() {
