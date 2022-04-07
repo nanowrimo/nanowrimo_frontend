@@ -102,6 +102,7 @@ const User = Model.extend({
   
   stats: null,
   annualStats: null,
+  homeRegion: null,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -274,22 +275,6 @@ const User = Model.extend({
   
   recalculateHome: 0,
   
-  homeRegion: computed('regions.[]','groupUsers.@each.{primary}','recalculateHome', function(){
-    let r = this.get('regions');
-    let gu = this.get('groupUsers');
-    let maxPrimary = -1;
-    let maxRegion = null;
-    r.forEach(function(tgroup) {
-      gu.forEach(function(tgu) {
-        if (tgu.group_id==tgroup.id && tgu.primary>maxPrimary) {
-          maxPrimary = tgu.primary;
-          maxRegion = tgroup;
-        }
-      });
-    });
-    return maxRegion;
-  }),
-
   myInvitations: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
@@ -633,6 +618,13 @@ const User = Model.extend({
       include: 'user,group'
     }).then(function() {
       debounce(u, u.connectGroupUsers, 1000, false);
+    });
+  },
+  
+  loadHomeRegion(){ 
+    let store = this.get('store');
+    store.queryRecord("group", { homeRegion: true}).then(response=>{
+      this.set('homeRegion', response);
     });
   },
   

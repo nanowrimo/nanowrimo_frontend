@@ -7,6 +7,11 @@ export default ApplicationAdapter.extend({
       delete query.slug;
       return `${this._super(...arguments)}/${slug}`;
     }
+    if(query.homeRegion) {
+      let endpoint = this._super(...arguments);
+      endpoint = endpoint.replace("groups", "users/current/home-region");
+      return endpoint;
+    }
     return this._super(...arguments);
   }
 });

@@ -45,7 +45,6 @@ export default Component.extend({
         g.get('groupUsers').removeObject(gu);
         cu.get('groups').removeObject(g);
         g.get('users').removeObject(cu);
-        //this.get('currentUser').checkForRegionUpdates();
       });
     }
   },
@@ -53,12 +52,12 @@ export default Component.extend({
   doHomeGroup() {
     //const _this = this;
     // Get the current user
-    let cu = this.get('currentUser.user');
+    let currentUser = this.get('currentUser.user');
     // Get the group
     let g = this.get('groupContainer.groupObject');
     // Set the local group user to null
     let gu = null;
-    cu.groupUsers.forEach(function(obj) {
+    currentUser.groupUsers.forEach(function(obj) {
       // If this is the correct group user
       if (obj.group_id==g.id) {
         gu = obj;
@@ -67,7 +66,8 @@ export default Component.extend({
     gu.set('primary', 1);
     gu.save().then(() => {
       //_this.set('isProcessing', false);
-      this.get('currentUser').checkForRegionUpdates();
+      this.get('currentUser').user.loadGroupUsers("regions");
+      this.get('currentUser').user.loadHomeRegion();
     });
   },
   
