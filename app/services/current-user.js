@@ -1,7 +1,6 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { resolve }  from 'rsvp';
-import { later } from '@ember/runloop';
 
 export default Service.extend({
   session: service(),
