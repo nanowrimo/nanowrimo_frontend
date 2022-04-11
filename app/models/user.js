@@ -103,6 +103,7 @@ const User = Model.extend({
   stats: null,
   annualStats: null,
   homeRegion: null,
+  buddiesLoaded: false,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -354,7 +355,7 @@ const User = Model.extend({
   // BEGINNING OF BUDDY FUNCTIONS
   // ---------------------------
 
-  //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
+
   buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
     let gus = this.get('groupUsers');
     let bgus = [];
@@ -430,9 +431,9 @@ const User = Model.extend({
     return blocked;
   }),
   
-  buddyGroupsActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
+  buddyGroupsActive: computed('buddiesLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
     let buddyGroups = [];
-    if (this.get('groupUsersLoaded')) {
+    if (this.get('buddiesLoaded')) {
       let bgus = this.get('buddyGroupUsersAccepted');
       let store = this.get('store');
       let id = this.get('id');
@@ -455,29 +456,27 @@ const User = Model.extend({
     return buddyGroups;
   }),
   
-  buddiesActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
-    get() {
-      let gul = this.get('groupUsersLoaded');
-      let bgus = this.get('buddyGroupUsersAccepted');
-      let buddies = [];
-      let store = this.get('store');
-      let id = this.get('id');
-      // are there buddyGroupUsersAccepted?
-      if (bgus && gul) {
-        bgus.forEach(function(bgu) {
-          let gus = bgu.group.get('groupUsers');
-          gus.forEach(function(gu) {
-            if (gu.user_id) {
-              let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
-                buddies.push(u);
-              }
+  buddiesActive: computed('buddiesLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}',function(){
+    let bgus = this.get('buddyGroupUsersAccepted');
+    let buddies = [];
+    let store = this.get('store');
+    let id = this.get('id');
+    // are there buddyGroupUsersAccepted?
+    if (bgus && this.get('buddiesLoaded')) {
+      bgus.forEach(function(bgu) {
+        let gus = bgu.group.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+              buddies.push(u);
             }
-          });
+          }
         });
-      }
-      return buddies;
+      });
     }
+    return buddies;
+
   }),
   buddiesInvited: computed('buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
@@ -525,6 +524,33 @@ const User = Model.extend({
       return buddies;
     }
   }),
+
+  // load the user's buddies, removing 
+  loadBuddies() {
+    // reload the user's buddies
+    //return this.get('user').hasMany('groups').reload();
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'buddies',
+      include: 'user,group'
+    }).then(data=>{
+      // buddes have been loaded
+      this.set('buddiesLoaded', true);
+      // keep track of the ids for returned content
+      let newIds = [];
+      data.content.forEach((gu)=>{
+        newIds.push(gu.id);
+      });
+      // unload any of this users buddy group_users that have an id not in the newIds
+      this.get('buddyGroupUsers').forEach(bgu=>{
+        if (newIds.indexOf(bgu.id)==-1) {
+          // no longer a buddy
+          bgu.unloadRecord();
+        }
+      });
+    });
+  },
 
   // ---------------------------
   // END OF BUDDY FUNCTIONS
