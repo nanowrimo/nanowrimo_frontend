@@ -335,7 +335,6 @@ const User = Model.extend({
     return bgus;
   }),
 
-  //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
@@ -357,12 +356,14 @@ const User = Model.extend({
 
 
   buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
-    let gus = this.get('groupUsers');
+    //let gus = this.get('groupUsers');
+    let gus = this.get('store').peekAll('group-user');
+    let id = this.get('id');
     let bgus = [];
     //are there group users?
     if (gus) {
       gus.forEach(function(gu) {
-        if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
+        if ((gu.groupType=='buddies')&&(gu.exitAt==null) && gu.user_id==id) {
           bgus.push(gu);
         }
       });
