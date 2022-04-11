@@ -11,7 +11,6 @@ export default Service.extend({
   isLoaded: false,
   groupUsersLoaded: false,
   load() {
-    let t = this;
     if (this.get('session.isAuthenticated')) {
       return this.get('store').queryRecord('user',
       { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
@@ -23,34 +22,11 @@ export default Service.extend({
           filter: { user_id: user.id },
           include: 'genres,challenges,project-challenges'
         }).then(() => {
-            //get the current user's buddies and regions
-            return this.get('store').query('group-user',
-            {
-              filter: { user_id: user.id },
-              group_types: 'buddies',
-              include: 'user,group'
-            }).then(() => {
-              this.set('groupUsersLoaded', true);
-              t.delayUntilGroupsLoaded();
-            });
-          });
+            // do nothing?
+        });
       });
     } else {
       return resolve();
     }
   },
-  
-  delayUntilGroupsLoaded() {
-    let t = this;
-    later(function() {
-      if (t.get('store').peekAll('group').length>0) {
-        t.set('isLoaded',true);
-      } else {
-        t.delayUntilGroupsLoaded();
-      }
-    }, 1000);
-    
-  },
-  
-
 });
