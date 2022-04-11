@@ -21,24 +21,16 @@ export default Controller.extend({
   }),
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.{isLoaded,groupUsersLoaded}','group',function() {
-    if (this.get('currentUser.isLoaded') && this.get('currentUser.groupUsersLoaded')) {
+  canEditGroup: computed('currentUser.{isLoaded}','group',function() {
+    if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
         return true;
       } else {
+        // is the user an admin?
         let uid = this.get('currentUser.user.id');
-        let gid = this.get('group.id');
-        let gus = this.get('store').peekAll('group-user');
-        let found = false;
-        gus.forEach((gu)=>{
-          if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.isAdmin)) {
-            found = true;
-          }
-        });
-        return found;
+        let adminIds = this.get('group.adminIds');
+        return adminIds.includes(uid);
       }
-    } else {
-      return false;
     }
   }),
   

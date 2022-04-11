@@ -108,7 +108,7 @@ export default Service.extend({
         } else {
           if (buddyshipUpdatedAt < json.data.buddyship_updated_at){
             // update the user's buddies
-            this.get('currentUser').reloadBuddies();
+            this.get('currentUser.user').loadBuddies();
             // record the updated at
             this.set('buddyshipUpdatedAt', json.data.buddyship_updated_at);
           }
