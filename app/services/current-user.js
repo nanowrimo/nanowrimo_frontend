@@ -14,6 +14,7 @@ export default Service.extend({
       return this.get('store').queryRecord('user',
       { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
         this.set('user', user);
+        this.set('isLoaded', true);
         user.loadHomeRegion();
         //get the current user's projects
         return this.get('store').query('project',
