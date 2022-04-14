@@ -11,6 +11,11 @@ export default Component.extend({
   tempSearchString: '',
   newMessage: null,
   
+  init(){
+    this._super(...arguments);
+    // load the current users nanomessagesGroups
+    this.get('currentUser').user.loadNanomessagesGroups();
+  },
   conversations: computed('currentUser.user.nanomessagesGroups.[]','tempSearchString','newMessage',function() {
     const es =  this.get('currentUser.user.nanomessagesGroups');
     const ss =  this.get('tempSearchString').toLowerCase();

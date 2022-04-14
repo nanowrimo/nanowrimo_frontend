@@ -24,6 +24,7 @@ export default Component.extend({
     });
     // load the currentUsers groupUsers of type region
     this.get('currentUser').user.loadGroupUsers("regions");
+    this.get('currentUser').user.loadRegions();//("regions");
   },
   
   _mapZoom: 3,
