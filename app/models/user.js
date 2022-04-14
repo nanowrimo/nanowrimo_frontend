@@ -104,6 +104,7 @@ const User = Model.extend({
   annualStats: null,
   homeRegion: null,
   buddiesLoaded: false,
+  regionsLoaded: false,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -525,7 +526,30 @@ const User = Model.extend({
       return buddies;
     }
   }),
-
+  
+  loadNanomessagesGroups() {
+    // ensure that the user's buddies, regions, and hq are loaded
+    if (!this.get('buddiesLoaded') ) {
+      // the user's buddies are not loaded... load them
+      this.loadBuddies();
+    }
+    if (!this.get('regionsLoaded') ) {
+      // the user's buddies are not loaded... load them
+      this.loadRegions();
+    }
+  },
+  loadRegions() {
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'regions',
+      include: 'user,group'
+    }).then(()=>{
+      // buddes have been loaded
+      this.set('regionsLoaded', true);
+    });
+  },
+  
   // load the user's buddies, removing 
   loadBuddies() {
     // reload the user's buddies
@@ -557,18 +581,27 @@ const User = Model.extend({
   // END OF BUDDY FUNCTIONS
   // ---------------------------
   
-  nanomessagesGroups: computed('groupUsersLoaded','groupUsers.[]', function(){
+  nanomessagesGroups: computed('regionsLoaded','buddiesLoaded','homeRegion', function(){
     let eGroups = [];
-    if (this.get('groupUsersLoaded')) {
-      let gus = this.get('groupUsers');
-      let store = this.get('store');
-      gus.forEach(function(gu) {
-        let g = store.peekRecord('group', gu.group_id);
-        if ((g.groupType=='everyone')||(g.groupType=='region')||(g.groupType=='buddies')) {
-          eGroups.push(g);
+    //let groupUsers = this.get('groupUsers');
+    let store = this.get('store');
+    let groupUsers = store.peekAll('groupUser');
+    let id = this.get("id");
+
+    // loop through the cuGroupUsers
+    groupUsers.forEach(groupUser=>{
+      // is this groupUser the current users?
+      if (groupUser.user_id==id) {
+      // get the group from the store
+      let group = store.peekRecord('group', groupUser.group_id);
+        if (group){
+          if ((group.groupType=='everyone')||(group.groupType=='region')||(group.groupType=='buddies')) {
+            eGroups.push(group);
+          }
         }
-      });
-    }
+      }
+    });
+    
     return eGroups;
   }),
   

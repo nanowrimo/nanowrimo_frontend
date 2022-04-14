@@ -23,6 +23,7 @@ export default Controller.extend({
         let gid = this.get('group.id');
         let gus = this.get('store').peekAll('group-user');
         gus.forEach((gu)=>{
+          // if there is an accepted groupUser for currentUser.user and group
           if ((gu.user_id==uid)&&(gu.group_id==gid)&&(gu.invitationAccepted==1)) {
             found = true;
           }
