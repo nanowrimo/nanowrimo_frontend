@@ -46,7 +46,12 @@ export default Component.extend({
       case 0:
         return  "/images/splash/NaNo-2021-Winner-Certificate.png";
       case 1:
-        return "/images/splash/Camp-2021-Winner-Certificate.jpg";
+        // is the year 2022?
+        if (this.get('eventYear')==2022 ) {
+          return "/images/splash/Camp-2022-Winner-Certificate.png";
+        } else {
+          return "/images/splash/Camp-2021-Winner-Certificate.jpg";
+        }
       case 3:
         return "/images/splash/now-what-cert.png";
     }
@@ -66,6 +71,23 @@ export default Component.extend({
         return route;
       } catch (error) {
         // bummer
+      }
+    }
+    return null;
+  }),
+  eventYear: computed ('extraData', function() {
+    let data = JSON.parse(this.get('extraData'));
+    if (data) {
+      let id = data.challenge_id;
+      //get the related challenge from the store
+      var store = this.get('store');
+      var event = store.peekRecord('challenge', id);
+      var startsAt = event.startsAt;
+      if (startsAt) {
+        // get the year, as an int
+        var bits = startsAt.split("-");
+        return parseInt(bits[0]);
+        
       }
     }
     return null;

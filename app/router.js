@@ -103,6 +103,11 @@ Router.map(function() {
     this.route('camp-nanowrimo-july-2021-winner');
     this.route('camp-nanowrimo-april-2021-winner');
     this.route('camp-nanowrimo-july-2021-winner');
+    
+    this.route('camp-nanowrimo-april-2022-winner');
+    //this.route('camp-nanowrimo-july-2022-winner');
+    
+    
     this.route('nanowrimo-2019-winner');
     this.route('nanowrimo-2020-winner');
     this.route('nanowrimo-2021-winner');
