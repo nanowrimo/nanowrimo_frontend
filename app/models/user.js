@@ -356,7 +356,7 @@ const User = Model.extend({
   // ---------------------------
 
 
-  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
+  buddyGroupUsers: computed('buddiesLoaded','groupUsers.@each.{invitationAccepted,exitAt}', function() {
     //let gus = this.get('groupUsers');
     let gus = this.get('store').peekAll('group-user');
     let id = this.get('id');
@@ -371,7 +371,7 @@ const User = Model.extend({
     }
     return bgus;
   }),
-  buddyGroupUsersAccepted: computed('buddyGroupUsers.[]','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersAccepted: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let accepted = [];
     //are there buddy group users?
@@ -384,7 +384,7 @@ const User = Model.extend({
     }
     return accepted;
   }),
-  buddyGroupUsersPending: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersPending: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let pending = [];
     //are there buddy group users?
@@ -397,7 +397,7 @@ const User = Model.extend({
     }
     return pending;
   }),
-  buddyGroupUsersInvited: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersInvited: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     const store = this.get('store');
     let pending = [];
@@ -419,7 +419,7 @@ const User = Model.extend({
     }
     return pending;
   }),
-  buddyGroupUsersBlocked: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersBlocked: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let blocked = [];
     //are there buddy group users?
