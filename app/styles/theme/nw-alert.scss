@@ -12,6 +12,10 @@
     background-color: $nw-alert-red;
     color: white;
   }
+  &.info {
+    background-color: $nw-darkgreyblue;
+    color: $nw-verylightgrey;
+  }
   &.success {
     background-color: $nw-mediumaqua;
     color: white;

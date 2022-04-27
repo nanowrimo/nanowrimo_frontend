@@ -85,8 +85,14 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
     to preserve scroll position when linking to a route, include "ps=true" query params in the link  
     {{link-to "SomeRoute" 'some.route' ((query-params ps="true"))}}
 
-
-
+  * Signaling to the user that code has changed and the UI should be refreshed   
+    The UI will periodically load /up-update.txt, parse datetime data in the file, and
+    then display a message to the user if updates are available. 
+    
+    The format used to store the time is the same as the output of the ruby Time.now()   
+    
+    In the code, the file is found at public/ui-update.txt
+    
 
 
 

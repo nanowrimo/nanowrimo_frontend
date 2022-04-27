@@ -7,6 +7,7 @@ export default Controller.extend({
   router: service(),
   media: service(), 
   currentUser: service(),
+  version: service(),
   
   init(){
     this._super(...arguments);
@@ -50,12 +51,16 @@ export default Controller.extend({
       }
     }
   }),
-  //routeName: computed('currentPath', function() {
-    //return this.get('currentPath');
-  //}),
+  UiOutdated: computed('version.outdated', function(){
+    return this.get('version.outdated');
+  }),
+  
   actions: {
     invalidateSession() {
       this.get('session').invalidate();
-    },    
+    },   
+    reloadUI() {
+      window.location.reload();
+    }
   }
 });
