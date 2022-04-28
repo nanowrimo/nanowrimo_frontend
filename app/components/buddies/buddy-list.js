@@ -18,7 +18,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     // load the buddies
-    this.get('currentUser.user').loadBuddies();
+    this.get('user').loadBuddies();
     
   },
   
@@ -26,8 +26,8 @@ export default Component.extend({
     return (this.get('currentUser.user.id')==this.get('user.id'))
   }),
   
-  isLoading: computed('currentUser.user.buddiesLoaded', function() {
-    return !this.get('currentUser.user.buddiesLoaded');
+  isLoading: computed('user.buddiesLoaded', function() {
+    return !this.get('user.buddiesLoaded');
   }),
   
   // Determines the number of active buddies
