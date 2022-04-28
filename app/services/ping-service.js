@@ -29,8 +29,6 @@ export default Service.extend({
   
   load() {
     if (this.get('session.isAuthenticated')) {
-      // load the initial badge data 
-      //this.get('badgesService').getBaseBadgeData();
       this.loopApiRequest();
     }
   },
@@ -131,7 +129,10 @@ export default Service.extend({
   },
   
   loopApiRequest() {
-    this.fetchApiData();
+    // has the current user been loaded?
+    if (this.get('currentUser.user.isLoaded')) {
+      this.fetchApiData();
+    }
     let delay = this.get('pingDelay'); 
     debounce(this, this.loopApiRequest, delay, false);
   },
