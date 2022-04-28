@@ -43,9 +43,9 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel() {
-    //this._loadPingService();
-    //this._loadBadgesService();
-    return this._loadCurrentUser();
+    this._loadCurrentUser();
+    this._loadPingService();
+    this._loadBadgesService();
   },
 
   sessionAuthenticated() {
