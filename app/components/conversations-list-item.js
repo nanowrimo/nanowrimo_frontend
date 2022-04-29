@@ -116,21 +116,23 @@ export default Component.extend({
   
   newNanomessagesCount: computed('pingService.messageData','group', function() {
     const gwum = this.get('pingService.messageData');
-    const g = this.get('group');
-    const gid = g.get('id');
-    let count = 0;
-    gwum.forEach(function(obj) {
-      // If this notification is about nanomessages
-      if (obj.group_id==gid) {
-        // Add the data count to the total
-        count = obj.unread_message_count;
+    if (gwum) {
+      const g = this.get('group');
+      const gid = g.get('id');
+      let count = 0;
+      gwum.forEach(function(obj) {
+        // If this notification is about nanomessages
+        if (obj.group_id==gid) {
+          // Add the data count to the total
+          count = obj.unread_message_count;
+        }
+      });
+      // If the count has changed
+      if (count != this.get('oldMessageCount')) {
+        this.reloadGroup(count);
       }
-    });
-    // If the count has changed
-    if (count != this.get('oldMessageCount')) {
-      this.reloadGroup(count);
+      return count;
     }
-    return count;
   }),
   
   // Reloads the group record in the store

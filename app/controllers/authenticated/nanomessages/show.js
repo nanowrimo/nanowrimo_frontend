@@ -7,6 +7,7 @@ import { debounce } from '@ember/runloop';
 export default Controller.extend({
   group: alias('model'),
   router: service(),
+  currentUser: service(),
   newMessage: false,
   oldgroupid: null,
   
