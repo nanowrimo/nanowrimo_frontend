@@ -21,7 +21,9 @@
             </div>
           </div>
           <div class="nw-card-content">
+            {{#if currentUser.isLoaded}}
             {{conversations-list group=group parentInitiateNewMessage=(action 'initiateNewMessage') parentCancelNewMessage=(action 'cancelNewMessage') newMessage=newMessage class="full-width"}}
+            {{/if}}
           </div>
         </div>
         {{#if group}}
