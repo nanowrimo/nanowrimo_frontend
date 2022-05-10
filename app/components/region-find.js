@@ -122,8 +122,11 @@ export default Component.extend({
         newArray.push(o);
       });
     }
-    var sorted = this.assignSort(newArray);
-    return sorted;
+    // sort the regions by name
+    return newArray.sort(function(a,b) { 
+      return (a.name > b.name) ? 1 : -1;
+    });
+
   }),
   
   joinedRegionIds: computed('userRegions.[]', function() {
