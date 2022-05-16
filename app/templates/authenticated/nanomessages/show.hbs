@@ -11,11 +11,12 @@
               <div class="nw-card-title-center">{{cardTitle}}</div>
               <div class="nw-card-title-right">
                 {{#if newMessage}}
-                  <div
+                  <button class='nw-close-button'
                     onClick={{action 'cancelNewMessage'}}
                   >
                     <i class="fa fa-times" />
-                  </div>
+                    <div class='sr-only'>Cancel New Message</div>
+                  </button>
                 {{/if}}
               </div>
             </div>
