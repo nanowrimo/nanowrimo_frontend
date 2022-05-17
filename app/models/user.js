@@ -590,8 +590,8 @@ const User = Model.extend({
 
     // loop through the cuGroupUsers
     groupUsers.forEach(groupUser=>{
-      // is this groupUser the current users?
-      if (groupUser.user_id==id) {
+      // is this groupUser the current users and has the invitation been accepted ?
+      if (groupUser.user_id==id && groupUser.invitationAccepted=='1') {
       // get the group from the store
       let group = store.peekRecord('group', groupUser.group_id);
         if (group){

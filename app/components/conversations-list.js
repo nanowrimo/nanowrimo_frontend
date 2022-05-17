@@ -22,10 +22,10 @@ export default Component.extend({
     let newes = [];
     // If the user has one or more groups
     if (es) {
+      let store = this.get('store');
+      let id = this.get('currentUser.user.id');
       // If there's an active search string
       if (ss) {
-        let store = this.get('store');
-        let id = this.get('currentUser.user.id');
         for (let i=0; i<es.length; i++) {
           let g = es[i];
           let name = g.get('name').toLowerCase();
@@ -49,7 +49,20 @@ export default Component.extend({
         if (this.get('newMessage')) {
           for (let i=0; i<es.length; i++) {
             if (es[i].latestMessageDt==null) {
-              newes.push(es[i]);
+              let g = es[i];
+              if (g.get('groupType')=='buddies') {
+                let gus = g.get('groupUsers');
+                gus.forEach(function(gu) {
+                  if (gu.user_id) {
+                    let u = store.peekRecord('user', gu.user_id);
+                    if ((u) && (u.id!=id) && (gu.invitationAccepted=='1')) {
+                      newes.push(es[i]);
+                    }
+                  }
+                });
+              } else {
+                newes.push(es[i]);
+              }
             }
           }
         } else { // Just the regular list
