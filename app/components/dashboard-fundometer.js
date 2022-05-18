@@ -62,5 +62,11 @@ export default Component.extend({
         _this.set('donorCount', json.donorCount);
       });
     });
+  },
+  
+  actions: {
+    donateClicked: function(){ 
+      window.open("https://store.nanowrimo.org/collections/donate","_blank");
+    }
   }
 });

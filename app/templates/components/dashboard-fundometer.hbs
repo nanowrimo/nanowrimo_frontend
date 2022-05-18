@@ -7,7 +7,5 @@
 <div class="fundometer-text">
   <div class="fundometer-raised">{{raised_string}} raised!</div>
   <div style="margin-bottom: 10px;">Thanks to {{donor_string}}.</div>
-  <a href="https://store.nanowrimo.org/collections/donate" target="_blank" >
-    <button>Donate now!</button>
-  </a>
+  <button {{action "donateClicked"}}>Donate now!</button>
 </div>
