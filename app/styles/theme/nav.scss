@@ -343,6 +343,9 @@
           font-size: 20px;
           line-height: 38px;
           position: relative;
+          &:focus{
+            border: 2px solid black;
+          }
           .fa-bell-o {
             font-size: 18px;
             color: $nw-darkgrey;
