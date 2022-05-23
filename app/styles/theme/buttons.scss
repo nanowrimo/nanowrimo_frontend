@@ -1,4 +1,11 @@
-button, input.nano-button {
+.nw-faux-button {
+  padding: 1px 6px;
+  &:hover{
+    color: white;
+    text-decoration: none;
+  }
+}
+button, input.nano-button, .nw-faux-button {
   
   /* Cursor */
   cursor: pointer;
