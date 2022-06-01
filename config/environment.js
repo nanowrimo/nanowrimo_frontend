@@ -21,7 +21,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API_HOST: (process.env.TARGET==='staging') ? 'https://api.nanowrimo.org' : 'https://api.nanowrimo.org',
+      API_HOST: (process.env.TARGET==='staging') ? 'https://staging-vpc.api.nanowrimo.org' : 'https://api.nanowrimo.org',
       DEBOUNCE_MS: 250,
       SOCIAL_SERVICES: ['facebook', 'twitter', 'instagram', 'medium', 'tumblr', 'youtube'],
       MODAL_BACKGROUND_TRANSITION_MS: 150,
@@ -144,7 +144,7 @@ module.exports = function(environment) {
 
   //is this a staging target?
   if (process.env.TARGET=='staging' || environment==="dev-with-staging-api") {
-    ENV.APP.API_HOST = 'https://api.nanowrimo.org';
+    ENV.APP.API_HOST = 'https://staging-vpc.api.nanowrimo.org';
     ENV.torii.providers['custom-google'].redirectUri = 'https://staging-vpc.nanowrimo.org/oauth2callback';
     ENV.forumsUrl = "https://staging.forums.nanowrimo.org";
   }
