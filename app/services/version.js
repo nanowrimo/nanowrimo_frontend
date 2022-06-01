@@ -9,16 +9,18 @@ export default Service.extend({
     // get the init time
     this.set('initTime', new Date() );
     
-    console.log( this.get('initTime') );
-    window.setInterval(this.checkVersion, 3000 );
+    //bind ... because 'javascript'
+    let checkVer = this.checkVersion.bind(this);
+    window.setInterval(checkVer, 3000 );
   },
   
   checkVersion: function() {
     fetch("/ui-update.txt").then(data=>{ 
         data.text().then( txt =>{
           let versionTime = new Date(txt);
-          console.log(versionTime);
-          
+          let initTime = this.get('initTime');
+          // is versionTime greater than initTime?        
+          this.set('outdated', (initTime < versionTime));
         });
     });
   }
