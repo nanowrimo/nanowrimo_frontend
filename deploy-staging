@@ -7,7 +7,7 @@ def runCmd(cmd)
 	output = `#{cmd}`
 	# was the command a success?
 	unless $?.success?
-    printErrors output
+        printErrors output
 		exit(false)
 	end
 	return output
