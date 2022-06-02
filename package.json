@@ -72,7 +72,7 @@
     "ember-responsive": "^3.0.5",
     "ember-simple-auth": "^2.1.0",
     "ember-source": "~3.20.2",
-    "ember-table": "^2.2.3",
+    "ember-table": "^3.3.1",
     "ember-template-lint": "^2.9.1",
     "ember-test-selectors": "^1.0.0",
     "ember-tracker": "^1.0.0",
