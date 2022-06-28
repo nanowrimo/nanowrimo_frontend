@@ -41,7 +41,7 @@ end
 current_branch = runCmd('git branch --show-current').chomp()
 
 # switch to the production branch
-runCmd("git checkout master")
+runCmd("git checkout main")
 
 # pull the new production code
 runCmd("git pull")
