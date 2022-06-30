@@ -102,6 +102,9 @@ const User = Model.extend({
   
   stats: null,
   annualStats: null,
+  homeRegion: null,
+  buddiesLoaded: false,
+  regionsLoaded: false,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -274,22 +277,6 @@ const User = Model.extend({
   
   recalculateHome: 0,
   
-  homeRegion: computed('regions.[]','groupUsers.@each.{primary}','recalculateHome', function(){
-    let r = this.get('regions');
-    let gu = this.get('groupUsers');
-    let maxPrimary = -1;
-    let maxRegion = null;
-    r.forEach(function(tgroup) {
-      gu.forEach(function(tgu) {
-        if (tgu.group_id==tgroup.id && tgu.primary>maxPrimary) {
-          maxPrimary = tgu.primary;
-          maxRegion = tgroup;
-        }
-      });
-    });
-    return maxRegion;
-  }),
-
   myInvitations: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
@@ -349,7 +336,6 @@ const User = Model.extend({
     return bgus;
   }),
 
-  //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
   convoGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
@@ -369,21 +355,23 @@ const User = Model.extend({
   // BEGINNING OF BUDDY FUNCTIONS
   // ---------------------------
 
-  //buddyGroupUsers: filterBy('groupUsers', 'groupType', 'buddies'),
-  buddyGroupUsers: computed('groupUsers.[]','groupUsers.@each.{invitationAccepted,exitAt}', function() {
-    let gus = this.get('groupUsers');
+
+  buddyGroupUsers: computed('buddiesLoaded','groupUsers.@each.{invitationAccepted,exitAt}', function() {
+    //let gus = this.get('groupUsers');
+    let gus = this.get('store').peekAll('group-user');
+    let id = this.get('id');
     let bgus = [];
     //are there group users?
     if (gus) {
       gus.forEach(function(gu) {
-        if ((gu.groupType=='buddies')&&(gu.exitAt==null)) {
+        if ((gu.groupType=='buddies')&&(gu.exitAt==null) && gu.user_id==id) {
           bgus.push(gu);
         }
       });
     }
     return bgus;
   }),
-  buddyGroupUsersAccepted: computed('buddyGroupUsers.[]','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersAccepted: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let accepted = [];
     //are there buddy group users?
@@ -396,7 +384,7 @@ const User = Model.extend({
     }
     return accepted;
   }),
-  buddyGroupUsersPending: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersPending: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let pending = [];
     //are there buddy group users?
@@ -409,7 +397,7 @@ const User = Model.extend({
     }
     return pending;
   }),
-  buddyGroupUsersInvited: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersInvited: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     const store = this.get('store');
     let pending = [];
@@ -431,7 +419,7 @@ const User = Model.extend({
     }
     return pending;
   }),
-  buddyGroupUsersBlocked: computed('buddyGroupUsers','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
+  buddyGroupUsersBlocked: computed('buddiesLoaded','buddyGroupUsers.@each.{invitationAccepted,entryAt}',function() {
     let bgus = this.get('buddyGroupUsers');
     let blocked = [];
     //are there buddy group users?
@@ -445,9 +433,9 @@ const User = Model.extend({
     return blocked;
   }),
   
-  buddyGroupsActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
+  buddyGroupsActive: computed('buddiesLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', function(){
     let buddyGroups = [];
-    if (this.get('groupUsersLoaded')) {
+    if (this.get('buddiesLoaded')) {
       let bgus = this.get('buddyGroupUsersAccepted');
       let store = this.get('store');
       let id = this.get('id');
@@ -470,29 +458,27 @@ const User = Model.extend({
     return buddyGroups;
   }),
   
-  buddiesActive: computed('groupUsersLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
-    get() {
-      let gul = this.get('groupUsersLoaded');
-      let bgus = this.get('buddyGroupUsersAccepted');
-      let buddies = [];
-      let store = this.get('store');
-      let id = this.get('id');
-      // are there buddyGroupUsersAccepted?
-      if (bgus && gul) {
-        bgus.forEach(function(bgu) {
-          let gus = bgu.group.get('groupUsers');
-          gus.forEach(function(gu) {
-            if (gu.user_id) {
-              let u = store.peekRecord('user', gu.user_id);
-              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
-                buddies.push(u);
-              }
+  buddiesActive: computed('buddiesLoaded','buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}',function(){
+    let bgus = this.get('buddyGroupUsersAccepted');
+    let buddies = [];
+    let store = this.get('store');
+    let id = this.get('id');
+    // are there buddyGroupUsersAccepted?
+    if (bgus && this.get('buddiesLoaded')) {
+      bgus.forEach(function(bgu) {
+        let gus = bgu.group.get('groupUsers');
+        gus.forEach(function(gu) {
+          if (gu.user_id) {
+            let u = store.peekRecord('user', gu.user_id);
+            if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+              buddies.push(u);
             }
-          });
+          }
         });
-      }
-      return buddies;
+      });
     }
+    return buddies;
+
   }),
   buddiesInvited: computed('buddyGroupUsersAccepted.[]','buddyGroupUsersAccepted.@each.{invitationAccepted,entryAt}', {
     get() {
@@ -540,23 +526,82 @@ const User = Model.extend({
       return buddies;
     }
   }),
+  
+  loadNanomessagesGroups() {
+    // ensure that the user's buddies, regions, and hq are loaded
+    if (!this.get('buddiesLoaded') ) {
+      // the user's buddies are not loaded... load them
+      this.loadBuddies();
+    }
+    if (!this.get('regionsLoaded') ) {
+      // the user's buddies are not loaded... load them
+      this.loadRegions();
+    }
+  },
+  loadRegions() {
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'regions',
+      include: 'user,group'
+    }).then(()=>{
+      // buddes have been loaded
+      this.set('regionsLoaded', true);
+    });
+  },
+  
+  // load the user's buddies, removing 
+  loadBuddies() {
+    // reload the user's buddies
+    //return this.get('user').hasMany('groups').reload();
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'buddies',
+      include: 'user,group'
+    }).then(data=>{
+      // buddes have been loaded
+      this.set('buddiesLoaded', true);
+      // keep track of the ids for returned content
+      let newIds = [];
+      data.content.forEach((gu)=>{
+        newIds.push(gu.id);
+      });
+      // unload any of this users buddy group_users that have an id not in the newIds
+      this.get('buddyGroupUsers').forEach(bgu=>{
+        if (newIds.indexOf(bgu.id)==-1) {
+          // no longer a buddy
+          bgu.unloadRecord();
+        }
+      });
+    });
+  },
 
   // ---------------------------
   // END OF BUDDY FUNCTIONS
   // ---------------------------
   
-  nanomessagesGroups: computed('groupUsersLoaded','groupUsers.[]', function(){
+  nanomessagesGroups: computed('regionsLoaded','buddiesLoaded','homeRegion', function(){
     let eGroups = [];
-    if (this.get('groupUsersLoaded')) {
-      let gus = this.get('groupUsers');
-      let store = this.get('store');
-      gus.forEach(function(gu) {
-        let g = store.peekRecord('group', gu.group_id);
-        if ((g.groupType=='everyone')||(g.groupType=='region')||(g.groupType=='buddies')) {
-          eGroups.push(g);
+    //let groupUsers = this.get('groupUsers');
+    let store = this.get('store');
+    let groupUsers = store.peekAll('groupUser');
+    let id = this.get("id");
+
+    // loop through the cuGroupUsers
+    groupUsers.forEach(groupUser=>{
+      // is this groupUser the current users and has the invitation been accepted ?
+      if (groupUser.user_id==id && groupUser.invitationAccepted=='1') {
+      // get the group from the store
+      let group = store.peekRecord('group', groupUser.group_id);
+        if (group){
+          if ((group.groupType=='everyone')||(group.groupType=='region')||(group.groupType=='buddies')) {
+            eGroups.push(group);
+          }
         }
-      });
-    }
+      }
+    });
+    
     return eGroups;
   }),
   
@@ -633,6 +678,13 @@ const User = Model.extend({
       include: 'user,group'
     }).then(function() {
       debounce(u, u.connectGroupUsers, 1000, false);
+    });
+  },
+  
+  loadHomeRegion(){ 
+    let store = this.get('store');
+    store.queryRecord("group", { homeRegion: true}).then(response=>{
+      this.set('homeRegion', response);
     });
   },
   

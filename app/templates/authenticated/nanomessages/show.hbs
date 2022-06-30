@@ -11,17 +11,20 @@
               <div class="nw-card-title-center">{{cardTitle}}</div>
               <div class="nw-card-title-right">
                 {{#if newMessage}}
-                  <div
+                  <button class='nw-close-button'
                     onClick={{action 'cancelNewMessage'}}
                   >
                     <i class="fa fa-times" />
-                  </div>
+                    <div class='sr-only'>Cancel New Message</div>
+                  </button>
                 {{/if}}
               </div>
             </div>
           </div>
           <div class="nw-card-content">
+            {{#if currentUser.isLoaded}}
             {{conversations-list group=group parentInitiateNewMessage=(action 'initiateNewMessage') parentCancelNewMessage=(action 'cancelNewMessage') newMessage=newMessage class="full-width"}}
+            {{/if}}
           </div>
         </div>
         {{#if group}}

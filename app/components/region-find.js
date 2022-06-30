@@ -22,6 +22,9 @@ export default Component.extend({
     }).then(data=>{
       this.set('regions',data);
     });
+    // load the currentUsers groupUsers of type region
+    this.get('currentUser').user.loadGroupUsers("regions");
+    this.get('currentUser').user.loadRegions();//("regions");
   },
   
   _mapZoom: 3,
@@ -119,8 +122,11 @@ export default Component.extend({
         newArray.push(o);
       });
     }
-    var sorted = this.assignSort(newArray);
-    return sorted;
+    // sort the regions by name
+    return newArray.sort(function(a,b) { 
+      return (a.name > b.name) ? 1 : -1;
+    });
+
   }),
   
   joinedRegionIds: computed('userRegions.[]', function() {

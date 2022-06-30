@@ -6,7 +6,9 @@
         <li class="nw-panel-tabs-spacer"></li>
         <li>{{link-to "Find a Region" "authenticated.regions.find"}}</li>
       </ul>
+      {{#if currentUser.isLoaded}}
       {{region-find class='grid-wrapper' regions=regions}}
+      {{/if}}
     </div>
   </div>
 </div>

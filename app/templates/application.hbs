@@ -17,6 +17,11 @@
         {{main-nav}}
       </nav>
       <NwUnverifiedHandler />
+      {{#if UiOutdated}}
+        <NwAlert @alertType="info">
+          Application updates are available. <a {{action "reloadUI"}}>Reload application</a>
+        </NwAlert>
+      {{/if}}
     </header>
     <main class="logged-in {{if currentUser.user.isNotConfirmed 'unverified' ''}}">
       {{outlet}}

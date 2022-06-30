@@ -1,4 +1,11 @@
-button, input.nano-button {
+.nw-faux-button {
+  padding: 1px 6px;
+  &:hover{
+    color: white;
+    text-decoration: none;
+  }
+}
+button, input.nano-button, .nw-faux-button {
   
   /* Cursor */
   cursor: pointer;
@@ -170,4 +177,25 @@ button .spinner {
     color: rgba(255,255,255,1.0);
   }
   
+}
+
+.nw-new-message-button:focus {
+  border: 3px solid black
+}
+
+.nw-close-button {
+  font-size: 10px;
+  border-color: transparent;
+  background-image: none !important;
+  background-color: transparent !important;
+  text-transform: none !important;
+  height: auto;
+  border-radius: 0px !important;
+  color: black;
+  float: right;
+  margin-top: -3px;
+  &:focus {
+    border-color: black;
+
+  }
 }

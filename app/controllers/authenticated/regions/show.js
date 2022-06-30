@@ -12,8 +12,8 @@ export default Controller.extend({
   dataLoaded: false,
   
   // Returns true if the user can edit the region
-  canEditGroup: computed('currentUser.{isLoaded,groupUsersLoaded}','group', function() {
-    let allowed = this.get('currentUser.isLoaded') && this.get('currentUser.groupUsersLoaded');
+  canEditGroup: computed('currentUser.{isLoaded}','group', function() {
+    let allowed = this.get('currentUser.isLoaded');
     if (allowed) {
       if (this.get('currentUser.user.adminLevel')) {
         return true;

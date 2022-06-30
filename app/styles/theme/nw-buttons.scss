@@ -7,6 +7,10 @@
   padding: 0px;
   color: $nw-black;
   background-color: transparent;
+  &:focus {
+    border: 2px solid $nw-black !important;
+    border-radius: 5px !important;
+  }
 }
 
 .nw-button-full-width {

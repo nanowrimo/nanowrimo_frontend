@@ -15,12 +15,19 @@ export default Component.extend({
   selectedSortOption: 'Overall Progress',
   showTools: false,
   
+  init() {
+    this._super(...arguments);
+    // load the buddies
+    this.get('user').loadBuddies();
+    
+  },
+  
   isCurrentUser: computed('currentUser.user.id', 'user.id', function() {
     return (this.get('currentUser.user.id')==this.get('user.id'))
   }),
   
-  isLoading: computed('currentUser.groupUsersLoaded', function() {
-    return !this.get('currentUser.groupUsersLoaded');
+  isLoading: computed('user.buddiesLoaded', function() {
+    return !this.get('user.buddiesLoaded');
   }),
   
   // Determines the number of active buddies
