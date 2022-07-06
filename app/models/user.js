@@ -529,18 +529,29 @@ const User = Model.extend({
   }),
   
   loadNanomessagesGroups() {
+    let groupTypes = [];
     // ensure that the user's buddies, regions, and hq are loaded
     if (!this.get('buddiesLoaded') ) {
       // the user's buddies are not loaded... load them
-      this.loadBuddies();
+      //this.loadBuddies();
+      groupTypes.push("buddies");
     }
     if (!this.get('regionsLoaded') ) {
       // the user's regions are not loaded... load them
-      this.loadRegions();
+      //this.loadRegions();
+      groupTypes.push("regions");
     }
     if (!this.get('hqLoaded') ) {
       // NaNo HQ is not loaded... load it
-      this.loadHQ();
+      //this.loadHQ();
+      groupTypes.push('everyone');
+    }
+    // are there group types?
+    if (groupTypes.length > 0) {
+      let typesString = groupTypes.join(",");
+      
+      // load the group users
+      this.loadGroupUsers(typesString);
     }
   },
   loadRegions() {
@@ -692,8 +703,17 @@ const User = Model.extend({
       filter: { user_id: u.id },
       group_types: group_types,
       include: 'user,group'
-    }).then(function() {
-      debounce(u, u.connectGroupUsers, 1000, false);
+    }).then(()=> {
+      
+      if (group_types.includes("everyone") ) {
+        this.set("hqLoaded", true);
+      }
+      if (group_types.includes("regions") ) {
+        this.set("regionsLoaded", true);
+      }
+      if (group_types.includes("buddies") ) {
+        this.set("buddiesLoaded", true);
+      }
     });
   },
   
