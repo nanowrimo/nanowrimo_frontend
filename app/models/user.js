@@ -105,6 +105,7 @@ const User = Model.extend({
   homeRegion: null,
   buddiesLoaded: false,
   regionsLoaded: false,
+  hqLoaded: false,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -534,8 +535,12 @@ const User = Model.extend({
       this.loadBuddies();
     }
     if (!this.get('regionsLoaded') ) {
-      // the user's buddies are not loaded... load them
+      // the user's regions are not loaded... load them
       this.loadRegions();
+    }
+    if (!this.get('hqLoaded') ) {
+      // NaNo HQ is not loaded... load it
+      this.loadHQ();
     }
   },
   loadRegions() {
@@ -545,8 +550,19 @@ const User = Model.extend({
       group_types: 'regions',
       include: 'user,group'
     }).then(()=>{
-      // buddes have been loaded
+      // regions have been loaded
       this.set('regionsLoaded', true);
+    });
+  },
+  loadHQ() {
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'everyone',
+      include: 'user,group'
+    }).then(()=>{
+      // hq has been loaded
+      this.set('hqLoaded', true);
     });
   },
   
@@ -581,7 +597,7 @@ const User = Model.extend({
   // END OF BUDDY FUNCTIONS
   // ---------------------------
   
-  nanomessagesGroups: computed('regionsLoaded','buddiesLoaded','homeRegion', function(){
+  nanomessagesGroups: computed('regionsLoaded','buddiesLoaded','homeRegion','hqLoaded', function(){
     let eGroups = [];
     //let groupUsers = this.get('groupUsers');
     let store = this.get('store');
