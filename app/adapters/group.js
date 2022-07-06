@@ -9,6 +9,7 @@ export default ApplicationAdapter.extend({
     }
     if(query.homeRegion) {
       let endpoint = this._super(...arguments);
+      delete query.homeRegion;
       endpoint = endpoint.replace("groups", "users/current/home-region");
       return endpoint;
     }

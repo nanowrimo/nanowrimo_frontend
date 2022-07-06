@@ -7,7 +7,7 @@ export default Controller.extend({
   router: service(),
   media: service(), 
   currentUser: service(),
-//  version: service(),
+  version: service(),
   
   init(){
     this._super(...arguments);

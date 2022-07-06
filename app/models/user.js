@@ -105,6 +105,7 @@ const User = Model.extend({
   homeRegion: null,
   buddiesLoaded: false,
   regionsLoaded: false,
+  hqLoaded: false,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -528,14 +529,29 @@ const User = Model.extend({
   }),
   
   loadNanomessagesGroups() {
+    let groupTypes = [];
     // ensure that the user's buddies, regions, and hq are loaded
     if (!this.get('buddiesLoaded') ) {
       // the user's buddies are not loaded... load them
-      this.loadBuddies();
+      //this.loadBuddies();
+      groupTypes.push("buddies");
     }
     if (!this.get('regionsLoaded') ) {
-      // the user's buddies are not loaded... load them
-      this.loadRegions();
+      // the user's regions are not loaded... load them
+      //this.loadRegions();
+      groupTypes.push("regions");
+    }
+    if (!this.get('hqLoaded') ) {
+      // NaNo HQ is not loaded... load it
+      //this.loadHQ();
+      groupTypes.push('everyone');
+    }
+    // are there group types?
+    if (groupTypes.length > 0) {
+      let typesString = groupTypes.join(",");
+      
+      // load the group users
+      this.loadGroupUsers(typesString);
     }
   },
   loadRegions() {
@@ -545,8 +561,19 @@ const User = Model.extend({
       group_types: 'regions',
       include: 'user,group'
     }).then(()=>{
-      // buddes have been loaded
+      // regions have been loaded
       this.set('regionsLoaded', true);
+    });
+  },
+  loadHQ() {
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'everyone',
+      include: 'user,group'
+    }).then(()=>{
+      // hq has been loaded
+      this.set('hqLoaded', true);
     });
   },
   
@@ -581,7 +608,7 @@ const User = Model.extend({
   // END OF BUDDY FUNCTIONS
   // ---------------------------
   
-  nanomessagesGroups: computed('regionsLoaded','buddiesLoaded','homeRegion', function(){
+  nanomessagesGroups: computed('regionsLoaded','buddiesLoaded','homeRegion','hqLoaded', function(){
     let eGroups = [];
     //let groupUsers = this.get('groupUsers');
     let store = this.get('store');
@@ -676,8 +703,17 @@ const User = Model.extend({
       filter: { user_id: u.id },
       group_types: group_types,
       include: 'user,group'
-    }).then(function() {
-      debounce(u, u.connectGroupUsers, 1000, false);
+    }).then(()=> {
+      
+      if (group_types.includes("everyone") ) {
+        this.set("hqLoaded", true);
+      }
+      if (group_types.includes("regions") ) {
+        this.set("regionsLoaded", true);
+      }
+      if (group_types.includes("buddies") ) {
+        this.set("buddiesLoaded", true);
+      }
     });
   },
   
