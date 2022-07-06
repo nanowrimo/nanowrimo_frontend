@@ -11,7 +11,7 @@ export default Service.extend({
     
     //bind ... because 'javascript'
     let checkVer = this.checkVersion.bind(this);
-    window.setInterval(checkVer, 3000 );
+    window.setInterval(checkVer, 300000 );
   },
   
   checkVersion: function() {
