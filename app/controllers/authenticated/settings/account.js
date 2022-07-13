@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import TimeZones from 'nanowrimo/lib/time-zones';
 import $ from 'jquery';
 
@@ -20,17 +20,24 @@ export default Controller.extend({
   currentEmail:null,
   currentTimeZone:null,
   newEmail:null,
-  
+  isLoaded: false,
   init(){
     this._super(...arguments);
-    let u = this.get("currentUser.user");
-    this.set('user', u );
-    this.set('formID', "account-settings");
-    this.set('currentName', u.name);
-    this.set('currentEmail', u.email);
-    this.set('currentTimeZone', u.timeZone);
-
+    this.set('isLoaded', this.get('currentUser.isLoaded') );
   },
+  
+  observeCurrentUser: observer('currentUser.isLoaded', function(){
+    let loaded = this.get('currentUser.isLoaded');
+    if (loaded) {
+      let u = this.get("currentUser.user");
+      this.set('user', u );
+      this.set('formID', "account-settings");
+      this.set('currentName', u.name);
+      this.set('currentEmail', u.email);
+      this.set('currentTimeZone', u.timeZone);
+      this.set('isLoaded', true);
+    }
+  }),
   
   timeZoneOptions: computed(function() {
     return TimeZones;
