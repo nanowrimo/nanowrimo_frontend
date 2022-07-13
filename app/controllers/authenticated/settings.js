@@ -1,8 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed, observer } from '@ember/object';
-import TimeZones from 'nanowrimo/lib/time-zones';
-import $ from 'jquery';
+import { computed} from '@ember/object';
 
 export default Controller.extend({
   currentUser: service(),

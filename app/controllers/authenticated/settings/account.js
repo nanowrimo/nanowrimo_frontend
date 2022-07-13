@@ -28,7 +28,6 @@ export default Controller.extend({
   
   observeCurrentUser: observer('currentUser.isLoaded', function(){
     let loaded = this.get('currentUser.isLoaded');
-    console.log(loaded);
     if (loaded) {
       let u = this.get("currentUser.user");
       this.set('user', u );
