@@ -89,25 +89,19 @@ export default Component.extend({
     return 0;
   }),
   
-  goalIcon: computed("project.currentProjectChallenge.computedChallenge",function(){
+  goalIcon: computed("project.currentProjectChallenge.eventType",function(){
     let str = '';
-    let proj = this.get('project');
-    if (proj) {
-      let pc = proj.currentProjectChallenge;
-      if (pc) {
-        let c = proj.currentProjectChallenge.computedChallenge;
-        // check if there is a computedChallenge
-        if(c) {
-          if (c.eventType==0) {
-            str = "<img src='/images/global/helmet.svg' style='' />";
-          }
-          if (c.eventType==1) {
-            str = "<img src='/images/global/tent.svg' style='' />";
-          }
-          if (c.eventType==3) {
-            str = "<img src='/images/global/now-what-pen.svg' style='' />";
-          }
-        }
+    let et = this.get('project.currentProjectChallenge.eventType');
+    if (et) {
+
+      if (et==0) {
+        str = "<img src='/images/global/helmet.svg' style='' />";
+      }
+      if (et==1) {
+        str = "<img src='/images/global/tent.svg' style='' />";
+      }
+      if (et==3) {
+        str = "<img src='/images/global/now-what-pen.svg' style='' />";
       }
     }
     return str;
