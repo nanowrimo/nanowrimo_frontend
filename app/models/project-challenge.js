@@ -68,7 +68,7 @@ const ProjectChallenge = Model.extend({
   }),
   
    // get the challenge without an api call with a relationship
-  computedChallenge: computed('challenge_id', function(){
+  computedChallenge: computed('challenge.[]','challenge_id', function(){
     // get the store 
     let s = this.get('store');
     // get the id of the associated challenge 
