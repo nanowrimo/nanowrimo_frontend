@@ -23,19 +23,16 @@ export default Controller.extend({
   isLoaded: false,
   init(){
     this._super(...arguments);
-    this.set('isLoaded', this.get('currentUser.isLoaded') );
+    let loaded = this.get('currentUser.isLoaded');
+    if (loaded) {
+      this._setUserData();
+    }
   },
   
   observeCurrentUser: observer('currentUser.isLoaded', function(){
     let loaded = this.get('currentUser.isLoaded');
     if (loaded) {
-      let u = this.get("currentUser.user");
-      this.set('user', u );
-      this.set('formID', "account-settings");
-      this.set('currentName', u.name);
-      this.set('currentEmail', u.email);
-      this.set('currentTimeZone', u.timeZone);
-      this.set('isLoaded', true);
+      this._setUserData();
     }
   }),
   
@@ -69,6 +66,9 @@ export default Controller.extend({
   }),
   
   hasChangedValues: computed('formChangeCount', function(){
+    if (this.get('formChangeCount')==0) {
+      return false;
+    }
     //get the form
     let user = this.get('user');
     let id = this.get('formID')
@@ -183,6 +183,16 @@ export default Controller.extend({
     }
   },
   
+  _setUserData(){
+      let u = this.get("currentUser.user");
+      this.set('user', u );
+      this.set('formID', "account-settings");
+      this.set('currentName', u.name);
+      this.set('currentEmail', u.email);
+      this.set('currentTimeZone', u.timeZone);
+      this.set('isLoaded', true);
+    },
+    
   changesHappened() {
     this.set("_formResponseMessage","");
     this.incrementProperty('formChangeCount');
