@@ -106,6 +106,7 @@ const User = Model.extend({
   buddiesLoaded: false,
   regionsLoaded: false,
   hqLoaded: false,
+  writingGroupsLoaded: false,
   
   // Returns true if the user is an admin
   isAdmin: computed('adminLevel', function() {
@@ -295,14 +296,16 @@ const User = Model.extend({
   groupUsersSortingDesc: Object.freeze(['entryAt:desc']),
   sortedGroupUsers: sort('groupUsers','groupUsersSortingDesc'),
   
-  myGroups: computed('sortedGroupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+  myGroups: computed('writingGroupsLoaded', 'sortedGroupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('sortedGroupUsers');
     let bgus = [];
+    let store = this.get('store');
     //are there group users?
     if (gus) {
       gus.forEach(function(gu) {
         if (((gu.groupType=='region')||(gu.groupType=='writing group'))&&(gu.exitAt==null)&&(gu.invitationAccepted==1)) {
-          bgus.push(gu.group);
+          let group = store.peekRecord('group', gu.group_id);
+          bgus.push(group);
         }
       });
     }
@@ -574,6 +577,17 @@ const User = Model.extend({
     }).then(()=>{
       // hq has been loaded
       this.set('hqLoaded', true);
+    });
+  },
+  loadWritingGroups() {
+    this.get('store').query('group-user',
+    {
+      filter: { user_id: this.get('id') },
+      group_types: 'writing group',
+      include: 'group'
+    }).then(()=>{
+      // hq has been loaded
+      this.set('writingGroupsLoaded', true);
     });
   },
   
