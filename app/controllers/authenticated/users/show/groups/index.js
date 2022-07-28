@@ -13,7 +13,13 @@ export default Controller.extend({
     this._super(...arguments);
   },
 
-  hasRegions: computed('user.myGroups', function() {
+  groupsLoaded: computed("currentUser.user.{writingGroupsLoaded,regionsLoaded}", function(){
+    let wgl = this.get('currentUser.user.writingGroupsLoaded');
+    let rl = this.get('currentUser.user.regionsLoaded');
+    return wgl && rl;
+  }),
+  
+  hasRegions: computed('user.myGroups.[]', function() {
     let gs = this.get('user.myGroups');
     if (gs.length>0) {
       return true;
