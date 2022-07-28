@@ -43,9 +43,12 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel() {
-    this._loadCurrentUser();
-    this._loadPingService();
-    this._loadBadgesService();
+    // only perform initial loading of services if not validating SSO
+    if (!document.location.href.includes("/sso?") ) {
+      this._loadCurrentUser();
+      this._loadPingService();
+      this._loadBadgesService();
+    } 
   },
 
   sessionAuthenticated() {
@@ -56,7 +59,10 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   _loadCurrentUser() {
-    return this.get('currentUser').load().catch(() => this.get('session').invalidate());
+    return this.get('currentUser').load().catch(() => {
+      this.get('session').invalidate();
+      }
+    );
   },
   _loadPingService() {
     return this.get('pingService').load();
