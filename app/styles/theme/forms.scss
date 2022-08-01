@@ -215,7 +215,7 @@ input:disabled, select:disabled, button:disabled {
     background-image: url('/images/global/calendar.svg');
     background-repeat: no-repeat;
     background-size: 16px 16px;
-    background-position: 160px center;
+    background-position: 180px center;
   }
   
   input[type=date], input[type=time] {
@@ -321,7 +321,7 @@ label.checkbox-label {
 
 /* one off for the project session modal 'date' */
 #project-session-modal-date {
-  background-position: 135px center;
+  background-position: 170px;
 }
 
 /* feelings radios */
