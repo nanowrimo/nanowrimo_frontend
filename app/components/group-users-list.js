@@ -142,7 +142,11 @@ export default Component.extend({
   isAdmin: computed('currentUser.user.id','group.adminIds.[]',function() {
     let cuid = this.get('currentUser.user.id');
     let adminIds  = this.get('group.adminIds');
-    return adminIds.includes(cuid);
+    if (!adminIds) {
+      return false;
+    } else {
+      return adminIds.includes(cuid);
+    }
   }),
   
   canInviteUsers: computed('isAdmin','group.joiningRule',function() {
