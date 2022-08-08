@@ -52,7 +52,7 @@ export default Component.extend({
   }),
   
   // Returns the latestMessage for this group
-  latestMessage: computed('group.groupType','group.denormedLastMessage','group.denormedLastOfficialMessage', function() {
+  latestMessage: computed('group.{groupType,denormedLastMessage,group.denormedLastOfficialMessage}', function() {
     // Get the group user
     let lm = null;
     if (this.get('group.groupType')=='region') {
