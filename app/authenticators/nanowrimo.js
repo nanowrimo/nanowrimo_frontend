@@ -20,6 +20,7 @@ export default BaseAuthenticator.extend({
         body: JSON.stringify({ identifier, password })
       })
       .then((response) => {
+        //alert(JSON.stringify(response));
         return response.json()
         .then((json)=>{
           if (this._validate(json)) {
@@ -48,6 +49,7 @@ export default BaseAuthenticator.extend({
   invalidate() {
     // get the auth_token from the session data
     let { auth_token }  = this.get('session.data.authenticated');
+    //alert(auth_token);
     // make a POST request to the API's logout endpoint 
     return fetch(this.get('serverLogoutEndpoint'), { 
       method: 'POST',
