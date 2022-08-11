@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import TimeZones from 'nanowrimo/lib/time-zones';
 import $ from 'jquery';
 
@@ -20,17 +20,21 @@ export default Controller.extend({
   currentEmail:null,
   currentTimeZone:null,
   newEmail:null,
-  
+  isLoaded: false,
   init(){
     this._super(...arguments);
-    let u = this.get("currentUser.user");
-    this.set('user', u );
-    this.set('formID', "account-settings");
-    this.set('currentName', u.name);
-    this.set('currentEmail', u.email);
-    this.set('currentTimeZone', u.timeZone);
-
+    let loaded = this.get('currentUser.isLoaded');
+    if (loaded) {
+      this._setUserData();
+    }
   },
+  
+  observeCurrentUser: observer('currentUser.isLoaded', function(){
+    let loaded = this.get('currentUser.isLoaded');
+    if (loaded) {
+      this._setUserData();
+    }
+  }),
   
   timeZoneOptions: computed(function() {
     return TimeZones;
@@ -62,6 +66,9 @@ export default Controller.extend({
   }),
   
   hasChangedValues: computed('formChangeCount', function(){
+    if (this.get('formChangeCount')==0) {
+      return false;
+    }
     //get the form
     let user = this.get('user');
     let id = this.get('formID')
@@ -176,6 +183,16 @@ export default Controller.extend({
     }
   },
   
+  _setUserData(){
+      let u = this.get("currentUser.user");
+      this.set('user', u );
+      this.set('formID', "account-settings");
+      this.set('currentName', u.name);
+      this.set('currentEmail', u.email);
+      this.set('currentTimeZone', u.timeZone);
+      this.set('isLoaded', true);
+    },
+    
   changesHappened() {
     this.set("_formResponseMessage","");
     this.incrementProperty('formChangeCount');

@@ -23,28 +23,32 @@
   </div>
   {{/if}}
   <div class='nw-column-cards'>
-    {{#if hasRegions}}
-      {{#each user.myGroups as |group|}}
-        {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
-      {{/each}}
-    {{else}}
-      <div class="nw-card nw-prompt-card">
-        <div class='nw-hflex'>
-          <div class="project-announce-quote">
-            <div class="quote-text">"Don't forget who you are and where you come from."<br />
-              <span class="quotee">F. Scott Fitzgerald</span>
+    {{#if groupsLoaded}}
+      {{#if hasRegions}}
+        {{#each user.myGroups as |group|}}
+          {{group-listing group=group buttons=true message=true isCurrentUser=isCurrentUser}}
+        {{/each}}
+      {{else}}
+        <div class="nw-card nw-prompt-card">
+          <div class='nw-hflex'>
+            <div class="project-announce-quote">
+              <div class="quote-text">"Don't forget who you are and where you come from."<br />
+                <span class="quotee">F. Scott Fitzgerald</span>
+              </div>
+            </div>
+            <div class='action'>
+              {{#link-to "authenticated.regions.find"}}
+              Join a region!
+              {{/link-to}}
+            </div>
+            <div class='prompt-image'>
+              <img alt="" src="/images/cards/homeregion.svg">
             </div>
           </div>
-          <div class='action'>
-            {{#link-to "authenticated.regions.find"}}
-            Join a region!
-            {{/link-to}}
-          </div>
-          <div class='prompt-image'>
-            <img alt="" src="/images/cards/homeregion.svg">
-          </div>
         </div>
-      </div>
+      {{/if}}
+    {{else}}
+      {{nw-loading}}
     {{/if}}
   </div>
 </div>

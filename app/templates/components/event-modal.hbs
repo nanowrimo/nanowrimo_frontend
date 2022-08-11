@@ -213,10 +213,111 @@
           </div>
         </div>
       {{else if (eq step 1)}}
+        <div class="form-group">
+          <p>Is this event in-person, online, or both?</p>
+          {{#if showEventTypeError}}
+            <div class="ext-invalid-feedback">{{eventTypeErrorMessage}}</div>
+          {{/if}}
+        </div>
         <div class="nw-form-section">
           <div class="nw-form-section-icon">
-            {{fa-icon 'laptop'}}
+            <i class="fa fa-map-marker" />
           </div>
+          <div class="nw-form-section-content">
+            <div class="form-group">
+              <label class="nw-checkbox-container">In-person
+                <input
+                  type="checkbox"
+                  name="eventTypeInPerson"
+                  id="eventTypeInPerson"
+                  class="form-control"
+                  checked={{eventTypeInPerson}}
+                  onchange={{action 'eventTypeInPersonChanged' value="target.checked"}}
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        {{#if eventTypeInPerson}}
+          {{#if hasLocations}}
+            <div class="form-group select-container">
+              <select name='venueSelect' id='venueSelect' class='form-control'
+                onchange={{action 'locationChanged' value="target.value"}}
+              >
+                <option value="0">Select or add a venue...</option>
+                {{#each acceptedLocations as |c|}}
+                  <option value="{{c.id}}">{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
+                {{/each}}
+                <option value="-1">+ Add a new venue</option>
+              </select>
+              {{#if showVenueError}}
+                <div class="ext-invalid-feedback">{{venueErrorMessage}}</div>
+              {{/if}}
+            </div>
+          {{else}}
+            <div class="form-group">
+              <div class="select-container">
+                <select id='associateSelect' class='form-control'
+                  onchange={{action 'locationChanged' value="target.value"}}
+                >
+                  <option value="0">Select...</option>
+                  <option value="-1">+ Add a new venue</option>
+                </select>
+              </div>
+              {{#if showVenueError}}
+                <div class="ext-invalid-feedback">{{venueErrorMessage}}</div>
+              {{/if}}
+            </div>
+          {{/if}}          
+          {{#if addingLocation}}
+            <div class="form-group">
+              {{nw-form-input
+                name='venueName'
+                label='What is the venue called?'
+                type='text'
+                value=venueName
+                errorMessage=venueNameError
+                submit=(action 'venueNameChanged')
+                placeholder='E.g. "Nanoville Library"'
+              }}
+      
+            </div>
+            <div class="form-group">
+              <label for='time' class='form-group'>Street Address (begin typing, then select the correct option)</label>
+              {{place-autocomplete-field
+                value=address2
+                inputClass= 'place-autocomplete--input form-control ember-text-field'
+                placeChangedCallback=(action "placeChanged")
+              }}
+              {{#if showLocationError}}
+                <div class="ext-invalid-feedback">{{locationErrorMessage}}</div>
+              {{/if}}
+            </div>
+          {{/if}}
+        {{/if}}
+        <hr />
+        <div class="nw-form-section">
+          <div class="nw-form-section-icon">
+            <i class="fa fa-laptop" />
+          </div>
+          <div class="nw-form-section-content">
+            <div class="form-group">
+              <label class="nw-checkbox-container">Online
+                <input
+                  type="checkbox"
+                  name="eventTypeOnline"
+                  id="eventTypeOnline"
+                  class="form-control"
+                  checked={{eventTypeOnline}}
+                  onchange={{action 'eventTypeOnlineChanged' value="target.checked"}}
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="nw-form-section">
           <div class="nw-form-section-content">
             {{#if eventTypeOnline}}
               <div class="form-group">

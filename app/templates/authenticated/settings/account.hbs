@@ -1,61 +1,64 @@
 {{page-title "Account"}}
-<form id={{formID}} {{action "submit" on="submit"}}>
-  <div class='nw-card'>
-    <div class='nw-card-header'>
-      <div class='nw-card-title'>Settings</div>
-    </div>
-    <div class='nw-card-content'>
-      <div class='form-group'>
-        <label for='username'>Username</label>
-        <input autocomplete='username' 
-          id='username' name='username'
-          class='form-control ember-text-field {{if nameErrorMessage 'is-invalid' ''}}'
-           {{action "nameChanged" value='target.value' on="keyUp" }}
-           value={{currentName}}
-          >
-        {{#if nameErrorMessage}}
-          <div class="invalid-feedback">{{nameErrorMessage}}</div>
-        {{/if}}
+{{#if isLoaded}}
+  <form id={{formID}} {{action "submit" on="submit"}}>
+    <div class='nw-card'>
+      <div class='nw-card-header'>
+        <div class='nw-card-title'>Settings</div>
       </div>
-      
-      <div class='form-group'>
-          <label for='email'>Email Address</label>
-        <input type='email' autocomplete='email' id='email' 
-          value={{currentEmail}}
-          class='form-control ember-text-field {{if emailErrorMessage 'is-invalid' ''}}'
-          {{action "emailChanged" value='target.value' on="keyUp"}}
-          >
-        {{#if emailErrorMessage}}
-          <div class="invalid-feedback">{{emailErrorMessage}}</div>
-        {{/if}}
-      </div>
-      
-      <div class='form-group'>
-        {{nw-form-input-password changeAction=(action "newPasswordChanged") 
-        errorMessage=passwordErrorMessage label='New Password' }}
-      </div>
-      {{#if showPasswordConfirm}}
+      <div class='nw-card-content'>
         <div class='form-group'>
-          {{nw-form-input-password changeAction=(action "currentPasswordChanged")
-          errorMessage=confirmationPasswordErrorMessage 
-          label="Enter Your Current Password to Confirm" name="currentPassword"}}
+          <label for='username'>Username</label>
+          <input autocomplete='username' 
+            id='username' name='username'
+            class='form-control ember-text-field {{if nameErrorMessage 'is-invalid' ''}}'
+             {{action "nameChanged" value='target.value' on="keyUp" }}
+             value={{currentName}}
+            >
+          {{#if nameErrorMessage}}
+            <div class="invalid-feedback">{{nameErrorMessage}}</div>
+          {{/if}}
         </div>
-      {{/if}}
-      
-      <div class="form-group">
-        <label for='timezone'>Time Zone</label>
-        <select name='timezone' id='timezone' class='form-control' {{action "timeZoneChanged" value='target.value' on="change"}} >
-          {{#each timeZoneOptions as |o|}}
-            <option value={{o.value}}  selected={{if (eq o.value user.timeZone) 'true'}} >{{o.name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      
-    <div class="form-instruction" style="margin-left: 20px; margin-top: 10px; max-width: 70%;">{{form-for--response-message responseMessage=formResponseMessage}}</div>
-  </div>
-  </div>
-  {{errorString}}
-  <div class='nw-panel-footer'>
-    {{nw-form-save-cancel resetCallback=(action 'reset') hasChanges=hasChangedValues}}
-  </div>
-</form>
+        
+        <div class='form-group'>
+            <label for='email'>Email Address</label>
+          <input type='email' autocomplete='email' id='email' 
+            value={{currentEmail}}
+            class='form-control ember-text-field {{if emailErrorMessage 'is-invalid' ''}}'
+            {{action "emailChanged" value='target.value' on="keyUp"}}
+            >
+          {{#if emailErrorMessage}}
+            <div class="invalid-feedback">{{emailErrorMessage}}</div>
+          {{/if}}
+        </div>
+        
+        <div class='form-group'>
+          {{nw-form-input-password changeAction=(action "newPasswordChanged") 
+          errorMessage=passwordErrorMessage label='New Password' }}
+        </div>
+        {{#if showPasswordConfirm}}
+          <div class='form-group'>
+            {{nw-form-input-password changeAction=(action "currentPasswordChanged")
+            errorMessage=confirmationPasswordErrorMessage 
+            label="Enter Your Current Password to Confirm" name="currentPassword"}}
+          </div>
+        {{/if}}
+        
+        <div class="form-group">
+          <label for='timezone'>Time Zone</label>
+          <select name='timezone' id='timezone' class='form-control' {{action "timeZoneChanged" value='target.value' on="change"}} >
+            {{#each timeZoneOptions as |o|}}
+              <option value={{o.value}}  selected={{if (eq o.value user.timeZone) 'true'}} >{{o.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        
+      <div class="form-instruction" style="margin-left: 20px; margin-top: 10px; max-width: 70%;">{{form-for--response-message responseMessage=formResponseMessage}}</div>
+    </div>
+    </div>
+    {{errorString}}
+    <div class='nw-panel-footer'>
+      {{nw-form-save-cancel resetCallback=(action 'reset') hasChanges=hasChangedValues}}
+    </div>
+  </form>
+
+{{/if}}

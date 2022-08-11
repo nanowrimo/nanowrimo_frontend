@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { next }  from '@ember/runloop';
 import $ from 'jquery';
 
@@ -14,6 +14,7 @@ export default Controller.extend({
   projects: null,
   buddies: null,
   displayForm: true,
+  isLoaded: false,
   
   /* numbers used here */
   //
@@ -26,9 +27,17 @@ export default Controller.extend({
   
   init(){
     this._super(...arguments);
-    this._setup();
+    this.set('isLoaded', this.get('currentUser.isLoaded'));
 
   },
+  
+  observeCurrentUser: observer('currentUser.isLoaded', function() {
+    let loaded = this.get('currentUser.isLoaded');
+    if (loaded) {
+      this._setup();
+      this.set('isLoaded', true);
+    }
+  }),
   
   submitDisabled: computed("newProfile", "newProjects", "newBuddies",
     "profile",

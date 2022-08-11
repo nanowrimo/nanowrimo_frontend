@@ -243,7 +243,7 @@ export default Component.extend({
         this.set('newStartsAt', pc.startsAt);
         this.set('newEndsAt', pc.endsAt);
         // is the project challenge associated with an event? 
-        if(pc.computedChallenge.isNaNoOrCampEvent){
+        if(pc.eventType==0 || pc.eventType==1 || pc.eventType ==3){
           //set the challenge association properties
           this.set('associateWithChallenge', true);
           this.set('associatedChallenge', pc.computedChallenge);
