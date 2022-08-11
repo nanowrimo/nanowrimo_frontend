@@ -21,7 +21,11 @@ export default Controller.extend({
         // is the viewer's id in the group's adminids array?
         let adminIds = this.get('group.adminIds');
         let uid = this.get('currentUser.user.id');
-        return adminIds.includes(uid);
+        if (!adminIds) {
+          return false;
+        } else {
+          return adminIds.includes(uid);
+        }
       }
     }
     return false;

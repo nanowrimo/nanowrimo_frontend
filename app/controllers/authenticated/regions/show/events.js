@@ -29,7 +29,11 @@ export default Controller.extend({
         // is the user an admin?
         let uid = this.get('currentUser.user.id');
         let adminIds = this.get('group.adminIds');
-        return adminIds.includes(uid);
+        if (!adminIds) {
+          return false;
+        } else {
+          return adminIds.includes(uid);
+        }
       }
     }
   }),
