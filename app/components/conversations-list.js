@@ -67,7 +67,7 @@ export default Component.extend({
           }
         } else { // Just the regular list
           for (let i=0; i<es.length; i++) {
-            if (es[i].latestMessageDt!=null) {
+            if (es[i].denormedLastOfficialMessageAt!=null) {
               newes.push(es[i]);
             }
           }
@@ -77,7 +77,7 @@ export default Component.extend({
     return newes;
   }),
   
-  conversationSortingDesc: Object.freeze(['latestMessageDt:desc']),
+  conversationSortingDesc: Object.freeze(['denormedLastOfficialMessageAt:desc']),
   
   updateSearch() {
     this.set('searchString',this.get('tempSearchString'));
