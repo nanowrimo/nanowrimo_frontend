@@ -77,7 +77,7 @@ export default Component.extend({
     return newes;
   }),
   
-  conversationSortingDesc: Object.freeze(['latestMessageDt:desc']),
+  conversationSortingDesc: Object.freeze(['denormedLastOfficialMessageAt:desc']),
   
   updateSearch() {
     this.set('searchString',this.get('tempSearchString'));
