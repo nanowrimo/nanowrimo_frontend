@@ -29,9 +29,10 @@ const Group = Model.extend({
   denormedLastMessageAt: attr('string'),
   denormedLastOfficalMessage: attr('string'),
   denormedLastOfficialMessageAt: attr('string'),
+  denormedAdminIds: attr('string'),
   latestMessage: attr('string'),
   latestMessageDt: attr('string'),
-  admin_ids: attr('string'),
+  //admin_ids: attr('string'),
   
   // Members
   users: hasMany('user'),
@@ -188,8 +189,13 @@ const Group = Model.extend({
       this.get('groupExternalLinks').forEach(link => link.persistChanges());
     });
   },
-  adminIds: computed('admin_ids', function(){
-    return this.get("admin_ids").split(",");
+  adminIds: computed('denormedAdminIds', function(){
+    let denormedAdminIds = this.get("denormedAdminIds");
+    if (denormedAdminIds) {
+      return this.get("denormedAdminIds").split(",");
+    } else {
+      return null;
+    }
   }),
   
 });

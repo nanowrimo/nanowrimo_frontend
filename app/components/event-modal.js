@@ -46,7 +46,7 @@ export default Component.extend({
   locationSelected: false,
   locationErrorMessage: null,
   locationId: 0,
-  eventTypeInPerson: false,
+  eventTypeInPerson: true,
   eventTypeOnline: true,
   
   street1: null,
@@ -154,7 +154,53 @@ export default Component.extend({
     }
     this.setProperties({ googleAuto: null });
   },
-  
+
+  // Set local variables based on response from Google Maps Timezone API
+  timezoneRetrieved: computed('timezoneResponse', function() {
+    let l = this.get('timezoneResponse');
+    if (l) {
+      this.saveTimezoneData(l);
+    }
+    return true;
+  }),
+
+  saveTimezoneData(response) {
+    let r = JSON.parse(response);
+    this.set('dstOffset',r.dstOffset);
+    this.set('rawOffset',r.rawOffset);
+    this.set('timeZoneId',r.timeZoneId);
+    this.set('timeZoneName',r.timeZoneName);
+    this.saveData();
+  },
+
+  transferFailed () {
+    alert("Something went wrong. Please try again");
+  },
+
+  getTimeZone() {
+    let lid = this.get('locationId');
+    let datestr = this.get('datestr');
+    let timestamp = moment(datestr).unix();
+    let t = this;
+    let url = 'https://maps.googleapis.com/maps/api/timezone/json?location=';
+    // If new location
+    if (lid==-1) {
+      url += this.get('latitude') + ',' + this.get('longitude');
+    } else {
+      let l = this.get('store').peekRecord('location',lid);
+      url += l.latitude + ',' + l.longtitude;
+    }
+    url += '&timestamp=' + timestamp + '&key=AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4';
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", function(){
+      t.set('timezoneResponse', this.responseText);
+    });
+    //oReq.addEventListener("load", this.timezoneRetrieved);
+    oReq.addEventListener("error", this.transferFailed);
+    oReq.open("GET", url);
+    oReq.send();
+  },
+      
   // Creates the group record in the store
   defineGroup() {
     let g = this.get('store').createRecord('group');
@@ -540,6 +586,8 @@ export default Component.extend({
     },
     
     onShow() {
+      //assign the user to the project
+      this.set('group.user', this.get('user'));
       var t = document.getElementById("ember-bootstrap-wormhole");
       t.firstElementChild.setAttribute("aria-modal", "true");
       t.firstElementChild.setAttribute("aria-label", "submit an event");

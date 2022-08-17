@@ -52,9 +52,14 @@ export default Component.extend({
   }),
   
   // Returns the latestMessage for this group
-  latestMessage: computed('group.latestMessage', function() {
+  latestMessage: computed('group.{groupType,denormedLastMessage,group.denormedLastOfficialMessage}', function() {
     // Get the group user
-    const lm = this.get('group.latestMessage');
+    let lm = null;
+    if (this.get('group.groupType')=='region') {
+      lm = this.get('group.denormedLastOfficialMessage');
+    } else {
+      lm = this.get('group.denormedLastMessage');      
+    }
     if (lm) {
       // Strip tags from message
       var div = document.createElement("div");

@@ -471,14 +471,16 @@ const User = Model.extend({
     if (bgus && this.get('buddiesLoaded')) {
       bgus.forEach(function(bgu) {
         let gus = bgu.group.get('groupUsers');
-        gus.forEach(function(gu) {
-          if (gu.user_id) {
-            let u = store.peekRecord('user', gu.user_id);
-            if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
-              buddies.push(u);
+        if (gus) {
+          gus.forEach(function(gu) {
+            if (gu.user_id) {
+              let u = store.peekRecord('user', gu.user_id);
+              if ((u) && (u.id!=id) && (gu.invitationAccepted=='1') && (gu.exitAt==null)) {
+                buddies.push(u);
+              }
             }
-          }
-        });
+          });
+        }
       });
     }
     return buddies;
