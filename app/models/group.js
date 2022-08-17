@@ -30,8 +30,8 @@ const Group = Model.extend({
   denormedLastOfficalMessage: attr('string'),
   denormedLastOfficialMessageAt: attr('string'),
   denormedAdminIds: attr('string'),
-  latestMessage: attr('string'),
-  latestMessageDt: attr('string'),
+  //latestMessage: attr('string'),
+  //latestMessageDt: attr('string'),
   //admin_ids: attr('string'),
   
   // Members

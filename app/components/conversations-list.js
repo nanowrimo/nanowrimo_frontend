@@ -48,7 +48,7 @@ export default Component.extend({
         // If it's the new message state
         if (this.get('newMessage')) {
           for (let i=0; i<es.length; i++) {
-            if (es[i].latestMessageDt==null) {
+            if (es[i].denormedLastMessageAt==null) {
               let g = es[i];
               if (g.get('groupType')=='buddies') {
                 let gus = g.get('groupUsers');

@@ -17,7 +17,7 @@ export default Component.extend({
     this._super(...arguments);
     let g = this.get('group');
     if (g) {
-      let lm = this.get('group.latestMessageDt');
+      let lm = this.get('group.denormedLastMessageAt');
       // if found, return the number of unread messages; otherwise return zero
       if (lm==null) {
         this.set('classNames', ['convo-item is-new']);
@@ -35,12 +35,12 @@ export default Component.extend({
     }
   }),
   
-  timeSince: computed('pingService.updateCount','group', 'group.latestMessageDt',function() {
+  timeSince: computed('pingService.updateCount','group', 'group.denormedLastMessageAt',function() {
     const updateCount = this.get('pingService.updateCount');
     let t = '';
     let g = this.get('group');
     if (g && updateCount) {
-      let lm = this.get('group.latestMessageDt');
+      let lm = this.get('group.denormedLastMessageAt');
       if (lm!=null) {
         t = moment.utc(lm, 'YYYY-MM-DD HH:mm:ss').local().fromNow();
       }
@@ -167,11 +167,11 @@ export default Component.extend({
     return tgu;
   }),
   // Returns the latestMessage for this group
-  latestMessage: computed('group', 'group.latestMessage', function() {
+  latestMessage: computed('group', 'group.denormedLastMessage', function() {
     // Get the group user
     let g = this.get('group');
     if (g) {
-      let lm = this.get('group.latestMessage');
+      let lm = this.get('group.denormedLastMessage');
       // if found, return the message; otherwise return null
       if (lm!=null) {
         // Strip tags from message
