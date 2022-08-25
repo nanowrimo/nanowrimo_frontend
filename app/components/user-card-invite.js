@@ -54,7 +54,6 @@ export default Component.extend({
       newGroupUser.set('entryMethod','invited');
       newGroupUser.save().then(function() {
         t.set('status',1);
-        //alert('done');
       });
       
     },

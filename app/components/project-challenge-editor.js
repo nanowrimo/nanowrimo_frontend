@@ -200,7 +200,6 @@ export default Component.extend({
 
     },
     startsAtChanged(val) {
-      //alert(val);
       //set the new StartsAt
       //let m = moment.utc(val);
       //this.set('newStartsAt', m);

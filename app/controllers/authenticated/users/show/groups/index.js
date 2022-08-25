@@ -13,9 +13,9 @@ export default Controller.extend({
     this._super(...arguments);
   },
 
-  groupsLoaded: computed("currentUser.user.{writingGroupsLoaded,regionsLoaded}", function(){
-    let wgl = this.get('currentUser.user.writingGroupsLoaded');
-    let rl = this.get('currentUser.user.regionsLoaded');
+  groupsLoaded: computed("user.{writingGroupsLoaded,regionsLoaded}", function(){
+    let wgl = this.get('user.writingGroupsLoaded');
+    let rl = this.get('user.regionsLoaded');
     return wgl && rl;
   }),
   

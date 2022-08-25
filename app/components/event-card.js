@@ -263,7 +263,6 @@ export default Component.extend({
       // Set the url to the region's upcoming events
       url = "/regions/" + p.slug + "/events/upcoming";
     }
-    //alert(url);
     // Destroy the record
     this.get('event').destroyRecord().then(()=>{
       // Then redirect to a page with content

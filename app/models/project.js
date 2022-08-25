@@ -193,7 +193,6 @@ const Project = Model.extend({
         active = pc;
       }
     });
-    //alert(active);
     return active;
   }),
 
@@ -205,7 +204,6 @@ const Project = Model.extend({
         active = pc;
       }
     });
-    //alert(active);
     return active;
   }),
 

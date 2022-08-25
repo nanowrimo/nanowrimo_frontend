@@ -12,7 +12,6 @@ export default Controller.extend({
   oldgroupid: null,
   
   hasGroup: computed('group','oldgroupid', function() {
-    //alert('computing');
     let g = this.get('group');
     let ogid = this.get('oldgroupid');
     if (g) {

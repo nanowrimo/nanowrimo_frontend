@@ -42,7 +42,7 @@ export default Component.extend({
   
   buddyActive: computed('currentUser.user.buddiesActive.[]','user', function() {
     let buddiesActive = this.get('currentUser.user.buddiesActive');
-    if (buddiesActive.includes(this.get('user'))) {
+    if (buddiesActive && buddiesActive.includes(this.get('user'))) {
       return true;
     } else {
       return false;
@@ -51,7 +51,7 @@ export default Component.extend({
   
   buddyInvited: computed('currentUser.user.buddiesInvited.[]',function() {
     let buddiesInvited = this.get('currentUser.user.buddiesInvited');
-    if (buddiesInvited.includes(this.get('user'))) {
+    if (buddiesInvited && buddiesInvited.includes(this.get('user'))) {
       return true;
     }
     return false;
@@ -59,7 +59,7 @@ export default Component.extend({
   
   buddyInvitedBy: computed('currentUser.user.buddiesInvitedBy.[]',function() {
     let buddiesInvitedBy = this.get('currentUser.user.buddiesInvitedBy');
-    if (buddiesInvitedBy.includes(this.get('user'))) {
+    if (buddiesInvitedBy && buddiesInvitedBy.includes(this.get('user'))) {
       return true;
     }
     return false;
@@ -67,7 +67,7 @@ export default Component.extend({
   
   userBlocked: computed('currentUser.user.usersBlocked',function() {
     let usersBlocked = this.get('currentUser.user.usersBlocked');
-    if (usersBlocked.includes(this.get('user'))) {
+    if (usersBlocked && usersBlocked.includes(this.get('user'))) {
       return true;
     }
     return false;
@@ -261,7 +261,6 @@ export default Component.extend({
           }
         })
         .catch(() => {
-          //alert('There was a problem removing this buddy. Please check your internet connection and try again.');
         });
       });
     },
