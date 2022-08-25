@@ -7,14 +7,7 @@ export default Route.extend({
   currentUser: service(),
   templateName: '404',
   model() {
-    let cu = this.get('currentUser.user');
-    let winner = cu.wonEventByName("NaNoWriMo 2020");
-    if (!winner) {
-      // return and the default 404 will be displayed
-      return;
-    }
-
-    let endpoint =  `${ENV.APP.API_HOST}/pages/nanowrimo-2020-winner?user_id=`+cu.get('id');
+    let endpoint =  `${ENV.APP.API_HOST}/pages/nanowrimo-2020-winner`;
     return fetch(endpoint).then((data)=>{
       return data.json().then((json)=>{
         return json;
