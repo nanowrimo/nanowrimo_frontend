@@ -23,7 +23,7 @@ export default Service.extend({
   
   init() {
     this._super(...arguments);
-    this.set('pingDelay', 50000); 
+    this.set('pingDelay', 5000); 
     this.set('buddiesData', []);
   },
   
