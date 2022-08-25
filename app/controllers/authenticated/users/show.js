@@ -49,9 +49,7 @@ export default Controller.extend({
   },
 
   spoofUser(uid) {
-    //alert('spoofing1');
     let _self = this;
-    
     return _self.get('session').authenticate('authenticator:spoof', uid);
   },
 

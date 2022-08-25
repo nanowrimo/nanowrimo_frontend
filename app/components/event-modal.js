@@ -140,13 +140,11 @@ export default Component.extend({
     let now = moment();
     let g = this.get('group');
     if (g) {
-      //alert('old event');
       this.set('name', g.get('name'));
       //this.set('startDate', g.get('startDt').format("YYYY-MM-DD"));
       this.set('durationHours', g.get('durationHours'));
       this.set('timeZone',g.get('timeZone'));
     } else {
-      //alert('new event');
       this.set('startDate', now.format("YYYY-MM-DD"));
       this.set('startTime', "19:00");
       this.set('durationHours', "2");

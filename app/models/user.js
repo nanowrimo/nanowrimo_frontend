@@ -296,18 +296,21 @@ const User = Model.extend({
   groupUsersSortingDesc: Object.freeze(['entryAt:desc']),
   sortedGroupUsers: sort('groupUsers','groupUsersSortingDesc'),
   
-  myGroups: computed('writingGroupsLoaded', 'sortedGroupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+  myGroups: computed('writingGroupsLoaded', 'regionsLoaded', 'sortedGroupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('sortedGroupUsers');
     let bgus = [];
     let store = this.get('store');
+    let regionsLoaded = this.get('regionsLoaded');
     //are there group users?
-    if (gus) {
-      gus.forEach(function(gu) {
-        if (((gu.groupType=='region')||(gu.groupType=='writing group'))&&(gu.exitAt==null)&&(gu.invitationAccepted==1)) {
-          let group = store.peekRecord('group', gu.group_id);
-          bgus.push(group);
-        }
-      });
+    if (regionsLoaded) {
+      if (gus) {
+        gus.forEach(function(gu) {
+          if (((gu.groupType=='region')||(gu.groupType=='writing group'))&&(gu.exitAt==null)&&(gu.invitationAccepted==1)) {
+            let group = store.peekRecord('group', gu.group_id);
+            bgus.push(group);
+          }
+        });
+      }
     }
     return bgus;
   }),
@@ -751,7 +754,6 @@ const User = Model.extend({
   
   setGroupUsersLoaded() {
     this.set('groupUsersLoaded', true);
-    //alert(this.get('groupUsersLoaded'));
   },
 
   projectsSortingCreatedDesc: Object.freeze(['createdAt:desc']),

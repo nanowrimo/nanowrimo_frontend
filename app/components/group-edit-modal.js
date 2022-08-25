@@ -54,7 +54,6 @@ export default Component.extend({
 
   actions: {
     updateChangeset() {
-      //alert('updating');
     },
  
     nameChanged(val) {

@@ -23,7 +23,7 @@ export default Service.extend({
   
   init() {
     this._super(...arguments);
-    this.set('pingDelay', 5000); 
+    this.set('pingDelay', 50000); 
     this.set('buddiesData', []);
   },
   
@@ -124,7 +124,6 @@ export default Service.extend({
         this.incrementUpdateCount();
       })
     }).catch(() => {
-      //alert('Something went wrong! Please reload the page and try again.');
     });
   },
   

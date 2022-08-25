@@ -12,7 +12,6 @@ export default BaseAuthenticator.extend({
   
   // For spoofing another user
   authenticate(user_id) {
-    //alert('spoofing3');
     let { auth_token }  = this.get('session.data.authenticated');
     
     return new Promise((resolve, reject) => {

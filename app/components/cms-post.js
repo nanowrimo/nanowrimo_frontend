@@ -18,37 +18,7 @@ export default Component.extend({
   offerJson: null,
   init() {
     this._super(...arguments);
-    //if (this.isDynamicSponsorOffer) {
-      //let c = this.get('post.data.attributes.offer-code');
-      //setTimeout(function(){ alert("Hello"); }, 3000);
-      //setTimeout(this.getDynamicSponsorOffer(c), 1000);
-      
-      //this.getDynamicSponsorOffer(c);
-    //}
   },
-  
-  /*getDynamicSponsorOffer(offerCode) {
-    let endpoint =  `${ENV.APP.API_HOST}/dynamic_sponsor_offer/` + offerCode;
-    alert(endpoint);
-    let { auth_token } = this.get('session.data.authenticated');
-    let t = this;
-    fetch(endpoint, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
-    })
-    .then((response) => {
-      response.json().then((json)=>{
-        console.log(json.data);
-        t.set('offer', json.data.attributes);
-        //t.set('description', json.description);
-        //t.set('imageUrl', json.image_url);
-        //t.set('offerCode', json.offer_code);
-      });
-    })
-    .catch((error) => {
-      reject(error);
-    });
-  },*/
   
   sponsorComputed: computed('sponsor',function() {
     return this.get('sponsor');

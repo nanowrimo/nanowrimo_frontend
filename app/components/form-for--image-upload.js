@@ -57,7 +57,6 @@ export default Component.extend({
           this.set('hasUploaded', true);
         }).catch(error => {
           alert(error + ": Files must be less than 10mb in size.");
-          //alert(error);
         });
       }
     }
