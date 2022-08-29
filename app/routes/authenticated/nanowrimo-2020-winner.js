@@ -4,11 +4,14 @@ import ENV from 'nanowrimo/config/environment';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  currentUser: service(),
+  session: service(),
   templateName: '404',
   model() {
+    let { auth_token }  = this.get('session.data.authenticated');
     let endpoint =  `${ENV.APP.API_HOST}/pages/nanowrimo-2020-winner`;
-    return fetch(endpoint).then((data)=>{
+    return fetch(endpoint,{
+    headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
+    }).then((data)=>{
       return data.json().then((json)=>{
         return json;
       });
