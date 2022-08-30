@@ -8,7 +8,7 @@ export default Route.extend({
   templateName: '404',
   model() {
     let { auth_token }  = this.get('session.data.authenticated');
-    let endpoint =  `${ENV.APP.API_HOST}/pages/nanowrimo-2019-winner?user_id=`+cu.get('id');
+    let endpoint =  `${ENV.APP.API_HOST}/pages/nanowrimo-2019-winner`;
     return fetch(endpoint,{
     headers: { 'Content-Type': 'application/json', 'Authorization': auth_token}
     }).then((data)=>{
