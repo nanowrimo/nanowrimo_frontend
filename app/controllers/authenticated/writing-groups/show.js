@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { alias }  from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { htmlSafe }  from '@ember/string';
@@ -10,10 +10,23 @@ export default Controller.extend({
   router: service(),
   group: alias('model'),
   dataLoaded: false,
+  user: null,
   
+  init(){
+    this._super(...arguments);
+    this.set("user", this.get('currentUser.user'));
+  },
+  
+  // watch the current user, are their writingGroupsLoaded?
+  observeUserWritingGroups: observer('currentUser.isLoaded', function(){
+    let user = this.get('currentUser.user');
+    if (!user.writingGroupsLoaded) {
+      user.loadWritingGroups();
+    }
+  }),
   
   // Returns true if the user can view the group
-  canViewGroup: computed('currentUser.isLoaded','group.id',function() {
+  canViewGroup: computed('currentUser.user.writingGroupsLoaded','group.id',function() {
     let found = false;
     if (this.get('currentUser.isLoaded')) {
       if (this.get('currentUser.user.adminLevel')) {
