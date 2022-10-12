@@ -17,7 +17,18 @@ export default Component.extend({
   init() {
     this._super(...arguments);
   },
-  
+  isGroupAdmin: computed ("group.id", "currentUser.user.id", function(){
+    let cu = this.get("currentUser.user");
+    let group = this.get('group');
+    if (group && cu) {
+      if (cu.adminLevel > 0) {
+        return true;
+      } else {
+        // is the current user's id in the group's adminids?
+        return group.adminIds.indexOf(cu.id) > -1;
+      }
+    }
+  }),
   groupUsersFound: computed(function() {
     let store = this.get('store');
     let gus = store.peekAll('group_user');

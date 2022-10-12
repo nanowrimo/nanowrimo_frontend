@@ -26,7 +26,7 @@
       {{/if}}
     {{/if}}
     {{#if (eq status 'pending')}}
-      {{#if groupUsersFound}}
+      {{#if isGroupAdmin}}
         <button {{action 'approveEvent'}}>
           Approve
         </button>
