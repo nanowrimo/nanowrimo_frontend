@@ -7,6 +7,6 @@ export default ScrollRoute.extend({
   },
   setupController(controller, model) {
     this._super(controller, model);
-    //controller.set('group', this.modelFor('authenticated.regions.show'));
+    controller.set('group', this.modelFor('authenticated.regions.show'));
   },
 });

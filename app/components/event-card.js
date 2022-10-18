@@ -17,32 +17,17 @@ export default Component.extend({
   classNames: ['nw-card','event-card'],
   
   // Returns true if the current user has editing rights on this event
-  canEditEvent: computed('currentUser.user', function() {
-    // Set variable "found" to false
-    let found = false;
-    // Set a local variable for the user
-    let u = this.get('currentUser.user');
-    // If they are an admin, return true
-    if (u.adminLevel>0) {
-      found = true;
-    } else { // Otherwise determine if they are an ML for this event
-      // Set the event as a local variable
-      let e = this.get('event');
-      // Set the parent group id to a local variable
-      let pid = e.groupId;
-      // Set store to local variable
-      let store = this.get('store');
-      // Get all group_users from the store
-      let gus = store.peekAll('group_user');
-      // Loop through all group users
-      gus.forEach((gu) => {
-        // If the current user is an admin, return true
-        if ((gu.group_id==pid)&&(gu.user_id==u.id)&&(gu.isAdmin)) {
-          found = true;
-        }
-      });
+  canEditEvent: computed("group.id", "currentUser.user.id", function(){
+    let cu = this.get("currentUser.user");
+    let group = this.get('group');
+    if (group && cu) {
+      if (cu.adminLevel > 0) {
+        return true;
+      } else {
+        // is the current user's id in the group's adminids?
+        return group.adminIds.indexOf(cu.id) > -1;
+      }
     }
-    return found;
   }),
   
   init() {
