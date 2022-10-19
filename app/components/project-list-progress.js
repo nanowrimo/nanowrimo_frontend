@@ -92,17 +92,14 @@ export default Component.extend({
   goalIcon: computed("project.currentProjectChallenge.eventType",function(){
     let str = '';
     let et = this.get('project.currentProjectChallenge.eventType');
-    if (et) {
-
-      if (et==0) {
-        str = "<img src='/images/global/helmet.svg' style='' />";
-      }
-      if (et==1) {
-        str = "<img src='/images/global/tent.svg' style='' />";
-      }
-      if (et==3) {
-        str = "<img src='/images/global/now-what-pen.svg' style='' />";
-      }
+    if (et==0) {
+      str = "<img src='/images/global/helmet.svg' style='' />";
+    }
+    if (et==1) {
+      str = "<img src='/images/global/tent.svg' style='' />";
+    }
+    if (et==3) {
+      str = "<img src='/images/global/now-what-pen.svg' style='' />";
     }
     return str;
   }),
