@@ -43,6 +43,25 @@ export default Controller.extend({
     return (n<2);
   }),
   
+  // Returns true if the user can edit the group
+  canEditGroup: computed('currentUser.{isLoaded}','group', function() {
+    let allowed = this.get('currentUser.isLoaded');
+    if (allowed) {
+      if (this.get('currentUser.user.adminLevel')) {
+        return true;
+      } else {
+        // is the viewer's id in the group's adminids array?
+        let adminIds = this.get('group.adminIds');
+        let uid = this.get('currentUser.user.id');
+        if (!adminIds) {
+          return false;
+        } else {
+          return adminIds.includes(uid);
+        }
+      }
+    }
+    return false;
+  }),
   actions: {
     deleteGroup() {
       let gus = this.get('myGroupUsers');

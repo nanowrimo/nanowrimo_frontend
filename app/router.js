@@ -136,7 +136,6 @@ Router.map(function() {
   this.route('sign-in');
   
   // universal pages
-  this.route('what-is-nanowrimo');
   this.route('terms-conditions');
   this.route('ways-to-support');
   this.route('writers-resources');
