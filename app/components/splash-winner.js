@@ -44,7 +44,7 @@ export default Component.extend({
      let et = this.get('eventType');
     switch(et) {
       case 0:
-        return  "/images/splash/NaNo-2021-Winner-Certificate.png";
+        return  "/images/splash/NaNo-2022-Winner-Certificate.png";
       case 1:
         // is the year 2022?
         if (this.get('eventYear')==2022 ) {
