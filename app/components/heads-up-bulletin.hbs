@@ -18,12 +18,32 @@
           {{text}}
         </span>
         {{/if}}
+        {{#if (eq type "DonationWeekend")}}
+        <span>
+          {{text}}
+        </span>
+        {{/if}}
       </div>
+      {{#if buttonAction}}
       <div class="flash-button">
         <button {{action "buttonClicked"}}>
           {{buttonText}}
         </button>
       </div>
+      {{/if}}
+      {{#if (eq type "DonationWeekend")}}
+        <div class='flash-button'>
+          <LinkTo class='button nw-faux-button' @route='pages' @model='double-up-2022'>Double My Donation!</LinkTo>
+        </div>
+      {{/if}}
+      
+      {{#if buttonAction}}
+      <div class="flash-button">
+        <button {{action "buttonClicked"}}>
+          {{buttonText}}
+        </button>
+      </div>
+      {{/if}}
     </div>
   </div>
   <div class="banner-right">
