@@ -7,6 +7,9 @@
     {{#if displayCampBanner}}
       <HeadsUpBulletin @type="Camp" @buttonAction={{action "openNewProjectModal"}}></HeadsUpBulletin>
     {{/if}}
+    {{#if displayDonationWeekendBanner}}
+      <HeadsUpBulletin @type="DonationWeekend"></HeadsUpBulletin>
+    {{/if}}
     {{#if displayNanoBanner}}
       <div class="flash-banner">
         <div class="banner-left">
