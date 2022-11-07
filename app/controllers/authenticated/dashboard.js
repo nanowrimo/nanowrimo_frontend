@@ -147,7 +147,7 @@ export default Controller.extend({
     return d;
   }),
   displayDonationWeekendBanner: computed('currentUser.user', function() {
-    return true;
+    return false;
   }),
   // Returns true is it's camp and the user hasn't created a project
   displayNanoBanner: computed('currentUser.user.projects.[]', 'primaryProject.currentProjectChallenge.count', function () {
