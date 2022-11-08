@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('authenticated', { path: '' }, function() {
     this.route('dashboard');
     this.route('search');
+    this.route('stats');
     this.route('genres', function() {
       this.route('new');
       this.route('show', { path: '/:genre_id' });
@@ -50,8 +51,7 @@ Router.map(function() {
       });
     });
     
-    this.route('stats', function() {
-    });
+    
     this.route('groups', function() {
     });
     this.route('notifications', function() {
