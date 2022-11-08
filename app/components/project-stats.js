@@ -16,6 +16,10 @@ export default Component.extend({
   projectChallenge: null,
   projectChallenges: null,
   
+  projectChallengesObserver: observer('project.projectChallenges', function(){
+    this.set("projectChallenge", this.get('project.currentProjectChallenge'));
+  }),
+  
   // observe the projectChallenge, when it changes, load its aggregates
   projectChallengeObserver: observer('projectChallenge', function(){
     let pc = this.get('projectChallenge');
