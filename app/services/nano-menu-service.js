@@ -24,7 +24,7 @@ export default Service.extend({
   statsItem: computed('currentUser.user.primaryProject', function () {
     let project = this.get('currentUser.user.primaryProject');
     if (project) {
-      let v = { label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg" };
+      let v = { label: "Stats", route: "authenticated.stats", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg" };
       return v;
     } else {
       return null;
