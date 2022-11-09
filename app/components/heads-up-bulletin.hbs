@@ -23,19 +23,12 @@
           {{text}}
         </span>
         {{/if}}
+        {{#if (eq type "HowToWin")}}
+        <span>
+          {{text}}
+        </span>
+        {{/if}}
       </div>
-      {{#if buttonAction}}
-      <div class="flash-button">
-        <button {{action "buttonClicked"}}>
-          {{buttonText}}
-        </button>
-      </div>
-      {{/if}}
-      {{#if (eq type "DonationWeekend")}}
-        <div class='flash-button'>
-          <LinkTo class='button nw-faux-button' @route='pages' @model='double-up-2022'>Double My Donation!</LinkTo>
-        </div>
-      {{/if}}
       
       {{#if buttonAction}}
       <div class="flash-button">
@@ -44,6 +37,20 @@
         </button>
       </div>
       {{/if}}
+      
+      {{#if (eq type "DonationWeekend")}}
+        <div class='flash-button'>
+          <LinkTo class='button nw-faux-button' @route='pages' @model='double-up-2022'>Double My Donation!</LinkTo>
+        </div>
+      {{/if}}
+      
+      {{#if (eq type "HowToWin")}}
+        <div class='flash-button'>
+          <a class='button nw-faux-button' target='_blank' href="https://nanowrimo.zendesk.com/hc/en-us/articles/4403967254932-How-to-Win-and-Collect-Winner-Goodies">How To Win</a>
+        </div>
+      {{/if}}
+      
+  
     </div>
   </div>
   <div class="banner-right">

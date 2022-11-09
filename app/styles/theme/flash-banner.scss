@@ -73,6 +73,7 @@
     }
     .flash-content {
       padding-right: 30px;
+      width: 100%;
       @media (max-width: $screen-md-max) {
         flex-wrap: wrap;
         padding-right: 0px;
