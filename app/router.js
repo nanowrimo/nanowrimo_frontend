@@ -21,6 +21,7 @@ Router.map(function() {
     this.route('projects', function() {
       this.route('new');
     });
+    this.route('winners-circle');
 
     this.route('users', { path: 'participants'}, function() {
       this.route('show', { path: '/:slug'}, function() {
