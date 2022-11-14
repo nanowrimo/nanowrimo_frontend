@@ -155,15 +155,17 @@ export default Component.extend({
         let formatted = now.format("YYYY-MM-DD");
         this.set('dateStart',formatted);
       }
-      //set defaults for the start time
-      this.set('whenStart', "12:00");
-
       //set end time
       let hhmmEnd;
       let m = moment();
       hhmmEnd = m.format("HH:mm");
       this.set('whenEnd',  hhmmEnd);
-      
+      // subtract 1 hour from m
+      m.subtract(1,'h');
+      let hhmmStart = m.format("HH:mm");
+      //set defaults for the start time
+      this.set('whenStart', hhmmStart);
+
       //set the 'count' to zero
       this.set('countValue', 0);
       var t = document.getElementById("ember-bootstrap-wormhole");

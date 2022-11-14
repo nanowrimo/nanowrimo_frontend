@@ -12,6 +12,8 @@ export default Component.extend({
         return "Camp NaNoWriMo starts in July! Join the official challenge and set your own writing goal for the month. Achieve your goal and get special badges, a certificate, and more celebratory goodies.";
       case "DonationWeekend":
         return "It's Double-Up Donation Weekend! Give $25 by November 6 to receive the $50 donor goodies—and an exclusive 2022 enamel pin (plus the chance to win daily prizes).";
+      case "HowToWin":
+        return "December is approaching—you can do it, writer! Learn how to claim your official NaNoWriMo 2022 win.";
     }
   }),
   
@@ -24,6 +26,9 @@ export default Component.extend({
         return "/images/banners/camp.png";
       case "DonationWeekend":
         return "/images/banners/flower.png";
+
+      case "HowToWin":
+        return "/images/banners/trophy.png";
 
     }
   }),
