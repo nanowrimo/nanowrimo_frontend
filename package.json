@@ -95,6 +95,6 @@
   },
   "dependencies": {},
   "resolutions": {
-     "**/@embroider/macros": "0.50.1"
+    "**/@embroider/macros": "0.50.1"
   }
 }
