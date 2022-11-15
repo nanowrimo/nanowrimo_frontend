@@ -44,14 +44,14 @@
     <script>
       const drawChart = async () => {
         const data = await d3.csv(
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vS4miU2yF1wGCB2lqTVmsu9TcVdvNV_SxLRBxri5aAraCCt-7uoU9R7Rk1QgUjv9InRyNZsV4FAjZBk/pub?gid=1450622436&single=true&output=csv"
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vTCWkmNDt85tcI2ijG91MKP1Klxum4hMBhLPlAsBykAX38NidyLgr0YEKAr6bRKjg5oe-Y9uysm1lgF/pub?output=csv"
         );
         console.log(data);
         var myArray = [];
         data.forEach((d, i) => {
-          d["novel_name"] = String(d["Name of Novel"]);
-          d["username"] = String(d["Username"]);
-          myArray.push([d.novel_name, d.username]);
+          d["novel"] = String(d["Title"]);
+          d["author"] = String(d["Author"]);
+          myArray.push([d.novel, d.author]);
         });
 
 
@@ -59,7 +59,7 @@
         var header = table.append("thead").append("tr");
         header
           .selectAll("th")
-          .data(data.columns.slice(1,3))
+          .data(data.columns.slice(3,5))
           .enter()
           .append("th")
           .text(function (d) {
