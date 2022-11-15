@@ -6,18 +6,39 @@
     <style type="text/css">
       body {
         overflow: scroll;
+        font-family: "SansRegular", sans-serif;
+        font-size: "14px";
+      }
+      #table{
+        padding: 30px;
       }
       table {
         margin-left: auto;
         margin-right:auto;
+        border-spacing: 20px 20px;       
       }
+      td {
+       padding: 1.5rem;
+       border-bottom: 1px solid #dcdcdc; 
+       position: relative;
+    }
+    td:not(:first-child):before {
+      content: '';
+      height: 1px; 
+      width: 25px;
+      background: #dcdcdc;
+      display: block;
+      position: absolute;
+        left: -25px;
+        bottom: -1px;
+    }
+      
   */
     </style>
   </head>
 
   <body>
-    <h1>NaNo Winners</h1>
-    <p>List of November Winners!</p>
+    <img src="winners-circle.png" alt="Winner's Circle Banner">
     <div id="table"></div>
   </body>
     <script>
@@ -30,17 +51,15 @@
         data.forEach((d, i) => {
           d["novel_name"] = String(d["Name of Novel"]);
           d["username"] = String(d["Username"]);
-          d["date"] = d["Date "];
-          myArray.push([d.novel_name, d.username, d.date]);
+          myArray.push([d.novel_name, d.username]);
         });
 
-        console.log(data);
-        console.log(data.columns.slice(1));
+
         var table = d3.select("body").append("table");
         var header = table.append("thead").append("tr");
         header
           .selectAll("th")
-          .data(data.columns.slice(1))
+          .data(data.columns.slice(1,3))
           .enter()
           .append("th")
           .text(function (d) {
@@ -60,6 +79,7 @@
           .text(function (d) {
             return d;
           });
+          
       };
       drawChart();
     </script>
