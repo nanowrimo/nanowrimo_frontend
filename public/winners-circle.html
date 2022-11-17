@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style type="text/css">
+      body {
+        overflow: scroll;
+        font-family: "SansRegular", sans-serif;
+        font-size: "14px";
+      }
+      #table {
+        padding: 30px;
+      }
+      table {
+        margin-left: auto;
+        margin-right: auto;
+        border-spacing: 20px 20px;
+      }
+      td {
+        padding: 1.5rem;
+        border-bottom: 1px solid #dcdcdc;
+        position: relative;
+      }
+      td:not(:first-child):before {
+        content: "";
+        height: 1px;
+        width: 25px;
+        background: #dcdcdc;
+        display: block;
+        position: absolute;
+        left: -25px;
+        bottom: -1px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="table"></div>
+  </body>
+  <script>
+    const drawChart = async () => {
+      const data = await d3.csv(
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTCWkmNDt85tcI2ijG91MKP1Klxum4hMBhLPlAsBykAX38NidyLgr0YEKAr6bRKjg5oe-Y9uysm1lgF/pub?output=csv"
+      );
+      var myArray = [];
+      data.forEach((d, i) => {
+        d["novel"] = String(d["Title"]);
+        d["author"] = String(d["Author"]);
+        myArray.push([d.novel, d.author]);
+      });
+
+      var table = d3.select("body").append("table");
+      var header = table.append("thead").append("tr");
+      header
+        .selectAll("th")
+        .data(data.columns.slice(3, 5))
+        .enter()
+        .append("th")
+        .text(function (d) {
+          return d;
+        });
+      var tablebody = table.append("tbody");
+      rows = tablebody.selectAll("tr").data(myArray).enter().append("tr");
+      var cells = rows;
+      cells
+        .selectAll("td")
+        .data(function (d) {
+          return d;
+        })
+        .enter()
+        .append("td")
+        .text(function (d) {
+          return d;
+        });
+    };
+    drawChart();
+  </script>
+</html>
