@@ -10,7 +10,7 @@ export default Component.extend({
   
   project: null,
   
-  winnerRoute: computed('project.currentProjectChallenge.eventType', function() {
+  winnerRoute: computed('project.currentProjectChallenge.eventType','goalMet', function() {
     let type = this.get('project.currentProjectChallenge.eventType');
     if (type < 2 || type==3){ // event is NaNoWriMo or Camp
       // get the event name 
