@@ -120,6 +120,7 @@ Router.map(function() {
     this.route('nano-winner-2021');
 
     this.route('winner-goodies-2021-2');
+    this.route('winner-goodies-2022-2');
     this.route('year-in-review', function() {
       this.route('show', { path: '/:year'}, function() {
       });
