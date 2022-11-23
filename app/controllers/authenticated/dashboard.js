@@ -150,7 +150,7 @@ export default Controller.extend({
     return false;
   }),
   displayHowToWinBanner: computed('currentUser.user', function() {
-    return false;
+    return true;
   }),
   // Returns true is it's camp and the user hasn't created a project
   displayNanoBanner: computed('currentUser.user.projects.[]', 'primaryProject.currentProjectChallenge.count', function () {
