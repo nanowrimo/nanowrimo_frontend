@@ -19,6 +19,7 @@ yarn-error.log
 testem.log
 jsconfig.json
 .env
+Scripts
 
 # ember-try
 .node_modules.ember-try/

@@ -46,6 +46,13 @@ runCmd("git checkout staging")
 # pull the new staging code
 runCmd("git pull")
 
+# ensure the output of `git status -s` is an empty string
+status = `git status -s`
+if status != ""
+  puts "ERROR: untracked or uncommited files\n\n"+status
+  exit(false)
+end
+
 # update yarn, in case the yarn.lock file changed
 runCmd("yarn")
 
