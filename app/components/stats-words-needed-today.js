@@ -78,7 +78,7 @@ export default ChartBaseComponent.extend({
   countNeededToday: computed("projectChallenge.{daysRemaining,todayCount}", function(){
     let pc = this.get('projectChallenge');
     if (pc) {
-      if (!pc.hasStarted || pc.hasEnded) {
+      if (!pc.hasStarted || pc.hasEnded || pc.countRemaining===0) {
         return 0;
       }
       //countRemaining
