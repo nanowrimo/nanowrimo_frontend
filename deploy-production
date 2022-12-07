@@ -49,6 +49,8 @@ runCmd("git pull")
 # ensure the output of `git status -s` is an empty string
 status = `git status -s`
 if status != ""
+  # checkout the 'current_branch'
+  `git checkout #{current_branch}`
   puts "ERROR: untracked or uncommited files\n\n"+status
   exit(false)
 end
