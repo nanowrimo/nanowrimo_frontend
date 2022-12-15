@@ -55,6 +55,9 @@ export default Component.extend({
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
+  disableChallengeSelect: computed('associateWithChallenge', function(){
+    return (this.get('associateWithChallenge'))? "" : "disable";
+  }),
   disableName: computed('canEditName','associateWithChallenge', function(){
     //can the user edit the original challenge?
     let canEdit = this.get('canEditName');
