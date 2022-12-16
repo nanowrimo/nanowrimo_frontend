@@ -226,6 +226,8 @@ export default Component.extend({
         
       } else {
         this.set('associatedChallenge', null);
+        //revert goal attributes to default
+        this._newProjectChallenge();
       }
     },
     
