@@ -331,13 +331,13 @@ export default Component.extend({
     this.set('displayName', "");
     projectChallenge.set('unitType',"0");
     projectChallenge.set('goal','');
-    let startTime;
+    //let startTime;
     // get the project 
     let project = this.get('project');
     // does the project have an activeProjectChallenge?
     if (project.activeProjectChallenge) { 
       // set the start for the day after the active projectChallenge ends
-      startTime = moment(project.activeProjectChallenge.endsAt).add(1,'d');
+      //startTime = moment(project.activeProjectChallenge.endsAt).add(1,'d');
     }else{
       //startTime = moment();
     }
@@ -424,7 +424,6 @@ export default Component.extend({
     //loop through the errors array to determine if there is an error
     Object.keys(errors).forEach((k)=>{
       if( errors[k] ){
-        console.log(errors[k]);
         this.set('hasValidationError', true);
       }
     });
