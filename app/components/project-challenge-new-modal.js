@@ -107,6 +107,10 @@ export default Component.extend({
     if (this.get('projectChallenge.challenge.hasStarted')){
       min = moment().format("YYYY-MM-DD");
     }
+    // has the association been removed?
+    if (!this.get('associateWithChallenge')){
+      min = null;
+    }
     return min;
   }),
   
@@ -322,10 +326,10 @@ export default Component.extend({
     }
     let projectChallenge = this.get('store').createRecord('projectChallenge');
     this.set('projectChallenge', projectChallenge);
-    projectChallenge.set('name',"My New Goal");
-    this.set('displayName', "My New Goal");
+    projectChallenge.set('name',"");
+    this.set('displayName', "");
     projectChallenge.set('unitType',"0");
-    projectChallenge.set('goal',50000);
+    projectChallenge.set('goal','');
     let startTime;
     // get the project 
     let project = this.get('project');
@@ -336,16 +340,16 @@ export default Component.extend({
     }else{
       startTime = moment();
     }
-    var startYMD = startTime.format("YYYY-MM-DD")
-    this.set('displayStartsAt', startYMD);
-    projectChallenge.set('startsAt', startYMD); 
-    this.set('newStartsAt', startYMD);
+    //var startYMD = startTime.format("YYYY-MM-DD")
+    this.set('displayStartsAt', "yyyy-mm-dd");
+    projectChallenge.set('startsAt', null); 
+    this.set('newStartsAt', null);
     
-    var endYMD = startTime.add(30,'d').format("YYYY-MM-DD")
-    projectChallenge.set('endsAt', endYMD); 
-    this.set('displayEndsAt', endYMD)
-    this.set('newEndsAt', endYMD);
-    this.set('newDuration', 30);
+    //var endYMD = startTime.add(30,'d').format("YYYY-MM-DD")
+    projectChallenge.set('endsAt', null); 
+    this.set('displayEndsAt', "yyyy-mm-dd");
+    this.set('newEndsAt', null);
+    this.set('newDuration', null);
   },
   
   _setProjectChallengeFromChallenge(){
