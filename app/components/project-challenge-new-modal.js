@@ -233,6 +233,7 @@ export default Component.extend({
         //revert goal attributes to default
         this._newProjectChallenge();
       }
+      this._validate();
     },
     
     goalChange(v) {
@@ -338,7 +339,7 @@ export default Component.extend({
       // set the start for the day after the active projectChallenge ends
       startTime = moment(project.activeProjectChallenge.endsAt).add(1,'d');
     }else{
-      startTime = moment();
+      //startTime = moment();
     }
     //var startYMD = startTime.format("YYYY-MM-DD")
     this.set('displayStartsAt', "yyyy-mm-dd");
@@ -382,6 +383,13 @@ export default Component.extend({
     //get the proposed start and end as moments
     let startTime = this.get('newStartsAt');
     let endTime = this.get('newEndsAt');
+    if (startTime == null) {
+      errors.badStart=true;
+    }
+    if (endTime==null){
+      errors.badEnd=true;
+    }
+      
     //errors.endsBeforeStart = endTime.isBefore(startTime);
     errors.endsBeforeStart = endTime<startTime;
     //loop through this project's projectChallenges
@@ -416,6 +424,7 @@ export default Component.extend({
     //loop through the errors array to determine if there is an error
     Object.keys(errors).forEach((k)=>{
       if( errors[k] ){
+        console.log(errors[k]);
         this.set('hasValidationError', true);
       }
     });
