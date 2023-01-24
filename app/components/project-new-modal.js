@@ -25,7 +25,7 @@ export default Component.extend({
   user: null,
   formStepOverride: 0,
   projectChallengeChangeset: null,
-  validChallengeDates: true,
+  validChallenge: true,
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
@@ -84,8 +84,9 @@ export default Component.extend({
   optionsForWritingType: computed(function() {
     return Project.optionsForWritingType;
   }),
-  invalidChallengeDates: computed('validChallengeDates', function(){
-    return !this.get('validChallengeDates');
+  invalidChallengeDates: computed('validChallenge', function(){
+    let vc = this.get('validChallenge');
+    return !vc;
   }),
 
   steps: computed(function() {
@@ -145,6 +146,19 @@ export default Component.extend({
     return ret;
   }),
   
+  disableButton: computed('validChallenge', 'formStepOverride', function(){
+    let vc = this.get('validChallenge');
+    let step = this.get('formStepOverride');
+    switch (step) {
+      case 0: 
+        return false;
+      case 1:
+        return !vc;
+      case 3:
+        return false;      
+    }
+  }),
+  
   actions: {
     associateChallengeSelect(challengeID) {
       this.set('associatedChallengeId', challengeID);
@@ -199,6 +213,9 @@ export default Component.extend({
       
       //refresh the user stats
       this.get('user').refreshStats();
+    },
+    setValidChallenge(value) {
+      this.set('validChallenge', value);
     }
   }
 });

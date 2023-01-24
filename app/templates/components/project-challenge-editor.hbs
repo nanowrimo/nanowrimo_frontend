@@ -5,10 +5,14 @@
   as |c|
 }}
   <div class="form-group">
-    {{c.input
+    <label for='goal-name' class='form-group'>Goal Name</label>
+    <input id="goal-name" name='goal-name' class='form-control'
+      oninput={{action "goalNameChanged" value="target.value"}} 
+      value={{displayGoalName}}
+      disabled={{disableName}} />
+    {{c.hidden_input
       label="Goal name"
       property="name"
-      isDisabled=disableName
       changeset=changeset
     }}
   </div>
@@ -28,13 +32,17 @@
   </div>
   <div class="form-group side-by-side">
     <div>
-      {{c.input
+      <label for='goal' class='form-group'>{{goalCountLabel}}</label>
+      <input id="goal" name='goal' type='number' class='form-control'
+        oninput={{action "goalChanged" value="target.value"}} 
+        value={{displayGoal}}
+        disabled={{disableDefaultGoal}}
+        min='1999-07-01'>
+      {{c.hidden_input
         changeset=changeset
         label=goalCountLabel
         property="goal"
         type='number'
-        isDisabled=disableDefaultGoal
-        min=1
       }}
     </div>
     <!--

@@ -124,10 +124,10 @@ export default Component.extend({
     }
     
     //get the time now
-    let newStartsAt = moment().utc();
-    let newEndsAt = moment().add(30,'d');
+    let newStartsAt = null;//moment().utc();
+    let newEndsAt = null;//moment().add(30,'d');
     //get the time now
-    let newWinAt = moment();
+    //let newWinAt = moment();
     //check for the challenge
     let challenge = this.get('challenge');
     if (challenge) {
@@ -136,6 +136,8 @@ export default Component.extend({
       //clone the challenge data into the project challenge changeset
       this.set('changeset.name', challenge.name);
       this.set('changeset.goal', challenge.defaultGoal);
+      this.set('displayGoal', challenge.defaultGoal);
+      this.set('displayGoalName', challenge.name);
       this.set('changeset.endsAt', moment.utc(challenge.endsAt).toDate());
       this.set('changeset.winAt', moment.utc(challenge.endsAt).toDate());
       this.set('changeset.writingType', challenge.writingType);
@@ -148,32 +150,42 @@ export default Component.extend({
       
     } else {
       //set the name of the challenge
-       this.set('changeset.name', 'My new goal');
+       //this.set('changeset.name', 'My new goal');
       
       //set the goals to default to 50K
-       this.set('changeset.goal', 50000);
+      // this.set('changeset.goal', 50000);
        //set the unitType to 0 (words type)
        this.set('changeset.unitType', 0);
        this.set('changeset.writingType', 0);
-       this.set('changeset.startsAt', newStartsAt.toDate());
-       this.set('changeset.endsAt', newEndsAt.toDate());
+       //this.set('changeset.startsAt', newStartsAt.toDate());
+       //this.set('changeset.endsAt', newEndsAt.toDate());
     }
     //format the newStartsAt and set the displayStartsAt
-    this.set('displayStartsAt', newStartsAt.format("YYYY-MM-DD"));
-    this.set('displayEndsAt', newEndsAt.format("YYYY-MM-DD"));
-    this.set('newStartsAt', newStartsAt);
-    this.set('newEndsAt', newEndsAt);
-   
-    this.set('displayWinAt', newWinAt.format("YYYY-MM-DD"));
-    this.set('newWinAt', newWinAt);
-     this.recomputeValidChallengeDates();
+    if (newStartsAt!==null) {
+      this.set('displayStartsAt', newStartsAt.format("YYYY-MM-DD"));
+      this.set('displayEndsAt', newEndsAt.format("YYYY-MM-DD"));
+      this.set('newStartsAt', newStartsAt);
+      this.set('newEndsAt', newEndsAt);
+    }
+    
+   // this.set('displayWinAt', newWinAt.format("YYYY-MM-DD"));
+    //this.set('newWinAt', newWinAt);
+     this.recomputeValidChallenge();
   },
   
-  recomputeValidChallengeDates: function(){
-    let e = moment(this.get('newEndsAt'));
-    let s = moment(this.get('newStartsAt'));
-    let valid = s.isSameOrBefore(e,'d');
-    this.set('validChallengeDates', valid);
+  recomputeValidChallenge: function(){
+    let valid;
+    if (this.get('newEndsAt')==null || this.get('newStartsAt')==null 
+      || this.get('changeset.goal')==null || this.get('changeset.name')==null) {
+      valid=false;
+    } else {
+      let e = moment(this.get('newEndsAt'));
+      let s = moment(this.get('newStartsAt'));
+      valid = s.isSameOrBefore(e,'d');
+    }
+    
+    let setValidChallenge = this.get('setValidChallenge');
+    setValidChallenge(valid);
   },
   
   endsBeforeStarts: computed('newEndsAt', 'newStartsAt', function(){
@@ -196,7 +208,7 @@ export default Component.extend({
       //this.set('changeset.endsAt', m.toDate());
       this.set('newEndsAt', val);
       this.set('changeset.endsAt', val);
-      this.recomputeValidChallengeDates();
+      this.recomputeValidChallenge();
 
     },
     startsAtChanged(val) {
@@ -207,7 +219,7 @@ export default Component.extend({
       //set the project-challenge starts at
       //this.set('changeset.startsAt', m.toDate());
       this.set('changeset.startsAt', val);
-      this.recomputeValidChallengeDates();
+      this.recomputeValidChallenge();
     },
     
     writingTypeChanged(val) {
@@ -218,6 +230,16 @@ export default Component.extend({
     unitTypeChanged(val) {
       this.set('projectChallenge.unitType', val);
     },
+    
+    goalChanged(val) {
+      this.set('changeset.goal',val);
+      this.recomputeValidChallenge();
+    },
+    
+    goalNameChanged(val) {
+      this.set('changeset.name',val);
+      this.recomputeValidChallenge();
+    }
     
   }
   
