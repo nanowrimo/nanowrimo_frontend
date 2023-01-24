@@ -30,7 +30,10 @@
           <div class="form-group {{hideClass}}">
             <label for="associateSelect">NaNoWriMo Event</label>
             <div class="select-container">
-              <select id='associateSelect' class='form-control' onchange={{action "associateChallengeSelect" value="target.value"}}>
+              <select id='associateSelect' class='form-control' 
+                onchange={{action "associateChallengeSelect" 
+                  value="target.value"}}
+                  disabled={{disableChallengeSelect}}>
                 {{#each optionsForChallenges as |c|}}
                   <option value="{{c.id}}" selected={{if (eq c.id associatedChallenge.id) 'true'}}>{{c.name}}</option>
                 {{/each}}
