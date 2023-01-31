@@ -9,7 +9,53 @@
     Ready...? Set...?
   {{/modal.header}}
   {{#modal.body}}
-
+  
+  <BsTab @customTabs={{true}} as |tab|>
+  <BsNav @type="tabs" as |nav|>
+    <nav.item id="modal-stopwatch-tab" class="{{if (bs-eq tab.activeId "stopwatch") "active"}}">
+      <a href="#stopwatch" class="nav-link" role="tab" {{on "click" (fn tab.select "stopwatch")}}>
+        Stopwatch
+      </a>
+    </nav.item>
+    <nav.item id="modal-timer-tab" class=" {{if (bs-eq tab.activeId "timer") "active"}}">
+      <a href="#timer" class="nav-link" role="tab" {{on "click" (fn tab.select "timer")}}>
+        Timer
+      </a>
+    </nav.item>
+  </BsNav>
+  
+  <div class="tab-content">
+    <tab.pane @id="stopwatch" aria-labeledby="modal-stopwatch-tab">
+      <input class=' nano-button' type='submit' value='Start Stopwatch' {{action "startStopwatch" }}>
+    </tab.pane>
+    
+    <tab.pane @id="timer" aria-labeledby="modal-timer-tab">
+      <div id='timer-form-modes'>
+        <div class='timer-content'>
+            {{#if countdownRemaining}}
+              {{countdownRemaining}}
+                <input class=' nano-button' type='submit' value='Cancel Timer' {{action "cancelTimer" }}>
+      
+            {{else}}
+              <div class='timer-duration form-group'>
+                <div style="width: 200px; margin-bottom: 5px; font-family: 'SansRegular'">
+                  <input type='number' id='hours-field' class="ember-text-field" min='0' name='timer-set-hours' onchange={{action 'timerSetHoursChanged' value="target.value"}} value={{timerHoursValue}}> <label for="hours-field">hours</label>
+                </div>
+                <div style="width: 200px; font-family: 'SansRegular'">
+                  <input type='number' id='minutes-field' class="ember-text-field" min='0' name='timer-set-minutes' onchange={{action 'timerSetMinutesChanged' value="target.value"}} value={{timerMinutesValue}}> <label for="minutes-field">minutes</label>
+                </div>
+              </div>
+              <div >
+                <input id='start-timer-button' class='form-control nano-button' type='submit' value='Start Timer' {{action "startTimer" }}>
+              </div>
+              
+            {{/if}}
+          </div>
+        </div>
+    </tab.pane>
+  </div>
+  </BsTab>
+  <!--
    {{#bs-tab classNames='timer-horizontal-tabs'
         activeId=activeTab
         onChange=(action (mut activeTab))
@@ -46,7 +92,7 @@
         </div>
       {{/tab.pane}}
   {{/bs-tab}}
-
+  //-->
     
   {{/modal.body}}
   
