@@ -149,6 +149,13 @@ export default Component.extend({
           this.set('approvingInvite', false);
           if (response.ok) {
             cu.loadGroupUsers('buddies');
+            // the buddy is approved
+            // if there are no more pending buddies... 
+            let requestCount = this.get("buddyRequestCount");
+            if (requestCount<=1) { // 
+              let dnsr = this.get("doNotShowRequests");
+              dnsr();
+            }
           } else {
             alert('There was a problem approving this invitation. Please reload the page and try again.');
           }
@@ -175,6 +182,12 @@ export default Component.extend({
         }) 
         .then((response) => {
           if (response.ok) {
+            // if there are no more pending buddies... 
+            let requestCount = this.get("buddyRequestCount");
+            if (requestCount<=1) { // 
+              let dnsr = this.get("doNotShowRequests");
+              dnsr();
+            }
             let found = false;
             let gus = store.peekAll('group-user');
             gus.forEach(function(gu) {
@@ -291,6 +304,12 @@ export default Component.extend({
           body: JSON.stringify(body)
         }).then((response) => {
           if (response.ok) {
+            // if there are no more pending buddies... 
+            let requestCount = this.get("buddyRequestCount");
+            if (requestCount<=1) { // 
+              let dnsr = this.get("doNotShowRequests");
+              dnsr();
+            }
             let gus = this.store.peekAll('group-user');
             gus.forEach(function(gu) {
               if (gu.group_id==group.id) {
