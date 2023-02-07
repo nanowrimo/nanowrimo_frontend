@@ -17,7 +17,7 @@
       &.wide-button {
         font-family: 'SansRegular', sans-serif;
         font-weight: normal;
-        width: 78px;
+        width: 90px;
         font-size: 18px;
         .fa {
           font-size: 14px;
@@ -139,6 +139,9 @@
         background-color: $nw-white;
         height: 36px;
       }
+    }
+    #start-timer-button {
+      line-height: 12px;
     }
   }
   .footer-actions {

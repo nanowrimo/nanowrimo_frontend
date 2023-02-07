@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 import { computed } from '@ember/object';
 
-const DEFAULT_TAB = 'timer-modal-stopwatch';
+const DEFAULT_TAB = 'stopwatch';
 
 export default Component.extend({
   currentUser: service(),
@@ -81,7 +81,6 @@ export default Component.extend({
         var hours = parseInt( this.get('timerHoursValue') );
         var mins = parseInt( this.get('timerMinutesValue') );
         var duration = (hours*60)+mins;
-
         //make a new timer for the user
         let now = moment();
         let t = this.store.createRecord('timer', {
