@@ -13,10 +13,10 @@
     <div class='nw-column-cards'>
       {{#if buddyRequestCount}}
         {{#each user.buddiesInvited as |buddy|}}
-          {{buddies/buddy-listing buddy=buddy user=user isActive=false buttons=true}}
+          {{buddies/buddy-listing buddy=buddy user=user isActive=false buttons=true buddyRequestCount=buddyRequestCount doNotShowRequests=(action 'doNotShowRequests')}}
         {{/each}}
         {{#each user.buddiesInvitedBy as |buddy|}}
-          {{buddies/buddy-listing buddy=buddy user=user isActive=false buttons=true}}
+          {{buddies/buddy-listing buddy=buddy user=user isActive=false buttons=true buddyRequestCount=buddyRequestCount doNotShowRequests=(action 'doNotShowRequests')}}
         {{/each}}
       {{else}}
         {{buddies/buddy-prompt}}

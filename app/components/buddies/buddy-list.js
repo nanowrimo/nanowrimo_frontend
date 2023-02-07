@@ -136,6 +136,10 @@ export default Component.extend({
       this.set('searchString',this.get('tempSearchString'));
     },
     
+    doNotShowRequests() {
+      this.set('showRequests', false);
+    },
+    
     toggleRequestsView() {
       const sr = this.get('showRequests');
       if ((sr === 'true') || (sr === true)) {
