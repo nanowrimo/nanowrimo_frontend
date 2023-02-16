@@ -11,12 +11,23 @@ export default Service.extend({
   recomputeOffers: 0,
   
   pepTalks: null,
+  latestPepTalk: null,
   
   getPepTalks() {
     let endpoint =  `${ENV.APP.API_HOST}/pages/pep-talks`;
     fetch(endpoint).then((data)=>{
       data.json().then((json)=>{
         this.set('pepTalks', json);
+        return 'done';
+      });
+    });
+  },
+  
+  getLatestPepTalk() {
+    let endpoint =  `${ENV.APP.API_HOST}/pep-talks/latest`;
+    fetch(endpoint).then((data)=>{
+      data.json().then((json)=>{
+        this.set('latestPepTalk', json);
         return 'done';
       });
     });
