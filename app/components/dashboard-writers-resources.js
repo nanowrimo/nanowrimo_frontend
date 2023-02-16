@@ -23,10 +23,7 @@ export default NanoSubcard.extend({
     let endpoint =  `${ENV.APP.API_HOST}/pep_talks/latest`;
     fetch(endpoint).then((data)=>{
       data.json().then((json)=>{
-        console.log(json);
-        //alert('done');
-        this.set('latestPepTalk', json);
-        //_this.set('offer',json.data.attributes);
+        this.set('latestPepTalk', json.data.attributes);
       });
     });
   },
@@ -42,11 +39,11 @@ export default NanoSubcard.extend({
 
   // Returns the publication date as a readable string
   computeShowAfter: computed(function() {
-    return moment(this.get('latestPepTalk.data.attributes.show-after')).format("MMMM D, YYYY");
+    return moment(this.get('latestPepTalk.show-after')).format("MMMM D, YYYY");
   }),
   
-  imgSrc: computed('latestPepTalk.data.attributes.promotional-card-image', function() {
-    return new htmlSafe( this.get('latestPepTalk.data.attributes.promotional-card-image') );
+  imgSrc: computed('latestPepTalk.promotional-card-image', function() {
+    return new htmlSafe( this.get('latestPepTalk.promotional-card-image') );
   }),
   
   

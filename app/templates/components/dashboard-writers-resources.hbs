@@ -10,7 +10,7 @@
   <div>
     <div style="text-align:center;">
       {{#if pepTalkLoaded}}
-        <a href="/{{{latestPepTalk.data.attributes.url}}}" style="display: flex;justify-content: center;">
+        <a href="/{{{latestPepTalk.url}}}" style="display: flex;justify-content: center;">
           <div class='nw-card nw-card-fixed-size nw-card-white nw-card-face-front'>
             <div class='nw-card-header nw-card-page-card'>
               <div class="nw-promo-image">
@@ -21,8 +21,8 @@
         
             </div>
             <div class='nw-card-content nw-fixed-card'>
-              <h4 class="nw-card-superhead"><strong style='color: #54301a;'>{{{latestPepTalk.data.attributes.content-type}}}</strong> | {{{computeShowAfter}}}</h4>
-              <div class='nw-card-headline'>{{{latestPepTalk.data.attributes.headline}}}</div>
+              <h4 class="nw-card-superhead"><strong style='color: #54301a;'>{{{latestPepTalk.content-type}}}</strong> | {{{computeShowAfter}}}</h4>
+              <div class='nw-card-headline'>{{{latestPepTalk.headline}}}</div>
             </div>
           </div>
         </a>
