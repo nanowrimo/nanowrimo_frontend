@@ -93,6 +93,6 @@ Deployment occurs automatically when TravisCI builds the `master` branch. Travis
     
     In the code, the file is found at public/ui-update.txt
     
-
+"Do what you can, with what you have, where you are." -- Teddy Roosevelt
 
 
