@@ -1,6 +1,7 @@
 import NanoSubcard from 'nanowrimo/components/nano-subcard';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/template';
+import moment from 'moment';
 import ENV from 'nanowrimo/config/environment';
 
 export default NanoSubcard.extend({
