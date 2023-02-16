@@ -1,13 +1,32 @@
 <div class="nw-card-header">
-  <div class="nw-card-title">Pep Talks</div>
+  <div class="nw-card-title">Latest Pep Talk</div>
+  <div class='nw-card-actions'>
+    <div class='nw-card-action-link'>
+      <a href="/pep-talks">See All</a>
+    </div>
+  </div>
 </div>
 <div class="nw-card-content nw-center-horiz">
   <div>
-    <div class="nw-promo-text">
-      Pep talks are inspirational letters written by well-known authors during NaNoWriMo just for you. Need some inspiration or motivation?
-    </div>
-    <div >
-      <a href="/pep-talks"><button>Inspire me!</button></a>
+    <div style="text-align:center;">
+      {{#if pepTalkLoaded}}
+        <a href="/{{{latestPepTalk.url}}}" style="display: flex;justify-content: center;">
+          <div class='nw-card nw-card-fixed-size nw-card-white nw-card-face-front'>
+            <div class='nw-card-header nw-card-page-card'>
+              <div class="nw-promo-image">
+                {{#if imgSrc }}
+                  <img class="nw-avatar-img" src={{imgSrc}} alt={{imgAlt}}>
+                {{/if}}
+              </div>
+        
+            </div>
+            <div class='nw-card-content nw-fixed-card'>
+              <h4 class="nw-card-superhead"><strong style='color: #54301a;'>{{{latestPepTalk.content-type}}}</strong> | {{{computeShowAfter}}}</h4>
+              <div class='nw-card-headline'>{{{latestPepTalk.headline}}}</div>
+            </div>
+          </div>
+        </a>
+      {{/if}}
     </div>
   </div>
 </div>
