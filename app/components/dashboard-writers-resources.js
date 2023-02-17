@@ -38,7 +38,7 @@ export default NanoSubcard.extend({
   }),
 
   // Returns the publication date as a readable string
-  computeShowAfter: computed(function() {
+  computeShowAfter: computed('latestPepTalk', function() {
     return moment(this.get('latestPepTalk.show-after')).format("MMMM D, YYYY");
   }),
   
@@ -46,5 +46,15 @@ export default NanoSubcard.extend({
     return new htmlSafe( this.get('latestPepTalk.promotional-card-image') );
   }),
   
+  actions: {
+    getRandomPepTalk() {
+      let endpoint =  `${ENV.APP.API_HOST}/pep_talks/random`;
+      fetch(endpoint).then((data)=>{
+        data.json().then((json)=>{
+          this.set('latestPepTalk', json.data.attributes);
+        });
+      });
+    },
+  }
   
 });
