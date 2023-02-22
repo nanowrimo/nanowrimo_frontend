@@ -38,7 +38,7 @@
 .nw-my-buddies {
   .nw-card-content {
     max-height: 450px;
-    overflow: scroll;
+    overflow-y: scroll;
     @media (max-width: $screen-xlg) {
       max-height: 600px;
     }
@@ -63,15 +63,17 @@
 }
 .nw-my-groups {
   max-height: 450px;
-  overflow: scroll;
   @media (max-width: $screen-xlg) {
     max-height: 600px;
+  }
+  .nw-card-content {
+    overflow-y: scroll;
   }
   a {
     width: 100%;
     .nw-card-content {
       max-height: 450px;
-      overflow: scroll;
+      overflow-y: scroll;
       @media (max-width: $screen-xlg) {
         max-height: 600px;
       }
@@ -80,6 +82,7 @@
       }
     }
   }
+
 }
 .nw-buddy-status {
   .nw-default-status {

@@ -1,5 +1,12 @@
 <div class="nw-card-header">
   <div class="nw-card-title">Writing Groups</div>
+   <div class='nw-card-actions'>
+    <div class='nw-card-action-link'>
+      {{#link-to 'authenticated.users.show.groups' currentUser.user.slug}}
+        See All
+      {{/link-to}}
+    </div>
+  </div>
 </div>
 <div class="nw-card-content">
   {{#if hasWritingGroup}}
@@ -25,7 +32,9 @@
           }}
         </div>
       </div>
-      <div class="nw-card-bottom-image"><img src="/images/cards/handsclapping.svg" style='width: 70px;' /></div>
     </div>
   {{/if}}
 </div>
+{{#if (not hasWritingGroup)}}
+<div class="nw-card-bottom-image"><img src="/images/cards/handsclapping.svg" style='width: 70px;' /></div>
+{{/if}}
