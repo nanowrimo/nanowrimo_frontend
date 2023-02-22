@@ -80,6 +80,8 @@ const User = Model.extend({
   emailBuddyRequests: attr('boolean'),
   emailNanomessagesBuddies: attr('boolean'),
   emailNanomessagesHq: attr('boolean'),
+  emailDonorRelated: attr('boolean'),
+  emailStoreOffers: attr('boolean'),
   emailWritingReminders: attr('boolean'),
   
   settingSessionMoreInfo: attr('boolean'),
