@@ -13,6 +13,6 @@ export default Route.extend({
   }),
   
   model() {
-    let user = this.get('currentUser.user');
+    this.get('currentUser.user');
   }
 });

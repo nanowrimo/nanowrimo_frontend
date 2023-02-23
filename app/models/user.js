@@ -317,7 +317,7 @@ const User = Model.extend({
     return bgus;
   }),
   
-  myWritingGroups: computed('groupUsers','groupUsers.@each.{invitationAccepted,exitAt}',function() {
+  myWritingGroups: computed('groupUsers.@each.{invitationAccepted,exitAt}',function() {
     let gus = this.get('groupUsers');
     let bgus = [];
     //are there group users?
