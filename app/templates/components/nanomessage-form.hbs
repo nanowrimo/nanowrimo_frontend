@@ -1,7 +1,7 @@
 {{#if showForm}}
   <div class="new-message-form">
     <form {{action "afterSubmit" this on='submit'}} class="full-width">
-      {{#if userIsAdmin}}
+      {{#if (or userIsML userIsAdmin) }}
         {{#if contextNotNanomessages}}
           <div class="form-group inline-checkbox">
             <input
@@ -14,7 +14,7 @@
             />
             <label class="checkbox-label" for='officialMessage'>This is an official message</label>
           </div>
-          {{#if adminIsChecked}}
+          {{#if (and adminIsChecked userIsML)}}
             <div class="form-group inline-checkbox">
               <input
                 type="checkbox"
