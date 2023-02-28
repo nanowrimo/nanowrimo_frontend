@@ -18,7 +18,7 @@ export default Controller.extend({
   },
   
   canAddEvent: computed('currentUser.user.name', function() {
-    return true;//(this.get('currentUser.user.name')=="Dave Beck");
+    return true;
   }),
   
   actions: {

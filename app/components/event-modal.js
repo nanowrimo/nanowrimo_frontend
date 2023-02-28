@@ -24,6 +24,8 @@ export default Component.extend({
   startTime: null,
   step: 0,
   recalculateEvents: 0,
+  hours: [0,1,2,3,4,5,6,7,8,9,10,11,12],
+  minutes: [0,5,10,15,20,25,30,35,40,45,50,55],
   
   // These values are returned from Google Maps Timezones API
   dstOffset: 0,
@@ -31,6 +33,7 @@ export default Component.extend({
   timeZoneId: null,
   timeZoneName: null,
   timeZone: null,
+  
   name: null,
   nameError: null,
   description: null,
@@ -38,7 +41,7 @@ export default Component.extend({
   durationMinutes: 0,
   durationErrorMessage: null,
   venueName: null,
-  venueUrl: null,
+  //venueUrl: null,
   venueNameError: null,
   venueUrlError: null,
   venueErrorMessage: null,
@@ -71,6 +74,36 @@ export default Component.extend({
     return TimeZones;
   }),
   
+  // Sets the modal title depending on new or editing event
+  editMode: computed('group', function() {
+    let g = this.get('group');
+    let em = false;
+    if (g) {
+      em = true;
+    }
+    return em;
+  }),
+  
+  // Sets the modal title depending on new or editing event
+  modalTitle: computed('group', function() {
+    let g = this.get('group');
+    let title = 'Submit an Event';
+    if (g) {
+      title = 'Edit Event';
+    }
+    return title;
+  }),
+  
+  // Sets the event url depending on new or editing event
+  venueUrl: computed('group', function() {
+    let g = this.get('group');
+    let vun = null;
+    if (g) {
+      vun = g.url;
+    }
+    return vun;
+  }),
+  
   // Gets all the affiliated locationGroups in the store
   locationGroups: computed('groupId','recomputeLocations', function() {
     let lgs = this.get('store').peekAll('location_group');
@@ -94,7 +127,22 @@ export default Component.extend({
         ls.push(l);
       }
     });
-    return ls;
+    //return ls;
+    return [];
+  }),
+  
+  locationId: computed('group',function() {
+    let store = this.get('store');
+    let lgs = store.peekAll('location_group');
+    let e = this.get('group');
+    let id = e.id;
+    let s = null;
+    lgs.forEach((lg) => {
+      if ((id==lg.group_id)&&(lg.id != null)) {
+        s = lg.location_id.toString();
+      }
+    });
+    return s;
   }),
   
   hasLocations: computed('acceptedLocations.[]',function() {
@@ -140,9 +188,18 @@ export default Component.extend({
     let now = moment();
     let g = this.get('group');
     if (g) {
+      // SET THE NAME
       this.set('name', g.get('name'));
-      //this.set('startDate', g.get('startDt').format("YYYY-MM-DD"));
-      this.set('durationHours', g.get('durationHours'));
+      // SET THE DESCRIPTION
+      this.set('description', g.get('description'));
+      //this.set('startDate', g.get('startDt'));
+      //this.set('durationHours', g.get('durationHours'));
+      let s = moment(g.get('startDt'));
+      this.set('startDate', s.format("YYYY-MM-DD"));
+      this.set('startTime', s.format('HH:mm'));
+      let e = moment(g.get('endDt'));
+      this.set('durationHours', e.diff(s, 'hours'));
+      this.set('durationMinutes', e.diff(s, 'minutes')-e.diff(s, 'hours')*60);
       this.set('timeZone',g.get('timeZone'));
     } else {
       this.set('startDate', now.format("YYYY-MM-DD"));

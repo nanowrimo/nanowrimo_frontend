@@ -5,7 +5,7 @@
   as |modal|
 }}
   {{#modal.header closeButton=false}}
-    Submit an Event
+    {{modalTitle}}
   {{/modal.header}}
   {{#modal.body}}
     <div class="steps" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow={{formCurrentStep}} aria-valuetext={{formProgressText}}>
@@ -98,7 +98,9 @@
             </div>
             <div id='event-description-group' class="form-group">
               <label for='event-description' class='form-group'>Event details:</label>
-              <textarea id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll"/>
+              <textarea id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll" >
+                {{description}}
+              </textarea>
           </div>
           </div>
         </div>
@@ -164,20 +166,15 @@
               <div class="select-container">
                 <select id='hours' name='hours'
                   class={{concat 'form-control' (if showDurationError ' is-invalid')}}
-                  onchange={{action 'hoursChanged' value="target.value"}}>
-                  <option value='0'>0 hours</option>
-                  <option value='1'>1 hour</option>
-                  <option value='2' selected>2 hours</option>
-                  <option value='3'>3 hours</option>
-                  <option value='4'>4 hours</option>
-                  <option value='5'>5 hours</option>
-                  <option value='6'>6 hours</option>
-                  <option value='7'>7 hours</option>
-                  <option value='8'>8 hours</option>
-                  <option value='9'>9 hours</option>
-                  <option value='10'>10 hours</option>
-                  <option value='11'>11 hours</option>
-                  <option value='12'>12 hours</option>
+                  onchange={{action 'hoursChanged' value="target.value"}}
+                >
+                  {{#each this.hours as |hour|}}
+                    {{#if (eq durationHours hour)}}
+                      <option value='{{hour}}' selected>{{hour}} hours</option>
+                    {{else}}
+                      <option value='{{hour}}'>{{hour}} hours</option>
+                    {{/if}}
+                  {{/each}}
                 </select>
               </div>
               <div class="nw-left-label">
@@ -192,18 +189,13 @@
                 <select id='minutes' name='minutes'
                   class={{concat 'form-control' (if showDurationError ' is-invalid')}}
                   onchange={{action 'minutesChanged' value="target.value"}}>
-                  <option value='0' selected>0 minutes</option>
-                  <option value='5'>5 minutes</option>
-                  <option value='10'>10 minutes</option>
-                  <option value='15'>15 minutes</option>
-                  <option value='20'>20 minutes</option>
-                  <option value='25'>25 minutes</option>
-                  <option value='30'>30 minutes</option>
-                  <option value='35'>35 minutes</option>
-                  <option value='40'>40 minutes</option>
-                  <option value='45'>45 minutes</option>
-                  <option value='50'>50 minutes</option>
-                  <option value='55'>55 minutes</option>
+                  {{#each this.minutes as |minute|}}
+                    {{#if (eq durationMinutes minute)}}
+                      <option value='{{minute}}' selected>{{minute}} minutes</option>
+                    {{else}}
+                      <option value='{{minute}}'>{{minute}} minutes</option>
+                    {{/if}}
+                  {{/each}}
                 </select>
               </div>
               {{#if showDurationError}}
@@ -247,7 +239,11 @@
               >
                 <option value="0">Select or add a venue...</option>
                 {{#each acceptedLocations as |c|}}
-                  <option value="{{c.id}}">{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
+                  {{#if (eq locationId c.id)}}
+                    <option value="{{c.id}}" selected>{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
+                  {{else}}
+                    <option value="{{c.id}}">{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
+                  {{/if}}
                 {{/each}}
                 <option value="-1">+ Add a new venue</option>
               </select>
@@ -335,7 +331,11 @@
           </div>
         </div>
       {{else}}
-        <p role="alert"><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
+        {{#if editMode}}
+          <p role="alert"><strong>The event has been edited!</strong></p>
+        {{else}}
+          <p role="alert"><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
+        {{/if}}
       {{/if}}
     </div>
   {{/modal.body}}

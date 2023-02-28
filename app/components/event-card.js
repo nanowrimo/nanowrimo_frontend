@@ -59,7 +59,7 @@ export default Component.extend({
       }
     }
   },
-  
+
   // Returns the start date as a readable string
   //startDateTime: computed(function() {
     //return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("h:mm a");
@@ -74,13 +74,16 @@ export default Component.extend({
       return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("dddd, MMM D, YYYY") + ", at " + moment(this.get('event.startDt')).tz(etz).format("h:mm a z") + " (" + moment(this.get('event.startDt')).tz(utz).format("h:mm a z") + ")";
     }
   }),
-  
-  
-  duration: computed(function() {
-    let start = moment(this.get('event.startDt'));
-    let end = moment(this.get('event.endDt'));
-    let diff = end.diff(start);
-    return moment.utc(diff).format("H:mm");
+ 
+  duration: computed('event', function() {
+    let e = this.get('event');
+    if (e) {
+      let start = moment(this.get('event.startDt'));
+      let end = moment(this.get('event.endDt'));
+      let diff = end.diff(start);
+      return moment.utc(diff).format("H:mm");
+    }
+    return null;
   }),
   
   // Returns true if the event has been cancelled
