@@ -42,28 +42,23 @@ export default Component.extend({
     }
   }),
   
+  userIsML: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
+    let cu = this.get('currentUser.user');
+    let group = this.get('group');
+    if (cu.id && group.adminIds) {
+      return group.adminIds.indexOf(cu.id) !== -1;
+    }
+    return false;    
+  }),
+  
   userIsAdmin: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
     // user is admin if adminLevel > 0
     if (this.get("currentUser.user.adminLevel")>0 ) {
       return true;
     }
-    
-    let found = false;
-    const gid = this.get('group.id');
-    const groupType = this.get('group.groupType');
-    if (this.get('currentUser.isLoaded')) {
-      if ((groupType!='buddies') && (groupType!='writing group')) {
-        let gus = this.get('store').peekAll('groupUser');
-        let cu = this.get('currentUser.user');
-        gus.forEach(function(gu) {
-          if ((gu.group_id==gid)&&(gu.user_id==cu.id)&&(gu.isAdmin)) {
-            found = true;
-          }
-        });
-      }
-    }
-    return found;
+    return false;
   }),
+  
   contextNotNanomessages: computed('context','group.groupType',function() {
     let c = this.get('context');
     let gt = this.get('group.groupType');
