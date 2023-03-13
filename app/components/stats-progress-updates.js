@@ -29,6 +29,7 @@ export default Component.extend({
     this.set('reimportConfirmationQuestionAddendum', "<p>Importing your history will check our database for all previous progress updates associated with this goal. Any existing data will then be added to your progress updates here.</p><p>Note that this won't rewrite or remove any of your existing updates—it will add historical data. You may end up with duplicate updates for you to delete as needed.</p>");
     this.set('reimportConfirmationYesText','Add My Past Updates'); 
     this.set('reimportConfirmationNoText','Cancel'); 
+    this.set("sessions", []);
     this.fetchSessions(true);
   },
   
@@ -73,18 +74,25 @@ export default Component.extend({
   }),
   
   fetchSessions: function(initial) {
+    let sessions = this.get('sessions');
     let store = this.get('store');
     let pc = this.get('projectChallenge');
     let options = {projectChallengeId: pc.id, limit: 50};
     if (!initial) {
       // what is the oldest end?
-      let sessions = this.get('sortedUpdates');
-      let last = sessions.lastObject;
+      let updates = this.get('sortedUpdates');
+      let last = updates.lastObject;
       // add the oldest end to the options as a unix timestamp... in UTC
       options.oldestEnd = last.end.getTime()/1000 + (last.end.getTimezoneOffset() * 60);
     }
     // from the api, request 50 project sessions
-    return store.query('project-session', options);
+    store.query('project-session', options)
+    .then(newSessions=>{
+      newSessions.forEach(session=>{
+        sessions.pushObject(session);
+      });
+    });
+    this.set('sessions', sessions);
   },
   
   actions: {
@@ -122,5 +130,18 @@ export default Component.extend({
     reimportConfirmationNo() {
        this.set('showConfirmReimport', false);
     },
+    
+    deleteFromLocalSessions(id) {
+      //get the sessions
+      let sessions = this.get('sessions');
+      sessions = sessions.filter((session)=>{return session.id!==id});
+      this.set("sessions", sessions);
+    },
+    
+    addToLocalSessions(session) {
+      let sessions = this.get('sessions');
+      sessions.pushObject(session);
+      this.set('sessions', sessions);
+    }
   }
 });

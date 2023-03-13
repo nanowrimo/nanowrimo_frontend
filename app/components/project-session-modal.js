@@ -264,6 +264,9 @@ export default Component.extend({
       session.set('start', startDate);
       session.set('count', count);
       session.save().then(()=>{
+        // run after Create
+        let ac = this.get('afterCreate');
+        ac(session);
         this.set('disableSubmit', false);
         this.set('open', false);
         return false;
