@@ -163,7 +163,7 @@ export default Component.extend({
     let pc = this.get('projectChallenge');
     if (pc) {
       //peek the sessions associated with the projectChallenge
-      let sessions = this.get('sessions').filterBy('project_challenge_id', parseInt(pc.id));
+      let sessions = this.get('sessions');//.filterBy('project_challenge_id', parseInt(pc.id));
       return sessions;
     } else {
       return [];

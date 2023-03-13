@@ -39,6 +39,7 @@
     {{#each sortedUpdates as |ps|}}
       <ProgressUpdate
         @projectSession={{ps}}
+        @afterDelete={{action "deleteFromLocalSessions"}}
       />
     {{/each}}
     </table>
@@ -51,5 +52,5 @@
     </div>
    </div>
 {{/if}}
-{{project-session-modal project=project projectChallenge=projectChallenge open=newProjectSession}}
+{{project-session-modal project=project projectChallenge=projectChallenge open=newProjectSession afterCreate=(action "addToLocalSessions")}}
 

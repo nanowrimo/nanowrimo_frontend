@@ -8,6 +8,7 @@ export default Component.extend({
   session: service(),
   tagName: '',
   projectSession: null,
+  afterDelete: null,
   
   // Get the end date
   formattedEnd: computed("projectSession.end", function(){
@@ -25,9 +26,13 @@ export default Component.extend({
     deleteProjectSession() {
       // get the session
       let ps = this.get('projectSession');
+      //get the id
+      let id = ps.id;
       // Destroy it
       ps.destroyRecord();
+      // run the afterDelete
+      let ad=this.get('afterDelete');
+      ad(id);
     }
   }
-
 });
