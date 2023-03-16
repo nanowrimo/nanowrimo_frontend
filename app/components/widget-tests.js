@@ -1,10 +1,9 @@
 import Component from '@ember/component';
-
+import mobiscroll from 'mobiscroll';
 export default Component.extend({
   
   didRender(){
     this._super(...arguments);
-    console.log('did render');
     mobiscroll.setOptions({
       theme: 'windows',
       themeVariant: 'light'
