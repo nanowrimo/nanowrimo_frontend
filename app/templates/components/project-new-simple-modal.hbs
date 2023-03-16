@@ -1,0 +1,116 @@
+{{#bs-modal
+  open=open
+  onShow=(action "onShow")
+  onHidden=(action "onHidden")
+  as |modal|
+}}
+  {{#modal.header closeButton=false}}
+    {{headerText}}
+  {{/modal.header}}
+  <form>
+    {{#modal.body}}
+      <div class="tab-content">
+        {{#if newProject }}
+          <div class="form-group form-group-ux" style="display: flex;">
+            <div class="fa-container">
+              <i class="fa fa-book fa-3x" aria-hidden="true"></i>
+            </div>
+            <div class="input-ux">
+              <label for='goal-name' class='form-group'>What is the title of your new novel/writing project?</label>
+              <input id="goal-name" name='goal-name' class='form-control'
+                oninput={{action "goalNameChanged" value="target.value"}} 
+                value={{displayGoalName}}
+                disabled={{disableName}} />
+            </div>
+          </div>
+        {{else}}
+          <div class="form-group form-group-ux" style="display: flex;">
+            <div class="fa-container">
+              <i class="fa fa-book fa-3x" aria-hidden="true"></i>
+            </div>
+            <div class="input-ux">
+              <label for='goal-name' class='form-group'>Which writing project would you like to use?</label>
+              <div class="select-container">
+                <select id='associateSelect' class='form-control'>
+                  {{#each optionsForProjects as |c|}}
+                    <option value="{{c.id}}">{{c.title}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+        {{#if isPersonal }}
+          <div class="form-group form-group-ux" style="display: flex;">
+            <div class="fa-container">
+              <i class="fa fa-list-ul fa-2x" aria-hidden="true"></i>
+            </div>
+            <div class="input-ux">
+              <label for='goal-name' class='form-group'>Give your goal a name</label>
+              <input id="goal-name" name='goal-name' class='form-control'
+                oninput={{action "goalNameChanged" value="target.value"}} 
+                value={{displayGoalName}}
+                disabled={{disableName}} />
+            </div>
+          </div>
+        {{/if}}
+        {{#if isFlexible }}
+          <div class="form-group form-group-ux" style="display: flex;">
+            <div class="fa-container">
+              <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
+            </div>
+            <div class="input-ux">
+              <label for='goal'>What is your word-count goal?</label>
+              <input class='form-control' id='goal' name='goal' min='1' type='number' />
+            </div>   
+          </div>
+        {{/if}}
+        {{#if isPersonal }}
+          <div class="form-group form-group-ux" style="display: flex;">
+            <div class="fa-container">
+              <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+            </div>
+            <div class="input-ux">
+              <div class="form-group side-by-side" style="margin-bottom: 0px;">
+                <div>
+
+                  <label for='start-date' class='form-group'>{{startLabel}}</label>
+                  <input id="start-date" name='start-date' type='date' class='form-control'
+                    oninput={{action "startsAtChanged" value="target.value"}} 
+                    value={{displayStartsAt}}
+                    disabled={{disableStartEnd}}
+                    min='1999-07-01'>
+                  {{c.hidden-input
+                    changeset=changeset
+                    property="startsAt"
+                  }}
+    
+                </div>
+                <div>
+                  <label for='challenge-last-day'>{{durationLabel}}</label>
+                  <input id="challenge-last-day" name='challenge-last-day' type='date' class='form-control'
+                    oninput={{action "endsAtChanged" value="target.value"}} 
+                    value={{displayEndsAt}}
+                    disabled={{disableStartEnd}}
+                    min='1999-07-01'>
+   
+                  {{c.hidden-input
+                    changeset=changeset
+                    property="endsAt"
+                  }}
+                </div>
+              </div>
+              {{#if endsBeforeStarts}}
+                <div class='text-danger'>Goal can not end before it starts.</div>
+              {{/if}}    
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    {{/modal.body}}
+    {{#modal.footer}}
+      <input disabled={{disableButton}} type="submit" class="nano-button" value="Save" data-test-project-submit />
+      <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} data-test-project-cancel />
+    {{/modal.footer}}
+  </form>
+{{/bs-modal}}

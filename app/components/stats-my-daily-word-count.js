@@ -25,7 +25,7 @@ export default ChartBaseComponent.extend({
     let counts = this.get('userDailyCounts');
     // get the keys from the counts object
     let keys = Object.keys(counts);
-    let dates = this.get('projectChallenge.datesShortMonthDayFormat');
+    let dates = this.get('projectChallenge.datesShortMonthDayYearFormat');
     // loop through the dates 
     for (var i = 0; i < dates.length; i++) {
       let countKey = keys[i];
@@ -75,8 +75,8 @@ export default ChartBaseComponent.extend({
       },
       title: null,
       xAxis: {
-        categories: this.get('xAxisRange'),
-        tickPositions: [0,8,29],
+        categories: this.get('projectChallenge.datesShortMonthDayYearFormat'),
+        tickPositions: [0,29],
         tickLength: 0,
         title: null,
         labels: {
@@ -108,7 +108,7 @@ export default ChartBaseComponent.extend({
           },
           column: {
             pointPadding: 0,
-            borderRadius: 7,
+            borderRadius: 3,
             borderWidth: 0,
             strokeWidth: 0,
           }

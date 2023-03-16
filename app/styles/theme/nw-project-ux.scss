@@ -1,0 +1,174 @@
+.nw-project-container {
+  width: 100%;
+  display: flex;
+  //flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  @media(max-width: $screen-md) {
+    flex-wrap: wrap;
+  }
+  .nw-project {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    .nw-project-cover {
+      flex: 0 0 169px;
+      height: 150px;
+      text-align: center;
+      @media(max-width: $screen-md) {
+        flex: 0 0 120px;
+        height: 150px;
+      }
+      .nw-project-cover-clip {
+        @media(min-width: $screen-md) {
+          position: absolute;
+          top: -30px;
+          left: -10px;
+          width: 189px;
+          height: 172px;
+          //clip-path: inset(0px 0px 0px -50px);
+          img {
+            transform: rotate(-15deg);
+            transform-origin: bottom right;
+            width: 122px;
+            height: 172px;
+            border-radius: 3px;
+          }
+        }
+        @media(max-width: $screen-sm-max) {
+          width: 110px;
+          height: 150px;
+          img {
+            transform: rotate(-15deg);
+            transform-origin: center;
+            width:90px;
+            height: 130px;
+            border-radius: 3px;
+          }
+        }
+      }
+    }
+    .nw-project-name-genres {
+      flex: 1 1 100%;
+      max-width: 250px;
+    }
+    @media(max-width: $screen-md) {
+    }
+  }
+  .nw-project-progress {
+    padding: 20px;
+    flex: 1 1 100%;
+    @media(max-width: $screen-sm) {
+      padding-top: 5px;
+    }
+    .goal-text{ 
+      width: 100%;
+      display: flex;
+      
+      justify-content: space-between;
+      margin-bottom: 7.5px;
+      font-size: 16px;
+
+      .goal {
+        color: $nw-mediumgrey
+      }
+      .winner-route {
+        text-align: right;
+        margin-left: 1em;
+      }
+    }
+    
+    .nano-progress-bar{
+      width: 100%;
+    }
+    .progress-text {
+      margin-top: 7.5px;
+      height: 18px;
+      font-weight: bold;
+      .count{
+        color: $nw-darkaqua;
+      }
+      .count.goal-met {
+        color: $nw-purple;
+      }
+    }
+    .challenge-start {
+      margin-top: 7.5px;
+      float: right;
+      .started {
+        color: $nw-lightgrey;
+      }
+    }
+  }
+}
+.nw-flippy-card.nw-flippy-project-cover {
+  width: 490px;
+  height: 700px;
+  
+  @media(max-width: $screen-sm) {
+    width: 392px;
+    height: 560px;
+  }
+  @media(max-width: $screen-xs) {
+    width: 245px;
+    height: 350px;
+  }
+  .nw-flippy-wrapper {
+    .nw-card {
+      box-shadow: $nw-box-shadow;
+      
+      width: 100%;
+      height: 100%;
+      .nw-card-content {
+        width: 100%;
+        height: 100%;
+        .nw-project-cover-large {
+          width: 100%;
+          height: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            
+          }
+        }
+      }
+      &.nw-card-face-front {
+        .nw-card-content {
+          padding: 0px 0px 0px 0px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.nw-project-genres {
+  margin-top: 7px;
+  margin-bottom: 17px;
+  line-height: 14px;
+  text-align: left;
+  color: $nw-mediumgrey;
+}
+.nw-project-details {
+  min-height: 0;
+}
+.nw-project-details > div {
+  flex: 0 0 37%;
+  padding: 10px;
+  background-color: $nw-white-2;
+  border-radius: 12px;
+  margin-top: 12px;
+  @media (max-width: $screen-xs) {
+    flex: 0 0 28%;
+  }
+  &.nw-project-flippy-title {
+    background-color: transparent;
+    padding-top: 0px;
+    border-top: 0px;
+    flex: 1 0 15%;
+    @media (max-width: $screen-xs) {
+      flex: 0 0 28%;
+    }
+  
+  }
+}

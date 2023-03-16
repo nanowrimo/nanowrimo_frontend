@@ -93,7 +93,6 @@
   "ember": {
     "edition": "octane"
   },
-  "dependencies": {},
   "resolutions": {
     "**/@embroider/macros": "0.50.1"
   }

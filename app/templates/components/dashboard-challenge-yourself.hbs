@@ -1,0 +1,24 @@
+<div class="nw-card-header">
+  <div class="nw-card-title">Challenge Yourself</div>
+</div>
+<div class="nw-card-content" style="padding-left: 0px; display: flex; flex-direction: row;">
+  <div style='flex: 0 0 132px;'>
+    <img src='/images/other/challenge_prompt.png' alt='A dragon is challenging you to set a new goal' style="width: 132px; height: 250px;" />
+  </div>
+  <div style='flex: 1 1 100%;'>
+    <div class="nw-quote-bubble left" >You've got so much to say! Would you like to set another word-count goal now?
+      <div class="quote_arrow">
+        <img src="/images/other/quote_left.png" alt="" />
+      </div>
+    </div>
+    <button style="margin-left: 20px;">Start a new novel!</button>
+    <button style="margin-left: 20px; margin-top: 10px;">Continue an existing work!</button>
+  </div>
+</div>
+{{project-new-simple-modal
+  onHidden=(action "afterSimpleProjectModalClose")
+  open=addSimpleProject
+  user=currentUser.user
+  newProject=newProject
+  challenge=challenge
+}}

@@ -120,6 +120,26 @@ form {
     color: $nw-darkred;
   }
 }
+.form-group-ux {
+  .fa-container {
+    align-self: flex-end;
+    flex: 0 0 46px;
+    text-align: right;
+    padding-right: 10px;
+    .fa {
+      color: #dddddd;
+    }
+  }
+  .input-ux {
+    align-self: flex-end;
+    flex: 1 1 100%;
+  }
+}
+.form-group-ux:focus-within {
+  .fa {
+    color: #73ab9b;
+  }
+}
 select {
   border-radius: 0px;
 }

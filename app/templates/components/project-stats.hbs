@@ -40,26 +40,17 @@
     </div>
     <div class="grid-wrapper">
       {{#if projectChallenge}}
-      {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count
-      goal=goal goalUnit=goalUnit class="nw-card g3-col1 g3-row1 g2-col1 g2-row1 short-card"}}
-      {{stats-words-needed-today projectChallenge=projectChallenge class="nw-card g3-col2 g3-row1 g2-col2 g2-row1
-      short-card" }}
-      {{stats-days-straight user=currentUser.user projectChallenge=projectChallenge class="nw-card g3-col3 g3-row1
-      g2-col1 g2-row2 short-card"}}
-      {{stats-progress-updates sessions=projectChallengeSessions project=project projectChallenge=projectChallenge
-      class="nw-card g3-col1 g3-row2 g2-col2 g2-row2 flippable"}}
-      {{stats-my-overall-progress projectChallenge=projectChallenge class="nw-card g3-col2 g3-row2 g3-hspan2 g2-col1
-      g2-row3 g2-hspan2"}}
-      {{stats-when-i-write projectChallenge=projectChallenge class="nw-card g3-col1 g3-row3 g2-col1 g2-row5 flippable"}}
-      {{stats-my-daily-word-count projectChallenge=projectChallenge class="nw-card g3-col2 g3-row3 g3-hspan2 g2-col1
-      g2-row4 g2-hspan2"}}
-      {{stats-where-i-write projectChallenge=projectChallenge user=currentUser.user class="nw-card g3-col1 g3-row4
-      g2-col2 g2-row5"}}
-      {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular
-      class="nw-card g3-col2 g3-row4 g2-col1 g2-row6 flippable"}}
-      {{stats-when-ill-finish user=currentUser.user rawDailyAverage=rawDailyAverage projectChallenge=projectChallenge
-      class="nw-card g3-col3 g3-row4 g2-col2 g2-row6 flippable"}}
-      {{stats-my-writing-speed writingSpeed=writingSpeed class="nw-card g3-col1 g3-row5 g2-col1 g2-row7"}}
+        {{stats-total-words userPercentData=userPercentData comparisonPercentData=comparisonPercentData count=count goal=goal goalUnit=goalUnit class="nw-card g3-col1 g3-row1 g2-col1 g2-row1 short-card"}}
+        {{stats-words-needed-today projectChallenge=projectChallenge class="nw-card g3-col2 g3-row1 g2-col2 g2-row1 short-card" }}
+        {{stats-days-straight user=currentUser.user projectChallenge=projectChallenge class="nw-card g3-col3 g3-row1 g2-col1 g2-row2 short-card"}}
+        {{stats-progress-updates sessions=projectChallengeSessions project=project projectChallenge=projectChallenge class="nw-card g3-col1 g3-row2 g2-col2 g2-row2 flippable"}}
+        {{stats-my-overall-progress projectChallenge=projectChallenge class="nw-card nw-no-background nw-card-white g3-col2 g3-row2 g3-hspan2 g2-col1 g2-row3 g2-hspan2"}}
+        {{stats-when-i-write projectChallenge=projectChallenge class="nw-card g3-col1 g3-row3 g2-col1 g2-row5 flippable"}}
+        {{stats-my-daily-word-count projectChallenge=projectChallenge class="nw-card nw-no-background nw-card-white g3-col2 g3-row3 g3-hspan2 g2-col1 g2-row4 g2-hspan2"}}
+        {{stats-where-i-write projectChallenge=projectChallenge user=currentUser.user class="nw-card g3-col1 g3-row4 g2-col2 g2-row5"}}
+        {{stats-my-daily-average dailyAverage=dailyAverage goalUnit=goalUnit goalUnitSingular=goalUnitSingular class="nw-card g3-col2 g3-row4 g2-col1 g2-row6 flippable"}}
+        {{stats-when-ill-finish user=currentUser.user rawDailyAverage=rawDailyAverage projectChallenge=projectChallenge class="nw-card g3-col3 g3-row4 g2-col2 g2-row6 flippable"}}
+        {{stats-my-writing-speed writingSpeed=writingSpeed class="nw-card g3-col1 g3-row5 g2-col1 g2-row7"}}
       {{stats-how-i-feel averageFeeling=averageFeeling class="nw-card g3-col2 g3-row5 g2-col2 g2-row7"}}
       {{/if}}
 

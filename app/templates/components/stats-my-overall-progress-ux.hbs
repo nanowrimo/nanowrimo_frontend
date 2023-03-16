@@ -1,0 +1,28 @@
+<div class="nw-card-content">
+  <table class="sr-only">
+    <tr><th scope="col">Date</th><th scope="col">Total Count</th><th scope="col">Goal</th></tr>
+    {{#each tableRows as |row|}}
+      <tr>
+        <td>{{row.date}}</td>
+        <td>{{row.total}}</td>
+        <td>{{row.success}}</td>
+      </tr>
+    {{/each}}
+  </table>
+  {{#if tableSelected}}
+    <table id='pane-table' class='stats-table' tabindex=0>
+      <tr><th scope="col">Date</th><th scope="col">Total Count</th><th scope="col">Goal</th></tr>
+      {{#each tableRows as |row|}}
+        <tr>
+          <td>{{row.date}}</td>
+          <td>{{row.total}}</td>
+          <td>{{row.success}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  {{else}}
+    <div id={{chartId}}>
+      {{high-charts content=chartData chartOptions=chartOptions theme=theme }}
+    </div>
+  {{/if}}
+</div>
