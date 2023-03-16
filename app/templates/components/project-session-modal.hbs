@@ -64,14 +64,12 @@
           <div style="flex: 1 1 160px; padding-right: 5px;">
             <label for='date' class='form-group'>Date</label>
             {{input
-              type='date'
               name='date'
               id='project-session-modal-date'
-              class='form-control'
+              class='form-control nano-datepicker'
               value=dateStart
               min=projectChallenge.startsAt
               max=dateMax
-              change=(action "dateChange")
             }}
           </div>
           <div style="flex: 0 0 80px; padding-right: 5px;">
