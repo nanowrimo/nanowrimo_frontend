@@ -62,13 +62,22 @@ export default Component.extend({
   longitude: null,
   latitude: null,
   utc_offset: null,
-  
+  _inclusiveChecklistShow: false,
   recomputeLocations: 0,
   
   timezoneResponse: null,
   
   timeZoneOptions: computed(function() {
     return TimeZones;
+  }),
+  
+  inclusiveChecklistShow: computed('_inclusiveChecklistShow', function() {
+    let p = this.get('_inclusiveChecklistShow');
+    if (p) {
+      return "info-visible";
+    } else {
+      return "info-hidden";
+    }
   }),
   
   // Gets all the affiliated locationGroups in the store
@@ -409,6 +418,10 @@ export default Component.extend({
   },
 
   actions: {
+    toggleInclusiveChecklist() {
+      let show = !this.get('_inclusiveChecklistShow');
+      this.set('_inclusiveChecklistShow',show);
+    },
     
     // Called on switching from one tab to another, or on pressing submit
     changeStep() {

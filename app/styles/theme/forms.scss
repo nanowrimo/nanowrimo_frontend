@@ -422,3 +422,7 @@ label.checkbox-label {
     min-height: 10rem;
   }
 }
+
+input[type="checkbox"]:focus {
+    outline: 1px solid black;
+}
