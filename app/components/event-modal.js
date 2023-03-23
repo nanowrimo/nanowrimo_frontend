@@ -65,6 +65,16 @@ export default Component.extend({
   _inclusiveChecklistShow: false,
   recomputeLocations: 0,
   
+  
+  // access features for group
+  accessMobility: false,
+  accessLgbt: false,
+  accessSize: false,
+  accessAge: false, 
+  accessPathogen: false,
+  accessPrice: false,
+  accessCaptioning: false,
+  
   timezoneResponse: null,
   
   timeZoneOptions: computed(function() {
@@ -234,6 +244,14 @@ export default Component.extend({
     if (online) {
       g.set("url",this.get("venueUrl"));
     }
+    //access
+    g.set("accessMobility",this.get("accessMobility"));
+    g.set("accessLgbt",this.get("accessLgbt"));
+    g.set("accessSize",this.get("accessSize"));
+    g.set("accessAge", this.get("accessAge"));
+    g.set("accessPathogen",this.get("accessPathogen"));
+    g.set("accessPrice", this.get("accessPrice" ));
+    g.set("accessCaptioning", this.get("accessCaptioning"));
     return g;
   },
     
@@ -418,13 +436,15 @@ export default Component.extend({
   },
 
   actions: {
-    toggleInclusiveChecklist() {
+    toggleInclusiveChecklist( ) {
       let show = !this.get('_inclusiveChecklistShow');
       this.set('_inclusiveChecklistShow',show);
     },
     
     // Called on switching from one tab to another, or on pressing submit
-    changeStep() {
+    formSubmit() {
+      event.preventDefault();
+      let formElements = event.target.elements;
       let s = this.get("step");
       switch (s) {
         case 0: {
@@ -436,6 +456,16 @@ export default Component.extend({
           if (e&&d) {
             this.set("step", 1);
           }
+          // store access values
+          this.set("accessMobility", formElements['access-mobility'].checked);
+          this.set("accessLgbt", formElements['access-lgbt'].checked);
+          this.set("accessSize", formElements['access-size'].checked);
+          this.set("accessAge", formElements['access-age'].checked) 
+          this.set("accessPathogen", formElements['access-pathogen'].checked);
+          this.set("accessPrice", formElements['access-price'].checked);
+          this.set("accessCaptioning", formElements['access-captioning'].checked);
+          
+          
           break;
         }
         case 1: {

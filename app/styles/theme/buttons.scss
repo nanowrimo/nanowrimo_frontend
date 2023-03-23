@@ -200,16 +200,3 @@ button .spinner {
   }
 }
 
-.nw-clear-button {
-  border: 0;
-  background-image: none;
-  background-color: transparent;
-  color: $nw-black;
-  &:focus, &:hover {
-    border: 1px solid black;
-    background-image: none !important;
-    background-color: transparent !important;
-    color: $nw-black;
-  }
-  
-}
