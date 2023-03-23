@@ -76,7 +76,7 @@ export default Component.extend({
       if (gt=='buddies') {
         showit = true;
       } else {
-        showit = this.get('userIsAdmin');
+        showit = this.get('userIsML');
       }
     }
     return showit;
