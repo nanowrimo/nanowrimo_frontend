@@ -98,51 +98,11 @@
                 placeholder='My New Event...'
               }}
             </div>
-            <a href="#" class="" {{action 'toggleInclusiveChecklist'}}>{{if _inclusiveChecklistShow 'Hide' 'Show'}} Inclusive Checklist 
-            {{#if _inclusiveChecklistShow}}
-              {{fa-icon "caret-up"}}
-            {{else}}
-              {{fa-icon "caret-down"}}
-            {{/if}}
-            </a>
-            
-            <div class="inclusive-checklist {{inclusiveChecklistShow}}">
-         
-              Inclusivity Checklist: Select all that apply and please explain further in the event details if necessary.
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-mobility' name='access-mobility' />
-                <label class='checkbox-label' for='access-mobility'>Accessible to wheelchairs/ other mobility aids</label>
-              </div>
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-lgbt' name='access-lgbt' />
-                <label class='checkbox-label' for='access-lgbt'> LGBTQIA+ inclusive (including all-gender or single stall bathrooms)</label>
-              </div>
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-size' name='access-size' />
-                <label class='checkbox-label' for='access-size'>Accessible to fat people (please specify seating options in event description)</label>
-              </div>
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-age' name='access-age'/>
-                <label class='checkbox-label' for='access-age'>All ages welcome</label>
-              </div>
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-pathogen' name='access-pathogen'/>
-                <label class='checkbox-label' for='access-pathogen'>COVID-conscious (masks required, outdoor seating, and/or additional measures)</label>
-              </div>
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-price' name='access-price'/>
-                <label class='checkbox-label' for='access-price'>No purchase required</label>
-              </div>
-              <div class= "form-group">
-                <input class='form-control ember-checkbox' type='checkbox' id='access-captioning' name='access-captioning'/>
-                <label class='checkbox-label' for='access-captioning'>Closed captioning available</label>
-              </div>
-            
-            </div>
+           
             <div id='event-description-group' class="form-group">
               <label for='event-description' class='form-group'>Event details:</label>
               <textarea id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll"/>
-          </div>
+            </div>
           </div>
         </div>
         <script>var editor = new MediumEditor('#event-description', {
@@ -377,6 +337,53 @@
             {{/if}}
           </div>
         </div>
+
+            <div class="inclusive-checklist">
+         
+              Accessibility Checklist: Select all that apply and please explain further in the venue details if necessary.
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-mobility' name='access-mobility' />
+                <label class='checkbox-label' for='access-mobility'>Accessible to wheelchairs/ other mobility aids</label>
+              </div>
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-lgbt' name='access-lgbt' />
+                <label class='checkbox-label' for='access-lgbt'> LGBTQIA+ inclusive (including all-gender or single stall bathrooms)</label>
+              </div>
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-size' name='access-size' />
+                <label class='checkbox-label' for='access-size'>Accessible to fat people (please specify seating options in event description)</label>
+              </div>
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-age' name='access-age'/>
+                <label class='checkbox-label' for='access-age'>All ages welcome</label>
+              </div>
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-pathogen' name='access-pathogen'/>
+                <label class='checkbox-label' for='access-pathogen'>COVID-conscious (masks required, outdoor seating, and/or additional measures)</label>
+              </div>
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-price' name='access-price'/>
+                <label class='checkbox-label' for='access-price'>No purchase required</label>
+              </div>
+              <div class= "form-group">
+                <input class='form-control ember-checkbox' type='checkbox' id='access-captioning' name='access-captioning'/>
+                <label class='checkbox-label' for='access-captioning'>Closed captioning available</label>
+              </div>
+            </div>
+            <div id='venue-details-group' class="form-group">
+              <label for='venue-details' class='form-group'>Venue details:</label>
+              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' onchange={{action 'venueDetailsChanged' value="target.value"}} style="height:70px;overflow-y:scroll"/>
+            </div>
+            <script>var editor = new MediumEditor('#venue-details', {
+          paste: {
+            forcePlainText: false,
+            cleanPastedHTML: true,
+            cleanAttrs: ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'autosave', 'bgcolor', 'border', 'buffered', 'challenge', 'charset', 'checked', 'cite', 'class', 'code', 'codebase', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'contextmenu', 'controls', 'coords', 'data', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'dropzone', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'hreflang', 'http-equiv', 'icon', 'id', 'ismap', 'itemprop', 'keytype', 'kind', 'label', 'lang', 'language', 'list', 'loop', 'low', 'manifest', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'ping', 'placeholder', 'poster', 'preload', 'radiogroup', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'scoped', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellcheck', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'summary', 'tabindex', 'target', 'type', 'usemap', 'value', 'width', 'wrap'],
+            cleanTags: ['label', 'meta', 'head', 'header', 'applet', 'embed', 'area', 'audio', 'base', 'basefont', 'button', 'canvas', 'col', 'colgroup', 'datalist', 'del', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'map', 'menu', 'menuitem', 'nav', 'noframes', 'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'script', 'select', 'source', 'style', 'var', 'video', 'wbr'],
+            unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
+          }
+        });</script> 
+            
       {{else}}
         <p role="alert"><strong>Thanks for submitting your event!</strong> We'll notify you by email when the event is approved for display on nanowrimo.org.</p>
       {{/if}}

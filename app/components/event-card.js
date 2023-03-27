@@ -29,6 +29,21 @@ export default Component.extend({
       }
     }
   }),
+  hasAccessInfo: computed('group', function(){
+    //return true if the group has venueDetails or accessible anything
+    let g = this.get('group');
+    console.log(g);
+    if (g.accessMobility || g.accessLgbt || g.accessSize || g.accessAge || g.accessPathogen || g.accessPrice || g.accessCaptioning) {
+      return true;
+    }
+  }),
+  
+  hasVenueInfo: computed("group", function() {
+    let g = this.get('group');
+    if (this.get('hasAccessInfo') || g.eventDetails ) {
+      return true;
+    }
+  }),
   
   init() {
     this._super(...arguments);

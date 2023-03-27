@@ -32,8 +32,39 @@
     </div>
     {{/if}}
     <div style="padding-top: 15px; padding-bottom: 15px;">
-      {{{event.description}}}
+      <b>Event details: </b>{{{event.description}}}
     </div>
+    {{#if hasVenueInfo}}
+      {{#if hasAccessInfo}}
+        <ul>
+          {{#if g.accessMobility}}
+            <li>Accessible to wheelchairs/ other mobility aids</li>
+          {{/if}}
+          {{#if g.accessLgbt}}
+            <li>LGBTQIA+ inclusive (including all-gender or single stall bathrooms)</li>
+          {{/if}}
+          {{#if g.accessSize}}
+            <li>Accessible to fat people (please specify seating options in event description)</li>
+          {{/if}}
+          {{#if g.accessAge}}
+            <li>All ages welcome</li>
+          {{/if}}
+          {{#if g.pathogen}}
+            <li>COVID-conscious (masks required, outdoor seating, and/or additional measures)</li>
+          {{/if}}
+          {{#if g.price}}
+            <li>No purchase required</li>
+          {{/if}}
+          {{#if g.accessCaption}}
+            <li>Closed captioning available</li>
+          {{/if}}
+        </ul>
+      {{/if}}
+       <div style="padding-top: 15px; padding-bottom: 15px;">
+        <b>Venue details: </b>{{{event.venueDetails}}}
+      </div>
+    {{/if}}
+    
     {{#if currentUser.isLoaded}}
     {{#if (eq status 'upcoming')}}
     {{#if isEnrolled}}
