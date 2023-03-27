@@ -268,7 +268,6 @@ export default Component.extend({
           let cu = this.get('currentUser');
           cu.load();
         }
-        console.log(data);
       });
     },
     

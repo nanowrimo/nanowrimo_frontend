@@ -207,11 +207,10 @@ export default Controller.extend({
       }
     }
     // Return if they won or not
-    //return d;
-    return true;
+    return d;
+    //return true;
   }),
   displayEventBanner: computed('currentUser.user.projects.[]', 'primaryProject.currentProjectChallenge.count', function () {
-    console.log('displayEventBanner');
     let ps = this.get('currentUser.user.projects');
     let c = this.get('primaryProject.currentProjectChallenge.count');
     let d = false;
@@ -262,7 +261,6 @@ export default Controller.extend({
         }
       }
     }
-    console.log(d);
     //return d;
     if (d) {
       return newc;
