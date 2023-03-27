@@ -627,8 +627,7 @@ export default Component.extend({
     },
     
     onShow() {
-      //assign the user to the project
-      this.set('group.user', this.get('user'));
+      // this.set('group.user', this.get('user'));
       var t = document.getElementById("ember-bootstrap-wormhole");
       t.firstElementChild.setAttribute("aria-modal", "true");
       t.firstElementChild.setAttribute("aria-label", "submit an event");
