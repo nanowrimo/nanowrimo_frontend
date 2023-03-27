@@ -9,7 +9,7 @@ export default Component.extend({
   challenge: null,
   updateDelay: null,
   secondsLeft: null,
-  newProject: true,
+  //newProject: true,
   
   init() {
     this._super(...arguments);
@@ -165,7 +165,7 @@ export default Component.extend({
     }
   }),
   
-  buttonText: computed("type", function(){
+  /*buttonText: computed("type", function(){
     let type = this.get("type");
     switch(type){
       case "NowWhat": 
@@ -174,13 +174,13 @@ export default Component.extend({
         return "Join Camp NaNoWriMo";
 
     }
-  }),
+  }),*/
   
-  addSimpleProject: false,
+  //addSimpleProject: false,
   
  
   actions: {
-    afterProjectModalClose() {
+    /*afterProjectModalClose() {
       this.set('addProject', null);
     },
     openNewProjectModal() {
@@ -195,7 +195,6 @@ export default Component.extend({
       this.set('addSimpleProject', true);
     },
     afterSimpleProjectModalClose() {
-      alert('yo');
       this.set('addSimpleProject', null);
     },
     afterNewProjectSubmit() {
@@ -207,7 +206,7 @@ export default Component.extend({
       if (action){
         action();
       }
-    } 
+    } */
     
   }
 });

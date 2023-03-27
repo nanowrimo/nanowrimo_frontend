@@ -4,8 +4,11 @@ import { sort } from '@ember/object/computed';
 import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
+import axios from 'axios';
+import ENV from 'nanowrimo/config/environment';
 
 export default Component.extend({
+  session: service(),
   currentUser: service(),
 
   tagName: 'span',
@@ -13,13 +16,19 @@ export default Component.extend({
   open: null,
   project: null,
   challenge: null,
-  challengeId: null,
   newProject: null,
+  projectId: null,
   user: null,
   displayStartsAt: null,
   displayEndsAt: null,
+  newTitle: null,
+  newChallengeName: null,
+  newGoal: 50000,
+  newStart: null,
+  newEnd: null,
+  context: null,
   
-  optionsForProjects: [{id: 1, title: 'Hello there'},{id: 2, title: 'Round Midnight'},{id: 3, title: 'Clams for a Pauper'}],
+  
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
   
   init() {
@@ -28,8 +37,25 @@ export default Component.extend({
     assert('Must pass a user into {{project-new-modal}}', user);
   },
   
+  optionsForProjects: computed("currentUser.user.inactiveProjects", function () {
+    let projects = this.get("currentUser.user.inactiveProjects");
+    let ps = [];
+    let needProjectId = true;
+    let pid = null;
+    projects.forEach(function(p) {
+      ps.push({id: p.id, title: p.title});
+      if (needProjectId) {
+        pid = p.id;
+        needProjectId = false;
+      }
+    });
+    this.set("projectId",pid);
+    return ps;    
+  }),
+  
   headerText: computed("challenge", function(){
     let challenge = this.get("challenge");
+    // If this is an event
     if (challenge) {
       switch (challenge.eventType) {
         case 0:
@@ -42,7 +68,8 @@ export default Component.extend({
           return "Join the challenge";
       }
     } else {
-      return "none";
+      // This is a personal challenge
+      return "Start a new personal challenge";
     }
   }),
   
@@ -59,21 +86,37 @@ export default Component.extend({
   isPersonal: computed("challenge", function(){
     let challenge = this.get("challenge");
     if (challenge) {
-      if (challenge.eventType === null) {
-        return true;
-      }
+      return false;
     }
-    return false;
+    return true;
   }),
   
   isFlexible: computed("challenge", function(){
     let challenge = this.get("challenge");
     if (challenge) {
-      if (challenge.eventType != 0) {
-        return true;
+      if (challenge.eventType == 0) {
+        return false;
       }
     }
-    return false;
+    return true;
+  }),
+  
+  context: computed("isPersonal", "newProject", function() {
+    let isPersonal = this.get("isPersonal");
+    let newProject = this.get("newProject");
+    if (isPersonal) {
+      if (newProject) {
+        return "personal-challenge-new-project";
+      } else {
+        return "personal-challenge-existing-project";
+      }
+    } else {
+      if (newProject) {
+        return "event-new-project";
+      } else {
+        return "event-existing-project";
+      }
+    }
   }),
   
   startLabel: computed('pastTense', function() {
@@ -92,29 +135,65 @@ export default Component.extend({
     }
   }),
   
+  invalidDates: computed('isPersonal', 'newStart', 'newEnd', function(){
+    const isPersonal = this.get('isPersonal');
+    const newStart = this.get('newStart');
+    const newEnd = this.get('newEnd');
+    if (isPersonal && newStart && newEnd && (newStart > newEnd)) {
+      return true;
+    }
+    return false;
+  }),
+  
+  disableButton: computed('newProject', 'isFlexible', 'isPersonal', 'newTitle', 'newChallengeName', 'newGoal', 'newStart', 'newEnd', 'invalidDates', function(){
+    const newProject = this.get('newProject');
+    const isFlexible = this.get('isFlexible');
+    const isPersonal = this.get('isPersonal');
+    const newTitle = this.get('newTitle');
+    const newChallengeName = this.get('newChallengeName');
+    const newGoal = this.get('newGoal');
+    const newStart = this.get('newStart');
+    const newEnd = this.get('newEnd');
+    const invalidDates = this.get('invalidDates');
+    // If present, is the title field filled in?
+    if (!newTitle && newProject) {
+      return true;
+    }
+    // If present, is the goal field filled in?
+    if (!newGoal && isFlexible) {
+      return true;
+    }
+    if (isPersonal) {
+      // If present, are the date fields filled in?
+      if (!newStart || !newEnd) {
+        return true;
+      }
+      // If present, is the challenge name field filled in?
+      if (!newChallengeName) {
+        return true;
+      }
+    }
+    // If present, is the start date on or before the end date?
+    if (invalidDates) {
+      return true;
+    }
+    // Otherwise, the form may be submitted
+    return false;
+  }),
+  
   actions: {
     durationChanged(val) {
       this.set('newDuration', val);
       this.recomputeEndsAt();
     },
     endsAtChanged(val) {
-      //let m = moment.utc(val);
-      //this.set('newEndsAt', m);
-      //this.set('changeset.endsAt', m.toDate());
-      this.set('newEndsAt', val);
+      this.set('newEnd', val);
       //this.set('changeset.endsAt', val);
-      this.recomputeValidChallenge();
+      //this.recomputeValidChallenge();
 
     },
     startsAtChanged(val) {
-      //set the new StartsAt
-      //let m = moment.utc(val);
-      //this.set('newStartsAt', m);
-      this.set('newStartsAt', val);
-      //set the project-challenge starts at
-      //this.set('changeset.startsAt', m.toDate());
-      //this.set('changeset.startsAt', val);
-      this.recomputeValidChallenge();
+      this.set('newStart', val);
     },
     
     writingTypeChanged(val) {
@@ -127,58 +206,78 @@ export default Component.extend({
     },
     
     goalChanged(val) {
-      this.set('changeset.goal',val);
-      this.recomputeValidChallenge();
+      this.set('newGoal',val);
     },
     
-    goalNameChanged(val) {
-      this.set('changeset.name',val);
-      this.recomputeValidChallenge();
+    titleChanged(val) {
+      this.set('newTitle',val);
     },
     
-    associateChallengeSelect(challengeID) {
-      this.set('associatedChallengeId', challengeID);
-      this.set('associatedChallenge', this.get('optionsForChallenges').findBy("id", challengeID));
-      if (this.get("associateWithChallenge") ) {
-        this.set('challenge', this.get("associatedChallenge"));
-      }
+    challengeNameChanged(val) {
+      this.set('newChallengeName',val);
     },
-    setStep(stepNum) {
-      this.set("formStepOverride", stepNum);
+    
+    projectSelect(selectValue) {
+      this.set("projectId",selectValue);
     },
+    
     onShow() {
-      //this.toggleProperty('getChallengeOptions');
-      //show the form (this should init the form-for)
-      //this.set('showForm', true);
-      //assign the user to the project
-      //this.get('user').projects.pushObject(this.get('project'))
       var t = document.getElementById("ember-bootstrap-wormhole");
       t.firstElementChild.setAttribute("aria-modal", "true");
       t.firstElementChild.setAttribute("aria-label", "Create a project");
     },
     onHidden() {
-      alert('hiding');
-      //let callback = this.get('onHidden');
-      //this.set('showForm', false);
-      this.set('challenge', null);
       this.set('open', null);
-      //if (callback) {
-        //callback();
-        //} else {
-        //this.set('open', null);
-        //}
     },
+    
+    submitForm(event) {
+      event.preventDefault();
+      let p = {};
+      let context = this.get("context");
+      let newTitle = this.get("newTitle");
+      let projectId = this.get("projectId");
+      let challengeId = this.get("challenge.id");
+      let newChallengeName = this.get("newChallengeName");
+      let newGoal = this.get("newGoal");
+      let newStart = this.get("newStart");
+      let newEnd = this.get("newEnd");
+      switch (context) {
+      case "event-new-project":
+        p = {context: context, title: newTitle, challenge_id: challengeId};
+        break;
+      case "event-existing-project":
+        p = {context: context, project_id: projectId, challenge_id: challengeId};
+        break;
+      case "personal-challenge-new-project":
+        p = {context: context, title: newTitle, challenge_name: newChallengeName, goal: newGoal, starts_at: newStart, ends_at: newEnd};
+        break;
+      case "personal-challenge-existing-project":
+        p = {context: context, project_id: projectId, challenge_name: newChallengeName, goal: newGoal, starts_at: newStart, ends_at: newEnd};
+        break;
+      default:
+        break;
+      }
+      let { auth_token }  = this.get('session.data.authenticated');
+      let endpoint =  `${ENV.APP.API_HOST}/projects/create_from_simple_form`;
+      return fetch(endpoint,{
+        method: "POST",
+        headers: { 'Content-Type': 'application/json', 'Authorization': auth_token},
+        body: JSON.stringify(p),
+      }).then((data)=>{
+        if (data.ok) {
+          this.set('open', null);
+          let cu = this.get('currentUser');
+          cu.load();
+        }
+        console.log(data);
+      });
+    },
+    
     afterSubmit() {
       //hide the modal
       this.set('open', null);
       let as = this.get('afterSubmit');
       if (as) { as() }
-      
-      //refresh the user stats
-      //this.get('user').refreshStats();
     },
-    setValidChallenge(value) {
-      this.set('validChallenge', value);
-    }
   }
 });

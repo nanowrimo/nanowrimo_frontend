@@ -11,14 +11,6 @@
         <img src="/images/other/quote_left.png" alt="" />
       </div>
     </div>
-    <button style="margin-left: 20px;">Start a new novel!</button>
-    <button style="margin-left: 20px; margin-top: 10px;">Continue an existing work!</button>
+    {{project-new-simple-modal-buttons buttonContext="challenge-yourself"}}
   </div>
 </div>
-{{project-new-simple-modal
-  onHidden=(action "afterSimpleProjectModalClose")
-  open=addSimpleProject
-  user=currentUser.user
-  newProject=newProject
-  challenge=challenge
-}}

@@ -11,22 +11,10 @@
         <div>{{text}}</div>
       </div>
       <div class="flash-button" style="display: flex; flex-wrap: wrap;">
-        <button {{action "openNewSimpleAddProjectModal"}}>
-          Start a new novel for {{type}}!
-        </button>
-        <button {{action "openNewSimpleExtendProjectModal"}}>
-          Continue with an existing novel!
-        </button>
+        {{project-new-simple-modal-buttons buttonContext='event-hub' challenge=challenge}}
       </div>
     </div>
   </div>
   <div class="banner-right">
   </div>
 </div>
-{{project-new-simple-modal
-  onHidden=(action "afterSimpleProjectModalClose")
-  open=addSimpleProject
-  user=currentUser.user
-  newProject=newProject
-  challenge=challenge
-}}
