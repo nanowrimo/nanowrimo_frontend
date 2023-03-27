@@ -27,15 +27,20 @@ export default ChartBaseComponent.extend({
     let success = this.get('successData');
     let totals = this.get('userDailyTotals');
     let dates = this.get('projectChallenge.datesShortMonthDayFormat');
-    // loop through the dates 
-    for (var i = 0; i < dates.length; i++) {
-      responseData.pushObject({"date": dates[i], "success": success[i], "total": totals[i]});
+    if (dates) {
+      // loop through the dates 
+      for (var i = 0; i < dates.length; i++) {
+        responseData.pushObject({"date": dates[i], "success": success[i], "total": totals[i]});
+      }
     }
     return responseData;
   }),
   
   successData: computed('projectChallenge', function() {
     let pc = this.get('projectChallenge');
+    if (!pc) {
+      return;
+    }
     let data = [];
     // get the fractionalCount/day
     let fcpd = pc.fractionCountPerDay;
