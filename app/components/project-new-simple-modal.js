@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { sort } from '@ember/object/computed';
 import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
@@ -54,14 +53,16 @@ export default Component.extend({
   
   headerText: computed("challenge", function(){
     let challenge = this.get("challenge");
+    let d = null;
+    let month = null;
     // If this is an event
     if (challenge) {
       switch (challenge.eventType) {
         case 0:
           return "Join the November Challenge";
         case 1:
-          let d = moment(challenge.startsAt);
-          let month = d.format('MMMM');
+          d = moment(challenge.startsAt);
+          month = d.format('MMMM');
           return "Join the " + month +" Camp Challenge";
         default:
           return "Join the challenge";
