@@ -45,7 +45,7 @@ export default Component.extend({
   userIsML: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
     let cu = this.get('currentUser.user');
     let group = this.get('group');
-    if (cu.id && group.adminIds) {
+    if (cu && group) {
       return group.adminIds.indexOf(cu.id) !== -1;
     }
     return false;    
