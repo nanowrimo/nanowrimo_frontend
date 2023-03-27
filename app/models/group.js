@@ -37,7 +37,7 @@ const Group = Model.extend({
   accessPathogen: attr('boolean'),
   accessPrice: attr('boolean'),
   accessCaptioning: attr('boolean'),
-  eventDetails: attr('string'),
+  venueDetails: attr('string'),
   //latestMessage: attr('string'),
   //latestMessageDt: attr('string'),
   //admin_ids: attr('string'),

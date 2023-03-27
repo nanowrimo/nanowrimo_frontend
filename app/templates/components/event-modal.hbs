@@ -372,9 +372,9 @@
             </div>
             <div id='venue-details-group' class="form-group">
               <label for='venue-details' class='form-group'>Venue details:</label>
-              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' onchange={{action 'venueDetailsChanged' value="target.value"}} style="height:70px;overflow-y:scroll"/>
+              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll"/>
             </div>
-            <script>var editor = new MediumEditor('#venue-details', {
+            <script>var venueEditor = new MediumEditor('#venue-details', {
           paste: {
             forcePlainText: false,
             cleanPastedHTML: true,

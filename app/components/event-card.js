@@ -29,18 +29,17 @@ export default Component.extend({
       }
     }
   }),
-  hasAccessInfo: computed('group', function(){
+  hasAccessInfo: computed('event', function(){
     //return true if the group has venueDetails or accessible anything
-    let g = this.get('group');
-    console.log(g);
-    if (g.accessMobility || g.accessLgbt || g.accessSize || g.accessAge || g.accessPathogen || g.accessPrice || g.accessCaptioning) {
+    let event = this.get('event');
+    if (event.accessMobility || event.accessLgbt || event.accessSize || event.accessAge || event.accessPathogen || event.accessPrice || event.accessCaptioning) {
       return true;
     }
   }),
   
-  hasVenueInfo: computed("group", function() {
-    let g = this.get('group');
-    if (this.get('hasAccessInfo') || g.eventDetails ) {
+  hasVenueDetails: computed("event", function() {
+    let event = this.get('event');
+    if ( event.venueDetails ) {
       return true;
     }
   }),
