@@ -174,6 +174,22 @@ const ProjectChallenge = Model.extend({
     return range;
   }),
   
+  datesShortMonthDayYearFormat: computed("startsAt", "endsAt", function(){
+    let start = this.get('startsAt');
+    let end = this.get('endsAt');
+    let s = moment.utc(start);
+    let e = moment.utc(end).add(1,'d');
+    let range = [];
+    //loop while the s is not the same as e day
+    while(! s.isSame(e, 'day')) {
+      //add the start date to the range
+      range.push( s.format("MMM D, YYYY"));
+      //add 1 day to the s
+      s.add(1,'d');
+    }
+    return range;
+  }),
+  
   unitTypePlural: computed("unitType", function(){
     let type = this.get('unitType');
     if (type===0) {

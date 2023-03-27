@@ -1,0 +1,17 @@
+<div style="display: flex; width: 100%; justify-content: center;">
+  <div style="align-self: center; text-align: right; font-weight: bold; flex: 0 0 159px; padding-right: 10px;">
+    Challenge<br />Badges
+  </div>
+  <div class="nw-badges-new-ux" style="align-self: center; flex: 1 1 100%;">
+    {{#if firstBadge}}
+      {{#each filteredBadges as |badge|}}
+        {{badge-rendered badge=badge user=user projectChallenge=projectChallenge renderSize='small'}}
+      {{/each}}
+    {{else}}
+      <div class="nw-list-loading">
+        <i class="fa fa-spinner fa-spin"></i>
+        Loading...
+      </div>
+    {{/if}}
+  </div>
+</div>

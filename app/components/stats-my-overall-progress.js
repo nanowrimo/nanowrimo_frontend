@@ -59,25 +59,7 @@ export default ChartBaseComponent.extend({
         data: this.get('userDailyTotals')
       }
     ];
-    //TODO: if comparison data, create object, push object onto cData
-    /*
-    {
-      name: "Dave Williams' word count",
-      type: 'spline',
-      color: '#edbb82',
-      data: [0, 2299, 2300, 4300, 5500, 12397, 13465, 15300, 15500]
-    },
-    {
-      name: "Path to success",
-      type: 'line',
-      dashStyle: 'ShortDash',
-      connectNulls: true,
-      data: [0, null, null, 3000, null, null, null, 7000, null, null, null, 10000,null, null, null, 20000, null, null, null, 27000, null, null, null, 30000,null, null, null, 43000, null, null, 50000]
-    }
-    * 
-    */ 
-     
-     //
+
     let successPath = {
       name: "Path to success",
       type: 'line',
@@ -116,8 +98,8 @@ export default ChartBaseComponent.extend({
       },
       title: null,
       xAxis: {
-        categories: this.get('projectChallenge.datesShortMonthDayFormat'),
-        tickPositions: [0,8,29],
+        categories: this.get('projectChallenge.datesShortMonthDayYearFormat'),
+        tickPositions: [0,29],
         tickLength: 0,
         title: null,
         labels: {
@@ -152,7 +134,7 @@ export default ChartBaseComponent.extend({
           },
           column: {
             pointPadding: 0,
-            borderRadius: 7,
+            borderRadius: 3,
             borderWidth: 0,
             strokeWidth: 0,
           }

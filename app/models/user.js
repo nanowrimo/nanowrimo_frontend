@@ -199,6 +199,17 @@ const User = Model.extend({
     return aps;
   }),
   
+  inactiveProjects: computed('computedProjects.[]',function() {
+    let allProjects = this.get('computedProjects');
+    let aps = [];
+    allProjects.forEach(function(p) {
+      if (p.noActiveProjectChallenge) {
+        aps.push(p);
+      }
+    });
+    return aps;
+  }),
+  
   persistedProjects: filter('computedProjects', function(project) {
     return project.id > 0;
   }),

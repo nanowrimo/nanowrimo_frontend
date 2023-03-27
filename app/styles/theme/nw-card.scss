@@ -36,6 +36,9 @@
   border-radius: 5px;
   border: solid 1px $nw-lightgreyblue;
   background-image: url('/images/global/card_back.png');
+  &.nw-no-background {
+    background-image: none;
+  }
   background-repeat: repeat-x;
   background-size: 4px 100%;
   &.nw-card-white {
@@ -701,3 +704,35 @@
 .nw-white-back {
   background-color: #ffffff;
 }
+
+// ----------------------
+// BEGIN QUOTE BUBBLE HANDLING
+
+.nw-quote-bubble {
+  position: relative;
+  text-align: center;
+  width: 70%;
+  padding: 20px;
+  margin-left: 31px;
+  margin-bottom: 20px;
+  border-radius: 20px 20px 20px 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px #888888;
+  font-size: 13px;
+  font-weight: bold;
+}
+.nw-quote-bubble.left {
+  float: left;
+  border-radius: 20px 20px 20px 0px;
+  .quote_arrow {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin-left: -31px;
+    margin-bottom: -4px;
+  }
+}
+
+
+// END QUOTE BUBBLE HANDLING
+// --------------------

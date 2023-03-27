@@ -9,6 +9,7 @@ export default ChartBaseComponent.extend({
     this._super(...arguments);
     this.set('chartType', 'line');
   },
+  
   tableSelected: computed("chartType", function(){
     return this.get('chartType')=="table";
   }),
@@ -19,35 +20,61 @@ export default ChartBaseComponent.extend({
     return this.get('chartType')=="bar";
   }),
   
-  tableRows: computed( "userDailyCounts.[]", function(){
+  
+  tableRows: computed("successData.[]", "userDailyTotals.[]", function(){
     let responseData = []
     // get the data 
-    let counts = this.get('userDailyCounts');
-    // get the keys from the counts object
-    let keys = Object.keys(counts);
-    let dates = this.get('projectChallenge.datesShortMonthDayYearFormat');
-    // loop through the dates 
-    for (var i = 0; i < dates.length; i++) {
-      let countKey = keys[i];
-      let c = counts[countKey];
-      responseData.pushObject({"date": dates[i], "count": c});
+    let success = this.get('successData');
+    let totals = this.get('userDailyTotals');
+    let dates = this.get('projectChallenge.datesShortMonthDayFormat');
+    if (dates) {
+      // loop through the dates 
+      for (var i = 0; i < dates.length; i++) {
+        responseData.pushObject({"date": dates[i], "success": success[i], "total": totals[i]});
+      }
     }
     return responseData;
   }),
   
-  countData: computed('myChartType','userDailyCounts.[]',function() {
+  successData: computed('projectChallenge', function() {
+    let pc = this.get('projectChallenge');
+    if (!pc) {
+      return;
+    }
+    let data = [];
+    // get the fractionalCount/day
+    let fcpd = pc.fractionCountPerDay;
+    for (var i=0; i < pc.duration; i++) {
+      let v = Math.round( (i+1)*fcpd );
+      if (i==pc.duration-1) {
+        //this is the last day
+        v = pc.goal;
+      }
+      data.push(v)
+    }
+    return data;
+  }),
+  countData: computed('myChartType','projectChallenge.dailyAggregates.[]',function() {
     let cData = [
       {
         name: 'My count',
         type: get(this,'myChartType'),
-        //color: '#2f3061',
+        //color: '#659dae',
         color: '#558d9e',
-        
-        data: this.get('userData')
+        data: this.get('userDailyTotals')
       }
-      // TODO: if making comparisons with other users, push that data onto the cData 
-     
     ];
+
+    let successPath = {
+      name: "Path to success",
+      type: 'line',
+      dashStyle: 'ShortDash',
+      connectNulls: true,
+      data: this.get('successData')
+    }
+     
+    //push the path to success onto the cData array
+    cData.push(successPath);
     return cData;
   }),
 
@@ -65,13 +92,14 @@ export default ChartBaseComponent.extend({
     return `pane-${this.get('chartType')}-chart`;
   }),
   
-  chartOptions: computed('xAxisRange', function() {
+  chartOptions: computed('projectChallenge', function() {
     // Set _this equal to component for later reference
     // let _this = this;
     let cOptions = {
       chart: {
         type: 'spline',
-        height: 300
+        height: 300,
+        reflow: true
       },
       title: null,
       xAxis: {
@@ -83,7 +111,7 @@ export default ChartBaseComponent.extend({
           style: {
             color: '#979797',
             fontSize: 14,
-            fontWeight: "bold"
+            fontWeight: "bold",
           }
         }
       },
@@ -101,6 +129,9 @@ export default ChartBaseComponent.extend({
         }
       },
       plotOptions: {
+        series: {
+          color: '#959595'
+        },
           spline: {
             marker: {
               enable: false
@@ -125,6 +156,7 @@ export default ChartBaseComponent.extend({
         borderColor: '#d5e2e6',
         borderRadius: 6,
         style: {
+          //color: '#73ab9b'
           color: '#73ab9b'
         }
       },
@@ -134,64 +166,46 @@ export default ChartBaseComponent.extend({
     };
     return cOptions;
   }),
-
+  
   chartData: computed('countData',function() {
     let cData = get(this,'countData');
     return cData;
   }),
   
-  userData: computed('userDailyCounts.[]', function(){
-    let counts = this.get('userDailyCounts');
-    if(counts) {
-      return Object.values(counts);
-    } else {
-      return [];
-    }
-  }),
-  xAxisRange: computed('projectChallenge', function(){
-    return this.get('projectChallenge.dates');
-  }),
-  
-  userDailyCounts: computed('projectChallenge.dailyAggregates.[]', function() {
-    let das = this.get('projectChallenge.dailyAggregates');
+  // determine the user's daily totals based on the days in the challenge and the dailyAggregates
+  userDailyTotals: computed('projectChallenge.dailyAggregates.[]', function() {
+    let dailyAggs = this.get('projectChallenge.dailyAggregates');
     let dates = this.get('projectChallenge.dates');
-    // were dates found?
-    if(dates && das) {
-      let today = moment().format("YYYY-MM-DD");
-      let todayFound = false;
-      //create an counts array
-      let counts = {};
-      //loop through the dates
-      for (var i = 0; i < dates.length; i++) {
-        // use the date as a key
-        let key = dates[i];
-        if (todayFound) {
-          counts[key] = null;
-        } else {
-          counts[key] = 0;
+    if(dailyAggs) {
+      let totals = [];
+      //loop through the dates that the project will be active
+      for(var i=0; i < dates.length; i++) {
+        var date = dates[i];
+        //if the date is in the future...
+        if(moment(date).isAfter()) {
+          break;
         }
-        if (key == today) {
-          todayFound = true;
+        // find the daily aggregate for the date
+        var agg = dailyAggs.filterBy('day', date)[0];
+        var val = 0;
+        if (agg) {
+          val = agg.count;
         }
+        
+        var tval = val;
+        if(i > 0) {
+          tval +=totals[i-1];
+        }
+        totals[i] = tval; 
       }
-      
-      //loop the dailyAggregates
-      das.forEach((da)=>{
-        var k = da.day;
-        counts[k]+=da.count;
-      });
-      return counts;
-      
+      return totals;
     } else {
       return [];
     }
-    
   }),
-  
-  actions: {
+    actions: {
     setChartType: function(val){
       this.set('chartType', val);
     }
   }
-  
 });
