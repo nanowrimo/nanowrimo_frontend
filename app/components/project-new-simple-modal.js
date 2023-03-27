@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { computed, observer }  from '@ember/object';
+import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import ENV from 'nanowrimo/config/environment';
@@ -24,7 +24,6 @@ export default Component.extend({
   newGoal: 50000,
   newStart: null,
   newEnd: null,
-  context: null,
   
   
   challengeSortingDesc: Object.freeze(['startsAt:desc']),
