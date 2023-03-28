@@ -36,7 +36,7 @@ export default Component.extend({
     let projects = this.get("currentUser.user.inactiveProjects");
     let ps = [];
     let needProjectId = true;
-    let pid = null;
+    //let pid = null;
     projects.forEach(function(p) {
       ps.push({id: p.id, title: p.title});
       if (needProjectId) {
