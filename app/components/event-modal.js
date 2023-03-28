@@ -574,7 +574,7 @@ export default Component.extend({
     
     // Called when the value of the minutes select changes
     descriptionChanged(v) {
-      console.log(v);
+      //console.log(v);
       this.set("description",v);
     },
     

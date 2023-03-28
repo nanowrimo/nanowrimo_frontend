@@ -40,7 +40,7 @@ export default Component.extend({
     projects.forEach(function(p) {
       ps.push({id: p.id, title: p.title});
       if (needProjectId) {
-        pid = p.id;
+        //pid = p.id;
         needProjectId = false;
       }
     });
@@ -48,7 +48,7 @@ export default Component.extend({
   }),
   
   defaultProjectCheck: observer('optionsForProjects.[]',function() {
-    console.log('trying');
+    //console.log('trying');
     let projects = this.get('optionsForProjects');
     if (projects.length > 0) {
       let first = projects[0];
