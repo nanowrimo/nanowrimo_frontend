@@ -44,16 +44,14 @@ export default Component.extend({
         needProjectId = false;
       }
     });
+    //this.set("projectId",pid);
     return ps;    
   }),
   
-  defaultProjectCheck: observer('optionsForProjects.[]',function() {
-    //console.log('trying');
-    let projects = this.get('optionsForProjects');
-    if (projects.length > 0) {
-      let first = projects[0];
-      this.set("projectId",first.id);
-    }
+  defaultProjectCheck: observer("optionsForProjects.[]",function() {
+    let projects = this.get("optionsForProjects");
+    //console.log("triggered");
+    this.set("projectId",projects[0].id);
   }),
   
   
