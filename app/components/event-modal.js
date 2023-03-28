@@ -74,6 +74,7 @@ export default Component.extend({
   accessPathogen: false,
   accessPrice: false,
   accessCaptioning: false,
+  venueDetails: null,
   
   timezoneResponse: null,
   
@@ -252,6 +253,7 @@ export default Component.extend({
     g.set("accessPathogen",this.get("accessPathogen"));
     g.set("accessPrice", this.get("accessPrice" ));
     g.set("accessCaptioning", this.get("accessCaptioning"));
+    g.set("venueDetails", this.get("venueDetails"));
     return g;
   },
     
@@ -456,7 +458,11 @@ export default Component.extend({
           if (e&&d) {
             this.set("step", 1);
           }
-          // store access values
+          
+          break;
+        }
+        case 1: {
+           // record the access values
           this.set("accessMobility", formElements['access-mobility'].checked);
           this.set("accessLgbt", formElements['access-lgbt'].checked);
           this.set("accessSize", formElements['access-size'].checked);
@@ -464,11 +470,9 @@ export default Component.extend({
           this.set("accessPathogen", formElements['access-pathogen'].checked);
           this.set("accessPrice", formElements['access-price'].checked);
           this.set("accessCaptioning", formElements['access-captioning'].checked);
+           let vd = document.querySelector(".editable.form-control.medium-editor-element").innerHTML;
+          this.set('venueDetails', vd);
           
-          
-          break;
-        }
-        case 1: {
           let et = this.validateInput('eventType');
           let valid = false;
           if (et) {
@@ -570,6 +574,7 @@ export default Component.extend({
     
     // Called when the value of the minutes select changes
     descriptionChanged(v) {
+      console.log(v);
       this.set("description",v);
     },
     
