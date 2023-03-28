@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { computed, observer }  from '@ember/object';
+import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import ENV from 'nanowrimo/config/environment';
@@ -30,15 +30,21 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('user');
     assert('Must pass a user into {{project-new-modal}}', user);
+    
+    let projects = this.get('user.inactiveProjects');
+    if (projects.length > 0) {
+      let id = projects.firstObject.id;
+      this.set("projectId",id);
+    }
   },
   
-  optionsForProjects: computed("currentUser.user.inactiveProjects", function () {
+  optionsForProjects: computed("currentUser.user.inactiveProjects.[]", function () {
     let projects = this.get("currentUser.user.inactiveProjects");
     let ps = [];
     let needProjectId = true;
     //let pid = null;
     projects.forEach(function(p) {
-      ps.push({id: p.id, title: p.title});
+      ps.pushObject({id: p.id, title: p.title});
       if (needProjectId) {
         //pid = p.id;
         needProjectId = false;
@@ -46,16 +52,6 @@ export default Component.extend({
     });
     return ps;    
   }),
-  
-  defaultProjectCheck: observer('optionsForProjects.[]',function() {
-    //console.log('trying');
-    let projects = this.get('optionsForProjects');
-    if (projects.length > 0) {
-      let first = projects[0];
-      this.set("projectId",first.id);
-    }
-  }),
-  
   
   headerText: computed("challenge", function(){
     let challenge = this.get("challenge");
