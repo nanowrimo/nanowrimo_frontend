@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { computed }  from '@ember/object';
+import { computed, observer }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import ENV from 'nanowrimo/config/environment';
@@ -26,8 +26,6 @@ export default Component.extend({
   newEnd: null,
   
   
-  challengeSortingDesc: Object.freeze(['startsAt:desc']),
-  
   init() {
     this._super(...arguments);
     let user = this.get('user');
@@ -46,9 +44,18 @@ export default Component.extend({
         needProjectId = false;
       }
     });
-    this.set("projectId",pid);
     return ps;    
   }),
+  
+  defaultProjectCheck: observer('optionsForProjects.[]',function() {
+    console.log('trying');
+    let projects = this.get('optionsForProjects');
+    if (projects.length > 0) {
+      let first = projects[0];
+      this.set("projectId",first.id);
+    }
+  }),
+  
   
   headerText: computed("challenge", function(){
     let challenge = this.get("challenge");
