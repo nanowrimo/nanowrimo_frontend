@@ -32,29 +32,30 @@ export default Component.extend({
     assert('Must pass a user into {{project-new-modal}}', user);
   },
   
+  // Returns an array of inactive projects which may be assigned new challenges
   optionsForProjects: computed("currentUser.user.inactiveProjects", function () {
     let projects = this.get("currentUser.user.inactiveProjects");
-    let ps = [];
-    let needProjectId = true;
+    let ps = [{id: 0, title: "Select a writing project:"}];
+    //let needProjectId = true;
     //let pid = null;
     projects.forEach(function(p) {
       ps.push({id: p.id, title: p.title});
-      if (needProjectId) {
+      //if (needProjectId) {
         //pid = p.id;
-        needProjectId = false;
-      }
+        //needProjectId = false;
+        //}
     });
     //this.set("projectId",pid);
     return ps;    
   }),
   
-  defaultProjectCheck: observer("optionsForProjects.[]",function() {
-    let projects = this.get("optionsForProjects");
+  //defaultProjectCheck: observer("optionsForProjects.[]",function() {
+    //let projects = this.get("optionsForProjects");
     //console.log("triggered");
-    this.set("projectId",projects[0].id);
-  }),
+    //this.set("projectId",projects[0].id);
+  //}),
   
-  
+  // Returns the proper text for the modal header
   headerText: computed("challenge", function(){
     let challenge = this.get("challenge");
     let d = null;
@@ -77,6 +78,7 @@ export default Component.extend({
     }
   }),
   
+  // Returns true if the selected challenge is an event
   isEvent: computed("challenge", function(){
     let challenge = this.get("challenge");
     if (challenge) {
@@ -87,6 +89,7 @@ export default Component.extend({
     return false;
   }),
   
+  // Returns true if the selected challenge is NOT an event
   isPersonal: computed("challenge", function(){
     let challenge = this.get("challenge");
     if (challenge) {
@@ -105,6 +108,7 @@ export default Component.extend({
     return true;
   }),
   
+  // Returns a context code which is used by the API to determine what resources to create
   context: computed("isPersonal", "newProject", function() {
     let isPersonal = this.get("isPersonal");
     let newProject = this.get("newProject");
@@ -149,7 +153,8 @@ export default Component.extend({
     return false;
   }),
   
-  disableButton: computed('newProject', 'isFlexible', 'isPersonal', 'newTitle', 'newChallengeName', 'newGoal', 'newStart', 'newEnd', 'invalidDates', function(){
+  disableButton: computed('projectId', 'newProject', 'isFlexible', 'isPersonal', 'newTitle', 'newChallengeName', 'newGoal', 'newStart', 'newEnd', 'invalidDates', function(){
+    const projectId = this.get('projectId');
     const newProject = this.get('newProject');
     const isFlexible = this.get('isFlexible');
     const isPersonal = this.get('isPersonal');
@@ -159,6 +164,10 @@ export default Component.extend({
     const newStart = this.get('newStart');
     const newEnd = this.get('newEnd');
     const invalidDates = this.get('invalidDates');
+    // If present, is the project selected?
+    if (!newProject && (projectId==0 || projectId==null)) {
+      return true;
+    }
     // If present, is the title field filled in?
     if (!newTitle && newProject) {
       return true;
