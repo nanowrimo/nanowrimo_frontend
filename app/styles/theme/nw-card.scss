@@ -437,6 +437,36 @@
     }
   }
 }
+.nw-card {
+  .nw-card-content.nw-horizontal-content {
+    display: flex;
+    flex-direction: row;
+    .nw-card-left-image {
+      flex: 0 0 160px;      
+    }
+    @media(max-width: $screen-sm-max) {
+      .nw-card-left-image {
+        display: none;
+      }
+    }
+    .nw-card-right-content {
+      flex: 1 1 100%;
+      .nw-icon-content-list {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        .nw-card-content-list-icon {
+          color: #73ab9b;
+          flex: 0 0 50px;
+        }
+        .nw-card-content-list-text {
+          font-size: 16px;
+          flex: 1 1 100%;
+        }
+      }
+    }
+  }
+}
 .nw-flippy-card {
   min-width: 280px;
   min-height: 280px;

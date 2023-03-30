@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { computed, observer }  from '@ember/object';
+import { computed }  from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import ENV from 'nanowrimo/config/environment';
@@ -30,32 +30,24 @@ export default Component.extend({
     this._super(...arguments);
     let user = this.get('user');
     assert('Must pass a user into {{project-new-modal}}', user);
+    
+    let projects = this.get('user.inactiveProjects');
+    if (projects.length > 0) {
+      let id = projects.firstObject.id;
+      this.set("projectId",id);
+    }
   },
   
   // Returns an array of inactive projects which may be assigned new challenges
   optionsForProjects: computed("currentUser.user.inactiveProjects", function () {
     let projects = this.get("currentUser.user.inactiveProjects");
     let ps = [{id: 0, title: "Select a writing project:"}];
-    //let needProjectId = true;
-    //let pid = null;
     projects.forEach(function(p) {
-      ps.push({id: p.id, title: p.title});
-      //if (needProjectId) {
-        //pid = p.id;
-        //needProjectId = false;
-        //}
+      ps.pushObject({id: p.id, title: p.title});
     });
-    //this.set("projectId",pid);
     return ps;    
   }),
   
-  //defaultProjectCheck: observer("optionsForProjects.[]",function() {
-    //let projects = this.get("optionsForProjects");
-    //console.log("triggered");
-    //this.set("projectId",projects[0].id);
-  //}),
-  
-  // Returns the proper text for the modal header
   headerText: computed("challenge", function(){
     let challenge = this.get("challenge");
     let d = null;
