@@ -31,8 +31,6 @@ export default Component.extend({
     this.set('secondsLeft',newSeconds);
     if (newSeconds >= 0) {
       debounce(this, this.timer, delay, false);
-    } else {
-      
     }
   },
   
@@ -141,12 +139,10 @@ export default Component.extend({
     if (challenge.eventType === 0) {
       return "November";
     }
-
   }),
   
-  headerText: computed("type", "challenge", "secondsLeft", "daysRemainingString", "hoursRemainingString", "minutesRemainingString", "secondsRemainingString", function(){
+  headerText: computed("type", "secondsLeft", "daysRemainingString", "hoursRemainingString", "minutesRemainingString", "secondsRemainingString", function(){
     let type = this.get("type");
-    let challenge = this.get("challenge");
     let secondsLeft = this.get("secondsLeft");
     let daysRemainingString = this.get("daysRemainingString");
     let hoursRemainingString = this.get("hoursRemainingString");
