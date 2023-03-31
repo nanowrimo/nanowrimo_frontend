@@ -7,13 +7,12 @@ import moment from 'moment';
 export default Component.extend({
   currentUser: service(),
   challenge: null,
-  updateDelay: null,
+  updateDelay: 1000,
   secondsLeft: null,
   //newProject: true,
   
   init() {
     this._super(...arguments);
-    this.set('updateDelay', 1000);
     let a = moment();
     let challenge = this.get("challenge");
     let b = moment(challenge.startsAt);
@@ -27,9 +26,14 @@ export default Component.extend({
       return;
     }
     let delay = this.get('updateDelay');
-    let newSeconds = this.get('secondsLeft')-1;
-    this.set('secondsLeft',newSeconds);
-    if (newSeconds >= 0) {
+    let a = moment();
+    let challenge = this.get("challenge");
+    let b = moment(challenge.startsAt);
+    let diff = Math.round(b.diff(a)/1000);
+    this.set('secondsLeft', diff); 
+    //let newSeconds = this.get('secondsLeft')-1;
+    //this.set('secondsLeft',newSeconds);
+    if (diff >= 0) {
       debounce(this, this.timer, delay, false);
     }
   },
