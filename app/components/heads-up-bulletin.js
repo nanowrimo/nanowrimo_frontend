@@ -13,8 +13,12 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
-    this.set('updateDelay', 1000); 
-    this.set('secondsLeft', 200000); 
+    this.set('updateDelay', 1000);
+    let a = moment();
+    let challenge = this.get("challenge");
+    let b = moment(challenge.startsAt);
+    let diff = Math.round(b.diff(a)/1000);
+    this.set('secondsLeft', diff); 
     this.timer();
   },
   
@@ -25,7 +29,11 @@ export default Component.extend({
     let delay = this.get('updateDelay');
     let newSeconds = this.get('secondsLeft')-1;
     this.set('secondsLeft',newSeconds);
-    debounce(this, this.timer, delay, false);
+    if (newSeconds >= 0) {
+      debounce(this, this.timer, delay, false);
+    } else {
+      
+    }
   },
   
   daysRemaining: computed("secondsLeft", function() {
@@ -102,9 +110,17 @@ export default Component.extend({
     let minutes = this.get("minutesRemaining");
     let seconds = this.get("secondsRemaining");
     if (seconds > 1) {
-      return "and " + seconds + " seconds";
+      if ((days > 0) || (hours > 0) || (minutes > 0)) {
+        return "and " + seconds + " seconds";
+      } else {
+        return seconds + " seconds";
+      }
     } else if (seconds === 1) {
-      return "and 1 second";
+      if ((days > 0) || (hours > 0) || (minutes > 0)) {
+        return "and 1 second";
+      } else {
+        return "1 second";
+      }
     } else if ((days > 0) || (hours > 0) || (minutes > 0)) {
       return "and 0 seconds";
     } else {
@@ -128,9 +144,25 @@ export default Component.extend({
 
   }),
   
-  text: computed("type", "challenge", function(){
+  headerText: computed("type", "challenge", "secondsLeft", "daysRemainingString", "hoursRemainingString", "minutesRemainingString", "secondsRemainingString", function(){
     let type = this.get("type");
     let challenge = this.get("challenge");
+    let secondsLeft = this.get("secondsLeft");
+    let daysRemainingString = this.get("daysRemainingString");
+    let hoursRemainingString = this.get("hoursRemainingString");
+    let minutesRemainingString = this.get("minutesRemainingString");
+    let secondsRemainingString = this.get("secondsRemainingString");
+    if (secondsLeft > 0) {
+      return type + " starts in " + daysRemainingString + hoursRemainingString + minutesRemainingString + secondsRemainingString + "!";
+    } else {
+      return type + " has begun!"
+    }
+  }),
+  
+  text: computed("type", "challenge", "secondsLeft", function(){
+    let type = this.get("type");
+    let challenge = this.get("challenge");
+    let secondsLeft = this.get("secondsLeft");
     let d = moment(challenge.startsAt);
     let month = d.format('MMMM');
     //let month = moment.format(challenge.startsAt, 'M')
@@ -140,7 +172,11 @@ export default Component.extend({
       case "NowWhat": 
         return "So you wrote a novel... now what? During the \"Now What\"? Months, set a goal to revise the first 50 pages of your novel three times by the end of February.";
       case "Camp":
-        return "Camp NaNoWriMo starts in " + month + "! Join the official challenge and set your own writing goal for the month. Achieve your goal and get special badges, a certificate, and more celebratory goodies.";
+        if (secondsLeft > 0) {
+          return "Camp NaNoWriMo starts in " + month + "! Join the official challenge and set your own writing goal for the month. Achieve your goal and get special badges, a certificate, and more celebratory goodies.";
+        } else {
+          return "Join the official challenge and set your own writing goal for the month. Achieve your goal and get special badges, a certificate, and more celebratory goodies.";
+        }
       case "DonationWeekend":
         return "It's Double-Up Donation Weekend! Give $25 by November 6 to receive the $50 donor goodies—and an exclusive 2022 enamel pin (plus the chance to win daily prizes).";
       case "HowToWin":
