@@ -21,7 +21,7 @@ export default Component.extend({
   displayEndsAt: null,
   newTitle: null,
   newChallengeName: null,
-  newGoal: 50000,
+  newGoal: null,
   newStart: null,
   newEnd: null,
   
