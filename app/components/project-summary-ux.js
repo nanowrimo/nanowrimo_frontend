@@ -5,8 +5,10 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   currentUser: service(),
   router: service(),
+  progressUpdaterService: service(),
   
   queryParams: ['editCover', 'editCoverTab'],
+  addGoal: false,
   
   editProject: false,
   editCover: null,
@@ -21,6 +23,14 @@ export default Component.extend({
   canEdit: computed('project.computedAuthor', function(){
     return this.get('currentUser.user') === this.get('project.computedAuthor');
   }),
+  
+  canAddProjectChallenge: computed('project.computedAuthor','currentUser.user', function(){
+    //get the project and the user
+    let a = this.get('project.computedAuthor');
+    let u = this.get('currentUser.user');
+    return (a == u);
+  }),
+  
 
   init(){
     this._super(...arguments);
@@ -72,7 +82,19 @@ export default Component.extend({
     
     viewGoals() {
       this.get('router').transitionTo('authenticated.users.show.projects.show.goals', this.get('currentUser.user.slug'), this.get('project.slug') );
-    }
+    },
+    
+    newProjectChallenge(){
+      this.set('addGoal', true);
+    },
+    
+    toggleProgressUpdater() {
+      let pus = this.get('progressUpdaterService');
+      let p = this.get('project');
+      pus.toggleSessionForm(p.id);
+    },
+    
+    
   }
   
 });

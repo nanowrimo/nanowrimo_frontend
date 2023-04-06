@@ -41,23 +41,38 @@
       yesAction=(action "deleteConfirmationYes")
       noAction=(action "deleteConfirmationNo")
     }}
-    <div style="display: flex; width: 100%; justify-content: center;">
-      <div style="align-self: center; text-align: right; font-weight: bold; flex: 0 0 169px;">
+    {{#if project.currentProjectChallenge}}
+      <div class="nw-card-side-by-side">
+        <div class="nw-card-side-by-side-title">
+        </div>
+        <div class="nw-card-side-by-side-content" style="font-size: 24px; margin-top: -20px; margin-bottom: 20px;">
+          <span style="color: #888888;">Challenge:</span> <a href="#" {{action "viewGoals"}} style="color: #055;"><b>{{project.currentProjectChallenge.name}}</b></a><br />
+          <span style="color: #888888;">Progress:</span> {{format-number project.currentProjectChallenge.count}} out of {{format-number project.currentProjectChallenge.goal}} words <button class='nano-button-small' style='margin-top: 5px; vertical-align: text-top;' {{action 'toggleProgressUpdater'}}>Update</button>
+        </div>
       </div>
-      <div style="align-self: center; flex: 1 1 100%; font-size: 24px; margin-top: -20px; margin-bottom: 20px;">
-        <span style="color: #888888;">Challenge:</span> <a href="http://cnn.com" style="color: #055;"><b>{{project.currentProjectChallenge.name}}</b></a><br />
-        <span style="color: #888888;">Progress:</span> 7,690 out of 50,000 words <button class='nano-button-small' style='margin-top: 5px; vertical-align: text-top;'>Update</button>
+      {{badges-ux cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=project.currentProjectChallenge}}
+      <div class="nw-card-side-by-side">
+        <div class="nw-card-side-by-side-title">
+          Challenge<br />Progress
+        </div>
+        <div class="nw-card-side-by-side-content">
+          {{stats-my-overall-progress-ux projectChallenge=project.currentProjectChallenge class="nw-card nw-no-background nw-card-white"}}
+        </div>
       </div>
-    </div>
-    {{badges-ux cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=project.currentProjectChallenge}}
-    <div style="display: flex; width: 100%; justify-content: center;">
-      <div style="align-self: center; text-align: right; font-weight: bold; flex: 0 0 159px; padding-right: 10px;">
-        Challenge<br />Progress
-      </div>
-      <div style="align-self: center; flex: 1 1 100%; padding: 20px; padding-left: 10px;">
-        {{stats-my-overall-progress-ux projectChallenge=project.currentProjectChallenge class="nw-card nw-no-background nw-card-white"}}
-      </div>
-    </div>
-    
+    {{else}}
+      {{#if canAddProjectChallenge}}
+        <div class="nw-card-side-by-side-title">
+          <div class="nw-card-side-by-side-title">
+            This project<br />needs a goal!
+          </div>
+          <div class="nw-card-side-by-side-content">
+            <button {{action 'newProjectChallenge'}} style="width: 150px;">Create a New Goal</button>
+          </div>
+        </div>
+        
+      {{/if}}
+      {{project-challenge-new-modal project=project open=addGoal createNew="true"}}
+      
+    {{/if}}
   </div>
 </div>

@@ -4,15 +4,8 @@
 }
 .nw-badges-new-ux {
   display: grid;
-  grid-template-columns: repeat(10, 37px);
+  grid-template-columns: repeat(12, 37px);
   grid-column-gap: 5px;
-  /*margin-top: 100px;
-  margin-bottom: 100px;*/
-  /*margin-left: 50px;*/
-  /*width: 100%;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;*/
   .badge-cell:nth-child(11n+1){ grid-column-start: 1;}
   .badge-cell:nth-child(11n+2){ grid-column-start: 3;}
   .badge-cell:nth-child(11n+3){ grid-column-start: 5;}
@@ -24,6 +17,25 @@
   .badge-cell:nth-child(11n+9){ grid-column-start: 6;}
   .badge-cell:nth-child(11n+10){ grid-column-start: 8;}
   .badge-cell:nth-child(11n){ grid-column-start: 10;}
+  @media(max-width: 1400px){
+    grid-template-columns: repeat(8, 37px);
+    .badge-cell:nth-child(7n+1){ grid-column-start: 1;}
+    .badge-cell:nth-child(7n+2){ grid-column-start: 3;}
+    .badge-cell:nth-child(7n+3){ grid-column-start: 5;}
+    .badge-cell:nth-child(7n+4){ grid-column-start: 7;}
+    .badge-cell:nth-child(7n+5){ grid-column-start: 2;}
+    .badge-cell:nth-child(7n+6){ grid-column-start: 4;}
+    .badge-cell:nth-child(7n){ grid-column-start: 6;}
+  }
+  @media(max-width: 400px){
+    grid-template-columns: repeat(6, 37px);
+    .badge-cell:nth-child(5n+1){ grid-column-start: 1;}
+    .badge-cell:nth-child(5n+2){ grid-column-start: 3;}
+    .badge-cell:nth-child(5n+3){ grid-column-start: 5;}
+    .badge-cell:nth-child(5n+4){ grid-column-start: 2;}
+    .badge-cell:nth-child(5n){ grid-column-start: 4;}
+  }
+
   
   div {
     display: inline-block;

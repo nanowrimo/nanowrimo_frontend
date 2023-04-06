@@ -466,6 +466,27 @@
       }
     }
   }
+  .nw-card-side-by-side {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .nw-card-side-by-side-title {
+      align-self: center;
+      text-align: right;
+      font-weight: bold;
+      flex: 0 0 159px;
+      padding-right: 10px;
+      @media(max-width: $screen-sm-max) {
+        display: none;
+      }       
+    }
+    .nw-card-side-by-side-content {
+       align-self: center;
+       flex: 1 1 100%;
+       padding: 20px;
+       padding-left: 10px;
+    }
+  }
 }
 .nw-flippy-card {
   min-width: 280px;
