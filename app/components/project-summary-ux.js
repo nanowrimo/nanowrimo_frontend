@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -41,6 +41,16 @@ export default Component.extend({
     this.set('deleteConfirmationYesText','Delete'); 
     this.set('deleteConfirmationNoText','Cancel'); 
   },
+  
+  // observe the projectChallenge, when it changes, load its aggregates
+  projectChallengeObserver: observer('project.currentProjectChallenge', function(){
+    let pc = this.get('project.currentProjectChallenge');
+    if (pc) {
+      pc.loadAggregates();
+    }
+  }),
+  
+  
   actions: {
     doNothing() {
       //no really, do nothing 

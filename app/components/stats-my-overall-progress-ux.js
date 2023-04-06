@@ -1,5 +1,5 @@
 import ChartBaseComponent from 'nanowrimo/components/chart-base-component';
-import { get,computed } from '@ember/object';
+import { get,computed, observer } from '@ember/object';
 import moment from 'moment';
 
 export default ChartBaseComponent.extend({
@@ -54,6 +54,15 @@ export default ChartBaseComponent.extend({
     }
     return data;
   }),
+  
+  // observe the projectChallenge, when it changes, load its aggregates
+  projectChallengeObserver: observer('projectChallenge', function(){
+    let pc = this.get('projectChallenge');
+    if (pc) {
+      pc.loadAggregates();
+    }
+  }),
+  
   countData: computed('myChartType','projectChallenge.dailyAggregates.[]',function() {
     let cData = [
       {
