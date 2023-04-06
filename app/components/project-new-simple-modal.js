@@ -242,16 +242,27 @@ export default Component.extend({
       let newTitle = this.get("newTitle");
       let projectId = this.get("projectId");
       let challengeId = this.get("challenge.id");
+      let isFlexible = this.get("isFlexible");
       let newChallengeName = this.get("newChallengeName");
       let newGoal = this.get("newGoal");
       let newStart = this.get("newStart");
       let newEnd = this.get("newEnd");
       switch (context) {
       case "event-new-project":
-        p = {context: context, title: newTitle, challenge_id: challengeId};
+        if (isFlexible) {
+          p = {context: context, title: newTitle, challenge_id: challengeId, goal: newGoal};
+        } else {
+          p = {context: context, title: newTitle, challenge_id: challengeId};
+        }
+        
         break;
       case "event-existing-project":
-        p = {context: context, project_id: projectId, challenge_id: challengeId};
+        if (isFlexible) {
+          p = {context: context, project_id: projectId, goal: newGoal, challenge_id: challengeId};
+        } else {
+          p = {context: context, project_id: projectId, challenge_id: challengeId};
+        }
+        
         break;
       case "personal-challenge-new-project":
         p = {context: context, title: newTitle, challenge_name: newChallengeName, goal: newGoal, starts_at: newStart, ends_at: newEnd};
