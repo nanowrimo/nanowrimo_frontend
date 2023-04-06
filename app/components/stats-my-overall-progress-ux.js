@@ -79,14 +79,7 @@ export default ChartBaseComponent.extend({
   }),
 
   myChartType: computed('chartType',function() {
-    switch (this.get('chartType') ){
-      case 'table':   
-        return '';
-      case "line": 
-        return "spline";
-      case "bar": 
-        return "column";
-    }
+    return "column";
   }),
   chartId: computed('chartType', function() {
     return `pane-${this.get('chartType')}-chart`;
