@@ -14,7 +14,6 @@ export default Component.extend({
   // return the event_type as defined in the API
   eventType: computed('eventName', function(){
     let name = this.get('eventName');
-    console.log(name);
     if (name.includes("Camp")) {
       return 1;
     }else if (name.includes("What") ){
@@ -43,11 +42,11 @@ export default Component.extend({
   
   winnerImage: computed('eventType', function(){
      let et = this.get('eventType');
+     let ey = this.get('eventYear');
     switch(et) {
       case 0:
         return  "/images/splash/NaNo-2022-Winner-Certificate.png";
       case 1:
-        let ey = this.get('eventYear');
         // is the year 2022?
         if (ey >= 2022 ) {
           return "/images/splash/Camp-"+ey+"-Winner-Certificate.png";
