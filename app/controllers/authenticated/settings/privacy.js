@@ -27,8 +27,12 @@ export default Controller.extend({
   
   init(){
     this._super(...arguments);
-    this.set('isLoaded', this.get('currentUser.isLoaded'));
-
+    let isLoaded = this.get('currentUser.isLoaded');
+    this.set('isLoaded',isLoaded );
+    // if the current user is loaded, _setup!
+    if (isLoaded) {
+      this._setup();
+    }
   },
   
   observeCurrentUser: observer('currentUser.isLoaded', function() {
@@ -96,7 +100,6 @@ export default Controller.extend({
     this.set(`privacyViewProfile${u.privacyViewProfile}Checked`, true);
     this.set(`privacyViewProjects${u.privacyViewProjects}Checked`, true);
     this.set(`privacyViewBuddies${u.privacyViewBuddies}Checked`, true);
-    
     //disable what needs disabling 
     this._profileChange(u.privacyViewProfile.toString())
   },
