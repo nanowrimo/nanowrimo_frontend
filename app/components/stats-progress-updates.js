@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { sort }  from '@ember/object/computed';
 import ENV from 'nanowrimo/config/environment';
@@ -8,7 +8,8 @@ export default Component.extend({
   store: service(),
   session: service(),
   currentUser: service(),
-
+  progressUpdaterService: service(),
+  project: null,
   // Get the project challenge as a variable
   projectChallenge: null,
   newProjectSession: false,
@@ -19,8 +20,8 @@ export default Component.extend({
   reimportConfirmationNoText:null,
   reimportConfirmationQuestion: null,
   reimportConfirmationQuestionAddendum: null,
-  
   sessions: null,
+  initialSessionsCreated: 0,
   
   init(){
     this._super(...arguments);
@@ -30,6 +31,8 @@ export default Component.extend({
     this.set('reimportConfirmationYesText','Add My Past Updates'); 
     this.set('reimportConfirmationNoText','Cancel'); 
     this.set("sessions", []);
+    this.set("initialSessionsCreated", this.get('progressUpdaterService.sessionsCreated'));
+    
     this.fetchSessions(true);
   },
   
@@ -42,6 +45,21 @@ export default Component.extend({
     } else {
       return false;
     }
+  }),
+  
+  projectSessionObserver: observer("progressUpdaterService.sessionsCreated", function() {
+    // get the sessions
+    let sessions = this.get('sessions');
+    // peak the store sessions
+    let pss = this.get('store').peekAll('projectSession');
+    pss.forEach((ps)=>{
+      if (!sessions.includes(ps)) {
+        if (ps.project_id == this.get('project.id')){
+          sessions.pushObject(ps);
+        }
+      }
+    });
+    this.set('sessions', sessions);
   }),
   
   progressUpdates: computed('sessions.[]', function() {

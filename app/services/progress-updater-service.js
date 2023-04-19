@@ -5,6 +5,7 @@ export default Service.extend({
   displaySessionForm: false,
   displayTimerForm: false,
   defaultProjectId: null,
+  sessionsCreated: 0,
   
   // Opens the progress updater
   // If projectId is specified, make that the default
@@ -33,6 +34,5 @@ export default Service.extend({
     this.set('displaySessionForm', false);
     this.set('displayTimerForm', false);
     this.set('defaultProjectId', null);
-  },
-  
+  }
 });
