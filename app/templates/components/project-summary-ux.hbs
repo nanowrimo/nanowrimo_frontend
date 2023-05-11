@@ -28,6 +28,11 @@
         </div>
       </div>
     </div>
+    {{#if project.isPrimary}}
+    <div class='nw-card-flippy-doodle'>
+      <img src="/images/users/projects/flippy-doodle-featured.png" alt="Featured">
+    </div>
+    {{/if}}
     {{project-edit-modal project=project open=editProject}}
     {{confirmation-modal
       doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
