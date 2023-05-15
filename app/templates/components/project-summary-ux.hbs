@@ -64,7 +64,9 @@
           Challenge<br />Progress
         </div>
         <div class="nw-card-side-by-side-content">
+          {{#if showChart}}
           {{stats-my-overall-progress-ux projectChallenge=project.currentProjectChallenge class="nw-card nw-no-background nw-card-white"}}
+          {{/if}}
         </div>
       </div>
     {{else}}
