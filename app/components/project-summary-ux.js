@@ -110,7 +110,7 @@ export default Component.extend({
   },
   
   //change the projectChallenge with a slight delay
-  _rerenderChart: function(newPC) {
+  _rerenderChart: function() {
     this.set('showChart', false);
     //wait a bit and set the pc to the proper value
     next(()=>{
