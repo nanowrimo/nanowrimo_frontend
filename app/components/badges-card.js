@@ -41,7 +41,7 @@ export default Component.extend({
           if (eventType==1) {filteredBadges.pushObject(badge);} 
           break; 
              
-          case "Edit 150 pages of your writing project this month!":
+          case 'Reach your "Now What?" goal this month!':
           if (eventType==3) {filteredBadges.pushObject(badge);} 
           break;    
                
