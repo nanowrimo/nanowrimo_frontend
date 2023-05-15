@@ -124,6 +124,13 @@ const ProjectChallenge = Model.extend({
     this.loadAggregates();
   }),
   
+  percentComplete: computed('goal', 'currentCount', function(){
+    let g = this.get('goal');
+    let c = this.get('currentCount');
+    let percent = Math.round(c*100/g);
+    return percent;
+  }),
+  
   countPerDay: computed('goal', 'duration', function(){
     let g = this.get('goal');
     let d = this.get('duration');
