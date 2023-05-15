@@ -52,7 +52,7 @@
         </div>
         <div class="nw-card-side-by-side-content" style="font-size: 24px; margin-top: -20px; margin-bottom: 20px;">
           <span style="color: #888888;">Challenge:</span> <a href="#" {{action "viewGoals"}} style="color: #055;"><b>{{project.currentProjectChallenge.name}}</b></a><br />
-          <span style="color: #888888;">Progress:</span> {{format-number project.currentProjectChallenge.currentCount}} out of {{format-number project.currentProjectChallenge.goal}} words 
+          <span style="color: #888888;">Progress:</span> {{project.currentProjectChallenge.percentComplete}}% ({{format-number project.currentProjectChallenge.currentCount}} out of {{format-number project.currentProjectChallenge.goal}} words) 
           {{#if project.currentProjectChallenge.isActive}}
             <button class='nano-button-small' style='margin-top: 5px; vertical-align: text-top;' {{action 'toggleProgressUpdater'}}>Update</button>
           {{/if}}
