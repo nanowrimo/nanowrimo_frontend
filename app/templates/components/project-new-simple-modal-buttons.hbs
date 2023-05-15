@@ -1,0 +1,25 @@
+{{#if isChallengeYourself}}
+  <button style="margin-left: 20px;" {{action "openNewSimpleAddProjectModal"}}>Start new project!</button>
+  {{#if hasInactiveProjects}}
+    <button style="margin-left: 20px; margin-top: 10px; height: 56px;" {{action "openNewSimpleExtendProjectModal"}}>Set new goal for existing project!</button>
+  {{/if}}
+{{/if}}
+{{#if isEventHub}}
+  <button {{action "openNewSimpleAddProjectModal"}}>
+    Start a new novel for {{type}}!
+  </button>
+  {{#if hasInactiveProjects}}
+    <button {{action "openNewSimpleExtendProjectModal"}}>
+      Continue with an existing novel!
+    </button>
+  {{/if}}
+{{/if}}
+{{#if addSimpleProject}}
+  {{project-new-simple-modal
+    onHidden=(action "afterSimpleProjectModalClose")
+    open=addSimpleProject
+    user=currentUser.user
+    newProject=newProject
+    challenge=challenge
+  }}
+{{/if}}

@@ -46,7 +46,7 @@ export default Component.extend({
     let cu = this.get('currentUser.user');
     let group = this.get('group');
     if (cu && group) {
-      return group.adminIds.indexOf(cu.id) !== -1;
+      return group.adminIds && group.adminIds.indexOf(cu.id) !== -1;
     }
     return false;    
   }),

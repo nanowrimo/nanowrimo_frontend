@@ -196,6 +196,34 @@ const Project = Model.extend({
     return active;
   }),
 
+  noActiveProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
+    let noActiveChallenge = true;
+    // get the user from the store using user_id
+    let user = this.get('computedUser');    
+    //get the time now in user's timezone 
+    let tz = user.timeZone;
+    
+    let now = moment().tz(tz);
+    
+    //loop through this project's projectChallenges
+    this.get('projectChallenges').forEach((pc)=>{
+      //get the start and end as moments
+      let startsAt = moment(pc.startsAt).tz(tz);
+      //let isEvent = pc.nanoEvent;
+      if ((pc.eventType===0)) {
+        let cStart = moment(pc.startsAt);
+        let newStart = cStart.utc().format("YYYY-MM-DD");
+        var m = moment.tz(newStart, "YYYY-MM-DD", tz);
+        startsAt = m.clone().startOf('day').utc();
+      }
+      //is this pc active?
+      if (now.isSameOrAfter(startsAt,'d') && !pc.hasEnded ) {
+        noActiveChallenge = false;
+      }
+    });
+    return noActiveChallenge;
+  }),
+
   futureProjectChallenge: computed('projectChallenges.{[],@each.startsAt,@each.endsAt}', function() {
     let active = null;
     //loop through this project's projectChallenges
@@ -227,6 +255,8 @@ const Project = Model.extend({
     });
     return  DS.PromiseObject.create({promise});
   }),
+  
+  
   // compute total word count for this a project
   /*totalWordCount: computed('projectSessions.[]', function(){
     let count=0;
@@ -256,24 +286,6 @@ const Project = Model.extend({
       });
     });
   },
-  //define the path to the flippyDoodle graphical asset  
-  flippyDoodlePath: computed('status', function(){
-    let status = this.get('status');
-    switch(status){
-      case "In Progress":
-        return `/images/users/projects/flippy-doodle-in-progress.png`;
-      case "Prepping":
-      case "Ready for Progress":
-        return `/images/users/projects/flippy-doodle-prepping.png`;
-      case "Drafted":
-        return `/images/users/projects/flippy-doodle-drafted.png`;
-      case "Completed":
-        return `/images/users/projects/flippy-doodle-completed.png`;
-      case "Published":
-        return `/images/users/projects/flippy-doodle-published.png`;
-    }
-    return null;
-  }),
   
   currentProjectChallenge: computed('projectChallenge.{[],@each.startsAt,@each.endsAt}','computedProjectChallenges.[]','allProjectChallenges.[]', function() {
     let active = null;

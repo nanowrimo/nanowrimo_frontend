@@ -19,7 +19,7 @@
         <div class='nw-project-name-genres'>
           <div class='nw-title'>
             {{#link-to 'authenticated.users.show.projects.show' project.computedAuthor.slug project.slug}}
-            {{project.title}}
+              {{project.title}}
             {{/link-to}}
           </div>
           <div class='nw-project-genres'>
@@ -31,32 +31,34 @@
         {{#if project.futureProjectChallenge }}
         {{else}}
         {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params addGoal="true") class='nw-faux-button nano-button-small'}}
-        Create a New Goal
+          Create a New Goal
         {{/link-to}}
         {{#if project.hasProjectChallenges}}
-        <hr />
+          <hr />
         {{/if}}
         {{/if}}
-        {{#if project.hasProjectChallenges}}
-        {{project-list-progress project=project}}
+          {{#if project.hasProjectChallenges}}
+          {{project-list-progress project=project}}
         {{/if}}
       </div>
     </div>
+    {{#if project.isPrimary}}
     <div class='nw-card-flippy-doodle'>
-      <img src="{{project.flippyDoodlePath}}" alt="Status: {{project.status}}">
+      <img src="/images/users/projects/flippy-doodle-featured.png" alt="Featured">
     </div>
+    {{/if}}
     {{project-edit-modal project=project open=editProject}}
     {{confirmation-modal
-    doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
-    yes=deleteConfirmationYesText
-    no=deleteConfirmationNoText
-    title=deleteConfirmationTitleText
-    question=deleteConfirmationQuestion
-    questionAddendum = "Deleting this writing project will also delete all associated goals and writing progress. A
-    warning: project deletion can't be undone. NaNoWriMo has no way of retrieving deleted projects."
-    open=showConfirmDelete
-    yesAction=(action "deleteConfirmationYes")
-    noAction=(action "deleteConfirmationNo")
+      doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
+      yes=deleteConfirmationYesText
+      no=deleteConfirmationNoText
+      title=deleteConfirmationTitleText
+      question=deleteConfirmationQuestion
+      questionAddendum = "Deleting this writing project will also delete all associated goals and writing progress. A
+      warning: project deletion can't be undone. NaNoWriMo has no way of retrieving deleted projects."
+      open=showConfirmDelete
+      yesAction=(action "deleteConfirmationYes")
+      noAction=(action "deleteConfirmationNo")
     }}
   </div>
 </div>

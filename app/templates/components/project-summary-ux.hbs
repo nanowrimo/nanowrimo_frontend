@@ -1,0 +1,86 @@
+<div class="nw-card nano-listing-mini-card project-summary-card">
+  <div class='nw-card-header nw-card-header-no-height'>
+    <div class='nw-card-actions'>
+      {{#if canEdit}}
+        <a href="Edit project" {{action "editProject" }} aria-label="Make changes to project">
+          <i class="fa fa-gear" aria-label="Make changes to project"></i>
+        </a>
+      {{/if}}
+    </div>
+  </div>
+  <div class="nw-card-content no-padding">
+    <div class="nw-project-container">
+      <div class="nw-project">
+        <div class='nw-project-cover'>
+          <div class='nw-project-cover-clip'>
+            <img src="{{project.coverUrl}}" alt="">
+          </div>
+        </div>
+        <div class='nw-project-name-genres' style="max-width: 100%;">
+          <div class='nw-title' style="font-size: 36px;">
+            {{#link-to 'authenticated.users.show.projects.show' project.computedAuthor.slug project.slug}}
+              {{project.title}}
+            {{/link-to}}
+          </div>
+          <div class='nw-project-genres'>
+            {{project.concatGenres}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{#if project.isPrimary}}
+    <div class='nw-card-flippy-doodle'>
+      <img src="/images/users/projects/flippy-doodle-featured.png" alt="Featured">
+    </div>
+    {{/if}}
+    {{project-edit-modal project=project open=editProject}}
+    {{confirmation-modal
+      doubleCheck="I'm sure I want to delete this writing project, and I understand that deletions can't be undone."
+      yes=deleteConfirmationYesText
+      no=deleteConfirmationNoText
+      title=deleteConfirmationTitleText
+      question=deleteConfirmationQuestion
+      questionAddendum = "Deleting this writing project will also delete all associated goals and writing progress. A
+      warning: project deletion can't be undone. NaNoWriMo has no way of retrieving deleted projects."
+      open=showConfirmDelete
+      yesAction=(action "deleteConfirmationYes")
+      noAction=(action "deleteConfirmationNo")
+    }}
+    {{#if project.currentProjectChallenge}}
+      <div class="nw-card-side-by-side">
+        <div class="nw-card-side-by-side-title">
+        </div>
+        <div class="nw-card-side-by-side-content" style="font-size: 24px; margin-top: -20px; margin-bottom: 20px;">
+          <span style="color: #888888;">Challenge:</span> <a href="#" {{action "viewGoals"}} style="color: #055;"><b>{{project.currentProjectChallenge.name}}</b></a><br />
+          <span style="color: #888888;">Progress:</span> {{format-number project.currentProjectChallenge.currentCount}} out of {{format-number project.currentProjectChallenge.goal}} words 
+          {{#if project.currentProjectChallenge.isActive}}
+            <button class='nano-button-small' style='margin-top: 5px; vertical-align: text-top;' {{action 'toggleProgressUpdater'}}>Update</button>
+          {{/if}}
+        </div>
+      </div>
+      {{badges-ux cardTitle='Writing badges' badgeType='word count' user=currentUser.user projectChallenge=project.currentProjectChallenge}}
+      <div class="nw-card-side-by-side">
+        <div class="nw-card-side-by-side-title">
+          Challenge<br />Progress
+        </div>
+        <div class="nw-card-side-by-side-content">
+          {{stats-my-overall-progress-ux projectChallenge=project.currentProjectChallenge class="nw-card nw-no-background nw-card-white"}}
+        </div>
+      </div>
+    {{else}}
+      {{#if canAddProjectChallenge}}
+        <div class="nw-card-side-by-side">
+          <div class="nw-card-side-by-side-title">
+            This project<br />needs a goal!
+          </div>
+          <div class="nw-card-side-by-side-content">
+            <button {{action 'newProjectChallenge'}} style="width: 150px;">Create a New Goal</button>
+          </div>
+        </div>
+        
+      {{/if}}
+      {{project-challenge-new-modal project=project open=addGoal createNew="true"}}
+      
+    {{/if}}
+  </div>
+</div>
