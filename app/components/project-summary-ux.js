@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { next } from '@ember/runloop';
 
 export default Component.extend({
   currentUser: service(),
@@ -19,7 +20,7 @@ export default Component.extend({
   deleteConfirmationNoText:null,
   deleteConfirmationQuestion: null,
   deleteConfirmationQuestionAddendum: null,
-  
+  showChart: false,
   canEdit: computed('project.computedAuthor', function(){
     return this.get('currentUser.user') === this.get('project.computedAuthor');
   }),
@@ -40,6 +41,7 @@ export default Component.extend({
     this.set('deleteConfirmationQuestionAddendum', "Deleting your project will also delete all associated goals and writing progress.");
     this.set('deleteConfirmationYesText','Delete'); 
     this.set('deleteConfirmationNoText','Cancel'); 
+    this.set('showChart', true);
   },
   
   // observe the projectChallenge, when it changes, load its aggregates
@@ -47,6 +49,7 @@ export default Component.extend({
     let pc = this.get('project.currentProjectChallenge');
     if (pc) {
       pc.loadAggregates();
+      this._rerenderChart();
     }
   }),
   
@@ -103,8 +106,16 @@ export default Component.extend({
       let p = this.get('project');
       pus.toggleSessionForm(p.id);
     },
-    
-    
+
+  },
+  
+  //change the projectChallenge with a slight delay
+  _rerenderChart: function(newPC) {
+    this.set('showChart', false);
+    //wait a bit and set the pc to the proper value
+    next(()=>{
+      this.set('showChart', true);
+    });
   }
   
 });
