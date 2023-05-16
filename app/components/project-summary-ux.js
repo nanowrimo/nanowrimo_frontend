@@ -52,7 +52,7 @@ export default Component.extend({
       pc.loadAggregates();
       this._rerenderChart();
       // check badges
-      ths.get('badgesService').checkForUpdates();
+      this.get('badgesService').checkForUpdates();
     }
   }),
   
