@@ -7,6 +7,7 @@ export default Component.extend({
   currentUser: service(),
   router: service(),
   progressUpdaterService: service(),
+  badgesService: service(),
   
   queryParams: ['editCover', 'editCoverTab'],
   addGoal: false,
@@ -50,6 +51,8 @@ export default Component.extend({
     if (pc) {
       pc.loadAggregates();
       this._rerenderChart();
+      // check badges
+      ths.get('badgesService').checkForUpdates();
     }
   }),
   
