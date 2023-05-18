@@ -106,10 +106,11 @@ export default ChartBaseComponent.extend({
       title: null,
       xAxis: {
         categories: this.get('projectChallenge.datesShortMonthDayYearFormat'),
-        tickPositions: [0,29],
+        // tick labels are at the first and last day of the challenge
+        tickPositions: [0,this.get('projectChallenge.duration')-1],
         tickLength: 0,
         title: null,
-        labels: {
+        labels: { 
           style: {
             color: '#979797',
             fontSize: 14,
