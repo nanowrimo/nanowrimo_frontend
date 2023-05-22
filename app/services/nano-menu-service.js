@@ -40,21 +40,21 @@ export default Service.extend({
       {
         toggleLabel: "My NaNoWriMo",
         submenuItems: [
-          { label: "Profile", route: "authenticated.users.show.index", segment: this.get('userSlug'), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg" },
           this.get('statsItem'),
-          //{label: "Stats", route: "authenticated.stats.index", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg"},
+          { label: "Profile", route: "authenticated.users.show.index", segment: this.get('userSlug'), teaser: "Tell other Wrimos about you", src: "/images/nav/id_card.svg" },
           { label: "Projects", route: "authenticated.users.show.projects", segment: this.get('userSlug'), teaser: "Organize all your projects", src: "/images/nav/open_book.svg" },
-          { label: "Buddies", route: "authenticated.users.show.buddies", segment: this.get('userSlug'), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg" }
-        ]
+          { label: "Buddies", route: "authenticated.users.show.buddies", segment: this.get('userSlug'), teaser: "Support and be supported", src: "/images/nav/clapping_hands.svg" },
+          { label: "Groups", route: "authenticated.users.show.groups", segment: this.get('userSlug'), teaser: "Regions and writing groups", src: "/images/nav/groups.svg" },
+          this.get('homeRegionItem')
+       ]
       },
       {
         toggleLabel: "Community",
         submenuItems: [
           { label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg" },
-          this.get('homeRegionItem'),
-          { label: "My Groups", route: "authenticated.users.show.groups", segment: this.get('userSlug'), teaser: "Regions and writing groups", src: "/images/nav/groups.svg" },
           { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" },
-          { label: "Get Involved",route: 'pages' , segment: "come-write-in", teaser: "Come Write In, MLs, & more", src: "/images/nav/comewritein.png" },
+          { label: "Local Initiatives",route: 'pages' , segment: "come-write-in", teaser: "Get involved in your region", src: "/images/nav/comewritein.png" },
+          { label: "NaNo HQ Events", route: "authenticated.regions.show.events.upcoming", segment: "nanowrimo-hq", teaser: "Virtual meetups with NaNo"},
           { label: "Our Values", route: 'pages' , segment: "dei", teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }
 
         ]
@@ -62,10 +62,10 @@ export default Service.extend({
       {
         toggleLabel: "Writer's Resources",
         submenuItems: [
-          { label: "Now What?", route: 'pages', segment: "now-what", teaser: "Editing and publishing resources", src: "/images/nav/thought_bubble.svg" },
-          { label: "Camp NaNo", route: 'pages', segment: "what-is-camp-nanowrimo", teaser: "How to participate and more", src: "/images/nav/tent.svg" },
-          { label: "NaNo Prep", route: "pages", segment: "nano-prep-101", teaser: "Get ready to write a novel", src: "/images/nav/thought_bubble.svg" },
-          { label: "Pep Talks", route: "pages", segment: 'pep-talks', teaser: "Great authors to motivate you", src: "/images/nav/pompom.svg" },
+          { label: "NaNoWriMo", route: 'pages', segment: "national-novel-writing-month", teaser: "November novel-writing challenge", src: "/images/nav/tent.svg" },
+          { label: "Camp NaNo", route: 'pages', segment: "what-is-camp-nanowrimo", teaser: "Set your own goal in April and July", src: "/images/nav/tent.svg" },
+          { label: "Now What?", route: 'pages', segment: "now-what", teaser: "Editing and publishing support", src: "/images/nav/thought_bubble.svg" },
+          { label: "Resource Hub", route: "pages", segment: 'revision-resources', teaser: "NaNo Prep, pep talks, and more", src: "/images/nav/pompom.svg" },
           { label: "Offers", route: "pages", segment: "offers", teaser: "Discounts on writer tools", src: "/images/nav/present.svg" }
         ]
       }
