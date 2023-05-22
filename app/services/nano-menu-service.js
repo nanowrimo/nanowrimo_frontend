@@ -53,8 +53,8 @@ export default Service.extend({
         submenuItems: [
           { label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg" },
           { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" },
-          { label: "Local Initiatives",route: 'pages' , segment: "come-write-in", teaser: "Get involved in your region", src: "/images/nav/comewritein.png" },
-          { label: "NaNo HQ Events", route: "authenticated.regions.show.events.upcoming", segment: "nanowrimo-hq", teaser: "Virtual meetups with NaNo"},
+          { label: "Local Partners",route: 'pages' , segment: "local", teaser: "Get involved in your region", src: "/images/nav/comewritein.png" },
+          { label: "HQ Events", route: "authenticated.regions.show.events.upcoming", segment: "nanowrimo-hq", teaser: "Virtual meetups with NaNo", src: "/images/nav/speechbubbles.svg"},
           { label: "Our Values", route: 'pages' , segment: "dei", teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }
 
         ]
@@ -62,7 +62,7 @@ export default Service.extend({
       {
         toggleLabel: "Writer's Resources",
         submenuItems: [
-          { label: "NaNoWriMo", route: 'pages', segment: "national-novel-writing-month", teaser: "November novel-writing challenge", src: "/images/nav/tent.svg" },
+          { label: "NaNoWriMo", route: 'pages', segment: "national-novel-writing-month", teaser: "November novel-writing challenge", src: "/images/nav/basic-logo.svg" },
           { label: "Camp NaNo", route: 'pages', segment: "what-is-camp-nanowrimo", teaser: "Set your own goal in April and July", src: "/images/nav/tent.svg" },
           { label: "Now What?", route: 'pages', segment: "now-what", teaser: "Editing and publishing support", src: "/images/nav/thought_bubble.svg" },
           { label: "Resource Hub", route: "pages", segment: 'revision-resources', teaser: "NaNo Prep, pep talks, and more", src: "/images/nav/pompom.svg" },
