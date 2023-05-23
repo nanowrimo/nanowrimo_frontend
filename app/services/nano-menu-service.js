@@ -53,7 +53,7 @@ export default Service.extend({
         submenuItems: [
           { label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg" },
           { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" },
-          { label: "Local Partners",route: 'pages' , segment: "local", teaser: "Get involved in your region", src: "/images/nav/comewritein.png" },
+          { label: "Local Partners",route: 'pages' , segment: "local-partners", teaser: "Get involved in your region", src: "/images/nav/comewritein.png" },
           { label: "HQ Events", route: "authenticated.regions.show.events.upcoming", segment: "nanowrimo-hq", teaser: "Virtual meetups with NaNo", src: "/images/nav/speechbubbles.svg"},
           { label: "Our Values", route: 'pages' , segment: "dei", teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }
 
