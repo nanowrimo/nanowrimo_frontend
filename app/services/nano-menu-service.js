@@ -66,7 +66,7 @@ export default Service.extend({
           { label: "Camp NaNo", route: 'pages', segment: "what-is-camp-nanowrimo", teaser: "Set your own goal in April and July", src: "/images/nav/tent.svg" },
           { label: "NaNo Prep", route: 'pages', segment: "nano-prep-101", teaser: "Get ready to write a novel", src: "/images/nav/thought_bubble.svg" },
           { label: "Now What?", route: 'pages', segment: "now-what", teaser: "Editing and publishing support", src: "/images/nav/question-book.svg" },
-          { label: "Resource Hub", route: "pages", segment: 'revision-resources', teaser: "Pep talks and more", src: "/images/nav/pompom.svg" },
+          { label: "Resource Hub", route: "pages", segment: 'nano-resource-hub', teaser: "Pep talks and more", src: "/images/nav/pompom.svg" },
           { label: "Offers", route: "pages", segment: "offers", teaser: "Discounts on writer tools", src: "/images/nav/present.svg" }
         ]
       }

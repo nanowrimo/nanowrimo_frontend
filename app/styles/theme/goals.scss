@@ -45,6 +45,18 @@
     min-width: 300px;
     .challenge-progress {
       width: 100%;
+      .goal-text {
+       
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 7.5px;
+        font-size: 16px;
+        .winner-route {
+          text-align: right;
+          margin-left: 1em;
+        }
+        
+      }
     }
     .nano-progress-bar{
       width: 100%;
