@@ -1,4 +1,16 @@
 <div class='challenge-progress'>
+  
+  <div class='goal-text'>
+    {{#if goalIcon}}
+      {{{goalIcon}}}
+    {{/if}}
+    {{#if winnerRoute }}
+      <span class='winner-route'>
+        {{#link-to winnerRoute}}<img src='/images/cards/golden-trophy.svg' alt="" /> Winner{{/link-to}}
+      </span>
+    {{/if}}
+  </div>
+  
   {{nano-progress-bar percent=percentCompleted}}
 
   <div class="left-right-links challenge-info">
