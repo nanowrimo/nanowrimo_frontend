@@ -42,7 +42,7 @@ export default Component.extend({
     }
   }),
   
-  userIsML: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
+  userIsML: computed('group.{id,groupType}','currentUser.isLoaded',function() {
     let cu = this.get('currentUser.user');
     let group = this.get('group');
     if (cu && group) {
@@ -51,7 +51,7 @@ export default Component.extend({
     return false;    
   }),
   
-  userIsAdmin: computed('group.{id,groupType}','currentUser.isLoaded}',function() {
+  userIsAdmin: computed('currentUser.isLoaded',function() {
     // user is admin if adminLevel > 0
     if (this.get("currentUser.user.adminLevel")>0 ) {
       return true;
@@ -65,18 +65,24 @@ export default Component.extend({
     return ((c!='nanomessages')&&(gt!='writing group'));
   }),
   
-  showForm: computed('context','group',function() {
+  showForm: computed('context','group','userIsAdmin',function() {
     let c = this.get("context");
     let t = this.get('group');
     let gt = t.groupType;
     let showit = false;
+    // always showit for admins
+    if (this.get('userIsAdmin') ){
+      showit = true;
+    }
     if (c!='nanomessages') {
       showit = true;
     } else {
       if (gt=='buddies') {
         showit = true;
       } else {
-        showit = this.get('userIsML') || this.get('userIsAdmin');
+        if (this.get('userIsML')){
+          showit=true;
+        }
       }
     }
     return showit;
