@@ -24,7 +24,7 @@ export default Component.extend({
   startTime: null,
   step: 0,
   recalculateEvents: 0,
-  
+  event: reads('group'),
   // These values are returned from Google Maps Timezones API
   dstOffset: 0,
   rawOffset: 0,
@@ -75,13 +75,13 @@ export default Component.extend({
   accessPrice: false,
   accessCaptioning: false,
   venueDetails: null,
-  
   timezoneResponse: null,
+  isEditing: false,
   
   timeZoneOptions: computed(function() {
     return TimeZones;
   }),
-  
+  showPlaceHolder: false,
   inclusiveChecklistShow: computed('_inclusiveChecklistShow', function() {
     let p = this.get('_inclusiveChecklistShow');
     if (p) {
@@ -436,7 +436,42 @@ export default Component.extend({
     }
     return isValid;
   },
-
+  
+  // set the component properties based on the event's data
+  _setEditValues() {
+    let event = this.get('event');
+    console.log(event);
+    this.set('name', event.name);
+    this.set('description', event.description);
+    // format the start date
+    var year = event.startDt.getFullYear();
+    var month = this._zeroPad(event.startDt.getMonth()+1);
+    var day = this._zeroPad(event.startDt.getDate());
+    this.set('startDate', `${year}-${month}-${day}`);
+    //format the start time
+    var minutes = this._zeroPad(event.startDt.getMinutes());
+    var startTime = `${event.startDt.getHours()}:${minutes}`;
+    console.log(event.startDt.getTimezoneOffset());
+    this.set('startTime', startTime);
+    
+    // get the duration based on the endDt
+    let start = moment(event.startDt);
+    let end = moment(event.endDt);
+    let diff = end.diff(start,"m");
+    let durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
+    let durationMinutes = diff - (60*durationHours);
+    // set the UI duration
+    document.getElementById('hours').value = String(durationHours);
+    document.getElementById('minutes').value = String(durationMinutes);
+    
+    // are there location-groups?
+    if(this.get("hasLocations") ) {
+      console.log( event.locationName() );
+    }
+    
+    
+    
+  },
   actions: {
     toggleInclusiveChecklist( ) {
       let show = !this.get('_inclusiveChecklistShow');
@@ -524,6 +559,7 @@ export default Component.extend({
     
     // Called when the value of the startDate input changes
     startDateChanged(v) {
+      console.log(v);
       this.set("startDate",v);
     },
     
@@ -632,13 +668,17 @@ export default Component.extend({
     },
     
     onShow() {
-      // this.set('group.user', this.get('user'));
+      // if there an id associated with the event, we are editing
+      if (this.get('event.id')){
+        this.set('isEditing', true);
+        this._setEditValues();
+      }
       var t = document.getElementById("ember-bootstrap-wormhole");
       t.firstElementChild.setAttribute("aria-modal", "true");
       t.firstElementChild.setAttribute("aria-label", "submit an event");
     },
     
-    // Called on hiding the modal
+    // Called on hiding the modal... resets all to nul
     onHidden() {
       this.set("step", 0);
       this.set("name",null);
@@ -668,5 +708,11 @@ export default Component.extend({
       let as = this.get('afterSubmit');
       if (as) { as() }
     }
+  },
+  
+  _zeroPad(i) {
+    var ret = (i < 10) ? `0${i}` : i;
+    return ret;
   }
+
 });
