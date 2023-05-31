@@ -169,7 +169,7 @@ export default Component.extend({
       case "NowWhat": 
         return "So you wrote a novel... now what? During the \"Now What\"? Months, set a goal to revise the first 50 pages of your novel three times by the end of February.";
       case "Camp NaNoWriMo":
-        return "Join the official challenge and set your own writing goal for the month. Get community support, writing motivation, and celebratory goodies if you meet your goal!";
+        return "Join the official Camp NaNoWriMo challenge and set your own writing goal for the month. Get community support, writing motivation, and celebratory goodies if you meet your goal!";
       case "DonationWeekend":
         return "It's Double-Up Donation Weekend! Give $25 by November 6 to receive the $50 donor goodies—and an exclusive 2022 enamel pin (plus the chance to win daily prizes).";
       case "HowToWin":
