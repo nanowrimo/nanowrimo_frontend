@@ -135,18 +135,20 @@ export default Component.extend({
     return challenge.id;
   }),
   
-  type: computed("challenge", function() {
+  typeName: computed("challenge","type", function() {
     let challenge = this.get("challenge");
     if (challenge.eventType === 1) {
-      return "Camp";
+      return "Camp NaNoWriMo";
     }
     if (challenge.eventType === 0) {
       return "November";
     }
+    // default to returning the type string
+    return this.get('type');
   }),
   
-  headerText: computed("type", "secondsLeft", "daysRemainingString", "hoursRemainingString", "minutesRemainingString", "secondsRemainingString", function(){
-    let type = this.get("type");
+  headerText: computed("typeName", "secondsLeft", "daysRemainingString", "hoursRemainingString", "minutesRemainingString", "secondsRemainingString", function(){
+    let type = this.get("typeName");
     let secondsLeft = this.get("secondsLeft");
     let daysRemainingString = this.get("daysRemainingString");
     let hoursRemainingString = this.get("hoursRemainingString");
@@ -159,8 +161,8 @@ export default Component.extend({
     }
   }),
   
-  text: computed("type", "challenge", "secondsLeft", function(){
-    let type = this.get("type");
+  text: computed("typeName", "challenge", "secondsLeft", function(){
+    let type = this.get("typeName");
     let challenge = this.get("challenge");
     let secondsLeft = this.get("secondsLeft");
     let d = moment(challenge.startsAt);
@@ -171,12 +173,8 @@ export default Component.extend({
         return "Are you ready to write a novel this November? Join the official NaNoWriMo challenge with a new or existing novel. Either way, you're about to write 50,000 life-changing words.";
       case "NowWhat": 
         return "So you wrote a novel... now what? During the \"Now What\"? Months, set a goal to revise the first 50 pages of your novel three times by the end of February.";
-      case "Camp":
-        if (secondsLeft > 0) {
-          return "Camp NaNoWriMo starts in " + month + "! Join the official challenge and set your own writing goal for the month. Achieve your goal and get special badges, a certificate, and more celebratory goodies.";
-        } else {
-          return "Join the official challenge and set your own writing goal for the month. Achieve your goal and get special badges, a certificate, and more celebratory goodies.";
-        }
+      case "Camp NaNoWriMo":
+        return "Join the official challenge and set your own writing goal for the month. Get community support, writing motivation, and celebratory goodies if you meet your goal!";
       case "DonationWeekend":
         return "It's Double-Up Donation Weekend! Give $25 by November 6 to receive the $50 donor goodies—and an exclusive 2022 enamel pin (plus the chance to win daily prizes).";
       case "HowToWin":
@@ -184,14 +182,14 @@ export default Component.extend({
     }
   }),
   
-  imageSource: computed("type", function(){
-    let type = this.get("type");
+  imageSource: computed("typeName", function(){
+    let type = this.get("typeName");
     switch(type){
       case "NowWhat": 
         return "/images/global/now-what-pen.svg";
       case "November":
         return "/images/logo/logo.svg";
-      case "Camp":
+      case "Camp NaNoWriMo":
         return "/images/banners/camp.png";
       case "DonationWeekend":
         return "/images/banners/flower.png";
