@@ -163,11 +163,6 @@ export default Component.extend({
   
   text: computed("typeName", "challenge", "secondsLeft", function(){
     let type = this.get("typeName");
-    let challenge = this.get("challenge");
-    let secondsLeft = this.get("secondsLeft");
-    let d = moment(challenge.startsAt);
-    let month = d.format('MMMM');
-    //let month = moment.format(challenge.startsAt, 'M')
     switch(type){
       case "November":
         return "Are you ready to write a novel this November? Join the official NaNoWriMo challenge with a new or existing novel. Either way, you're about to write 50,000 life-changing words.";
