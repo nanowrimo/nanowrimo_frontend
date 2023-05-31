@@ -164,9 +164,7 @@ export default Component.extend({
   text: computed("typeName", "challenge", "secondsLeft", function(){
     let type = this.get("typeName");
     let challenge = this.get("challenge");
-    let secondsLeft = this.get("secondsLeft");
     let d = moment(challenge.startsAt);
-    let month = d.format('MMMM');
     //let month = moment.format(challenge.startsAt, 'M')
     switch(type){
       case "November":
