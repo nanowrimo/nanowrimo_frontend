@@ -438,7 +438,7 @@ export default Component.extend({
   },
   
   // set the component properties based on the event's data
-  _setEditValues() {
+  _setEditValues(step) {
     let event = this.get('event');
     console.log(event);
     this.set('name', event.name);
@@ -467,6 +467,22 @@ export default Component.extend({
     // are there location-groups?
     if(this.get("hasLocations") ) {
       console.log( event.locationName() );
+      console.log( event );
+      // what is the locationID of this location?
+      let store = this.get('store');
+      let locations = store.peekAll('location');
+      let locId = -1;
+      locations.forEach((loc)=>{
+        console.log(loc);
+        if (loc.name == event.locationName()) {
+          locId = loc.id;
+        }
+      });
+      
+      if (locId > 0) {
+        console.log(locId);
+        document.getElementById('venueSelect').value = String(locId);
+      }
     }
     
     
