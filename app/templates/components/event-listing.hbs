@@ -11,6 +11,9 @@
       <span>{{startDateTime}}</span> &bull;
       <span>Duration: {{duration}}</span>
     </div>
+    {{#if hasPhysicalLocation}}
+    <div  style="font-size: 16px;">{{event.locationName}} {{event.locationAddress}}</div>
+    {{/if}}
   </div>
   <div>
   {{#if currentUser.isLoaded}}
