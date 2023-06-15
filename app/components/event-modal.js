@@ -438,54 +438,70 @@ export default Component.extend({
   },
   
   // set the component properties based on the event's data
-  _setEditValues(step) {
+  _setEditValues() {
+    // don't set event types
+    this.set('eventTypeInPerson', false);
+    this.set('eventTypeOnline', false);
+    let step = this.get('step');
+    console.log(step);
     let event = this.get('event');
-    console.log(event);
-    this.set('name', event.name);
-    this.set('description', event.description);
-    // format the start date
-    var year = event.startDt.getFullYear();
-    var month = this._zeroPad(event.startDt.getMonth()+1);
-    var day = this._zeroPad(event.startDt.getDate());
-    this.set('startDate', `${year}-${month}-${day}`);
-    //format the start time
-    var minutes = this._zeroPad(event.startDt.getMinutes());
-    var startTime = `${event.startDt.getHours()}:${minutes}`;
-    console.log(event.startDt.getTimezoneOffset());
-    this.set('startTime', startTime);
-    
-    // get the duration based on the endDt
-    let start = moment(event.startDt);
-    let end = moment(event.endDt);
-    let diff = end.diff(start,"m");
-    let durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
-    let durationMinutes = diff - (60*durationHours);
-    // set the UI duration
-    document.getElementById('hours').value = String(durationHours);
-    document.getElementById('minutes').value = String(durationMinutes);
-    
-    // are there location-groups?
-    if(this.get("hasLocations") ) {
-      console.log( event.locationName() );
-      console.log( event );
-      // what is the locationID of this location?
-      let store = this.get('store');
-      let locations = store.peekAll('location');
-      let locId = -1;
-      locations.forEach((loc)=>{
-        console.log(loc);
-        if (loc.name == event.locationName()) {
-          locId = loc.id;
-        }
-      });
-      
-      if (locId > 0) {
-        console.log(locId);
-        document.getElementById('venueSelect').value = String(locId);
+    switch (step) {
+      case 0:
+        
+        console.log(event);
+        this.set('name', event.name);
+        this.set('description', event.description);
+        // format the start date
+        var year = event.startDt.getFullYear();
+        var month = this._zeroPad(event.startDt.getMonth()+1);
+        var day = this._zeroPad(event.startDt.getDate());
+        this.set('startDate', `${year}-${month}-${day}`);
+        //format the start time
+        var minutes = this._zeroPad(event.startDt.getMinutes());
+        var startTime = `${event.startDt.getHours()}:${minutes}`;
+        console.log(event.startDt.getTimezoneOffset());
+        this.set('startTime', startTime);
+        
+        // get the duration based on the endDt
+        let start = moment(event.startDt);
+        let end = moment(event.endDt);
+        let diff = end.diff(start,"m");
+        let durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
+        let durationMinutes = diff - (60*durationHours);
+        // set the UI duration
+        document.getElementById('hours').value = String(durationHours);
+        document.getElementById('minutes').value = String(durationMinutes);
+        break;
+        
+    case 1:
+
+      // are there location-groups?
+      if(this.get("hasLocations") ) {
+        // what is the locationID of this location?
+        let store = this.get('store');
+        let locations = store.peekAll('location');
+        let locId = -1;
+        locations.forEach((loc)=>{
+          if (loc.name == event.locationName()) {
+            locId = loc.id;
+          }
+        });
+        if (locId > 0) {
+          // check the In-person box
+          this.set('eventTypeInPerson', true);
+          later(()=> document.getElementById('venueSelect').value = String(locId));
+        } 
       }
-    }
+      // is there an event url?
+      let eventURL = this.get('event.url');
+      if (eventURL) {
+        // check the Online box
+        this.set('eventTypeOnline', true);
+        //insert the url
+        this.set('venueUrl', eventURL);
+      } 
     
-    
+  }
     
   },
   actions: {
@@ -499,6 +515,10 @@ export default Component.extend({
       event.preventDefault();
       let formElements = event.target.elements;
       let s = this.get("step");
+      // is editing happening?
+      if (this.get('isEditing') ) {
+        this._setEditValues();
+      }
       switch (s) {
         case 0: {
           let e = this.validateInput('eventName');
@@ -508,6 +528,10 @@ export default Component.extend({
           this.set('description', desc);
           if (e&&d) {
             this.set("step", 1);
+            // is editing happening?
+            if (this.get('isEditing') ) {
+              later(() => this._setEditValues() );
+            }
           }
           
           break;
@@ -681,6 +705,7 @@ export default Component.extend({
     
     setStep(stepNum) {
       this.set("step", stepNum);
+      console.log('set step');
     },
     
     onShow() {
