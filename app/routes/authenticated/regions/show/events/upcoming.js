@@ -6,7 +6,7 @@ export default ScrollRoute.extend({
     return this.get('store').query('group', 
     { filter: 
       {group_id: group.id, group_type: "event", event_type: "upcoming"},
-      include: 'group-users'
+      include: 'group-users,locations,location-groups'
     });
   },
   setupController(controller, model) {

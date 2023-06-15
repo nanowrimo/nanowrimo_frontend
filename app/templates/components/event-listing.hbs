@@ -11,6 +11,14 @@
       <span>{{startDateTime}}</span> &bull;
       <span>Duration: {{duration}}</span>
     </div>
+    {{#if hasPhysicalLocation}}
+    <div  style="font-size: 16px;">{{event.locationName}} {{event.locationAddress}}</div>
+    {{/if}}
+    {{#if event.url}}
+    <div style="font-size: 16px;">
+      <a href="{{event.url}}" target="_BLANK">{{event.url}} <i class="fa fa-external-link"></i></a>
+    </div>
+    {{/if}}
   </div>
   <div>
   {{#if currentUser.isLoaded}}
