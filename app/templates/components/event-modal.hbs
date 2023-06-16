@@ -386,7 +386,7 @@
             </div>
             <div id='venue-details-group' class="form-group">
               <label for='venue-details' class='form-group'>Venue details:</label>
-              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll"/>
+              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll">{{{venueDetails}}}</textarea>
             </div>
             <script>var venueEditor = new MediumEditor('#venue-details', {
           paste: {
@@ -405,7 +405,7 @@
   {{/modal.body}}
   {{#modal.footer}}
     <button class="nano-button">
-    {{if (eq step 1) "Submit Event for Approval" (if (eq step 0) "Next: Venue" (if (eq step 2) "Close"))}}
+      {{buttonText}}
     </button> 
     {{#if (not-eq step 2)}}
       <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />

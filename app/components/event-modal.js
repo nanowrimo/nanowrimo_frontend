@@ -221,7 +221,13 @@ export default Component.extend({
       
   // Creates the group record in the store
   defineGroup() {
-    let g = this.get('store').createRecord('group');
+    let g;
+    if (this.isEditing) {
+      let id = this.get('event.id');
+      g = this.get('store').peekRecord('group', id);
+    } else {
+      g = this.get('store').createRecord('group');
+    }
     let n = this.get('name');
     g.set("name",n);
     g.set("groupType","event");
@@ -271,10 +277,12 @@ export default Component.extend({
   
   // saveData saves the location, group, and location_group to the API
   saveData() {
+    let isEditing = this.get('isEditing');
     let inperson = this.get('eventTypeInPerson');
     // If this event has a physical location
     if (inperson) {
       let lid = this.get('locationId');
+      console.log(lid);
       // If new location
       if (lid==-1) {
         let l = this.get('store').createRecord('location');
@@ -297,6 +305,9 @@ export default Component.extend({
         l.save().then(()=>{
           let g = this.defineGroup();
           g.save().then(()=>{
+            if (isEditing) {
+              this.set('open', false);
+            }
             // Create the location-group record for the event
             let lg = this.get('store').createRecord('location-group');
             lg.set("location_id",l.id);
@@ -325,11 +336,15 @@ export default Component.extend({
         });
       } else { // If existing location
         let l = this.get('store').peekRecord('location',lid);
+        console.log(l);
         this.set("longitude",l.longitude);
         this.set("latitude",l.latitude);
         
         let g = this.defineGroup();
         g.save().then(()=>{
+         if (isEditing) {
+            this.set('open', false);
+          }
           let lg = this.get('store').createRecord('location-group');
           lg.set("location_id",lid);
           lg.set("group_id",g.id);
@@ -347,6 +362,9 @@ export default Component.extend({
     } else {
       let g = this.defineGroup();
       g.save().then(()=>{
+        if (isEditing) {
+          this.set('open', false);
+        }
         // Save the user as admin
         let gu = this.defineAdminMembership(g);
         gu.save().then(()=>{
@@ -372,6 +390,24 @@ export default Component.extend({
     return this.get('eventTypeErrorMessage')!=null;
   }),
   
+  buttonText: computed('step', 'isEditing', function(){
+    let step = this.get('step');
+    let isEditing = this.get('isEditing');
+    let text = '';
+    switch(step) {
+      case 0: 
+        text = "Next: Venue";
+        break;
+      case 1: 
+        text = (isEditing) ? "Submit" : "Submit Event for Approval";
+        break;
+      case 2: 
+        text = "Close";
+    }
+    return text;
+  }),
+  
+  
   // validateField holds all validation code for each field in the events and locations forms
   validateInput(fieldName) {
     let isValid = true;
@@ -385,6 +421,7 @@ export default Component.extend({
         }
         break;
       case 'eventName':
+        console.log(this.get("name"));
         if (!this.get("name")) {
           this.set("nameError","The event name is required");
           isValid = false;
@@ -439,16 +476,16 @@ export default Component.extend({
   
   // set the component properties based on the event's data
   _setEditValues() {
+    let event = this.get('event');
+    console.log(event);
     // don't set event types
     this.set('eventTypeInPerson', false);
     this.set('eventTypeOnline', false);
+    this.set('venueDetails',event.venueDetails);
     let step = this.get('step');
-    console.log(step);
-    let event = this.get('event');
+    
     switch (step) {
       case 0:
-        
-        console.log(event);
         this.set('name', event.name);
         this.set('description', event.description);
         // format the start date
@@ -459,7 +496,6 @@ export default Component.extend({
         //format the start time
         var minutes = this._zeroPad(event.startDt.getMinutes());
         var startTime = `${event.startDt.getHours()}:${minutes}`;
-        console.log(event.startDt.getTimezoneOffset());
         this.set('startTime', startTime);
         
         // get the duration based on the endDt
@@ -489,6 +525,7 @@ export default Component.extend({
         if (locId > 0) {
           // check the In-person box
           this.set('eventTypeInPerson', true);
+          this.set('locationId', locId);
           later(()=> document.getElementById('venueSelect').value = String(locId));
         } 
       }
@@ -500,8 +537,19 @@ export default Component.extend({
         //insert the url
         this.set('venueUrl', eventURL);
       } 
-    
-  }
+      
+      // the accessibilty checkboxes
+      // this is not the Ember way
+      document.getElementById('access-mobility').checked = event.accessMobility;
+      document.getElementById('access-lgbt').checked = event.accessLgbt;
+      document.getElementById('access-size').checked = event.accessSize;
+      document.getElementById('access-age').checked = event.accessAge;
+      document.getElementById('access-pathogen').checked = event.accessPathogen;
+      document.getElementById('access-price').checked = event.accessPrice;
+      document.getElementById('access-captioning').checked = event.accessCaptioning;
+      
+      // handle the venue details
+    }
     
   },
   actions: {
@@ -515,10 +563,7 @@ export default Component.extend({
       event.preventDefault();
       let formElements = event.target.elements;
       let s = this.get("step");
-      // is editing happening?
-      if (this.get('isEditing') ) {
-        this._setEditValues();
-      }
+
       switch (s) {
         case 0: {
           let e = this.validateInput('eventName');
