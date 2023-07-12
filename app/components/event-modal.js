@@ -282,7 +282,6 @@ export default Component.extend({
     // If this event has a physical location
     if (inperson) {
       let lid = this.get('locationId');
-      console.log(lid);
       // If new location
       if (lid==-1) {
         let l = this.get('store').createRecord('location');
@@ -320,15 +319,17 @@ export default Component.extend({
               lg2.set("group_id",this.get("groupId"));
               lg2.set("primary",0);
               lg2.save().then(()=>{
-                // Save the user as admin
-                let gu = this.defineAdminMembership(g);
-                gu.save().then(()=>{
-                  // Increment recompute location
-                  let rl = this.get('recomputeLocations');
-                  this.set('recomputeLocations',rl+1);
-                  // Last step
-                  this.set('step',2);
-                });
+                // Save the user as admin unless editing
+                if (!isEditing ) {
+                  let gu = this.defineAdminMembership(g);
+                  gu.save().then(()=>{
+                    // Increment recompute location
+                    let rl = this.get('recomputeLocations');
+                    this.set('recomputeLocations',rl+1);
+                    // Last step
+                    this.set('step',2);
+                  });
+                }
               });
             });
           });
@@ -336,7 +337,6 @@ export default Component.extend({
         });
       } else { // If existing location
         let l = this.get('store').peekRecord('location',lid);
-        console.log(l);
         this.set("longitude",l.longitude);
         this.set("latitude",l.latitude);
         
@@ -421,7 +421,6 @@ export default Component.extend({
         }
         break;
       case 'eventName':
-        console.log(this.get("name"));
         if (!this.get("name")) {
           this.set("nameError","The event name is required");
           isValid = false;
@@ -477,7 +476,6 @@ export default Component.extend({
   // set the component properties based on the event's data
   _setEditValues() {
     let event = this.get('event');
-    console.log(event);
     // don't set event types
     this.set('eventTypeInPerson', false);
     this.set('eventTypeOnline', false);
@@ -499,11 +497,11 @@ export default Component.extend({
         this.set('startTime', startTime);
         
         // get the duration based on the endDt
-        let start = moment(event.startDt);
-        let end = moment(event.endDt);
-        let diff = end.diff(start,"m");
-        let durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
-        let durationMinutes = diff - (60*durationHours);
+        var start = moment(event.startDt);
+        var end = moment(event.endDt);
+        var diff = end.diff(start,"m");
+        var durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
+        var durationMinutes = diff - (60*durationHours);
         // set the UI duration
         document.getElementById('hours').value = String(durationHours);
         document.getElementById('minutes').value = String(durationMinutes);
@@ -530,7 +528,7 @@ export default Component.extend({
         } 
       }
       // is there an event url?
-      let eventURL = this.get('event.url');
+      var eventURL = this.get('event.url');
       if (eventURL) {
         // check the Online box
         this.set('eventTypeOnline', true);
@@ -644,7 +642,6 @@ export default Component.extend({
     
     // Called when the value of the startDate input changes
     startDateChanged(v) {
-      console.log(v);
       this.set("startDate",v);
     },
     
@@ -695,7 +692,6 @@ export default Component.extend({
     
     // Called when the value of the minutes select changes
     descriptionChanged(v) {
-      //console.log(v);
       this.set("description",v);
     },
     
@@ -750,7 +746,6 @@ export default Component.extend({
     
     setStep(stepNum) {
       this.set("step", stepNum);
-      console.log('set step');
     },
     
     onShow() {

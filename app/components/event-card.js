@@ -17,15 +17,19 @@ export default Component.extend({
   classNames: ['nw-card','event-card'],
   
   // Returns true if the current user has editing rights on this event
-  canEditEvent: computed("group.id", "currentUser.user.id", function(){
+  canEditEvent: computed("group.id", "currentUser.user.id",'event.id', function(){
     let cu = this.get("currentUser.user");
     let group = this.get('group');
-    if (group && cu) {
+    let event = this.get('event');
+    if (group && cu && event) {
       if (cu.adminLevel > 0) {
         return true;
       } else {
         // is the current user's id in the group's adminids?
-        return group.adminIds.indexOf(cu.id) > -1;
+        if (group.adminIds.indexOf(cu.id) > -1) {
+          return true;
+        }
+        return event.userId == cu.id;
       }
     }
   }),
