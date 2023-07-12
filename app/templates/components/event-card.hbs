@@ -100,10 +100,11 @@
         <a href="#" {{action "confirmDelete" }}>
           Delete event
         </a>
-        {{#if false}}
-        <button {{action 'openNewEventModal' }}>
+        {{#if canEditEvent}}
+         &bull;
+        <a href="#" {{action 'openNewEventModal' }}>
           Edit event
-        </button>
+        </a>
         {{event-modal
         open=editEvent
         user=user

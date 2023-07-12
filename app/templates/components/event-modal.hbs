@@ -6,7 +6,11 @@
 }}
   <form id='new-event-form' onSubmit={{action "formSubmit"}}>
   {{#modal.header closeButton=false}}
-    Submit an Event
+    {{#if isEditing}}
+      Editing Event
+    {{else}}
+      Submit an Event
+    {{/if}}
   {{/modal.header}}
   {{#modal.body}}
     
@@ -101,19 +105,21 @@
            
             <div id='event-description-group' class="form-group">
               <label for='event-description' class='form-group'>Event details:</label>
-              <textarea id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll"/>
+              <div id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll">{{{description}}}</div>
             </div>
           </div>
         </div>
-        <script>var editor = new MediumEditor('#event-description', {
-          paste: {
-            forcePlainText: false,
-            cleanPastedHTML: true,
-            cleanAttrs: ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'autosave', 'bgcolor', 'border', 'buffered', 'challenge', 'charset', 'checked', 'cite', 'class', 'code', 'codebase', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'contextmenu', 'controls', 'coords', 'data', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'dropzone', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'hreflang', 'http-equiv', 'icon', 'id', 'ismap', 'itemprop', 'keytype', 'kind', 'label', 'lang', 'language', 'list', 'loop', 'low', 'manifest', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'ping', 'placeholder', 'poster', 'preload', 'radiogroup', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'scoped', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellcheck', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'summary', 'tabindex', 'target', 'type', 'usemap', 'value', 'width', 'wrap'],
-            cleanTags: ['label', 'meta', 'head', 'header', 'applet', 'embed', 'area', 'audio', 'base', 'basefont', 'button', 'canvas', 'col', 'colgroup', 'datalist', 'del', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'map', 'menu', 'menuitem', 'nav', 'noframes', 'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'script', 'select', 'source', 'style', 'var', 'video', 'wbr'],
-            unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
-          }
-        });</script> 
+        <script>
+          var editor = new MediumEditor('#event-description', {
+            placeholder: false,
+            paste: { 
+              cleanPastedHTML: true,
+              cleanAttrs: ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'autosave', 'bgcolor', 'border', 'buffered', 'challenge', 'charset', 'checked', 'cite', 'class', 'code', 'codebase', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'contextmenu', 'controls', 'coords', 'data', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'dropzone', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'hreflang', 'http-equiv', 'icon', 'id', 'ismap', 'itemprop', 'keytype', 'kind', 'label', 'lang', 'language', 'list', 'loop', 'low', 'manifest', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'ping', 'placeholder', 'poster', 'preload', 'radiogroup', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'scoped', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellcheck', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'summary', 'tabindex', 'target', 'type', 'usemap', 'value', 'width', 'wrap'],
+              cleanTags: ['label', 'meta', 'head', 'header', 'applet', 'embed', 'area', 'audio', 'base', 'basefont', 'button', 'canvas', 'col', 'colgroup', 'datalist', 'del', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'map', 'menu', 'menuitem', 'nav', 'noframes', 'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'script', 'select', 'source', 'style', 'var', 'video', 'wbr'],
+              unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
+            }
+          });
+        </script> 
          
         <div class="nw-form-section">
           <div class="nw-form-section-icon">
@@ -146,10 +152,18 @@
                   class='form-control'
                   onchange={{action 'timeZoneChanged' value="target.value"}}>
                   {{#each timeZoneOptions as |tz|}}
-                    {{#if (eq tz.value currentUser.user.timeZone)}}
-                      <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                    {{#if isEditing}}
+                      {{#if (eq tz.value event.timeZone)}}
+                        <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                      {{else}}
+                        <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{/if}}
                     {{else}}
-                      <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{#if (eq tz.value currentUser.user.timeZone)}}
+                        <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                      {{else}}
+                        <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{/if}}
                     {{/if}}
                   {{/each}}
                 </select>
@@ -372,7 +386,7 @@
             </div>
             <div id='venue-details-group' class="form-group">
               <label for='venue-details' class='form-group'>Venue details:</label>
-              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll"/>
+              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll">{{{venueDetails}}}</textarea>
             </div>
             <script>var venueEditor = new MediumEditor('#venue-details', {
           paste: {
@@ -391,7 +405,7 @@
   {{/modal.body}}
   {{#modal.footer}}
     <button class="nano-button">
-    {{if (eq step 1) "Submit Event for Approval" (if (eq step 0) "Next: Venue" (if (eq step 2) "Close"))}}
+      {{buttonText}}
     </button> 
     {{#if (not-eq step 2)}}
       <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />

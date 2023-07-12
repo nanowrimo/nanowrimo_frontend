@@ -24,7 +24,7 @@ export default Component.extend({
   startTime: null,
   step: 0,
   recalculateEvents: 0,
-  
+  event: reads('group'),
   // These values are returned from Google Maps Timezones API
   dstOffset: 0,
   rawOffset: 0,
@@ -75,13 +75,13 @@ export default Component.extend({
   accessPrice: false,
   accessCaptioning: false,
   venueDetails: null,
-  
   timezoneResponse: null,
+  isEditing: false,
   
   timeZoneOptions: computed(function() {
     return TimeZones;
   }),
-  
+  showPlaceHolder: false,
   inclusiveChecklistShow: computed('_inclusiveChecklistShow', function() {
     let p = this.get('_inclusiveChecklistShow');
     if (p) {
@@ -221,7 +221,13 @@ export default Component.extend({
       
   // Creates the group record in the store
   defineGroup() {
-    let g = this.get('store').createRecord('group');
+    let g;
+    if (this.isEditing) {
+      let id = this.get('event.id');
+      g = this.get('store').peekRecord('group', id);
+    } else {
+      g = this.get('store').createRecord('group');
+    }
     let n = this.get('name');
     g.set("name",n);
     g.set("groupType","event");
@@ -271,6 +277,7 @@ export default Component.extend({
   
   // saveData saves the location, group, and location_group to the API
   saveData() {
+    let isEditing = this.get('isEditing');
     let inperson = this.get('eventTypeInPerson');
     // If this event has a physical location
     if (inperson) {
@@ -297,6 +304,9 @@ export default Component.extend({
         l.save().then(()=>{
           let g = this.defineGroup();
           g.save().then(()=>{
+            if (isEditing) {
+              this.set('open', false);
+            }
             // Create the location-group record for the event
             let lg = this.get('store').createRecord('location-group');
             lg.set("location_id",l.id);
@@ -309,15 +319,17 @@ export default Component.extend({
               lg2.set("group_id",this.get("groupId"));
               lg2.set("primary",0);
               lg2.save().then(()=>{
-                // Save the user as admin
-                let gu = this.defineAdminMembership(g);
-                gu.save().then(()=>{
-                  // Increment recompute location
-                  let rl = this.get('recomputeLocations');
-                  this.set('recomputeLocations',rl+1);
-                  // Last step
-                  this.set('step',2);
-                });
+                // Save the user as admin unless editing
+                if (!isEditing ) {
+                  let gu = this.defineAdminMembership(g);
+                  gu.save().then(()=>{
+                    // Increment recompute location
+                    let rl = this.get('recomputeLocations');
+                    this.set('recomputeLocations',rl+1);
+                    // Last step
+                    this.set('step',2);
+                  });
+                }
               });
             });
           });
@@ -330,6 +342,9 @@ export default Component.extend({
         
         let g = this.defineGroup();
         g.save().then(()=>{
+         if (isEditing) {
+            this.set('open', false);
+          }
           let lg = this.get('store').createRecord('location-group');
           lg.set("location_id",lid);
           lg.set("group_id",g.id);
@@ -347,6 +362,9 @@ export default Component.extend({
     } else {
       let g = this.defineGroup();
       g.save().then(()=>{
+        if (isEditing) {
+          this.set('open', false);
+        }
         // Save the user as admin
         let gu = this.defineAdminMembership(g);
         gu.save().then(()=>{
@@ -371,6 +389,24 @@ export default Component.extend({
   showEventTypeError: computed('eventTypeErrorMessage',function() {
     return this.get('eventTypeErrorMessage')!=null;
   }),
+  
+  buttonText: computed('step', 'isEditing', function(){
+    let step = this.get('step');
+    let isEditing = this.get('isEditing');
+    let text = '';
+    switch(step) {
+      case 0: 
+        text = "Next: Venue";
+        break;
+      case 1: 
+        text = (isEditing) ? "Submit" : "Submit Event for Approval";
+        break;
+      case 2: 
+        text = "Close";
+    }
+    return text;
+  }),
+  
   
   // validateField holds all validation code for each field in the events and locations forms
   validateInput(fieldName) {
@@ -436,7 +472,84 @@ export default Component.extend({
     }
     return isValid;
   },
+  
+  // set the component properties based on the event's data
+  _setEditValues() {
+    let event = this.get('event');
+    // don't set event types
+    this.set('eventTypeInPerson', false);
+    this.set('eventTypeOnline', false);
+    this.set('venueDetails',event.venueDetails);
+    let step = this.get('step');
+    
+    switch (step) {
+      case 0:
+        this.set('name', event.name);
+        this.set('description', event.description);
+        // format the start date
+        var year = event.startDt.getFullYear();
+        var month = this._zeroPad(event.startDt.getMonth()+1);
+        var day = this._zeroPad(event.startDt.getDate());
+        this.set('startDate', `${year}-${month}-${day}`);
+        //format the start time
+        var minutes = this._zeroPad(event.startDt.getMinutes());
+        var startTime = `${event.startDt.getHours()}:${minutes}`;
+        this.set('startTime', startTime);
+        
+        // get the duration based on the endDt
+        var start = moment(event.startDt);
+        var end = moment(event.endDt);
+        var diff = end.diff(start,"m");
+        var durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
+        var durationMinutes = diff - (60*durationHours);
+        // set the UI duration
+        document.getElementById('hours').value = String(durationHours);
+        document.getElementById('minutes').value = String(durationMinutes);
+        break;
+        
+    case 1:
 
+      // are there location-groups?
+      if(this.get("hasLocations") ) {
+        // what is the locationID of this location?
+        let store = this.get('store');
+        let locations = store.peekAll('location');
+        let locId = -1;
+        locations.forEach((loc)=>{
+          if (loc.name == event.locationName()) {
+            locId = loc.id;
+          }
+        });
+        if (locId > 0) {
+          // check the In-person box
+          this.set('eventTypeInPerson', true);
+          this.set('locationId', locId);
+          later(()=> document.getElementById('venueSelect').value = String(locId));
+        } 
+      }
+      // is there an event url?
+      var eventURL = this.get('event.url');
+      if (eventURL) {
+        // check the Online box
+        this.set('eventTypeOnline', true);
+        //insert the url
+        this.set('venueUrl', eventURL);
+      } 
+      
+      // the accessibilty checkboxes
+      // this is not the Ember way
+      document.getElementById('access-mobility').checked = event.accessMobility;
+      document.getElementById('access-lgbt').checked = event.accessLgbt;
+      document.getElementById('access-size').checked = event.accessSize;
+      document.getElementById('access-age').checked = event.accessAge;
+      document.getElementById('access-pathogen').checked = event.accessPathogen;
+      document.getElementById('access-price').checked = event.accessPrice;
+      document.getElementById('access-captioning').checked = event.accessCaptioning;
+      
+      // handle the venue details
+    }
+    
+  },
   actions: {
     toggleInclusiveChecklist( ) {
       let show = !this.get('_inclusiveChecklistShow');
@@ -448,6 +561,7 @@ export default Component.extend({
       event.preventDefault();
       let formElements = event.target.elements;
       let s = this.get("step");
+
       switch (s) {
         case 0: {
           let e = this.validateInput('eventName');
@@ -457,6 +571,10 @@ export default Component.extend({
           this.set('description', desc);
           if (e&&d) {
             this.set("step", 1);
+            // is editing happening?
+            if (this.get('isEditing') ) {
+              later(() => this._setEditValues() );
+            }
           }
           
           break;
@@ -574,7 +692,6 @@ export default Component.extend({
     
     // Called when the value of the minutes select changes
     descriptionChanged(v) {
-      //console.log(v);
       this.set("description",v);
     },
     
@@ -632,13 +749,17 @@ export default Component.extend({
     },
     
     onShow() {
-      // this.set('group.user', this.get('user'));
+      // if there an id associated with the event, we are editing
+      if (this.get('event.id')){
+        this.set('isEditing', true);
+        this._setEditValues();
+      }
       var t = document.getElementById("ember-bootstrap-wormhole");
       t.firstElementChild.setAttribute("aria-modal", "true");
       t.firstElementChild.setAttribute("aria-label", "submit an event");
     },
     
-    // Called on hiding the modal
+    // Called on hiding the modal... resets all to nul
     onHidden() {
       this.set("step", 0);
       this.set("name",null);
@@ -668,5 +789,11 @@ export default Component.extend({
       let as = this.get('afterSubmit');
       if (as) { as() }
     }
+  },
+  
+  _zeroPad(i) {
+    var ret = (i < 10) ? `0${i}` : i;
+    return ret;
   }
+
 });
