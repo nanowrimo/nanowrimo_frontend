@@ -516,7 +516,7 @@ export default Component.extend({
         let locations = store.peekAll('location');
         let locId = -1;
         locations.forEach((loc)=>{
-          if (loc.name == event.locationName()) {
+          if (loc.name == event.locationName) {
             locId = loc.id;
           }
         });
