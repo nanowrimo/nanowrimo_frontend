@@ -216,14 +216,14 @@ const Group = Model.extend({
       if ((id==lg.group_id)&&(lg.primary==1)&&(lg.id != null)) {
         let l = store.peekRecord('location',lg.location_id);
         if (l) {
-          s = l.name;
+          s = l.formatted_address;
         }
       }
     });
     return s;
   },
   
-  locationAddress: function() {
+  locationName: computed('locationGroups.[]',function() {
     let store = this.get('store');
     let lgs = store.peekAll('location_group');
     let id = this.get('id');
@@ -232,7 +232,7 @@ const Group = Model.extend({
       if ((id==lg.group_id)&&(lg.primary==1)&&(lg.id != null)) {
         let l = store.peekRecord('location',lg.location_id);
         if (l) {
-          s = l.formatted_address;
+          s = l.name;
         }
       }
     });
