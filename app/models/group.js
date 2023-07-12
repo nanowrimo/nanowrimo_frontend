@@ -205,9 +205,9 @@ const Group = Model.extend({
       return null;
     }
   }),
-  
+
   // if this group is an event, there may be a location
-  locationName: function() {
+  locationAddress: computed('locationGroups.[]',function() {
     let store = this.get('store');
     let lgs = store.peekAll('location_group');
     let id = this.get('id');
@@ -237,7 +237,7 @@ const Group = Model.extend({
       }
     });
     return s;
-  },
+  }),
   
 });
 
