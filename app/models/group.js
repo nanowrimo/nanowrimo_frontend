@@ -221,7 +221,7 @@ const Group = Model.extend({
       }
     });
     return s;
-  },
+  }),
   
   locationName: computed('locationGroups.[]',function() {
     let store = this.get('store');
