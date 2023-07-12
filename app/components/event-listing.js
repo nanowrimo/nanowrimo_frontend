@@ -73,6 +73,12 @@ export default Component.extend({
     return moment.utc(diff).format("H:mm");
   }),
   
+  hasPhysicalLocation: computed('event.locationAddress', function() {
+    let address = this.get('event.locationAddress');
+    let ret = (address) ? true : false;
+    return ret;
+  }),
+  
   doJoin() {
     let e = this.get('event');
     let eid = this.get('event.id');
@@ -113,6 +119,7 @@ export default Component.extend({
       // save is the end of the rejection. Is anything needed here?
     });
   },
+
     
   actions: {
     joinEvent() {

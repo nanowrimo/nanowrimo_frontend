@@ -205,8 +205,7 @@ const Group = Model.extend({
       return null;
     }
   }),
-  
-  
+
   // if this group is an event, there may be a location
   locationName: function() {
     let store = this.get('store');
@@ -238,6 +237,7 @@ const Group = Model.extend({
       }
     });
     return s;
+
   },
   
 });
