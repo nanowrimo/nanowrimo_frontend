@@ -207,23 +207,7 @@ const Group = Model.extend({
   }),
 
   // if this group is an event, there may be a location
-  locationName: function() {
-    let store = this.get('store');
-    let lgs = store.peekAll('location_group');
-    let id = this.get('id');
-    let s = null;
-    lgs.forEach((lg) => {
-      if ((id==lg.group_id)&&(lg.primary==1)&&(lg.id != null)) {
-        let l = store.peekRecord('location',lg.location_id);
-        if (l) {
-          s = l.name;
-        }
-      }
-    });
-    return s;
-  },
-  
-  locationAddress: function() {
+  locationAddress: computed('locationGroups.[]',function() {
     let store = this.get('store');
     let lgs = store.peekAll('location_group');
     let id = this.get('id');
@@ -237,8 +221,23 @@ const Group = Model.extend({
       }
     });
     return s;
-
-  },
+  }),
+  
+  locationName: computed('locationGroups.[]',function() {
+    let store = this.get('store');
+    let lgs = store.peekAll('location_group');
+    let id = this.get('id');
+    let s = null;
+    lgs.forEach((lg) => {
+      if ((id==lg.group_id)&&(lg.primary==1)&&(lg.id != null)) {
+        let l = store.peekRecord('location',lg.location_id);
+        if (l) {
+          s = l.name;
+        }
+      }
+    });
+    return s;
+  }),
   
 });
 
