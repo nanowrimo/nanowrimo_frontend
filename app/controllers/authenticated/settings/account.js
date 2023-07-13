@@ -3,7 +3,6 @@ import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import TimeZones from 'nanowrimo/lib/time-zones';
 import $ from 'jquery';
-import { reads } from '@ember/object/computed';
 
 export default Controller.extend({
   error: null, // String OR object
