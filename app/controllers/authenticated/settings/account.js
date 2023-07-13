@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import TimeZones from 'nanowrimo/lib/time-zones';
 import $ from 'jquery';
+import { reads } from '@ember/object/computed';
 
 export default Controller.extend({
   error: null, // String OR object
@@ -17,7 +18,7 @@ export default Controller.extend({
   showPasswordConfirm: false,
   confirmationPasswordErrorMessage: null,
   currentName:null,
-  currentEmail:null,
+  currentEmail: null,
   currentTimeZone:null,
   newEmail:null,
   isLoaded: false,
@@ -29,9 +30,9 @@ export default Controller.extend({
     }
   },
   
-  observeCurrentUser: observer('currentUser.isLoaded', function(){
-    let loaded = this.get('currentUser.isLoaded');
-    if (loaded) {
+  observeCurrentUser: observer('currentUser.email', function(){
+    let email = this.get('currentUser.email');
+    if (email) {
       this._setUserData();
     }
   }),
@@ -188,7 +189,7 @@ export default Controller.extend({
       this.set('user', u );
       this.set('formID', "account-settings");
       this.set('currentName', u.name);
-      this.set('currentEmail', u.email);
+      this.set('currentEmail', this.get('currentUser.email') );
       this.set('currentTimeZone', u.timeZone);
       this.set('isLoaded', true);
     },
