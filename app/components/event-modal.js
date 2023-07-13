@@ -504,7 +504,9 @@ export default Component.extend({
         var end = moment(event.endDt);
         var diff = end.diff(start,"m");
         var durationHours = (diff > 60) ? Math.floor(diff/60) : 0;
+        this.set('durationHours', durationHours);
         var durationMinutes = diff - (60*durationHours);
+        this.set('durationMinutes', durationMinutes);
         // set the UI duration
         document.getElementById('hours').value = String(durationHours);
         document.getElementById('minutes').value = String(durationMinutes);
