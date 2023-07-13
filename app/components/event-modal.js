@@ -350,12 +350,14 @@ export default Component.extend({
           lg.set("group_id",g.id);
           lg.set("primary",1);
           lg.save().then(()=>{
-            // Save the user as admin
-            let gu = this.defineAdminMembership(g);
-            gu.save().then(()=>{
-              // Last step
-              this.set('step',2);
-            });
+            if (!isEditing) {
+              // Save the user as admin
+              let gu = this.defineAdminMembership(g);
+              gu.save().then(()=>{
+                // Last step
+                this.set('step',2);
+              });
+            }
           });
         });
       }
@@ -364,12 +366,13 @@ export default Component.extend({
       g.save().then(()=>{
         if (isEditing) {
           this.set('open', false);
+        } else {
+          // Save the user as admin
+          let gu = this.defineAdminMembership(g);
+          gu.save().then(()=>{
+            this.set('step',2);
+          });
         }
-        // Save the user as admin
-        let gu = this.defineAdminMembership(g);
-        gu.save().then(()=>{
-          this.set('step',2);
-        });
       });
     }
   },
