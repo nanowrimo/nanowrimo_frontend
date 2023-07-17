@@ -83,8 +83,8 @@ export default Component.extend({
     //return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("h:mm a");
   //}),
   // Returns the start date as a readable string
-  startDateTime: computed(function() {
-    let etz = this.get('event.timeZone');
+  startDateTime: computed('event.[startDt,timeZone]', function() {
+    let etz = this.get('event.timeZone'); 
     let utz = this.get('currentUser.user.timeZone');
     if (etz==utz) {
       return moment(this.get('event.startDt')).tz(this.get('event.timeZone')).format("dddd, MMM D, YYYY") + ", at " + moment(this.get('event.startDt')).tz(etz).format("h:mm a z");
@@ -94,7 +94,7 @@ export default Component.extend({
   }),
   
   
-  duration: computed(function() {
+  duration: computed('event.startDt', 'eventendDt', function() {
     let start = moment(this.get('event.startDt'));
     let end = moment(this.get('event.endDt'));
     let diff = end.diff(start);
@@ -113,7 +113,7 @@ export default Component.extend({
   }),
 
   // Returns the start date as a readable string
-  startDate: computed(function() {
+  startDate: computed('event.startDt', function() {
     return moment(this.get('event.startDt')).format("D");
   }),
   
