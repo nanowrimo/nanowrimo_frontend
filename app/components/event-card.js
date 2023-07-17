@@ -83,7 +83,7 @@ export default Component.extend({
     //return moment(this.get('event.startDt')).format("dddd, MMMM D, YYYY") + ", from " + moment(this.get('event.startDt')).format("h:mm a") + " to " + moment(this.get('event.endDt')).format("h:mm a");
   //}),
   // Returns the start date as a readable string
-  startDateTime: computed('event.[startDt,timeZone]', function() {
+  startDateTime: computed('event.{startDt,timeZone}', function() {
     let etz = this.get('event.timeZone'); 
     let utz = this.get('currentUser.user.timeZone');
     if (etz==utz) {
