@@ -495,8 +495,10 @@ export default Component.extend({
         var day = this._zeroPad(event.startDt.getDate());
         this.set('startDate', `${year}-${month}-${day}`);
         //format the start time
+        var eventStart = moment.tz(event.startDt,event.timeZone);
+        var hours = eventStart.hour();
         var minutes = this._zeroPad(event.startDt.getMinutes());
-        var startTime = `${event.startDt.getHours()}:${minutes}`;
+        var startTime = `${hours}:${minutes}`;
         this.set('startTime', startTime);
         
         // get the duration based on the endDt
