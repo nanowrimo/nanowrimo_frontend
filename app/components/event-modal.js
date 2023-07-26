@@ -131,7 +131,7 @@ export default Component.extend({
   
   addingLocation: computed('locationId',function() {
     let id = this.get('locationId');
-    if (id == -1) {
+    if (id == "-1") {
       return true;
     } else {
       return false;
@@ -202,7 +202,7 @@ export default Component.extend({
     let t = this;
     let url = 'https://maps.googleapis.com/maps/api/timezone/json?location=';
     // If new location
-    if (lid==-1) {
+    if (lid=="-1") {
       url += this.get('latitude') + ',' + this.get('longitude');
     } else {
       let l = this.get('store').peekRecord('location',lid);
@@ -606,6 +606,8 @@ export default Component.extend({
                 if (v&l) {
                   valid = true;
                   //this.getTimeZone();
+                } else {
+                  break;
                 }
               } else {
                 let vs = this.validateInput('venueSelect');
@@ -689,10 +691,17 @@ export default Component.extend({
       this.validateInput('venueUrl');
     },
     
-    // Called when the value of the minutes select changes
+    // Called when the value of the locationselect changes
     locationChanged(v) {
-      this.set("locationId",v);
+      let i = parseInt(v);
+      this.set("locationId",i);
       this.validateInput('venueSelect');
+      // if the id is -1 reset the venueName
+      if (i==-1) {
+        this.set('venueName', null);
+        this.set('location', null);
+        this.set('locationSelected', false);
+      }
     },
     
     // Called when the value of the minutes select changes
