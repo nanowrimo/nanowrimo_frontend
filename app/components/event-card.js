@@ -29,7 +29,7 @@ export default Component.extend({
         if (group.adminIds.indexOf(cu.id) > -1) {
           return true;
         }
-        return event.userId == cu.id;
+        //return event.userId == cu.id;
       }
     }
   }),
