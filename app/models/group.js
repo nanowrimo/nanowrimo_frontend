@@ -38,6 +38,7 @@ const Group = Model.extend({
   accessPrice: attr('boolean'),
   accessCaptioning: attr('boolean'),
   venueDetails: attr('string'),
+  significantEditAt: attr('string'),
   //latestMessage: attr('string'),
   //latestMessageDt: attr('string'),
   //admin_ids: attr('string'),

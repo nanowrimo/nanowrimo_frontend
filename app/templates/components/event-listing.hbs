@@ -6,7 +6,9 @@
   <div class='nw-title'>
     {{#link-to 'authenticated.regions.show.events.show' group.slug event.slug}}
       {{event.name}}
-    {{/link-to}}
+    {{/link-to}} 
+    {{#if event.significantEditAt}}  <b>Edited</b> 
+    {{/if}}
     <div class="subtitle" style="font-size: 16px;">
       <span>{{startDateTime}}</span> &bull;
       <span>Duration: {{duration}}</span>
