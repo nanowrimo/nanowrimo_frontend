@@ -72,6 +72,7 @@ const User = Model.extend({
   notificationNewBadges: attr('boolean'),
   notificationNanomessagesBuddies: attr('boolean'),
   notificationSprintStart: attr('boolean'),
+  notificationEvents: attr('boolean'),
   emailNanowrimoUpdates: attr('boolean'),
   emailNewsletter: attr('boolean'),
   emailEventsInHomeRegion: attr('boolean'),
