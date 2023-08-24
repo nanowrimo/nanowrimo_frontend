@@ -162,12 +162,12 @@ export default Component.extend({
     if (g) {
       this.set('name', g.get('name'));
       //this.set('startDate', g.get('startDt').format("YYYY-MM-DD"));
-      this.set('durationHours', g.get('durationHours'));
+      this.set('durationHours', parseInt(g.get('durationHours')));
       this.set('timeZone',g.get('timeZone'));
     } else {
       this.set('startDate', now.format("YYYY-MM-DD"));
       this.set('startTime', "19:00");
-      this.set('durationHours', "2");
+      this.set('durationHours', 2);
       this.set('timeZone',this.get('currentUser.user.timeZone'));
     }
     this.setProperties({ googleAuto: null });
@@ -509,9 +509,6 @@ export default Component.extend({
         this.set('durationHours', durationHours);
         var durationMinutes = diff - (60*durationHours);
         this.set('durationMinutes', durationMinutes);
-        // set the UI duration
-        document.getElementById('hours').value = String(durationHours);
-        document.getElementById('minutes').value = String(durationMinutes);
         break;
         
     case 1:
@@ -672,7 +669,7 @@ export default Component.extend({
     
     // Called when the value of the minutes select changes
     minutesChanged(v) {
-      this.set("durationMinutes",v);
+      this.set("durationMinutes",parseInt(v));
       this.validateInput('duration');
     },
     

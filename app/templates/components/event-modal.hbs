@@ -182,19 +182,19 @@
                 <select id='hours' name='hours'
                   class={{concat 'form-control' (if showDurationError ' is-invalid')}}
                   onchange={{action 'hoursChanged' value="target.value"}}>
-                  <option value='0'>0 hours</option>
-                  <option value='1'>1 hour</option>
-                  <option value='2' selected>2 hours</option>
-                  <option value='3'>3 hours</option>
-                  <option value='4'>4 hours</option>
-                  <option value='5'>5 hours</option>
-                  <option value='6'>6 hours</option>
-                  <option value='7'>7 hours</option>
-                  <option value='8'>8 hours</option>
-                  <option value='9'>9 hours</option>
-                  <option value='10'>10 hours</option>
-                  <option value='11'>11 hours</option>
-                  <option value='12'>12 hours</option>
+                  <option value='0' selected={{eq durationHours 0}}>0 hours</option>
+                  <option value='1' selected={{eq durationHours 1}}>1 hour</option>
+                  <option value='2' selected={{eq durationHours 2}}>2 hours</option>
+                  <option value='3' selected={{eq durationHours 3}}>3 hours</option>
+                  <option value='4' selected={{eq durationHours 4}}>4 hours</option>
+                  <option value='5' selected={{eq durationHours 5}}>5 hours</option>
+                  <option value='6' selected={{eq durationHours 6}}>6 hours</option>
+                  <option value='7' selected={{eq durationHours 7}}>7 hours</option>
+                  <option value='8' selected={{eq durationHours 8}}>8 hours</option>
+                  <option value='9' selected={{eq durationHours 9}}>9 hours</option>
+                  <option value='10' selected={{eq durationHours 10}}>10 hours</option>
+                  <option value='11' selected={{eq durationHours 11}}>11 hours</option>
+                  <option value='12' selected={{eq durationHours 12}}>12 hours</option>
                 </select>
               </div>
               <div class="nw-left-label">
@@ -209,18 +209,18 @@
                 <select id='minutes' name='minutes'
                   class={{concat 'form-control' (if showDurationError ' is-invalid')}}
                   onchange={{action 'minutesChanged' value="target.value"}}>
-                  <option value='0' selected>0 minutes</option>
-                  <option value='5'>5 minutes</option>
-                  <option value='10'>10 minutes</option>
-                  <option value='15'>15 minutes</option>
-                  <option value='20'>20 minutes</option>
-                  <option value='25'>25 minutes</option>
-                  <option value='30'>30 minutes</option>
-                  <option value='35'>35 minutes</option>
-                  <option value='40'>40 minutes</option>
-                  <option value='45'>45 minutes</option>
-                  <option value='50'>50 minutes</option>
-                  <option value='55'>55 minutes</option>
+                  <option value='0' selected={{eq durationMinutes 0}}>0 minutes</option>
+                  <option value='5' selected={{eq durationMinutes 5}}>5 minutes</option>
+                  <option value='10' selected={{eq durationMinutes 10}}>10 minutes</option>
+                  <option value='15' selected={{eq durationMinutes 15}}>15 minutes</option>
+                  <option value='20' selected={{eq durationMinutes 20}}>20 minutes</option>
+                  <option value='25' selected={{eq durationMinutes 25}}>25 minutes</option>
+                  <option value='30' selected={{eq durationMinutes 30}}>30 minutes</option>
+                  <option value='35' selected={{eq durationMinutes 35}}>35 minutes</option>
+                  <option value='40' selected={{eq durationMinutes 40}}>40 minutes</option>
+                  <option value='45' selected={{eq durationMinutes 45}}>45 minutes</option>
+                  <option value='50' selected={{eq durationMinutes 50}}>50 minutes</option>
+                  <option value='55' selected={{eq durationMinutes 55}}>55 minutes</option>
                 </select>
               </div>
               {{#if showDurationError}}
