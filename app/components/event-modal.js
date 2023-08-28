@@ -663,7 +663,7 @@ export default Component.extend({
     
     // Called when the value of the hours select changes
     hoursChanged(v) {
-      this.set("durationHours",v);
+      this.set("durationHours",parseInt(v));
       this.validateInput('duration');
     },
     
