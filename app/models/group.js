@@ -38,6 +38,7 @@ const Group = Model.extend({
   accessPrice: attr('boolean'),
   accessCaptioning: attr('boolean'),
   venueDetails: attr('string'),
+  significantEditAt: attr('string'),
   //latestMessage: attr('string'),
   //latestMessageDt: attr('string'),
   //admin_ids: attr('string'),
@@ -205,7 +206,8 @@ const Group = Model.extend({
       return null;
     }
   }),
-  
+
+  // if this group is an event, there may be a location
   locationAddress: computed('locationGroups.[]',function() {
     let store = this.get('store');
     let lgs = store.peekAll('location_group');
@@ -237,7 +239,6 @@ const Group = Model.extend({
     });
     return s;
   }),
-  
   
 });
 

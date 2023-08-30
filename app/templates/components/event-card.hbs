@@ -12,6 +12,8 @@
     </div>
   </div>
   <div class='nw-flex-full'>
+     {{#if event.significantEditAt}} <b>(Edited)</b>
+      {{/if}}
     <div class='nw-title'>
       {{event.name}}
     </div>
@@ -83,7 +85,7 @@
     {{/if}}
     {{#if canEditEvent}}
     <div style="padding-top: 20px;">
-      <span><b>ML tools: </b></span>
+      <span><b>Event tools: </b></span>
       <span>
         {{#if isCancelled}}
         <a href="#" {{action "confirmRestore" }}>
@@ -100,10 +102,11 @@
         <a href="#" {{action "confirmDelete" }}>
           Delete event
         </a>
-        {{#if false}}
-        <button {{action 'openNewEventModal' }}>
+        {{#if canEditEvent}}
+         &bull;
+        <a href="#" {{action 'openNewEventModal' }}>
           Edit event
-        </button>
+        </a>
         {{event-modal
         open=editEvent
         user=user

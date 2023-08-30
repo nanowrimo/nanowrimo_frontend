@@ -46,6 +46,10 @@ export default Component.extend({
     }
   }),
   
+  // should the button display 'novel' or 'project'?
+  projectDescription: computed("challenge", function() {
+    return this.get("challenge.eventType")==0 ? "novel" : "project";
+  }),
   // Returns true if the user has projects without active challenges
   hasInactiveProjects: computed("currentUser.user.inactiveProjects", function () {
     const currentUser = this.get("currentUser");

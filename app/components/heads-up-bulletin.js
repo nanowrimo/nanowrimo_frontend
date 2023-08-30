@@ -165,7 +165,7 @@ export default Component.extend({
     let type = this.get("typeName");
     switch(type){
       case "November":
-        return "Are you ready to write a novel this November? Join the official NaNoWriMo challenge with a new or existing novel. Either way, you're about to write 50,000 life-changing words.";
+        return "Join the official NaNoWriMo challenge and write 50,000 words in November. You've got a story—now is the time to tell it!";
       case "NowWhat": 
         return "So you wrote a novel... now what? During the \"Now What\"? Months, set a goal to revise the first 50 pages of your novel three times by the end of February.";
       case "Camp NaNoWriMo":

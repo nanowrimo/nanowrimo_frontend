@@ -6,7 +6,11 @@
 }}
   <form id='new-event-form' onSubmit={{action "formSubmit"}}>
   {{#modal.header closeButton=false}}
-    Submit an Event
+    {{#if isEditing}}
+      Editing Event
+    {{else}}
+      Submit an Event
+    {{/if}}
   {{/modal.header}}
   {{#modal.body}}
     
@@ -101,19 +105,21 @@
            
             <div id='event-description-group' class="form-group">
               <label for='event-description' class='form-group'>Event details:</label>
-              <textarea id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll"/>
+              <div id="event-description" name='description' rows='3' class='editable form-control' onchange={{action 'descriptionChanged' value="target.value"}} style="height:70px;overflow:scroll">{{{description}}}</div>
             </div>
           </div>
         </div>
-        <script>var editor = new MediumEditor('#event-description', {
-          paste: {
-            forcePlainText: false,
-            cleanPastedHTML: true,
-            cleanAttrs: ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'autosave', 'bgcolor', 'border', 'buffered', 'challenge', 'charset', 'checked', 'cite', 'class', 'code', 'codebase', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'contextmenu', 'controls', 'coords', 'data', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'dropzone', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'hreflang', 'http-equiv', 'icon', 'id', 'ismap', 'itemprop', 'keytype', 'kind', 'label', 'lang', 'language', 'list', 'loop', 'low', 'manifest', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'ping', 'placeholder', 'poster', 'preload', 'radiogroup', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'scoped', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellcheck', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'summary', 'tabindex', 'target', 'type', 'usemap', 'value', 'width', 'wrap'],
-            cleanTags: ['label', 'meta', 'head', 'header', 'applet', 'embed', 'area', 'audio', 'base', 'basefont', 'button', 'canvas', 'col', 'colgroup', 'datalist', 'del', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'map', 'menu', 'menuitem', 'nav', 'noframes', 'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'script', 'select', 'source', 'style', 'var', 'video', 'wbr'],
-            unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
-          }
-        });</script> 
+        <script>
+          var editor = new MediumEditor('#event-description', {
+            placeholder: false,
+            paste: { 
+              cleanPastedHTML: true,
+              cleanAttrs: ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'autosave', 'bgcolor', 'border', 'buffered', 'challenge', 'charset', 'checked', 'cite', 'class', 'code', 'codebase', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'contextmenu', 'controls', 'coords', 'data', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'dropzone', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'hreflang', 'http-equiv', 'icon', 'id', 'ismap', 'itemprop', 'keytype', 'kind', 'label', 'lang', 'language', 'list', 'loop', 'low', 'manifest', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'ping', 'placeholder', 'poster', 'preload', 'radiogroup', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'scoped', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellcheck', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'summary', 'tabindex', 'target', 'type', 'usemap', 'value', 'width', 'wrap'],
+              cleanTags: ['label', 'meta', 'head', 'header', 'applet', 'embed', 'area', 'audio', 'base', 'basefont', 'button', 'canvas', 'col', 'colgroup', 'datalist', 'del', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'map', 'menu', 'menuitem', 'nav', 'noframes', 'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'script', 'select', 'source', 'style', 'var', 'video', 'wbr'],
+              unwrapTags: ['div', 'body', 'html', 'abbr', 'acronym', 'address', 'article', 'aside', 'bdi', 'bdo', 'big', 'center', 'cite', 'col', 'details', 'footer', 'label', 'legend', 'main', 'section']
+            }
+          });
+        </script> 
          
         <div class="nw-form-section">
           <div class="nw-form-section-icon">
@@ -146,10 +152,18 @@
                   class='form-control'
                   onchange={{action 'timeZoneChanged' value="target.value"}}>
                   {{#each timeZoneOptions as |tz|}}
-                    {{#if (eq tz.value currentUser.user.timeZone)}}
-                      <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                    {{#if isEditing}}
+                      {{#if (eq tz.value event.timeZone)}}
+                        <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                      {{else}}
+                        <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{/if}}
                     {{else}}
-                      <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{#if (eq tz.value currentUser.user.timeZone)}}
+                        <option value="{{tz.value}}" selected>{{tz.name}}</option>
+                      {{else}}
+                        <option value="{{tz.value}}">{{tz.name}}</option>
+                      {{/if}}
                     {{/if}}
                   {{/each}}
                 </select>
@@ -168,19 +182,19 @@
                 <select id='hours' name='hours'
                   class={{concat 'form-control' (if showDurationError ' is-invalid')}}
                   onchange={{action 'hoursChanged' value="target.value"}}>
-                  <option value='0'>0 hours</option>
-                  <option value='1'>1 hour</option>
-                  <option value='2' selected>2 hours</option>
-                  <option value='3'>3 hours</option>
-                  <option value='4'>4 hours</option>
-                  <option value='5'>5 hours</option>
-                  <option value='6'>6 hours</option>
-                  <option value='7'>7 hours</option>
-                  <option value='8'>8 hours</option>
-                  <option value='9'>9 hours</option>
-                  <option value='10'>10 hours</option>
-                  <option value='11'>11 hours</option>
-                  <option value='12'>12 hours</option>
+                  <option value='0' selected={{eq durationHours 0}}>0 hours</option>
+                  <option value='1' selected={{eq durationHours 1}}>1 hour</option>
+                  <option value='2' selected={{eq durationHours 2}}>2 hours</option>
+                  <option value='3' selected={{eq durationHours 3}}>3 hours</option>
+                  <option value='4' selected={{eq durationHours 4}}>4 hours</option>
+                  <option value='5' selected={{eq durationHours 5}}>5 hours</option>
+                  <option value='6' selected={{eq durationHours 6}}>6 hours</option>
+                  <option value='7' selected={{eq durationHours 7}}>7 hours</option>
+                  <option value='8' selected={{eq durationHours 8}}>8 hours</option>
+                  <option value='9' selected={{eq durationHours 9}}>9 hours</option>
+                  <option value='10' selected={{eq durationHours 10}}>10 hours</option>
+                  <option value='11' selected={{eq durationHours 11}}>11 hours</option>
+                  <option value='12' selected={{eq durationHours 12}}>12 hours</option>
                 </select>
               </div>
               <div class="nw-left-label">
@@ -195,18 +209,18 @@
                 <select id='minutes' name='minutes'
                   class={{concat 'form-control' (if showDurationError ' is-invalid')}}
                   onchange={{action 'minutesChanged' value="target.value"}}>
-                  <option value='0' selected>0 minutes</option>
-                  <option value='5'>5 minutes</option>
-                  <option value='10'>10 minutes</option>
-                  <option value='15'>15 minutes</option>
-                  <option value='20'>20 minutes</option>
-                  <option value='25'>25 minutes</option>
-                  <option value='30'>30 minutes</option>
-                  <option value='35'>35 minutes</option>
-                  <option value='40'>40 minutes</option>
-                  <option value='45'>45 minutes</option>
-                  <option value='50'>50 minutes</option>
-                  <option value='55'>55 minutes</option>
+                  <option value='0' selected={{eq durationMinutes 0}}>0 minutes</option>
+                  <option value='5' selected={{eq durationMinutes 5}}>5 minutes</option>
+                  <option value='10' selected={{eq durationMinutes 10}}>10 minutes</option>
+                  <option value='15' selected={{eq durationMinutes 15}}>15 minutes</option>
+                  <option value='20' selected={{eq durationMinutes 20}}>20 minutes</option>
+                  <option value='25' selected={{eq durationMinutes 25}}>25 minutes</option>
+                  <option value='30' selected={{eq durationMinutes 30}}>30 minutes</option>
+                  <option value='35' selected={{eq durationMinutes 35}}>35 minutes</option>
+                  <option value='40' selected={{eq durationMinutes 40}}>40 minutes</option>
+                  <option value='45' selected={{eq durationMinutes 45}}>45 minutes</option>
+                  <option value='50' selected={{eq durationMinutes 50}}>50 minutes</option>
+                  <option value='55' selected={{eq durationMinutes 55}}>55 minutes</option>
                 </select>
               </div>
               {{#if showDurationError}}
@@ -372,7 +386,7 @@
             </div>
             <div id='venue-details-group' class="form-group">
               <label for='venue-details' class='form-group'>Venue details:</label>
-              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll"/>
+              <textarea id="venue-details" name='venue-details' rows='3' class='editable form-control' style="height:70px;overflow-y:scroll">{{{venueDetails}}}</textarea>
             </div>
             <script>var venueEditor = new MediumEditor('#venue-details', {
           paste: {
@@ -391,7 +405,7 @@
   {{/modal.body}}
   {{#modal.footer}}
     <button class="nano-button">
-    {{if (eq step 1) "Submit Event for Approval" (if (eq step 0) "Next: Venue" (if (eq step 2) "Close"))}}
+      {{buttonText}}
     </button> 
     {{#if (not-eq step 2)}}
       <input type="button" class="nano-button btn-underlined" value="Cancel" {{action modal.close}} />

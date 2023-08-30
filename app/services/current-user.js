@@ -7,12 +7,14 @@ export default Service.extend({
   store: service(),
 
   user: null,
+  email: null,
   isLoaded: false,
   groupUsersLoaded: false,
   load() {
     if (this.get('session.isAuthenticated')) {
       return this.get('store').queryRecord('user',
       { current: true, include: 'projects,timers,stopwatches'}).then((user) => {
+        this.set('email', user.email);
         this.set('user', user);
         this.set('isLoaded', true);
         user.loadHomeRegion();

@@ -24,7 +24,7 @@ export default Component.extend({
   newGoal: null,
   newStart: null,
   newEnd: null,
-  
+  projectDescription: null,
   
   init() {
     this._super(...arguments);
@@ -41,7 +41,7 @@ export default Component.extend({
   // Returns an array of inactive projects which may be assigned new challenges
   optionsForProjects: computed("currentUser.user.inactiveProjects", function () {
     let projects = this.get("currentUser.user.inactiveProjects");
-    let ps = [{id: 0, title: "Select a writing project:"}];
+    let ps = [{id: 0, title: "Select a "+this.get('projectDescription')+":"}];
     projects.forEach(function(p) {
       ps.pushObject({id: p.id, title: p.title});
     });
@@ -56,7 +56,7 @@ export default Component.extend({
     if (challenge) {
       switch (challenge.eventType) {
         case 0:
-          return "Join the November Challenge";
+          return "Join the NaNoWriMo Challenge";
         case 1:
           d = moment(challenge.startsAt);
           month = d.format('MMMM');
