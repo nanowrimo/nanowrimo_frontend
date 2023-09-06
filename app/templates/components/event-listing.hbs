@@ -17,8 +17,8 @@
     <div  style="font-size: 16px;">{{event.locationName}} {{event.locationAddress}}</div>
     {{/if}}
     {{#if event.url}}
-    <div style="font-size: 16px;">
-      <a href="{{event.url}}" target="_BLANK">{{event.url}} <i class="fa fa-external-link"></i></a>
+    <div>
+      <a class = "event-url" href="{{event.url}}" target="_BLANK">{{event.url}} <i class="fa fa-external-link"></i></a>
     </div>
     {{/if}}
   </div>
