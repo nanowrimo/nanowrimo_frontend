@@ -59,7 +59,10 @@
       </div>
     {{else}}
       <div style="padding: 15px;">
-        All membership slots have been taken! If you'd like to increase the maximum number of members allowed, edit your group settings.
+        All membership slots have been taken! 
+        {{#if (not maxMemberCeilingReached)}}
+          If you'd like to increase the maximum number of members allowed, edit your group settings from the Admin tab.
+        {{/if}}
       </div>
     {{/if}}
   {{/if}}
