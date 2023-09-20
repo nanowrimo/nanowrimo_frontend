@@ -27,6 +27,17 @@ const Location = Model.extend({
     //   return { genres: 'Must select at least one genre' };
     // }
     return null;
+  }),
+  shortAddress: computed('formatted_address', 'street1', 'street2','city', function(){
+    let s1 = this.get('street1');
+    let s2 = this.get('street2');
+    let city = this.get('city');
+    let fa = this.get('formatted_address');
+    if (s1&city) {
+      return `(${s1} ${s2}, ${city})`;
+    }else{
+      return `(${fa})`;
+    }
   })
 });
 

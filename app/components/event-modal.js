@@ -77,7 +77,7 @@ export default Component.extend({
   venueDetails: null,
   timezoneResponse: null,
   isEditing: false,
-  
+  stopGapLocationFix: false,
   timeZoneOptions: computed(function() {
     return TimeZones;
   }),
@@ -157,6 +157,8 @@ export default Component.extend({
   
   init() {
     this._super(...arguments);
+    // we are using the stop gap location fix :(
+    this.set('stopGapLocationFix', true);
     let now = moment();
     let g = this.get('group');
     if (g) {
@@ -415,6 +417,15 @@ export default Component.extend({
   validateInput(fieldName) {
     let isValid = true;
     switch (fieldName) {
+      case "venueAddress":
+        var venueAddress = this.get('venueAddress').trim();
+        if (venueAddress==null || venueAddress.length==0) {
+          this.set('venueAddressError', "The event address is required");
+          isValid = false;
+        } else {
+          this.set('venueAddressError', null);
+        }
+        break;
       case 'eventType':
         if (!this.get("eventTypeInPerson")&&!this.get("eventTypeOnline")) {
           this.set("eventTypeErrorMessage","Please select at least one type of venue.");
@@ -601,7 +612,13 @@ export default Component.extend({
             if (this.get("eventTypeInPerson")) {
               if (this.get("locationId")==-1) {
                 let v = this.validateInput('venueName');
-                let l = this.validateInput('location');
+                // is the stopGapLocation fix happening?
+                let l;
+                if (this.get('stopGapLocationFix') ) {
+                  l = this.validateInput('venueAddress');
+                }else{
+                  l = this.validateInput('location');
+                }
                 if (v&l) {
                   valid = true;
                   //this.getTimeZone();
@@ -715,7 +732,15 @@ export default Component.extend({
       later(() => messageElement.classList.remove('fade-in-element'), 2000);
       this.set('message', 'blur blur blur');
     },
-
+    
+    venueAddressChanged(event){
+      let address = event.target.value;
+      this.set("venueAddress", address);
+      this.validateInput("venueAddress");
+      this.set("formatted_address", address);
+      
+    },
+    
     // Called when the user selects a place from google maps autocomplete
     placeChanged(place) {
       let p = place;
