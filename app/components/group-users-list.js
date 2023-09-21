@@ -14,10 +14,11 @@ export default Component.extend({
   searchString: '',
   searchResults: null,
   searching: false,
-  
+  maxMemberCeiling: 0,
   init() {
     this._super(...arguments);
     this.checkForUpdates();
+    this.set('maxMemberCeiling', 20);
   },
   
   // Loads any necessary user data from the API
@@ -153,6 +154,10 @@ export default Component.extend({
     let isAdmin = this.get('isAdmin');
     let joiningRule = this.get('group.joiningRule');
     return (isAdmin || (joiningRule>0));
+  }),
+  
+  maxMemberCeilingReached: computed('group', function(){
+    return this.get('group.maxMemberCount') == this.get('maxMemberCeiling');
   }),
   
   actions: {

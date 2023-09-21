@@ -264,7 +264,7 @@
               >
                 <option value="0">Select or add a venue...</option>
                 {{#each acceptedLocations as |c|}}
-                  <option value="{{c.id}}">{{c.name}} ({{c.street1}} {{c.street2}}, {{c.city}})</option>
+                  <option value="{{c.id}}">{{c.name}} {{c.shortAddress}}</option>
                 {{/each}}
                 <option value="-1">+ Add a new venue</option>
               </select>
@@ -301,14 +301,28 @@
       
             </div>
             <div class="form-group">
-              <label for='time' class='form-group'>Street Address (begin typing, then select the correct option)</label>
-              {{place-autocomplete-field
-                value=address2
-                inputClass= 'place-autocomplete--input form-control ember-text-field'
-                placeChangedCallback=(action "placeChanged")
-              }}
-              {{#if showLocationError}}
-                <div class="ext-invalid-feedback">{{locationErrorMessage}}</div>
+              {{#if stopGapLocationFix}}
+                <label for="venueAddress">What is the venue Street Address?</label>
+                <input name="venueAddress" value ={{address2}}
+                 onkeyup={{action 'venueAddressChanged'}} 
+                 placeholder="E.g. &quot;1313 Mockingbird Ln, Anytown USA, 10101&quot;" 
+                 id="venueAddress" 
+                 class="form-control ember-text-field ember-view" 
+                 type="text">
+                {{#if venueAddressError}}
+                  <div class="ext-invalid-feedback">{{venueAddressError}}</div>
+                {{/if}}
+              
+              {{else}}
+                <label for='time' class='form-group'>Street Address (begin typing, then select the correct option)</label>
+                {{place-autocomplete-field
+                  value=address2
+                  inputClass= 'place-autocomplete--input form-control ember-text-field'
+                  placeChangedCallback=(action "placeChanged")
+                }}
+                {{#if showLocationError}}
+                  <div class="ext-invalid-feedback">{{locationErrorMessage}}</div>
+                {{/if}}
               {{/if}}
             </div>
           {{/if}}
