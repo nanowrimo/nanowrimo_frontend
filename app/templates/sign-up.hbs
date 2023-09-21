@@ -39,11 +39,7 @@
               <div class="invalid-feedback">{{emailErrorMessage}}</div>
             {{/if}}
           </div>
-          
-          <div class='form-group'>
-            {{nw-form-input-password errorMessage=passwordErrorMessage}}
-          </div>
-          
+
           <div class='form-group'>
             <label for='username'>Username</label>
             <input autocomplete='username' 
@@ -55,6 +51,11 @@
               <div class="invalid-feedback">{{nameErrorMessage}}</div>
             {{/if}}
           </div>
+          
+           <div class='form-group'>
+            {{nw-form-input-password errorMessage=passwordErrorMessage}}
+          </div>
+          
           
           <div class="form-group">
             <label for='timezone'>Time Zone</label>
