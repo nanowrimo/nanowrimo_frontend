@@ -48,7 +48,7 @@
         {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
       </div>
     </div>
-    <ul class="nw-list {{processingHide}}" style="height: 700px; ">
+    <ul class="nw-list {{processingHide}}" style="height: 300px; ">
       {{#if regions }}
         {{#each sortedRegions as |regionContainer index|}}
           {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
