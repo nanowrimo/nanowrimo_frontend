@@ -1,4 +1,22 @@
-<div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan3 g2-col2 g2-row1 g2-hspan1 g2-vspan3">
+
+<div class="nw-card g1-col1 g2-row1 ">
+  <div class="nw-card-header">
+    <div class="nw-card-title">My Regions</div>
+  </div>
+  <div class="nw-card-content no-padding">
+    <div class="nw-list-message {{userHasNoRegions}}">
+      You haven't joined a region! Please select one of the regions from the list below.
+    </div>
+    <ul class="nw-list" style="max-height: 300px;">
+      {{#each userRegions as |regionContainer index|}}
+        {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' leavable=true}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+
+<div class="nw-card g2-col2 g2-row1 ">
   <div class="nw-card-content no-padding">
       <div class="nw-card-header">
     <div class="nw-card-title">Find a Region</div>
@@ -38,21 +56,5 @@
       {{/if}}
     </ul>
   </div>
-  </div>
-</div>
-
-<div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan1">
-  <div class="nw-card-header">
-    <div class="nw-card-title">My Regions</div>
-  </div>
-  <div class="nw-card-content no-padding">
-    <div class="nw-list-message {{userHasNoRegions}}">
-      You haven't joined a region! Please select one of the regions from the list below.
-    </div>
-    <ul class="nw-list" style="max-height: 300px;">
-      {{#each userRegions as |regionContainer index|}}
-        {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' leavable=true}}
-      {{/each}}
-    </ul>
   </div>
 </div>
