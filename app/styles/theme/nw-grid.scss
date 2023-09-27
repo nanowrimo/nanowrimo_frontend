@@ -4,14 +4,11 @@
   display: grid;
   grid-gap: 28px;
   padding: 28px;
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: $screen-md) {
     grid-template-columns: 1fr;
     .nano-card {
       flex-wrap: wrap;
     }
-  }
-  .g2-row1 {
-    grid-row: 1 / 3;
   }
 }
 
