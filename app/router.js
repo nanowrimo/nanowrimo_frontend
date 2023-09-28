@@ -8,6 +8,8 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
+  //borked urls
+  this.route('what-is-nanowrimo');
     // dynamic routes
   this.route('pages', {path: '/:path'});
   this.route('authenticated', { path: '' }, function() {
@@ -165,8 +167,6 @@ Router.map(function() {
 
   //delete request
   this.route('delete-request', {path: '/delete-request/:token'});
-  
-
-  
+ 
 });
 
