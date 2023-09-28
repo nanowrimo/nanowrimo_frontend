@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   router: service(),
   
-  redirect(model, transition) {
+  redirect() {
     this.get('router').transitionTo('/');
   }
 });
