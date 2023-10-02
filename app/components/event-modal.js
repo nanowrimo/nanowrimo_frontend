@@ -158,7 +158,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     // we are using the stop gap location fix :(
-    this.set('stopGapLocationFix', true);
+    this.set('stopGapLocationFix', false);
     let now = moment();
     let g = this.get('group');
     if (g) {
