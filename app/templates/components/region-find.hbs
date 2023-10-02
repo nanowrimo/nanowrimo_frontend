@@ -1,17 +1,5 @@
-<div class="nw-card g3-col2 g3-row1 g3-hspan2 g3-vspan3 g2-col2 g2-row1 g2-hspan1 g2-vspan3">
-  <div class="nw-card-content no-padding">
-    {{#if hasSortedRegions }}
-      {{#g-map lat=center_latitude lng=center_longitude zoom=mapZoom as |context|}}
-        {{#each sortedRegions as |region index|}}
-          {{g-map-marker context lat=region.groupObject.latitude lng=region.groupObject.longitude}}
-        {{/each}}
-      {{/g-map}}
-    {{else}}
-      <NwLoading />
-    {{/if}}
-  </div>
-</div>
-<div class="nw-card g3-col1 g3-row1 g3-hspan1 g3-vspan1 g2-col1 g2-row1 g2-hspan1 g2-vspan1">
+
+<div class="nw-card g1-col1 g2-row1 ">
   <div class="nw-card-header">
     <div class="nw-card-title">My Regions</div>
   </div>
@@ -26,8 +14,11 @@
     </ul>
   </div>
 </div>
-<div class="nw-card g3-col1 g3-row2 g3-hspan1 g3-vspan2 g2-col1 g2-row1 g2-hspan1 g2-vspan2 wrap-content">
-  <div class="nw-card-header">
+
+
+<div class="nw-card g2-col2 g2-row1 ">
+  <div class="nw-card-content no-padding">
+      <div class="nw-card-header">
     <div class="nw-card-title">Find a Region</div>
     <div class="nw-card-actions nw-card-actions-left">
       <div class='btn-group' role='tablist'>
@@ -37,12 +28,14 @@
           {{fa-icon "search"}} 
           <span class='sr-only'>Search regions by name</span>
         </button>
+
         <button class="{{if primaryDisplay '' 'active'}}" 
           {{action "setPrimaryDisplay" false}} role='tab'
           aria-controls='pane-search-by-location' aria-selected={{searchByLocationSelected}}>
           {{fa-icon "map-marker"}}
           <span class='sr-only'>Search regions by location</span>
         </button>
+
       </div>
     </div>
   </div>
@@ -55,7 +48,7 @@
         {{input class="nano-list-search-field" placeholder="Search region names..." value=tempSearchString key-up=(action "searchStringChange")}}
       </div>
     </div>
-    <ul class="nw-list {{processingHide}}" style="height: 700px; ">
+    <ul class="nw-list {{processingHide}}" style="height: 300px; ">
       {{#if regions }}
         {{#each sortedRegions as |regionContainer index|}}
           {{group-list-item groupContainer=regionContainer listOrder=index limitList=limitList sortBySearch='name' joinable=true}}
@@ -64,5 +57,6 @@
         <NwLoading />
       {{/if}}
     </ul>
+  </div>
   </div>
 </div>
