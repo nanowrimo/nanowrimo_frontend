@@ -3,11 +3,11 @@
     <div class="nw-one-third">
       <img src="{{offer.card-image}}" />
       <div class="nw-spacer"></div>
-      <a href="{{offer.external-link}}" target="_blank">
+      <form action="{{offer.external-link}}" target="_blank">
         <button class="button-reversed">
           Claim Offer
         </button>
-      </a>
+      </form>
     </div>
     <div class="nw-two-thirds">
       <div class="nw-card-headline">
@@ -28,12 +28,12 @@
     </div>
   </div>
   <div class='nw-card-content nw-white-back'>
-    {{{offer.body}}}
-    <a href="{{offer.external-link}}" target="_blank">
-      <button class="button-reversed">
+    <form action="{{offer.external-link}}" target="_blank" class='t2-offer-form'>
+      <button class="button-reversed" >
         Claim Offer
       </button>
-    </a>
+    </form>
+    {{{offer.body}}}
   </div>
 {{/if}}
 {{#if hasCouponCode}}
