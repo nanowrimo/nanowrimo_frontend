@@ -252,6 +252,8 @@ export default Component.extend({
     let online = this.get('eventTypeOnline');
     if (online) {
       g.set("url",this.get("venueUrl"));
+    } else {
+      g.set("url",'');
     }
     //access
     g.set("accessMobility",this.get("accessMobility"));
