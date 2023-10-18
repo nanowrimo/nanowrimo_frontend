@@ -7,8 +7,13 @@ export default Controller.extend({
   error: null, // String OR object
   currentUser: service(),
 
-  user: computed('currentUser.user',function() {
-    return this.get('currentUser.user');
+  user: computed('currentUser.isLoaded',function() {
+    let currentUser = this.get('currentUser');
+    if (currentUser.isLoaded) {
+      let user = currentUser.user;
+      user.email = currentUser.email;
+      return this.get('currentUser.user');
+    }
   }),
   
   forumsEmailPreferencesUrl: computed('user.discourseUsername', function(){
