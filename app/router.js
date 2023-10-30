@@ -147,7 +147,7 @@ Router.map(function() {
   this.route('ways-to-support');
   this.route('writers-resources');
   this.route('connect');
-  this.route('press');
+  //this.route('press');
   //this.route('about');
   //this.route('test');
   //this.route('pep-talks');
