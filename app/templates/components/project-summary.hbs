@@ -28,14 +28,13 @@
         </div>
       </div>
       <div class="nw-project-progress">
-        {{#if project.futureProjectChallenge }}
-        {{else}}
-        {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params addGoal="true") class='nw-faux-button nano-button-small'}}
-          Create a New Goal
-        {{/link-to}}
-        {{#if project.hasProjectChallenges}}
-          <hr />
-        {{/if}}
+        {{#if displayNewGoal }}
+          {{#link-to 'authenticated.users.show.projects.show.goals' project.computedAuthor.slug project.slug (query-params addGoal="true") class='nw-faux-button nano-button-small'}}
+            Create a New Goal
+          {{/link-to}}
+            {{#if project.hasProjectChallenges}}
+              <hr />
+            {{/if}}
         {{/if}}
           {{#if project.hasProjectChallenges}}
           {{project-list-progress project=project}}
