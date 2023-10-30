@@ -21,7 +21,13 @@ export default Component.extend({
   canEdit: computed('project.computedAuthor', function(){
     return this.get('currentUser.user') === this.get('project.computedAuthor');
   }),
-
+  
+  displayNewGoal: computed('canEdit', 'project.futureProjectChallenge', function() {
+    let canEdit = this.get('canEdit');
+    let hasProjectChallenge = this.get('project.futureProjectChallenge');
+    return canEdit && !hasProjectChallenge;
+  }),
+  
   init(){
     this._super(...arguments);
     this.set('deleteConfirmationTitleText', "Confirm Delete");
