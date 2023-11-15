@@ -25,6 +25,7 @@ Router.map(function() {
       this.route('new');
     });
     this.route('winners-circle');
+    this.route('winners-circle-2022');
 
     this.route('users', { path: 'participants'}, function() {
       this.route('show', { path: '/:slug'}, function() {
