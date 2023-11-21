@@ -127,6 +127,7 @@ Router.map(function() {
 
     this.route('winner-goodies-2021-2');
     this.route('winner-goodies-2022-2');
+    this.route('winner-offers-2023');
     this.route('year-in-review', function() {
       this.route('show', { path: '/:year'}, function() {
       });
