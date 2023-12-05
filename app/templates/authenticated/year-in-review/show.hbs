@@ -7,12 +7,25 @@
     </div>
     <div class="nw-panel">
       <div style="font-size: 16px; padding: 30px;">
-      Here's what you and your muse accomplished last year, Wrimo! We can't wait to see what you've got in store for the year ahead...
+				Here's what you and your muse accomplished last year, Wrimo! We can't wait to see what you've got in store for the year ahead...
       </div>
       {{year-in-review-stat statType='total words' year=model.year annualStats=model.annualStats}}
       {{year-in-review-stat statType='best project' year=model.year annualStats=model.annualStats}}
       {{year-in-review-stat statType='longest streak' year=model.year annualStats=model.annualStats}}
       {{year-in-review-stat statType='one day' year=model.year annualStats=model.annualStats}}
     </div>
+    
+    {{#if hasOtherYears}}
+			<h2>Results from other years</h2>
+
+			<div class="nw-panel">
+				<ul>
+				{{#each otherYears as |year|}}
+					<li> {{link-to year 'authenticated.year-in-review.show' year}} </li>
+				{{/each}}
+				</ul>
+			</div>
+		{{/if}}
   </div>
+  
 </div>
