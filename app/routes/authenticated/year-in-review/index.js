@@ -2,6 +2,9 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   beforeModel() {
-    this.transitionTo('/year-in-review/2020');
+		// what is the current year?
+		var date = new Date();
+		var year = date.getFullYear();
+    this.transitionTo(`/year-in-review/${year}`);
   }
 });
