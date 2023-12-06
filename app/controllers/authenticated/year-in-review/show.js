@@ -8,14 +8,16 @@ export default Controller.extend({
   
 	otherYears: computed('currentUser.user.yearsDone','year', function(){ 
 		var user = this.get('currentUser.user');
-		var targetYear = this.get('year');
-		var otherYears = [];
-		user.yearsDone.forEach((year) => {
-			if (year !== targetYear) {
-				otherYears.push(year);
-			}
-		});
-		return otherYears;
+		if (user) {
+			var targetYear = this.get('year');
+			var otherYears = [];
+			user.yearsDone.forEach((year) => {
+				if (year !== targetYear) {
+					otherYears.push(year);
+				}
+			});
+			return otherYears;
+		}
 	}),
 
 	hasOtherYears: computed('otherYears', function(){	
