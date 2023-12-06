@@ -6,6 +6,7 @@ import ScrollRoute from 'nanowrimo/routes/scroll-route'
 export default ScrollRoute.extend({
   session: service(),
   model(params) {
+		this.set('params', params);
     //define the API url for search requests 
     let url = `${ENV.APP.API_HOST}/users/annual_stats/` + params.year;
     //get the session auth token so we can add it to the request header
@@ -17,5 +18,9 @@ export default ScrollRoute.extend({
         return { annualStats: json, year: params.year }
       });
     });
+  },
+  setupController: function(controller, model) {
+    controller.set('year', this.get('params.year'));
+    this._super(controller, model);
   }
 });
