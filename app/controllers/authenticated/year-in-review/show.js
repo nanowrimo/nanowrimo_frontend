@@ -7,17 +7,19 @@ export default Controller.extend({
   annualStats: null,
   
 	otherYears: computed('currentUser.user.yearsDone','year', function(){ 
+		// get the current user
 		var user = this.get('currentUser.user');
+		// an array for the list of other years the user has participated
+		var otherYears = [];
 		if (user) {
 			var targetYear = this.get('year');
-			var otherYears = [];
 			user.yearsDone.forEach((year) => {
 				if (year !== targetYear) {
 					otherYears.push(year);
 				}
 			});
-			return otherYears;
 		}
+		return otherYears;
 	}),
 
 	hasOtherYears: computed('otherYears', function(){	
