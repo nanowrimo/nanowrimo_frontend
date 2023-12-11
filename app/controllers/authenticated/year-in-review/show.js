@@ -19,6 +19,8 @@ export default Controller.extend({
 				}
 			});
 		}
+		// sort otherYears in reverse cron order
+		otherYears = otherYears.sort().reverse();
 		return otherYears;
 	}),
 
