@@ -6,26 +6,22 @@ export default Controller.extend({
   year: null,
   annualStats: null,
   
-	otherYears: computed('currentUser.user.yearsDone','year', function(){ 
+	allYears: computed('currentUser.user.yearsDone','year', function(){ 
 		// get the current user
 		var user = this.get('currentUser.user');
 		// an array for the list of other years the user has participated
-		var otherYears = [];
+		var allYears = [];
 		if (user) {
-			var targetYear = this.get('year');
-			user.yearsDone.forEach((year) => {
-				if (year !== targetYear) {
-					otherYears.push(year);
-				}
-			});
+			allYears = user.yearsDone;
+		
 		}
-		// sort otherYears in reverse cron order
-		otherYears = otherYears.sort().reverse();
-		return otherYears;
+		// sort allYears in reverse cron order
+		allYears = allYears.sort().reverse();
+		return allYears;
 	}),
 
-	hasOtherYears: computed('otherYears', function(){	
-		let oy = this.get('otherYears');
+	hasAllYears: computed('allYears', function(){	
+		let oy = this.get('allYears');
 		return oy.length > 0;
 	}),
 	
