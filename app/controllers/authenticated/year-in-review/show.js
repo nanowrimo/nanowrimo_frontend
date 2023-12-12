@@ -27,6 +27,10 @@ export default Controller.extend({
 	hasOtherYears: computed('otherYears', function(){	
 		let oy = this.get('otherYears');
 		return oy.length > 0;
+	}),
+	
+	pageTitle: computed('year', function() {
+		return "Year-In-Review "+this.get('year');
 	})
 });
 
