@@ -839,6 +839,21 @@ const User = Model.extend({
     return years;
   }),
   
+  //get an array of nano years done
+  allYearsWriting: computed('projects.@each.projectChallenges', function(){
+    let years = [];
+    this.get('projects').forEach((p)=>{
+      p.challenges.forEach((c)=>{
+				// get the year the challenge started
+				var year = c.startsAt.substring(0,4);
+        if( !years.includes(year)) { // counting words
+          years.push(year);
+        }
+      });
+    });
+    return years;
+  }),
+  
   //how many times has the user won nano?
   nanoWinCount: computed('yearsWon', function(){
     let yw = this.get('yearsWon');
