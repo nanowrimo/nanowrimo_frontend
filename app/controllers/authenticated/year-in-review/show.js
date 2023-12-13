@@ -13,7 +13,6 @@ export default Controller.extend({
 		var allYears = [];
 		if (user) {
 			allYears = user.allYearsWriting;
-			console.log(allYears);
 		}
 		// sort allYears in reverse cron order
 		allYears = allYears.sort().reverse();
