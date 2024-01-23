@@ -27,7 +27,8 @@ export default Controller.extend({
   actions: {
     onSubmit(){
       let form = event.target;
-      this.validateForm(form);
+      let formData = new FormData(form);
+      this.validateForm(form, formData.get('h-captcha-response'));
     },
     emailChanged() {
       if (this.get('emailErrorMessage')!==null ) {
@@ -70,15 +71,13 @@ export default Controller.extend({
   },
   
   // perform some basic validation and submit if the data is OK
-  validateForm(form) {
+  validateForm(form,captchaResponse) {
     let _self = this;
     (form);
     let e = form.email.value;
     let p = form.password.value;
     let u = form.username.value;
-    (u);
-    (form.username);
-    let t = form.timezone.value;
+    let t = form.timezone.value; 
     if (!e && !p && !u){
       ('empty form');
       return;
@@ -109,7 +108,8 @@ export default Controller.extend({
           email: e, 
           password: p, 
           name: u, 
-          time_zone: t
+          time_zone: t,
+          captcha_response: captchaResponse
           })
       })
       .then(function(resp){ // process the fetch response
