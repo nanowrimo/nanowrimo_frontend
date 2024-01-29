@@ -31,14 +31,17 @@ export default Controller.extend({
   }),
   
   actions: {
-    submit(form) {
-      let email = form.get('email');
+    submit() {
+			// start processing form data
+      let formData = new FormData(event.target);
+      let email = formData.get('email');
+      let captchaResponse = formData.get('h-captcha-response');
       if (this.validEmail(email) ){
         //perform the query
         let url = `${ENV.APP.API_HOST}/users/forgot_password`;
         // send the data as a POST so that the email doesn't end up in the server logs
         return fetch(url, {
-          body: JSON.stringify({email: email}),
+          body: JSON.stringify({email: email, captcha_response: captchaResponse}),
           method: 'POST',
           headers: {
             'Accept': 'application/json, text/plain, */*',
