@@ -53,9 +53,6 @@ module.exports = function(environment) {
       key: 'AIzaSyDtu-8_FBOLBM4a0kOIPv1p163uHfZ8YG4' //place-autocomplete key
       //key: 'AIzaSyCQPYqd0KcWOgppNEZBEFKQlouY0BKLxss' //the original g-map key
     },
-  
-    
-    
     torii: {
       allowUnsafeRedirect: true,
       providers: {
@@ -89,7 +86,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
-  if (environment === 'development-dave') {
+  if (environment === 'development-docker') {
     ENV.APP.API_HOST = 'http://localhost:3000';
     ENV.APP.UI_HOST = 'http://localhost:4200';
     ENV.forumsUrl = "http://localhost:9292";
@@ -133,8 +130,8 @@ module.exports = function(environment) {
     ENV.APP.MODAL_BACKGROUND_TRANSITION_MS = 0;
     ENV.APP.MODAL_TRANSITION_MS = 0;
   }
+
   if (environment === 'production') {
-    
     ENV.torii.providers['facebook-connect'].appId = '2019466444992364';
     ENV.torii.providers['custom-google'].apiKey = '566453198538-khkvh94le8q9a2j0jmrokg8faajotr38.apps.googleusercontent.com';
     ENV.torii.providers['custom-google'].redirectUri = 'https://nanowrimo.org/oauth2callback';
@@ -166,6 +163,5 @@ module.exports = function(environment) {
     ENV.airbrake.ignoreMessageStrings=['Ember Data Request','The adapter operation','More context objects'];
   }
   */
-  
   return ENV;
 };
