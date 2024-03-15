@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import TimeZones from 'nanowrimo/lib/time-zones';
 import $ from 'jquery';
+import moment from 'moment'; 
 
 export default Controller.extend({
   error: null, // String OR object
@@ -14,6 +15,7 @@ export default Controller.extend({
   emailErrorMessage: null,
   passwordErrorMessage: null,
   currentPasswordError: null,
+  birthdateErrorMessage: null,
   showPasswordConfirm: false,
   confirmationPasswordErrorMessage: null,
   currentName:null,
@@ -76,6 +78,7 @@ export default Controller.extend({
     if (form.username.value != user.name) return true;
     if (form.email.value != user.email) return true;
     if (form.timezone.value != user.timeZone) return true;
+    if (form.birthday.value != user.birthday) return true;
     if(form.password.value) {
       if (form.currentPassword.value) return true;
     }
@@ -89,7 +92,10 @@ export default Controller.extend({
         this.changesHappened();
       }
     },
-    
+    birthdateChanged(val) {
+			this.set('birthdateErrorMessage',null);
+			this.changesHappened();
+		},
     emailChanged() {
       this.set('emailErrorMessage', null);
       this.changesHappened();
@@ -118,6 +124,8 @@ export default Controller.extend({
       let name = form.username.value;
       let email = form.email.value;
       let password = form.password.value;
+      let birthday = form.birthday.value;
+      let birthDate = new Date(birthday);
       let currentPassword='';
       if(password){
         currentPassword = form.currentPassword.value;
@@ -135,6 +143,10 @@ export default Controller.extend({
         hasError = true;
         this.set('emailError', "Email cannot be blank");
       }
+      if (birthDate == null) {
+				hasError= true;
+				this.set('birthdayErrorMessage', "Invalid birthdate");
+			}
       if (password.length>0) {
         if (currentPassword.length==0) {
           hasError = true;
@@ -147,13 +159,15 @@ export default Controller.extend({
         //update the user and submit
         user.set('name', name);
         user.set('email', email);
+        user.set('birthday',birthDate);
+        console.log(birthday);
         this.set('newEmail', email);
         if(password){
           user.set('newPassword', password);
           user.set('currentPassword', currentPassword);
         }
         user.set('timeZone', timezone);
-        
+        console.log(user);
         return user.save().then(()=>{
           self.afterSubmit();
         }).catch((error)=>{
@@ -190,6 +204,8 @@ export default Controller.extend({
       this.set('currentName', u.name);
       this.set('currentEmail', this.get('currentUser.email') );
       this.set('currentTimeZone', u.timeZone);
+      // the user's birthday in yyyy-mm-dd format
+      this.set('currentBirthdate', moment(u.birthday).format("YYYY-MM-DD"));
       this.set('isLoaded', true);
     },
     

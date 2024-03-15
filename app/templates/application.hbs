@@ -17,6 +17,7 @@
         {{main-nav}}
       </nav>
       <NwUnverifiedHandler />
+      <NwUnknownAgeHandler />
       {{#if UiOutdated}}
         <NwAlert @alertType="info">
           Application updates are available. <a {{action "reloadUI"}}>Reload application</a>

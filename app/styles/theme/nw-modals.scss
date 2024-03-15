@@ -143,6 +143,10 @@
       textarea {
         height: 72px;
       }
+      input[type='radio']{
+				height: initial;
+				box-shadow: initial;
+      }
       label.checkbox-label {
         font-size: 16px;
         line-height: 1.31;
@@ -234,6 +238,18 @@
     height: 20px;
   }
 }
+
+/* scrollable terms in modal */
+.scroll-terms {
+	height: 300px;
+	overflow-x:auto;
+	margin: 5px;
+	padding: 2px;
+	background: white;
+	border: 1px solid $nw-mediumgreen;
+	border-radius: 5px;
+}
+
 
 /* profile edit modal tabs */
 

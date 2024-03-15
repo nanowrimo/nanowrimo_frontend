@@ -24,10 +24,22 @@
           <input type='email' autocomplete='email' id='email' 
             value={{currentEmail}}
             class='form-control ember-text-field {{if emailErrorMessage 'is-invalid' ''}}'
-            {{action "emailChanged" value='target.value' on="keyUp"}}
+            {{action "emailChanged" value='target.value' on="Change"}}
             >
           {{#if emailErrorMessage}}
             <div class="invalid-feedback">{{emailErrorMessage}}</div>
+          {{/if}}
+        </div>
+        
+        <div class='form-group'>
+            <label for='birthday'>Birthdate</label>
+          <input type='date' id='birthday' name='birthday'
+            value={{currentBirthdate}}
+            class='form-control ember-text-field {{if birthdateErrorMessage 'is-invalid' ''}}'
+            onchange={{action "birthdateChanged" value='target.value'}}
+            >
+          {{#if birthdateErrorMessage}}
+            <div class="invalid-feedback">{{birthdateErrorMessage}}</div>
           {{/if}}
         </div>
         
