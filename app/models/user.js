@@ -33,6 +33,7 @@ const User = Model.extend({
   laurels: attr('number'),
   birthday: attr('date'),
   over18: attr('boolean'),
+  agreedToTerms: attr('date'),
   statsStreakEnabled: attr('boolean'),
   statsStreak: attr('number'),
   statsProjectsEnabled: attr('boolean'),
@@ -998,6 +999,10 @@ const User = Model.extend({
     }
     return null;
   }),
+  
+  unknownBirthdate: computed('birthday', function(){
+		return this.get('birthday') == null;
+	}),
   
   refreshStats: function() {
     let { auth_token } = this.get('session.data.authenticated');
