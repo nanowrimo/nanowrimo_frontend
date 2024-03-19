@@ -34,7 +34,7 @@ export default Service.extend({
   },
   
   // should social items be displayed?
-  displaySocial: computed("user.isNotConfirmed","user.isOver18", function(){
+  displaySocial: computed("user.{isNotConfirmed,isOver18}", function(){
 		let user = this.get('user');
 		if (user) {
 			let notConfirmed = this.get('user.isNotConfirmed');

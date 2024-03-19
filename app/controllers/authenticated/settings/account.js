@@ -92,7 +92,7 @@ export default Controller.extend({
         this.changesHappened();
       }
     },
-    birthdateChanged(val) {
+    birthdateChanged() {
 			this.set('birthdateErrorMessage',null);
 			this.changesHappened();
 		},
@@ -160,14 +160,12 @@ export default Controller.extend({
         user.set('name', name);
         user.set('email', email);
         user.set('birthday',birthDate);
-        console.log(birthday);
         this.set('newEmail', email);
         if(password){
           user.set('newPassword', password);
           user.set('currentPassword', currentPassword);
         }
         user.set('timeZone', timezone);
-        console.log(user);
         return user.save().then(()=>{
           self.afterSubmit();
         }).catch((error)=>{

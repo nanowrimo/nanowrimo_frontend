@@ -31,7 +31,6 @@ export default Controller.extend({
     let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset",'unsubscribe','authenticated.agree-to-terms'];
     //let rn = this.get('routeName');
     let rn = this.get('router').get('currentRouteName'); 
-    console.log(rn);
     return !no_nav_routes.includes(rn);
   }),
   show_footer: computed('routeName', function() {
