@@ -27,9 +27,8 @@ export default Controller.extend({
 		}
 	}),
   // which routes should display navigation? 
-  show_navigation: computed('routeName', function() {
+  show_navigation: computed('router.currentRouteName', function() {
     let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset",'unsubscribe','authenticated.agree-to-terms'];
-    //let rn = this.get('routeName');
     let rn = this.get('router').get('currentRouteName'); 
     return !no_nav_routes.includes(rn);
   }),
