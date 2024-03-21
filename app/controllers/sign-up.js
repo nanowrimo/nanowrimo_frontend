@@ -77,8 +77,9 @@ export default Controller.extend({
     let e = form.email.value;
     let p = form.password.value;
     let u = form.username.value;
-    let t = form.timezone.value; 
-    if (!e && !p && !u){
+    let t = form.timezone.value;
+    let b = form.birthdate.value; 
+    if (!e && !p && !u && !b){
       ('empty form');
       return;
     }
@@ -96,7 +97,11 @@ export default Controller.extend({
       this.set('passwordErrorMessage','Pasword cannot be blank'); 
       hasErrors=true;
     }
-    
+    let birthDate = new Date(b);
+    if (b=='') {
+			hasErrors = true;
+			this.set('birthdateErrorMessage', "Birth Date cannot be blank");
+		}
     //are there errors?
     if(!hasErrors){
       //perform the fetch!
@@ -109,6 +114,7 @@ export default Controller.extend({
           password: p, 
           name: u, 
           time_zone: t,
+          birthday: birthDate,
           captcha_response: captchaResponse
           })
       })

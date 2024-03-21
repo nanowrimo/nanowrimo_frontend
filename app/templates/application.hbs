@@ -2,6 +2,7 @@
 
 {{#if is_authenticated}}
   <div class="page-background">
+		{{#if show_navigation}}
     <header>
       {{#if (media "isMobile")}}
       <nav>
@@ -17,16 +18,22 @@
         {{main-nav}}
       </nav>
       <NwUnverifiedHandler />
+      <NwUnknownAgeHandler />
       {{#if UiOutdated}}
         <NwAlert @alertType="info">
           Application updates are available. <a {{action "reloadUI"}}>Reload application</a>
         </NwAlert>
       {{/if}}
     </header>
-    <main class="logged-in {{if currentUser.user.isNotConfirmed 'unverified' ''}}">
+    {{/if}}
+    <main class="logged-in 
+			{{if currentUser.user.isNotConfirmed 'unverified' ''}} 
+			{{if (not show_navigation) 'no-navigation'}}
+			{{if currentUser.user.unknownBirthdate 'unknown-birthdate' }}
+			">
       {{outlet}}
     </main>
-    {{#if show_footer}}
+    {{#if (and show_footer show_navigation) }}
       <footer>
         {{authenticated-footer}}
       </footer>
@@ -47,3 +54,4 @@
     </footer>
   {{/if}}
 {{/if}}
+{{show_navigation}}

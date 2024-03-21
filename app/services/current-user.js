@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { resolve }  from 'rsvp';
+import { computed } from '@ember/object';
 
 export default Service.extend({
   session: service(),
@@ -31,4 +32,18 @@ export default Service.extend({
       return resolve();
     }
   },
+  
+
+  // should social items be displayed?
+  displayForumsAndRegions: computed("user.{isNotConfirmed,isOver18}", function(){
+		let user = this.get('user');
+		if (user) {
+			let notConfirmed = this.get('user.isNotConfirmed');
+			let isOver18 = this.get('user.isOver18');
+			return (!notConfirmed && isOver18);
+		} else {
+			return false;
+		}
+	}),
+  
 });
