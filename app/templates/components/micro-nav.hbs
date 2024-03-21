@@ -5,7 +5,7 @@
       <img src="/images/logo/logo.svg" alt="NaNoWriMo home." />
       {{/link-to}}
     </div>
-    {{#if session.isAuthenticated}}
+    {{#if (and session.isAuthenticated currentUser.user.over18)}}
     {{search-field size='small' class='nw-menu-search-field-container'}}
     {{/if}}
     <div class="nav-store flex-row-reverse">

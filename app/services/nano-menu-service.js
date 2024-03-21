@@ -21,8 +21,8 @@ export default Service.extend({
       return null;
     }
   }),
-  forumsItem: computed('currentUser.user.displayForumsAndRegions', function () {
-    let display = this.get('currentUser.user.displayForumLink');
+  forumsItem: computed('currentUser.displayForumsAndRegions', function () {
+    let display = this.get('currentUser.displayForumsAndRegions');
     if (display) {
       let v = { label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg" };
       return v;
