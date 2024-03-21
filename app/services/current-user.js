@@ -35,12 +35,12 @@ export default Service.extend({
   
 
   // should social items be displayed?
-  displayForumsAndRegions: computed("user.{isNotConfirmed,isOver18}", function(){
+  displayForumsAndRegions: computed("user.{isNotConfirmed,over18}", function(){
 		let user = this.get('user');
 		if (user) {
 			let notConfirmed = this.get('user.isNotConfirmed');
-			let isOver18 = this.get('user.isOver18');
-			return (!notConfirmed && isOver18);
+			let over18 = this.get('user.over18');
+			return (!notConfirmed && over18);
 		} else {
 			return false;
 		}
