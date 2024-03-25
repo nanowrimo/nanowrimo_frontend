@@ -6,12 +6,14 @@ export default Component.extend({
   currentUser: service(),
   session: service(),
 	termsText: null,
+	user: null,
   init(){
     this._super(...arguments);
+    this.set('user', this.get('currentUser.user'));
   },
-  displayBanner: computed('currentUser.user.birthday', function(){
+  displayBanner: computed('currentUser.birthdate' , function(){
 		// do we know the user's age?
-		let bday = this.get('currentUser.user.birthday');
+		let bday = this.get('currentUser.birthdate');
 		return  bday == null;
 	})
 

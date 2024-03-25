@@ -1000,10 +1000,6 @@ const User = Model.extend({
     return null;
   }),
   
-  unknownBirthdate: computed('birthday', function(){
-		return this.get('birthday') == null;
-	}),
-  
   refreshStats: function() {
     let { auth_token } = this.get('session.data.authenticated');
     //fetch the stats from the API

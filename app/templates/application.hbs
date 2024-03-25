@@ -29,7 +29,7 @@
     <main class="logged-in 
 			{{if currentUser.user.isNotConfirmed 'unverified' ''}} 
 			{{if (not show_navigation) 'no-navigation'}}
-			{{if currentUser.user.unknownBirthdate 'unknown-birthdate' }}
+			{{if currentUser.unknownBirthdate 'unknown-birthdate' }}
 			">
       {{outlet}}
     </main>
@@ -54,4 +54,3 @@
     </footer>
   {{/if}}
 {{/if}}
-{{show_navigation}}
