@@ -196,6 +196,7 @@ export default Controller.extend({
   },
   
   _setUserData(){
+			let cu = this.get('currentUser');
       let u = this.get("currentUser.user");
       this.set('user', u );
       this.set('formID', "account-settings");
@@ -203,7 +204,7 @@ export default Controller.extend({
       this.set('currentEmail', this.get('currentUser.email') );
       this.set('currentTimeZone', u.timeZone);
       // the user's birthday in yyyy-mm-dd format
-      this.set('currentBirthdate', moment(u.birthday).format("YYYY-MM-DD"));
+      this.set('currentBirthdate', moment(cu.birthdate).format("YYYY-MM-DD"));
       this.set('isLoaded', true);
     },
     
@@ -215,6 +216,9 @@ export default Controller.extend({
   afterSubmit() {
     this.set('confirmationPasswordError', false);
     let u = this.get('user');
+    this.set('currentUser.birthdate', u.birthday);
+    this.set('currentUser.over18', u.over18);
+    
     let ne = this.get('newEmail');
     let r = "Your changes have been saved.";
     if (u.email != ne && ne != null) {
