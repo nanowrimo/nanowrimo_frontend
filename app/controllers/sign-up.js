@@ -15,6 +15,11 @@ export default Controller.extend({
   nameErrorMessage:null,
   isSubmitting: false,
 
+
+	init(){
+		this._super(...arguments);
+		this.set('submitDisabled', false);
+	},
   timeZoneOptions: computed(function() {
     (TimeZones);
     return TimeZones;
@@ -79,10 +84,7 @@ export default Controller.extend({
     let u = form.username.value;
     let t = form.timezone.value;
     let b = form.birthdate.value; 
-    if (!e && !p && !u && !b){
-      ('empty form');
-      return;
-    }
+
     let hasErrors = false;
     // check length
     if (e.length==0){ 
