@@ -25,6 +25,12 @@ main {
   &.unverified {
     margin-top: 160px;
   }
+  &.unknown-birthdate {
+    margin-top: 160px;
+  }
+  &.no-navigation {
+		margin-top: 0px !important;
+  }
   @media (max-width: $screen-lg) {
     margin-top: 42px;
   }

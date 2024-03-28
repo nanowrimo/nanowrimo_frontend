@@ -13,6 +13,7 @@ Router.map(function() {
     // dynamic routes
   this.route('pages', {path: '/:path'});
   this.route('authenticated', { path: '' }, function() {
+		this.route('agree-to-terms');
     this.route('dashboard');
     this.route('search');
     this.route('stats');

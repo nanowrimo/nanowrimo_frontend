@@ -11,6 +11,7 @@
   &.warning {
     background-color: $nw-alert-red;
     color: white;
+    a { color: white;}
   }
   &.info {
     background-color: $nw-darkgreyblue;

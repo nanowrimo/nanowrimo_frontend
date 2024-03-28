@@ -8,16 +8,28 @@ export default Controller.extend({
   media: service(), 
   currentUser: service(),
   version: service(),
+  agreedToTerms: null,
   
   init(){
     this._super(...arguments);
     this.set('isLoading', true);
+    // get the initial value of the agreed to terms
+    this.set('agreedToTerms', this.get('currentUser.user.agreedToTerms'));
   },
+  
+  observerUserTermsAgreement: observer('currentUser.{user.agreedToTerms,isLoaded}', function(){
+		let loaded = this.get('currentUser.isLoaded');
+		if (loaded) {
+			let agreedToTerms = this.get('currentUser.user.agreedToTerms');
+			if (!agreedToTerms) {
+				this.get('router').transitionTo('authenticated.agree-to-terms');
+			}
+		}
+	}),
   // which routes should display navigation? 
-  show_navigation: computed('routeName', function() {
-    let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset",'unsubscribe'];
-    //let rn = this.get('routeName');
-    let rn = this.get('router').get('currentRouteName');
+  show_navigation: computed('router.currentRouteName', function() {
+    let no_nav_routes = ["sign-in","sign-up","forgot-password","password-reset",'unsubscribe','authenticated.agree-to-terms'];
+    let rn = this.get('router').get('currentRouteName'); 
     return !no_nav_routes.includes(rn);
   }),
   show_footer: computed('routeName', function() {

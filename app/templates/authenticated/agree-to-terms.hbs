@@ -1,0 +1,40 @@
+{{page-title "Agree To Terms of Service"}}
+
+<div class="nano-centered">
+	<div>
+		<div class="nw-login-image"><img src="/images/other/login_image.svg" alt="" /></div>
+		<div class="nw-card">
+			<div class='nw-card-header'>
+				<div class='nw-card-title'>
+					Terms of Service
+				</div>
+			</div>
+			<div class="nw-card-content">
+				<div class='scroll-terms'>{{{termsText}}}</div>
+			</div>
+		</div>
+		<br />
+		<div class="nw-card">
+			<div class='nw-card-header'>
+				<div class='nw-card-title'>
+					Codes of Conduct
+				</div>
+			</div>
+			<div class="nw-card-content">
+				<div class='scroll-terms'>{{{conductText}}}</div>
+			</div>
+		</div>
+		<br/>
+		<div class="nw-card">
+			<div class="nw-card-content">
+				<form {{action "onSubmit" on="submit"}}>
+					<div class="instruction">Do you agree to accept the Terms of Service and follow the Codes of Conduct?</div>
+					<input type='submit' value="I Agree">
+				</form>
+			</div>
+		</div>
+		
+	</div>	
+</div>
+	
+

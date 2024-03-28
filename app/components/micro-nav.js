@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   session: service(),
   nanoMenuService: service(),
+  currentUser: service(),
   storeLinks: alias("nanoMenuService.storeLinks"),
   helpLinks: alias("nanoMenuService.helpLinks")
 });

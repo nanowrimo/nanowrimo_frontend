@@ -21,10 +21,29 @@ export default Service.extend({
       return null;
     }
   }),
+  forumsItem: computed('currentUser.displayForumsAndRegions', function () {
+    let display = this.get('currentUser.displayForumsAndRegions');
+    if (display) {
+      let v = { label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg" };
+      return v;
+    } else {
+      return null;
+    }
+  }),
   statsItem: computed('currentUser.user.primaryProject', function () {
     let project = this.get('currentUser.user.primaryProject');
     if (project) {
       let v = { label: "Stats", route: "authenticated.stats", segment: null, teaser: "Track your writing progress", src: "/images/nav/bar_chart.svg" };
+      return v;
+    } else {
+      return null;
+    }
+  }),
+  
+  findRegionItem: computed('currentUser.user.displayForumsAndRegions', function () {
+    let display = this.get('currentUser.user.displayForumLink');
+    if (display) {
+      let v =  { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" };
       return v;
     } else {
       return null;
@@ -51,8 +70,8 @@ export default Service.extend({
       {
         toggleLabel: "Community",
         submenuItems: [
-          { label: "Forums", url: ENV.forumsUrl, segment: null, teaser: "Our lively discussion space", src: "/images/nav/smiley_paper.svg" },
-          { label: "Find a Region", route: "authenticated.regions.find", segment: null, teaser: "Join a region for more support", src: "/images/nav/earth.svg" },
+          this.get('forumsItem'),
+          this.get('findRegionItem'),
           { label: "Local Partners",route: 'pages' , segment: "local-partners", teaser: "Get involved in your region", src: "/images/nav/comewritein.png" },
           { label: "HQ Events", route: "authenticated.regions.show.events.upcoming", segment: "nanowrimo-hq", teaser: "Virtual meetups with NaNo", src: "/images/nav/speechbubbles.svg"},
           { label: "Our Values", route: 'pages' , segment: "dei", teaser: "Diversity, equity, and inclusion", src: "/images/nav/hearts.svg" }

@@ -31,7 +31,9 @@ const User = Model.extend({
   newPassword: attr('string'),
   halo: attr('boolean'),
   laurels: attr('number'),
-  
+  birthday: attr('date'),
+  over18: attr('boolean'),
+  agreedToTerms: attr('date'),
   statsStreakEnabled: attr('boolean'),
   statsStreak: attr('number'),
   statsProjectsEnabled: attr('boolean'),
@@ -712,7 +714,11 @@ const User = Model.extend({
       return this.get('confirmedAt')==null;
     }
   }),
-
+	isOver18: computed('age', function(){
+		let ageSeconds = this.get('age');
+		// is ageSeconds >= 18 years in seconds? 568,025,136
+		return ageSeconds >= 568025136;
+	}),
   rollbackExternalLinks() {
     this.get('externalLinks').forEach(link => {
       if (link) { link.rollback(); }

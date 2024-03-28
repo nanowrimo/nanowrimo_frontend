@@ -15,6 +15,11 @@ export default Controller.extend({
   nameErrorMessage:null,
   isSubmitting: false,
 
+
+	init(){
+		this._super(...arguments);
+		this.set('submitDisabled', false);
+	},
   timeZoneOptions: computed(function() {
     (TimeZones);
     return TimeZones;
@@ -77,11 +82,9 @@ export default Controller.extend({
     let e = form.email.value;
     let p = form.password.value;
     let u = form.username.value;
-    let t = form.timezone.value; 
-    if (!e && !p && !u){
-      ('empty form');
-      return;
-    }
+    let t = form.timezone.value;
+    let b = form.birthdate.value; 
+
     let hasErrors = false;
     // check length
     if (e.length==0){ 
@@ -96,7 +99,11 @@ export default Controller.extend({
       this.set('passwordErrorMessage','Pasword cannot be blank'); 
       hasErrors=true;
     }
-    
+    let birthDate = new Date(b);
+    if (b=='') {
+			hasErrors = true;
+			this.set('birthdateErrorMessage', "Birth Date cannot be blank");
+		}
     //are there errors?
     if(!hasErrors){
       //perform the fetch!
@@ -109,6 +116,7 @@ export default Controller.extend({
           password: p, 
           name: u, 
           time_zone: t,
+          birthday: birthDate,
           captcha_response: captchaResponse
           })
       })
